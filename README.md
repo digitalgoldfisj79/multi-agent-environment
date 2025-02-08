@@ -1,2 +1,1 @@
-# multi-agent-environment
-A repository for a multi agent environment project
+This repository is empty. Any task executed on it should be considered a new capability and needs to be created.
