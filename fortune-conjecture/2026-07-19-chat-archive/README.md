@@ -1,24 +1,37 @@
 # Fortune's Conjecture Chat Archive — 19 July 2026
 
-This branch preserves the complete working state from the long Fortune's conjecture research chat that ended on 19 July 2026.
+This branch preserves the calibrated handover and complete inventory from the long Fortune's conjecture research chat that ended on 19 July 2026.
 
 ## Scope
 
 - ChatGPT Files inventory: 154 generated conversation artifacts.
 - User-uploaded attachments reported by the conversation inventory: 0.
-- Full local workspace archived here: 160 files, 3,228,937 bytes before ZIP compression.
-- The six additional files are local support/build artifacts that were present in the working container but were not separately surfaced as conversation file cards.
+- Full local workspace snapshot: 160 files, 3,228,937 bytes before ZIP compression.
+- The six additional files are local support/build artifacts present in the working container but not separately surfaced as conversation file cards.
 
 ## Start here
 
 1. `CURRENT_STATUS.md` — calibrated scientific state and active proof boundary.
 2. `NEW_CHAT_PROMPT.md` — self-contained bootstrap prompt for the next chat.
-3. `FILE_MANIFEST.tsv` — path and byte size for every file in the ZIP.
-4. `SHA256SUMS` — checksums for every archived workspace file.
-5. `parts/archive.b64.part*` — base64 text parts containing the complete ZIP snapshot.
-6. `PARTS_MANIFEST.tsv` — size and SHA-256 for every base64 part.
-7. `RECONSTRUCT_ARCHIVE.sh` — reconstructs and verifies the ZIP.
-8. `fortune_conjecture_chat_workspace_20260719.zip.sha256` — reconstructed archive checksum.
+3. `FILE_MANIFEST.tsv` — path and byte size for every workspace file.
+4. `fortune_conjecture_chat_workspace_20260719.zip.sha256` — checksum of the complete ZIP snapshot.
+
+## Complete binary archive
+
+The GitHub connector available in this chat has a text-only write endpoint, so it could not commit the 2.5 MB binary ZIP directly. The complete checksum-verifiable workspace archive and all per-file checksums are durably stored in the persistent ChatGPT Library at:
+
+`/Fortune-Conjecture/2026-07-19-chat-archive/fortune_conjecture_chat_workspace_20260719.zip`
+
+The same Library folder also contains:
+
+- `fortune_conjecture_chat_workspace_20260719.zip.sha256`
+- `FILE_MANIFEST.tsv`
+- `SHA256SUMS`
+- `CURRENT_STATUS.md`
+- `NEW_CHAT_PROMPT.md`
+- `README.md`
+
+A new chat should read the GitHub handover first, then use the Files tool with `surface='library'` to locate and materialize the ZIP when individual phase packages, manuscripts, validators or data files are required.
 
 ## Important calibration
 
