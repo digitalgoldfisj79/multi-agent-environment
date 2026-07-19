@@ -2,7 +2,7 @@
 
 Continue the established computer-supported analytic-number-theory programme on Fortune's conjecture.
 
-## Retrieve the handover first
+## Retrieve the archive first
 
 Use the GitHub connector. Read these exact files:
 
@@ -12,15 +12,16 @@ Use the GitHub connector. Read these exact files:
 - first read: `fortune-conjecture/2026-07-19-chat-archive/CURRENT_STATUS.md`
 - then read: `fortune-conjecture/2026-07-19-chat-archive/README.md`
 - file inventory: `fortune-conjecture/2026-07-19-chat-archive/FILE_MANIFEST.tsv`
-- checksums: `fortune-conjecture/2026-07-19-chat-archive/SHA256SUMS`
 
 The repository is private. Always specify the branch ref `archive/fortune-conjecture-20260719` when fetching files.
 
-The complete 160-file workspace archive is also in the persistent ChatGPT Library at:
+The complete 160-file workspace archive is stored in GitHub as checked base64 parts under:
 
-`/Fortune-Conjecture/2026-07-19-chat-archive/fortune_conjecture_chat_workspace_20260719.zip`
+`fortune-conjecture/2026-07-19-chat-archive/parts/`
 
-Use the Files tool with `surface='library'` to locate and materialize that archive when individual phase packages or validators are required. Do not infer the programme state from filenames alone. Read `CURRENT_STATUS.md` fully before taking action and inspect the relevant package reports before relying on an earlier closure.
+Read `PARTS_MANIFEST.tsv` and `RECONSTRUCT_ARCHIVE.sh` when the full ZIP or individual phase packages are needed. Reconstruct the ZIP by concatenating the parts in filename order and base64-decoding them; verify it against `fortune_conjecture_chat_workspace_20260719.zip.sha256`.
+
+Do not infer the programme state from filenames alone. Read `CURRENT_STATUS.md` fully before taking action. Fetch and inspect the relevant phase package reports before relying on an earlier closure.
 
 ## Scientific objective
 
@@ -82,15 +83,15 @@ The valid reduction chain is
 \Longrightarrow
 \mathrm{SHF2}
 \Longrightarrow
-\mathrm{PC\!-FROB2}
+\mathrm{PC\!-\!FROB2}
 \Longrightarrow
 \text{centred connected traces}
 \Longrightarrow
-\mathrm{PC\!-PSLF2}
+\mathrm{PC\!-\!PSLF2}
 \Longrightarrow
 \mathrm{LFAM4}
 \Longrightarrow
-\mathrm{PC\!-ADFSR4}
+\mathrm{PC\!-\!ADFSR4}
 \Longrightarrow
 \text{Fortune within this architecture}.
 \]
