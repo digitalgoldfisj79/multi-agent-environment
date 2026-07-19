@@ -13,14 +13,19 @@ This branch preserves the calibrated handover and complete inventory from the lo
 
 1. `CURRENT_STATUS.md` — calibrated scientific state and active proof boundary.
 2. `NEW_CHAT_PROMPT.md` — self-contained bootstrap prompt for the next chat.
-3. `FILE_MANIFEST.tsv` — path and byte size for every workspace file.
-4. `fortune_conjecture_chat_workspace_20260719.zip.sha256` — checksum of the complete ZIP snapshot.
+3. `ARCHIVE_LOCATION.md` — exact persistent archive location and file IDs.
+4. `FILE_MANIFEST.tsv` — path and byte size for every workspace file.
+5. `fortune_conjecture_chat_workspace_20260719.zip.sha256` — checksum of the complete ZIP snapshot.
 
 ## Complete binary archive
 
-The GitHub connector available in this chat has a text-only write endpoint, so it could not commit the 2.5 MB binary ZIP directly. The complete checksum-verifiable workspace archive and all per-file checksums are durably stored in the persistent ChatGPT Library at:
+The GitHub connector available in this chat could write the handover and inventory files but its safety layer rejected the opaque binary/archive payload. The complete checksum-verifiable workspace archive and all per-file checksums are durably stored in the persistent ChatGPT Library at:
 
-`/Fortune-Conjecture/2026-07-19-chat-archive/fortune_conjecture_chat_workspace_20260719.zip`
+`/Fortune Conjecture/2026-07-19 Chat Archive/fortune_conjecture_chat_workspace_20260719.zip`
+
+Exact archive file ID: `file_00000000d56881f497ca9153ed7cc68b`
+
+SHA-256: `f47a37cccd18aea6ffa0ac314cc2c1b0a7bcf14bbab07d8fc3175a2ae1d018dc`
 
 The same Library folder also contains:
 
@@ -29,7 +34,6 @@ The same Library folder also contains:
 - `SHA256SUMS`
 - `CURRENT_STATUS.md`
 - `NEW_CHAT_PROMPT.md`
-- `README.md`
 
 A new chat should read the GitHub handover first, then use the Files tool with `surface='library'` to locate and materialize the ZIP when individual phase packages, manuscripts, validators or data files are required.
 
