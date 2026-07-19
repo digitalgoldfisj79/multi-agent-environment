@@ -15,8 +15,10 @@ This branch preserves the complete working state from the long Fortune's conject
 2. `NEW_CHAT_PROMPT.md` — self-contained bootstrap prompt for the next chat.
 3. `FILE_MANIFEST.tsv` — path and byte size for every file in the ZIP.
 4. `SHA256SUMS` — checksums for every archived workspace file.
-5. `fortune_conjecture_chat_workspace_20260719.zip` — complete workspace snapshot.
-6. `fortune_conjecture_chat_workspace_20260719.zip.sha256` — archive checksum.
+5. `parts/archive.b64.part*` — base64 text parts containing the complete ZIP snapshot.
+6. `PARTS_MANIFEST.tsv` — size and SHA-256 for every base64 part.
+7. `RECONSTRUCT_ARCHIVE.sh` — reconstructs and verifies the ZIP.
+8. `fortune_conjecture_chat_workspace_20260719.zip.sha256` — reconstructed archive checksum.
 
 ## Important calibration
 
