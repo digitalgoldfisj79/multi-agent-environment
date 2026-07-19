@@ -10,16 +10,18 @@ Use the GitHub connector. Read these exact files:
 - branch: `archive/fortune-conjecture-20260719`
 - directory: `fortune-conjecture/2026-07-19-chat-archive/`
 - first read: `fortune-conjecture/2026-07-19-chat-archive/CURRENT_STATUS.md`
-- then read: `fortune-conjecture/2026-07-19-chat-archive/README.md`
+- then read: `fortune-conjecture/2026-07-19-chat-archive/ARCHIVE_LOCATION.md`
 - file inventory: `fortune-conjecture/2026-07-19-chat-archive/FILE_MANIFEST.tsv`
 
 The repository is private. Always specify the branch ref `archive/fortune-conjecture-20260719` when fetching files.
 
-The complete 160-file workspace archive is stored in GitHub as checked base64 parts under:
+The complete 160-file workspace archive is stored in the persistent ChatGPT Library at:
 
-`fortune-conjecture/2026-07-19-chat-archive/parts/`
+`/Fortune Conjecture/2026-07-19 Chat Archive/fortune_conjecture_chat_workspace_20260719.zip`
 
-Read `PARTS_MANIFEST.tsv` and `RECONSTRUCT_ARCHIVE.sh` when the full ZIP or individual phase packages are needed. Reconstruct the ZIP by concatenating the parts in filename order and base64-decoding them; verify it against `fortune_conjecture_chat_workspace_20260719.zip.sha256`.
+Exact file ID: `file_00000000d56881f497ca9153ed7cc68b`
+
+Use the Files tool with Library scope to locate or materialize it when individual phase packages or validators are needed.
 
 Do not infer the programme state from filenames alone. Read `CURRENT_STATUS.md` fully before taking action. Fetch and inspect the relevant phase package reports before relying on an earlier closure.
 
@@ -83,15 +85,15 @@ The valid reduction chain is
 \Longrightarrow
 \mathrm{SHF2}
 \Longrightarrow
-\mathrm{PC\!-\!FROB2}
+\mathrm{PC\!-FROB2}
 \Longrightarrow
 \text{centred connected traces}
 \Longrightarrow
-\mathrm{PC\!-\!PSLF2}
+\mathrm{PC\!-PSLF2}
 \Longrightarrow
 \mathrm{LFAM4}
 \Longrightarrow
-\mathrm{PC\!-\!ADFSR4}
+\mathrm{PC\!-ADFSR4}
 \Longrightarrow
 \text{Fortune within this architecture}.
 \]
