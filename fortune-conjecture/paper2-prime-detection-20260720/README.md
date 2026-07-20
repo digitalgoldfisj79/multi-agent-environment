@@ -9,7 +9,7 @@
 
 This paper is a sequel to *Collision Geometry and Spectral Laws for Consecutive-Prime Partial Products* (Paper I; DOI `10.5281/zenodo.21426465`).
 
-The full release contains a 20-page PDF, a 22-page editable Word manuscript, canonical Markdown and generated LaTeX sources, a 17-item bibliography, self-contained validators, phase reports, a manifest, and checksums.
+The full release contains a 20-page PDF, a 23-page editable Word manuscript, canonical Markdown and generated LaTeX sources, a 17-item bibliography, self-contained validators, phase reports, a manifest, and checksums.
 
 ## Scope
 
@@ -24,4 +24,4 @@ Neither open estimate is proved.
 
 `fortune_prime_detection_paper2_20260720.zip`
 
-SHA-256: `fba2f52cff638d2b05718d36bda7fa1ea43835e6d0867b189197213f7041026f`
+SHA-256: `471e9fed5050395760ef1870cbff0449d0c501a22bbd4bc1cc32b3d8de04ca7f`
