@@ -5,11 +5,12 @@
 **Author:** Bozzard, Edward Stewart Anthony  
 **ORCID:** 0009-0002-4052-0994  
 **Version date:** 20 July 2026  
-**Status:** complete second-paper draft for cold specialist review; no proof of Fortune's conjecture claimed.
+**Revision:** Rev. 1 after independent cold review  
+**Status:** conditionally ready for submission review; no proof of Fortune's conjecture claimed.
 
 This paper is a sequel to *Collision Geometry and Spectral Laws for Consecutive-Prime Partial Products* (Paper I; DOI `10.5281/zenodo.21426465`).
 
-The full release contains a 20-page PDF, a 23-page editable Word manuscript, canonical Markdown and generated LaTeX sources, a 17-item bibliography, self-contained validators, phase reports, a manifest, and checksums.
+The revised release contains a 21-page PDF, a 23-page editable Word manuscript, canonical Markdown and generated LaTeX sources, a 17-item bibliography, self-contained validators, phase reports, the independent cold review, a revision ledger, a refreshed one-sided phase package, a manifest, and checksums.
 
 ## Scope
 
@@ -20,8 +21,14 @@ The paper proves exact reductions, moment formulas, and route-specific obstructi
 
 Neither open estimate is proved.
 
-## Release checksum
+## Cold-review outcome
 
-`fortune_prime_detection_paper2_20260720.zip`
+The independent review found no mathematical error in the theorem layer and classified the manuscript as conditionally ready subject to a short pre-submission fix list. Rev. 1 implements that list, including the offset-one correction to Lemma 2.2 and the refreshed reproducibility records.
 
-SHA-256: `471e9fed5050395760ef1870cbff0449d0c501a22bbd4bc1cc32b3d8de04ca7f`
+See `COLD_REVIEW_REVISION_NOTES.md` for the exact ledger.
+
+## Revised release checksum
+
+`fortune_prime_detection_paper2_20260720_rev1.zip`
+
+SHA-256: `8bda577e3c95c511f5f812542d0cc51442cab5744c7a6526cb652e679a336108`
