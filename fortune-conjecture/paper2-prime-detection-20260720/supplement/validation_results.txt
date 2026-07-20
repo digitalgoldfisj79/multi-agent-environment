@@ -1,0 +1,35 @@
+=== validate_pair_sum_fourth_moment.py ===
+N= 2 exact=19
+N= 3 exact=102
+N= 4 exact=334
+N= 5 exact=835
+N= 6 exact=1761
+N= 7 exact=3304
+N= 8 exact=5692
+N= 9 exact=9189
+N=10 exact=14095
+N=11 exact=20746
+N=12 exact=29514
+N=55 formula=13562560
+PAIR_SUM_FOURTH_MOMENT_PASS
+
+=== validate_one_sided_identity.py ===
+trials=80 max_residual=8.486e-09
+ONE_SIDED_IDENTITY_PASS
+
+=== validate_mobius_degree_identity.py ===
+MOBIUS_DEGREE_IDENTITY_PASS cases=2400
+
+=== validate_fourier_scale_conservation.py ===
+cases=10485 max_residual=8.598e-14
+FOURIER_SCALE_CONSERVATION_PASS
+
+=== validate_critical_scale_coherence.py ===
+N=  100 max_error=0.144668
+N=  300 max_error=0.116466
+N= 1000 max_error=0.094433
+N= 3000 max_error=0.080009
+N=10000 max_error=0.068447
+CRITICAL_SCALE_COHERENCE_DIAGNOSTIC_PASS
+
+ALL_CHECKS_PASS
