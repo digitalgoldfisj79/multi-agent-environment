@@ -12,9 +12,12 @@ for one square and one nonsquare value of a. Counts depend only on the square
 class of a. It records N_a(p) mod p, which is the canonical top coefficient of
 the exact Frobenius determinant indicator divided by 3a.
 
-The local cubic rootless condition is used as an exact prefilter: an
-irreducible member cannot have a root in F_p, and on F_p the degree-p family
-agrees with its local cubic tail.
+Two exact prefilters are used:
+
+1. The local cubic must be rootless, because on F_p the degree-p family agrees
+   with its cubic tail.
+2. The involution X -> -X sends d -> -d and preserves irreducibility. Since
+   d=0 gives a factor X, it is enough to test 1 <= d <= (p-1)/2 and double.
 """
 
 from __future__ import annotations
@@ -65,8 +68,8 @@ def is_irreducible(p: int, a: int, c: int, d: int) -> bool:
 def count_slice(task: tuple[int, int]) -> dict[str, int | float]:
     p, a = task
     started = time.time()
-    count = 0
-    tested = 0
+    half_count = 0
+    tested_half = 0
     cubes = [(x * x % p) * x % p for x in range(p)]
 
     for c in range(p):
@@ -74,19 +77,20 @@ def count_slice(task: tuple[int, int]) -> dict[str, int | float]:
             (-a * cubes[x] - (c + 1) * x) % p
             for x in range(p)
         }
-        for d in range(1, p):
+        for d in range(1, (p + 1) // 2):
             if d in forbidden_d:
                 continue
-            tested += 1
-            count += int(is_irreducible(p, a, c, d))
+            tested_half += 1
+            half_count += int(is_irreducible(p, a, c, d))
 
+    count = 2 * half_count
     return {
         "p": p,
         "a": a,
         "chi_a": chi(a, p),
         "count": count,
         "residue": count % p,
-        "tested": tested,
+        "tested_half": tested_half,
         "seconds": time.time() - started,
     }
 
