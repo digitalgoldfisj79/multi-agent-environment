@@ -1,67 +1,69 @@
-# Exact discriminant and Möbius mass for the d=1 cubic slices
+# Exact discriminant and locally admissible Möbius mass for the d=1 cubic slices
 
 **Date:** 2026-07-21  
-**Status:** proved algebraically; independently machine-checked by Sylvester-resultant determinants for every `(a,c,d)` at `p=5,7,11,13`.
+**Status:** the full-slice discriminant formulas and the local-admissibility lemmas below are proved algebraically and independently machine-checked.
+
+> **Convention correction.** For
+> \(F_{a,c,d}(X)=X^p+aX^3+cX+d\), evaluation on \(\mathbf F_p\) gives
+> \(F_{a,c,d}(x)=a x^3+(c+1)x+d\). Therefore the correct local
+> admissibility condition is that \(aX^3+(c+1)X+d\) is rootless, not
+> \(aX^3+cX+d\). The earlier diagnostic restriction without the `+1`
+> was misindexed. The complete-slice theorems were unaffected; all local
+> statements in this revision use the canonical convention.
 
 ## 1. Setup
 
-Let `p >= 5` be prime, let `a in F_p^*`, and consider the depressed cubic slice
+Let \(p\ge5\) be prime, \(a\in\mathbf F_p^*\), and
 
 \[
-f_{a,c,d}(X)=X^p+aX^3+cX+d,
+F_{a,c,d}(X)=X^p+aX^3+cX+d,
 \qquad c,d\in\mathbf F_p.
 \]
 
-Write `chi` for the quadratic character of `F_p`, extended by `chi(0)=0`, and put
+Write \(\chi\) for the quadratic character of \(\mathbf F_p\), extended by
+\(\chi(0)=0\), and put
 
 \[
-s_p=(-1)^{(p-1)/2}\in\mathbf F_p^*.
+s_p=(-1)^{(p-1)/2}.
 \]
-
-This is the normal-form slice used in the d=1 function-field Fortune programme after the quadratic term has been killed by translation.
 
 ## 2. Exact discriminant formula
 
 ### Theorem DM.1
 
-For `c != 0`, define
+For \(c\ne0\), put
 
 \[
-\varepsilon_c=\chi\!\left(-\frac{c}{3a}\right)\in\{\pm1\}.
+\varepsilon_c=\chi\!\left(-\frac{c}{3a}\right).
 \]
 
 Then
 
 \[
 \boxed{
-\operatorname{Disc}(f_{a,c,d})
+\operatorname{Disc}(F_{a,c,d})
 =s_p\left(3ad^2+c\left(\varepsilon_c+\frac{2c}{3}\right)^2\right).
 }
 \]
 
-For `c=0`, the same formula is interpreted as
+For \(c=0\),
 
 \[
 \boxed{
-\operatorname{Disc}(f_{a,0,d})=s_p\,3ad^2.
+\operatorname{Disc}(F_{a,0,d})=s_p\,3ad^2.
 }
 \]
 
 ### Proof
 
-In characteristic `p`,
+In characteristic \(p\),
 
 \[
-f'_{a,c,d}(X)=3aX^2+c.
+F'_{a,c,d}(X)=3aX^2+c.
 \]
 
-Let `u^2=-c/(3a)`. For `c != 0`,
-
-\[
-u^p=\chi(u^2)u=\varepsilon_cu.
-\]
-
-Also
+Let \(u^2=-c/(3a)\). For \(c\ne0\),
+\(u^p=\varepsilon_cu\), and
 
 \[
 au^3+cu=\frac{2c}{3}u.
@@ -70,60 +72,37 @@ au^3+cu=\frac{2c}{3}u.
 Hence
 
 \[
-f(u)=d+\left(\varepsilon_c+\frac{2c}{3}\right)u,
+F(u)=d+\left(\varepsilon_c+\frac{2c}{3}\right)u,
 \qquad
-f(-u)=d-\left(\varepsilon_c+\frac{2c}{3}\right)u.
+F(-u)=d-\left(\varepsilon_c+\frac{2c}{3}\right)u.
 \]
 
 Since
 
 \[
-\operatorname{Res}(f,f')=(3a)^p f(u)f(-u)
-=3a f(u)f(-u),
+\operatorname{Res}(F,F')=(3a)^pF(u)F(-u)=3aF(u)F(-u)
 \]
 
 and
 
 \[
-\operatorname{Disc}(f)=(-1)^{p(p-1)/2}\operatorname{Res}(f,f')
-=s_p\operatorname{Res}(f,f'),
+\operatorname{Disc}(F)=(-1)^{p(p-1)/2}\operatorname{Res}(F,F'),
 \]
 
-the displayed formula follows. The case `c=0` follows directly from `f'=3aX^2`.
+the formula follows. The case \(c=0\) is immediate.
 
-## 3. Exact full-slice character mass
+## 3. Exact complete-slice mass
 
 Define
 
 \[
 M_a(p)=\sum_{c,d\in\mathbf F_p}
-\chi\bigl(\operatorname{Disc}(f_{a,c,d})\bigr).
+\chi\bigl(\operatorname{Disc}(F_{a,c,d})\bigr).
 \]
 
-Put
-
-\[
-\delta_a=\chi(2a),
-\qquad
-\iota=\chi(-1),
-\]
-
-and
-
-\[
-m_a=\mathbf 1_{\delta_a=1}
-+\mathbf 1_{\iota\delta_a=-1}.
-\]
+Put \(\delta_a=\chi(2a)\). Then
 
 ### Theorem DM.2
-
-\[
-\boxed{
-M_a(p)=p\,m_a\,\chi(s_p3a).
-}
-\]
-
-Equivalently,
 
 \[
 \boxed{
@@ -132,64 +111,10 @@ M_a(p)=
 p\chi(3a),&p\equiv1\pmod4,\\
 -2p\chi(3a),&p\equiv3\pmod4\text{ and }\chi(2a)=1,\\
 0,&p\equiv3\pmod4\text{ and }\chi(2a)=-1.
-\end{cases}
-}
+\end{cases}}
 \]
 
-### Proof
-
-For fixed `c`, the discriminant has the form
-
-\[
-A d^2+B_c,
-\qquad A=s_p3a\ne0.
-\]
-
-The standard quadratic-character identity gives
-
-\[
-\sum_{d\in\mathbf F_p}\chi(Ad^2+B_c)
-=
-\begin{cases}
--\chi(A),&B_c\ne0,\\
-(p-1)\chi(A),&B_c=0.
-\end{cases}
-\]
-
-Besides `c=0`, a zero `B_c` requires
-
-\[
-\varepsilon_c+\frac{2c}{3}=0,
-\qquad c=-\frac{3\varepsilon_c}{2}.
-\]
-
-The consistency conditions are
-
-\[
-\varepsilon_c=1:\quad \chi(2a)=1,
-\]
-
-and
-
-\[
-\varepsilon_c=-1:\quad \chi(-1)\chi(2a)=-1.
-\]
-
-Thus there are exactly `1+m_a` values of `c` with `B_c=0`. Summing the two cases over all `p` values of `c` yields
-
-\[
-M_a(p)=p\,m_a\chi(A).
-\]
-
-## 4. Exact discriminant-zero count
-
-Let
-
-\[
-Z_a(p)=\#\{(c,d):\operatorname{Disc}(f_{a,c,d})=0\}.
-\]
-
-Then
+The number of zero discriminants in the complete slice is
 
 \[
 \boxed{
@@ -197,72 +122,326 @@ Z_a(p)=
 \begin{cases}
 p-\chi(2a),&p\equiv1\pmod4,\\
 p,&p\equiv3\pmod4.
-\end{cases}
-}
+\end{cases}}
 \]
 
-Consequently the numbers of nonzero square and nonsquare discriminants are determined exactly by
+For fixed \(c\), the discriminant is \(Ad^2+B_c\), with \(A=s_p3a\).
+The standard quadratic-character sum in \(d\), followed by the elementary
+classification of the values of \(c\) for which \(B_c=0\), gives both
+formulas.
+
+By Pellet's formula, because \(p\) is odd,
 
 \[
-N_++N_-=p^2-Z_a(p),
+\sum_{c,d}\mu(F_{a,c,d})=-M_a(p).
+\]
+
+## 4. Correct local admissibility
+
+Set
+
+\[
+H_{a,c,d}(X)=aX^3+(c+1)X+d.
+\]
+
+For every \(x\in\mathbf F_p\),
+
+\[
+F_{a,c,d}(x)=H_{a,c,d}(x).
+\]
+
+Thus absence of linear factors of \(F_{a,c,d}\) is exactly rootlessness of
+\(H_{a,c,d}\).
+
+### Theorem LA.1 — local admissibility forces squarefreeness
+
+If \(H_{a,c,d}\) has no root in \(\mathbf F_p\), then
+
+\[
+\operatorname{Disc}(F_{a,c,d})\ne0.
+\]
+
+#### Proof
+
+Suppose \(F\) has a repeated root \(\beta\). From \(F'(\beta)=0\),
+
+\[
+\beta^2=-\frac{c}{3a}\in\mathbf F_p,
+\]
+
+so \(\beta\in\mathbf F_{p^2}\).
+
+If \(\beta\in\mathbf F_p\), then \(H(\beta)=F(\beta)=0\), contradicting
+local admissibility.
+
+Otherwise \(\beta^p=-\beta\). Writing \(t=\beta^2\), the equation
+\(F(\beta)=0\) becomes
+
+\[
+(-1+at+c)\beta+d=0.
+\]
+
+Since \(1,\beta\) are linearly independent over \(\mathbf F_p\), one has
+\(d=0\). But then \(H(0)=0\), again a contradiction. Therefore a locally
+admissible member is squarefree.
+
+This is stronger than the earlier numerical observation: the restricted
+zero-discriminant count is identically zero for every \(p\ge5\) and every
+\(a\ne0\).
+
+## 5. Exact number of locally admissible cubics
+
+Write a locally admissible cubic in monic form
+
+\[
+q_{u,v}(X)=X^3+uX+v,
 \qquad
-N_+-N_-=M_a(p).
+u=(c+1)/a,\quad v=d/a.
 \]
 
-## 5. Möbius interpretation
-
-Pellet's formula over an odd finite field states
+Let
 
 \[
-\mu(f)=(-1)^{\deg f}\chi(\operatorname{Disc}f).
+\rho=\chi(-3).
 \]
 
-Here `deg f=p` is odd, so, including the nonsquarefree cases where both sides vanish,
+### Theorem LA.2 — uniform fixed-\(u\) count
+
+For every \(u\ne0\),
 
 \[
 \boxed{
-\sum_{c,d}\mu(f_{a,c,d})=-M_a(p).
+\#\{v:q_{u,v}\text{ is irreducible}\}=\frac{p-\rho}{3}.
 }
 \]
 
-Thus the proposed Stickelberger/discriminant route is not merely a parity observation: the complete two-parameter cubic slice has an exact Möbius mass of order `p`, the same scale as the empirically observed irreducible count.
-
-## 6. What this proves, and what it does not
-
-The formula is a genuine new exact layer for the programme. It reduces the full-slice discriminant character sum to elementary local data and shows that the Möbius mass is naturally on the target `~p` scale.
-
-It does **not** by itself prove that an irreducible member exists. Squarefree reducible polynomials also contribute `+1` or `-1`, and their net contribution can cancel or reinforce the irreducible contribution.
-
-The correct next target is the rootless-tail restriction
+For \(u=0\),
 
 \[
-\mathcal R_a=\{(c,d):aX^3+cX+d\text{ has no root in }\mathbf F_p\}.
+\boxed{
+\#\{v:X^3+v\text{ is irreducible}\}
+=\frac{(1+\rho)(p-1)}{3}.
+}
 \]
 
-Since a rootless cubic is irreducible, `|R_a|=(p^2-1)/3` exactly. The restricted mass
+Consequently
 
 \[
-M_a^{(0)}(p)=
-\sum_{(c,d)\in\mathcal R_a}
-\chi(\operatorname{Disc}(f_{a,c,d}))
+\boxed{
+\#\{(c,d):H_{a,c,d}\text{ is rootless}\}
+=\frac{p^2-1}{3}.
+}
 \]
 
-is the first nontrivial mass capable of interacting directly with the necessary local condition for degree-`p` irreducibility. It should be attacked through the trace/norm parametrisation of irreducible depressed cubics over `F_{p^3}`. The verification script records this restricted mass as diagnostic data but makes no theorem claim for it.
+#### Proof for \(u\ne0\)
 
-## 7. Reproducibility
+Consider \(\phi_u(x)=x^3+ux\). For each output value, the fibre size is the
+number of roots of \(X^3+uX+v\). Ordered collisions with distinct inputs are
+controlled by
 
-Run:
+\[
+\phi_u(x)=\phi_u(y),\quad x\ne y
+\iff x^2+xy+y^2=-u.
+\]
+
+The nondegenerate binary quadratic form on the right has exactly
+\(p-\rho\) solutions for nonzero right-hand side. Removing the diagonal and
+combining the zeroth, first and second fibre moments gives
+
+\[
+n_0=\frac{p-\rho}{3},
+\]
+
+independently of the square class of \(-u/3\). Here \(n_0\) is the number
+of output values with empty fibre. Those output values are precisely the
+irreducible cubics. The case \(u=0\) follows from whether the cube map is
+bijective or has image of index three.
+
+## 6. Restricted discriminant mass and factor parity
+
+Define
+
+\[
+\mathcal A_a=\{(c,d):H_{a,c,d}\text{ is rootless over }\mathbf F_p\}
+\]
+
+and
+
+\[
+M_a^{\mathrm{loc}}(p)=
+\sum_{(c,d)\in\mathcal A_a}
+\chi\bigl(\operatorname{Disc}(F_{a,c,d})\bigr).
+\]
+
+By Theorem LA.1 every summand is \(\pm1\). Therefore the exact numbers of
+locally admissible members with square and nonsquare discriminant are
+
+\[
+\boxed{
+N_{a,+}=\frac12\left(\frac{p^2-1}{3}+M_a^{\mathrm{loc}}(p)\right),
+\qquad
+N_{a,-}=\frac12\left(\frac{p^2-1}{3}-M_a^{\mathrm{loc}}(p)\right).
+}
+\]
+
+Pellet's formula identifies these with odd and even factor parity,
+respectively. In particular, every irreducible member lies in the `+`
+class, while a locally admissible reducible member in that class has at
+least three irreducible factors.
+
+## 7. Exact complete-sum decomposition
+
+Let
+
+\[
+\Delta(u,v)=-4u^3-27v^2,
+\]
+
+and define
+
+\[
+D_a(u,v)=\operatorname{Disc}
+\bigl(F_{a,\,au-1,\,av}\bigr).
+\]
+
+Put
+
+\[
+S_a=\sum_{u,v}\chi(D_a(u,v)),
+\]
+
+\[
+C_a=\sum_{u,v}\chi(\Delta(u,v))\chi(D_a(u,v)),
+\]
+
+\[
+R_a=\sum_{x,u}\chi\bigl(D_a(u,-x^3-ux)\bigr),
+\]
+
+and
+
+\[
+\tau_a=\chi(D_a(0,0)).
+\]
+
+### Theorem LA.3 — exact restricted-mass identity
+
+\[
+\boxed{
+M_a^{\mathrm{loc}}(p)=\frac{2S_a+C_a-R_a-\tau_a}{3}.
+}
+\]
+
+Moreover \(S_a=M_a(p)\), so the first term is already known exactly from
+Theorem DM.2.
+
+#### Proof
+
+For \(q_{u,v}=X^3+uX+v\), let \(r(u,v)\) be its number of distinct roots in
+\(\mathbf F_p\). The exact irreducibility indicator is
+
+\[
+\mathbf1_{q_{u,v}\ \mathrm{irred}}
+=
+\frac{2+\chi(\Delta(u,v))-r(u,v)
+-\mathbf1_{(u,v)=(0,0)}}{3}.
+\]
+
+For squarefree cubics this is the three-way Frobenius-cycle classification;
+for singular cubics the final correction handles the triple-root case.
+Multiplying by \(\chi(D_a(u,v))\) and summing gives the displayed identity.
+The root-incidence term is exactly \(R_a\).
+
+This replaces the vague “discriminant mass” proposal by two explicit
+complete character sums, \(C_a\) and \(R_a\), plus known elementary terms.
+
+## 8. Trace–norm form over \(\mathbf F_{p^3}\)
+
+Let \(K=\mathbf F_{p^3}\). For \(\alpha\in K\) with
+\(\operatorname{Tr}(\alpha)=0\), \(\alpha\ne0\), put
+
+\[
+u_\alpha=-\frac12\operatorname{Tr}(\alpha^2),
+\qquad
+v_\alpha=-\operatorname{Norm}(\alpha).
+\]
+
+Then \(X^3+u_\alpha X+v_\alpha\) is the minimal polynomial of \(\alpha\),
+and each irreducible depressed cubic occurs exactly three times. Hence
+
+\[
+\boxed{
+M_a^{\mathrm{loc}}(p)
+=
+\frac13
+\sum_{\substack{\alpha\in K^*\\\operatorname{Tr}(\alpha)=0}}
+\chi\bigl(D_a(u_\alpha,v_\alpha)\bigr).
+}
+\]
+
+This is the canonical trace–norm form for comparison with prescribed
+trace/norm and Kloosterman literature.
+
+## 9. Algebraic-geometric next target
+
+For \(c\ne0\), write
+
+\[
+\operatorname{Disc}(F)=s_p\{P(c,d)+\chi(-c/(3a))Q(c)\},
+\]
+
+where
+
+\[
+P(c,d)=3ad^2+c+\frac49c^3,
+\qquad
+Q(c)=\frac43c^2.
+\]
+
+The identity
+
+\[
+\chi(P+\eta Q)
+=
+\frac12\left[
+\chi(P+Q)+\chi(P-Q)
++\eta\{\chi(P+Q)-\chi(P-Q)\}
+\right]
+\]
+
+for \(\eta=\pm1\) converts the nested character into ordinary Kummer
+character sums. Thus \(C_a\) and \(R_a\) are finite combinations of
+complete, fixed-degree character sums on two-dimensional varieties.
+
+The next proof target is a uniform bound
+
+\[
+C_a,R_a=O(p)
+\]
+
+through a geometric nondegeneracy analysis. That would give the rigorous
+parity-equidistribution statement
+
+\[
+M_a^{\mathrm{loc}}(p)=O(p),
+\qquad
+N_{a,\pm}=\frac{p^2}{6}+O(p).
+\]
+
+This does not alone prove irreducibility, but it is precisely compatible
+with a reducible-count or RQM assembly: any proof that the locally
+admissible members with at least three factors are fewer than \(N_{a,+}\)
+would force an irreducible member.
+
+## 10. Reproducibility
+
+Run
 
 ```bash
 python frontier/d1_discriminant/discriminant_mass_check.py
 ```
 
-The script uses only the Python standard library. It:
-
-1. verifies the pointwise discriminant formula against independently constructed Sylvester determinants for every coefficient tuple at `p=5,7,11,13`;
-2. verifies the closed full-slice mass and zero-count formulas for both square classes at all primes up to a configurable bound;
-3. prints the rootless-tail restricted masses as explicitly labelled diagnostics.
-
-## 8. Literature boundary
-
-Pellet's formula is standard; a convenient modern proof is Ardavan Afshar, *A Proto-Pellet's Formula for the Möbius Function*, arXiv:2001.05641. No novelty claim is made here for the use of discriminants in sparse finite-field families. The exact specialised formulas DM.1--DM.2 should be checked against the sparse-polynomial parity literature before publication.
+The verifier uses only the Python standard library and checks the
+pointwise discriminant formula, complete-slice formulas, local
+squarefreeness, the fixed-\(u\) count, and the exact restricted-mass
+identity.
