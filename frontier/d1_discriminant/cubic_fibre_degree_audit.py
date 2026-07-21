@@ -21,7 +21,7 @@ v_formula = sp.factor(sp.solve(ceq, v)[0])
 assert v_formula == (2*V**2*c - 2*V**2*u - V**2 + 6*u**2)/(9*V)
 
 A = sp.factor(sp.together(orientation.subs(v, v_formula)) * 3*V**2 / 4)
-B = sp.factor(-sp.together(deq.subs(v, v_formula)) / 2)
+B = sp.factor(-9*sp.together(deq.subs(v, v_formula)) / 2)
 
 A_expected = (
     V**4*c**2 - 2*V**4*c*u - V**4*c + V**4*u**2 + V**4*u + V**4
@@ -35,8 +35,10 @@ assert sp.expand(A - A_expected) == 0
 assert sp.expand(B - B_expected) == 0
 
 resultant = sp.factor(sp.resultant(A, B, u))
-assert sp.rem(resultant, 6561*V**12, domain=sp.ZZ[c,d,V]) == 0
-E = sp.factor(resultant / (6561*V**12))
+quotient = sp.cancel(resultant / (6561*V**12))
+num, den = sp.fraction(quotient)
+assert den == 1
+E = sp.factor(num)
 assert sp.Poly(E, V).degree() == 8
 assert sp.Poly(E, V).LC() == 1
 
@@ -53,13 +55,26 @@ def inv(x: int, p: int) -> int:
     return pow(x % p, p - 2, p)
 
 
+def eval_a(uu: int, vv: int, cv: int, p: int) -> int:
+    return (
+        vv**4*cv**2 - 2*vv**4*cv*uu - vv**4*cv + vv**4*uu**2
+        + vv**4*uu + vv**4 + 6*vv**2*cv*uu**2 - 3*vv**2*uu**3
+        - 3*vv**2*uu**2 + 9*uu**4
+    ) % p
+
+
+def eval_b(uu: int, vv: int, cv: int, dv: int, p: int) -> int:
+    return (
+        2*vv**4*cv - 2*vv**4*uu - vv**4 - 9*vv**3*dv
+        + 9*vv**2*cv*uu - 12*vv**2*uu**2 + 9*vv**2*uu + 9*uu**3
+    ) % p
+
+
 def count_solutions(p: int, cv: int, dv: int) -> int:
     count = 0
     for vv in range(1, p):
         for uu in range(p):
-            aa = int(A_expected.subs({V: vv, u: uu, c: cv})) % p
-            bb = int(B_expected.subs({V: vv, u: uu, c: cv, d: dv})) % p
-            if aa == 0 and bb == 0:
+            if eval_a(uu, vv, cv, p) == 0 and eval_b(uu, vv, cv, dv, p) == 0:
                 # v is uniquely recovered because 9V is invertible.
                 _ = (
                     (2*vv*vv*cv - 2*vv*vv*uu - vv*vv + 6*uu*uu)
