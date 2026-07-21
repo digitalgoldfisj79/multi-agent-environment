@@ -52,9 +52,15 @@ H_2(\theta)=\sum_{u\in\mathcal P_2}e(\theta S_u),
 K(\theta)=|H_2(\theta)|^2-M.
 \]
 
-All constants below are absolute. The only structural input is (A.1); the
-results hold verbatim for any superincreasing sequence with ratio at least
-\(X\).
+All constants below are absolute. The only structural input is (A.1).
+Scope note: the dichotomy (Section A.2) holds verbatim for any
+superincreasing sequence with ratio at least \(X\), of any length \(N\).
+The tail theorem (Section A.3) additionally uses \(N\ll X\) — automatic in
+the prime-block setting, where \(N\asymp X/\log X\) — since the optimal
+moment order at top levels is \(k\asymp N\), which must stay below the
+rigidity threshold \((X-1)/2\); for an arbitrary superincreasing sequence
+with \(N\gtrsim X\), (A.10) holds only for \(\lambda\lesssim(X/N)^2M^2\)-type
+restricted ranges.
 
 **Lemma A.1 (\(B\)-rigidity).** Let \(B\ge1\) be an integer and suppose
 \(X>B+1\). If \(c_0,\ldots,c_{N-1}\) are integers with \(|c_t|\le B\) and
@@ -339,13 +345,20 @@ because \(1/(2\sqrt t)<1/\sqrt{2(t+1)}\) for \(t\ge2\) with margin
 exceeding \(1/(4(t+1))\) for \(t\ge121\). Hence \(f\le f(121)<0\) on the
 range, proving (A.10). \(\square\)
 
-**Remark A.8 (sharpness).** The constant \(\sqrt2\) in (A.9) is optimal.
-Indeed \(H_2=(F^2+F(2\cdot))/2\) with \(F\) a lacunary sum of \(N\) unit
-phases, and \(F/\sqrt N\) converges in moments to a standard complex
-Gaussian \(g\) (the exact even moments of \(H_2/\sqrt M\) match those of
-\(g^2/\sqrt2\) to leading order for every fixed order — see Remark A.9), so
-\(K/M\) behaves like \(|g|^4/2-1\), whose tail is
-\(\exp(-\sqrt{2\lambda/M}(1+o(1)))\). Empirically (check 4) the ratio
+**Remark A.8 (sharpness at fixed levels).** The constant \(\sqrt2\) in
+(A.9) cannot be improved *at fixed levels*, in the following iterated-limit
+sense. The even moments of \(H_2/\sqrt M\) match those of \(g^2/\sqrt2\)
+(\(g\) standard complex Gaussian) to leading order at every fixed order
+(Remark A.9); the limit law \(|g|^4/2\) is moment-determinate (its \(k\)-th
+moment \((2k)!/2^k\) satisfies Carleman's condition), so for each fixed
+\(t>0\),
+\(\operatorname{meas}\{K\ge tM\}\to
+\Pr\bigl(|g|^2\ge\sqrt{2(t+1)}\bigr)=\exp(-\sqrt{2(t+1)})\)
+as \(X\to\infty\). Hence no bound of the form
+\(\exp(-c\sqrt{\lambda/M})\) with \(c>\sqrt2\) can hold uniformly at fixed
+levels. Sharpness *uniformly over the whole range* \(\lambda\le M^2\)
+(the moderate/large-deviation regime) is **not** claimed and would require
+a separate argument. Empirically (check 4) the ratio
 \(-\log\operatorname{meas}/\sqrt{\lambda/M}\) is stable near \(1.5\) at
 \(N=24\) for \(\lambda/M\in[2,64]\), consistent with \(\sqrt2\) plus
 finite-size corrections; the measured tail respects (A.9) at every level.
@@ -357,8 +370,12 @@ count \(\int_0^1|H_2|^6\) equals
 \(6\), \(d_\tau\) is the (constant) number of ordered triples of unordered
 pairs realizing a fixed endpoint multiset of type \(\tau\), and
 \(c_\tau(N)\), the number of index multisets of type \(\tau\), is a
-polynomial in \(N\) of degree equal to the number of distinct parts of
-\(\tau\), vanishing at the integers below that number. Hence the count is a
+polynomial in \(N\) of degree equal to the number of **parts** of
+\(\tau\) — equivalently, of distinct endpoint labels: for \(\tau\) with
+\(\ell\) parts and part-size multiplicities \(m_r\),
+\(c_\tau(N)=N(N-1)\cdots(N-\ell+1)/\prod_r m_r!\) — vanishing at the
+integers below \(\ell\). (Note: *parts*, not distinct part-sizes; e.g.
+\(\tau=(3,3)\) has \(\ell=2\) and contributes degree 2.) Hence the count is a
 single polynomial in \(N\) of degree at most \(6\), valid for all
 \(N\ge0\); it is therefore determined by its values at seven points.
 Exhaustive counting at \(N=2,\ldots,9\) (eight points) with verification at

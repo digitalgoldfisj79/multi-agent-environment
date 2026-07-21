@@ -64,12 +64,19 @@ and moreover the hyperplane decomposition \(S(p)=\frac1p\sum_u T_u\) has
 \(T_u=\eta(-1)G_Q\,(R(u)-1)\) where \(R(u)\in\{0,1,2,p\}\) is the
 \(\mathbb F_Q\)-root count of \(x^p+x^2+u\). So
 \(S(p)=\eta(-1)G_Q\,N(p)\): the twisted Kloosterman-type sum over
-\(\mathbb F_{p^p}\) is *quantized* — its value literally is the root
-count, there is no cancellation inside it, and no analytic evaluation can
-decide its positivity. Verified exactly at \(p=3,5,7\) (at \(p=7\):
+\(\mathbb F_{p^p}\) is *quantized* — its final value is exactly
+determined by an integer root count (term-by-term the sum does exhibit
+cancellation; the point is that the total collapses to the quantized
+lattice \(\eta(-1)G_Q\cdot\mathbb Z_{\ge0}\)), so no analytic estimation
+can decide its positivity. Verified exactly at \(p=3,5,7\) (at \(p=7\):
 117,648 terms over \(\mathbb F_{7^7}\), \(S(7)=i\cdot7^{7/2}\) on the
 nose). The literature agent found no prior occurrence of this object or
-identity.
+identity; however, the adjacent literature connecting Kloosterman/Gauss
+sums to counts of irreducible polynomials with prescribed trace and norm
+(notably the Moisio line of work, and recent norm-trace counting in
+finite algebras) is substantial, so novelty should be treated as a
+*candidate pending a dedicated primary-source review* of that corpus,
+not as established.
 
 **Theorem D1.4 (exact ledger and reduction of the Target).**
 \[

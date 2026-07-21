@@ -21,7 +21,7 @@ exchangeability test supports the first part.
 
 ---
 
-## 1. Theorem RQM: the unconditional random-order model theorem
+## 1. The RQM assembly target: an unconditional random-order model result
 
 **Statement (status: provable-sketch; every component lemma proved and
 independently verified; remaining work is assembly write-up, est. 5–10 pages,
@@ -169,20 +169,29 @@ derivation and the numerics were independently re-done by the auditor.
   the untruncated \(-H\log H\); the truncation at \(\ell_j\sim2X\ll H^{1/2}\)
   changes the logarithm scale, and the numerics confirm the truncated
   constant against the untruncated overshoot in every tested case.
-- **Conditional theorem (proved).** If Hardy–Littlewood holds uniformly at
-  the primorial centres of the block with relative error
-  \(\varepsilon(X)=o(\log X/X)\) (first and second moments), then Paper II
-  hypothesis (2.7) holds with \(L(X)=o(\log X)\), hence by Theorem 2.4
-  Fortune's conjecture holds for all sufficiently large \(n\).
-  **Correction to RESEARCH_VECTORS B1:** the conclusion \(L=O(1)\) requires
-  the stronger \(\varepsilon=O(1/X)\); at \(\varepsilon=o(\log X/X)\) one
-  gets \(L=o(\log X)\), which is exactly what (2.7) needs. Using truncated
-  or full singular series in the hypothesis is equivalent within the budget.
+- **Conditional theorem — SUPERSEDED (see `CONDITIONAL_HL_BLOCK.md`).**
+  The theorem as originally stated hypothesized a *pointwise* first-moment
+  approximation \(\Psi_j(H)=H+O(H\varepsilon)\) at every centre. A cold
+  review correctly observed that this hypothesis is vacuously strong: at
+  any \(\varepsilon<1/2\) it directly forces
+  \(\Psi_j(H)\ge H/2>o(H)\) beyond the prime-power contamination, hence a
+  prime at every centre — the conclusion — with no variance argument, no
+  pair correlation, and no singular-series input. (Equivalently,
+  \(|E_j|\ll H\varepsilon\) pointwise makes the block variance trivial
+  already at \(\varepsilon=o(\sqrt{\log X/X})\).) The pair-correlation
+  machinery becomes genuinely load-bearing only under **block-averaged**
+  hypotheses: first and second moments averaged over the \(N\) centres,
+  uniformly in the shift \(d\). The corrected theorem — block-averaged HL
+  with relative error \(\varepsilon=o(\log X/X)\) implies (2.7) with
+  \(L\le2+O(\eta X\varepsilon)+o(1)=o(\log X)\), hence Fortune for all
+  large \(n\) — is stated and proved in full in
+  `CONDITIONAL_HL_BLOCK.md`, where the truncated-singular-series lemma
+  \(|T_j(H)|\le2H\log X\) does exactly the work it was built for.
 
-The headline remains: Fortune follows from HL at primorial centres with
-relative error barely better than \(1/X\) — a full log factor short of
-square-root cancellation. This is now a complete, checkable manuscript
-skeleton.
+The corrected headline: Fortune follows from *block-averaged*
+Hardy–Littlewood at primorial centres at relative accuracy
+\(o(\log X/X)\); the earlier pointwise phrasing overstated the depth of
+the conditional bridge.
 
 ## 4. Order-ensemble numerics: the increasing order is exchangeable
 
@@ -208,13 +217,13 @@ replaced by a genuinely \(q\)-dependent adversary (also generic). Also
 recorded: at a single modulus the single-walk energy is an exact linear
 function of \(V\) (\(G=K(V-1)\)), so \(V\) carries all the information.
 
-This is the evidence one wants before investing in Theorem RQM: no
+This is the evidence one wants before investing in the RQM assembly: no
 finite-size derandomization obstruction is visible. It is also the honest
 flip side: order-genericity offers no lever the true order visibly lacks.
 
 ## 5. The frontier map after this round
 
-1. **Write Theorem RQM** (assembly write-up G1; days of work, low risk,
+1. **Complete the RQM assembly** (write-up G1; days of work, low risk,
    polylog margin in the binding case must be tracked). It is the
    epistemically cleanest artefact the programme can currently produce:
    unconditional, GRH-free, first of its kind, honest about scope.

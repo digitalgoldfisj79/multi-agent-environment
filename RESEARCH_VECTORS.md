@@ -70,8 +70,9 @@ Verified by brute force at N = 3, 5, 7.
 
 an exact polynomial in N computable by the same multiset combinatorics
 (leading coefficient = [(2k−1)!!·k!]²/(2k)! = (2k)!/4^k; verified at
-k = 2, 3, 4). Interpretation: H₂/√M has *exactly* the moments of g²/√2 for a
-standard complex Gaussian g, through every order the rigidity range allows.
+k = 2, 3, 4). Interpretation: the moments of H₂/√M match those of g²/√2
+for a standard complex Gaussian g to leading order, with O_k(1/N)
+corrections, at every fixed order the rigidity range allows.
 The kernel K = |H₂|² − M is a half-squared-Gaussian object: mean 0, second
 moment 5M², third moment 74M³ (Gaussian-model predictions 5 and 74 match the
 exact leading coefficients).
