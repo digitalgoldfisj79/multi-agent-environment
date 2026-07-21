@@ -1,12 +1,15 @@
 #!/usr/bin/env python3
-"""Independent checks for DISCRIMINANT_MASS.md.
+"""Independent checks for the d=1 discriminant/local-mass note.
 
 Standard library only.
 
 Checks:
-  1. Pointwise discriminant formula against a Sylvester determinant.
-  2. Full-slice character-mass and discriminant-zero formulas.
-  3. Rootless-tail restricted masses as diagnostics only.
+  1. Pointwise discriminant formula against Sylvester determinants.
+  2. Complete-slice character-mass and zero-count formulas.
+  3. Correct local convention: a*x^3 + (c+1)*x + d.
+  4. Local admissibility implies nonzero discriminant.
+  5. Exact fixed-u count of irreducible depressed cubics.
+  6. Exact restricted-mass decomposition LA.3.
 """
 
 from __future__ import annotations
@@ -16,11 +19,11 @@ from math import isqrt
 
 
 def primes_upto(limit: int) -> list[int]:
-    out: list[int] = []
-    for n in range(2, limit + 1):
-        if all(n % q for q in range(2, isqrt(n) + 1)):
-            out.append(n)
-    return out
+    return [
+        n
+        for n in range(2, limit + 1)
+        if all(n % q for q in range(2, isqrt(n) + 1))
+    ]
 
 
 def chi(a: int, p: int) -> int:
@@ -35,7 +38,7 @@ def least_nonsquare(p: int) -> int:
 
 
 def discriminant_formula(p: int, a: int, c: int, d: int) -> int:
-    """DM.1, returned as an element of F_p represented by 0..p-1."""
+    """DM.1, represented by an integer in 0..p-1."""
     a %= p
     c %= p
     d %= p
@@ -78,7 +81,6 @@ def det_mod(matrix: list[list[int]], p: int) -> int:
 def sylvester_resultant(
     f_descending: list[int], g_descending: list[int], p: int
 ) -> int:
-    """Resultant by the determinant of the Sylvester matrix."""
     n = len(f_descending) - 1
     m = len(g_descending) - 1
     size = n + m
@@ -98,7 +100,6 @@ def sylvester_resultant(
 
 
 def discriminant_sylvester(p: int, a: int, c: int, d: int) -> int:
-    """Independent discriminant calculation from Res(f,f')."""
     f = [0] * (p + 1)  # descending coefficients, degree p to 0
     f[0] = 1
     f[p - 3] = a % p
@@ -111,21 +112,21 @@ def discriminant_sylvester(p: int, a: int, c: int, d: int) -> int:
 
 
 @dataclass(frozen=True)
-class PredictedMass:
+class MassAndZeros:
     mass: int
     zero_count: int
 
 
-def predicted_mass(p: int, a: int) -> PredictedMass:
+def predicted_full_mass(p: int, a: int) -> MassAndZeros:
     delta = chi(2 * a, p)
     if p % 4 == 1:
-        return PredictedMass(p * chi(3 * a, p), p - delta)
+        return MassAndZeros(p * chi(3 * a, p), p - delta)
     if delta == 1:
-        return PredictedMass(-2 * p * chi(3 * a, p), p)
-    return PredictedMass(0, p)
+        return MassAndZeros(-2 * p * chi(3 * a, p), p)
+    return MassAndZeros(0, p)
 
 
-def brute_mass(p: int, a: int) -> PredictedMass:
+def brute_full_mass(p: int, a: int) -> MassAndZeros:
     mass = 0
     zero_count = 0
     for c in range(p):
@@ -133,26 +134,71 @@ def brute_mass(p: int, a: int) -> PredictedMass:
             value = chi(discriminant_formula(p, a, c, d), p)
             mass += value
             zero_count += value == 0
-    return PredictedMass(mass, zero_count)
+    return MassAndZeros(mass, zero_count)
 
 
-def tail_is_rootless(p: int, a: int, c: int, d: int) -> bool:
-    return all((a * x**3 + c * x + d) % p for x in range(p))
+def phi_image(p: int, u: int) -> set[int]:
+    return {(x**3 + u * x) % p for x in range(p)}
 
 
-def restricted_rootless_mass(p: int, a: int) -> tuple[int, int, int]:
+def irreducible_v_values(p: int, u: int) -> list[int]:
+    """v such that x^3+u*x+v has no F_p root, hence is irreducible."""
+    image = phi_image(p, u)
+    return [v for v in range(p) if (-v) % p not in image]
+
+
+def predicted_fixed_u_count(p: int, u: int) -> int:
+    rho = chi(-3, p)
+    if u % p:
+        return (p - rho) // 3
+    return ((1 + rho) * (p - 1)) // 3
+
+
+def local_mass(p: int, a: int) -> tuple[int, int, int]:
+    """count, discriminant mass, zero count under the correct +1 convention."""
     count = 0
     mass = 0
     zero_count = 0
-    for c in range(p):
-        for d in range(p):
-            if not tail_is_rootless(p, a, c, d):
-                continue
-            count += 1
+    for u in range(p):
+        for v in irreducible_v_values(p, u):
+            c = (a * u - 1) % p
+            d = (a * v) % p
             value = chi(discriminant_formula(p, a, c, d), p)
+            count += 1
             mass += value
             zero_count += value == 0
     return count, mass, zero_count
+
+
+def tail_discriminant(p: int, u: int, v: int) -> int:
+    return (-4 * u**3 - 27 * v * v) % p
+
+
+def restricted_components(p: int, a: int) -> tuple[int, int, int, int, int]:
+    """Return S, C, R, tau, and (2S+C-R-tau)/3."""
+    s_term = 0
+    cross = 0
+    root_incidence = 0
+
+    for u in range(p):
+        for v in range(p):
+            c = (a * u - 1) % p
+            d = (a * v) % p
+            disc_char = chi(discriminant_formula(p, a, c, d), p)
+            s_term += disc_char
+            cross += chi(tail_discriminant(p, u, v), p) * disc_char
+
+    for x in range(p):
+        for u in range(p):
+            v = (-x**3 - u * x) % p
+            c = (a * u - 1) % p
+            d = (a * v) % p
+            root_incidence += chi(discriminant_formula(p, a, c, d), p)
+
+    tau = chi(discriminant_formula(p, a, -1, 0), p)
+    numerator = 2 * s_term + cross - root_incidence - tau
+    assert numerator % 3 == 0
+    return s_term, cross, root_incidence, tau, numerator // 3
 
 
 def verify_pointwise() -> None:
@@ -168,34 +214,76 @@ def verify_pointwise() -> None:
         print(f"PASS pointwise p={p}: {checked} tuples")
 
 
-def verify_mass(limit: int = 199) -> None:
+def verify_full_mass(limit: int = 199) -> None:
     for p in primes_upto(limit):
         if p < 5:
             continue
         for a in (1, least_nonsquare(p)):
-            actual = brute_mass(p, a)
-            expected = predicted_mass(p, a)
+            actual = brute_full_mass(p, a)
+            expected = predicted_full_mass(p, a)
             assert actual == expected, (p, a, actual, expected)
-    print(f"PASS mass and zero-count formulas for both square classes, p <= {limit}")
+    print(f"PASS complete mass and zero-count formulas, p <= {limit}")
 
 
-def print_restricted_diagnostics(limit: int = 47) -> None:
-    print("\nRootless-tail restricted diagnostics (not a theorem):")
-    print("p class a rootless_count restricted_mass disc_zero_count")
+def verify_fixed_u(limit: int = 199) -> None:
+    for p in primes_upto(limit):
+        if p < 5:
+            continue
+        total = 0
+        for u in range(p):
+            actual = len(irreducible_v_values(p, u))
+            expected = predicted_fixed_u_count(p, u)
+            assert actual == expected, (p, u, actual, expected)
+            total += actual
+        assert total == (p * p - 1) // 3
+    print(f"PASS fixed-u and total admissible-cubic counts, p <= {limit}")
+
+
+def verify_local_squarefree_and_identity(limit: int = 79) -> None:
+    print("\nCorrect locally admissible masses:")
+    print("p class a count mass zero_count S C R tau")
     for p in primes_upto(limit):
         if p < 5:
             continue
         r = least_nonsquare(p)
         for label, a in (("square", 1), ("nonsquare", r)):
-            count, mass, zeros = restricted_rootless_mass(p, a)
+            count, mass, zeros = local_mass(p, a)
             assert count == (p * p - 1) // 3
-            print(p, label, a, count, mass, zeros)
+            assert zeros == 0, (p, a, zeros)
+            s_term, cross, root_incidence, tau, reconstructed = restricted_components(
+                p, a
+            )
+            assert reconstructed == mass, (
+                p,
+                a,
+                mass,
+                reconstructed,
+                s_term,
+                cross,
+                root_incidence,
+                tau,
+            )
+            assert s_term == predicted_full_mass(p, a).mass
+            print(
+                p,
+                label,
+                a,
+                count,
+                mass,
+                zeros,
+                s_term,
+                cross,
+                root_incidence,
+                tau,
+            )
+    print(f"PASS local squarefreeness and LA.3 identity, p <= {limit}")
 
 
 def main() -> None:
     verify_pointwise()
-    verify_mass()
-    print_restricted_diagnostics()
+    verify_full_mass()
+    verify_fixed_u()
+    verify_local_squarefree_and_identity()
     print("\nALL PROVED FORMULA CHECKS PASSED")
 
 
