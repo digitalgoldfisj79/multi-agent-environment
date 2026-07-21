@@ -12,7 +12,7 @@
 
 `E_sigma E_a^sigma <= C(eta,rho) M (log X)^9`
 
-uniformly for `1 <= |a| < H`, together with the weighted aggregate and Frobenius-energy bounds. The load-bearing arithmetic input is the exact sixth-moment count of characters with block-prime correlation at least `3/4`; the finite configuration and matching ledger closes with a polylogarithmic margin.
+uniformly for `1 <= |a| < H`, together with the weighted aggregate and Frobenius-energy bounds.
 
 **Scope:** this is a theorem about uniformly random orderings of the block primes. It does not imply the estimate for the increasing primorial order and does not prove Fortune's conjecture.
 
@@ -39,9 +39,13 @@ The following are proved or machine-certified as labelled in `D1_ATTACK.md` and 
 17. universal oriented-cubic parameterization by the trace-zero plane;
 18. unsigned locally admissible cubic incidence `p^2/9 + O(p^(3/2))`;
 19. signed cubic incidence `O(p^(3/2))`;
-20. exact reduced Frobenius determinant indicator `J_a(c,d)=3a 1_irred`.
+20. exact reduced Frobenius determinant indicator `J_a(c,d)=3a 1_irred`;
+21. exact quadratic factorial sieve through order three and complete quadratic deletion;
+22. uniform cubic-factor multiplicity bound `nu_3 <= 24` from a degree-eight orientation eliminant;
+23. unsigned quartic incidence `p^2/12 + O(p^(3/2))` and signed quartic incidence `O(p^(3/2))`;
+24. a positive-parity sector of size `p^2/288 + O(p^(3/2))` with no factors of degrees 2, 3, or 4.
 
-The quantized identity's method is classical. Novelty of the exact object and result remains provisional pending manual inspection of the offline sources listed in `NOVELTY_VERDICT.md`.
+Novelty of the exact objects and results remains provisional pending manual inspection of the offline sources listed in `NOVELTY_VERDICT.md`.
 
 ## 2. Consolidation correction
 
@@ -59,7 +63,7 @@ and
 
 `H_(a,c,d)(X) = aX^3 + (c+1)X + d`,
 
-let `A_a` be the coefficient pairs for which `H` is rootless. Every such F is squarefree and has no linear factor.
+let `A_a` be the coefficient pairs for which H is rootless. Every such F is squarefree and has no linear factor.
 
 Pellet gives
 
@@ -69,7 +73,7 @@ where r is the number of irreducible factors. Hence a positive-discriminant redu
 
 > F is irreducible if and only if it is locally admissible, has positive discriminant character, and has no factor of degree from 2 through `floor(p/3)`.
 
-## 4. Completed quadratic sieve level
+## 4. Completed quadratic multiplicative level
 
 Every irreducible quadratic
 
@@ -79,69 +83,86 @@ divides exactly one member of the cubic slice, with
 
 `c=1-a(s^2-n)`, `d=s(an-1)`.
 
-The associated local cubic satisfies
+The first signed and unsigned incidences satisfy
 
-`H_(s,n)(X)=a(X+s)h_(s,n)(X)+(2X-s)`.
+`L_(a,2)=p^2/6+O(p)`,
 
-This gives the exact unsigned formula
+`L_(a,2)^chi=O(p^(3/2))`.
 
-`L_(a,2)=p(p-1)/6 + [1+chi(a)(p chi(-1)-K_p)-2T_a]/6`,
+Eliminating n gives the trace equation
 
-where `K_p` is the trace of a fixed K3 surface. Hence
+`a s^3-(2-c)s-d=0`.
 
-`L_(a,2)=p^2/6+O(p)`.
+Therefore every member has at most three irreducible quadratic factors. Exact factorial moments through order three give
 
-For the signed incidence,
+`N_(a,no2)=29p^2/144+O(p^(3/2))`,
 
-`|L_(a,2)^chi| <= 30p^(3/2)+131p+1`.
+`M_(a,no2)=O(p^(3/2))`.
 
-Therefore
+Consequently
 
-`L_(a,2,+)=p^2/12+O(p^(3/2))`,
+`N_(a,no2,+)=29p^2/288+O(p^(3/2))`,
 
-`L_(a,2,-)=p^2/12+O(p^(3/2))`.
+`N_(a,no2,-)=29p^2/288+O(p^(3/2))`.
 
-## 5. Completed cubic single-factor level
+This removes all quadratic factors, including simultaneous pairs and triples.
+
+## 5. Completed cubic single-factor level and bounded fibres
 
 Choose an irreducible base cubic `X^3+X+b` and identify its trace-zero plane with `F_p^2`. Frobenius acts universally by
 
 `tau(x,y)=(-y,x-y)`.
 
-The invariant forms
-
-`u=x^2-xy+y^2`,
-
-`v=bR+(W0/2)S`,
-
-`V=W0R-(27b/2)S`
-
-parameterize oriented irreducible depressed cubics, three plane points per cubic.
-
-The unique compatible translate and coefficients are rational fixed-degree functions of `(u,v,V)`. The shifted local-root equation is the degree-six surface
-
-`G_a=2aV(z^3+uz+v)-6uz^2+(3V+9v)z-4u^2=0`.
-
-A characteristic-zero genericity certificate proves that the root surface is geometrically irreducible and that all local and degree-p discriminant weights are geometrically nonsquare outside a finite bad-base set. Fixed-degree Weil and Lang-Weil estimates therefore give
+The invariant forms parameterize oriented irreducible depressed cubics, three plane points per cubic. Fixed-degree geometry gives
 
 `L_(a,3)=p^2/9+O(p^(3/2))`,
 
 `L_(a,3)^chi=O(p^(3/2))`.
 
-Consequently
+The compatible coefficient map has a monic degree-eight eliminant in the orientation V. For each V, a cubic equation determines the remaining invariant. Hence
 
-`L_(a,3,+)=p^2/18+O(p^(3/2))`,
+`nu_3(F) <= 24`
 
-`L_(a,3,-)=p^2/18+O(p^(3/2))`.
+uniformly for every member. Cubic deletion is therefore an exact finite factorial-moment problem through order 24, not an inclusion-exclusion problem with a p-dependent tail.
 
-A vectorized exact Hugging Face sweep over every prime below 1200 and both square classes found
+## 6. Completed quartic single-factor level
 
-`max |L_(a,3)-p^2/9|/p < 1.05`,
+For a Frobenius-ordered quartic orbit `x_0,x_1,x_2,x_3`, compatibility is the fixed system
 
-`max |L_(a,3)^chi|/p < 1.66`,
+`x_(i+1)+a x_i^3+c x_i+d=0`
 
-strongly supporting the sharper `O(p)` bounds.
+for i modulo four.
 
-## 6. Exact full-cycle determinant indicator
+After scaling to a=1 and saturating by the Vandermonde, the characteristic-zero ordered-cycle ideal is prime of dimension two. Adding a local root produces another prime dimension-two cover. The local triple-root locus is zero-dimensional.
+
+The local discriminant and all eight raw degree-p discriminant Kummer weights are nonsquares; this is certified by a transverse quartic number-field specialization.
+
+Lang-Weil therefore gives
+
+`L_(a,4)=p^2/12+O(p^(3/2))`,
+
+`L_(a,4)^chi=O(p^(3/2))`,
+
+and hence
+
+`L_(a,4,+)=p^2/24+O(p^(3/2))`,
+
+`L_(a,4,-)=p^2/24+O(p^(3/2))`.
+
+## 7. Roughness through degree four
+
+Let `N_(a,rough4,+)` count locally admissible positive-discriminant members with no factor of degree 2, 3, or 4. A union bound after the exact quadratic deletion gives
+
+`N_(a,rough4,+)`
+` >= N_(a,no2,+)-L_(a,3,+)-L_(a,4,+)`
+` = [29/288-1/18-1/24]p^2+O(p^(3/2))`
+` = p^2/288+O(p^(3/2))`.
+
+Thus every sufficiently large cubic slice contains positive-parity members rough through degree four.
+
+This is the final degree at which first-moment subtraction can work. The next expected positive degree-five incidence is `p^2/30`, which exceeds the remaining `p^2/288` margin. Further progress must use multiplicative correlations or the determinant indicator.
+
+## 8. Exact full-cycle determinant indicator
 
 Let B be the matrix of `Phi-I`, where `Phi(z)=z^p` on
 
@@ -149,56 +170,28 @@ Let B be the matrix of `Phi-I`, where `Phi(z)=z^p` on
 
 in the basis `1,X,...,X^(p-1)`. Delete the constant column and the row indexed by `X^(p-3)`, and call the determinant `J_a(c,d)`.
 
-For an arbitrary, possibly non-squarefree F, the Frobenius-fixed subspace has dimension equal to the number of distinct irreducible factors. Since `deg F=p` and `a != 0`, rank `p-1` occurs exactly on the irreducible locus.
-
-On an irreducible member, conjugating Frobenius to the permutation matrix of a p-cycle gives
-
-`adj(Phi-I)=e_0 Tr`.
-
-Newton's identities give
-
-`Tr(X^(p-3))=3a`.
-
-Therefore the selected cofactor has the exact value
+For every coefficient pair,
 
 `J_a(c,d)=3a * 1_(F irreducible)`.
 
-This has been exhaustively verified pointwise for both square classes at `p=5,7,11,13`.
+Therefore, in `F_p`,
 
-## 7. Sharpest current reduction to the function-field crown
+`sum_(c,d)J_a(c,d)=3a N_a(p)`.
 
-Let
-
-`N_a(p)=#{(c,d):X^p+aX^3+cX+d is irreducible}`.
-
-Then in `F_p`,
-
-`sum_(c,d) J_a(c,d)=3a N_a(p)`.
-
-Thus the full d=1 function-field theorem follows from the single congruence
-
-`sum_(c,d) J_a(c,d) != 0 mod p`.
-
-Equivalently, let `J_a^can(c,d)` be the canonical polynomial function with degree at most `p-1` in each variable. Finite-field orthogonality gives
+Equivalently, if `J_a^can` is the canonical polynomial function,
 
 `sum_(c,d)J_a(c,d)=[c^(p-1)d^(p-1)]J_a^can`.
 
-Therefore it is enough to prove that one top coefficient is nonzero.
+A nonzero formula for this coefficient would prove the function-field crown directly. Initial small-prime determinant factorizations do not yet exhibit a stable coefficient recurrence.
 
-This is currently the shortest plausible route to the function-field crown. It replaces a positive integer count of size about p by one exact coefficient computation modulo p.
+## 9. Ranked open fronts
 
-## 8. Ranked open fronts
+1. **Determinant top coefficient.** Find a constant-term, resultant, recurrence, or divided-hook formula for `[c^(p-1)d^(p-1)]J_a^can`.
+2. **Finite cubic factorial sieve.** Determine the generic monodromy and top-dimensional components of the fibre powers of the degree-eight cubic map, then combine them with the quadratic deletion weight.
+3. **Mixed roughness sieve.** Use exact mixed factorial moments rather than first-moment union bounds to pass degree five and beyond.
+4. **O(p) geometric sharpening.** Remove weight-three cohomology from the completed degree-2, 3, and 4 surfaces; this improves constants but does not alone reach irreducibility.
+5. **Increasing-order transfer from RQM.** This remains the original integer Fortune wall.
 
-1. **Top determinant coefficient.** Compute or prove nonzero
-   `[c^(p-1)d^(p-1)]J_a^can` without expanding the full determinant. This would prove FF-Fortune `(p,1)` directly.
-2. **O(p) cubic and signed-quadratic sharpening.** Audit the fixed global surfaces to remove possible weight-three cohomology.
-3. **Multiplicative parity sieve.** Compress products of small factors without term-by-term inclusion-exclusion through degree `p/3`.
-4. **Increasing-order transfer from RQM.** This remains the original integer Fortune wall.
+## 10. Immediate next action
 
-## 9. Immediate next action
-
-Attack the determinant top coefficient by determinant multilinearity and finite-field orthogonality, using the Frobenius columns generated by powers of
-
-`-aX^3-cX-d`.
-
-The first acceptable outcome is either a closed nonzero formula or an exact recurrence in p. Failure should be documented as a structural obstruction before returning to the multiplicative parity sieve.
+The next controlled task is the generic monodromy of the degree-eight cubic orientation eliminant. If its geometric Galois group is S_8 or another explicitly transitive group, the cubic factorial moments become a finite Chebotarev calculation and exact cubic deletion can be completed. In parallel, the determinant coefficient remains the higher-upside direct route.
