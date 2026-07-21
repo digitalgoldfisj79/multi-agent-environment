@@ -1,0 +1,111 @@
+{
+ "overall": "AUDIT PASSED \u2014 no fatal flaws found; every load-bearing claim re-verified with independent code and independent derivations. (a) EXACT THEORY: Theorem A (orbit structure) re-derived by hand (action law (b,c,d)->(lam*b, 2b*al+c, lam^{-1}(b*al^2+(c+1)*al+d)) confirmed on 300 random flint compositions) and exhaustively re-verified for p=3..13 with my own code, including the b=0 stratum being exactly {x^p-x+d, d!=0}; counts 8/24/48/120/324 reproduced. Theorem B's six-step chain (root ledger, annihilator 1_{F_p}=p^{1-p}Sum_{t in kerTr}, linearization Tr(t theta^p)=Tr(t^{1/p}theta), completed square, t=tau^p, Hasse-Davenport phase G_Q=G_p^p) re-derived independently and confirmed by MY OWN direct F_Q arithmetic at p=3,5 (flint-based) and by an independent vectorized numpy F_{7^7} engine: S(7)=i*7^{7/2} exactly, N_formula(7)=1.00000000. Theorem C (quantization T_u = eta(-1)G_Q(R(u)-1)) \u2014 the double-evaluation proof is correct (Q/G_Q = eta(-1)G_Q since G_Q*conj(G_Q)=Q, conj(G_Q)=eta(-1)G_Q) and I confirmed it exhaustively for every u at p=3,5 with independent code; the p=3 Sali\u00e9 cross-check values (T_1=0, T_2=-2G_Q, S(3)=-G_Q) match my run. Lemma L1 proof correct, verified p<5000. Theorem D equivalences follow immediately. DATA: my own no-prefilter full-Rabin implementation (compose_mod doubling, validated against flint factor() on 240 random polynomials) plus a flint-free sympy cross-check (p=13,19,31) reproduced N(p) and the exact witness d-lists at p=3,5,7,11,13,17,19,23,101 and 5 random table primes 263,587,887,919,1153 \u2014 all match. ALL 61 claimed N(p)=0 primes <=1500 were exhaustively re-confirmed by my code (every d proven reducible via exhibited root, small-degree gcd certificate, or failed Rabin; zero survivors) \u2014 audit_zero_results.json. N(1499)=1 with unique d=349 confirmed by full exhaustive recomputation. All 53 quad-team cubic witnesses independently re-certified irreducible with a!=0, covering exactly the 53 N=0 primes <1200. The two teams' N tables agree perfectly on all 195 common primes including d-lists. (b) STATISTICS: recomputed exactly (dist {0:61,1:105,2:46,3:20,4:6}, mean 1.1807, var/mean 0.830, chi2=6.89/3dof, mod-4 z=+2.00 for N>=2, z=-0.97 for N=0; no modulus k<=60 classifies 1_{N=0}). The task's 'Poisson mean ~1 -> 1/e zeros' benchmark is REJECTED by the data: Poisson(1) predicts 87.6 zeros vs 61 observed (-3.6 sigma). The correct naive benchmark is the rootless-conditioned mean e/2~1.359 (only (p-1)/2 values of d lack F_p-roots, each irreducible with conditional probability ~e/p); Poisson(e/2) predicts P(0)=0.257 vs observed 0.256 \u2014 striking \u2014 yet the observed MEAN 1.181 sits 2.8 sigma below e/2, and relative to Poisson(observed mean) there is a zero deficit (-1.7 sigma) plus underdispersion. So the data-team's 'weakly non-Poisson' reading is the correct one; the quad summary's 'matching Poisson statistics' is an imprecise gloss (its own writeup is more careful). New audit observation: among rootless d, the parity of the number of irreducible factors splits EXACTLY 50/50 (25/25 at p=101, 49/49 at p=197) \u2014 a deterministic Stickelberger/Swan-type discriminant constraint that bars half the rootless candidates from irreducibility; this (and the p mod 4 dependence of the Gauss phase) is the natural candidate mechanism for the underdispersion and the ~2sigma mod-4 tilt, and is cheap to settle exactly via the trinomial discriminant of x^p+x^2+d (Swan's method). None of this changes strategy: N=0 occurs at a steady ~26% rate, the quadratic route is permanently closed, the cubic family is necessary and empirically robust (my recomputation of both cubic classes at p=5,7,13,31,37,41 matches the table exactly; normal-form a->a*lam^2 action verified). (c) LITERATURE: all four load-bearing papers re-read; every quoted statement verified verbatim (details in verdicts); the unverifiable negative/novelty claims were honestly labeled by the lit team. (d) AUDIT BONUS \u2014 coverage gap found and CLOSED: the combined deliverable only verified the target theorem for p<1200 (the data team's zero list extends to 1500 but its cubic table stops at 293, and the quad witnesses stop at 1151), leaving the 8 N=0 primes in (1200,1500] without witnesses. I found and Rabin-certified cubic witnesses (a,b,c,d) at all 8: 1231:(88,1005,958,911), 1237:(195,1059,573,379), 1303:(1218,640,86,648), 1367:(427,1259,1211,596), 1423:(207,820,799,782), 1439:(1105,817,1049,751), 1453:(1385,935,1443,248), 1481:(453,488,406,1430). Hence the target theorem (and FF-Fortune(p,1) modulo reduction (i)) is now machine-verified for EVERY odd prime p <= 1500. Audit code and artifacts: /tmp/claude-0/-home-user-multi-agent-environment/53da20a7-5af0-58c9-b6a4-3bdefd3e2c90/scratchpad/{audit_own_N.py, audit_zero_verify.py, audit_zero_results.json, audit_zero.log, audit_1499.py, audit_gap_witness.py, audit_gap.log}.",
+ "verdicts": [
+  {
+   "claim": "Theorem A: affine action law, trivial stabilizers for b!=0, #irred_2 = p(p-1)N(p) + (p-1), b=0 stratum exactly Artin-Schreier",
+   "verdict": "CONFIRMED",
+   "reason": "Re-derived independently (f(lam x+al)/lam with lam^p=lam, al^p=al gives exactly the claimed (b,c,d) map; stabilizer and unique-normal-form arguments check out); action law verified against 300 random flint compositions; exhaustive count over all p^3 triples at p=3,5,7,11,13 matches formula (8,24,48,120,324) and b=0 irreducibles are exactly {c=-1, d!=0} in all five cases."
+  },
+  {
+   "claim": "Theorem B: N(p) = p^{-p} G_Q S(p) with G_Q = G_p^p (p^{p/2} resp. -i p^{p/2}), S real resp. purely imaginary",
+   "verdict": "CONFIRMED",
+   "reason": "Full derivation independently re-done (all six steps sound, including the -1/4 constant and eta(tau^p)=eta(tau)); my own F_Q implementations verify it exactly at p=3 and 5, and an independent vectorized F_{7^7} computation gives S(7)=i*7^{7/2} and N_formula=1 to machine precision. For general p the Gauss sign and Hasse-Davenport are classical inputs, correctly flagged as such."
+  },
+  {
+   "claim": "Theorem C (quantization): T_u = eta(-1) G_Q (R(u)-1), R(u) in {0,1,2,p}; hence S(p) = eta(-1) G_Q N(p), no cancellation inside S(p)",
+   "verdict": "CONFIRMED",
+   "reason": "The elementary double-evaluation proof is correct (verified Q/G_Q = eta(-1)G_Q; R(u) value-set argument sound, including the d=0 repeated-root case R(0)=2); my independent F_Q code confirms T_u = eta(-1)G_Q(R(u)-1) for every u at p=3 and p=5, and the p=3 Sali\u00e9 values (T_1=0, T_2=-2G_Q, S(3)=-G_Q) match. This is a genuine structural result: the sums are pinned to root counts."
+  },
+  {
+   "claim": "Lemma L1: gcd(p-2, p^p-1) = 1 for all odd primes p",
+   "verdict": "CONFIRMED",
+   "reason": "Proof re-checked (r | p-2 and r | p^p-1 forces ord_r(2)=p, so r \u2261 1 mod p, contradicting r <= p-2; r=2 excluded since p-2 odd); verified computationally for all p < 5000 with my own code."
+  },
+  {
+   "claim": "Theorem D: quadratic Fortune witness <=> N(p)>=1 <=> S(p) != 0 <=> ray positivity <=> |S(p)| >= p^{p/2} <=> some T_u = eta(-1)(p-1)G_Q",
+   "verdict": "CONFIRMED",
+   "reason": "All equivalences are immediate from S = eta(-1) G_Q N and the quantization; the ray-confinement (S in p^{p/2} Z_{>=0}, rotated by i for p \u2261 3 mod 4) checks against the verified sign conventions at p=3,5,7."
+  },
+  {
+   "claim": "N(p)=0 occurs: first at p=31; 53 primes < 1200; 61 of 238 primes <= 1500 (25.6%), full zero list as stated",
+   "verdict": "CONFIRMED",
+   "reason": "All 61 claimed zero primes exhaustively re-verified by my independent staged Rabin/gcd/root pipeline (no prefilter dependence for positive claims; every d proven reducible; zero survivors at all 61 primes); N(31)=0 additionally confirmed by flint-free sympy factorization; both teams' tables agree perfectly on all 195 common primes including witness d-lists; 53 zeros < 1200 and 61 <= 1500 both recounted."
+  },
+  {
+   "claim": "N(p) spot values: N(13)=2 {5,8}, N(19)=2 {12,14}, N(101)=1 {61}; table values at 5 random primes; N(1499)=1 unique d=349",
+   "verdict": "CONFIRMED",
+   "reason": "My own full-Rabin implementation (validated against flint factor on 240 random polynomials) reproduces N and the exact d-lists at p=3,5,7,11,13,17,19,23,101 and at randomly sampled table primes 263, 587, 887, 919, 1153; N(1499) recomputed exhaustively: exactly one irreducible, d=349."
+  },
+  {
+   "claim": "No congruence classification: neither N(p) nor 1_{N=0} factors through p mod k for any k <= 60; no strong residue-symbol correlate",
+   "verdict": "CONFIRMED",
+   "reason": "Recomputed directly on the 238-prime dataset: for every modulus 2 <= k <= 60 some residue class contains both N=0 and N>0 primes; crosstabs reproduce the reported values, with only the p mod 4 tilt in P(N>=2) reaching ~2 sigma (z=+2.00) and P(N=0) tilt at z=-0.97 \u2014 correctly labeled suggestive/unverified by the data team."
+  },
+  {
+   "claim": "Cubic rescue: certified irreducible quadrinomial witnesses (a != 0) at all 53 N=0 primes < 1200; hence target theorem and FF-Fortune(p,1) for all odd p < 1200",
+   "verdict": "CONFIRMED",
+   "reason": "All 53 witnesses extracted from the quad team's output and independently re-certified irreducible with a != 0 by my Rabin test; coverage is exactly the 53 zero primes. Audit extension: I found and certified witnesses at the 8 remaining N=0 primes in (1200,1500], so the verified range is now all odd p <= 1500."
+  },
+  {
+   "claim": "Quadratic family exactly critical; 'individual Kloosterman sign problem' framing refined (quantized, not oscillatory)",
+   "verdict": "CONFIRMED",
+   "reason": "The refinement is forced by Theorem C: |T_u| <= (p-1)|G_Q| is an identity-based bound saturated by N = p-1, and the sums take only 4 quantized values; the conclusion that no analytic sign evaluation can decide positivity, and that positivity is in fact false for ~27% of primes, is verified."
+  },
+  {
+   "claim": "Data team: cubic classes N3_1, N3_r both nonzero for every 5 <= p <= 293; min total 10 at p=5, 16 for p >= 7; growth ~2p; no prime <= 300 with both families empty",
+   "verdict": "CONFIRMED",
+   "reason": "Exact recomputation of both classes at p=5,7,13,31,37,41 matches the table entry-for-entry (including at N=0 primes 31, 41); table has no zero entries and its minima (10 at p=5; 16 at p=7) match my exact recomputations at those primes. Minor erratum: the table covers 60 primes, not the stated 61."
+  },
+  {
+   "claim": "Data team: cubic normal form \u2014 a != 0 splits into exactly two affine classes a in {1, r} via a -> a lam^2, b killed by translation for p >= 5",
+   "verdict": "CONFIRMED",
+   "reason": "Derivation re-checked (leading coeff lam after monic renormalization gives a -> a lam^2 since lam^{p-1}=1; al = -b/(3a) needs 3 invertible, p >= 5) and confirmed on 400 random numeric substitution checks."
+  },
+  {
+   "claim": "Data team: N(p) distribution weakly non-Poisson \u2014 mean 1.181, var/mean 0.83, chi2 = 6.9 on 3 dof (p ~ 0.08), deficit of zeros / excess of ones vs Poisson(mean)",
+   "verdict": "CONFIRMED",
+   "reason": "All figures reproduced exactly from the dataset (mean 1.1807, var/mean 0.830, chi2 6.89, zero-count z = -1.70 vs Poisson(mean)). This is the correct statistical reading; the quad summary's 'matching Poisson statistics' gloss is imprecise. Note: task's Poisson(1) benchmark predicts 87.6 zeros vs 61 observed (-3.6 sigma); the appropriate naive mean is e/2 (rootless-conditioned), whose P(0)=0.257 matches the observed 0.256 but whose mean exceeds the observed by 2.8 sigma \u2014 real second-order structure, plausibly Stickelberger/Swan parity (I observed exactly even 50/50 factor-parity splits among rootless d at p=101 and 197)."
+  },
+  {
+   "claim": "Data team: prefilter soundness (composite Frobenius iterates, gcd factor-degree certificates, root iff 1-4d square); positive decisions never rely on the filter",
+   "verdict": "CONFIRMED",
+   "reason": "The underlying facts are standard and were re-derived (theta in F_p root iff theta^2+theta+d=0; gcd(x^{p^k}-x, f) nontrivial iff factor of degree dividing k); more importantly my fully independent no-prefilter pipeline reproduces every headline count tested, so the headline numbers do not depend on their filter."
+  },
+  {
+   "claim": "Lit: Cohen 1989 / Wan Thm 10.12 / Lidl-Niederreiter Cor 3.79 criterion for x^p - a_1 x - a_0, confirming reduction (ii)",
+   "verdict": "CONFIRMED",
+   "reason": "Verified verbatim in full text of arXiv:2409.10467 (Lemma 28, citing Cohen Bull. Austral. Math. Soc. 40(3):407-412, 1989) and arXiv:2412.04985 (Section 4 quoting Wan Thm 10.12; Lemma 2.4 = L-N Cor 3.79). Over F_p this leaves exactly the Artin-Schreier family, matching reduction (ii)."
+  },
+  {
+   "claim": "Lit: Agou 1980 \u2014 X^{p^t}+aX+b with t >= 2 irreducible forces t = p = 2 (relayed statement)",
+   "verdict": "CONFIRMED",
+   "reason": "Confirmed as a faithful relay: arXiv:2412.04985 Section 4 states 'a result by Agou [1] indicates that a necessary condition for f(X) to be irreducible over F_q is t = p = 2', with [1] = Agou, Canad. Math. Bull. 23 (1980) 207-212 \u2014 exactly as the lit report cites. The original French paper itself remains unread (correctly labeled provable-sketch)."
+  },
+  {
+   "claim": "Lit: Slavov/BBR prescribed-coefficient technology structurally inapplicable (d fixed q -> infinity; (q,d(d-1))=1 hypothesis; affine-linearized leading part excluded; char | d never Morse)",
+   "verdict": "CONFIRMED",
+   "reason": "All four obstructions verified verbatim in the full text of arXiv:1903.09050 v2: Theorem 1 quotes BBR's hypothesis (q, d(d-1)) = 1 (Duke 164 (2015) 277-295); the error is O_d(q^{-1/2}); Remark 3 states char F_q | d polynomials are never Morse; Lemma 9 excludes affine linearized f = sum a_i T^{p^i} + f(0). T^p + (low degree) over F_p is excluded on multiple independent grounds."
+  },
+  {
+   "claim": "Lit: quadratic-form/Gauss-sum machinery standard (Chen arXiv:2411.11705: rank = n - dim ker L, epsilon G^r q^{n-r} evaluations, Hasse-Davenport via L-N Thm 5.15, diagonalization Prop 16); nondegeneracy of Tr(t theta^2)",
+   "verdict": "CONFIRMED",
+   "reason": "All verified in the full text: Theorem 2 gives dim ker L + rank M_L = n; pages 2-3 give the complete Gauss evaluation and hyperplane-restricted root counts by rank parity; 'G_d = (-1)^{d-1} G^d ([8, Theorem 5.15])' with [8] = Lidl-Niederreiter; Proposition 16 as described; Klapper/Fitzgerald-Kottegoda/Coulter/Anbar-Meidl all in the reference list. For Q_t(x)=Tr(t x^2): l(x)=tx is self-adjoint with trivial kernel for t != 0, so rank p \u2014 the brief's nondegeneracy claim is textbook-provable as stated."
+  },
+  {
+   "claim": "Lit: Jones-Boston settled polynomials citation (Proc. AMS 140 (2012) 1849-1863; Errata 148 (2020) 913-914) and the quadratic dynamical-irreducibility criterion; Theorem 29 (second iterate of shifted linearized polynomials reducible for p >= 3)",
+   "verdict": "CONFIRMED",
+   "reason": "References [18]/[19] of arXiv:2409.10467 match the citation exactly; Proposition 11 matches the lit report's quote verbatim (iff over finite fields); Theorem 29 verified verbatim with its proof (Capelli + trace transitivity). The absence of a length-p Frobenius-orbit existence theorem in that literature is consistent with the paper's actual content."
+  },
+  {
+   "claim": "Lit: the target family x^p + a x^3 + b x^2 + c x + d is unsettled in the literature; S(p) is a new object; no function-field Fortune conjecture has been stated; classical Fortune attribution (Reo Fortune/Golomb)",
+   "verdict": "UNVERIFIABLE",
+   "reason": "These are negative search results and a memory-level attribution; nothing in my independent reading contradicts them, and the pre-arXiv French/Russian caveat (Agou 1982, Varshamov) is real given blocked web access. The lit team labeled all of these 'unverified' \u2014 correct epistemic practice; treat as 'no evidence of prior settlement', not proof of novelty."
+  },
+  {
+   "claim": "Lit: verified count data 8/24/48 (b != 0: 6/20/42) for p = 3,5,7",
+   "verdict": "CONFIRMED",
+   "reason": "Reproduced exhaustively by my own independent code (and consistent with the orbit formula and my N values); matches the task's given table."
+  }
+ ],
+ "fatal_flaws": []
+}

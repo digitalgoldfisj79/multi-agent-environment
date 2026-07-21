@@ -1,0 +1,104 @@
+{
+ "overall": "JUDGE ADJUDICATION (all claims re-derived and/or independently recomputed; new code: judge_p5_full.py, judge_p7_moment.py, judge_scan.py, judge_scan2.py, judge_stats.py, judge_Lw.py in /tmp/claude-0/-home-user-multi-agent-environment/53da20a7-5af0-58c9-b6a4-3bdefd3e2c90/scratchpad/).\n\n(1) STRONGEST SURVIVING STATEMENT ABOUT THE CUBIC FAMILY. The entire exact-identity layer survives and is now doubly verified: master identity p*#irred_4 = C - p^4 (p>=5; p=3 needs the -(Q-p) zero-polynomial correction) [proved]; linearization Tr(t theta^p)=Tr(t^{1/p} theta) [proved]; |V_t| = p^{p-2} for all t in kerTr\\0 [proved]; u=v=0 stratum = p-1 = the excluded Artin-Schreier orbit [proved; I re-derived via c^{(Q-1)/(p-1)}=c]; u=0,v!=0 strata = chi(-1)^{(p+3)/2} p^{(3-p)/2} A' = #irred_2-(p-1) [proved; I re-derived every step incl. the identical w-cancellation on kerTr, eta|F_p^* = chi, and the Hasse-Davenport sign G_Q=g_p^p; verified A'=100 -> 20 at p=5]; slice decomposition #irred_a = p^2 - p^{3-p} + p^{2-p}R_a with my independent recomputation giving R = (-620,+630,+630,-620) at p=5, matching brute force for every a [proved]; exact ledger #irred_4 = (p-1) + p(p-1)N(p) + (p-1)(p^2-p^{3-p}) + p^{2-p}sum_{a!=0}R_a and the implication [|sum R_a| < (p-1)(p^p-p)] => Target [proved; arithmetic checked]. The alpha=0 strata sum to exactly #irred_2 (the briefing's contrary main-term claim is false; both agents agreed and I confirm). Symmetries: #irred_a depends only on chi(a) and p | #irred_a [proved] -- STRENGTHENED HERE: the involution f(T) -> -f(-T) fixes each a-slice (a,b,c,d)->(a,-b,c,-d), acts freely on b=0 irreducibles (fixed points d=0 are divisible by T), so 2p | #irred_a for a != 0, p >= 5; every slice count in all datasets is even, confirming this new theorem.\nNEW STRUCTURAL RESULTS FOUND DURING ADJUDICATION, which overturn both agents' asymptotic readings: (i) For x in F_p, f(x) equals the cubic tail ax^3+(1+c)x+d, so the F_p-root (linear-factor) structure of every family member is EXACTLY the splitting of its cubic tail; the number of rootless (c,d) per (a,b=0)-slice is exactly (p^2-1)/3 [proved, verified p=5..17], vs the random-poly rate e^{-1}: the family carries a deterministic 'singular-series' density factor with leading term (1/3)e ~ 0.906. (ii) Extended slice counts (my independent Frobenius-ladder scan to p=181, agreeing with the prior N3 sweep at EVERY jointly computed prime; combined validated data to p=293, 60 primes, 120 slice values) obey cnt_{b=0}/p = 0.842 + 0.618/sqrt(p) + noise, with residuals standardized by the pair-Poisson variance 2p having mean 0.000, variance 0.83, |z|<=2.8, and NO trend in p (slope 0.004). The same logic predicts the quadratic family's mean N(p) ~ (1/2)e*corr ~ 1.2, exactly as observed (1.18 over 238 primes). CONSEQUENCE: E[R_a] ~ (sigma(p)-1)p^p ~ -0.16 p^p is a DETERMINISTIC secondary main term at critical scale with definite negative sign (candidate closed-form origin: local factor statistics of the sparse family), while the FLUCTUATION is at the smaller scale ~p^{p-1/2} (pair-Poisson), decaying relatively like p^{-1/2}. This refutes the cubic writeup's empirical model ('R_a ~ random signs at p^p, non-decaying, individual-sign problem like N(p)>=1') -- its evidence (max 0.54 at p=13) was small-p noise plus the then-invisible drift -- and refines the adversary's Poisson picture (right scale, but variance is 2p from pairing, and the drift exists; their z=-4.88 at p=167 is drift, not a tail event). Also refuted: writeup sec.6's 'typical |E_a(t)| ~ p^{(p+1)/2}': measured rms|E_a(t)| = 0.39 sqrt(Q) at both p=5 and p=7; and I proved E_a(t^p)=E_a(t) exactly (Frobenius invariance in t). The quadratic route is confirmed dead: N(p)=0 at 31,41,59,71,97,113,131,151,157,163 in my independent scan (61/238 primes <=1499 per the prior checkpoint, consistent on all overlaps).\n\n(2) GAMMA-AVERAGING / FROBENIUS-TWIST TRICK: UNSOUND -- independently derived. At fixed t, gamma = wt + t^{1/p} ranges only over the p-point affine line t^{1/p} + F_p t, never over F_Q, and alpha=ut, beta=vt co-move with t, so no complete gamma-sum at fixed (alpha,beta) exists anywhere in the family. L_w(t)=wt+t^{1/p} maps kerTr to kerTr and is bijective iff w != -1 (kernel F_p at w=-1; verified ranks 4,4,4,4,3 at p=5 -- the adversary's 'rank-deficient at w=4' IS w=-1, so the two reports do not even disagree). Structurally decisive: the phase is linear in t, so every complete t-average over the subgroup kerTr is a Plancherel delta reconstructing the unknown count (first moment = p^{p-1} r(u,v,w), verified; second moment = p^{p-1} N_corr with the forced diagonal). The two reports' 'conflicting' second-moment numbers are literally the same fact: N_corr = (p+1)Q - p + E = p^{p+1} + (Q-p) + E; at (u,v,w)=(2,4,1), p=5 I recomputed sum_t|W|^2 = 11,434,375 and N_corr - p^{p+1} = 2670 = (3125-5) + (-450). RMS|W| = sqrt(Q) exactly; Cauchy-Schwarz returns the trivial bound. No exact rearrangement of the ledger can close the gap.\n\n(3) EXACT RESIDUAL GAP. Minimal clean lemma (Lemma E): for every prime p >= 5 (needed exactly when N(p)=0, ~26% of primes): there exist u in F_p^*, v,w in F_p and theta in F_{p^p}\\F_p with theta^p + u theta^3 + v theta^2 + w theta in F_p. [Then f = T^p+uT^3+vT^2+wT-(value) is the degree-p minimal polynomial of theta, hence irreducible with a != 0; so Lemma E <=> some a!=0 slice positive => Target.] Sufficient analytic form (Lemma L, confirmed correct): |sum_{a!=0} R_a| < (p-1)(p^p - p); the empirical truth is ~0.16(p-1)p^p (factor ~6 margin), the provable trivial bound is p^{p-3} too large, and the required saving over per-term Weil on the u!=0 aggregate is a factor ~2p^{p/2-1} (the briefing's 'p^{1/2+eps}' was wrong; the writeup's ledger arithmetic is right). NEW, sharper well-posed target arising from this adjudication: prove the singular-series asymptotic #irred_a = sigma_a(p) p^2 (1+o(1)) with sigma_a(p) bounded below -- the deterministic component now has a candidate local-statistics derivation (leading factor (1/3)e from the exact cubic-tail root localization), reducing the problem to any o(p^p) bound on the fluctuating part of R_a; that error bound is still the square-root-cancellation-in-growing-dimension wall (codim-4, degrees<=4, bilinear-phase sum in A^{2p}; Betti constants exponential in p; dynatomic degree 3^p), unreachable by current technology.\n\n(4) OVERALL VERDICT: HARD-BUT-WELL-POSED. Not theorem-in-reach: the elementary/moment/equidistribution toolbox is provably circular or insufficient (agreed by both agents and confirmed), and cohomological closure needs constants ~p^2 where general bounds are exponential in p. But NOT the same wall as the quadratic criticality in the strong sense claimed by the cubic writeup: the truth has a stable positive density sigma ~ 0.84-0.91 with a derivable leading constant, failure requires an ~sqrt(sigma p/2)-sigma downward fluctuation (~10.5 sigma already at p~200, growing like sqrt(p)) plus the exact quantized event I_+ = I_- = 0 (each in 2pZ) AND N(p)=0; the Target is doubly machine-verified for all p <= 293 (my independent scan to 181 agreeing with the cross-validated sweep everywhere; no zero slice anywhere; explicit witnesses at quadratic-failure primes confirmed, e.g. T^97+T^3+1 and p=401 (1,0,10,58)). Most promising residual routes, in order: (a) prove the local/singular-series main term with power saving (new formulation); (b) fixed-dimension mass formulas (Stickelberger/discriminant character sums over the 4-dim family) to exclude the exact vanishing event; (c) the constructive dynamical route (f = T^p - g(T) irreducible iff x^p = g(x) has a g-composition-period-p solution; proof re-derived and confirmed).\n\nP=3 RULING: the briefing's family-equality claim (iii) is FALSE at p=3 (deg-3 m with lead 2 collapses degree; also theta^3 is Frobenius at p=3, linearizing the 'cubic' phase and voiding the Weil bound), and the master identity needs the -(Q-p) correction; but this is immaterial: FF-Fortune(3,1) is unconditionally PROVED -- every deg-1 m fails (f(x)=ax+b on F_3 always has a root; re-derived), deg-2 witnesses exist (6 of them; T^3+T^2-T+1 verified irreducible), witnesses are automatically coprime to P_1, and reducible deg-2/3 m must have a linear factor, so the minimal nonconstant m has degree 2 and is irreducible. Correct handling: state all machinery for p >= 5 and cite the p=3 base case as separately proved. Both agents handled this correctly in substance; the adversary's classification 'repairable' is right.",
+ "verdicts": [
+  {
+   "claim": "Master identity p*#irred_4 = C - p^4 (p>=5) with p=3 correction -(Q-p)",
+   "verdict": "CONFIRMED",
+   "reason": "Re-derived (degree-1-or-p dichotomy, inseparable members T^p+d=(T+d)^p contribute exactly one incidence); independently recomputed C_cub=1245=625+5*124 at p=5; p=7 total 426 confirmed by my own brute force."
+  },
+  {
+   "claim": "Character expansion, linearization Tr(t theta^p)=Tr(t^{1/p} theta), |V_t|=p^{p-2}, slice decomposition #irred_a = p^2 - p^{3-p} + p^{2-p}R_a",
+   "verdict": "CONFIRMED",
+   "reason": "Independent from-scratch implementation reproduces R_a = (-620,+630,+630,-620) at p=5 with predicted slices exactly matching brute force (20,30,30,20); |V_t|=125 for all 624 t."
+  },
+  {
+   "claim": "u=v=0 stratum = p-1 (Artin-Schreier orbit only, fires at w=-1, t in F_p^*)",
+   "verdict": "CONFIRMED",
+   "reason": "Re-derived via c^{(Q-1)/(p-1)}=c for c in F_p^*; also verified the adversary's dual statement that the t in F_p^* strata of the quadratic formula contribute exactly p-1 (phase vanishes on V_t; contribution 4.000000 at p=5)."
+  },
+  {
+   "claim": "u=0,v!=0 strata = chi(-1)^{(p+3)/2} p^{(3-p)/2} A' = #irred_2 - (p-1), A' = sum eta(t) chi(Tr(t^{2-p}))",
+   "verdict": "CONFIRMED",
+   "reason": "Full independent hand re-derivation (complete square; w-terms killed by Tr(t)=Tr(t^{1/p})=0; eta=chi on F_p^*; inner v-sum = chi(-1)chi(Tr)g_p; t=tau^p substitution; Hasse-Davenport G_Q=g_p^p); numerics A'=+100 -> contribution 20 = 24-4 at p=5."
+  },
+  {
+   "claim": "Briefing claim that the alpha=0 strata contain the p^3 main term",
+   "verdict": "REFUTED",
+   "reason": "Both agents already corrected this and I confirm: alpha=0 strata sum to exactly #irred_2 (=(p-1)+p(p-1)N, 24 at p=5, and 0 whenever N(p)=0); the p^3 main term is the theta-in-F_p diagonal of the u!=0 strata."
+  },
+  {
+   "claim": "Second-moment identity and its consequences; alleged conflict between the writeup's E=-450 and the adversary's deviation 2670 at p=5,(u,v,w)=(2,4,1)",
+   "verdict": "CONFIRMED",
+   "reason": "I recomputed sum_{t in kerTr}|W|^2 = 11,434,375 and N_corr = 18,295 from scratch; the numbers are the same fact: N_corr = (p+1)Q-p+E = p^{p+1}+(Q-p)+E, 2670 = 3120-450. RMS|W| = sqrt(Q) exactly; the t-average is Plancherel-circular (first moment IS the count); Cauchy-Schwarz gains nothing. No disagreement exists between the reports here."
+  },
+  {
+   "claim": "Gamma-averaging/Frobenius-twist completion trick",
+   "verdict": "REFUTED",
+   "reason": "Independently derived as unsound: gamma ranges over a p-point line at fixed t; alpha,beta co-move with t; L_w bijective on kerTr iff w != -1 (verified ranks 4,4,4,4,3 at p=5 -- adversary's 'w=4' is exactly w=-1, reconciling the reports); phase linear in t makes every exact t-average a delta reconstruction of the count."
+  },
+  {
+   "claim": "Writeup sec.6: typical |E_a(t)| ~ p^{(p+1)/2}",
+   "verdict": "REFUTED",
+   "reason": "Direct measurement: rms|E_a(t)| = 21.95 at p=5 and ~352-359 at p=7 over 300 sampled t = 0.39*sqrt(Q) at both primes, a factor sqrt(p) below the claimed scale. Also proved and verified E_a(t^p) = E_a(t) exactly."
+  },
+  {
+   "claim": "Writeup claim 12: cubic family exactly square-root-critical, R_a/p^p = O(1) non-decaying random signs; positivity is an individual-sign problem of the same nature as N(p)>=1",
+   "verdict": "REFUTED",
+   "reason": "Extended data (independent scan to p=181, cross-validated sweep to p=293, 120 slice values): cnt/p = 0.842+0.618/sqrt(p) with pair-Poisson residuals (var 0.83, |z|<=2.8, no p-trend). The p^p-scale component of R_a is a DETERMINISTIC negative secondary term (~ -0.16 p^p) with a derivable local-statistics origin (exact cubic-tail root localization, rootless count (p^2-1)/3, leading density factor (1/3)e=0.906); the random part decays relatively like p^{-1/2}. The p<=19 'non-decay' was small-p noise."
+  },
+  {
+   "claim": "Adversary: N(p)=0 for ~26% of primes; quadratic route dead; cubic family unavoidable",
+   "verdict": "CONFIRMED",
+   "reason": "My independent normal-form scan finds N=0 at 31,41,59,71,97,113,131,151,157,163; N_checkpoint (61/238 <= 1499) matches my recomputation on all 29+ overlapping primes; cubic slices comfortably positive at every quadratic-failure prime."
+  },
+  {
+   "claim": "Adversary: Poisson/aggregation picture -- z=(cnt-p)/sqrt(p) ~ N(0,1), mean ~p relevant orbits, failure needs ~sqrt(p)-sigma, heuristic failure probability e^{-cp}",
+   "verdict": "PLAUSIBLE",
+   "reason": "Qualitatively supported but quantitatively corrected: counts are even (new pairing theorem 2p | #irred_a via f -> -f(-T)), so the null variance is 2p not p; and the mean drifts deterministically to sigma(p)*p with sigma ~ 0.84-0.91, which their model missed (their own z-statistic shows apparent outliers like -4.88 at p=167 that are drift, not tails). After both corrections the exponential-safety conclusion stands (failure needs ~sqrt(sigma p/2)-sigma, ~10.5 sigma at p~200)."
+  },
+  {
+   "claim": "Orbit/stabilizer theorem, b=0 translation cross-section, chi(a)-dependence of slices",
+   "verdict": "CONFIRMED",
+   "reason": "#irred_a = p * #irred_{a,b=0} verified exactly at p=5,7 for every a; slice values depend only on chi(a) in all data to p=293; scaling exponent slip in the briefing (lambda^{p-2} vs =lambda^{-1}, exponent = 1 mod p-1) is harmless as both agents noted."
+  },
+  {
+   "claim": "Lemma L formulation and implication (|sum_{a!=0}R_a| < (p-1)(p^p-p) => Target for p >= 5); required saving over per-term Weil ~ 2p^{p/2-1}, not the briefing's p^{1/2+eps}",
+   "verdict": "CONFIRMED",
+   "reason": "(p-1)(p^2-p^{3-p}) = p^{2-p}(p-1)(p^p-p) checked; ledger arithmetic re-done: u!=0 aggregate has ~p^{p+2} terms of size <= 2sqrt(Q) vs needed p^{p+3}-scale main term with p^p-scale error budget. Both agents' corrected figures agree with mine."
+  },
+  {
+   "claim": "Dynamical reformulation (T^p - g(T) irreducible iff x^p = g(x) has a solution of exact g-composition-period p) and Frobenius-in-span reformulation",
+   "verdict": "CONFIRMED",
+   "reason": "Re-derived: theta^{p^i} = g^{oi}(theta) since g has F_p coefficients; exact period = degree of theta; a degree-p root forces irreducibility of the monic degree-p polynomial. Span version follows from independence of 1,theta,theta^2,theta^3 for deg theta = p > 3."
+  },
+  {
+   "claim": "p=3: background claim (iii) false at p=3; FF-Fortune(3,1) separately and unconditionally proved",
+   "verdict": "CONFIRMED",
+   "reason": "Degree collapse at a=-1 verified; theta^3 is Frobenius at p=3 so the cubic Weil machinery is inapplicable; my numerics: all 6 deg-1 m give an F_3-root, 6 deg-2 witnesses exist, T^3+T^2-T+1 irreducible; reduction logic makes the minimal m degree-2 and irreducible. Machinery should be stated for p >= 5."
+  },
+  {
+   "claim": "Target Theorem verified for all p <= 293 (previously claimed p <= 19 proved, sweep to 293 unverified)",
+   "verdict": "CONFIRMED",
+   "reason": "My independent Frobenius-ladder scan (validated against factor() and against the slow method) covers p <= 181 and agrees with the prior N3 sweep at every jointly computed prime; the sweep to 293 has no zero slice and all counts even (consistent with the new pairing theorem it could not have known); explicit witnesses re-verified (p=97: T^97+T^3+1 irreducible -- the adversary's prose 'T^97+T^3+T+1' was a typo, their tuple was right; p=401: (1,0,10,58) irreducible)."
+  },
+  {
+   "claim": "Second-moment Weil bound |E| <= p^2 sqrt(Q) for p >= 7 (h_0 never const*square by monomial matching)",
+   "verdict": "PLAUSIBLE",
+   "reason": "Sketch is sound (sparse-support square-matching forces (p-1)/2 in {0,2,p-1}, impossible for p >= 7) but the degenerate sub-locus 4v^2 = 12uw changes h_0's shape and needs a separate (routine) case; not fully re-checked; non-load-bearing since both reports agree the second moment yields no usable saving."
+  },
+  {
+   "claim": "Ha arXiv:1601.06867 prescribed-coefficient state of the art and Sawin short-interval scope (literature claims)",
+   "verdict": "UNVERIFIABLE",
+   "reason": "Not independently re-read this session; both reports agree on content and the claims are plausibility-consistent with the regime analysis (r = n-4 prescribed coefficients is beyond any positive-proportion method), but I could not verify the papers here; treat citations as reported by the two prior sessions."
+  }
+ ],
+ "fatal_flaws": [
+  "Briefing's cubic-ledger plan is unsound as stated: the alpha=0 (exactly evaluable) strata do NOT contain the p^3 main term -- they sum to exactly #irred_2, which vanishes for the ~26% of primes with N(p)=0; the main term lives in the u!=0 cubic-Weil aggregate, which no stratum supplies for free (confirmed against both agents and by independent computation).",
+  "Briefing's error budget is wrong by an exponential factor: the needed saving over per-term Weil on the u!=0 aggregate is ~2p^{p/2-1} (essentially full square-root cancellation over the (p-1)-dimensional t-space), not p^{1/2+eps}.",
+  "The gamma-averaging/Frobenius-twist 'decisive trick' is structurally impossible: gamma ranges over a p-point line at fixed t, alpha and beta co-move with t, and L_w(t)=wt+t^{1/p} (bijective on kerTr iff w != -1) never decouples the arguments.",
+  "All exact t-average/moment methods are circular: the phase is linear in t, so subgroup averaging is a Plancherel delta reconstructing the unknown count; the second moment is diagonal-dominated with RMS|W| = sqrt(Q) exactly, so Cauchy-Schwarz returns the trivial bound with zero gain (verified to the digit at p=5).",
+  "The quadratic (a=0) family cannot carry the theorem: N(p)=0 for 61 of 238 primes <= 1499 (independently confirmed at 10 primes up to 163); any proof must produce cubic (a != 0) witnesses.",
+  "The cubic writeup's asymptotic diagnosis is wrong: its 'exactly critical, non-decaying random-sign R_a ~ p^p' model (and its claimed typical |E_a(t)| ~ p^{(p+1)/2}) is refuted by extended data; the critical-scale component is a deterministic negative secondary term (~ -0.16 p^p, with a derivable local-statistics origin) and the noise decays relatively as p^{-1/2}. Misdiagnosing this as an individual-Kloosterman-sign problem would misdirect future work; the real analytic target is a singular-series main term with any o(p^p) error.",
+  "Cohomological closure is blocked at growing dimension: the isolated error is a bilinear-phase character sum over a codim-4, degree <= 4 variety in A^{2p} needing square-root cancellation with constant <= p^2, while general Betti/complexity bounds are exponential in 2p, and the dynatomic model has degree 3^p; no rearrangement of the elementary ledger avoids this wall."
+ ]
+}
