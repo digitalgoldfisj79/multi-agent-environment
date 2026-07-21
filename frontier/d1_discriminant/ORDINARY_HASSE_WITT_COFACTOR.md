@@ -1,7 +1,7 @@
 # Ordinary Hasse--Witt cofactor indicator
 
 **Date:** 2026-07-21  
-**Status:** exact unconditional theorem over `F_p` for every member with `d!=0`.
+**Status:** exact unconditional theorem over `F_p` for every coefficient pair.
 
 ## 1. Full ordinary Hasse--Witt matrix
 
@@ -9,7 +9,7 @@ Let
 
 `F(X)=X^p+aX^3+cX+d`,
 
-where `p>=5`, `a!=0`, and `d!=0`. Define the full `p x p` coefficient matrix
+where `p>=5` and `a!=0`. Define the full `p x p` coefficient matrix
 
 `H(F)_(u,v)=[X^(pu-v)]F(X)^(p-1)`, `1<=u,v<=p`.
 
@@ -43,9 +43,9 @@ The Cartier operator selects exponents congruent to `-1 mod p`. Hence
 
 `C(omega_v)=sum_u H_(u,v) omega_u`.
 
-So H is the Cartier matrix on this p-dimensional simple-pole space.
+So H is the Cartier matrix on this p-dimensional rational-differential space. This calculation is valid whether or not zero is a root and whether or not F is squarefree.
 
-Assume first that F is squarefree, with nonzero roots `alpha_1,...,alpha_p`. Let
+Assume first that F is squarefree, with roots `alpha_1,...,alpha_p`. Let
 
 `E_(i,u)=alpha_i^(u-1)/F'(alpha_i)`.
 
@@ -79,7 +79,7 @@ For the cubic slice,
 
 inside `F_p^p`; the last coordinate `p f_p` vanishes.
 
-## 3. The selected cofactor
+## 3. The selected cofactor on the irreducible locus
 
 If F is irreducible, P is one p-cycle. For a directed p-cycle,
 
@@ -89,23 +89,43 @@ Conjugating by E gives
 
 `adj(I-H)=r e_p^T`.
 
-Therefore the adjugate entry in row 3, column p is
+Therefore
 
 `adj(I-H)_(3,p)=r_3=3a`.
 
 This adjugate entry is the cofactor obtained by deleting row p and column 3.
 
-If F has at least two distinct irreducible factors, the fixed space of Frobenius has dimension at least two, so `rank(I-H)<=p-2` and every `(p-1)`-cofactor vanishes.
+## 4. Reducible and singular members
 
-A degree-p polynomial with only one distinct factor but not irreducible would have to be `(X-r)^p`. This cannot occur because `a!=0`.
+Write
 
-The same conclusion therefore holds for singular members as well: either F is irreducible, or `I-H` has corank at least two.
+`F=product_i h_i^(e_i)`
 
-## 4. Exact theorem
+with distinct monic irreducibles `h_i`. For every distinct factor, the logarithmic differential
+
+`d h_i/h_i = h_i'(F/h_i)dX/F`
+
+belongs to the span of `omega_1,...,omega_p`, because its numerator has degree at most `p-1`. Cartier fixes logarithmic differentials:
+
+`C(d h_i/h_i)=d h_i/h_i`.
+
+The differentials belonging to distinct factors are linearly independent, for example by their residues at the corresponding reduced root sets. Thus the fixed space of H has dimension at least the number of distinct irreducible factors of F.
+
+If F is reducible and has at least two distinct factors, `I-H` has corank at least two, so every `(p-1)`-cofactor vanishes.
+
+The only degree-p polynomial with one distinct irreducible factor but not itself irreducible would be
+
+`F=(X-r)^p=X^p-r^p`,
+
+because p is prime. This is impossible in the present slice since `a!=0`.
+
+Therefore every nonirreducible member has at least two independent Cartier-fixed logarithmic differentials, including all singular members and all members with `d=0`.
+
+## 5. Exact theorem
 
 ### Theorem OHC.1
 
-For every prime `p>=5`, every `a!=0`, every `c in F_p`, and every `d in F_p^*`,
+For every prime `p>=5`, every `a!=0`, and all `c,d in F_p`,
 
 `boxed(Cofactor_(p,3)(I-H(F))=3a * 1_(F irreducible).)`
 
@@ -117,9 +137,9 @@ Thus
 
 `boxed(1_(F irreducible)=(3a)^(-1)e_3^T adj(I-B)b.)`
 
-This is a purely mod-p ordinary Hasse--Witt indicator. It requires neither `Beta_(p^2)` nor a p-adic lift.
+This is a purely mod-p ordinary Hasse--Witt indicator. It requires neither `Beta_(p^2)`, a p-adic lift, squarefreeness, nor local admissibility.
 
-## 5. Relation to the higher Hasse--Witt route
+## 6. Relation to the higher Hasse--Witt route
 
 The boundary-Witt calculation gave
 
@@ -131,15 +151,15 @@ with `w=Bb`. The universal adjugate identity
 
 then reduces the higher indicator to the selected ordinary cofactor. On an irreducible member `det(B)=1`; on reducible members the cofactor vanishes. Hence the p-adic construction collapses exactly to Theorem OHC.1.
 
-The higher calculation was therefore not wasted: it exposed the correct missing boundary column b and selected cofactor.
+The higher calculation was not wasted: it exposed the missing boundary column b and the correct selected cofactor.
 
-## 6. Crown reformulation
+## 7. Crown reformulation
 
-Every irreducible member has `d!=0`. Therefore
+The complete coefficient-plane identity is
 
-`3a N_a(p)=sum_(c in F_p,d in F_p^*) Cofactor_(p,3)(I-H(F))`.
+`3a N_a(p)=sum_(c,d in F_p) Cofactor_(p,3)(I-H(F))`.
 
-The d=1 function-field crown follows from nonvanishing of this one explicit cofactor sum for at least one square class of a.
+The `d=0` line contributes zero pointwise. The d=1 function-field crown follows from nonvanishing of this one explicit cofactor sum for at least one square class of a.
 
 The matrix entries involve only coefficients of the single four-term power `F^(p-1)`. This is materially simpler than:
 
@@ -147,6 +167,10 @@ The matrix entries involve only coefficients of the single four-term power `F^(p
 - expanding all dynatomic periods;
 - computing `Beta_(p^2)` or a first-Witt correction.
 
-## 7. Verification
+## 8. Exhaustive verification
 
-Exhaustive direct calculations at `p=5,7` verify the cofactor pointwise for every `a!=0`, every c, and every `d!=0`, including singular members. The cofactor is always exactly `3a` on irreducibles and zero otherwise.
+An independent `python-flint` audit checked every `a!=0,c,d` at
+
+`p=5,7,11,13`.
+
+For every member, the selected cofactor was exactly `3a` on the independently factorised irreducible locus and zero elsewhere. This includes all squarefree reducible, singular, and `d=0` members. No mismatch occurred.
