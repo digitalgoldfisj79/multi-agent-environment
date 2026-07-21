@@ -1,0 +1,61 @@
+{
+ "overall": "The function-field assessment survives a full adversarial audit. All five cited papers (KR 1204.0708, BBR 1302.0625, Sawin 1809.05137, SS 1808.04001, Ha 1601.06867) plus Hochfilzer 2102.06415 were re-read verbatim this session: every quoted theorem statement, constant, regime restriction, and even the flagged typo in Sawin Thm 1.2/Cor 4.7 (printed main term q^n vs Prop 4.2's true q^{n-m}dim(pi^{S_n})) checks out exactly. The elementary reduction (factor-degree floor >= d+1, hence reducible coprime offsets have degree >= 2d+2), the n_d ~ q^d coupling, and Lemma 3 (no degree-1 offset at d=1 over prime fields) were re-proved independently and are correct, including the degenerate (q,d) exceptions. The 18-case diagnostics were independently reproduced for 10 cases with a from-scratch polynomial-arithmetic implementation - every n, deg F, bound, and irreducibility verdict matched. The coupling arithmetic in Section 3 (each technology fails h = 2d+2 by the stated explicit margin; only the Weil bound has polynomial-in-n error) was recomputed and is correct. Target Theorem 1 is a genuine provable-sketch: the assembly from KR's verified ingredients closes with room to spare at h ~ n/2 + 2log_q n. Target Theorem 2 is correctly scoped - neither trivial (needs ~p-3 prescribed coefficients vs Ha's n/4 ceiling; no elementary construction known; Katz's general Betti bound 3(p+2)^{2p-4} is hopeless) nor demonstrably hopeless (B(pi)=o(p) for a fixed 4-dimensional variety with extra additive/S_p structure, finitely checkable per p), and its obstruction (a Betti-number bound in wild char-p geometry) is genuinely distinct from the archive's closed reciprocal-frame/critical-length kernel, so it passes the stop-rule; the q-fixed d->infinity regime is correctly flagged as the integer wall in disguise. Minor blemishes, none fatal: (i) 'stronger than anything provable over Z' overstates - Baker-Harman-Pintz gives an unconditional Z-analogue at exponent 0.525, so the honest claim is only that the exponent-1/2 statement needs RH over Z (the agent did mark that comparison UNVERIFIED); (ii) the B(pi)=o(p) sufficiency argument should explicitly subtract the O(p^2) Lambda-mass of the constant (Artin-Schreier) offsets and proper prime powers - trivial against the p^4 main term but currently unstated; (iii) Sawin's asymptotic-regime formula is displayed in the paper for d_k with log_q(k+2), and the agent's (n+2) version is the correct analogue for Lambda rather than a verbatim quote. Recommendation to orchestrator: the writeup is reliable as data; Target Theorem 1 can be written up now; Target Theorem 2 stands as the ranked open problem with the stated caveats added.",
+ "verdicts": [
+  {
+   "claim": "FF reduction: minimal nonconstant m of degree <= 2d+1 with P_d + m irreducible is itself irreducible up to a unit; reducible coprime offsets have degree >= 2d+2 (with degenerate exceptions (2,1),(2,2),(3,1)).",
+   "verdict": "CONFIRMED",
+   "reason": "Re-proved independently: any irreducible factor pi of m with deg pi <= d divides P_d and hence the irreducible P_d + m, impossible by degrees; so all factors of m have degree >= d+1 and a reducible m has degree >= 2d+2. Degenerate cases (n_d = 2, 4, 3 vs 2d+1 = 3, 5, 3) handled correctly."
+  },
+  {
+   "claim": "deg P_d = sum e*pi_q(e) = q^d(1 + q^{-1} + O(dq^{-2})), so n_d ~ q^d and the Fortune-forcing exponent is 2d+2 ~ 2 log_q n_d.",
+   "verdict": "CONFIRMED",
+   "reason": "e*pi_q(e) = sum_{c|e} mu(e/c) q^c gives n_1=q, n_2=q^2, n_3=q^3+q^2-q as stated; independent computation reproduced n = 10, 22, 9, 33, 25 for the small cases and the values 105, 106, 145 check arithmetically."
+  },
+  {
+   "claim": "For prime p >= 3 no degree-1 offset makes T^p - T + m irreducible (Lemma 3).",
+   "verdict": "CONFIRMED",
+   "reason": "Independent proof: with m = aT + b, a != 0, write T^p - cT + b, c = 1 - a != 1; c = 0 gives (T+b)^p; otherwise x^p - cx = (1-c)x on F_p is bijective, giving a root and a linear factor of a degree-p >= 3 polynomial. Numerics agree (d=1 successes always at degree 2)."
+  },
+  {
+   "claim": "Exact statements and regimes of KR 1204.0708, BBR 1302.0625, Sawin 1809.05137 (including the main-term typo), SS 1808.04001, and Ha 1601.06867 as quoted.",
+   "verdict": "CONFIRMED",
+   "reason": "All read verbatim this session via alphaXiv: KR Thm 2.1 (h < n-3, q->infty, limit n-h-2), Lemma 4.2, eq. 3.33 |Psi| <= (deg Q - 1)q^{n/2}, Thm 4.1 error O((n-h)/q^{n/2}+n^2/q); BBR Thm 2.3 with c(k)q^{m+1/2}, 3<=m<k, m=1,2 exceptions, Props 6.1-6.3; Sawin Thm 1.2/Cor 4.7 error 6(n+2)^{2n-h}q^{(1/2)(h+floor(n/p)-floor((n-h)/p)+1)}, abstract's 'not yet nontrivial in the large n limit', Prop 4.2 main term q^{n-m}dim(pi^{S_n}) confirming the q^n typo, Cor 4.4 B(pi) <= 3(n+2)^{n+m}; SS Thms 1.1 (q>685090p^2, averaged over f), 1.3 (p^2k^2e^2), 1.7, 1.9 (delta<1/126, squarefree, exact constant), 2.1 ((q^{1/2}+1)binom(m-1,t)q^{t/2}, squarefree), 1.11-1.12 (q = 3^nu); Ha Thms 1.1/1.3 (n/4 - log_q n - 1 at q>=16; n/5; n/10; error O(q^{3n/4}); fixed q; arbitrary positions). Only nit: Sawin's displayed regime formula uses log_q(k+2) for d_k; the agent's (n+2) version is the correct Lambda analogue, not a verbatim quote. Journal attributions correctly left UNVERIFIED."
+  },
+  {
+   "claim": "No surveyed result reaches the Fortune-forcing range h = 2d+2 under n ~ q^d in any regime (BBR fails for every d >= 1 even with c(k)=1; Sawin fails exponentially; SS blocked by squarefree/averaged moduli and level 1/2+1/126; Ha by n/4 vs n - O(log n); KR/Hochfilzer by the q->infty limit).",
+   "verdict": "CONFIRMED",
+   "reason": "Arithmetic recomputed on the verified statements: BBR error/main ~ n q^{-1/2} ~ q^{d-1/2} >= q^{1/2}; Sawin's (n+2)^{2n-h} is exp(~2q^d d log q); the involuted family is a single class to the non-squarefree modulus T^{n-h} with conductor exponent 1 - O((log n)/n), outside every SS hypothesis; Ha needs ~n - 2log_q n prescribed coefficients vs n/4. Scope correctly limited to the surveyed corpus."
+  },
+  {
+   "claim": "Target Theorem 1: unconditionally D(q,d) <= n/2 + 2 log_q n + O(1) for n large, via the involution + even-character orthogonality + Weil; stronger than the Z-analogue, which needs RH.",
+   "verdict": "CONFIRMED",
+   "reason": "The sketch assembles correctly from independently verified ingredients: error <= (n-h-1)q^{n/2} (q^{n-h-1} even characters times prefactor q^{-(n-h-1)}), prime-power mass <= 2nq^{n/2}, constant offsets <= qn; at h = ceil(n/2)+ceil(2log_q n)+2 the main term q^{h+1} ~ q^3 n^2 q^{n/2} wins by a factor ~n. Caveat: 'stronger than anything provable over Z' is overstated - Baker-Harman-Pintz gives an unconditional Z bound at exponent 0.525; only the exponent-1/2 statement needs RH (the agent flagged this comparison UNVERIFIED, appropriately). Status provable-sketch is the right label: correct but not refereed."
+  },
+  {
+   "claim": "Among surveyed technologies only the Weil explicit-formula bound has error polynomial in the centre degree with absolute constants, surviving the coupling exactly down to h ~ n/2.",
+   "verdict": "CONFIRMED",
+   "reason": "Follows from the verified error shapes: (n-h-1)q^{n/2} with absolute constants (KR eq. 3.33) vs Lang-Weil c(k) (unbounded in k), Sawin's (n+2)^{2n-h}, SS's structural modulus restrictions, Ha's circle-method q^{3n/4}. The h >= n/2 + 2log_q n threshold is exactly where q^{h+1} overtakes n q^{n/2}."
+  },
+  {
+   "claim": "Fixed-q variance of Lambda (or Mobius) in short intervals is open as of the verified record; SS list it as future work; Hochfilzer 2102.06415 and Sawin 1805.04330 are q->infty at fixed characteristic.",
+   "verdict": "UNVERIFIABLE",
+   "reason": "The positive sub-claims are CONFIRMED verbatim (SS section 1.5 lists Mobius variance as future work; Hochfilzer Thm 9.4 is lim_{q->infty} Var/q^{nw+h+1} = min{n, s_Q(rho)} with h <= n-5, characteristic fixed, input Sawin 1805.04330). The negative claim (no fixed-q variance theorem exists in 2021-2026 literature) cannot be proven by search; the agent's own 'unverified' label is the correct status."
+  },
+  {
+   "claim": "Diagnostics: 18/18 cases conform; deg F ~ log_q n, a square below the allowed bound.",
+   "verdict": "CONFIRMED",
+   "reason": "Independently reproduced 10 of the cases with a from-scratch implementation (own polynomial arithmetic + Rabin irreducibility): every n, deg F, bound check, and Fortunate-element irreducibility matched, including (2,4): degF=5, (3,3): degF=4, and degF=2 for all d=1 primes tested. Diagnostics only, per programme rules; prime-power q untested as disclosed."
+  },
+  {
+   "claim": "Target Theorem 2 (d=1, deg m in {2,3}) is the sharpest attackable full-Fortune case; its geometric bottleneck is B(pi) = o(p) for Sawin's 4-dimensional interval variety at c = T^p - T, vs Katz's 3(p+2)^{2p-4}; correctly scoped and stop-rule compliant.",
+   "verdict": "CONFIRMED",
+   "reason": "Recomputed from verified Prop 4.2 with (n,m,q) = (p, p-4, p): dim X = n-m = 4, exponent (1/2)(4 + 1 - 0 + 1) = 3, so error B(pi)p^3 vs main term p^4; B(pi) = o(p) suffices (modulo subtracting the O(p^2) Lambda-mass of the p-1 Artin-Schreier constant offsets and proper prime powers - trivial but should be stated explicitly). Katz bound at n+m = 2p-4 confirmed. Scoping is honest: not trivial (equivalent to ~p-3 prescribed coefficients, far beyond Ha's n/4; no elementary construction known), not demonstrably hopeless (finite per-p computation, extra additive/S_p structure), and the obstruction is a Betti bound in char-p geometry, not the archive's closed reciprocal-frame kernel."
+  },
+  {
+   "claim": "The q-fixed, d->infty regime is isomorphic to the integer critical-length wall and must not be advertised as a route; FF parity-free tools do not transfer to Lambda in a single class.",
+   "verdict": "CONFIRMED",
+   "reason": "The involution identification is exact (KR Lemma 4.2, verified): the Fortune family is one residue class mod T^{n-h} with conductor exponent 1 - o(1), a non-squarefree modulus excluded from SS Thms 1.7/1.9/2.1; Thms 1.11/1.12 are verified to concern Mobius only, and converting to prime detection reinstates the parity/convolution obstruction. The flag is correctly limited to current mechanisms. Stop-rule audit is sound."
+  }
+ ],
+ "fatal_flaws": []
+}

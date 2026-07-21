@@ -1,0 +1,51 @@
+{
+ "overall": "AUDIT PASSED. All proved-labelled items (Lemmas 1, 2, 3, 6, Theorem 5) verify under independent re-derivation; the one provable-sketch item (Lemma 3', Dickman constant I(2) = 3-2log2) is correctly labelled, numerically supported, and not load-bearing. I re-derived the local factors by hand (identical), re-derived the divisor-identity algebra (c_1 = -1, c_s = 0 for odd s>1, c_{2u} = 2C_j/phi2(u) \u2014 all correct), re-checked the Euler-product cancellation and Mertens bounds in Lemma 3, and ran my own exact-rational code (scratchpad/audit_T.py) at fresh parameters ell = 43/61/113, H = 1500/3000/10000: identity matches exactly, T < 0, remainder 0.87-0.90 H (inside proved O(H)), Dickman ratios 0.942-0.952 improving with ell, and untruncated log H overshoots in every case \u2014 no sign error, no -H log H vs -c H log X conflation (the writeup explicitly and correctly distinguishes the truncated constant I(2) ~ 1.614 from the untruncated 2). Conditional-theorem bookkeeping verified against the actual Paper II manuscript (Thm 2.4/(2.7)/Prop 2.1 as used): diagonal (2+o(1))HX per centre, off-diagonal T_j/2 with |T_j| <= 2H log X (e^gamma < 2) contributing only o(1) to L, error budget H^2 eps = (eta X eps) HX giving exactly the eps = o(log X/X) threshold, coverage via X = p_n/sqrt(2) sound. The agent also honestly corrected an overstatement in RESEARCH_VECTORS B1 (L = O(1) requires the stronger eps = O(1/X); at eps = o(log X/X) the conclusion is L = o(log X), which suffices for (2.7)). Reran the agent's pair_check.py: output reproduces its table digit-for-digit. Stop-rule compliance confirmed: this is vector B1 executed as a conditional theorem, HL enters only as hypothesis, no stop-listed technique appears, no kernel reformulation. Minor caveats only, listed in verdicts; no fatal flaws.",
+ "verdicts": [
+  {
+   "claim": "Lemma 1: truncated singular-series local factors p(p-2)/(p-1)^2 (p not dividing d) and p/(p-1) (p|d) at p <= ell_j; p=2 automatic; tail primes classical with product 1+O(1/X)",
+   "verdict": "CONFIRMED",
+   "reason": "Independently re-derived by residue counting with Lambda-normalisation; identical result including the p=2 automatic vanishing and the P_j-mod-p independence for p > ell_j. Also empirically reproduced: reran pair_check.py, all obs/pred ratios 0.984-1.016 across S_j 1.33-5.15, exactly 0 pairs at odd d."
+  },
+  {
+   "claim": "Lemma 2: exact divisor identity T_j(H) = -H(H-1) + 4C_j sum_{u|A', 2u<H} W(2u)/phi2(u)",
+   "verdict": "CONFIRMED",
+   "reason": "Re-derived the regrouping by hand (lambda_p expansion, c_1 = -1 via vanishing p=2 factor, c_s = 0 for odd s>1, c_{2u} = 2C_j/phi2(u) all check); my own independent exact-rational code matches the direct double sum EXACTLY at three fresh parameter sets (ell=43,H=1500; ell=61,H=3000; ell=113,H=10000) plus the {2,3},H=5 hand check."
+  },
+  {
+   "claim": "Lemma 3: T_j(H) = -beta_j H + O(H) with 2C_2 <= beta_j <= (e^gamma+o(1)) log ell_j, hence |T_j(H)| <= 2H log X uniformly \u2014 the load-bearing bound",
+   "verdict": "CONFIRMED",
+   "reason": "Verified the three key steps: exact H^2 cancellation via C_j sum_{u|A'} 1/(u phi2(u)) = 1 (checked by Euler product), tail O(1/V) via f = 1*h with h(p)=2/(p-2) bounded and summable, E-term O(H); Mertens telescoping to prod p/(p-1) confirmed; e^gamma ~ 1.781 < 2 makes the 2H log X bound valid for large X. My numerics: remainder/H stable at 0.865-0.901, T strictly negative at all fresh parameters."
+  },
+  {
+   "claim": "Lemma 3' (provable-sketch): sharp constant T_j(H) = -I(theta_j) H log ell_j (1+o(1)), giving -(3-2log2)(1+o(1)) H log X in the H = eta X^2 regime",
+   "verdict": "PLAUSIBLE",
+   "reason": "Sketch route through de Bruijn smooth-number asymptotics is standard and the mass bookkeeping (I(inf) = e^gamma matching the total Mertens mass) is internally consistent; my independent Dickman integrator confirms I(2) = 3-2log2 to 2e-12 and my fresh-parameter ratios 0.942-0.952 approach 1 from below as ell grows. Not written to full rigor (restriction to odd squarefree divisors and constant recombination unproven here); correctly labelled provable-sketch and genuinely not used in Theorem 5."
+  },
+  {
+   "claim": "Theorem 5: UHL(eps) with eps = o(log X/X) implies Paper II (2.7) with L <= 2 + eta X eps + o(1) = o(log X), hence Fortune for all large n; eps = O(1/X) gives L = O(1)",
+   "verdict": "CONFIRMED",
+   "reason": "Bookkeeping independently verified line by line: diagonal <= (2+o(1))HX via log P_j <= theta(2X) ~ 2X; off-diagonal = T_j/2 + O(H^2 eps) + O(H) with the d=H-1 and O(1)-per-d edge terms correctly absorbed; H^2 eps = (eta X eps)HX gives exactly the stated threshold; |T_j| <= 2H log X contributes o(1) to L. Paper II Thm 2.4, (2.7), Prop 2.1 checked against the archive manuscript and match the usage. Coverage X = p_n/sqrt(2) puts p_n in [X,2X), P_n = P_j, H < p_{n+1}^2. The correction of B1's overstated L = O(1) to L = o(log X) is right and honestly flagged."
+  },
+  {
+   "claim": "Lemma 6: S(d) = S_j(d)(1+O(1/X)) for 0<|d|<H; hypothesis formulations equivalent at the o(log X/X) threshold",
+   "verdict": "CONFIRMED",
+   "reason": "At most one prime factor of d exceeds ell_j since two would force d >= ell_j^2 >= X^2 > eta X^2 = H; sum_{p>X} 1/(p-1)^2 << 1/(X log X) is standard; S_j(d) << log log(3d) correct. The caveat that the L = O(1) refinement degrades to O(log log X) under the full-series formulation is accurate and honestly stated."
+  },
+  {
+   "claim": "Numerical validation: exact identity matches, remainder ~ -0.9H, Dickman ratios 0.88-0.96, real-primorial sieve to ~1%",
+   "verdict": "CONFIRMED",
+   "reason": "Reran the agent's pair_check.py \u2014 output reproduces the reported table digit-for-digit (67488 primes, ratio 1.0000, all pair ratios as tabulated). My own independent script at disjoint parameters reproduces every qualitative and quantitative claim (exact identity match, remainder 0.87-0.90 H, Dickman ratios 0.94-0.95 improving with ell). Correctly framed as diagnostics, not proofs."
+  },
+  {
+   "claim": "Contextual claims (Montgomery-Soundararajan secondary constants; novelty of 3-2log2) marked UNVERIFIED",
+   "verdict": "UNVERIFIABLE",
+   "reason": "Not load-bearing anywhere in the proved chain; the agent correctly declined to claim novelty without a literature search. No fabricated citation detected \u2014 the M-S asymptotic is cited at the level of common knowledge and flagged unverified for its exact constants, which is the right epistemic posture."
+  },
+  {
+   "claim": "Stop-rule compliance: vector B1 conditional anchor, no kernel reformulation, no conflict with semiprime-resonance no-go",
+   "verdict": "CONFIRMED",
+   "reason": "Checked against RESEARCH_VECTORS.md and the stop-list: this is B1 as specified (conditional theorem with HL as hypothesis, parallel to Goldston-Montgomery); nothing reconstructs the reciprocal kernel; the semiprime-resonance no-go killed HL as an unconditional surrogate inside the reciprocal frame, which is disjoint from assuming HL as a hypothesis in the direct-detector route; no CRT de-tensorisation, signed splitting, factorial transfer, harmonic-range growth, or divisor pinning appears."
+  }
+ ],
+ "fatal_flaws": []
+}
