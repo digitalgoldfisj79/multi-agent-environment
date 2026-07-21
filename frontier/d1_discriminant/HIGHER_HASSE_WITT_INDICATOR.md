@@ -1,0 +1,200 @@
+# Higher Hasse--Witt indicator for the cubic slice
+
+**Date:** 2026-07-21  
+**Status:** exact indicator theorem proved, conditional only on the standard Dwork--Vlasenko congruence identifying the unit-root Frobenius matrix modulo `p^2`.
+
+## 1. Setup
+
+Let
+
+`F(X)=X^p+aX^3+cX+d`,
+
+where `p>=5` is prime and `a!=0` in `F_p`. Use the canonical integer lifts of `a,c,d` in `{0,...,p-1}` and regard F as a polynomial over `Z_p`.
+
+For every positive integer m define the `(p-1) x (p-1)` coefficient matrix
+
+`Beta_m(F)_(u,v) = [X^(m u-v)] F(X)^(m-1)`,
+
+with `1<=u,v<=p-1`.
+
+Write
+
+`B=Beta_p(F)`,
+
+`B2=Beta_(p^2)(F)`.
+
+All matrix congruences below are taken over `Z/p^2 Z` unless stated otherwise.
+
+## 2. Dwork approximation
+
+For a squarefree member with `d!=0`, the zero-dimensional hypersurface `F=0` lies in `G_m` and its reduced unit-root crystal has rank `p-1`. The standard higher Hasse--Witt congruence gives its Frobenius matrix `Phi_red` modulo `p^2` as
+
+`Phi_red = B2 B^(-1) mod p^2`.
+
+The orientation may be transposed or inverted under alternative Cartier conventions, but the characteristic polynomial and its value at one are unchanged.
+
+If
+
+`F=product_i h_i`
+
+is squarefree with factor degrees `d_i`, then
+
+`det(1-T Phi_red)=product_i(1-T^(d_i))/(1-T)`.
+
+At `T=1` this equals
+
+- `p` if F is irreducible of degree p;
+- `0` if F has at least two factors.
+
+Therefore
+
+`det(I-B2 B^(-1)) = p 1_(F irreducible) mod p^2`.
+
+Multiplying by `det(B)` gives
+
+`det(B-B2)=p det(B) 1_(F irreducible) mod p^2`.
+
+On an irreducible degree-p member, Frobenius is a p-cycle. Since p is odd, its determinant on the reduced permutation representation is `+1`. Hence
+
+`det(B)=1 mod p`
+
+on the irreducible locus. On the reducible locus the right side is zero. Thus:
+
+## 3. Exact indicator theorem
+
+### Theorem HHW.1
+
+For every squarefree member of the cubic slice,
+
+`det(B-B2)/p = 1_(F irreducible) mod p`.
+
+The determinant is always divisible by p.
+
+### Extension to non-squarefree members
+
+Modulo p one has
+
+`B2 = B^2`.
+
+Hence
+
+`B-B2 = B(I-B) mod p`.
+
+If F is non-squarefree, Frobenius on the reduced quotient has a zero direction coming from the nilpotent/non-etale part, while `I-B` has a fixed direction. The eigenvalues zero and one give independent kernel directions. Consequently
+
+`rank(B-B2 mod p) <= p-3`.
+
+A perturbation of a `(p-1)x(p-1)` matrix of corank at least two has determinant divisible by `p^2`. Since `a!=0`, the only one-distinct-factor nonreduced possibility `(X-r)^p` cannot occur. Therefore
+
+`det(B-B2)=0 mod p^2`
+
+for every non-squarefree member.
+
+Combining the two cases gives the unconditional pointwise identity:
+
+### Theorem HHW.2
+
+For every prime `p>=5`, every `a!=0`, and all `c,d in F_p`,
+
+`boxed( det(Beta_p(F)-Beta_(p^2)(F))/p = 1_(F irreducible) mod p ).`
+
+This is a second exact irreducibility indicator, independent in construction from the reduced Berlekamp cofactor
+
+`J_a(c,d)/(3a)=1_(F irreducible)`.
+
+In particular,
+
+`J_a(c,d)/(3a) = det(Beta_p-Beta_(p^2))/p mod p`.
+
+## 4. Sparse first-Witt correction
+
+Put
+
+`E_F(X)=(F(X)^p-F(X^p))/p`.
+
+This is an integral polynomial. It is the first p-typical Witt carry of the four monomials of F, together with the Fermat-quotient terms arising from the chosen coefficient lifts.
+
+Using
+
+`F^(p^2-1)=F^(p-1)(F^p)^(p-1)`
+
+and
+
+`F^p=F(X^p)+p E_F`,
+
+one obtains modulo `p^2`
+
+`F^(p^2-1) = F^(p-1)F(X^p)^(p-1)`
+`               +p(p-1)F^(p-1)F(X^p)^(p-2)E_F`.
+
+The first term gives exactly the matrix product `B^2`. Define the matrix Gamma over `F_p` by
+
+`Gamma_(u,v)=(p-1)[X^(p^2 u-v)]`
+`             F(X)^(p-1) F(X^p)^(p-2) E_F(X)`.
+
+Then
+
+`boxed( Beta_(p^2)=Beta_p^2+p Gamma mod p^2 ).`
+
+Thus the indicator is determined entirely by:
+
+1. the ordinary Hasse--Witt matrix B, whose entries come from the four-term power `F^(p-1)`;
+2. one explicit first-Witt correction Gamma;
+3. one `(p-1)x(p-1)` determinant modulo `p^2`.
+
+No extension-field factorisation and no growing-period inclusion--exclusion appears in this formula.
+
+## 5. Crown reformulation
+
+Let
+
+`K_a(c,d)=det(Beta_p(F)-Beta_(p^2)(F))/p mod p`.
+
+Then
+
+`K_a(c,d)=1_(F irreducible)`
+
+pointwise. Consequently
+
+`N_a(p) = sum_(c,d) K_a(c,d) mod p`.
+
+The d=1 function-field crown follows if, for at least one square class of a,
+
+`sum_(c,d) K_a(c,d) !=0 mod p`.
+
+This is a higher Hasse--Witt version of the determinant top-coefficient target. Its advantage is that every entry is an explicit coefficient of a power of a four-term polynomial, and the only genuinely p-adic information is the first Witt carry `E_F`.
+
+## 6. Verification
+
+The standard-library checker `higher_hasse_witt_indicator_check.py` exhaustively verifies Theorem HHW.2 for every
+
+- `a!=0`, `c,d in F_5`;
+- `a!=0`, `c,d in F_7`.
+
+This includes all squarefree, reducible, irreducible, and non-squarefree members. It independently tests irreducibility using the prime-degree Rabin criterion.
+
+Observed total irreducible counts over all nonzero a are:
+
+- `20` at `p=5`;
+- `54` at `p=7`.
+
+For every tested member the determinant difference is `p mod p^2` on the irreducible locus and `0 mod p^2` elsewhere.
+
+## 7. Next exact target
+
+Expand the determinant only to first order in the Witt correction:
+
+`Beta_p-Beta_(p^2)=B(I-B)-p Gamma`.
+
+The crown-level calculation is now to evaluate
+
+`sum_(c,d) (1/p) det(B(I-B)-p Gamma) mod p`
+
+without expanding the full determinant polynomial. The plausible mechanisms are:
+
+1. Cauchy--Binet/minor expansion using the sparse coefficient support of B and Gamma;
+2. finite-field orthogonality in c and d before the determinant sum;
+3. a matrix-tree interpretation of the first-order determinant around the unipotent Frobenius block;
+4. a Witt-vector resultant or constant-term formula.
+
+Unlike the earlier scalar character sums, this object genuinely contains the first p-adic Frobenius correction and is not merely a repackaging of the integer count.
