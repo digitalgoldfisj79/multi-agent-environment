@@ -21,7 +21,21 @@ exchangeability test supports the first part.
 
 ---
 
-## 1. The RQM assembly target: an unconditional random-order model result
+## 1. Theorem RQM: the unconditional random-order model theorem
+
+> **Status update (2026-07-21, superseding the assembly-target framing
+> below):** the G1 assembly is complete. Two independent full write-ups
+> were produced and a closure adjudication (brute-force configuration
+> coverage at N = 3..8 and 16, independent recomputation of the binding
+> case and constants) ruled CLOSES: YES. The theorem is now **proved
+> under explicitly stated hypotheses** (frame nondegeneracy of ρ;
+> effective Chebyshev bounds), with explicit constants — final form
+> \(\mathbb E_\sigma[\mathcal E_a]\le C(\eta,\rho)M(\log X)^9\). The
+> complete primary proof text is `RQM_PROOF.md`; the independent second
+> assembly, adjudication record, and Monte Carlo diagnostic are in
+> `frontier/rqm_workbench/` and `frontier/rqm_mc/`. The scope caveat is
+> unchanged: a model theorem about random orderings, silent on the
+> increasing order and on Fortune itself.
 
 **Statement (status: provable-sketch; every component lemma proved and
 independently verified; remaining work is assembly write-up, est. 5–10 pages,

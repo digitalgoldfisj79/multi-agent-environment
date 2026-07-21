@@ -70,13 +70,17 @@ cancellation; the point is that the total collapses to the quantized
 lattice \(\eta(-1)G_Q\cdot\mathbb Z_{\ge0}\)), so no analytic estimation
 can decide its positivity. Verified exactly at \(p=3,5,7\) (at \(p=7\):
 117,648 terms over \(\mathbb F_{7^7}\), \(S(7)=i\cdot7^{7/2}\) on the
-nose). The literature agent found no prior occurrence of this object or
-identity; however, the adjacent literature connecting Kloosterman/Gauss
-sums to counts of irreducible polynomials with prescribed trace and norm
-(notably the Moisio line of work, and recent norm-trace counting in
-finite algebras) is substantial, so novelty should be treated as a
-*candidate pending a dedicated primary-source review* of that corpus,
-not as established.
+nose). Novelty status (adjudicated 2026-07-21, see
+`NOVELTY_VERDICT.md`): **method known, result new as stated** — the
+mechanism (orthogonality double-evaluation, Gaussian collapse,
+Hasse–Davenport, lattice-valued twisted sums) is classical
+(Salié; Katz–Livné/Lachaud–Wolfmann via Moisio; Nguyen), but the
+specific objects and identities appear nowhere in the retrievable
+literature, and the counting regime (degree divisible by the
+characteristic, \(p-3\) prescribed coefficients) is explicitly declared
+open in Granger (FFA 2019, Problem 4) and Kolekar (2025, Question 5.1).
+Eight named offline sources remain to be manually checked before a
+publication-grade novelty claim.
 
 **Theorem D1.4 (exact ledger and reduction of the Target).**
 \[
