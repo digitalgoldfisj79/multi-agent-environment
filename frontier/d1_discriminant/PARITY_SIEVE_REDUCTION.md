@@ -5,246 +5,136 @@
 
 ## 1. Setup
 
-Let \(p\ge5\) be prime and \(a\in\mathbf F_p^*\). Put
+Let `p >= 5` be prime and `a` a nonzero element of `F_p`. Put
 
-\[
-F_{c,d}(X)=X^p+aX^3+cX+d
-\]
+`F_(c,d)(X) = X^p + a X^3 + c X + d`
 
 and
 
-\[
-H_{c,d}(X)=aX^3+(c+1)X+d.
-\]
+`H_(c,d)(X) = a X^3 + (c + 1) X + d`.
 
-Let
+Let `A_a` be the coefficient pairs `(c,d)` for which `H_(c,d)` has no root in `F_p`.
 
-\[
-\mathcal A_a=
-\{(c,d)\in\mathbf F_p^2:H_{c,d}\text{ has no root in }\mathbf F_p\}.
-\]
+The local-squarefreeness theorem in `DISCRIMINANT_MASS.md` gives, for every `(c,d)` in `A_a`:
 
-The local-squarefreeness theorem in `DISCRIMINANT_MASS.md` gives, for every \((c,d)\in\mathcal A_a\):
-
-1. \(F_{c,d}\) has no linear factor;
-2. \(F_{c,d}\) is squarefree;
-3. \(\chi(\operatorname{Disc}F_{c,d})\in\{\pm1\}\).
+1. `F_(c,d)` has no linear factor;
+2. `F_(c,d)` is squarefree;
+3. `chi(Disc F_(c,d))` is either `+1` or `-1`.
 
 ## 2. Exact parity-breaking lemma
 
 ### Theorem PS.1
 
-For \((c,d)\in\mathcal A_a\),
+For `(c,d)` in `A_a`, the following are equivalent:
 
-\[
-\boxed{
-F_{c,d}\text{ is irreducible}
-\iff
-\chi(\operatorname{Disc}F_{c,d})=+1
-\text{ and }
-F_{c,d}\text{ has no irreducible factor of degree }
-2\le k\le\lfloor p/3\rfloor.
-}
-\]
+1. `F_(c,d)` is irreducible;
+2. `chi(Disc F_(c,d)) = +1` and `F_(c,d)` has no irreducible factor of degree from `2` through `floor(p/3)`.
 
 ### Proof
 
 Factor
 
-\[
-F_{c,d}=P_1\cdots P_r
-\]
+`F_(c,d) = P_1 ... P_r`
 
-into distinct monic irreducibles. Since \(F_{c,d}\) is locally admissible, every \(\deg P_i\ge2\), and
+into distinct monic irreducibles. Local admissibility gives `deg P_i >= 2`, and the factor degrees sum to `p`.
 
-\[
-\sum_{i=1}^r\deg P_i=p.
-\]
+Pellet's formula gives
 
-Pellet's formula says
+`mu(F_(c,d)) = (-1)^p chi(Disc F_(c,d))`.
 
-\[
-\mu(F_{c,d})=(-1)^p\chi(\operatorname{Disc}F_{c,d}).
-\]
+Since `p` is odd and the polynomial is squarefree,
 
-As \(p\) is odd and \(F_{c,d}\) is squarefree,
+`chi(Disc F_(c,d)) = (-1)^(r+1)`.
 
-\[
-(-1)^r=-\chi(\operatorname{Disc}F_{c,d}),
-\]
+Thus positive discriminant character is equivalent to odd `r`.
 
-or equivalently
+If the polynomial is irreducible, then `r = 1`, so the stated conditions hold.
 
-\[
-\chi(\operatorname{Disc}F_{c,d})=(-1)^{r+1}.
-\]
+Conversely, suppose the discriminant character is positive and the polynomial is reducible. Then `r` is odd and `r >= 3`. The smallest factor degree is at most the average factor degree, hence at most `p/r <= p/3`. This contradicts the absence of factors in the stated range. Therefore `r = 1`. QED.
 
-Thus positive discriminant character is equivalent to odd \(r\).
+## 3. Exact inclusion-exclusion identity
 
-If \(F_{c,d}\) is irreducible, then \(r=1\), its discriminant character is positive, and it has no proper factor.
+Set `z = floor(p/3)`. Let `P_z` be the set of monic irreducibles over `F_p` with degrees from `2` through `z`. Let `D_z` be the squarefree monic products of elements of `P_z`, including `D = 1`.
 
-Conversely, suppose the discriminant character is positive and \(F_{c,d}\) is reducible. Then \(r\) is odd and \(r\ge3\). Therefore
+For squarefree `F`,
 
-\[
-\min_i\deg P_i
-\le \frac1r\sum_i\deg P_i
-=\frac pr
-\le\frac p3.
-\]
+`sum_(D in D_z, D divides F) mu(D)`
 
-Because the factor degrees are integers and at least two, a factor occurs in the stated range, contradicting the hypothesis. Hence \(r=1\). QED.
+is `1` when `F` has no factor in `P_z`, and `0` otherwise.
 
-## 3. Exact inclusion–exclusion identity
+Therefore the irreducible count in the slice is exactly
 
-Let
-
-\[
-z=\lfloor p/3\rfloor
-\]
-
-and let \(\mathscr P_z\) be the set of monic irreducibles over \(\mathbf F_p\) with degrees in \([2,z]\). Let \(\mathscr D_z\) be the squarefree monic products of elements of \(\mathscr P_z\), including \(D=1\).
-
-For squarefree \(F\),
-
-\[
-\sum_{\substack{D\in\mathscr D_z\\D\mid F}}\mu(D)
-=
-\begin{cases}
-1,&F\text{ has no factor in }\mathscr P_z,\\
-0,&F\text{ has at least one factor in }\mathscr P_z.
-\end{cases}
-\]
-
-Theorem PS.1 therefore gives the exact identity
-
-\[
-\boxed{
-I_a(p)
-=
-\frac12
-\sum_{(c,d)\in\mathcal A_a}
-\left(1+\chi(\operatorname{Disc}F_{c,d})\right)
-\sum_{\substack{D\in\mathscr D_z\\D\mid F_{c,d}}}\mu(D),
-}
-\]
-
-where \(I_a(p)\) is the number of irreducible members in the slice.
+`I_a(p) = (1/2) sum_((c,d) in A_a) (1 + chi(Disc F_(c,d))) sum_(D in D_z, D divides F_(c,d)) mu(D)`.
 
 Define
 
-\[
-A_a(D)=
-\#\{(c,d)\in\mathcal A_a:D\mid F_{c,d}\},
-\]
+`A_a(D) = number of (c,d) in A_a for which D divides F_(c,d)`
 
 and
 
-\[
-B_a(D)=
-\sum_{\substack{(c,d)\in\mathcal A_a\\D\mid F_{c,d}}}
-\chi(\operatorname{Disc}F_{c,d}).
-\]
+`B_a(D) = sum of chi(Disc F_(c,d)) over those same coefficient pairs`.
 
-Interchanging the finite sums yields
+Interchanging the finite sums gives
 
-\[
-\boxed{
-I_a(p)
-=
-\frac12
-\sum_{D\in\mathscr D_z}
-\mu(D)\bigl(A_a(D)+B_a(D)\bigr).
-}
-\]
+`I_a(p) = (1/2) sum_(D in D_z) mu(D) (A_a(D) + B_a(D))`.
 
-The \(D=1\) terms are already known:
+The `D = 1` terms are already known:
 
-\[
-A_a(1)=\frac{p^2-1}{3},
-\qquad
-B_a(1)=M_a^{\mathrm{loc}}(p).
-\]
+`A_a(1) = (p^2 - 1)/3`
+
+and
+
+`B_a(1) = M_a^loc(p)`.
 
 ## 4. Incidence uniqueness
 
 ### Lemma PS.2
 
-For every monic \(D\in\mathbf F_p[X]\) with \(\deg D\ge2\),
-
-\[
-A_a(D)\le1.
-\]
+For every monic `D` with `deg D >= 2`, one has `A_a(D) <= 1`.
 
 ### Proof
 
-If the same \(D\) divided both \(F_{c,d}\) and \(F_{c',d'}\), it would divide their difference
+If the same `D` divided both `F_(c,d)` and `F_(c',d')`, then `D` would divide their difference
 
-\[
-(c-c')X+(d-d').
-\]
+`(c - c') X + (d - d')`.
 
-A nonzero polynomial of degree at most one cannot be divisible by \(D\). Hence \(c=c'\) and \(d=d'\). QED.
+A nonzero polynomial of degree at most one cannot be divisible by `D`. Hence `c = c'` and `d = d'`. QED.
 
-Consequently
+Consequently `B_a(D)` belongs to `{-1,0,+1}` for every `D != 1`.
 
-\[
-B_a(D)\in\{-1,0,+1\}
-\]
-
-for every \(D\ne1\), and whenever \(A_a(D)=1\),
-
-\[
-B_a(D)=
-\chi(\operatorname{Disc}F_{c(D),d(D)}).
-\]
-
-Thus the remaining theorem is an incidence-distribution problem: determine the signed Möbius sum over those squarefree small-factor products \(D\) that are compatible with the two-parameter sparse family.
+Thus the remaining theorem is an incidence-distribution problem: determine the signed Mobius sum over those squarefree small-factor products compatible with the two-parameter sparse family.
 
 ## 5. Frobenius hook-character form
 
-For a squarefree degree-\(p\) polynomial \(F\), let \(\sigma_F\in S_p\) denote Frobenius acting on its roots, and let `Std` denote the standard representation of \(S_p\).
+For squarefree degree-p `F`, let `sigma_F` be Frobenius acting on its roots, and let `Std` be the standard representation of `S_p`.
 
 ### Theorem PS.3
 
-\[
-\boxed{
-p\,\mathbf1_{F\text{ irreducible}}
-=
-\det(1-\sigma_F\mid\mathrm{Std})
-=
-\sum_{j=0}^{p-1}(-1)^j
-\chi_{\wedge^j\mathrm{Std}}(\sigma_F).
-}
-\]
+`p * 1_(F irreducible) = det(1 - sigma_F | Std)`
+
+and
+
+`det(1 - sigma_F | Std) = sum_(j=0)^(p-1) (-1)^j chi_(exterior^j Std)(sigma_F)`.
 
 ### Proof
 
-If \(\sigma_F\) has \(r>1\) cycles, its permutation representation has eigenvalue \(1\) with multiplicity \(r\), so `Std` has eigenvalue \(1\) and the determinant vanishes.
+If `sigma_F` has more than one cycle, its permutation representation has eigenvalue `1` with multiplicity greater than one. Therefore `Std` still has eigenvalue `1`, and the determinant vanishes.
 
-If \(F\) is irreducible, \(\sigma_F\) is a \(p\)-cycle. Its eigenvalues on `Std` are the nontrivial \(p\)-th roots of unity, hence
-
-\[
-\det(1-\sigma_F\mid\mathrm{Std})
-=
-\prod_{j=1}^{p-1}(1-\zeta_p^j)=p.
-\]
+If `F` is irreducible, `sigma_F` is a p-cycle. Its eigenvalues on `Std` are the nontrivial p-th roots of unity, and their product under `1 - eigenvalue` is `p`.
 
 The second equality is the characteristic-polynomial expansion of the determinant into exterior-power traces. QED.
 
-The discriminant character is the top exterior-power character only. Theorem PS.3 gives a precise representation-theoretic explanation of the remaining gap: sign information breaks the ordinary sieve parity barrier but does not replace the lower hook traces needed to isolate a single Frobenius cycle.
+The discriminant character is only the top exterior-power character. The theorem explains the remaining gap precisely: sign information breaks the ordinary sieve parity barrier but does not replace the lower hook traces needed to isolate a single Frobenius cycle.
 
 ## 6. Correct next target
 
 A sufficient theorem is any estimate proving
 
-\[
-\sum_{D\in\mathscr D_z}
-\mu(D)\bigl(A_a(D)+B_a(D)\bigr)>0
-\]
+`sum_(D in D_z) mu(D) (A_a(D) + B_a(D)) > 0`
 
-for at least one nonzero cubic slice \(a\), uniformly for all sufficiently large primes \(p\). Finite certification can then handle the remaining primes.
+for at least one nonzero cubic slice `a`, uniformly for all sufficiently large primes `p`. Finite certification can then handle the remaining primes.
 
 The two plausible implementations are:
 
-1. a parity-weighted combinatorial sieve with a level of distribution reaching degree \(p/3\);
-2. a geometric trace formula that evaluates the full alternating hook sum as one object rather than bounding its \(p\) terms separately.
+1. a parity-weighted combinatorial sieve with a level of distribution reaching degree `p/3`;
+2. a geometric trace formula that evaluates the full alternating hook sum as one object rather than bounding its p terms separately.
