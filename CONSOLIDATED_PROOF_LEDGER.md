@@ -16,11 +16,7 @@ uniformly for `1 <= |a| < H`, together with the weighted aggregate and Frobenius
 
 **Scope:** this is a theorem about uniformly random orderings of the block primes. It does not imply the estimate for the increasing primorial order and does not prove Fortune's conjecture.
 
-### Exact moment, tail, and singular-series layers
-
-The difference-multiplicity dichotomy, partition moment formula, sixth moment, centred third moment, stretched-exponential upper tail, explicit variance constant, and truncated singular-series identity remain proved as recorded in the addendum and frontier files. The corrected conditional route must use block-averaged Hardy-Littlewood hypotheses; the earlier pointwise first-moment hypothesis was logically stronger than its conclusion.
-
-### Function-field d=1: exact algebraic layer
+### Function-field d=1: exact algebraic and sieve layers
 
 The following are proved or machine-certified as labelled in `D1_ATTACK.md` and `frontier/d1_discriminant/`:
 
@@ -39,131 +35,170 @@ The following are proved or machine-certified as labelled in `D1_ATTACK.md` and 
 13. exact degree-2 and degree-3 unconditioned factor-incidence formulas;
 14. exact parity-breaking sieve reduction;
 15. exact locally admissible quadratic-incidence formula with `O(p)` error;
-16. exact reduced Frobenius-determinant criterion for irreducibility;
-17. exact signed quadratic-incidence decomposition with an effective `O(p^(3/2))` bound.
+16. exact signed quadratic-incidence decomposition with an effective `O(p^(3/2))` bound;
+17. universal oriented-cubic parameterization by the trace-zero plane;
+18. unsigned locally admissible cubic incidence `p^2/9 + O(p^(3/2))`;
+19. signed cubic incidence `O(p^(3/2))`;
+20. exact reduced Frobenius determinant indicator `J_a(c,d)=3a 1_irred`.
 
 The quantized identity's method is classical. Novelty of the exact object and result remains provisional pending manual inspection of the offline sources listed in `NOVELTY_VERDICT.md`.
 
 ## 2. Consolidation correction
 
-There is **no direct mathematical interface between Theorem RQM and the function-field odd-reducible sector**. RQM uses entropy from random orderings of integer block primes. The function-field problem has no such ordering variable. Earlier wording suggesting that an “RQM assembly” could combine with the discriminant theorem is withdrawn.
+There is no direct mathematical interface between Theorem RQM and the function-field odd-reducible sector. RQM uses entropy from random orderings of integer block primes. The function-field problem has no such ordering variable.
 
-The correct companion to the discriminant theorem is a parity-weighted factor sieve or an equivalent full Frobenius-class trace formula.
+The correct function-field companions are the parity-weighted factor sieve and the exact Frobenius determinant indicator.
 
 ## 3. Parity-breaking reduction
 
 For
 
-`F_(a,c,d)(X) = X^p + a X^3 + c X + d`
+`F_(a,c,d)(X) = X^p + aX^3 + cX + d`
 
 and
 
-`H_(a,c,d)(X) = a X^3 + (c + 1) X + d`,
+`H_(a,c,d)(X) = aX^3 + (c+1)X + d`,
 
-let `A_a` be the coefficient pairs for which `H_(a,c,d)` is rootless over `F_p`. Every `F` in `A_a` is squarefree and has no linear factor.
+let `A_a` be the coefficient pairs for which `H` is rootless. Every such F is squarefree and has no linear factor.
 
-Write `F = product_i P_i` as a product of `r` distinct monic irreducibles. Pellet gives
+Pellet gives
 
-`chi(Disc F) = (-1)^(r+1)`.
+`chi(Disc F)=(-1)^(r+1)`,
 
-Hence positive discriminant means that `r` is odd. If such an `F` is reducible then `r >= 3`, so its smallest factor has degree at most `p/3`. Therefore:
+where r is the number of irreducible factors. Hence a positive-discriminant reducible member has at least three factors and therefore a factor of degree at most `p/3`. Thus
 
-> `F` is irreducible if and only if it is locally admissible, has positive discriminant character, and has no factor of degree from `2` through `floor(p/3)`.
+> F is irreducible if and only if it is locally admissible, has positive discriminant character, and has no factor of degree from 2 through `floor(p/3)`.
 
-The full proof and exact inclusion-exclusion form are in `frontier/d1_discriminant/PARITY_SIEVE_REDUCTION.md`.
-
-## 4. First completed sieve level: quadratic factors
+## 4. Completed quadratic sieve level
 
 Every irreducible quadratic
 
-`h_(s,n)(X) = X^2 - sX + n`
+`h_(s,n)(X)=X^2-sX+n`
 
 divides exactly one member of the cubic slice, with
 
-`c = 1 - a(s^2 - n)`,
+`c=1-a(s^2-n)`, `d=s(an-1)`.
 
-`d = s(an - 1)`.
+The associated local cubic satisfies
 
-The associated local cubic satisfies the exact identity
+`H_(s,n)(X)=a(X+s)h_(s,n)(X)+(2X-s)`.
 
-`H_(s,n)(X) = a(X + s)h_(s,n)(X) + (2X - s)`.
+This gives the exact unsigned formula
 
-This makes the total local-root incidence exactly `p(p - 1)/2`, equal to the number of irreducible quadratics.
+`L_(a,2)=p(p-1)/6 + [1+chi(a)(p chi(-1)-K_p)-2T_a]/6`,
 
-Let `L_(a,2)` be the number of compatible irreducible quadratics whose local cubic is rootless. Then
+where `K_p` is the trace of a fixed K3 surface. Hence
 
-`L_(a,2) = p(p - 1)/6 + [1 + chi(a)(p chi(-1) - K_p) - 2T_a]/6`,
+`L_(a,2)=p^2/6+O(p)`.
 
-where `T_a` is an explicit correction with at most three terms and
+For the signed incidence,
 
-`K_p = sum_(D,S) chi(D S P(D,S))`
+`|L_(a,2)^chi| <= 30p^(3/2)+131p+1`.
 
-for the fixed polynomial
+Therefore
 
-`P(D,S) = D^3 - 18D^2S - 24D^2 + 81DS^2 - 360DS + 192D + 144S - 512`.
+`L_(a,2,+)=p^2/12+O(p^(3/2))`,
 
-The double cover `Z^2 = D S P(D,S)` compactifies to a `(4,4)` double cover of `P^1 x P^1` with only ADE singularities; its minimal resolution is a K3 surface. Hence
+`L_(a,2,-)=p^2/12+O(p^(3/2))`.
 
-`K_p = O(p)`
+## 5. Completed cubic single-factor level
 
-and therefore
+Choose an irreducible base cubic `X^3+X+b` and identify its trace-zero plane with `F_p^2`. Frobenius acts universally by
 
-`L_(a,2) = p^2/6 + O(p)`.
+`tau(x,y)=(-y,x-y)`.
 
-For the signed incidence
+The invariant forms
 
-`L_(a,2)^chi = sum_(locally admissible F) chi(Disc F) nu_2(F)`,
+`u=x^2-xy+y^2`,
 
-an exact four-term decomposition separates two complete `(D,S)` sums, one root-incidence `(w,t)` sum, and a triple-root correction. After expanding the character projectors, every raw term is a one-variable quadratic-character sum of degree at most 6 or 8. The complete and root families have at most 23 and 28 exceptional fibres, respectively. Therefore
+`v=bR+(W0/2)S`,
 
-`|L_(a,2)^chi| <= 30 p^(3/2) + 131p + 1`.
+`V=W0R-(27b/2)S`
 
-Consequently the positive- and negative-discriminant sectors each carry
+parameterize oriented irreducible depressed cubics, three plane points per cubic.
 
-`p^2/12 + O(p^(3/2))`
+The unique compatible translate and coefficients are rational fixed-degree functions of `(u,v,V)`. The shifted local-root equation is the degree-six surface
 
-quadratic-factor incidence. This completes the first signed sieve level.
+`G_a=2aV(z^3+uz+v)-6uz^2+(3V+9v)z-4u^2=0`.
 
-## 5. Full-cycle determinant
+A characteristic-zero genericity certificate proves that the root surface is geometrically irreducible and that all local and degree-p discriminant weights are geometrically nonsquare outside a finite bad-base set. Fixed-degree Weil and Lang-Weil estimates therefore give
 
-Let B be the matrix of `Phi - I`, where `Phi(z) = z^p` on
+`L_(a,3)=p^2/9+O(p^(3/2))`,
+
+`L_(a,3)^chi=O(p^(3/2))`.
+
+Consequently
+
+`L_(a,3,+)=p^2/18+O(p^(3/2))`,
+
+`L_(a,3,-)=p^2/18+O(p^(3/2))`.
+
+A vectorized exact Hugging Face sweep over every prime below 1200 and both square classes found
+
+`max |L_(a,3)-p^2/9|/p < 1.05`,
+
+`max |L_(a,3)^chi|/p < 1.66`,
+
+strongly supporting the sharper `O(p)` bounds.
+
+## 6. Exact full-cycle determinant indicator
+
+Let B be the matrix of `Phi-I`, where `Phi(z)=z^p` on
 
 `F_p[X]/(F_(a,c,d))`
 
-in the basis `1,X,...,X^(p-1)`.
+in the basis `1,X,...,X^(p-1)`. Delete the constant column and the row indexed by `X^(p-3)`, and call the determinant `J_a(c,d)`.
 
-Delete the constant column and the `X^(p-3)` row. The resulting determinant `J_a(c,d)` satisfies, for every squarefree member,
+For an arbitrary, possibly non-squarefree F, the Frobenius-fixed subspace has dimension equal to the number of distinct irreducible factors. Since `deg F=p` and `a != 0`, rank `p-1` occurs exactly on the irreducible locus.
 
-`J_a(c,d) != 0 if and only if F_(a,c,d) is irreducible`.
+On an irreducible member, conjugating Frobenius to the permutation matrix of a p-cycle gives
 
-The row choice is canonical: the trace row is a left nullvector and Newton's identities give
+`adj(Phi-I)=e_0 Tr`.
 
-`Tr(X^(p-3)) = 3a != 0`,
+Newton's identities give
 
-whereas `Tr(1) = p = 0`, so deleting the constant row would fail.
+`Tr(X^(p-3))=3a`.
 
-The determinant criterion has been exhaustively checked against an independent Rabin test for both square classes at `p = 5,7,11,13`. It packages every factor degree simultaneously and is the cleanest direct alternative to the parity sieve.
+Therefore the selected cofactor has the exact value
 
-## 6. Representation-theoretic form
+`J_a(c,d)=3a * 1_(F irreducible)`.
 
-For squarefree degree-p `F`, let `sigma_F` be Frobenius on its roots and `Std` the standard `(p - 1)`-dimensional representation. Then
+This has been exhaustively verified pointwise for both square classes at `p=5,7,11,13`.
 
-`p * 1_(F irreducible) = det(1 - sigma_F | Std)`
+## 7. Sharpest current reduction to the function-field crown
 
-and
+Let
 
-`det(1 - sigma_F | Std) = sum_(j=0)^(p-1) (-1)^j chi_(exterior^j Std)(sigma_F)`.
+`N_a(p)=#{(c,d):X^p+aX^3+cX+d is irreducible}`.
 
-The discriminant character is only the top exterior-power term. The reduced Frobenius determinant is the linear-algebraic realization of the complete full-cycle detector.
+Then in `F_p`,
 
-## 7. Ranked open fronts after the signed quadratic theorem
+`sum_(c,d) J_a(c,d)=3a N_a(p)`.
 
-1. **Sharpen signed quadratic incidence.** The observed values are `O(p)`. Proving this requires an irregularity and singularity audit of the finite list of fixed double-cover surfaces in `SIGNED_QUADRATIC_INCIDENCE.md`.
-2. **Locally admissible cubic incidence.** Repeat the quadratic programme on the oriented cubic surface; target `p^2/9 + O(p)` and its signed analogue.
-3. **Frobenius-determinant structure.** Search for a basis giving block triangularity, low displacement rank, a norm/resultant formula, or an explicit nonvanishing coefficient family. Small-prime canonical polynomials have no stable factorisation yet.
-4. **Multiplicative parity sieve.** Extend the degree-2 and degree-3 incidence control to squarefree products only after the signed single-factor layers are understood. A term-by-term attack through degree `p/3` is not currently justified.
-5. **Increasing-order transfer from RQM.** This remains the integer Fortune wall. A variance theorem over random orderings would strengthen genericity but still would not select the increasing order without an additional deterministic transfer principle.
+Thus the full d=1 function-field theorem follows from the single congruence
 
-## 8. Immediate next action
+`sum_(c,d) J_a(c,d) != 0 mod p`.
 
-The next controlled decision is between two fixed-complexity tasks: audit the signed quadratic double covers to remove the possible weight-3 cohomology and obtain `O(p)`, or move to the unsigned cubic-incidence surface where a new `p^2/9` main term is available. The signed quadratic audit has priority because it would fully close both halves of the first parity-sieve level.
+Equivalently, let `J_a^can(c,d)` be the canonical polynomial function with degree at most `p-1` in each variable. Finite-field orthogonality gives
+
+`sum_(c,d)J_a(c,d)=[c^(p-1)d^(p-1)]J_a^can`.
+
+Therefore it is enough to prove that one top coefficient is nonzero.
+
+This is currently the shortest plausible route to the function-field crown. It replaces a positive integer count of size about p by one exact coefficient computation modulo p.
+
+## 8. Ranked open fronts
+
+1. **Top determinant coefficient.** Compute or prove nonzero
+   `[c^(p-1)d^(p-1)]J_a^can` without expanding the full determinant. This would prove FF-Fortune `(p,1)` directly.
+2. **O(p) cubic and signed-quadratic sharpening.** Audit the fixed global surfaces to remove possible weight-three cohomology.
+3. **Multiplicative parity sieve.** Compress products of small factors without term-by-term inclusion-exclusion through degree `p/3`.
+4. **Increasing-order transfer from RQM.** This remains the original integer Fortune wall.
+
+## 9. Immediate next action
+
+Attack the determinant top coefficient by determinant multilinearity and finite-field orthogonality, using the Frobenius columns generated by powers of
+
+`-aX^3-cX-d`.
+
+The first acceptable outcome is either a closed nonzero formula or an exact recurrence in p. Failure should be documented as a structural obstruction before returning to the multiplicative parity sieve.
