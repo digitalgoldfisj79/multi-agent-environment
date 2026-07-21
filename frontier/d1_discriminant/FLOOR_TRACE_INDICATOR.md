@@ -1,0 +1,189 @@
+# Single-trace compression of degree-p irreducibility
+
+**Date:** 2026-07-21  
+**Status:** exact elementary theorem proved.
+
+## 1. Setup
+
+Let p be an odd prime and let F be a monic squarefree polynomial of degree p over `F_p`. Write its factor degrees as
+
+`d_1,...,d_r`,
+
+so that
+
+`d_1+...+d_r=p`.
+
+Let Phi be arithmetic Frobenius acting on the p geometric roots of F, equivalently the p-dimensional permutation representation attached to the factorisation. Define
+
+`tau(F)=Tr((Phi-I)^(p-1)) in F_p`.
+
+The constant line contributes zero to this trace, so tau may equally be computed on the reduced `(p-1)`-dimensional representation or from the ordinary Hasse--Witt matrix.
+
+## 2. Exact cycle calculation
+
+In characteristic p,
+
+`(Phi-I)^(p-1)=sum_(k=0)^(p-1) Phi^k`,
+
+because
+
+`binom(p-1,k)(-1)^(p-1-k)=1 mod p`.
+
+On a cycle of length d,
+
+`Tr(Phi^k)=d`
+
+exactly when `d` divides k, and is zero otherwise. Therefore the contribution of a d-cycle is
+
+`S_p(d)=d(floor((p-1)/d)+1) mod p`.
+
+For `d=p`, this is p and hence zero.
+
+For `1<d<p`, write
+
+`p=q d+r`, with `1<=r<=d-1`.
+
+Then
+
+`floor((p-1)/d)=q`
+
+and
+
+`S_p(d)=d(q+1)=p+(d-r)=d-r mod p`.
+
+The canonical integer representative `d-r` lies strictly between 0 and d.
+
+For `d=1`, the contribution is p and is again zero.
+
+## 3. Classification of the zero trace
+
+Suppose F is reducible and has at least one factor of degree greater than one. Summing the canonical representatives over the non-linear factors gives an integer S satisfying
+
+`0<S<sum_(d_i>1)d_i<=p`.
+
+Thus S is nonzero modulo p. Linear factors contribute zero and cannot cancel it.
+
+Consequently:
+
+### Theorem FT.1
+
+For every monic squarefree degree-p polynomial over `F_p`,
+
+`tau(F)=0`
+
+if and only if either
+
+1. F is irreducible of degree p; or
+2. F splits completely into p distinct linear factors.
+
+There are no other zero-trace factorisation types.
+
+## 4. Application to the cubic slice
+
+Now put
+
+`F_(a,c,d)(X)=X^p+aX^3+cX+d`,
+
+with `a!=0`.
+
+A monic squarefree degree-p polynomial that splits completely over `F_p` has all p field elements as roots and is therefore exactly
+
+`X^p-X`.
+
+That polynomial has zero cubic coefficient. It does not occur in the nonzero-a slice.
+
+Hence:
+
+### Theorem FT.2
+
+For every squarefree member of the nonzero cubic slice,
+
+`boxed( F_(a,c,d) irreducible iff Tr((Phi-I)^(p-1))=0 in F_p ).`
+
+Equivalently, by Fermat's theorem,
+
+`boxed( 1_(F irreducible)=1-tau(F)^(p-1) )`
+
+on the squarefree locus.
+
+This is an exact all-factor-degree compression. It replaces exclusion of every factor degree through `p/3` by one scalar trace of one matrix power.
+
+## 5. Global pointwise indicator
+
+Let `Delta(F)` be the discriminant and define
+
+`SqFree(F)=Delta(F)^(p-1)`.
+
+This equals one on the squarefree locus and zero on the singular locus. Therefore the following identity holds for every member of the slice:
+
+### Corollary FT.3
+
+`boxed( 1_(F irreducible)=Delta(F)^(p-1)(1-tau(F)^(p-1)) ).`
+
+Here tau is computed from the explicit p-dimensional Frobenius matrix on
+
+`A=F_p[X]/(F)`,
+
+whose columns are reductions of the powers of
+
+`g(X)=-aX^3-cX-d`.
+
+No squarefreeness assumption is needed in the displayed pointwise formula because the discriminant projector kills every singular member.
+
+## 6. Crown reformulation
+
+For fixed nonzero a,
+
+`N_a(p)=sum_(c,d) Delta(F_(a,c,d))^(p-1)`
+`                    (1-tau(F_(a,c,d))^(p-1))`
+
+as an exact `F_p` identity.
+
+Thus the d=1 cubic-slice crown follows if this single two-variable sum is nonzero for at least one square class of a.
+
+The new obstruction is no longer growing-period independence. It is the finite-field distribution of the scalar function
+
+`tau(a,c,d)=Tr((Phi_(a,c,d)-I)^(p-1))`.
+
+Unlike the determinant cofactor, tau is a trace and can be expanded as
+
+`tau=sum_(k=0)^(p-1) Tr(Phi^k)`.
+
+Unlike the factorial sieve, all factor degrees are compressed before estimation.
+
+## 7. Relation to factor degrees
+
+If F is squarefree with factor degrees `d_i`, then the theorem gives the exact integer representative
+
+`tau(F)=sum_(1<d_i<p) (d_i-(p mod d_i))`,
+
+where the sum lies in `{0,...,p-1}`.
+
+In particular:
+
+- irreducible type `(p)` gives tau=0;
+- completely split type `(1,...,1)` gives tau=0;
+- every other partition of p gives a strictly positive value below p.
+
+This positivity, rather than cancellation modulo p, is what makes the single trace decisive.
+
+## 8. Verification
+
+The checker `floor_trace_indicator_check.py` constructs the Frobenius substitution matrix directly and verifies the theorem exhaustively for every nonzero a and every c,d at p=5 and p=7.
+
+It checks independently that
+
+`Delta^(p-1)(1-tau^(p-1))`
+
+agrees pointwise with the prime-degree Rabin irreducibility test, including singular members.
+
+## 9. Next target
+
+The immediate crown-level task is to exploit the trace form before raising it to the `(p-1)`st power. The principal avenues are:
+
+1. derive a low-displacement-rank form for the matrix `Phi-I` generated by the cubic substitution recurrence;
+2. compute the finite-field value distribution of tau via trace formulas rather than factorisation;
+3. use the explicit discriminant projector to evaluate the two-variable sum by orthogonality;
+4. compare tau with the first-Witt higher Hasse--Witt indicator, which detects the same p-cycle by a different deformation.
+
+The theorem is unconditional and independent of the fixed-period monodromy package.
