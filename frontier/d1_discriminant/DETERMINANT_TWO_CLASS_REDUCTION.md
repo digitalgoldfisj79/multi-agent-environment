@@ -71,13 +71,15 @@ for any nonsquare nu, after dividing by nu.
 
 ### Theorem DTC.1
 
-The cubic-slice function-field crown follows if and only if
+The determinant nonvanishing architecture proves the cubic-slice function-field crown whenever
 
 `(alpha_p,beta_p) != (0,0)`.
 
-Equivalently, it is enough that the square and nonsquare slice counts are not both divisible by p.
+Equivalently, this architecture succeeds whenever the square and nonsquare slice counts are not both divisible by p.
 
 A zero residue in one class does not kill this architecture; the other class may still prove the theorem.
+
+If both modes vanish, the congruence architecture is inconclusive: the integer counts `N_+` and `N_-` could still be positive multiples of p. Thus simultaneous vanishing does not disprove the cubic-slice crown itself.
 
 ## 4. Orthogonality extraction
 
