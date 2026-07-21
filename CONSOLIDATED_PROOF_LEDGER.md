@@ -39,7 +39,8 @@ The following are proved or machine-certified as labelled in `D1_ATTACK.md` and 
 13. exact degree-2 and degree-3 unconditioned factor-incidence formulas;
 14. exact parity-breaking sieve reduction;
 15. exact locally admissible quadratic-incidence formula with `O(p)` error;
-16. exact reduced Frobenius-determinant criterion for irreducibility.
+16. exact reduced Frobenius-determinant criterion for irreducibility;
+17. exact signed quadratic-incidence decomposition with an effective `O(p^(3/2))` bound.
 
 The quantized identity's method is classical. Novelty of the exact object and result remains provisional pending manual inspection of the offline sources listed in `NOVELTY_VERDICT.md`.
 
@@ -109,7 +110,19 @@ and therefore
 
 `L_(a,2) = p^2/6 + O(p)`.
 
-This closes the unsigned quadratic local-incidence layer with a stronger error than the previously targeted `O(p^(3/2))`.
+For the signed incidence
+
+`L_(a,2)^chi = sum_(locally admissible F) chi(Disc F) nu_2(F)`,
+
+an exact four-term decomposition separates two complete `(D,S)` sums, one root-incidence `(w,t)` sum, and a triple-root correction. After expanding the character projectors, every raw term is a one-variable quadratic-character sum of degree at most 6 or 8. The complete and root families have at most 23 and 28 exceptional fibres, respectively. Therefore
+
+`|L_(a,2)^chi| <= 30 p^(3/2) + 131p + 1`.
+
+Consequently the positive- and negative-discriminant sectors each carry
+
+`p^2/12 + O(p^(3/2))`
+
+quadratic-factor incidence. This completes the first signed sieve level.
 
 ## 5. Full-cycle determinant
 
@@ -143,10 +156,9 @@ and
 
 The discriminant character is only the top exterior-power term. The reduced Frobenius determinant is the linear-algebraic realization of the complete full-cycle detector.
 
-## 7. Ranked open fronts after the completed phase
+## 7. Ranked open fronts after the signed quadratic theorem
 
-1. **Signed quadratic incidence.** Prove
-   `L_(a,2)^chi = O(p^(3/2))`, preferably `O(p)`, by completing the fixed Kummer-surface branch audit after substituting the unique compatible quadratic coefficients.
+1. **Sharpen signed quadratic incidence.** The observed values are `O(p)`. Proving this requires an irregularity and singularity audit of the finite list of fixed double-cover surfaces in `SIGNED_QUADRATIC_INCIDENCE.md`.
 2. **Locally admissible cubic incidence.** Repeat the quadratic programme on the oriented cubic surface; target `p^2/9 + O(p)` and its signed analogue.
 3. **Frobenius-determinant structure.** Search for a basis giving block triangularity, low displacement rank, a norm/resultant formula, or an explicit nonvanishing coefficient family. Small-prime canonical polynomials have no stable factorisation yet.
 4. **Multiplicative parity sieve.** Extend the degree-2 and degree-3 incidence control to squarefree products only after the signed single-factor layers are understood. A term-by-term attack through degree `p/3` is not currently justified.
@@ -154,4 +166,4 @@ The discriminant character is only the top exterior-power term. The reduced Frob
 
 ## 8. Immediate next action
 
-The next mathematically controlled target is the signed quadratic incidence. Its exact coefficient substitution is known, and every term reduces to a fixed finite list of ordinary quadratic-character sums after splitting the nested discriminant character. The first acceptable milestone is an unconditional `O(p^(3/2))` theorem with an explicit surface list; the stronger `O(p)` result requires showing that the relevant resolutions have zero irregularity.
+The next controlled decision is between two fixed-complexity tasks: audit the signed quadratic double covers to remove the possible weight-3 cohomology and obtain `O(p)`, or move to the unsigned cubic-incidence surface where a new `p^2/9` main term is available. The signed quadratic audit has priority because it would fully close both halves of the first parity-sieve level.
