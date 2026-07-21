@@ -35,7 +35,11 @@ The following are proved or machine-certified as labelled in `D1_ATTACK.md` and 
 9. local admissibility implies squarefreeness;
 10. exact count `(p^2 - 1)/3` of locally admissible members per nonzero cubic slice;
 11. exact restricted discriminant-mass decomposition;
-12. unconditional `O(p^(3/2))` factor-parity estimate.
+12. unconditional `O(p^(3/2))` factor-parity estimate;
+13. exact degree-2 and degree-3 unconditioned factor-incidence formulas;
+14. exact parity-breaking sieve reduction;
+15. exact locally admissible quadratic-incidence formula with `O(p)` error;
+16. exact reduced Frobenius-determinant criterion for irreducibility.
 
 The quantized identity's method is classical. Novelty of the exact object and result remains provisional pending manual inspection of the offline sources listed in `NOVELTY_VERDICT.md`.
 
@@ -45,7 +49,7 @@ There is **no direct mathematical interface between Theorem RQM and the function
 
 The correct companion to the discriminant theorem is a parity-weighted factor sieve or an equivalent full Frobenius-class trace formula.
 
-## 3. New exact reduction
+## 3. Parity-breaking reduction
 
 For
 
@@ -67,9 +71,67 @@ Hence positive discriminant means that `r` is odd. If such an `F` is reducible t
 
 The full proof and exact inclusion-exclusion form are in `frontier/d1_discriminant/PARITY_SIEVE_REDUCTION.md`.
 
-This is the correct parity-breaking use of the discriminant theorem. It reduces the open crown to a lower-bound sieve over only the positive-parity locally admissible sector.
+## 4. First completed sieve level: quadratic factors
 
-## 4. Representation-theoretic form
+Every irreducible quadratic
+
+`h_(s,n)(X) = X^2 - sX + n`
+
+divides exactly one member of the cubic slice, with
+
+`c = 1 - a(s^2 - n)`,
+
+`d = s(an - 1)`.
+
+The associated local cubic satisfies the exact identity
+
+`H_(s,n)(X) = a(X + s)h_(s,n)(X) + (2X - s)`.
+
+This makes the total local-root incidence exactly `p(p - 1)/2`, equal to the number of irreducible quadratics.
+
+Let `L_(a,2)` be the number of compatible irreducible quadratics whose local cubic is rootless. Then
+
+`L_(a,2) = p(p - 1)/6 + [1 + chi(a)(p chi(-1) - K_p) - 2T_a]/6`,
+
+where `T_a` is an explicit correction with at most three terms and
+
+`K_p = sum_(D,S) chi(D S P(D,S))`
+
+for the fixed polynomial
+
+`P(D,S) = D^3 - 18D^2S - 24D^2 + 81DS^2 - 360DS + 192D + 144S - 512`.
+
+The double cover `Z^2 = D S P(D,S)` compactifies to a `(4,4)` double cover of `P^1 x P^1` with only ADE singularities; its minimal resolution is a K3 surface. Hence
+
+`K_p = O(p)`
+
+and therefore
+
+`L_(a,2) = p^2/6 + O(p)`.
+
+This closes the unsigned quadratic local-incidence layer with a stronger error than the previously targeted `O(p^(3/2))`.
+
+## 5. Full-cycle determinant
+
+Let B be the matrix of `Phi - I`, where `Phi(z) = z^p` on
+
+`F_p[X]/(F_(a,c,d))`
+
+in the basis `1,X,...,X^(p-1)`.
+
+Delete the constant column and the `X^(p-3)` row. The resulting determinant `J_a(c,d)` satisfies, for every squarefree member,
+
+`J_a(c,d) != 0 if and only if F_(a,c,d) is irreducible`.
+
+The row choice is canonical: the trace row is a left nullvector and Newton's identities give
+
+`Tr(X^(p-3)) = 3a != 0`,
+
+whereas `Tr(1) = p = 0`, so deleting the constant row would fail.
+
+The determinant criterion has been exhaustively checked against an independent Rabin test for both square classes at `p = 5,7,11,13`. It packages every factor degree simultaneously and is the cleanest direct alternative to the parity sieve.
+
+## 6. Representation-theoretic form
 
 For squarefree degree-p `F`, let `sigma_F` be Frobenius on its roots and `Std` the standard `(p - 1)`-dimensional representation. Then
 
@@ -79,23 +141,17 @@ and
 
 `det(1 - sigma_F | Std) = sum_(j=0)^(p-1) (-1)^j chi_(exterior^j Std)(sigma_F)`.
 
-The discriminant character is only the top exterior-power term. A complete irreducibility count requires either the full alternating hook-character sum or an equivalent parity-weighted sieve. This explains exactly why the discriminant mass alone cannot finish the theorem.
+The discriminant character is only the top exterior-power term. The reduced Frobenius determinant is the linear-algebraic realization of the complete full-cycle detector.
 
-## 5. Ranked open fronts after consolidation
+## 7. Ranked open fronts after the completed phase
 
-1. **Parity-weighted factor sieve for FF-Fortune `(p,1)`.** Establish a positive lower bound after removing factor degrees through `p/3`, using the exact parity weight. This is the nearest route to a full infinite-family theorem.
-2. **Hook-trace or geometric collapse.** Seek a fixed-complexity realization of the full alternating exterior-power trace rather than bounding the `p` hook terms separately.
-3. **Constructive dynamics.** The period-p equivalence is exact, but affine maps and global rational semiconjugacies are eliminated. Exact small-prime interpolation shows no stable sparse fibre-semiconjugacy pattern so far.
-4. **Increasing-order transfer from RQM.** This remains the integer Fortune wall. A variance theorem over random orderings would strengthen genericity but still would not select the increasing order without an additional deterministic transfer principle.
+1. **Signed quadratic incidence.** Prove
+   `L_(a,2)^chi = O(p^(3/2))`, preferably `O(p)`, by completing the fixed Kummer-surface branch audit after substituting the unique compatible quadratic coefficients.
+2. **Locally admissible cubic incidence.** Repeat the quadratic programme on the oriented cubic surface; target `p^2/9 + O(p)` and its signed analogue.
+3. **Frobenius-determinant structure.** Search for a basis giving block triangularity, low displacement rank, a norm/resultant formula, or an explicit nonvanishing coefficient family. Small-prime canonical polynomials have no stable factorisation yet.
+4. **Multiplicative parity sieve.** Extend the degree-2 and degree-3 incidence control to squarefree products only after the signed single-factor layers are understood. A term-by-term attack through degree `p/3` is not currently justified.
+5. **Increasing-order transfer from RQM.** This remains the integer Fortune wall. A variance theorem over random orderings would strengthen genericity but still would not select the increasing order without an additional deterministic transfer principle.
 
-## 6. Immediate programme
+## 8. Immediate next action
 
-The next work targets the parity sieve, beginning with the exact divisor-incidence functions
-
-`A_a(D) = number of locally admissible F divisible by D`
-
-and
-
-`B_a(D) = sum of chi(Disc F) over locally admissible F divisible by D`,
-
-for squarefree products `D` of irreducibles of degrees `2` through `floor(p/3)`. For every fixed `D` of degree at least two, at most one coefficient pair `(c,d)` is possible. The remaining problem is therefore an incidence-distribution theorem, not a multiplicity problem.
+The next mathematically controlled target is the signed quadratic incidence. Its exact coefficient substitution is known, and every term reduces to a fixed finite list of ordinary quadratic-character sums after splitting the nested discriminant character. The first acceptable milestone is an unconditional `O(p^(3/2))` theorem with an explicit surface list; the stronger `O(p)` result requires showing that the relevant resolutions have zero irregularity.
