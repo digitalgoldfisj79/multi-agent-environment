@@ -4,194 +4,244 @@
 **Branch:** `gpt56/consolidated-fortune-20260721`  
 **Parents:** Claude RQM and novelty head `30703f06...`; GPT discriminant and dynamics head `b2d0e266...`.
 
-## 1. Closed theorem fronts
+## 1. Scope
 
-### RQM: random-order reciprocal-frame model
+The repository contains two mathematically separate programmes.
 
-`RQM_PROOF.md` proves, under its stated frame-nondegeneracy and effective prime-count hypotheses,
+`RQM_PROOF.md` proves a reciprocal-frame estimate for uniformly random orderings of integer block primes. It does not transfer to the increasing primorial order and does not prove the integer Fortune conjecture.
 
-`E_sigma E_a^sigma <= C(eta,rho) M (log X)^9`
+The function-field d=1 programme studies
 
-uniformly for `1 <= |a| < H`, together with the weighted aggregate and Frobenius-energy bounds.
+`F_(a,c,d)(X)=X^p+aX^3+cX+d`, `a != 0`,
 
-**Scope:** this is a theorem about uniformly random orderings of the block primes. It does not imply the estimate for the increasing primorial order and does not prove Fortune's conjecture.
+and seeks one irreducible member in every characteristic. Results below concern this function-field crown unless stated otherwise.
 
-### Function-field d=1: exact algebraic and sieve layers
+## 2. Exact parity reduction
 
-The following are proved or machine-certified as labelled in `D1_ATTACK.md` and `frontier/d1_discriminant/`:
+Put
 
-1. reduction to the sparse cubic family;
-2. master root-incidence identity;
-3. affine orbit structure;
-4. quantized Kloosterman and root-count identity;
-5. exact four-slice ledger and Lemma-L reduction;
-6. machine certification through the stated finite range;
-7. exact degree-p discriminant formula;
-8. exact complete-slice Mobius mass and zero-discriminant count;
-9. local admissibility implies squarefreeness;
-10. exact count `(p^2 - 1)/3` of locally admissible members per nonzero cubic slice;
-11. exact restricted discriminant-mass decomposition;
-12. unconditional `O(p^(3/2))` factor-parity estimate;
-13. exact degree-2 and degree-3 unconditioned factor-incidence formulas;
-14. exact parity-breaking sieve reduction;
-15. exact locally admissible quadratic-incidence formula with `O(p)` error;
-16. exact signed quadratic-incidence decomposition with an effective `O(p^(3/2))` bound;
-17. universal oriented-cubic parameterization by the trace-zero plane;
-18. unsigned locally admissible cubic incidence `p^2/9 + O(p^(3/2))`;
-19. signed cubic incidence `O(p^(3/2))`;
-20. exact reduced Frobenius determinant indicator `J_a(c,d)=3a 1_irred`;
-21. exact quadratic factorial sieve through order three and complete quadratic deletion;
-22. uniform cubic-factor multiplicity bound `nu_3 <= 24` from a degree-eight orientation eliminant;
-23. unsigned quartic incidence `p^2/12 + O(p^(3/2))` and signed quartic incidence `O(p^(3/2))`;
-24. a positive-parity sector of size `p^2/288 + O(p^(3/2))` with no factors of degrees 2, 3, or 4.
+`H_(a,c,d)(X)=aX^3+(c+1)X+d`.
 
-Novelty of the exact objects and results remains provisional pending manual inspection of the offline sources listed in `NOVELTY_VERDICT.md`.
+Local admissibility means H is rootless over F_p. Every locally admissible F is squarefree and has no linear factor.
 
-## 2. Consolidation correction
+If F has r irreducible factors, Pellet gives
 
-There is no direct mathematical interface between Theorem RQM and the function-field odd-reducible sector. RQM uses entropy from random orderings of integer block primes. The function-field problem has no such ordering variable.
+`chi(Disc F)=(-1)^(r+1)`.
 
-The correct function-field companions are the parity-weighted factor sieve and the exact Frobenius determinant indicator.
+A positive-discriminant reducible member therefore has at least three factors, and its smallest factor has degree at most `p/3`. Hence
 
-## 3. Parity-breaking reduction
+> F is irreducible if and only if it is locally admissible, has positive discriminant, and has no factor of degree from 2 through `floor(p/3)`.
 
-For
+This is the exact parity-breaking sieve target.
 
-`F_(a,c,d)(X) = X^p + aX^3 + cX + d`
+## 3. Closed algebraic layer
 
-and
+The following are proved or independently machine-certified in `frontier/d1_discriminant/`:
 
-`H_(a,c,d)(X) = aX^3 + (c+1)X + d`,
+1. exact degree-p discriminant formula;
+2. exact complete discriminant mass and zero count;
+3. local admissibility implies squarefreeness;
+4. exact locally admissible family size `(p^2-1)/3`;
+5. exact restricted discriminant-mass decomposition and `O(p^(3/2))` parity bound;
+6. exact degree-2 and degree-3 compatibility formulae;
+7. exact reduced Frobenius determinant indicator
+   `J_a(c,d)=3a 1_(F irreducible)`;
+8. exact top-coefficient reformulation
+   `sum_(c,d)J_a(c,d)=[c^(p-1)d^(p-1)]J_a^can`.
 
-let `A_a` be the coefficient pairs for which H is rootless. Every such F is squarefree and has no linear factor.
+The determinant coefficient remains unevaluated.
 
-Pellet gives
+## 4. Complete quadratic deletion
 
-`chi(Disc F)=(-1)^(r+1)`,
+The compatible quadratic traces satisfy
 
-where r is the number of irreducible factors. Hence a positive-discriminant reducible member has at least three factors and therefore a factor of degree at most `p/3`. Thus
+`a s^3-(2-c)s-d=0`.
 
-> F is irreducible if and only if it is locally admissible, has positive discriminant character, and has no factor of degree from 2 through `floor(p/3)`.
+Therefore
 
-## 4. Completed quadratic multiplicative level
+`nu_2(F) <= 3`.
 
-Every irreducible quadratic
-
-`h_(s,n)(X)=X^2-sX+n`
-
-divides exactly one member of the cubic slice, with
-
-`c=1-a(s^2-n)`, `d=s(an-1)`.
-
-The first signed and unsigned incidences satisfy
+The first unsigned and signed incidences are
 
 `L_(a,2)=p^2/6+O(p)`,
 
 `L_(a,2)^chi=O(p^(3/2))`.
 
-Eliminating n gives the trace equation
-
-`a s^3-(2-c)s-d=0`.
-
-Therefore every member has at most three irreducible quadratic factors. Exact factorial moments through order three give
+Exact factorial moments through order three give
 
 `N_(a,no2)=29p^2/144+O(p^(3/2))`,
 
 `M_(a,no2)=O(p^(3/2))`.
 
-Consequently
+Thus each discriminant-parity sector with no quadratic factor has size
 
-`N_(a,no2,+)=29p^2/288+O(p^(3/2))`,
+`29p^2/288+O(p^(3/2))`.
 
-`N_(a,no2,-)=29p^2/288+O(p^(3/2))`.
+All simultaneous configurations of quadratic factors are removed exactly.
 
-This removes all quadratic factors, including simultaneous pairs and triples.
+## 5. Cubic compatibility and monodromy
 
-## 5. Completed cubic single-factor level and bounded fibres
-
-Choose an irreducible base cubic `X^3+X+b` and identify its trace-zero plane with `F_p^2`. Frobenius acts universally by
+The trace-zero plane gives a universal parameterization of oriented irreducible depressed cubics. Frobenius acts by
 
 `tau(x,y)=(-y,x-y)`.
 
-The invariant forms parameterize oriented irreducible depressed cubics, three plane points per cubic. Fixed-degree geometry gives
+Eliminating the cubic invariants gives a monic degree-eight orientation polynomial `E_(c,d)(V)`. Every fibre has at most 24 compatible cubic factors:
 
-`L_(a,3)=p^2/9+O(p^(3/2))`,
+`nu_3(F) <= 24`.
 
-`L_(a,3)^chi=O(p^(3/2))`.
+The generic arithmetic and geometric Galois groups of E are both `S_8`. This is proved by the specialization `c=d=-2`, whose good-prime cycle types include an 8-cycle, a 7-cycle, and a transposition, together with the nonsquare generic discriminant.
 
-The compatible coefficient map has a monic degree-eight eliminant in the orientation V. For each V, a cubic equation determines the remaining invariant. Hence
+After marking roots inside the eight cubic blocks, the full geometric monodromy is
 
-`nu_3(F) <= 24`
+`C_3^8 semidirect S_8`.
 
-uniformly for every member. Cubic deletion is therefore an exact finite factorial-moment problem through order 24, not an inclusion-exclusion problem with a p-dependent tail.
+The diagonal C_3 kernel is excluded by a rational specialization containing two distinct cyclic cubic fields of discriminants `13^2` and `7^2`. The sum-zero kernel is excluded by an explicit noncube product of the eight Cardano classes.
 
-## 6. Completed quartic single-factor level
+## 6. Complete cubic deletion
 
-For a Frobenius-ordered quartic orbit `x_0,x_1,x_2,x_3`, compatibility is the fixed system
+For the locally admissible family define
 
-`x_(i+1)+a x_i^3+c x_i+d=0`
+`Q_(a,3,j)=sum binom(nu_3(F),j)`.
 
-for i modulo four.
+For `0 <= j <= 8`, full marked monodromy, independence of the local S_3 field, and fixed-degree Lang-Weil estimates give
 
-After scaling to a=1 and saturating by the Vandermonde, the characteristic-zero ordered-cycle ideal is prime of dimension two. Adding a local root produces another prime dimension-two cover. The local triple-root locus is zero-dimensional.
+`Q_(a,3,j)=p^2/[j! 3^(j+1)]+O(p^(3/2))`.
 
-The local discriminant and all eight raw degree-p discriminant Kummer weights are nonsquares; this is certified by a transverse quartic number-field specialization.
+The discriminant-weighted moments satisfy
 
-Lang-Weil therefore gives
+`Q_(a,3,j)^chi=O(p^(3/2))`.
+
+Orders `9 <= j <= 24` are supported on the fixed exceptional divisor and are `O(p)`, signed and unsigned.
+
+Exact finite inclusion-exclusion therefore gives
+
+`N_(a,no3)=C_3 p^2+O(p^(3/2))`,
+
+`M_(a,no3)=O(p^(3/2))`,
+
+where
+
+`C_3=(1/3)sum_(j=0)^8 (-1/3)^j/j!`
+
+`   =189550849/793618560`.
+
+This removes every cubic factor, including exceptional fibres.
+
+## 7. Complete mixed quadratic-cubic deletion
+
+The full quadratic marked monodromy is
+
+`C_2^3 semidirect S_3`.
+
+At `d=0`, its three nontrivial quadratic classes are
+
+`c-2`, `c-1`, `(c-2)(c-1)`.
+
+The cubic orientation sign class is
+
+`c^2-c+1`,
+
+and the local-cubic sign class is
+
+`c+1`.
+
+These classes are independent. The quadratic, cubic, and local splitting fields are therefore linearly disjoint. The raw degree-p discriminant Kummer classes remain nontrivial on every mixed fibre power.
+
+For `0 <= i <= 3`, `0 <= j <= 8`,
+
+`Q_(a;i,j)=p^2/[3 i!2^i j!3^j]+O(p^(3/2))`,
+
+`Q_(a;i,j)^chi=O(p^(3/2))`.
+
+Orders `j>8` are `O(p)`.
+
+Exact mixed inclusion-exclusion yields
+
+`N_(a,no23)`
+` =(5496974621/38093690880)p^2+O(p^(3/2))`,
+
+`M_(a,no23)=O(p^(3/2))`.
+
+Each parity sector with neither quadratic nor cubic factors has density
+
+`5496974621/76187381760`
+
+`=0.07215072225891911...`.
+
+This is the first simultaneous complete deletion across two factor degrees.
+
+## 8. Quartic single-factor theorem
+
+Quartic factors are exact period-four cycles of
+
+`g(X)=-aX^3-cX-d`.
+
+The ordered cycle surface, after removing repeated coordinates, is geometrically integral of dimension two. Its local-root cover is also integral, the triple-root locus is zero-dimensional, and every required local or degree-p Kummer weight is nonsquare.
+
+Therefore
 
 `L_(a,4)=p^2/12+O(p^(3/2))`,
 
 `L_(a,4)^chi=O(p^(3/2))`,
 
-and hence
+and
 
-`L_(a,4,+)=p^2/24+O(p^(3/2))`,
+`L_(a,4,+)=p^2/24+O(p^(3/2))`.
 
-`L_(a,4,-)=p^2/24+O(p^(3/2))`.
-
-## 7. Roughness through degree four
-
-Let `N_(a,rough4,+)` count locally admissible positive-discriminant members with no factor of degree 2, 3, or 4. A union bound after the exact quadratic deletion gives
+Combining this with complete mixed quadratic-cubic deletion gives
 
 `N_(a,rough4,+)`
-` >= N_(a,no2,+)-L_(a,3,+)-L_(a,4,+)`
-` = [29/288-1/18-1/24]p^2+O(p^(3/2))`
-` = p^2/288+O(p^(3/2))`.
+` >= (2322500381/76187381760)p^2+O(p^(3/2))`.
 
-Thus every sufficiently large cubic slice contains positive-parity members rough through degree four.
+Thus every sufficiently large slice contains a positive-discriminant population of density at least
 
-This is the final degree at which first-moment subtraction can work. The next expected positive degree-five incidence is `p^2/30`, which exceeds the remaining `p^2/288` margin. Further progress must use multiplicative correlations or the determinant indicator.
+`0.03048405559225244...`
 
-## 8. Exact full-cycle determinant indicator
+with no factors of degrees 2, 3, or 4.
 
-Let B be the matrix of `Phi-I`, where `Phi(z)=z^p` on
+## 9. Finite quartic factorial reduction
 
-`F_p[X]/(F_(a,c,d))`
+The period-four dynatomic polynomial is
 
-in the basis `1,X,...,X^(p-1)`. Delete the constant column and the row indexed by `X^(p-3)`, and call the determinant `J_a(c,d)`.
+`Phi_(g,4)=[g^4(X)-X]/[g^2(X)-X]`
 
-For every coefficient pair,
+and has degree
 
-`J_a(c,d)=3a * 1_(F irreducible)`.
+`3^4-3^2=72`.
 
-Therefore, in `F_p`,
+Every quartic factor contributes four distinct exact period-four points. Hence
 
-`sum_(c,d)J_a(c,d)=3a N_a(p)`.
+`nu_4(F) <= 18`.
 
-Equivalently, if `J_a^can` is the canonical polynomial function,
+Quartic deletion is therefore finite:
 
-`sum_(c,d)J_a(c,d)=[c^(p-1)d^(p-1)]J_a^can`.
+`1_(nu_4=0)=sum_(j=0)^18 (-1)^j binom(nu_4,j)`.
 
-A nonzero formula for this coefficient would prove the function-field crown directly. Initial small-prime determinant factorizations do not yet exhibit a stable coefficient recurrence.
+The quartic factorial moments are not yet proved. Published dynatomic work establishes generic irreducibility in broad polynomial families and wreath-product monodromy in important cases, but a primary theorem whose explicit hypotheses directly cover the centered two-parameter cubic family has not yet been verified. No full quartic monodromy theorem is claimed in this ledger.
 
-## 9. Ranked open fronts
+## 10. Current distance to the function-field crown
 
-1. **Determinant top coefficient.** Find a constant-term, resultant, recurrence, or divided-hook formula for `[c^(p-1)d^(p-1)]J_a^can`.
-2. **Finite cubic factorial sieve.** Determine the generic monodromy and top-dimensional components of the fibre powers of the degree-eight cubic map, then combine them with the quadratic deletion weight.
-3. **Mixed roughness sieve.** Use exact mixed factorial moments rather than first-moment union bounds to pass degree five and beyond.
-4. **O(p) geometric sharpening.** Remove weight-three cohomology from the completed degree-2, 3, and 4 surfaces; this improves constants but does not alone reach irreducibility.
-5. **Increasing-order transfer from RQM.** This remains the original integer Fortune wall.
+The theorem is not yet proved.
 
-## 10. Immediate next action
+Closed:
 
-The next controlled task is the generic monodromy of the degree-eight cubic orientation eliminant. If its geometric Galois group is S_8 or another explicitly transitive group, the cubic factorial moments become a finite Chebotarev calculation and exact cubic deletion can be completed. In parallel, the determinant coefficient remains the higher-upside direct route.
+- linear factors;
+- every quadratic factor, including multiplicities;
+- every cubic factor, including multiplicities and mixed quadratic-cubic configurations;
+- first signed and unsigned quartic incidence;
+- a positive rough-through-four sector;
+- a finite quartic inclusion-exclusion bound.
+
+Open:
+
+1. complete quartic factorial moments and their mixed moments with degrees two and three;
+2. a mechanism extending roughness through all degrees up to `p/3`, rather than one fixed degree at a time;
+3. or, preferably, evaluation of the determinant top coefficient, which bypasses the factor sieve entirely.
+
+## 11. Ranked next routes
+
+1. **Direct determinant coefficient.** Find a constant-term, resultant, or recurrence formula for `[c^(p-1)d^(p-1)]J_a^can`.
+2. **Quartic monodromy.** Prove that the period-four cycle cover for the centered cubic family has maximal cycle/root monodromy, either by checking a published theorem's hypotheses or by a direct specialization and branch-cycle proof.
+3. **Quartic mixed sieve.** Once monodromy is known, compute the finite mixed factorial table and delete quartics exactly.
+4. **Growing-degree compression.** Find a uniform cycle-index, trace formula, or determinant identity that controls all degrees through `p/3` without repeating fixed-degree geometry indefinitely.
+5. **Integer Fortune.** The increasing-order transfer remains a separate major obstruction.
