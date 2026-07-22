@@ -1,7 +1,9 @@
 # Cartier weighted filtration: dominant-block theorem and exact remaining gap
 
+> **Superseded in part on 2026-07-22.** The dominant no-identity determinant theorem below remains exact. The filtered-minor lemma and the proposed full survivor-support law are refuted at `p=29`; see `CARTIER_SUBSTITUTION_MINOR_IDENTITY.md`, `P29_CARTIER_SUPPORT_COUNTEREXAMPLE.md`, and `D1_PUSH_PHASE_Y_STATUS_20260722.md`.
+
 **Date:** 2026-07-22  
-**Status:** exact theorem for the dominant Cartier block, followed by a precise reduction of the empirical survivor-support law to filtered minors. The full support law remains open.
+**Status:** exact theorem for the dominant Cartier block. The original reduction to a uniform support lemma is retained below for provenance, but that lemma is now known to be false.
 
 ## 1. The Cartier minor and the `w`-decomposition
 
@@ -17,8 +19,9 @@ Write
 
 The binomial expansion of `F^(p-1)` gives, for rows `1<=u<=p-1`,
 
-`H_(u,v)=sum_(w=1)^min(4,u) (-1)^(p-1-u+w)
-           [X^(pw-v)]G(X)^(p-1-u+w).`
+`H_(u,v)=sum_(w=1)^min(4,u) (-1)^(p-1-u+w)`
+
+`           [X^(pw-v)]G(X)^(p-1-u+w).`
 
 The integer `w=u-m` records how many fewer `X^p` factors are used than the row index. Degree three of `G` forces `w<=4`.
 
@@ -46,9 +49,11 @@ This is exactly the `w=1` Cartier block after reversing the original row and col
 
 For every prime `p>=5`,
 
-`boxed( det A_p(G)
-       =-c^(p(p-3)/2)d^(p-3)
-          ((p-3)ad^2-c^3). )`
+`boxed( det A_p(G)`
+
+`       =-c^(p(p-3)/2)d^(p-3)`
+
+`          ((p-3)ad^2-c^3). )`
 
 The ordering convention is the increasing order just stated. Reversing rows or columns changes only the global sign.
 
@@ -80,14 +85,17 @@ The same calculation can alternatively be written as a falling-factorial alterna
 
 and the determinant reduces to the two boundary alternants above.
 
-## 3. Weighted consequence
+## 3. Weighted consequence for the no-identity block
 
 Under `c->tc`, `d->t^2d`, Theorem CWFR.1 becomes
 
-`det A_p(G_t)
- =-c^(p(p-3)/2)d^(p-3)
-   t^((p^2+p-6)/2)
-   ((p-3)ad^2 t-c^3).`
+`det A_p(G_t)`
+
+` =-c^(p(p-3)/2)d^(p-3)`
+
+`   t^((p^2+p-6)/2)`
+
+`   ((p-3)ad^2 t-c^3).`
 
 Therefore
 
@@ -109,7 +117,7 @@ Since
 
 `(p^2+p-4)/2 < (p^2-1)/2+(p-1),`
 
-the entire dominant block already obeys the desired survivor-support law. The unexplained cancellation is not inside the no-identity `w=1` determinant.
+the entire dominant no-identity block obeys the proposed support bound. The `p=29` counterexample comes from an identity-selected minor, not this evaluated block.
 
 ## 4. Identity-selected minors
 
@@ -139,49 +147,68 @@ Its filtration loss and polynomial degree satisfy
 
 `2r=m+(p-4)w-v+4.`
 
-A nonzero alternant requires enough independent falling-factorial degrees `m`. The already-proved grading law imposes, for an orthogonality survivor,
+The already-proved grading law imposes, for an orthogonality survivor,
 
 `sum i = 1 mod (p-1)/2.`
 
-Thus the full empirical support statement is reduced to the following finite combinatorial theorem.
+## 5. Original filtered-minor lemma — refuted
 
-### Filtered-minor lemma — remaining gap
+The original proposed statement was:
 
-For every prime `p>=5`, every admissible identity subset `S`, and every nonzero falling-factorial alternant arising from the `w=1,2,3,4` terms with
+> For every prime `p>=5`, every admissible identity subset `S`, and every nonzero falling-factorial alternant arising from the `w=1,2,3,4` terms with `sum i = 1 mod (p-1)/2`, its total `(1,2)`-weight is at most `(p^2-1)/2`.
 
-`sum i = 1 mod (p-1)/2,`
+The individual-alternant version was first refuted at `p=23`: a weight-`286` assignment has nonzero alternant and nonzero individual contribution.
 
-its total `(1,2)`-weight is at most
+The strengthened grouped-coefficient version is also false. At `p=29`, omitted falling-factorial row values
 
-`(p^2-1)/2.`
+`{1,2,4,5,7,8}`
 
-Because the next possible survivor weight differs by exactly `p-1`, any strict degree bound below that next level suffices.
+and `I=43` give the orthogonality survivor
 
-## 5. Why this is a genuine reduction
+`a^43 c^224 d^112`
 
-The previous formulation involved a symbolic determinant with exponentially many terms. The new formulation separates it into:
+of weight `448>420`. The identity minor has coefficient `7 mod 29`, and after cofactor and row signs contributes `22 mod 29`.
 
-1. a completely evaluated dominant block;
-2. identity-selected minors of a single coefficient array;
-3. a falling-factorial independence condition;
-4. one congruence on the total cubic-factor count.
+An independent full-determinant Fourier extraction proves
 
-The higher `w=2,3,4` pieces are lower in the filtration for fixed row and column data. Exact computations through the committed symbolic range show that they do not determine the maximal weighted degree; their possible role is only in coefficient cancellation at a weight already present in the identity/`w=1` filtration.
+`[c^224 d^112]det(I-H)=22a chi_29(a).`
 
-The remaining problem is therefore a modular alternant-vanishing statement, not an unconstrained determinant expansion.
+The same coefficient occurs with `w=1` alone. Hence neither the dominant identity-selected support statement nor the full `w=1,2,3,4` support law is valid.
 
-## 6. Machine audit
+## 6. Correct algebraic replacement
 
-The audit constructs `A_p(G)` iteratively, computes its determinant over `F_p`, and checks CWFR.1 at four deterministic parameter triples for every prime `5<=p<=199`.
+For a fixed identity subset and degree set `M`, the factorial-weighted signed scalar is exactly a minor of the substitution matrix
 
-All `176` determinant comparisons pass exactly. No floating point or symbolic interpolation is used.
+`B_(q,m)=1/m! [X^q](X+X^3)^m.`
 
-## 7. Epistemic classification
+This follows from the matrix factorization and Cauchy-Binet identity proved in `CARTIER_SUBSTITUTION_MINOR_IDENTITY.md`.
+
+It explains the complete grouped cancellation in the selected `p=17,19,23` examples, but the relevant substitution minors become nonzero at `p=29`.
+
+## 7. Machine audits
+
+The original audit constructs `A_p(G)` iteratively, computes its determinant over `F_p`, and checks CWFR.1 at four deterministic parameter triples for every prime `5<=p<=199`.
+
+All `176` determinant comparisons pass exactly.
+
+The superseding audits additionally verify:
+
+- `p=17`: `476` assignments in `2` degree sets, both grouped scalars zero;
+- `p=19`: `7,054` assignments in `5` degree sets, all grouped scalars zero;
+- `p=23`: `332,192` assignments in `18` degree sets, all grouped scalars zero;
+- `p=29`: `2,166,022,375` assignments in `2,177` degree sets, `15` nonzero grouped scalars, identity-minor coefficient `7 mod 29`;
+- complete `p=29` coefficient `22a chi_29(a)` by exact Fourier inversion in two quadratic field models.
+
+No floating point is used.
+
+## 8. Epistemic classification
 
 - `w`-decomposition: exact binomial expansion.
-- Dominant-block determinant formula: exact theorem.
-- Weighted degree and orthogonality consequence: exact.
+- Dominant no-identity determinant formula: exact theorem.
+- Weighted degree and no-identity orthogonality consequence: exact.
 - Identity-selected falling-factorial reduction: exact.
-- Filtered-minor lemma: open.
-- Evaluation/nonvanishing of the Cartier survivor sum: open.
+- Substitution-minor/Cauchy-Binet formula: exact.
+- Original filtered-minor lemma: refuted.
+- Full proposed Cartier support law: refuted at `p=29`.
+- Evaluation or nonvanishing of the complete survivor sum: open.
 - General function-field crown: open.
