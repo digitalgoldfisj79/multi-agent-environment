@@ -1,0 +1,24 @@
+{
+  "status": "PASS",
+  "method": "Exact exhaustive F_p character sums; no floating point.",
+  "prime_count": 44,
+  "max_prime": 199,
+  "checks": [
+    "B0",
+    "Bchi",
+    "Dplus0",
+    "Dpluschi",
+    "Dminus0",
+    "Dminuschi",
+    "U0"
+  ],
+  "all_checks_pass_for_every_prime": true,
+  "sample_rows": [
+    {"p":5,"B0":0,"Bchi":-4,"Dplus0":4,"Dpluschi":8,"Dminus0":-4,"Dminuschi":4,"U0":-9,"U1":-10},
+    {"p":7,"B0":0,"Bchi":-6,"Dplus0":0,"Dpluschi":-4,"Dminus0":-12,"Dminuschi":-4,"U0":15,"U1":8},
+    {"p":11,"B0":3,"Bchi":9,"Dplus0":0,"Dpluschi":12,"Dminus0":-28,"Dminuschi":-12,"U0":-21,"U1":-4},
+    {"p":13,"B0":-3,"Bchi":-11,"Dplus0":12,"Dpluschi":-16,"Dminus0":4,"Dminuschi":-36,"U0":-25,"U1":-32},
+    {"p":17,"B0":3,"Bchi":-15,"Dplus0":-12,"Dpluschi":20,"Dminus0":16,"Dminuschi":48,"U0":35,"U1":34},
+    {"p":19,"B0":-3,"Bchi":-17,"Dplus0":24,"Dpluschi":-20,"Dminus0":20,"Dminuschi":20,"U0":-37,"U1":-36}
+  ]
+}
