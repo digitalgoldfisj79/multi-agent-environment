@@ -1,0 +1,20 @@
+{
+  "status": "PASS",
+  "statement": "For every conjugacy type of S_p and every hook, chi_(p-1-i)=sgn*chi_i. The central-hook character vanishes on every odd conjugacy type.",
+  "range": "all prime p from 5 through 47",
+  "rows": [
+    {"prime":5,"conjugacy_type_count":7,"odd_conjugacy_type_count":3,"maximum_absolute_hook_character":6,"hook_sign_pairing_verified":true,"central_hook_odd_vanishing_verified":true},
+    {"prime":7,"conjugacy_type_count":15,"odd_conjugacy_type_count":7,"maximum_absolute_hook_character":20,"hook_sign_pairing_verified":true,"central_hook_odd_vanishing_verified":true},
+    {"prime":11,"conjugacy_type_count":56,"odd_conjugacy_type_count":27,"maximum_absolute_hook_character":252,"hook_sign_pairing_verified":true,"central_hook_odd_vanishing_verified":true},
+    {"prime":13,"conjugacy_type_count":101,"odd_conjugacy_type_count":49,"maximum_absolute_hook_character":924,"hook_sign_pairing_verified":true,"central_hook_odd_vanishing_verified":true},
+    {"prime":17,"conjugacy_type_count":297,"odd_conjugacy_type_count":146,"maximum_absolute_hook_character":12870,"hook_sign_pairing_verified":true,"central_hook_odd_vanishing_verified":true},
+    {"prime":19,"conjugacy_type_count":490,"odd_conjugacy_type_count":242,"maximum_absolute_hook_character":48620,"hook_sign_pairing_verified":true,"central_hook_odd_vanishing_verified":true},
+    {"prime":23,"conjugacy_type_count":1255,"odd_conjugacy_type_count":623,"maximum_absolute_hook_character":705432,"hook_sign_pairing_verified":true,"central_hook_odd_vanishing_verified":true},
+    {"prime":29,"conjugacy_type_count":4565,"odd_conjugacy_type_count":2274,"maximum_absolute_hook_character":40116600,"hook_sign_pairing_verified":true,"central_hook_odd_vanishing_verified":true},
+    {"prime":31,"conjugacy_type_count":6842,"odd_conjugacy_type_count":3411,"maximum_absolute_hook_character":155117520,"hook_sign_pairing_verified":true,"central_hook_odd_vanishing_verified":true},
+    {"prime":37,"conjugacy_type_count":21637,"odd_conjugacy_type_count":10801,"maximum_absolute_hook_character":9075135300,"hook_sign_pairing_verified":true,"central_hook_odd_vanishing_verified":true},
+    {"prime":41,"conjugacy_type_count":44583,"odd_conjugacy_type_count":22267,"maximum_absolute_hook_character":137846528820,"hook_sign_pairing_verified":true,"central_hook_odd_vanishing_verified":true},
+    {"prime":43,"conjugacy_type_count":63261,"odd_conjugacy_type_count":31602,"maximum_absolute_hook_character":538257874440,"hook_sign_pairing_verified":true,"central_hook_odd_vanishing_verified":true},
+    {"prime":47,"conjugacy_type_count":124754,"odd_conjugacy_type_count":62338,"maximum_absolute_hook_character":8233430727600,"hook_sign_pairing_verified":true,"central_hook_odd_vanishing_verified":true}
+  ]
+}
