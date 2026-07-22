@@ -1,7 +1,15 @@
 # Fourier–Airy compression and the exact cyclic-convolution obstruction
 
 **Date:** 2026-07-22  
-**Status:** exact Fourier calculation proved; crown remains open. The remaining effectivity theorem is sharpened from a general toric direct-image problem to a characteristic-p cyclic-convolution problem for a rank-two cubic Airy sheaf.
+**Status:** **partly superseded.** The Fourier calculation and rank-two cubic Airy transform remain exact. The pre-cohomology Cyclic Airy Effectivity Lemma and diagonal-fixed-locus strategy in this note are superseded by:
+
+- `CYCLIC_AIRY_FORMALISM_AND_NO_GO.md`;
+- `HOOK_COHOMOLOGY_EFFECTIVITY_LEDGER.md`;
+- `ADAMS_PUSHFORWARD_NO_GO.md`.
+
+The correct cyclic class is the virtual difference `e_1-e_zeta`, not a single nontrivial eigensummand. Frobenius traces localise on a degree-p field-trace fibre rather than the geometric diagonal. No `O(p)` effective local-system model exists before t/v cohomology. The crown remains open at the after-pushforward effectivity theorem.
+
+The remainder of this file is retained as the historical derivation of the Airy transform and the provisional target that it motivated.
 
 ## 1. Root sheaf and Fourier transform
 
@@ -33,7 +41,7 @@ This is a cubic Airy phase. Its compactly supported cohomology in `x` has generi
 
 Away from the standard exceptional loci, `FT_v(R_q)` is a cubic Airy perverse sheaf of generic rank `2`.
 
-This is an exact cancellation-before-cohomology compression of the original degree-p root cover.
+This is an exact Fourier compression of the original degree-p root cover. It does not, by itself, provide effective cyclic-power cancellation.
 
 ## 2. Why rank two does not immediately prove the crown
 
@@ -49,7 +57,7 @@ Fourier transform does not commute with tensor products or Adams operations. It 
 
 `FT_v(psi^p R_q)`
 
-is not `psi^p(FT_v R_q)` in the ordinary tensor category. It is a cyclic-isotypic summand of the p-fold additive convolution power of the rank-two Airy object.
+is not `psi^p(FT_v R_q)` in the ordinary tensor category. It is represented by the difference of the trivial and a nontrivial cyclic eigensummand of the p-fold additive convolution power, with the exact Tate twist and shift recorded in `CYCLIC_AIRY_FORMALISM_AND_NO_GO.md`.
 
 The tempting substitution
 
@@ -59,31 +67,24 @@ would give an immediate `O(p)` rank bound because for rank two
 
 `psi^p(V)=Sym^p(V)-det(V) Sym^(p-2)(V)`
 
-has total effective rank `2p`. But this substitution is unjustified: it uses the tensor Adams operation after a transform that changes tensor into convolution.
+has total effective rank `2p`. This substitution is unjustified: it uses the tensor Adams operation after a transform that changes tensor into convolution.
 
-## 3. Exact sharpened target
+## 3. Historical provisional target
 
-Let `A_q=FT_v(R_q)`, a rank-two cubic Airy perverse sheaf. Let `Cyc_p^*(A_q)` denote the virtual cyclic-isotypic object obtained from the p-fold additive convolution under the action of the cyclic permutation group `C_p`, with character `1-psi` matching
+The provisional Cyclic Airy Effectivity Lemma sought an `O(p)` effective model for the cyclic convolution before q-line cohomology. The later audit proved that formulation too strong:
 
-`Ind_(C_p)^(S_p)(1-psi)=Lambda_p`.
+- the generic p-cycle local-system class has minimum positive-plus-negative effective rank `2^(p-1)`;
+- its canonical fixed-q hook cohomology has total actual middle dimension
+  `((2p-3)2^(p-1)+3)/p`;
+- the geometric cyclic diagonal computes the wrong fixed-point problem for arithmetic Frobenius traces.
 
-The missing theorem can be stated as follows.
-
-### Cyclic Airy Effectivity Lemma (CAEL)
-
-For the family `A_q`, the semisimplified numerator-plus-denominator rank and total q-line conductor of
-
-`Cyc_p^*(A_q)`
-
-and its quadratic Kummer twist are `O(p)` with an absolute implied constant.
-
-CAEL implies the required `O(sqrt(p))` bounds after division by the normalizing factor `p`, hence the function-field crown after finite certification.
+The surviving target is after-pushforward cancellation between the even and odd hook cohomologies, leaving only `O(p)` uncancelled q-line Frobenius constituents.
 
 ## 4. Characteristic-p opportunity and obstruction
 
-The exponent of the cyclic power equals the characteristic. This is not a generic p-fold convolution problem. The diagonal and Frobenius graph in the p-fold addition map can coalesce inseparably, so a characteristic-p cyclic-power or Adams--Riemann--Roch formula might reduce `Cyc_p^*(A_q)` to a bounded number of Frobenius pullbacks and vanishing-cycle corrections.
+The exponent of the cyclic power equals the characteristic, but standard cyclic localisation does not collapse the arithmetic trace. Fixed points of `Frob composed tau` are parameterised by the degree-p field-trace fibre, whereas fixed points of `tau` alone form the diagonal supported over zero.
 
-No theorem located in the checked Fourier--Deligne and convolution literature directly supplies that identity with quantitative effective ranks. Standard Fourier--Deligne theory controls the transform, and convolution categories make convolution into a tensor operation, but neither statement by itself bounds the effective size of the characteristic-p cyclic isotypic summand.
+Likewise, moving Adams through compact support changes the point set from `U(F_Q)` to `U(F_(Q^p))`. The discrepancy is global and cannot be absorbed into a finite boundary or tangent correction.
 
 ## 5. Relation to the toric five-term equation
 
@@ -91,15 +92,12 @@ The Laurent equation
 
 `q(u^(2p)+1)+u^(p+3)+u^(p-3)+v u^p=0`
 
-encodes the same transformed object after Kummer descent `x=u+u^(-1)`. The Fourier calculation shows that the central `p`-dependence is already absorbed by inverse Frobenius in the linear coefficient of a cubic phase. Therefore the five-term toric support should not be attacked by a generic Newton-polytope bound. The correct object is the characteristic-p cyclic convolution of a rank-two Airy sheaf.
+encodes the same transformed object after Kummer descent `x=u+u^(-1)`. The Fourier calculation shows that the degree-p term is absorbed geometrically into an inverse-Frobenius linear coefficient of a cubic phase. Generic Newton-polytope estimates therefore remain inappropriate.
 
-## 6. Strategic conclusion
+However, the exact audits show that the Airy transform is an alternative presentation of the same exponential virtual cancellation, not an automatic effective reduction.
 
-This route is not closed. It has produced a material new reduction:
+## 6. Revised strategic conclusion
 
-- before: prove effectivity for a rank-zero two-dimensional toric direct image with apparent degree p;
-- now: prove effectivity for one explicitly defined cyclic-isotypic p-fold convolution of a rank-two cubic Airy family.
+The Airy calculation remains useful, but the pre-cohomology Cyclic Airy route is closed. A future continuation must act on the already-integrated q-family and prove an explicit parity-reversing pairing between hook cohomologies, or an equivalent cancellation of all but `O(p)` semisimple Frobenius factors.
 
-The theorem-level obstruction is CAEL, specifically the absence of a characteristic-p formula that converts the cyclic convolution summand into an effective complex of total rank `O(p)` before taking q-line cohomology.
-
-Any future continuation should begin with cyclic power operations in the convolution Tannakian category, not with generic toric bounds or hook-by-hook cohomology.
+Do not resume the single-projector, geometric-diagonal, or coherent Adams--Riemann--Roch variants without a materially new theorem that overcomes the exact no-go results cited above.
