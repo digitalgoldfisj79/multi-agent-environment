@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "method": "Exact integer arithmetic from the proved fixed-q inertia and Grothendieck--Ogg--Shafarevich formulas.",
+  "results": [
+    {"p":5,"total_rank":16,"total_swan":6,"total_h_c_1":23,"even_h_c_1":11,"odd_h_c_1":12,"virtual_h_c_1":-1},
+    {"p":7,"total_rank":64,"total_swan":36,"total_h_c_1":101,"even_h_c_1":49,"odd_h_c_1":52,"virtual_h_c_1":-3},
+    {"p":11,"total_rank":1024,"total_swan":744,"total_h_c_1":1769,"even_h_c_1":881,"odd_h_c_1":888,"virtual_h_c_1":-7},
+    {"p":13,"total_rank":4096,"total_swan":3150,"total_h_c_1":7247,"even_h_c_1":3619,"odd_h_c_1":3628,"virtual_h_c_1":-9},
+    {"p":17,"total_rank":65536,"total_swan":53970,"total_h_c_1":119507,"even_h_c_1":59747,"odd_h_c_1":59760,"virtual_h_c_1":-13},
+    {"p":19,"total_rank":262144,"total_swan":220752,"total_h_c_1":482897,"even_h_c_1":241441,"odd_h_c_1":241456,"virtual_h_c_1":-15},
+    {"p":23,"total_rank":4194304,"total_swan":3647220,"total_h_c_1":7841525,"even_h_c_1":3920753,"odd_h_c_1":3920772,"virtual_h_c_1":-19},
+    {"p":29,"total_rank":268435456,"total_swan":240666270,"total_h_c_1":509101727,"even_h_c_1":254550851,"odd_h_c_1":254550876,"virtual_h_c_1":-25},
+    {"p":31,"total_rank":1073741824,"total_swan":969831324,"total_h_c_1":2043573149,"even_h_c_1":1021786561,"odd_h_c_1":1021786588,"virtual_h_c_1":-27}
+  ]
+}
