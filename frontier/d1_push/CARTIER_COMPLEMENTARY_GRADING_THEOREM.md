@@ -1,7 +1,9 @@
 # Cartier complementary torus grading and the one-level tail
 
+> **Superseded in part on 2026-07-22.** The grading formulas `CCG.1`–`CCG.3` remain exact. The proposed support lemma `CT1-w1`, equivalently `beta<=gamma+2` for every nonzero complementary-minor product, is refuted at `p=223`. See `P223_CT1_W1_COUNTEREXAMPLE.md` and `p223_ct1_w1_counterexample_verify_results.json`.
+
 **Date:** 2026-07-22  
-**Status:** exact arithmetic theorem for every dominant `w=1` Cauchy-Binet term. It explains why the first possible support beyond the old boundary is exactly the single level observed in the complete ledgers. It reduces `CT1-w1` to the integer inequality `beta<=gamma+2`.
+**Status:** exact arithmetic grading theorem for every dominant `w=1` Cauchy-Binet term. The former reduction to `CT1-w1` is retained for provenance, but that lemma is now false.
 
 ## 1. Complementary notation
 
@@ -125,11 +127,11 @@ and weight
 
 `boxed( W=(p-1)(p+3)/2. )`
 
-This is exactly the single extra level found at every audited prime `29<=p<=47`.
+This is exactly the single extra level found in the complete ledgers for `29<=p<=47`.
 
-## 5. Corrected support lemma
+## 5. Former corrected support lemma — refuted
 
-The complementary inequality from `CT1-w1` is
+The proposed complementary inequality was
 
 `sum R<=3sum E+2p.`
 
@@ -141,52 +143,70 @@ and
 
 `2sum E=gamma(p-1)-2`,
 
-one obtains
+this is equivalent to
 
-`beta(p-1)<=gamma(p-1)+2(p-1)`.
+`boxed( beta<=gamma+2. )`
 
-Thus:
+The statement was called `CT1-w1`.
 
-### Corollary CCG.4 — integer form of CT1-w1
+It is false. At `p=223`,
 
-`boxed( CT1-w1 is equivalent to beta<=gamma+2. )`
+`E={5,7,8,12,13,14,16,17,18}`
 
-Equivalently, the dominant corrected support theorem says that the nonzero product of the two complementary minors excludes all torus triples with
+and
 
-`beta>=gamma+4.`
+`R={49,71,94,119,122,126,130,141,148,220}`
 
-The `p=29` counterexample has `beta=gamma+2` and is therefore extremal.
+give
 
-## 6. Structural consequence
+`gamma=1`, `beta=5=gamma+4`,
 
-The one-level tail pattern is not merely a numerical spacing artefact.
+while
 
-- Torus grading forces support levels to differ from the old boundary by integral multiples of `p-1`.
-- The parity equation forces the excess coordinate `beta-gamma` to be even.
-- Therefore the corrected bound `B_1` permits exactly one new level and no intermediate level.
+`det(P^(-1))_(R,E union {0})=86 mod 223`
 
-What remains open is not the spacing but the exclusion of `beta-gamma>=4` by the product
+and
 
-`det(P^(-1))_(R,E union {0}) det(U)_(R,E union {p-3}).`
+`det(U)_(R,E union {220})=169 mod 223`.
 
-## 7. New proof target
+The original `213x213` Cauchy-Binet determinant product is independently `114 mod 223`, also nonzero.
 
-The dominant Route-1 gate can now be stated without degree sums:
+Thus an individual dominant term can occur at the second extra level
 
-> If the two explicit complementary minors are nonzero modulo `p` and the torus grading holds, prove `beta-gamma<=2`.
+`W=(p-1)(p+5)/2`,
 
-The inverse-substitution entries are signed Raney numbers:
+one full multiple of `p-1` above the former corrected boundary.
 
-`|U_(s+2h,s)|=s/(s+3h) binom(s+3h,h),`
+## 6. What remains exact and what changes
 
-counting forests of `s` full ternary trees with `h` internal vertices and `s+2h` leaves. This suggests a nonintersecting-forest interpretation of the remaining minor inequality.
+The grading still proves:
+
+- support levels differ from the old boundary by integral multiples of `p-1`;
+- `beta-gamma` is even;
+- the first extra level is `beta=gamma+2`;
+- the second extra level is `beta=gamma+4`.
+
+What fails is the claim that nonzero individual complementary-minor products exclude the second and higher levels.
+
+The `p=223` witness does not determine the **fully grouped** coefficient. Cancellation may still occur after summing degree sets, identity sets, and the four `w` blocks.
+
+## 7. Correct replacement target
+
+Route 1 can no longer proceed by bounding each Cauchy-Binet product separately. The correct object is the fully assembled torus coefficient:
+
+1. sum all degree sets `M` for each identity set;
+2. sum all identity sets contributing to the same monomial;
+3. assemble `w=1,2,3,4` before asserting support or nonvanishing.
+
+Any future support theorem must be a theorem about that complete assembly.
 
 ## 8. Epistemic classification
 
 - Complementary degree formulas: exact.
 - Integrality of `gamma`: exact consequence of torus orthogonality.
 - Grading simplex and excess formula: exact.
-- Explanation of the single allowed extra level under CT1: exact.
-- Equivalence of CT1-w1 and `beta<=gamma+2`: exact.
-- Nonintersecting-forest proof of the minor bound: proposed next mechanism, not yet proved.
-- Full CT1 and d=1 crown: open.
+- Spacing of possible filtration levels: exact.
+- `CT1-w1` / `beta<=gamma+2`: refuted at `p=223`.
+- Fully grouped dominant coefficient at the witness weight: open.
+- Full Cartier support and nonvanishing: open.
+- Function-field `d=1` crown: open.
