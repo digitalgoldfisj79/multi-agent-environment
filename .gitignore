@@ -1,0 +1,4 @@
+# Transient workflow infrastructure (isolated agent worktrees, caches)
+.claude/
+__pycache__/
+*.pyc
