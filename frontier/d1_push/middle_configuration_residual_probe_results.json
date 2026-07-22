@@ -1,0 +1,18 @@
+{
+  "status": "PASS",
+  "scope": "Exact finite diagnostic after subtracting the proved Kummer, pair and D ledgers; no general-p bound claimed.",
+  "max_prime": 31,
+  "results": [
+    {"p":5,"rows":[{"A":1,"generic_cells":3,"generic_irreducibles":4,"E_total":-5,"E_extremal":-5,"E_middle":0},{"A":-1,"generic_cells":3,"generic_irreducibles":2,"E_total":5,"E_extremal":5,"E_middle":0}]},
+    {"p":7,"rows":[{"A":1,"generic_cells":4,"generic_irreducibles":4,"E_total":0,"E_extremal":0,"E_middle":0},{"A":-1,"generic_cells":6,"generic_irreducibles":8,"E_total":-14,"E_extremal":12,"E_middle":-26}]},
+    {"p":11,"rows":[{"A":1,"generic_cells":10,"generic_irreducibles":14,"E_total":-44,"E_extremal":36,"E_middle":-80},{"A":-1,"generic_cells":8,"generic_irreducibles":6,"E_total":22,"E_extremal":-2,"E_middle":24}]},
+    {"p":13,"rows":[{"A":1,"generic_cells":11,"generic_irreducibles":8,"E_total":39,"E_extremal":-10,"E_middle":49},{"A":-1,"generic_cells":11,"generic_irreducibles":6,"E_total":65,"E_extremal":-12,"E_middle":77}]},
+    {"p":17,"rows":[{"A":1,"generic_cells":15,"generic_irreducibles":18,"E_total":-51,"E_extremal":0,"E_middle":-51},{"A":-1,"generic_cells":15,"generic_irreducibles":6,"E_total":153,"E_extremal":2,"E_middle":151}]},
+    {"p":19,"rows":[{"A":1,"generic_cells":18,"generic_irreducibles":20,"E_total":-38,"E_extremal":-60,"E_middle":22},{"A":-1,"generic_cells":16,"generic_irreducibles":16,"E_total":0,"E_extremal":10,"E_middle":-10}]},
+    {"p":23,"rows":[{"A":1,"generic_cells":20,"generic_irreducibles":12,"E_total":184,"E_extremal":36,"E_middle":148},{"A":-1,"generic_cells":22,"generic_irreducibles":20,"E_total":46,"E_extremal":-8,"E_middle":54}]},
+    {"p":29,"rows":[{"A":1,"generic_cells":27,"generic_irreducibles":36,"E_total":-261,"E_extremal":-51,"E_middle":-210},{"A":-1,"generic_cells":27,"generic_irreducibles":26,"E_total":29,"E_extremal":7,"E_middle":22}]},
+    {"p":31,"rows":[{"A":1,"generic_cells":28,"generic_irreducibles":22,"E_total":186,"E_extremal":-10,"E_middle":196},{"A":-1,"generic_cells":30,"generic_irreducibles":38,"E_total":-248,"E_extremal":112,"E_middle":-360}]}
+  ],
+  "observed_max_abs_E_middle_over_p": 11.612903225806452,
+  "interpretation": "The primitive middle sector is empirically linear rather than quadratic in p, but this table is not a proof of an absolute Cp bound."
+}
