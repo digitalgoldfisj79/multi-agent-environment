@@ -1,0 +1,38 @@
+{
+  "status": "PASS",
+  "method": "Direct evaluation of the selected 22x22 dominant-w=1 identity minor at all 840 nonzero elements of two independent F_(29^2) models, followed by exact multiplicative Fourier extraction of the a^43 coefficient. No assignment or degree-set enumeration.",
+  "prime": 29,
+  "omitted_n": [1, 2, 4, 5, 7, 8],
+  "identity_rows": [21, 22, 24, 25, 27, 28],
+  "target": {
+    "a_degree": 43,
+    "c_degree": 224,
+    "d_degree": 112,
+    "weight": 448,
+    "support_boundary": 420
+  },
+  "field_models": [
+    {
+      "field": "F_29[s]/(s^2-2)",
+      "nonsquare": 2,
+      "multiplicative_order": 840,
+      "a_degree_bound": 379,
+      "coefficient_encoded": 7,
+      "coefficient_real": 7,
+      "coefficient_imag": 0
+    },
+    {
+      "field": "F_29[s]/(s^2-3)",
+      "nonsquare": 3,
+      "multiplicative_order": 840,
+      "a_degree_bound": 379,
+      "coefficient_encoded": 7,
+      "coefficient_real": 7,
+      "coefficient_imag": 0
+    }
+  ],
+  "identity_minor_coefficient_mod_29": 7,
+  "identity_expansion_sign": -1,
+  "signed_cartier_contribution_mod_29": 22,
+  "a_2_signed_check_mod_29": 14
+}
