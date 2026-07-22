@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "method": "Exact character-polynomial arithmetic over every conjugacy class; no sampling or floating point.",
+  "results": [
+    {"p":5,"cycle_types_checked":7,"dimension_checks":true,"failures":[],"failure_count":0,"all_checks_pass":true},
+    {"p":7,"cycle_types_checked":15,"dimension_checks":true,"failures":[],"failure_count":0,"all_checks_pass":true},
+    {"p":11,"cycle_types_checked":56,"dimension_checks":true,"failures":[],"failure_count":0,"all_checks_pass":true},
+    {"p":13,"cycle_types_checked":101,"dimension_checks":true,"failures":[],"failure_count":0,"all_checks_pass":true},
+    {"p":17,"cycle_types_checked":297,"dimension_checks":true,"failures":[],"failure_count":0,"all_checks_pass":true}
+  ]
+}
