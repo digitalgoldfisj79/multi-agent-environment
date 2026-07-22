@@ -68,7 +68,9 @@ def audit_class(p: int, a: int) -> dict:
     satisfying_roots = 0
     translation_orbits = 0
 
-    # Each orbit has a unique representative with trace zero.
+    # Each additive orbit of degree-three elements has one trace-zero element.
+    # Dividing the trace-zero element count by three counts the corresponding
+    # Frobenius orbits/irreducible cubics.
     for s0 in range(p):
         for n0 in range(p):
             if irreducible_cubic(p, 0, s0, n0):
@@ -132,7 +134,7 @@ def audit_class(p: int, a: int) -> dict:
     incidence = sum(factors_per_member.values())
     expected = (p * p - 1) // 3
     assert incidence == expected
-    assert satisfying_roots == p * expected
+    assert satisfying_roots == 3 * expected
     assert translation_orbits == expected
 
     distribution = Counter(
