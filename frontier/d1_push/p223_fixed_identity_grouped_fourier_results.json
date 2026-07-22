@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "prime": 223,
+  "identity_set_E": [5, 7, 8, 12, 13, 14, 16, 17, 18],
+  "target_sum_R": 1220,
+  "fourier_evaluations": 49728,
+  "determinant_polynomial_degree_bound": 2175,
+  "multiplicative_order": 49728,
+  "grouped_coefficient_real": 114,
+  "grouped_coefficient_imag": 0,
+  "nonzero": true,
+  "job_id": "6a61474513e6ef894d54c612"
+}
