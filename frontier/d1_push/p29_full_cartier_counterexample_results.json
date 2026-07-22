@@ -1,0 +1,60 @@
+{
+  "status": "PASS",
+  "prime": 29,
+  "support_boundary": 420,
+  "target": {
+    "c_degree": 224,
+    "d_degree": 112,
+    "weight": 448,
+    "above_boundary_by": 28
+  },
+  "field_order": 841,
+  "multiplicative_order": 840,
+  "exact_degree_bounds": {
+    "full_w1_to_w4_t_degree": 550,
+    "full_w1_to_w4_c_degree": 406,
+    "w1_only_t_degree": 550,
+    "w1_only_c_degree": 380
+  },
+  "no_fourier_aliasing": true,
+  "method": "Exact two-stage multiplicative Fourier inversion after c=c0*t and d=t^2. The t transform extracts weight 448 and the c0 transform extracts c-degree 224. Every evaluation is a 28x28 determinant over F_29^2.",
+  "independent_quadratic_field_models": [
+    {
+      "field": "F_29[s]/(s^2-2)",
+      "nonsquare": 2,
+      "full_w1_to_w4": {
+        "a_square_representative_1": 22,
+        "a_nonsquare_representative_2": 14
+      },
+      "w1_only": {
+        "a_square_representative_1": 22,
+        "a_nonsquare_representative_2": 14
+      }
+    },
+    {
+      "field": "F_29[s]/(s^2-3)",
+      "nonsquare": 3,
+      "full_w1_to_w4": {
+        "a_square_representative_1": 22,
+        "a_nonsquare_representative_2": 14
+      }
+    }
+  ],
+  "coefficient_function_for_nonzero_a": "22*a*chi_29(a)",
+  "independent_identity_minor_check": {
+    "omitted_n": [1, 2, 4, 5, 7, 8],
+    "identity_rows": [21, 22, 24, 25, 27, 28],
+    "formal_a_degree": 43,
+    "identity_minor_coefficient_mod_29": 7,
+    "identity_expansion_sign": -1,
+    "signed_contribution_mod_29": 22,
+    "check_at_a_2": "22*2^43 = 14 mod 29"
+  },
+  "conclusions": {
+    "grouped_factorial_coefficient_theorem": "REFUTED",
+    "dominant_w1_support_law": "REFUTED",
+    "full_cartier_support_law": "REFUTED",
+    "lower_w_blocks_repair_counterexample": false,
+    "function_field_crown": "OPEN"
+  }
+}
