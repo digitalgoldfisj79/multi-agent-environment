@@ -1,0 +1,43 @@
+{
+  "status": "PASS",
+  "date": "2026-07-22",
+  "prime": 29,
+  "method": "Independent C++ implementation of exact two-stage multiplicative Fourier extraction on the complete 28x28 Cartier minor. The verifier was compiled with GCC 14 and run on Hugging Face cpu-xl.",
+  "source_sha256": "5d3c6bf3f5da37b8328946dad238a51a6e9395d61428319d5b8afd2f27313537",
+  "hugging_face_job_id": "6a61214013e6ef894d54c372",
+  "hugging_face_flavor": "cpu-xl",
+  "runtime_seconds": 42,
+  "field_models": [
+    {
+      "nonsquare": 2,
+      "w1_only": {
+        "t_degree_bound": 550,
+        "c_degree_bound": 380,
+        "a_1_coefficient": [22, 0],
+        "a_2_coefficient": [14, 0]
+      },
+      "full_w1_to_w4": {
+        "t_degree_bound": 550,
+        "c_degree_bound": 406,
+        "a_1_coefficient": [22, 0],
+        "a_2_coefficient": [14, 0]
+      }
+    },
+    {
+      "nonsquare": 3,
+      "w1_only": {
+        "t_degree_bound": 550,
+        "c_degree_bound": 380,
+        "a_1_coefficient": [22, 0],
+        "a_2_coefficient": [14, 0]
+      },
+      "full_w1_to_w4": {
+        "t_degree_bound": 550,
+        "c_degree_bound": 406,
+        "a_1_coefficient": [22, 0],
+        "a_2_coefficient": [14, 0]
+      }
+    }
+  ],
+  "conclusion": "The complete coefficient [c^224 d^112] det(I-H) is 22 for square representative a=1 and 14 for nonsquare representative a=2 in both independent quadratic field models. The w=1-only and full w=1,2,3,4 answers are identical. This independently confirms the p=29 counterexample to the proposed Cartier support law."
+}
