@@ -1,8 +1,8 @@
 # Consolidated Fortune proof ledger
 
-**Date:** 2026-07-21  
+**Date:** 2026-07-22  
 **Branch:** `gpt56/consolidated-fortune-20260721`  
-**Parents:** Claude RQM and novelty head `30703f06...`; GPT discriminant and dynamics head `b2d0e266...`.
+**Parents:** Claude RQM and novelty head `30703f06...`; GPT discriminant and dynamics programme.
 
 ## 1. Scope
 
@@ -46,10 +46,14 @@ The following are proved or independently machine-certified in `frontier/d1_disc
 6. exact degree-2 and degree-3 compatibility formulae;
 7. exact reduced Frobenius determinant indicator
    `J_a(c,d)=3a 1_(F irreducible)`;
-8. exact top-coefficient reformulation
-   `sum_(c,d)J_a(c,d)=[c^(p-1)d^(p-1)]J_a^can`.
+8. exact ordinary Cartier cofactor indicator
+   `Cofactor_(p,3)(I-H_Cartier)=3a 1_(F irreducible)`;
+9. general prime-degree Cartier theorem
+   `Cofactor_(p,j)(I-H_Cartier)=j f_j 1_(F irreducible)`;
+10. exact top-coefficient reformulation
+    `sum_(c,d)J_a(c,d)=[c^(p-1)d^(p-1)]J_a^can`.
 
-The determinant coefficient remains unevaluated.
+The determinant/cofactor coefficient remains unevaluated.
 
 ## 4. Complete quadratic deletion
 
@@ -79,41 +83,27 @@ Thus each discriminant-parity sector with no quadratic factor has size
 
 All simultaneous configurations of quadratic factors are removed exactly.
 
-## 5. Cubic compatibility and monodromy
+## 5. Cubic compatibility and complete deletion
 
 The trace-zero plane gives a universal parameterization of oriented irreducible depressed cubics. Frobenius acts by
 
 `tau(x,y)=(-y,x-y)`.
 
-Eliminating the cubic invariants gives a monic degree-eight orientation polynomial `E_(c,d)(V)`. Every fibre has at most 24 compatible cubic factors:
+Eliminating the cubic invariants gives a monic degree-eight orientation polynomial. Every fibre has at most 24 compatible cubic factors:
 
 `nu_3(F) <= 24`.
 
-The generic arithmetic and geometric Galois groups of E are both `S_8`. This is proved by the specialization `c=d=-2`, whose good-prime cycle types include an 8-cycle, a 7-cycle, and a transposition, together with the nonsquare generic discriminant.
-
-After marking roots inside the eight cubic blocks, the full geometric monodromy is
+The generic orientation group is `S_8`; after marking roots inside the eight blocks, the full geometric monodromy is
 
 `C_3^8 semidirect S_8`.
 
-The diagonal C_3 kernel is excluded by a rational specialization containing two distinct cyclic cubic fields of discriminants `13^2` and `7^2`. The sum-zero kernel is excluded by an explicit noncube product of the eight Cardano classes.
+For `0 <= j <= 8`, marked monodromy, independence of the local `S_3` field, and Lang--Weil give
 
-## 6. Complete cubic deletion
-
-For the locally admissible family define
-
-`Q_(a,3,j)=sum binom(nu_3(F),j)`.
-
-For `0 <= j <= 8`, full marked monodromy, independence of the local S_3 field, and fixed-degree Lang-Weil estimates give
-
-`Q_(a,3,j)=p^2/[j! 3^(j+1)]+O(p^(3/2))`.
-
-The discriminant-weighted moments satisfy
+`Q_(a,3,j)=p^2/[j! 3^(j+1)]+O(p^(3/2))`,
 
 `Q_(a,3,j)^chi=O(p^(3/2))`.
 
-Orders `9 <= j <= 24` are supported on the fixed exceptional divisor and are `O(p)`, signed and unsigned.
-
-Exact finite inclusion-exclusion therefore gives
+Orders `9 <= j <= 24` lie on a fixed exceptional divisor and are `O(p)`, signed and unsigned. Exact finite inclusion--exclusion gives
 
 `N_(a,no3)=C_3 p^2+O(p^(3/2))`,
 
@@ -125,27 +115,13 @@ where
 
 `   =189550849/793618560`.
 
-This removes every cubic factor, including exceptional fibres.
-
-## 7. Complete mixed quadratic-cubic deletion
+## 6. Complete mixed quadratic-cubic deletion
 
 The full quadratic marked monodromy is
 
-`C_2^3 semidirect S_3`.
+`C_2^3 semidirect S_3`,
 
-At `d=0`, its three nontrivial quadratic classes are
-
-`c-2`, `c-1`, `(c-2)(c-1)`.
-
-The cubic orientation sign class is
-
-`c^2-c+1`,
-
-and the local-cubic sign class is
-
-`c+1`.
-
-These classes are independent. The quadratic, cubic, and local splitting fields are therefore linearly disjoint. The raw degree-p discriminant Kummer classes remain nontrivial on every mixed fibre power.
+and it is linearly disjoint from the cubic marked field and the local cubic field. The raw degree-p discriminant Kummer classes remain nontrivial on every mixed fibre power.
 
 For `0 <= i <= 3`, `0 <= j <= 8`,
 
@@ -153,11 +129,10 @@ For `0 <= i <= 3`, `0 <= j <= 8`,
 
 `Q_(a;i,j)^chi=O(p^(3/2))`.
 
-Orders `j>8` are `O(p)`.
-
-Exact mixed inclusion-exclusion yields
+Orders `j>8` are `O(p)`. Exact mixed inclusion--exclusion yields
 
 `N_(a,no23)`
+
 ` =(5496974621/38093690880)p^2+O(p^(3/2))`,
 
 `M_(a,no23)=O(p^(3/2))`.
@@ -168,56 +143,112 @@ Each parity sector with neither quadratic nor cubic factors has density
 
 `=0.07215072225891911...`.
 
-This is the first simultaneous complete deletion across two factor degrees.
+## 7. Complete periods four and five
 
-## 8. Quartic single-factor theorem
-
-Quartic factors are exact period-four cycles of
+A degree-k factor is an exact period-k cycle of
 
 `g(X)=-aX^3-cX-d`.
 
-The ordered cycle surface, after removing repeated coordinates, is geometrically integral of dimension two. Its local-root cover is also integral, the triple-root locus is zero-dimensional, and every required local or degree-p Kummer weight is nonsquare.
+The generic marked cycle groups are
 
-Therefore
+`G_4=C_4 wr S_18`,
 
-`L_(a,4)=p^2/12+O(p^(3/2))`,
+`G_5=C_5 wr S_48`.
 
-`L_(a,4)^chi=O(p^(3/2))`,
+The local cubic field and all degree-p discriminant Kummer fields are independent of these marked dynatomic fields. Consequently all quartic and quintic factorial moments are proved, signed and unsigned:
+
+`Q_(a,4,j)=p^2/[3 j!4^j]+O(p^(3/2))`, `0<=j<=18`,
+
+`Q_(a,5,j)=p^2/[3 j!5^j]+O(p^(3/2))`, `0<=j<=48`,
+
+with signed versions `O(p^(3/2))`.
+
+The period fields for `2,3,4,5` have full direct-product monodromy. Exact simultaneous inclusion--exclusion gives
+
+`N_(a,no2to5,+)`
+
+` = (1/6) product_(k=2)^5 E_k * p^2+O(p^(3/2))`,
+
+where
+
+`E_k=sum_(j=0)^(r_k)(-1/k)^j/j!`,
+
+`r_k=(1/k)sum_(m|k)mu(k/m)3^m`.
+
+The positive and negative rough-through-five sectors both have density
+
+`0.04600533167213053...`.
+
+## 8. Every fixed factor cutoff is closed
+
+`FIXED_CUTOFF_DYNATOMIC_SIEVE.md` extends the preceding construction from periods `2,...,5` to every fixed finite cutoff K.
+
+Morton's full wreath-product theorem and linear disjointness on the unicritical line force full direct-product monodromy
+
+`product_(k=2)^K (C_k wr S_(r_k))`
+
+for the generic centered family.
+
+The independence of the local cubic is uniform in the period. On the local-discriminant divisor, specialize to the map
+
+`f(Z)=(Z^3+2)/3`.
+
+Its unique finite critical orbit converges to its parabolic fixed point `Z=1`; it has no other finite root-of-unity multiplier cycle. Hence every exact dynatomic polynomial of period at least two is squarefree there, so the local discriminant is not a branch component of any higher-period field.
+
+At the origin the map is `-X^3`, whose exact dynatomic polynomials are squarefree in every period. This proves the required independence of all raw discriminant Kummer classes from every finite dynatomic/local compositum.
+
+For each fixed `K>=2`, outside a finite set of primes depending on K,
+
+`N_(a,no[2,K],+)`
+
+` = (1/6) product_(k=2)^K E_k * p^2+O_K(p^(3/2))`,
+
+with the same formula for the negative sector.
+
+Thus every fixed factor cutoff is now removed simultaneously, including all mixed factorial configurations.
+
+The product has the dimension-one asymptotic
+
+`product_(k=2)^K E_k ~ C_0/K`,
+
+`C_0=1.5202566273133043...`.
+
+The positive rough-sector density is therefore asymptotic to
+
+`0.2533761045522174.../K`.
+
+This identifies the remaining multiplicative obstruction exactly: uniformity when K grows linearly with p.
+
+## 9. Cartier--Krylov transfer theorem and no-go result
+
+Let `Q` be Frobenius on `F_p[X]/(F)` in the signed power basis and let H be the full Cartier matrix. Define the residue Gram matrix
+
+`G_(m,v)=ell((-1)^m X^(m+v-1))`.
+
+For the cubic slice,
+
+`G_(m,v)=(-1)^m(`
+
+` 1_(m+v=p)-a1_(m+v=2p-3)-c1_(m+v=2p-1))`,
 
 and
 
-`L_(a,4,+)=p^2/24+O(p^(3/2))`.
+`det G=1`.
 
-Combining this with complete mixed quadratic-cubic deletion gives
+Frobenius--Cartier adjunction gives the exact similarity
 
-`N_(a,rough4,+)`
-` >= (2322500381/76187381760)p^2+O(p^(3/2))`.
+`H=G^(-1)QG`,
 
-Thus every sufficiently large slice contains a positive-discriminant population of density at least
+`I-H=G^(-1)(I-Q)G`.
 
-`0.03048405559225244...`
+The associated principal-part Krylov matrix is `K=QG`, and the sparse boundary matrix is `G^(-1)`, so `H=G^(-1)K`.
 
-with no factors of degrees 2, 3, or 4.
+Therefore the natural Cartier transfer operator is exactly the Berlekamp/Frobenius operator in the residue-dual basis. It does not provide an independent lower-dimensional evaluator of the complete cofactor sum. This closes the obvious transfer route rigorously.
 
-## 9. Finite quartic factorial reduction
+Files:
 
-The period-four dynatomic polynomial is
-
-`Phi_(g,4)=[g^4(X)-X]/[g^2(X)-X]`
-
-and has degree
-
-`3^4-3^2=72`.
-
-Every quartic factor contributes four distinct exact period-four points. Hence
-
-`nu_4(F) <= 18`.
-
-Quartic deletion is therefore finite:
-
-`1_(nu_4=0)=sum_(j=0)^18 (-1)^j binom(nu_4,j)`.
-
-The quartic factorial moments are not yet proved. Published dynatomic work establishes generic irreducibility in broad polynomial families and wreath-product monodromy in important cases, but a primary theorem whose explicit hypotheses directly cover the centered two-parameter cubic family has not yet been verified. No full quartic monodromy theorem is claimed in this ledger.
+- `CARTIER_KRYLOV_TRANSFER.md`;
+- `cartier_krylov_transfer_check.py`.
 
 ## 10. Current distance to the function-field crown
 
@@ -225,23 +256,27 @@ The theorem is not yet proved.
 
 Closed:
 
-- linear factors;
-- every quadratic factor, including multiplicities;
-- every cubic factor, including multiplicities and mixed quadratic-cubic configurations;
-- first signed and unsigned quartic incidence;
-- a positive rough-through-four sector;
-- a finite quartic inclusion-exclusion bound.
+- linear factors and local admissibility;
+- exact parity reduction;
+- every fixed factor degree;
+- every fixed finite collection of factor degrees, including all mixed factorial moments;
+- exact Frobenius and Cartier irreducibility indicators;
+- the natural p-dimensional Cartier/Krylov transfer, shown to be Frobenius-conjugate;
+- bounded-degree constructive semiconjugacies, ruled out by the `p/4` degree barrier.
 
 Open:
 
-1. complete quartic factorial moments and their mixed moments with degrees two and three;
-2. a mechanism extending roughness through all degrees up to `p/3`, rather than one fixed degree at a time;
-3. or, preferably, evaluation of the determinant top coefficient, which bypasses the factor sieve entirely.
+1. uniform dynatomic/Chebotarev estimates for a cutoff K growing to `p/3`;
+2. a genuinely compressed quotient of the Frobenius/Cartier module;
+3. or a direct nonvanishing evaluation of the complete determinant/cofactor sum;
+4. the full-family character-sum Lemma L, whose current formulations still face growing-dimension square-root cancellation.
+
+The fixed-cutoff theorem shows that the multiplicative sieve itself has the correct main term and sieve dimension. The obstruction is not any individual period; it is uniformity across a linearly growing set of periods.
 
 ## 11. Ranked next routes
 
-1. **Direct determinant coefficient.** Find a constant-term, resultant, or recurrence formula for `[c^(p-1)d^(p-1)]J_a^can`.
-2. **Quartic monodromy.** Prove that the period-four cycle cover for the centered cubic family has maximal cycle/root monodromy, either by checking a published theorem's hypotheses or by a direct specialization and branch-cycle proof.
-3. **Quartic mixed sieve.** Once monodromy is known, compute the finite mixed factorial table and delete quartics exactly.
-4. **Growing-degree compression.** Find a uniform cycle-index, trace formula, or determinant identity that controls all degrees through `p/3` without repeating fixed-degree geometry indefinitely.
+1. **Uniform fixed-cutoff constants.** Quantify the K-dependence of the effective Lang--Weil/Chebotarev constants and determine the largest provable growing cutoff `K(p)`. Even `K(p)->infinity` would be a new theorem, although it would not alone prove the crown.
+2. **Large-sieve dynatomic compression.** Replace the full fibre product by a Frobenius large sieve over separate period covers, seeking uniform roughness without constructing the exponentially large compositum.
+3. **Direct determinant coefficient.** Find a quotient, constant-term identity, or recurrence that is not Gram-conjugate to Frobenius and evaluates the two square-class modes.
+4. **Character-sum Lemma L.** Seek a non-projective, non-Plancherel transform that preserves finer a-data before aggregation.
 5. **Integer Fortune.** The increasing-order transfer remains a separate major obstruction.
