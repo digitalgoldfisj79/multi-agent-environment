@@ -1,0 +1,193 @@
+{
+  "status": "PASS",
+  "method": "Exact integer partitions, binomial dimensions, hook labels and rational Gram-matrix arithmetic; no random sampling and no floating point.",
+  "claims_checked": [
+    "The pulled-back hook alternating sum cancels under S_p to S_(p-1) branching.",
+    "The even and odd generic hook sectors share no irreducible S_p constituent.",
+    "Every distinct pair of root-selected contraction vectors differs generically.",
+    "Any generic effective residual has total rank at least 2^(p-1).",
+    "Selecting one root forgets all derangement Frobenius cycle types, including p-cycles."
+  ],
+  "results": [
+    {
+      "p": 5,
+      "checks": {
+        "even_rank_formula": true,
+        "odd_rank_formula": true,
+        "branching_cancellation": true,
+        "even_odd_hook_labels_disjoint": true,
+        "root_difference_norm_two": true,
+        "p_cycle_is_derangement": true
+      },
+      "all_checks_pass": true,
+      "even_hook_rank": 8,
+      "odd_hook_rank": 8,
+      "minimum_generic_residual_total_rank": 16,
+      "root_vector_norm_squared": "4/5",
+      "distinct_root_inner_product": "-1/5",
+      "root_difference_norm_squared": "2",
+      "derangement_cycle_type_count": 2,
+      "total_cycle_type_count": 7
+    },
+    {
+      "p": 7,
+      "checks": {
+        "even_rank_formula": true,
+        "odd_rank_formula": true,
+        "branching_cancellation": true,
+        "even_odd_hook_labels_disjoint": true,
+        "root_difference_norm_two": true,
+        "p_cycle_is_derangement": true
+      },
+      "all_checks_pass": true,
+      "even_hook_rank": 32,
+      "odd_hook_rank": 32,
+      "minimum_generic_residual_total_rank": 64,
+      "root_vector_norm_squared": "6/7",
+      "distinct_root_inner_product": "-1/7",
+      "root_difference_norm_squared": "2",
+      "derangement_cycle_type_count": 4,
+      "total_cycle_type_count": 15
+    },
+    {
+      "p": 11,
+      "checks": {
+        "even_rank_formula": true,
+        "odd_rank_formula": true,
+        "branching_cancellation": true,
+        "even_odd_hook_labels_disjoint": true,
+        "root_difference_norm_two": true,
+        "p_cycle_is_derangement": true
+      },
+      "all_checks_pass": true,
+      "even_hook_rank": 512,
+      "odd_hook_rank": 512,
+      "minimum_generic_residual_total_rank": 1024,
+      "root_vector_norm_squared": "10/11",
+      "distinct_root_inner_product": "-1/11",
+      "root_difference_norm_squared": "2",
+      "derangement_cycle_type_count": 14,
+      "total_cycle_type_count": 56
+    },
+    {
+      "p": 13,
+      "checks": {
+        "even_rank_formula": true,
+        "odd_rank_formula": true,
+        "branching_cancellation": true,
+        "even_odd_hook_labels_disjoint": true,
+        "root_difference_norm_two": true,
+        "p_cycle_is_derangement": true
+      },
+      "all_checks_pass": true,
+      "even_hook_rank": 2048,
+      "odd_hook_rank": 2048,
+      "minimum_generic_residual_total_rank": 4096,
+      "root_vector_norm_squared": "12/13",
+      "distinct_root_inner_product": "-1/13",
+      "root_difference_norm_squared": "2",
+      "derangement_cycle_type_count": 24,
+      "total_cycle_type_count": 101
+    },
+    {
+      "p": 17,
+      "checks": {
+        "even_rank_formula": true,
+        "odd_rank_formula": true,
+        "branching_cancellation": true,
+        "even_odd_hook_labels_disjoint": true,
+        "root_difference_norm_two": true,
+        "p_cycle_is_derangement": true
+      },
+      "all_checks_pass": true,
+      "even_hook_rank": 32768,
+      "odd_hook_rank": 32768,
+      "minimum_generic_residual_total_rank": 65536,
+      "root_vector_norm_squared": "16/17",
+      "distinct_root_inner_product": "-1/17",
+      "root_difference_norm_squared": "2",
+      "derangement_cycle_type_count": 66,
+      "total_cycle_type_count": 297
+    },
+    {
+      "p": 19,
+      "checks": {
+        "even_rank_formula": true,
+        "odd_rank_formula": true,
+        "branching_cancellation": true,
+        "even_odd_hook_labels_disjoint": true,
+        "root_difference_norm_two": true,
+        "p_cycle_is_derangement": true
+      },
+      "all_checks_pass": true,
+      "even_hook_rank": 131072,
+      "odd_hook_rank": 131072,
+      "minimum_generic_residual_total_rank": 262144,
+      "root_vector_norm_squared": "18/19",
+      "distinct_root_inner_product": "-1/19",
+      "root_difference_norm_squared": "2",
+      "derangement_cycle_type_count": 105,
+      "total_cycle_type_count": 490
+    },
+    {
+      "p": 23,
+      "checks": {
+        "even_rank_formula": true,
+        "odd_rank_formula": true,
+        "branching_cancellation": true,
+        "even_odd_hook_labels_disjoint": true,
+        "root_difference_norm_two": true,
+        "p_cycle_is_derangement": true
+      },
+      "all_checks_pass": true,
+      "even_hook_rank": 2097152,
+      "odd_hook_rank": 2097152,
+      "minimum_generic_residual_total_rank": 4194304,
+      "root_vector_norm_squared": "22/23",
+      "distinct_root_inner_product": "-1/23",
+      "root_difference_norm_squared": "2",
+      "derangement_cycle_type_count": 253,
+      "total_cycle_type_count": 1255
+    },
+    {
+      "p": 29,
+      "checks": {
+        "even_rank_formula": true,
+        "odd_rank_formula": true,
+        "branching_cancellation": true,
+        "even_odd_hook_labels_disjoint": true,
+        "root_difference_norm_two": true,
+        "p_cycle_is_derangement": true
+      },
+      "all_checks_pass": true,
+      "even_hook_rank": 134217728,
+      "odd_hook_rank": 134217728,
+      "minimum_generic_residual_total_rank": 268435456,
+      "root_vector_norm_squared": "28/29",
+      "distinct_root_inner_product": "-1/29",
+      "root_difference_norm_squared": "2",
+      "derangement_cycle_type_count": 847,
+      "total_cycle_type_count": 4565
+    },
+    {
+      "p": 31,
+      "checks": {
+        "even_rank_formula": true,
+        "odd_rank_formula": true,
+        "branching_cancellation": true,
+        "even_odd_hook_labels_disjoint": true,
+        "root_difference_norm_two": true,
+        "p_cycle_is_derangement": true
+      },
+      "all_checks_pass": true,
+      "even_hook_rank": 536870912,
+      "odd_hook_rank": 536870912,
+      "minimum_generic_residual_total_rank": 1073741824,
+      "root_vector_norm_squared": "30/31",
+      "distinct_root_inner_product": "-1/31",
+      "root_difference_norm_squared": "2",
+      "derangement_cycle_type_count": 1238,
+      "total_cycle_type_count": 6842
+    }
+  ]
+}
