@@ -43,7 +43,6 @@ static void run_class(int p,int a){
             ++total_irred;
             Poly3 f=xp(S,N,p);
             int u=modp(-(long long)f.c2*inv3a,p);
-            int t=modp(3LL*u,p);
             int s=modp((long long)S+3LL*u*u,p);
             int n=modp((long long)N+(long long)S*u+(long long)u*u%p*u,p);
             int A=modp((long long)f.c0-(long long)f.c1*u+(long long)f.c2*u%p*u+u,p);
@@ -62,8 +61,8 @@ static void run_class(int p,int a){
         if(q)support++; mx=max(mx,q); dist[q]++;
     }
     if(total_irred!=((long long)p*p-1)/3){ cerr<<"mass mismatch\n"; exit(4); }
-    string ds; for(auto [k,v]:dist){if(!ds.empty())ds+=';';ds+=to_string(k)+":"+to_string(v);} 
-    cout<<p<<','<<a<<','<<chi(a,p)<<','<<qinc<<','<<qpair<<','<<qtriple<<','<<rinc<<','<<rpair<<','<<rtriple<<','<<support<<','<<mx<<',"'<<ds<<"'\n";
+    string ds; for(auto [k,v]:dist){if(!ds.empty())ds+=';';ds+=to_string(k)+":"+to_string(v);}
+    cout<<p<<','<<a<<','<<chi(a,p)<<','<<qinc<<','<<qpair<<','<<qtriple<<','<<rinc<<','<<rpair<<','<<rtriple<<','<<support<<','<<mx<<",\""<<ds<<"\"\n";
 }
 
 int main(int argc,char**argv){
