@@ -1,0 +1,18 @@
+{
+  "status": "PASS",
+  "method": "Exact finite-field polynomial arithmetic with SymPy over GF(p); no random sampling or floating point.",
+  "claims_checked": [
+    "Pair and quotient models are squarefree for every admissible q.",
+    "Critical fibres have exactly the required double factors.",
+    "Residual factors have degree p-2 and squarefree disjoint product.",
+    "Pair anti-invariant and D_q genus/rank formulas hold."
+  ],
+  "results": [
+    {"p":5,"all_checks_pass":true,"formulas":{"pair_genus":1,"pair_quotient_genus":0,"pair_anti_rank":2,"pair_anti_rank_formula":2,"D_genus":2,"D_H1_rank":4},"admissible_q_checked":3,"failed_q":[]},
+    {"p":7,"all_checks_pass":true,"formulas":{"pair_genus":2,"pair_quotient_genus":1,"pair_anti_rank":2,"pair_anti_rank_formula":2,"D_genus":4,"D_H1_rank":8},"admissible_q_checked":5,"failed_q":[]},
+    {"p":11,"all_checks_pass":true,"formulas":{"pair_genus":4,"pair_quotient_genus":2,"pair_anti_rank":4,"pair_anti_rank_formula":4,"D_genus":8,"D_H1_rank":16},"admissible_q_checked":9,"failed_q":[]},
+    {"p":13,"all_checks_pass":true,"formulas":{"pair_genus":5,"pair_quotient_genus":2,"pair_anti_rank":6,"pair_anti_rank_formula":6,"D_genus":10,"D_H1_rank":20},"admissible_q_checked":11,"failed_q":[]},
+    {"p":17,"all_checks_pass":true,"formulas":{"pair_genus":7,"pair_quotient_genus":3,"pair_anti_rank":8,"pair_anti_rank_formula":8,"D_genus":14,"D_H1_rank":28},"admissible_q_checked":15,"failed_q":[]},
+    {"p":19,"all_checks_pass":true,"formulas":{"pair_genus":8,"pair_quotient_genus":4,"pair_anti_rank":8,"pair_anti_rank_formula":8,"D_genus":16,"D_H1_rank":32},"admissible_q_checked":17,"failed_q":[]}
+  ]
+}
