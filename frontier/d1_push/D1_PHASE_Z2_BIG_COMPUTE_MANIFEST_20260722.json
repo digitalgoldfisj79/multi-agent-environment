@@ -1,0 +1,87 @@
+{
+  "date": "2026-07-22",
+  "branch": "gpt56/d1-push-weight0-collapse-20260722",
+  "campaign": "D1_PHASE_Z2_BIG_COMPUTE_CAMPAIGN_20260722.md",
+  "jobs": [
+    {
+      "job_id": "6a61410713e6ef894d54c5bb",
+      "status": "COMPLETED",
+      "flavor": "cpu-xl",
+      "task": "Exact cubic mixed moments for both square classes",
+      "range": "all 69 primes 103<=p<500",
+      "rows": 138,
+      "source": "cubic_mixed_mass_audit.cpp"
+    },
+    {
+      "job_id": "6a61447813e6ef894d54c5fd",
+      "status": "COMPLETED",
+      "flavor": "cpu-xl",
+      "task": "Exact odd-locus cubic factor moments for both square classes",
+      "range": "all 123 primes 5<=p<700",
+      "rows": 246,
+      "source": "odd_locus_cubic_mass.cpp"
+    },
+    {
+      "job_id": "6a6141a4d09dc1f57c6c346d",
+      "status": "CANCELLED_AFTER_COUNTEREXAMPLE",
+      "flavor": "cpu-xl",
+      "task": "Randomized exact torus-graded complementary-minor adversary",
+      "range": "primes 29 through 251 attempted in parallel",
+      "source": "cartier_complementary_minor_counterexample_search.cpp",
+      "decisive_result": "p=223 CT1-w1 counterexample"
+    },
+    {
+      "job_id": "6a61432cd09dc1f57c6c34a3",
+      "status": "COMPLETED",
+      "flavor": "cpu-xl",
+      "task": "Exact CP-SAT inverse-substitution support classification",
+      "range": "all primes 31<=p<200",
+      "source": "cartier_u_support_cpsat.py"
+    },
+    {
+      "job_id": "6a61445613e6ef894d54c5fb",
+      "status": "COMPLETED",
+      "flavor": "cpu-xl",
+      "task": "Exact CP-SAT complementary substitution support classification",
+      "range": "all primes 31<=p<200",
+      "source": "cartier_t_complement_support_cpsat.py"
+    },
+    {
+      "job_id": "6a6145f413e6ef894d54c609",
+      "status": "COMPLETED",
+      "flavor": "cpu-basic",
+      "task": "Independent p=223 small-minor and 213x213 direct verification",
+      "source": "p223_ct1_w1_counterexample_verify.py",
+      "result": "PASS"
+    },
+    {
+      "job_id": "6a61474513e6ef894d54c612",
+      "status": "COMPLETED",
+      "flavor": "cpu-xl",
+      "task": "Exact p=223 fixed-identity Cauchy-Binet grouping by Fourier inversion",
+      "source": "p223_fixed_identity_grouped_fourier.cpp",
+      "result": "grouped coefficient 114 mod 223"
+    }
+  ],
+  "decisive_witness": {
+    "prime": 223,
+    "E": [5, 7, 8, 12, 13, 14, 16, 17, 18],
+    "R": [49, 71, 94, 119, 122, 126, 130, 141, 148, 220],
+    "gamma": 1,
+    "beta": 5,
+    "alpha": 104,
+    "det_P_inverse": 86,
+    "det_U": 169,
+    "direct_product": 114,
+    "fixed_identity_grouped_coefficient": 114,
+    "weight": 25308,
+    "former_corrected_boundary": 25086
+  },
+  "global_status": {
+    "CT1_w1": "REFUTED",
+    "fixed_identity_one_level_support": "REFUTED",
+    "complete_identity_and_four_block_support": "OPEN",
+    "function_field_d1_crown": "OPEN",
+    "integer_fortune_conjecture": "OPEN"
+  }
+}
