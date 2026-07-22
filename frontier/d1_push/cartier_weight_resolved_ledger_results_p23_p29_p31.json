@@ -1,0 +1,62 @@
+{
+  "status": "PASS",
+  "date": "2026-07-22",
+  "method": "Exact weight-resolved torus projection of the Cartier cofactor over F_(p^2), using c=c0*t and d=d0*t^2, summation over c0,d0 in F_p, and multiplicative Fourier inversion in t. Exact Hungarian assignment bounds exclude aliasing.",
+  "hugging_face_job_id": "6a612671d09dc1f57c6c31b6",
+  "hugging_face_flavor": "cpu-xl",
+  "runtime_seconds": 58,
+  "cases": [
+    {
+      "prime": 23,
+      "field_order": 529,
+      "multiplicative_order": 528,
+      "degree_bound": 344,
+      "old_support_boundary": 264,
+      "w1_only": {
+        "square_a": {"a": 1, "total": 12, "low": 12, "tail": 0, "weights": {"88": 6, "110": 13, "132": 17, "154": 20, "176": 16, "198": 4, "220": 8, "242": 15, "264": 5}},
+        "nonsquare_a": {"a": 5, "total": 20, "low": 20, "tail": 0, "weights": {"88": 7, "110": 4, "132": 13, "154": 19, "176": 10, "198": 3, "220": 7, "242": 10, "264": 16}}
+      },
+      "full_w1_to_w4": {
+        "square_a": {"a": 1, "total": 13, "low": 13, "tail": 0, "weights": {"66": 18, "88": 5, "110": 16, "132": 4, "154": 5, "176": 4, "198": 2, "220": 15, "242": 1, "264": 12}},
+        "nonsquare_a": {"a": 5, "total": 8, "low": 8, "tail": 0, "weights": {"66": 18, "88": 10, "110": 6, "132": 3, "154": 14, "176": 18, "198": 5, "220": 6, "242": 9, "264": 11}}
+      }
+    },
+    {
+      "prime": 29,
+      "field_order": 841,
+      "multiplicative_order": 840,
+      "degree_bound": 550,
+      "old_support_boundary": 420,
+      "w1_only": {
+        "square_a": {"a": 1, "total": 27, "low": 5, "tail": 22, "weights": {"112": 3, "140": 24, "168": 7, "196": 28, "224": 18, "252": 14, "280": 20, "308": 14, "336": 8, "364": 14, "392": 15, "420": 14, "448": 22}},
+        "nonsquare_a": {"a": 2, "total": 18, "low": 4, "tail": 14, "weights": {"112": 6, "140": 15, "168": 7, "196": 4, "224": 13, "252": 26, "280": 14, "308": 26, "336": 21, "364": 20, "392": 18, "420": 8, "448": 14}}
+      },
+      "full_w1_to_w4": {
+        "square_a": {"a": 1, "total": 21, "low": 28, "tail": 22, "weights": {"84": 15, "112": 8, "140": 25, "168": 1, "196": 19, "224": 19, "252": 20, "280": 6, "308": 2, "336": 17, "364": 10, "392": 27, "420": 4, "448": 22}},
+        "nonsquare_a": {"a": 2, "total": 23, "low": 9, "tail": 14, "weights": {"84": 5, "112": 4, "140": 19, "168": 27, "196": 25, "224": 9, "252": 8, "280": 20, "308": 28, "336": 17, "364": 28, "392": 14, "420": 8, "448": 14}}
+      }
+    },
+    {
+      "prime": 31,
+      "field_order": 961,
+      "multiplicative_order": 960,
+      "degree_bound": 629,
+      "old_support_boundary": 480,
+      "w1_only": {
+        "square_a": {"a": 1, "total": 22, "low": 12, "tail": 10, "weights": {"150": 24, "180": 26, "210": 21, "240": 10, "270": 13, "300": 13, "330": 25, "360": 16, "390": 24, "420": 29, "450": 29, "480": 30, "510": 10}},
+        "nonsquare_a": {"a": 3, "total": 9, "low": 28, "tail": 12, "weights": {"150": 21, "180": 22, "210": 6, "240": 22, "270": 26, "300": 13, "330": 27, "360": 19, "390": 24, "420": 1, "450": 27, "480": 6, "510": 12}}
+      },
+      "full_w1_to_w4": {
+        "square_a": {"a": 1, "total": 28, "low": 18, "tail": 10, "weights": {"120": 11, "150": 27, "180": 3, "210": 1, "240": 23, "270": 22, "300": 8, "330": 6, "360": 28, "390": 29, "420": 24, "450": 28, "480": 25, "510": 10}},
+        "nonsquare_a": {"a": 3, "total": 1, "low": 20, "tail": 12, "weights": {"90": 30, "120": 3, "150": 29, "180": 17, "210": 18, "240": 28, "270": 17, "300": 28, "330": 18, "360": 20, "390": 20, "420": 26, "450": 5, "480": 9, "510": 12}}
+      }
+    }
+  ],
+  "observations": {
+    "p23_tail": "zero in both square classes and in both w1-only and full matrices",
+    "p29_tail": "one nonzero weight, 448=16(p-1), unchanged by adding w=2,3,4",
+    "p31_tail": "one nonzero weight, 510=17(p-1), unchanged by adding w=2,3,4",
+    "first_tail_level_pattern": "for p=29,31 the sole observed tail is at ((p+3)/2)(p-1), exactly one survivor level above the old boundary",
+    "lower_filtration_effect": "w=2,3,4 materially rearrange the low-weight ledger but do not alter the observed tail at p=29,31"
+  }
+}
