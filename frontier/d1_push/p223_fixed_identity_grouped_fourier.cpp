@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <array>
 #include <cstdint>
 #include <cstdlib>
@@ -14,14 +15,14 @@ Cauchy-Binet and Jacobi reduce the grouped coefficient at fixed sum(R) to
  [z^1220] det( A^T diag(r! z^r) U ),
 
 where A=P^{-1}[Omega,C0] and U is the inverse substitution matrix
-[ X^r ] psi(X)^s, psi+psi^3=X.  The determinant is 10x10.  Fourier inversion
+[ X^r ] psi(X)^s, psi+psi^3=X. The determinant is 10x10. Fourier inversion
 over F_(223^2)^* extracts the coefficient exactly; the determinant degree is
 at most the sum of the ten largest row indices, far below 223^2-1.
 */
 
 static constexpr int P = 223;
 static constexpr int Q = P * P;
-static constexpr int NR = 3; // quadratic nonsquare modulo 223
+static constexpr int NR = 3;
 static constexpr int K = 10;
 static constexpr int TARGET = 1220;
 
@@ -76,18 +77,13 @@ int main(){
         if(s==0)v=(r==0);
         else if(r>=s&&((r-s)&1)==0){
             int h=(r-s)/2;
-            // Lagrange inversion; comb may cross p and is evaluated mod p.
             int bin=choose_mod(r+h-1,h,fac,ifac);
-            if(r+h-1>=P){
-                // In this index range Lucas says zero whenever the upper index crosses p.
-                bin=0;
-            }
+            if(r+h-1>=P)bin=0;
             if(bin){v=(long long)s*powp(r,P-2)%P*bin%P;if(h&1)v=mp(-v);}
         }
         U[r][j]=v;
     }
 
-    // Enumerate all nonzero elements a+b*s of F_(p^2).
     F2 sum{0,0};
     long long evaluations=0;
     int max_degree=0;for(int r=P-K;r<P;r++)max_degree+=r;
@@ -108,7 +104,6 @@ int main(){
         sum=add(sum,mul(d,character));
         evaluations++;
     }
-    // 1/(Q-1)=-1 in characteristic p.
     F2 coefficient=negf(sum);
     cout<<"{\n"
         <<"  \"status\": \"PASS\",\n"
