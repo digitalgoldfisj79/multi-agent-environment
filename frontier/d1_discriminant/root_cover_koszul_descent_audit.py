@@ -87,7 +87,6 @@ def audit_prime(p: int) -> Dict[str, object]:
         "even_hook_rank": even_rank,
         "odd_hook_rank": odd_rank,
         "minimum_generic_residual_total_rank": even_rank + odd_rank,
-        "branching_coefficients": branching_coefficients,
         "root_vector_norm_squared": str(root_norm),
         "distinct_root_inner_product": str(distinct_root_inner_product),
         "root_difference_norm_squared": str(root_difference_norm),
