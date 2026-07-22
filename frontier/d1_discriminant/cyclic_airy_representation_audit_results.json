@@ -1,0 +1,21 @@
+{
+  "status": "PASS",
+  "method": "Exact integer arithmetic over every cycle type (integer partition) of S_p; no permutation sampling and no floating point arithmetic.",
+  "claims_checked": [
+    "alternating hook character equals Fix(sigma^p)-Fix(sigma)",
+    "for prime p this equals p on p-cycles and zero otherwise",
+    "positive and negative hook dimensions are each 2^(p-2)",
+    "rank-p cyclic tensor eigenspaces differ in dimension by p"
+  ],
+  "results": [
+    {"p":5,"cycle_types_checked":7,"identity_passed":true,"positive_hook_dimension":8,"negative_hook_dimension":8,"minimum_total_effective_rank":16,"cyclic_trivial_eigenspace_dimension":629,"cyclic_nontrivial_eigenspace_dimension":624,"cyclic_dimension_difference":5},
+    {"p":7,"cycle_types_checked":15,"identity_passed":true,"positive_hook_dimension":32,"negative_hook_dimension":32,"minimum_total_effective_rank":64,"cyclic_trivial_eigenspace_dimension":117655,"cyclic_nontrivial_eigenspace_dimension":117648,"cyclic_dimension_difference":7},
+    {"p":11,"cycle_types_checked":56,"identity_passed":true,"positive_hook_dimension":512,"negative_hook_dimension":512,"minimum_total_effective_rank":1024,"cyclic_trivial_eigenspace_dimension":25937424611,"cyclic_nontrivial_eigenspace_dimension":25937424600,"cyclic_dimension_difference":11},
+    {"p":13,"cycle_types_checked":101,"identity_passed":true,"positive_hook_dimension":2048,"negative_hook_dimension":2048,"minimum_total_effective_rank":4096,"cyclic_trivial_eigenspace_dimension":23298085122493,"cyclic_nontrivial_eigenspace_dimension":23298085122480,"cyclic_dimension_difference":13},
+    {"p":17,"cycle_types_checked":297,"identity_passed":true,"positive_hook_dimension":32768,"negative_hook_dimension":32768,"minimum_total_effective_rank":65536,"cyclic_trivial_eigenspace_dimension":48661191875666868497,"cyclic_nontrivial_eigenspace_dimension":48661191875666868480,"cyclic_dimension_difference":17},
+    {"p":19,"cycle_types_checked":490,"identity_passed":true,"positive_hook_dimension":131072,"negative_hook_dimension":131072,"minimum_total_effective_rank":262144,"cyclic_trivial_eigenspace_dimension":1041273502979112415323,"cyclic_nontrivial_eigenspace_dimension":1041273502979112415304,"cyclic_dimension_difference":19},
+    {"p":23,"cycle_types_checked":1255,"identity_passed":true,"positive_hook_dimension":2097152,"negative_hook_dimension":2097152,"minimum_total_effective_rank":4194304,"cyclic_trivial_eigenspace_dimension":90784643477599617540674023,"cyclic_nontrivial_eigenspace_dimension":90784643477599617540674000,"cyclic_dimension_difference":23},
+    {"p":29,"cycle_types_checked":4565,"identity_passed":true,"positive_hook_dimension":134217728,"negative_hook_dimension":134217728,"minimum_total_effective_rank":268435456,"cyclic_trivial_eigenspace_dimension":887084660805030236767855415033262069,"cyclic_nontrivial_eigenspace_dimension":887084660805030236767855415033262040,"cyclic_dimension_difference":29},
+    {"p":31,"cycle_types_checked":6842,"identity_passed":true,"positive_hook_dimension":536870912,"negative_hook_dimension":536870912,"minimum_total_effective_rank":1073741824,"cyclic_trivial_eigenspace_dimension":550618520345910837374536871905139185678862431,"cyclic_nontrivial_eigenspace_dimension":550618520345910837374536871905139185678862400,"cyclic_dimension_difference":31}
+  ]
+}
