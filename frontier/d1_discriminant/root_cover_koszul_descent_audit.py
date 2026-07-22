@@ -24,7 +24,7 @@ import json
 from fractions import Fraction
 from math import comb
 from pathlib import Path
-from typing import Dict, Iterable, Iterator, List, Tuple
+from typing import Dict, Iterator, Tuple
 
 
 def partitions(n: int, max_part: int | None = None) -> Iterator[Tuple[int, ...]]:
@@ -93,7 +93,6 @@ def audit_prime(p: int) -> Dict[str, object]:
         "root_difference_norm_squared": str(root_difference_norm),
         "derangement_cycle_type_count": len(derangement_types),
         "total_cycle_type_count": len(cycle_types),
-        "derangement_cycle_types": [list(cycle_type) for cycle_type in derangement_types],
     }
 
 
