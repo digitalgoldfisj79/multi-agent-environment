@@ -97,7 +97,7 @@ Every identity-selected binomial/falling-factorial alternant satisfying the surv
 
 `(p^2-1)/2.`
 
-The elementary assignment bound is insufficient: its first apparent excess occurs at `p=23`. The corresponding leading alternant vanishes modulo `23`. This is the concrete modular cancellation that must be proved uniformly.
+The elementary assignment bound is insufficient. At `p=23`, the proposed support boundary is `264`, while the only possible orthogonality-survivor weights above it are `286`, `308`, and `330`. An exact two-stage multiplicative-Fourier audit over `F_(23^2)` now verifies that every coefficient `c^(22 alpha)d^(22 beta)` at those three weights vanishes for representatives of both square classes of `a`. This is a complete finite verification of the p=23 support law, including all permutations, identity selections, and `w=1,2,3,4` terms. The specific tropical leading alternant that motivated the original sentence has not yet been reconstructed and is no longer presented as an audited object.
 
 The problem is now a finite determinant-divisibility statement. It is naturally expressible using binomial minors, factorial Schur functions and hook-content/product formulae.
 
@@ -131,10 +131,13 @@ Success proves the Cartier survivor-support law uniformly. The next task would t
 - Split/nonsplit extremal audit: exact through `p=199`.
 - Nonsplit discriminant-40 audit: exact through `p=499`.
 - Cartier dominant-block audit: `176/176` exact determinant comparisons through `p=199`.
+- p=23 filtered-survivor audit: all `38/38` above-boundary coefficient checks vanish exactly over `F_(23^2)` for both square classes of `a`; Hugging Face CPU-XL job `6a61048b13e6ef894d54c19f`.
 
 ## 7. Epistemic classification
 
 - All completed results above: exact theorems with stated dependencies.
+- p=23 support law: exact finite verification.
+- Specific p=23 leading alternant witness: not reconstructed.
 - Modular filtered-minor lemma: open.
 - Cartier survivor-sum nonvanishing: open.
 - General-prime function-field crown: open.
