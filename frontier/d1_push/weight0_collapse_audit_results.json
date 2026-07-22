@@ -1,0 +1,158 @@
+{
+  "status": "PASS",
+  "method": "Exact permutation and affine-group enumeration; exhaustive S_p character check for p<=7; no random sampling or floating point.",
+  "claims_checked": [
+    "Finite transposition decomposition cosets contain no p-cycles.",
+    "The even affine inertia contains exactly p-1 p-cycles.",
+    "The odd affine coset contains no p-cycles.",
+    "The infinity local alternating traces are 2 and 0.",
+    "Subtracting the global invariant line leaves the quadratic character.",
+    "The discriminant-unit Legendre character is tabulated for every admissible q."
+  ],
+  "results": [
+    {
+      "p": 5,
+      "all_checks_pass": true,
+      "checks": {
+        "finite_cosets_have_no_pcycles": true,
+        "even_affine_inertia_pcycle_count": true,
+        "odd_affine_coset_pcycle_count": true,
+        "infinity_even_local_trace_two": true,
+        "infinity_odd_local_trace_zero": true,
+        "global_subtraction_gives_quadratic_character": true,
+        "adams_character_check": true
+      },
+      "finite_coset_elements_checked": 24,
+      "finite_pcycles_found": 0,
+      "infinity_inertia_order": 10,
+      "infinity_even_pcycles": 4,
+      "infinity_odd_coset_pcycles": 0,
+      "infinity_even_alternating_trace": 2,
+      "infinity_odd_alternating_trace": 0,
+      "after_global_subtraction": {"even_coset": 1, "odd_coset": -1},
+      "adams_permutations_checked": 120,
+      "adams_character_failures": 0,
+      "discriminant_character_table": [[1,-1],[3,1],[4,-1]]
+    },
+    {
+      "p": 7,
+      "all_checks_pass": true,
+      "checks": {
+        "finite_cosets_have_no_pcycles": true,
+        "even_affine_inertia_pcycle_count": true,
+        "odd_affine_coset_pcycle_count": true,
+        "infinity_even_local_trace_two": true,
+        "infinity_odd_local_trace_zero": true,
+        "global_subtraction_gives_quadratic_character": true,
+        "adams_character_check": true
+      },
+      "finite_coset_elements_checked": 480,
+      "finite_pcycles_found": 0,
+      "infinity_inertia_order": 21,
+      "infinity_even_pcycles": 6,
+      "infinity_odd_coset_pcycles": 0,
+      "infinity_even_alternating_trace": 2,
+      "infinity_odd_alternating_trace": 0,
+      "after_global_subtraction": {"even_coset": 1, "odd_coset": -1},
+      "adams_permutations_checked": 5040,
+      "adams_character_failures": 0,
+      "discriminant_character_table": [[1,1],[3,-1],[4,1],[5,-1],[6,-1]]
+    },
+    {
+      "p": 11,
+      "all_checks_pass": true,
+      "checks": {
+        "finite_cosets_have_no_pcycles": true,
+        "even_affine_inertia_pcycle_count": true,
+        "odd_affine_coset_pcycle_count": true,
+        "infinity_even_local_trace_two": true,
+        "infinity_odd_local_trace_zero": true,
+        "global_subtraction_gives_quadratic_character": true,
+        "adams_character_check": true
+      },
+      "finite_coset_elements_checked": 4,
+      "finite_pcycles_found": 0,
+      "infinity_inertia_order": 55,
+      "infinity_even_pcycles": 10,
+      "infinity_odd_coset_pcycles": 0,
+      "infinity_even_alternating_trace": 2,
+      "infinity_odd_alternating_trace": 0,
+      "after_global_subtraction": {"even_coset": 1, "odd_coset": -1},
+      "adams_permutations_checked": 0,
+      "adams_character_failures": 0,
+      "discriminant_character_table": [[1,-1],[3,-1],[4,-1],[5,-1],[6,1],[7,1],[8,1],[9,-1],[10,1]]
+    },
+    {
+      "p": 13,
+      "all_checks_pass": true,
+      "checks": {
+        "finite_cosets_have_no_pcycles": true,
+        "even_affine_inertia_pcycle_count": true,
+        "odd_affine_coset_pcycle_count": true,
+        "infinity_even_local_trace_two": true,
+        "infinity_odd_local_trace_zero": true,
+        "global_subtraction_gives_quadratic_character": true,
+        "adams_character_check": true
+      },
+      "finite_coset_elements_checked": 4,
+      "finite_pcycles_found": 0,
+      "infinity_inertia_order": 78,
+      "infinity_even_pcycles": 12,
+      "infinity_odd_coset_pcycles": 0,
+      "infinity_even_alternating_trace": 2,
+      "infinity_odd_alternating_trace": 0,
+      "after_global_subtraction": {"even_coset": 1, "odd_coset": -1},
+      "adams_permutations_checked": 0,
+      "adams_character_failures": 0,
+      "discriminant_character_table": [[1,1],[3,1],[4,1],[5,-1],[6,-1],[7,-1],[8,-1],[9,1],[10,1],[11,-1],[12,1]]
+    },
+    {
+      "p": 17,
+      "all_checks_pass": true,
+      "checks": {
+        "finite_cosets_have_no_pcycles": true,
+        "even_affine_inertia_pcycle_count": true,
+        "odd_affine_coset_pcycle_count": true,
+        "infinity_even_local_trace_two": true,
+        "infinity_odd_local_trace_zero": true,
+        "global_subtraction_gives_quadratic_character": true,
+        "adams_character_check": true
+      },
+      "finite_coset_elements_checked": 4,
+      "finite_pcycles_found": 0,
+      "infinity_inertia_order": 136,
+      "infinity_even_pcycles": 16,
+      "infinity_odd_coset_pcycles": 0,
+      "infinity_even_alternating_trace": 2,
+      "infinity_odd_alternating_trace": 0,
+      "after_global_subtraction": {"even_coset": 1, "odd_coset": -1},
+      "adams_permutations_checked": 0,
+      "adams_character_failures": 0,
+      "discriminant_character_table": [[1,-1],[3,1],[4,-1],[5,1],[6,1],[7,1],[8,-1],[9,-1],[10,1],[11,1],[12,1],[13,-1],[14,1],[15,-1],[16,-1]]
+    },
+    {
+      "p": 19,
+      "all_checks_pass": true,
+      "checks": {
+        "finite_cosets_have_no_pcycles": true,
+        "even_affine_inertia_pcycle_count": true,
+        "odd_affine_coset_pcycle_count": true,
+        "infinity_even_local_trace_two": true,
+        "infinity_odd_local_trace_zero": true,
+        "global_subtraction_gives_quadratic_character": true,
+        "adams_character_check": true
+      },
+      "finite_coset_elements_checked": 4,
+      "finite_pcycles_found": 0,
+      "infinity_inertia_order": 171,
+      "infinity_even_pcycles": 18,
+      "infinity_odd_coset_pcycles": 0,
+      "infinity_even_alternating_trace": 2,
+      "infinity_odd_alternating_trace": 0,
+      "after_global_subtraction": {"even_coset": 1, "odd_coset": -1},
+      "adams_permutations_checked": 0,
+      "adams_character_failures": 0,
+      "discriminant_character_table": [[1,1],[3,-1],[4,1],[5,1],[6,1],[7,1],[8,-1],[9,1],[10,-1],[11,1],[12,-1],[13,-1],[14,-1],[15,-1],[16,1],[17,1],[18,-1]]
+    }
+  ]
+}
