@@ -1,0 +1,166 @@
+{
+ "description": "Post-pushforward Frobenius spectra of hook cohomologies H^1_c(U, Lambda^i Std) for the fixed-q root cover P_{q,t}(z)=q z^p+z^3-3z-(q-2)t, U = P^1 \\ {1,-1,oo}. L_i(T) = det(1 - T Frob | H^1_c). All from exact python-flint cycle-type censuses.",
+ "p5": {
+  "ledger_dims": [
+   2,
+   6,
+   8,
+   6,
+   1
+  ],
+  "census_range": "j=1..9, q in {1,3,4}; every L_i determined by j<=h_i and validated on all remaining j (out-of-sample through j=9)",
+  "L": {
+   "q1": {
+    "L0": "(1-T)^2",
+    "L1": "(1-T)^4 (1+T)^2",
+    "L2": "(1-T)^2 (1+T)^4 (1+5T^2)",
+    "L3": "(1+T)^2 (1-4T+5T^2) (1+5T^2)",
+    "L4": "(1+T)"
+   },
+   "q3": {
+    "L0": "(1-T)^2",
+    "L1": "(1-T)^2 (1+T+T^2)^2",
+    "L2": "(1-T)^2 (1-2T+5T^2) (1+T+T^2)^2",
+    "L3": "(1-T)^2 (1-T+5T^2) (1+3T+5T^2)",
+    "L4": "(1-T)"
+   },
+   "q4": {
+    "L0": "(1-T)^2",
+    "L1": "(1-T)^2 (1+T+T^2)^2",
+    "L2": "(1-T)^2 (1+2T+5T^2) (1+T+T^2)^2",
+    "L3": "(1-T)^2 (1-3T+5T^2) (1+T+5T^2)",
+    "L4": "(1+T)"
+   }
+  },
+  "survivors_after_even_odd_cancellation": {
+   "q1": {
+    "even": "(1+T)",
+    "odd": "(1-4T+5T^2)",
+    "rank": 3
+   },
+   "q3": {
+    "even": "(1-T)(1-2T+5T^2)",
+    "odd": "(1-T+5T^2)(1+3T+5T^2)",
+    "rank": 7
+   },
+   "q4": {
+    "even": "(1+T)(1+2T+5T^2)",
+    "odd": "(1-3T+5T^2)(1+T+5T^2)",
+    "rank": 7
+   }
+  },
+  "identifications": {
+   "disc_unit": "disc_z P_{q,t} = u_q (t^2-1), u_q = 3 q (q-2)^2; L4 = 1 - chi(u_q) T = 1 + chi(q) T (chi(3)=-1 mod 5). The weight-0 survivor is ALWAYS exactly this Kummer class.",
+   "V1_V0": "reduced permutation module on the 9 punctures (infinity + critical fibers (z-+1)^2 * cubic g_+-); pure weight 0",
+   "V3_weight1": "= H^1(D_q), D_q: w^2 = u_q g_+(z) g_-(z) genus 2; verified by independent point counts: L(D_1)=(1+5T^2)(1-4T+5T^2), L(D_3)=(1-T+5T^2)(1+3T+5T^2), L(D_4)=(1-3T+5T^2)(1+T+5T^2)",
+   "V2_weight1": "= H^1 anti-part of pair curve B_q: (P_q(z1)-P_q(z2))/(z1-z2)=0 (S_2-quotient rational); verified by independent counts: a(B_1)=0 [1+5T^2], a(B_3)=2 [1-2T+5T^2], a(B_4)=-2 [1+2T+5T^2]",
+   "q1_extra_cancellation": "H^1(B_1)=(1+5T^2) is an isogeny factor of Jac(D_1) -> rank drops 7 -> 3; accidental, absent at q=3,4 and at sampled generic q in F_25"
+  },
+  "exact_count_formula": "5 I_j(q) = 5^j - E_j, E_j = (-chi(q))^j + a_j(B_q) - a_j(D_q); verified all q, j<=9",
+  "E_tables": {
+   "q1": [
+    -5,
+    -5,
+    -5,
+    15,
+    75,
+    235,
+    555,
+    1055,
+    1435
+   ],
+   "q3": [
+    5,
+    5,
+    -25,
+    5,
+    -75,
+    215,
+    1125,
+    -1915
+   ],
+   "q4": [
+    -5,
+    5,
+    25,
+    5,
+    75,
+    215,
+    -1125,
+    -1915
+   ],
+   "twist_relation": "E_j(q=4) = (-1)^j E_j(q=3) exactly"
+  },
+  "q2_degenerate_slice": "X^5+2X^3+X+d = x(x^2+1)^2+d cover, branch {0,oo}: census gives L(V_0..V_3) = (1-T)^{1,2,2,2} and sgn sheaf TRIVIAL (colliding critical values make disc = unit * square), so H^2_c(V_4) = Q_l(-1) is a second Tate class and I_j = 2*5^(j-1) EXACTLY (verified j<=8). The q=2 boundary contributes n_+(2)=2 needed to close CVN.2: N_1(5)=0+2+2+0=4, N_2(5)=2+0+0+2+2=6 both match the validation table",
+  "cvn_check": "n_+(q) = census irreducible-t count I_1(q) exactly: (2,0,2) for q=(1,3,4)"
+ },
+ "p7": {
+  "ledger_dims": [
+   2,
+   10,
+   23,
+   32,
+   23,
+   10,
+   1
+  ],
+  "census_range": "j=1..8 planned (j<=7 complete at time of writing), q in {1,3,4,5,6}",
+  "exact_results": {
+   "L0": "(1-T)^2 all q",
+   "L6": "1 - chi(u_q) T, u_q = -3 q^3 (q-2)^2, chi(u_q)=chi(q) at p=7: +T sign per q {1:+1,3:-1,4:+1,5:-1,6:-1}",
+   "L1": {
+    "q1": "(1-T)^2 Phi5^2",
+    "q6": "(1-T)^2 Phi5^2",
+    "q3": "(1-T)^6 Phi3^2",
+    "q4": "(1-T)^4 (1+T)^2 Phi4^2",
+    "q5": "(1-T)^4 (1+T)^2 Phi3^2",
+    "note": "= reduced permutation module on 13 punctures; exact match to critical-fiber quintic factorizations, all j"
+   },
+   "L5": "= W0 * L(D_q), W0 = (1-T)^2 for q=1,3,6; (1+T)^2 for q=4,5; L(D_q) = genus-4 curve w^2 = u_q g_+ g_- computed independently (j=5-validated): q1: (1-T-7T^2-7T^3+49T^4)(1+3T+13T^2+21T^3+49T^4); q3: (1-T-2T^2-7T^3+49T^4)(1+3T+6T^2+21T^3+49T^4); q4: (1+6T^2+49T^4)(1-4T+10T^2-28T^3+49T^4); q5: (1-4T+7T^2)(1+T+7T^2)(1-3T+6T^2-21T^3+49T^4); q6: (1+3T+9T^2+21T^3+49T^4)(1+3T+13T^2+21T^3+49T^4). Only 2 parameters fitted, all other j validated."
+  },
+  "V2_unique_structured_fits": {
+   "q1": "(1-T)^5 Phi5^4 (1+7T^2)",
+   "q3": "(1-T)^8 (1+T) Phi3^6 (1+2T+7T^2)",
+   "q4": "(1-T)^5 (1+T)^4 Phi4^6 (1+3T+7T^2)",
+   "q5": "(1-T)^4 (1+T)^5 Phi3^4 Phi6^2 (1-3T+7T^2)",
+   "q6": "(1-T)^4 (1+T) Phi5^4 (1-2T+7T^2)",
+   "note": "unique in ansatz space, 6 out-of-sample j validations each; weight-1 part rank 2 = pair-curve anti-part (q=1 case independently confirmed by pair+quotient curve counts)"
+  },
+  "V3_V4_candidates_jmax7": {
+   "q1_V3": "Phi1^6 Phi5^4 * W1 deg 10 = (1+T-7T^2+7T^3+49T^4)(1+T-14T^3+49T^5+343T^6) [2 validation j]",
+   "q1_V4": "Phi1^3 Phi5^2 * W1 deg 12 = (1+7T^2)(1+T+7T^2+7T^3+49T^4)(1-3T+2T^2+6T^3+14T^4-147T^5+343T^6) [1 validation j]",
+   "note": "candidates only; to be re-tested at j=8"
+  },
+  "cross_pipeline_identity": "antichi_j (sgn-weighted pair-config count, independent code) = -P_j(V4) - P_j(V5) verified exactly q=1,6 j<=6",
+  "survivor_rank_bounds": "E_6(q=5) = 4669 => surviving weight-1 rank >= 14 at q=5 (Weil bound, unconditional); candidates imply ~33 total; raw dims were 49+52",
+  "survivor_rank_lower_bounds_unconditional": {
+   "method": "(|E_j|-1)/7^{j/2} max over j<=7, Weil weight<=1",
+   "q1": 7,
+   "q3": 11,
+   "q4": 7,
+   "q5": 14,
+   "q6": 5,
+   "note": "p=5 same method gives 2.0/4.0/4.0 vs true ranks 3/7/7"
+  }
+ },
+ "scaling_probe": "Ej_p11_p13.json: E_j tables for p=11 (j<=5) and p=13 (j<=4), all q, to discriminate polynomial vs Swan-total (exponential) growth of surviving rank",
+ "files": {
+  "scan_generic.py": "cycle-type census engine (any p, parallel)",
+  "analyze_generic.py": "p=5 full pipeline: power sums -> Newton -> factor -> cancellation",
+  "analyze_p7.py": "p=7 T1-T5 hypothesis tests",
+  "fit_middle_p7.py / fit_middle2_p7.py / fit_middle3_p7.py": "structured spectral fits for middle hooks",
+  "genus2_p5.py / genus4_p7.py": "independent twist-curve D_q point counts and L-polys",
+  "pair_curve_p5.py / pair_curve_p7.py / pair_twist_p7.py": "pair/configuration curve counts, sgn-twisted versions",
+  "generic_q_p5.py": "q in F_25 probe of D_q and B_q",
+  "analyze_q2slice.py": "degenerate q=2 boundary slice spectra",
+  "cycle_counts_*.json": "raw exact census data",
+  "Ej_p11_p13.json": "irreducible-count E_j scaling data p=11,13"
+ },
+ "epsilon_minus_families": {
+  "p5": "nonsplit slice X^5-(eta q)^{-1}X^3+3q^{-1}X+d towers computed j<=7 (nonsplit_towers_p5.json). q=1: E^-_j = (-1)^j E_j EXACTLY (global quadratic twist). q=3: unique rank-7 fit: Kummer flips (+1->-1), B-factor kept (a=2), D-factors {1,-3} -> {-1,-3} (one factor quadratically twisted). q=4: Kummer flips (-1->+1), B kept (a=-2), D {3,-1} -> {3,1}. RULE: nonsplit family = same surviving object with Kummer class and exactly one D-factor sign-flipped.",
+  "p7": "towers j<=6 (nonsplit_towers_p7.json): even-j E^- equals untwisted E exactly (forced: quadratic extension splits the twist), odd-j shows partial factor flips; q=1: [-7,-49,77,119,-147,1631] vs [7,-49,-77,119,637,1631]",
+  "consequence": "n_+(q) and n_-(q) are the two Frobenius readings of ONE surviving object per q; p n_+/-(q) = p -/+ E_1-type traces"
+ },
+ "j1_positivity_structure": "p=7: q=1,6 (irreducible quintic critical fibers) have ZERO irreducible fibers over F_7 (E_1 = +7 = p); q=3,4,5 have 2 each (E_1 = -7). Pointwise Weil at j=1 is vacuous when surviving rank ~ p; positivity of N_a comes from the q-average (CVN.2), i.e. the crown needs the q-line assembly of the surviving curve families, not per-q bounds.",
+ "q2_boundary_p7": "p=7 q=2 slice (2x^7+x^3-3x+d): disc = -3d^2 (unit square), I_j = [2*7^j + 2*Re((i sqrt7)^j)]/7 exactly (verified j<=4): two Tate classes + supersingular elliptic factor"
+}
