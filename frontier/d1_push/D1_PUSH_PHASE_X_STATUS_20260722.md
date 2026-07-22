@@ -1,5 +1,7 @@
 # d=1 crown push — Phase X status
 
+> **Superseded on 2026-07-22 by `D1_PUSH_PHASE_Y_STATUS_20260722.md`.** The grouped-coefficient target and the proposed full Cartier support law below are refuted by an exact `p=29` counterexample. The completed geometric and extremal results remain valid.
+
 **Date:** 2026-07-22  
 **Branch:** `gpt56/d1-push-weight0-collapse-20260722`  
 **Base:** Claude commit `aede75b7590555d843322fd24de2ca958ecd25ee`
@@ -49,8 +51,9 @@ Thus every split/nonsplit Kummer, pair and D term is explicit.
 
 For every fibre permutation `sigma`,
 
-`sum_k(p-k)(-1)^k Tr(sigma|exterior^k P)
- =p*1_(sigma is a p-cycle).`
+`sum_k(p-k)(-1)^k Tr(sigma|exterior^k P)`
+
+` =p*1_(sigma is a p-cycle).`
 
 After finite and infinite boundary subtraction this gives
 
@@ -70,12 +73,13 @@ and the coefficient matrix
 
 one has
 
-`det A_p(G)
- =-c^(p(p-3)/2)d^(p-3)((p-3)ad^2-c^3).`
+`det A_p(G)`
+
+` =-c^(p(p-3)/2)d^(p-3)((p-3)ad^2-c^3).`
 
 The dominant no-identity Cartier block therefore already satisfies the empirical survivor-support bound.
 
-## 3. Exact surviving gap
+## 3. Exact surviving gap at the end of Phase X
 
 Expanding the Cartier cofactor by identity selections reduces the full support law to minors with
 
@@ -107,15 +111,15 @@ The complete coefficient still vanishes. For this identity-selected minor, all `
 
 Analogous raw excess assignments already occur at `p=17` and `p=19`, so the wording “the assignment bound first exceeds the boundary at p=23” is not correct for this natural dominant-`w=1` assignment model.
 
-The corrected open theorem is:
+The Phase X target was:
 
-### Factorial-weighted filtered-coefficient lemma
+### Factorial-weighted filtered-coefficient lemma — now refuted
 
 For every prime `p`, every identity-selected minor, every survivor exponent above the proposed boundary, and every fixed falling-factorial degree set `M`, the factorial-weighted signed sum of all column choices producing `M` vanishes modulo `p`, unless the associated alternant itself vanishes.
 
-This coefficient-level statement is strong enough to imply the support law. It is strictly subtler than a hook-content divisibility theorem for individual alternants.
+Phase Y shows that this statement fails at `p=29`, and that the complete support law also fails there.
 
-## 4. What is closed
+## 4. What remains closed
 
 Closed without a new ingredient:
 
@@ -124,20 +128,20 @@ Closed without a new ingredient:
 - using configuration recursion alone to derive positivity;
 - further extremal Kummer/pair/D point-count work;
 - searching for another growing-genus obstruction in the extremal sector;
-- claiming that all above-boundary individual factorial-Schur alternants vanish.
+- claiming that all above-boundary individual factorial-Schur alternants vanish;
+- proving the crown by the proposed hard Cartier support cutoff.
 
-## 5. Highest-value next move
+## 5. Superseding result
 
-Prove the factorial-weighted filtered-coefficient lemma by:
+`CARTIER_SUBSTITUTION_MINOR_IDENTITY.md` proves that every grouped scalar is a minor of the substitution matrix
 
-1. fixing an identity subset and a falling-factorial degree set `M`;
-2. writing its scalar coefficient as a signed sum of products `1/(i!j!)`;
-3. converting that sum to a coefficient or determinant identity in binomial generating functions;
-4. proving modular vanishing above the survivor boundary;
-5. only then applying factorial-Schur or hook-content formulae to any residual degree sets;
-6. checking that the lower `w=2,3,4` terms satisfy the same grouped cancellation.
+`1/m! [X^q](X+X^3)^m.`
 
-Success proves the Cartier survivor-support law uniformly. The next task would then be evaluation or nonvanishing of the boundary survivor sum.
+`P29_CARTIER_SUPPORT_COUNTEREXAMPLE.md` proves
+
+`[c^224 d^112] det(I-H)=22 a chi_29(a),`
+
+at weight `448>420`. The same coefficient occurs in the `w=1` block alone.
 
 ## 6. Audits
 
@@ -149,6 +153,8 @@ Success proves the Cartier survivor-support law uniformly. The next task would t
 - Cartier dominant-block audit: `176/176` exact determinant comparisons through `p=199`.
 - p=23 filtered-survivor audit: all `38/38` above-boundary coefficient checks vanish exactly over `F_(23^2)` for both square classes of `a`; Hugging Face CPU-XL job `6a61048b13e6ef894d54c19f`.
 - p=23 leading-assignment reconstruction: one explicit nonzero weight-286 assignment, `332,192` compatible assignments, `18/18` grouped scalar coefficients zero modulo `23`.
+- p=29 substitution-minor audit: `2,166,022,375` assignments in `2,177` degree sets, `15` nonzero grouped scalars, identity-minor coefficient `7 mod 29`.
+- p=29 full Fourier audit: exact coefficient `22 a chi_29(a)` at `c^224d^112`, independently over two quadratic field models.
 
 ## 7. Epistemic classification
 
@@ -156,6 +162,7 @@ Success proves the Cartier survivor-support law uniformly. The next task would t
 - p=23 full support law: exact finite verification.
 - p=23 leading-assignment reconstruction and grouped cancellation: exact finite verification.
 - Previous individual-alternant filtered-minor lemma: refuted.
-- Factorial-weighted filtered-coefficient lemma: open.
+- Factorial-weighted filtered-coefficient lemma: refuted at `p=29`.
+- Full Cartier support law: refuted at `p=29`.
 - Cartier survivor-sum nonvanishing: open.
 - General-prime function-field crown: open.
