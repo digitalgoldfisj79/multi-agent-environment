@@ -65,16 +65,16 @@ def irreducible_cubic(p: int, t: int, s: int, n: int) -> bool:
 
 def audit_class(p: int, a: int) -> dict:
     factors_per_member: Counter[tuple[int, int]] = Counter()
-    satisfying_roots = 0
-    translation_orbits = 0
+    satisfying_root_count = 0
+    translation_orbit_frobenius_classes = 0
 
-    # Each additive orbit of degree-three elements has one trace-zero element.
-    # Dividing the trace-zero element count by three counts the corresponding
-    # Frobenius orbits/irreducible cubics.
+    # Each additive translation orbit has one trace-zero element. Frobenius
+    # permutes those trace-zero elements in triples, so trace-zero irreducible
+    # cubics count Frobenius classes of translation orbits.
     for s0 in range(p):
         for n0 in range(p):
             if irreducible_cubic(p, 0, s0, n0):
-                translation_orbits += 1
+                translation_orbit_frobenius_classes += 1
 
     for t in range(p):
         for s in range(p):
@@ -89,9 +89,8 @@ def audit_class(p: int, a: int) -> dict:
                 c = (a * s - B) % p
                 d = (-A - a * n) % p
                 factors_per_member[(c, d)] += 1
-                satisfying_roots += 3
+                satisfying_root_count += 3
 
-                # Direct quotient-ring divisibility check.
                 remainder = [
                     (A + a * n + d) % p,
                     (B - a * s + c) % p,
@@ -99,7 +98,6 @@ def audit_class(p: int, a: int) -> dict:
                 ]
                 assert remainder == [0, 0, 0]
 
-                # Check the Frobenius-oriented discriminant interpolation.
                 discriminant = (
                     t * t * s * s
                     - 4 * s**3
@@ -132,10 +130,11 @@ def audit_class(p: int, a: int) -> dict:
                 assert (t * t - 3 * s + a * t * delta) % p == 0
 
     incidence = sum(factors_per_member.values())
-    expected = (p * p - 1) // 3
-    assert incidence == expected
-    assert satisfying_roots == 3 * expected
-    assert translation_orbits == expected
+    expected_factor_incidence = (p * p - 1) // 3
+    expected_additive_orbits = p * p - 1
+    assert incidence == expected_factor_incidence
+    assert satisfying_root_count == expected_additive_orbits
+    assert translation_orbit_frobenius_classes == expected_factor_incidence
 
     distribution = Counter(
         factors_per_member[(c, d)] for c in range(p) for d in range(p)
@@ -144,9 +143,13 @@ def audit_class(p: int, a: int) -> dict:
     return {
         "a": a,
         "square_class": chi(a, p),
-        "translation_orbit_count": translation_orbits,
+        "additive_translation_orbit_count": expected_additive_orbits,
+        "translation_orbit_frobenius_class_count": (
+            translation_orbit_frobenius_classes
+        ),
+        "satisfying_degree_three_root_count": satisfying_root_count,
         "cubic_factor_incidence": incidence,
-        "expected_incidence": expected,
+        "expected_incidence": expected_factor_incidence,
         "member_multiplicity_distribution": {
             str(k): distribution[k] for k in sorted(distribution)
         },
@@ -173,10 +176,10 @@ def main() -> None:
     result = {
         "status": "PASS",
         "statement": (
-            "For both square classes and every audited prime, additive "
-            "translation orbits of degree-three elements are counted exactly "
-            "by (p^2-1)/3, and exactly one element per orbit satisfies the "
-            "fixed-a cubic divisibility condition."
+            "For both square classes and every audited prime, there are "
+            "p^2-1 additive translation orbits of degree-three elements, "
+            "exactly one satisfying root per orbit, and (p^2-1)/3 "
+            "Frobenius classes/irreducible-cubic factor incidences."
         ),
         "range": "all prime p from 5 through 29",
         "rows": rows,
