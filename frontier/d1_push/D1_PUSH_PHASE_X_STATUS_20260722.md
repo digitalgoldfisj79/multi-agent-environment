@@ -8,7 +8,7 @@
 
 The function-field `d=1` crown remains open. It is machine-certified for every prime below `1200`; no uniform general-prime proof is claimed here.
 
-This phase nevertheless closes every previously unidentified extremal term and converts the Cartier support conjecture into a precise modular determinant lemma.
+This phase nevertheless closes every previously unidentified extremal term and converts the Cartier support conjecture into a precise modular determinant problem.
 
 ## 2. Results completed in this continuation
 
@@ -83,23 +83,37 @@ Expanding the Cartier cofactor by identity selections reduces the full support l
 
 `C=(R\{3}) union {p}.`
 
-After the weighted scaling `c->tc`, `d->t^2d`, coefficients become falling-factorial polynomials in the row parameter `n=p-u`. A nonzero determinant is a binomial/factorial-Schur minor.
-
-The survivor grading imposes
+After the weighted scaling `c->tc`, `d->t^2d`, coefficients become falling-factorial polynomials in the row parameter `n=p-u`. The survivor grading imposes
 
 `sum i = 1 mod (p-1)/2.`
 
-The exact remaining lemma is:
+The previous provisional formulation claimed that every individual above-boundary falling-factorial alternant must vanish modulo `p`. Exact reconstruction at `p=23` disproves that formulation.
 
-### Modular filtered-minor lemma
+For the identity set
 
-Every identity-selected binomial/falling-factorial alternant satisfying the survivor grading and contributing nontrivially modulo `p` has `(1,2)`-weight at most
+`S={16,17,18,21,22}`
 
-`(p^2-1)/2.`
+there is an explicit dominant `w=1` assignment with
 
-The elementary assignment bound is insufficient. At `p=23`, the proposed support boundary is `264`, while the only possible orthogonality-survivor weights above it are `286`, `308`, and `330`. An exact two-stage multiplicative-Fourier audit over `F_(23^2)` now verifies that every coefficient `c^(22 alpha)d^(22 beta)` at those three weights vanishes for representatives of both square classes of `a`. This is a complete finite verification of the p=23 support law, including all permutations, identity selections, and `w=1,2,3,4` terms. The specific tropical leading alternant that motivated the original sentence has not yet been reconstructed and is no longer presented as an audited object.
+`sum i=34,  sum j=110,  sum k=88,`
 
-The problem is now a finite determinant-divisibility statement. It is naturally expressible using binomial minors, factorial Schur functions and hook-content/product formulae.
+and weight
+
+`110+2*88=286 > 264=(p^2-1)/2.`
+
+Its falling-factorial determinant is `3 mod 23`, its factorial scalar is `10 mod 23`, and its signed individual contribution is `7 mod 23`. Thus an individual above-boundary alternant can be nonzero.
+
+The complete coefficient still vanishes. For this identity-selected minor, all `332,192` compatible distinct-degree assignments group into `18` falling-factorial degree sets. For every degree set, the factorial-weighted signed sum of column choices is `0 mod 23`, before multiplication by the corresponding alternant. The aggregate p=23 Fourier audit independently verifies all weights `286,308,330` for both square classes of `a`, including `w=1,2,3,4`.
+
+Analogous raw excess assignments already occur at `p=17` and `p=19`, so the wording “the assignment bound first exceeds the boundary at p=23” is not correct for this natural dominant-`w=1` assignment model.
+
+The corrected open theorem is:
+
+### Factorial-weighted filtered-coefficient lemma
+
+For every prime `p`, every identity-selected minor, every survivor exponent above the proposed boundary, and every fixed falling-factorial degree set `M`, the factorial-weighted signed sum of all column choices producing `M` vanishes modulo `p`, unless the associated alternant itself vanishes.
+
+This coefficient-level statement is strong enough to imply the support law. It is strictly subtler than a hook-content divisibility theorem for individual alternants.
 
 ## 4. What is closed
 
@@ -109,17 +123,19 @@ Closed without a new ingredient:
 - treating `C_3` or any single configuration degree as an `O(p)` survivor;
 - using configuration recursion alone to derive positivity;
 - further extremal Kummer/pair/D point-count work;
-- searching for another growing-genus obstruction in the extremal sector.
+- searching for another growing-genus obstruction in the extremal sector;
+- claiming that all above-boundary individual factorial-Schur alternants vanish.
 
 ## 5. Highest-value next move
 
-Prove the modular filtered-minor lemma by:
+Prove the factorial-weighted filtered-coefficient lemma by:
 
-1. writing each leading coefficient as a binomial determinant;
-2. applying the general binomial-minor/Schur evaluation;
-3. converting nonvanishing modulo `p` into a hook-content divisibility criterion;
-4. showing that every partition above the survivor boundary contains a factor divisible by `p`;
-5. checking that lower `w=2,3,4` terms cannot evade the same filtration criterion.
+1. fixing an identity subset and a falling-factorial degree set `M`;
+2. writing its scalar coefficient as a signed sum of products `1/(i!j!)`;
+3. converting that sum to a coefficient or determinant identity in binomial generating functions;
+4. proving modular vanishing above the survivor boundary;
+5. only then applying factorial-Schur or hook-content formulae to any residual degree sets;
+6. checking that the lower `w=2,3,4` terms satisfy the same grouped cancellation.
 
 Success proves the Cartier survivor-support law uniformly. The next task would then be evaluation or nonvanishing of the boundary survivor sum.
 
@@ -132,12 +148,14 @@ Success proves the Cartier survivor-support law uniformly. The next task would t
 - Nonsplit discriminant-40 audit: exact through `p=499`.
 - Cartier dominant-block audit: `176/176` exact determinant comparisons through `p=199`.
 - p=23 filtered-survivor audit: all `38/38` above-boundary coefficient checks vanish exactly over `F_(23^2)` for both square classes of `a`; Hugging Face CPU-XL job `6a61048b13e6ef894d54c19f`.
+- p=23 leading-assignment reconstruction: one explicit nonzero weight-286 assignment, `332,192` compatible assignments, `18/18` grouped scalar coefficients zero modulo `23`.
 
 ## 7. Epistemic classification
 
-- All completed results above: exact theorems with stated dependencies.
-- p=23 support law: exact finite verification.
-- Specific p=23 leading alternant witness: not reconstructed.
-- Modular filtered-minor lemma: open.
+- All completed geometric and extremal results above: exact theorems with stated dependencies.
+- p=23 full support law: exact finite verification.
+- p=23 leading-assignment reconstruction and grouped cancellation: exact finite verification.
+- Previous individual-alternant filtered-minor lemma: refuted.
+- Factorial-weighted filtered-coefficient lemma: open.
 - Cartier survivor-sum nonvanishing: open.
 - General-prime function-field crown: open.
