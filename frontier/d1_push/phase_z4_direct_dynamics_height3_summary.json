@@ -1,0 +1,50 @@
+{
+  "date": "2026-07-23",
+  "job_id": "6a61a21c13e6ef894d54cae9",
+  "status": "PASS",
+  "method": "Exact FLINT Rabin certification of X^p+aX^3+bX^2+cX+d for every fixed integral tail with nonzero a and coefficients of height at most 3.",
+  "range": {
+    "prime_min": 5,
+    "prime_max_exclusive": 500,
+    "prime_count": 93,
+    "candidate_map_count": 2058,
+    "requested_witnesses_per_prime": 2
+  },
+  "primes_without_a_height3_cubic_map": [5,227,419,439,461,463,487,491,499],
+  "nondegenerate_uncovered_prime_count": 8,
+  "distinct_maps_found_in_first_witness_union": 143,
+  "top_fixed_maps": [
+    {
+      "tail": [-2,-1,0,-2],
+      "covered_prime_count": 8,
+      "covered_primes": [7,11,13,23,61,197,223,373]
+    },
+    {
+      "tail": [-2,1,0,2],
+      "covered_prime_count": 8,
+      "covered_primes": [7,11,13,23,61,197,223,373]
+    },
+    {
+      "tail": [-3,-2,3,2],
+      "covered_prime_count": 7,
+      "covered_primes": [7,19,37,41,239,433,449]
+    },
+    {
+      "tail": [-3,2,3,-2],
+      "covered_prime_count": 7,
+      "covered_primes": [7,19,37,41,239,433,449]
+    }
+  ],
+  "conclusions": {
+    "universal_fixed_height3_map_found": false,
+    "small_fixed_map_menu_found": false,
+    "height3_family_covers_every_prime_below_500": false,
+    "general_prime_dynamical_rule_found": false,
+    "d1_crown_proved": false
+  },
+  "notes": [
+    "p=5 has the known small-characteristic collision and is not treated as evidence against a general p>=7 cubic-map construction.",
+    "The other eight uncovered primes exhaust all 2058 height-3 cubic tails.",
+    "The first-witness union and greedy menu are discovery devices, not an exhaustive minimum set-cover proof over every height-3 map."
+  ]
+}
