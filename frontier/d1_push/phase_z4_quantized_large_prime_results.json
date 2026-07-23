@@ -1,0 +1,38 @@
+{
+  "date": "2026-07-23",
+  "status": "PASS",
+  "method": "Exact FLINT Rabin criterion with logarithmic Frobenius composition; cross-checked against the independent C++ implementation at p=101.",
+  "jobs": {
+    "401": "6a619ffc13e6ef894d54cac9",
+    "503": "6a61a00cd09dc1f57c6c3d1a",
+    "601": "6a61a0a5d09dc1f57c6c3d24",
+    "701": "6a61a0b313e6ef894d54cad3",
+    "p101_crosscheck": "6a61a539d09dc1f57c6c3d97"
+  },
+  "rows": [
+    {"prime":401,"N_square":362,"N_nonsquare":370,"square_ratio":0.9027431421446384,"nonsquare_ratio":0.9226932668329177},
+    {"prime":503,"N_square":480,"N_nonsquare":466,"square_ratio":0.9542743538767395,"nonsquare_ratio":0.9264413518886679},
+    {"prime":601,"N_square":516,"N_nonsquare":488,"square_ratio":0.8585690515806988,"nonsquare_ratio":0.8119800332778702},
+    {"prime":701,"N_square":628,"N_nonsquare":642,"square_ratio":0.8958630527817404,"nonsquare_ratio":0.9158345221112696}
+  ],
+  "checks": {
+    "all_even": true,
+    "all_positive": true,
+    "all_below_3p_over_2": true,
+    "all_below_2p": true,
+    "no_zero_residue": true,
+    "p101_cross_implementation_counts": [76,116]
+  },
+  "combined_dataset_observation": {
+    "prime_range": "5<=p<=293 plus 401,503,601,701",
+    "max_abs_N_minus_p_over_sqrt_p": 4.875086364965062,
+    "attained_at": {"prime":167,"square_class":"square","N":104},
+    "fixed_sqrt_p_scale_supported_finitely": true
+  },
+  "conclusions": {
+    "uniform_N_below_2p_proved": false,
+    "uniform_positive_N_proved": false,
+    "quantized_route_refuted": false,
+    "d1_crown_proved": false
+  }
+}
