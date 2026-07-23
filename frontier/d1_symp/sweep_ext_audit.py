@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
-"""Independent statistical audit of sweep_ext_results.csv."""
+"""Independent statistical audit of a sweep_ext_results.csv file."""
 from __future__ import annotations
 
+import argparse
 import csv
 import json
 import math
@@ -60,10 +61,13 @@ def audit(csv_path: Path) -> dict[str, object]:
 
 
 def main() -> None:
-    result=audit(Path("frontier/d1_symp/sweep_ext_results.csv"))
-    Path("frontier/d1_symp/sweep_ext_audit_results.json").write_text(
-        json.dumps(result, indent=2)+"\n"
-    )
+    parser=argparse.ArgumentParser()
+    parser.add_argument("csv", type=Path, help="path to sweep_ext_results.csv")
+    parser.add_argument("--output", type=Path, default=None)
+    args=parser.parse_args()
+    result=audit(args.csv)
+    if args.output is not None:
+        args.output.write_text(json.dumps(result, indent=2)+"\n")
     print(json.dumps(result, indent=2))
 
 
