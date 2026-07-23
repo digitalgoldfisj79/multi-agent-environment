@@ -1,7 +1,7 @@
-# Local Fourier rank-four bridge
+# Local Fourier rank-four bridge — conditional form
 
 **Date:** 2026-07-23  
-**Status:** exact reduction of the terminal conductor problem to one functorial cyclic Thom–Sebastiani compatibility. The local singularity calculation gives the sharp candidate bound `4`. The final compatibility and removal of the Artin–Schreier excess are not yet claimed as proved.
+**Status:** the local algebra gives a candidate effective bound `4`, but the passage from the finite cyclic fixed diagonal to the primitive weighted-corner Fourier transform is not proved. The two rank-one wild infinity orbits belong to the Artin–Schreier class already subtracted and provide no direct bound for `E_a^prim`. This file records the exact conditional bridge and the remaining theorem without treating it as established.
 
 ## 1. Terminal object
 
@@ -9,164 +9,163 @@ Let
 
 `E_a=R^1 pi_! (Psi^p(P_a)-P_a)`
 
-be the generic-pencil Adams pushforward on the original linear-coefficient line `A^1_c`, as in `GENERIC_PENCIL_ADAMS_PUSHFORWARD_THEOREM.md`. After removing the exact Tate, Kummer, pair, split/nonsplit `D`, CM and Artin–Schreier boundary summands, write the residual virtual middle extension as
+be the generic-pencil Adams pushforward on the original linear-coefficient line `A^1_c`. After removing the exact Tate, Kummer, pair, split/nonsplit `D`, CM and Artin–Schreier boundary summands, write the residual virtual middle extension as
 
 `E_a^prim`.
 
-The remaining crown theorem follows from an absolute bound for
+The crown would follow from absolute effective bounds for
 
 `Swan_infinity(E_a^prim)-rank(E_a^prim)`
 
 and for the invariant dimension.
 
-For a middle extension on `A^1` with no finite singularities, Laumon's stationary-phase/rank formula identifies the conductor defect with the generic rank of the Fourier–Deligne transform away from frequency zero. Thus the sharp local target is
+If `E_a^prim[1]` admits an effective perverse presentation with no constant or punctual summands, and if its Fourier transform is a middle extension lisse on `G_m`, then Laumon stationary phase identifies the relevant conductor defect with the generic effective rank of the Fourier transform. Under those additional hypotheses, the sharp candidate target is
 
 `rank_eff(FT_c(E_a^prim)|_(G_m)) <= 4.`
 
-## 2. Cyclic realization of the Adams operation
+None of the hypotheses in the preceding paragraph is automatic from the finite trace data.
 
-For a complex `K`, the p-th Adams operation is represented by the cyclic trace on `K^(tensor p)`:
+## 2. Cyclic realization of Adams
 
-`Psi^p(K)=Tr_(C_p)(sigma|K^(tensor p))`
+For a complex `K`, the p-th Adams operation is represented in the Grothendieck group by the cyclic trace on `K^(tensor p)`:
 
-in the Grothendieck group, where `sigma` is a p-cycle.
+`Psi^p(K)=Tr_(C_p)(sigma|K^(tensor p))`,
 
-Fourier–Deligne transform exchanges tensor product in the `d`-coordinate with additive convolution in the dual coordinate. Therefore the Fourier transform of the cyclic power is the cyclic trace of the p-fold additive convolution. This compatibility is formal from the projection formula, proper base change and the symmetric monoidal structure, once shifts and Tate twists are normalized.
+where `sigma` is a p-cycle.
 
-The difficult point is localizing the resulting cyclic convolution in characteristic `p`: the factor permutation has order equal to the residue characteristic, so a naive tame fixed-point formula is invalid.
+Fourier–Deligne transform exchanges tensor product in the `d`-coordinate with additive convolution in the dual coordinate. At the level of Grothendieck classes and normalized six-functor operations, the Fourier transform of the cyclic power is therefore represented by the cyclic trace of the p-fold additive convolution.
 
-## 3. Exact fixed-diagonal singularity calculation
+The unresolved issue is localizing that cyclic trace in characteristic `p`, where the factor permutation itself has order `p`. A tame fixed-point argument does not apply.
 
-The cyclic fixed locus in the p-fold root fibre product is the root diagonal. The exact normal displacement is
+## 3. Exact finite fixed-diagonal algebra
+
+The cyclic fixed locus in the p-fold root fibre product is the root diagonal. The one-factor normal displacement is
 
 `f_(a,c,d)(x+h)-f_(a,c,d)(x)`
 
 `=h^p+(3a x^2+c)h+3a xh^2+ah^3.`
 
-Consequently the only nontransverse locus is
+Consequently the one-factor nontransverse locus is
 
 `Gamma_a: c=-3a x^2.`
 
-On `Gamma_a` the normal germ is
+On `Gamma_a` the one-factor normal germ is
 
 `phi_(a,x)(h)=h^p+3a xh^2+ah^3.`
 
-The theorem `CYCLIC_DIAGONAL_SINGULARITY_THEOREM.md` proves:
+The exact local calculation gives:
 
 - `x!=0`: formal type `A_1`, Milnor number `1`;
 - `x=0`: formal type `A_2`, Milnor number `2`;
-- the `h^p` term is formally removable in both cases;
-- there are no further finite fixed-diagonal singularities.
+- the `h^p` term is formally removable in both one-variable germs.
 
-## 4. The A1 contribution is already explicit
+This does **not** by itself identify the complete normal complex of the p-fold cyclic convolution. The normal space has `p-1` directions and the reduction to the one-factor vanishing cycles requires the missing equivariant Thom–Sebastiani comparison.
 
-The punctured critical parabola is a quadratic cover of the `c`-line:
+## 4. Exact A1 main/Kummer decomposition
 
-`c=-3a x^2.`
+The punctured critical parabola maps to the `c`-line by
 
-Its local vanishing-cycle rank is one. After pushforward to `c`, this gives the quadratic/Kummer stationary-phase class already present in the exact extremal ledger. It is therefore absent from `E_a^prim`.
+`x -> c=-3a x^2.`
 
-Equivalently, the only possible primitive finite-diagonal contribution is supported at the single point `x=c=0`.
+Its pushforward is exactly
 
-## 5. The A2 effective dimension
+`Q_l direct_sum L_(chi(-c/(3a))).`
 
-Let `V_A2` denote the two-dimensional vanishing-cycle representation of the tame `A_2` germ. Functorial Thom–Sebastiani identifies the cyclic local contribution with its p-th cyclic Adams operation.
+Thus, if the finite fixed-diagonal contribution is identified by the cyclic localization theorem, its punctured `A_1` part is exhausted by the already removed main/Tate and Kummer classes.
 
-Regardless of the arithmetic Frobenius structure, the virtual difference
+The word “if” is essential: the quadratic-cover calculation is exact, while its identification with the complete cyclic Fourier contribution is conditional.
+
+## 5. Candidate A2 effective dimension
+
+Let `V_A2` be the two-dimensional tame vanishing-cycle representation of the one-variable `A_2` germ. In the tame representation ring, the virtual class
 
 `Psi^p(V_A2)-V_A2`
 
-has an honest effective presentation using two representations of dimension `2`. Hence
+has an effective presentation as the difference of two representations of dimension `2`; hence its total effective presentation dimension is at most `4`.
 
-`effective dimension <= 4.`
+Therefore, **conditional on** the cyclic Thom–Sebastiani–corner lemma identifying the entire primitive finite contribution with this class and proving that no additional specialization cone survives, one obtains
 
-This bound is independent of `p`.
+`rank_eff(FT_c(E_a^prim)|_(G_m)) <= 4.`
 
-Thus, once the cyclic Thom–Sebastiani localization is shown to have no additional primitive wild excess,
+The dimension calculation is exact. The identification with `FT_c(E_a^prim)` is open.
 
-### Rank-four consequence
+## 6. Artin–Schreier subtraction and what remains
 
-`boxed(rank_eff(FT_c(E_a^prim)|_(G_m)) <= 4.)`
+At the root-infinity inertia group,
 
-## 6. Wild excess and the weighted corner
+`W|I=W_AS^aff+2(Q-m1).`
 
-All possible non-finite excess is concentrated at the unique corner `c=d=infinity`:
+The class `W_AS^aff` contains the complete positive-ramification representation, including the two square/nonsquare wild orbits whose local Fourier transforms have rank one. That entire class is explicitly removed in `E_a^prim`.
 
-- the infinity family is formally constant at every finite `c`;
-- the weighted exceptional divisor is the universal Artin–Schreier family;
-- its open contribution is explicit Tate/Artin–Schreier;
-- the tame endpoint is Adams-annihilated;
-- the wild endpoint is exactly Artin–Schreier infinity;
-- the only p-cycle fibres on the descended exceptional divisor are the known orbit `X^p-X+D`, `D!=0`.
+The residual term `2(Q-m1)` is tame. Its global weight-zero contribution collapses to the single quadratic Kummer line, also removed.
 
-Therefore the remaining bridge is not to classify another local type. It is to prove the derived equality:
+Consequently the remaining primitive problem is **not** controlled by the two wild rank-one orbits. It is the derived specialization cone of the residual tame augmentation at the weighted corner.
 
-`wild cyclic excess = explicit Artin-Schreier/Tate boundary class`
+The exact weighted-corner results establish:
 
-in the localization triangle. After that subtraction, only the `A_2` term remains.
+- formal rigidity away from the corner;
+- the universal Artin–Schreier central fibre;
+- the tame and wild endpoint types;
+- complete finite critical factorization;
+- Adams annihilation of every finite collision stratum.
 
-## 7. Precise bridge lemma
+They do not yet prove that the residual specialization cone is the isolated `A_2` Adams difference.
 
-### Cyclic Thom–Sebastiani–corner lemma
+## 7. Precise remaining theorem
 
-For the p-fold cyclic convolution defining `Psi^p(P_a)`:
+### Tame augmentation specialization theorem
 
-1. the iterated Thom–Sebastiani isomorphism is `C_p`-equivariant;
-2. its stationary-phase decomposition localizes the finite part to the fixed diagonal;
-3. the punctured `A_1` family maps to the already identified Kummer summand;
-4. the isolated `A_2` point contributes `Psi^p(V_A2)-V_A2`;
-5. the entire wild correction is the explicit Artin–Schreier/Tate class of the weighted corner.
+Construct the localization triangle for the resolved weighted corner after removing the explicit Artin–Schreier/Tate and Kummer summands, and prove that:
 
-Then
+1. the p-fold cyclic Thom–Sebastiani comparison is `C_p`-equivariant in the required normalized derived category;
+2. all finite `A_1`, triple and quadruple strata map to the already removed main/Kummer or zero Adams classes;
+3. the specialization cone of `2(Q-m1)` at the central fibre is supported only at the persistent `A_2` point;
+4. that punctual cone is represented by `Psi^p(V_A2)-V_A2` with no additional wild, constant or extension summands.
 
-`rank_eff(FT_c(E_a^prim)|_(G_m)) <= 4`,
+Only then does the effective rank-four bound follow. A further check that the primitive Fourier transform has no constant/punctual summand is required to convert the generic rank bound into a bound for the zero-frequency stalk and hence the conductor defect.
 
-and Laumon's rank formula gives
+## 8. Finite evidence
 
-`Swan_infinity(E_a^prim)-rank(E_a^prim) <= 4.`
-
-Together with the already explicit endpoint invariant calculation, this supplies the Primitive effective-degree lemma and hence
-
-`N_a(p)=p+O(sqrt p)`.
-
-## 8. Evidence for sharpness
-
-The true `c`-pencil Fourier audit through `p=199` found
+The exact primitive `c`-pencil audits found
 
 `max_(k!=0) |FT(m_(p,A))(k)|/p^(3/2)=3.85138337984372`
 
-at `(p,A,k)=(127,1,35)`.
+through `p=199`, and the out-of-sample `p=251` values remained below `3.29`.
 
-For a pure effective trace object, a rank-three Weil envelope would be at most `3`. The observed coefficient is therefore consistent with effective rank at least four and strongly supports `4` as the sharp generic rank rather than merely a convenient upper bound.
+These computations reject visible growth on the tested range. They do **not** determine geometric rank: a high-rank or virtual sheaf may have bounded normalized traces through cancellation. The data are compatible with rank four but are not evidence that distinguishes rank four from a larger cancelling object.
 
-This is evidence, not part of the proof, because the current object is virtual until the effective presentation in the bridge lemma is constructed.
+A sparse fit against ordinary cubic Airy and normalized tame Jacobi dictionaries explained less than about one quarter of the variance. Thus no simple small list of standard Airy/Kummer factors has been identified.
 
 ## 9. Literature mechanism
 
-The required formal ingredients exist individually:
+The required general ingredients exist separately:
 
-- Illusie, *Around the Thom–Sebastiani theorem*: nearby cycles commute with external products under the stated `Psi`-good hypotheses, and vanishing cycles of a sum are local additive convolutions;
-- Fu, *A Thom–Sebastiani Theorem in Characteristic p*: the isolated-singularity form via Fourier transform and stationary phase;
-- Fu and Abbes–Saito: explicit local Fourier transforms and stationary-phase decompositions;
-- T. Saito: the Milnor formula identifies vanishing-cycle total dimension with characteristic-cycle intersection multiplicity.
+- Illusie’s étale Thom–Sebastiani theorem replaces tensor product by local additive convolution in characteristic `p` and gives tame convolution formulas;
+- Fu’s characteristic-`p` isolated-singularity theorem uses Fourier transform and stationary phase;
+- Laumon, Fu and Abbes–Saito compute local Fourier transforms and rank/Swan changes;
+- T. Saito’s Milnor formula relates total vanishing-cycle dimension to characteristic-cycle intersection multiplicity.
 
-The project-specific work is to write the cyclic equivariance and the weighted-corner subtraction in one commutative localization diagram.
+The project-specific missing work is the equivariant specialization diagram for the residual tame augmentation. None of the cited general results automatically supplies that diagram.
 
 ## 10. Epistemic classification
 
 ### Exact
 
-- cyclic realization of Adams at the representation/trace level;
-- Fourier tensor/convolution compatibility at the six-functor level;
-- fixed diagonal and critical parabola;
+- cyclic Adams trace identity in the Grothendieck group;
+- normalized Fourier tensor/convolution compatibility;
+- one-factor fixed-diagonal normal expansion;
 - formal `A_1/A_2` classification and Milnor numbers;
-- explicit weighted Artin–Schreier corner and endpoints;
-- effective dimension `<=4` for the isolated `A_2` Adams difference.
+- critical-parabola main/Kummer decomposition;
+- complete Artin–Schreier/tame infinity splitting;
+- effective presentation dimension `<=4` for the isolated tame `A_2` Adams difference;
+- finite stationary equations and absence of generic affine stationary points at nonzero `c`-frequency.
 
-### Remaining
+### Conditional or open
 
-- `C_p`-equivariant iterated Thom–Sebastiani comparison in the exact global-local diagram used here;
-- equality of the wild cyclic excess with the explicit Artin–Schreier/Tate corner class;
-- resulting rank-four theorem;
+- reduction of the full p-fold normal complex to the one-factor `A_1/A_2` germs;
+- `C_p`-equivariant cyclic Thom–Sebastiani at the weighted corner;
+- identification of the residual tame specialization cone;
+- rank-four theorem for the primitive Fourier transform;
+- absence of primitive constant/punctual summands;
 - conductor-defect lemma;
 - `N_a=p+O(sqrt p)` and the function-field `d=1` crown.
