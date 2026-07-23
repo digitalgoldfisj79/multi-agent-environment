@@ -1,0 +1,29 @@
+Command:
+  python frontier/d1_symp/virtual_quotient_probe.py
+
+Status: VERIFIED COMPUTATIONALLY. Exact arithmetic modulo the displayed split coefficient primes; these are mechanism tests, not a raw T_p sweep and not a proof of a uniform pattern.
+
+p=5: degrees (0, 2)
+  ell=10061: gcd degree=0, residual total degree=2, first virtual trace mod ell=0
+  ell=20011: gcd degree=0, residual total degree=2, first virtual trace mod ell=0
+  ell=50021: gcd degree=0, residual total degree=2, first virtual trace mod ell=0
+  ell=100151: gcd degree=0, residual total degree=2, first virtual trace mod ell=0
+  ell=200041: gcd degree=0, residual total degree=2, first virtual trace mod ell=0
+p=7: degrees (1, 3)
+  ell=10039: gcd degree=0, residual total degree=4, first virtual trace mod ell=2639
+  ell=20021: gcd degree=0, residual total degree=4, first virtual trace mod ell=13304
+  ell=50023: gcd degree=0, residual total degree=4, first virtual trace mod ell=25074
+  ell=100003: gcd degree=0, residual total degree=4, first virtual trace mod ell=91073
+  ell=200033: gcd degree=0, residual total degree=4, first virtual trace mod ell=151711
+p=11: degrees (3, 5)
+  ell=10099: gcd degree=1, residual total degree=6, first virtual trace mod ell=1627
+  ell=20021: gcd degree=1, residual total degree=6, first virtual trace mod ell=595
+  ell=50051: gcd degree=1, residual total degree=6, first virtual trace mod ell=10499
+  ell=100057: gcd degree=1, residual total degree=6, first virtual trace mod ell=58930
+  ell=200003: gcd degree=1, residual total degree=6, first virtual trace mod ell=56932
+
+Independent checks embedded in the script:
+- p=5: first virtual trace equals -p*T_p = 0 modulo every ell.
+- p=11: first virtual trace equals -p*T_p with committed T_11=322102 modulo every ell.
+- reconstructed polynomial degrees equal the exact Haessig--Rojas-Leon degrees.
+- leading coefficients are nonzero modulo every displayed ell.
