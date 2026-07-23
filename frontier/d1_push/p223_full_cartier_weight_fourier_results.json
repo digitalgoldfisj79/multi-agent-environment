@@ -1,0 +1,79 @@
+{
+  "date": "2026-07-23",
+  "prime": 223,
+  "target_weight": 25308,
+  "old_boundary": 24864,
+  "corrected_one_level_boundary": 25086,
+  "excess_over_corrected_boundary": 222,
+  "specialization": {
+    "a": 1,
+    "c": "t",
+    "d": "t^2"
+  },
+  "fourier": {
+    "field_order": 49729,
+    "multiplicative_order": 49728,
+    "exact_degree_bound": 33077,
+    "no_aliasing": true,
+    "max_entry_exponent": 444
+  },
+  "paired_runs": [
+    {
+      "job_id": "6a619aa513e6ef894d54ca7d",
+      "quadratic_nonresidue": 3,
+      "max_w": 1,
+      "term_count": 1037850,
+      "frobenius_orbits": 24975,
+      "coefficient_real": 14,
+      "coefficient_imag": 0,
+      "elapsed_seconds": 13.6846
+    },
+    {
+      "job_id": "6a619aaf13e6ef894d54ca7f",
+      "quadratic_nonresidue": 3,
+      "max_w": 4,
+      "term_count": 1866168,
+      "frobenius_orbits": 24975,
+      "coefficient_real": 12,
+      "coefficient_imag": 0,
+      "elapsed_seconds": 20.3596
+    },
+    {
+      "job_id": "6a619ab9d09dc1f57c6c3c83",
+      "quadratic_nonresidue": 5,
+      "max_w": 1,
+      "term_count": 1037850,
+      "frobenius_orbits": 24975,
+      "coefficient_real": 14,
+      "coefficient_imag": 0,
+      "elapsed_seconds": 13.3939
+    },
+    {
+      "job_id": "6a619ac4d09dc1f57c6c3c85",
+      "quadratic_nonresidue": 5,
+      "max_w": 4,
+      "term_count": 1866168,
+      "frobenius_orbits": 24975,
+      "coefficient_real": 12,
+      "coefficient_imag": 0,
+      "elapsed_seconds": 20.2899
+    }
+  ],
+  "unpaired_verification": {
+    "job_id": "6a619b1513e6ef894d54ca83",
+    "quadratic_nonresidue": 3,
+    "max_w": 4,
+    "field_elements_evaluated": 49728,
+    "coefficient_real": 12,
+    "coefficient_imag": 0,
+    "elapsed_seconds": 41.0532
+  },
+  "conclusions": {
+    "dominant_weight_coefficient": 14,
+    "complete_four_block_weight_coefficient": 12,
+    "cross_block_correction": 221,
+    "complete_coefficient_nonzero": true,
+    "corrected_complete_support_conjecture_refuted": true,
+    "d1_crown_proved": false
+  }
+}
