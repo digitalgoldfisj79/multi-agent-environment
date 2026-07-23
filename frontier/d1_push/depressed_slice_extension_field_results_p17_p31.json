@@ -1,0 +1,42 @@
+{
+  "status": "PASS",
+  "method": "exact Sage finite-field enumeration and irreducibility certification",
+  "definition": "A_r(a)=p*N_a(F_{p^r})-p^{2r}; e_2=(A_1^2-A_2)/2",
+  "cases": [
+    {
+      "p": 17,
+      "square": {"a": 1, "N_1": 18, "A_1": 17, "N_2": 4924, "A_2": 187, "e_2": 51},
+      "nonsquare": {"a": 3, "N_1": 14, "A_1": -51, "N_2": 4924, "A_2": 187, "e_2": 1207},
+      "job_id": "6a61c6fed09dc1f57c6c49dd"
+    },
+    {
+      "p": 19,
+      "square": {"a": 1, "N_1": 22, "A_1": 57, "N_2": 6504, "A_2": -6745, "e_2": 4997},
+      "nonsquare": {"a": 2, "N_1": 16, "A_1": -57, "N_2": 6880, "A_2": 399, "e_2": 1425},
+      "job_id": "6a61c71213e6ef894d54d65a"
+    },
+    {
+      "p": 23,
+      "square": {"a": 1, "N_1": 12, "A_1": -253, "N_2": 11756, "A_2": -9453, "e_2": 36731},
+      "nonsquare": {"a": 5, "N_1": 22, "A_1": -23, "N_2": 11756, "A_2": -9453, "e_2": 4991},
+      "job_id": "6a61c729d09dc1f57c6c49ee"
+    },
+    {
+      "p": 29,
+      "square": {"a": 1, "N_1": 36, "A_1": 203, "N_2": 23984, "A_2": -11745, "e_2": 26477},
+      "nonsquare": {"a": 2, "N_1": 28, "A_1": -29, "N_2": 23984, "A_2": -11745, "e_2": 6293},
+      "job_id": "6a61c74213e6ef894d54d66c"
+    },
+    {
+      "p": 31,
+      "square": {"a": 1, "N_1": 30, "A_1": -31, "N_2": 29920, "A_2": 3999, "e_2": -1519},
+      "nonsquare": {"a": 3, "N_1": 38, "A_1": 217, "N_2": 29920, "A_2": 3999, "e_2": 21545},
+      "job_id": "6a61c75513e6ef894d54d67a"
+    }
+  ],
+  "interpretation": [
+    "The r=2 traces provide exact second local-factor coefficients for the virtual weight-at-most-three complex.",
+    "The varying signs and magnitudes of e_2 reject an honest uniform rank-one model and are compatible with a nontrivial virtual complex.",
+    "ADAMS_TOP_WEIGHT_EXTRACTION_THEOREM.md now proves the weight exponent abstractly, so further deep extension-field enumeration has low theorem value."
+  ]
+}
