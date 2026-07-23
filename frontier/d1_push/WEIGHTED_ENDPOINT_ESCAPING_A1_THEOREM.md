@@ -1,7 +1,7 @@
 # Weighted endpoint: two escaping A1 stationary branches
 
 **Date:** 2026-07-23  
-**Status:** the endpoint normalization, critical sections, weighted local equations and critical values are exact for every prime `p>=5`. Standard local stationary phase gives one rank-one factor per branch after the explicit Artin–Schreier central class is removed. Together with the exact multiplicity-two tame augmentation, this gives a generic effective-rank bound `4`, subject only to the functorial identification of the weighted specialization cone with the stated local stationary-phase factors. The zero-frequency/invariant bound remains separate.
+**Status:** the endpoint normalization, critical sections, weighted local equations and critical values are exact for every prime `p>=5`. Standard local stationary phase gives one rank-one cyclic-convolution term per branch after the explicit Artin–Schreier central class is removed. The Adams defect subtracts one rank-one original term on the same branch, so each branch has effective presentation dimension at most two. There are exactly two branches; hence the candidate generic effective-rank bound is `4`. The exact weighted-specialization identification and the zero-frequency/invariant bound remain separate.
 
 ## 1. Normalized endpoint family
 
@@ -127,29 +127,38 @@ At `T=0` they are `+xi^p` and `-xi^p`, which are distinct because `p>=5` and `xi
 
 Thus the two stationary contributions do not collide in the weighted limit.
 
-## 5. Local stationary-phase consequence
+## 5. Adams and stationary-phase bookkeeping
 
-The central term `h^p` is the radicial/Artin–Schreier part already represented by the explicit weighted central fibre. After subtracting that class, the relative vanishing-cycle cone at each critical section is the tame `A_1` vanishing cycle above.
+The central term `h^p` is the radicial/Artin–Schreier part represented by the explicit weighted central fibre. After subtracting that class, the relative vanishing-cycle cone at each critical section is the tame rank-one `A_1` vanishing cycle above.
 
-Laumon stationary phase, equivalently the one-dimensional case of the étale Thom–Sebastiani/Fourier formalism, assigns one rank-one local Fourier factor to each nondegenerate section.
+For one branch:
 
-Therefore one geometric tame-augmentation copy contributes generic local Fourier rank at most
+1. tame Thom–Sebastiani and local stationary phase give one rank-one term for the cyclic `p`-fold convolution, i.e. the `Psi^p` side;
+2. the original root sheaf contributes one rank-one `A_1` term on the same branch, i.e. the subtracted `P` side.
 
-`1+1=2.`
+Therefore the Adams difference on one branch has an effective presentation as
 
-The exact infinity splitting is
+`[one rank-one cyclic-convolution term]`
 
-`W|I=W_AS^aff+2(Q-m1).`
+`-[one rank-one original term]`,
 
-After removing `W_AS^aff`, the residual augmentation occurs with multiplicity two. Consequently:
+of total effective dimension at most `2`.
 
-### Theorem WEA1.5 — generic rank-four consequence
+There are exactly two escaping branches. Hence:
 
-Provided the resolved weighted specialization triangle identifies each of the two copies of `Q-m1` with the two stationary sections above and introduces no additional boundary summand,
+### Theorem WEA1.5 — conditional generic rank-four consequence
 
-`boxed(rank_eff FT_c(E_a^prim)|G_m <= 4.)`
+Provided the resolved weighted specialization triangle identifies the post-Artin–Schreier primitive boundary with the two branchwise Adams differences above and introduces no additional boundary summand,
 
-All local algebra and all candidate stationary sections in this statement are exact. The remaining proviso is a functorial localization identification, not an estimate.
+`boxed(rank_eff FT_c(E_a^prim)|G_m <= 2+2=4.)`
+
+The exact infinity identity
+
+`W|I=W_AS^aff+2(Q-m1)`
+
+is consistent with this bookkeeping: its factor `2` records the two escaping finite-critical branches collectively. It must not be applied as a second multiplicity after those branches have already been counted.
+
+All local algebra, the number of branches and the effective `2+2` presentation are exact. The remaining proviso is a functorial localization identification, not an estimate.
 
 ## 6. Relation to the previous A2 bridge
 
@@ -182,8 +191,9 @@ The unique fibrewise Tate class and the complete weight-zero Kummer class have a
 - the two critical sections;
 - the weighted rescaled germ;
 - the two rescaled critical values;
-- nondegeneracy and separation;
-- the factor-two residual augmentation bookkeeping.
+- nondegeneracy and separation.
+
+The rank bookkeeping is representation-theoretic: two branches, each represented as one rank-one cyclic-convolution term minus one rank-one original term.
 
 ## 9. Epistemic classification
 
@@ -195,15 +205,17 @@ The unique fibrewise Tate class and the complete weight-zero Kummer class have a
 - rescaled local germs;
 - tame `A_1` type at each section;
 - separated rescaled critical values;
-- multiplicity-two residual tame augmentation.
+- branchwise effective dimension at most two for the Adams difference;
+- total candidate effective dimension at most four.
 
 ### Standard theorem input
 
-- one rank-one local Fourier contribution per nondegenerate `A_1` stationary section.
+- tame Thom–Sebastiani/local convolution for the rank-one `A_1` vanishing cycle;
+- one rank-one local Fourier contribution per nondegenerate stationary section.
 
 ### Open
 
-- exact identification of both augmentation copies with these stationary sections in the resolved localization triangle;
+- exact identification of the resolved primitive specialization cone with the two branchwise Adams differences;
 - absence/boundedness of primitive zero-frequency punctual and constant classes;
 - conductor-defect lemma;
 - `N_a=p+O(sqrt p)` and the function-field `d=1` crown.
