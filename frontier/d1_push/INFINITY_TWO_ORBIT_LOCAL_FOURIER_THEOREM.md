@@ -1,7 +1,7 @@
 # Infinity wild standard representation: two rank-one local Fourier orbits
 
 **Date:** 2026-07-23  
-**Status:** exact representation and Swan calculation for every prime `p>=5`; the rank-one local Fourier conclusion is the standard Laumon rank formula for slopes below one. This proves a genuine exponential-to-constant local collapse for the wild standard term. Relating these two rank-one pieces to the complete c-pencil primitive transform still requires the corner specialization diagram.
+**Status:** exact representation and Swan calculation for every prime `p>=5`; the rank-one local Fourier conclusion is the standard Laumon rank formula for slopes below one. This proves a genuine exponential-to-constant collapse for the wild standard term. However, that entire wild standard term lies in the explicit affine Artin–Schreier class already subtracted from `E_a^prim`. The theorem therefore checks the completeness of the Artin–Schreier removal but does not bound the primitive rank-four object.
 
 ## 1. Affine inertia irreducibles
 
@@ -106,27 +106,39 @@ at the level of semisimple local representations, up to the standard Fourier shi
 
 Thus the growing `(p-1)`-dimensional wild standard representation has local Fourier rank exactly `2`.
 
-## 5. Tame quotient term
+## 5. Relation to the Artin–Schreier subtraction
 
-The term
+The exact infinity splitting is
 
-`2Q`
+`W|I=W_AS^aff+2(Q-m1)`,
 
-is entirely tame. It is responsible for the puncture/cyclotomic boundary complex. The exact general-p Weight-Zero Collapse Theorem proves that, after the global invariant line is removed, this tame list collapses to the single quadratic Kummer character.
+where
 
-After subtraction of that Kummer line, no growing weight-zero local Fourier term remains.
+`W_AS^aff=(p-1)1-V.`
 
-## 6. Relation to the rank-four target
+Consequently both `rho_+` and `rho_-` occur wholly inside `W_AS^aff`. The explicit weighted Artin–Schreier boundary class removed in the definition of `E_a^prim` removes this complete wild standard term, including the two rank-one local Fourier transforms above.
 
-The two rank-one wild Fourier pieces are arithmetic square-class readings. The isolated A2 Adams difference has an effective presentation containing the original and p-th Adams transforms of a two-dimensional local object, hence effective dimension at most four.
+The residual class
 
-The current representation calculation proves the underlying constant-rank mechanism:
+`2(Q-m1)`
 
-- two wild square-class orbits, each Fourier rank one;
-- one exact Kummer line from the tame quotient;
-- no finite-inertia contribution.
+is tame. Its weight-zero global boundary contribution collapses to the single quadratic Kummer character, which is also subtracted from `E_a^prim`.
 
-The remaining corner diagram must identify how the two rank-one local transforms and their Adams readings assemble into `FT_c(E_a^prim)`. The expected effective generic rank is four.
+## 6. What the theorem proves—and does not prove
+
+The theorem proves:
+
+- the wild standard term has only two local Fourier orbits;
+- the explicit Artin–Schreier model accounts for the complete positive-ramification representation;
+- no unidentified wild orbit survives the Artin–Schreier subtraction.
+
+It does **not** prove:
+
+- that `FT_c(E_a^prim)` has rank two or four;
+- that the two rank-one orbits attach to the isolated `A_2` term;
+- a bound for the primitive conductor defect.
+
+Those statements concern the specialization cone of the residual tame augmentation at the weighted corner, after the Artin–Schreier and Kummer classes have been removed. They require the separate cyclic Thom–Sebastiani/corner comparison.
 
 ## 7. Epistemic classification
 
@@ -137,10 +149,11 @@ The remaining corner diagram must identify how the two rank-one local transforms
 - decomposition `V=rho_+ direct_sum rho_-`;
 - ranks, Swan conductors and slopes;
 - total standard Swan check;
-- application of the standard local Fourier rank formula, yielding rank one per orbit.
+- application of the standard local Fourier rank formula, yielding rank one per orbit;
+- inclusion of both orbits in the already subtracted Artin–Schreier class.
 
 ### Open
 
-- arithmetic epsilon/twist identification of the two rank-one transforms;
-- their exact attachment to the c-pencil A2 specialization;
-- rank-four global local-Fourier theorem and crown.
+- specialization of the residual tame augmentation at the weighted corner;
+- effective rank of the primitive local Fourier transform;
+- conductor-defect lemma and crown.
