@@ -2,7 +2,12 @@
 
 **Date:** 2026-07-23. **Status:** problem statement (specialist-ready) +
 exact empirical calibration. Nothing here is proved beyond the displayed
-identities; the Lemma is open.
+identities; the Lemma is open. **Update (same day):** for p ≡ 2 (mod 3)
+the two-parameter sum collapses further — see
+`frontier/d1_symp/COLLAPSE_LEMMA.md` (proved): the Lemma there is
+equivalent to |T_p| ≤ C·p^{(p−1)/2} for a single cubic sum T_p on the
+trace-zero hyperplane of F_{p^p}, and the b=0 punctual separation is an
+exact identity, not a separate estimate.
 
 ## 1. What it implies
 
