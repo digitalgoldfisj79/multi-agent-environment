@@ -1,0 +1,38 @@
+{
+  "date": "2026-07-23",
+  "branch": "gpt56/d1-push-weight0-collapse-20260722",
+  "status": "COMPLETE",
+  "routes": {
+    "quantized_residue": {
+      "jobs": ["6a619ffc13e6ef894d54cac9","6a61a00cd09dc1f57c6c3d1a","6a61a0a5d09dc1f57c6c3d24","6a61a0b313e6ef894d54cad3","6a61a539d09dc1f57c6c3d97","6a61a5d3d09dc1f57c6c3da5"],
+      "sources": ["depressed_slice_irreducible_count.cpp","depressed_slice_irreducible_count_flint.py","quantized_count_curve_fingerprint.py"],
+      "results": ["phase_z4_quantized_large_prime_results.json","phase_z4_quantized_counter_crosscheck_p101.json","phase_z4_quantized_curve_fingerprint_summary.json","D1_PHASE_Z4_QUANTIZED_STATUS_20260723.md"]
+    },
+    "geometric_direct_image": {
+      "jobs": ["6a619e9dd09dc1f57c6c3cdf"],
+      "sources": ["hook_spectra/scan_generic.py"],
+      "results": ["phase_z4_geometric_hook_spectra_results.json","D1_PHASE_Z4_GEOMETRIC_STATUS_20260723.md"]
+    },
+    "motives_and_sieve": {
+      "jobs": ["6a619f07d09dc1f57c6c3ce6","6a61a4a513e6ef894d54cb1e"],
+      "sources": ["cubic_mixed_mass_audit.cpp","cubic_mixed_mass_fast_patch.py","x13_birational_quartic_reduction.py"],
+      "results": ["phase_z4_cubic_motive_sweep_summary.json","D1_PHASE_Z4_MOTIVE_SIEVE_STATUS_20260723.md","x13_birational_quartic_results.json","X13_BIRATIONAL_QUARTIC_REDUCTION.md"]
+    },
+    "direct_dynamics": {
+      "jobs": ["6a61a21c13e6ef894d54cae9","6a61a3b713e6ef894d54cb0b","6a619f4b13e6ef894d54cabd"],
+      "sources": ["direct_dynamics_low_height_search.py"],
+      "results": ["phase_z4_direct_dynamics_height3_summary.json","D1_PHASE_Z4_DIRECT_DYNAMICS_CALIBRATION_20260723.md","phase_z4_direct_dynamics_height4_gap_results.json","phase_z4_direct_dynamics_height4_full_summary.json","D1_PHASE_Z4_DIRECT_DYNAMICS_STATUS_20260723.md"]
+    }
+  },
+  "cancelled_or_redundant_jobs": [
+    {"job_id":"6a619f6ad09dc1f57c6c3cea","reason":"obsolete slow C++ p=401 duplicate"},
+    {"job_id":"6a619f74d09dc1f57c6c3cec","reason":"obsolete slow C++ p=503 duplicate"},
+    {"job_id":"6a61a69a13e6ef894d54cb44","reason":"focused first-witness dynamics pass superseded by completed full three-witness sweep"}
+  ],
+  "conclusions": {
+    "all_four_routes_executed": true,
+    "general_prime_theorem_obtained": false,
+    "d1_crown_proved": false,
+    "integer_fortune_proved": false
+  }
+}
