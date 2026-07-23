@@ -1,0 +1,27 @@
+{
+  "date": "2026-07-23",
+  "job_id": "6a61a4a513e6ef894d54cb1e",
+  "status": "PASS",
+  "open_divisor": "2*a*D-9*y != 0",
+  "solved_N": "(2*D*S*a*y+2*D*a*y^3+3*D*y+4*S^2+6*S*y^2)/(2*D*a-9*y)",
+  "quartic_degrees": {"D":4,"S":4,"y":6},
+  "quartic_discriminant": {
+    "square_components": [
+      "S^2",
+      "a^2",
+      "(8*S^2*a+30*S*a*y^2+18*a*y^4+27*y^2)^2"
+    ],
+    "primitive_branch_degrees": {"S":10,"y":18,"total":19}
+  },
+  "representative_audits": [
+    {"a":1,"primitive_irreducible_over_Q":true},
+    {"a":2,"primitive_irreducible_over_Q":true}
+  ],
+  "method": "Exact symbolic elimination, discriminant and factorization over QQ; no floating point.",
+  "conclusions": {
+    "birational_quartic_reduction_obtained": true,
+    "primitive_branch_splits_into_small_Q_factors": false,
+    "elliptic_decomposition_proved": false,
+    "uniform_trace_bound_proved": false
+  }
+}
