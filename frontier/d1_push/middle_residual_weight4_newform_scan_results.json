@@ -1,0 +1,29 @@
+{
+  "status": "PASS",
+  "job_id": "6a61ce43d09dc1f57c6c4b65",
+  "scope": {
+    "weight": 4,
+    "levels": "1<=N<=150",
+    "coefficient_field": "rational",
+    "rational_newforms_tested": 283,
+    "quadratic_twists": [1, -1, 2, -2, 3, -3, 5, -5, 6, -6, 7, -7, 10, -10, 13, -13, 15, -15],
+    "targets": ["E_middle_plus", "E_middle_minus", "sum", "difference"],
+    "prime_observations": "41 to 43 usable primes per fit after removing bad primes"
+  },
+  "exact_matches": 0,
+  "best_fit": {
+    "r_squared": 0.5536274815763664,
+    "level": 28,
+    "newform_index": 0,
+    "twist_D": -2,
+    "target": "E_middle_minus",
+    "scale": "54271311/47329862",
+    "rmse": 1545.7275609385933,
+    "observations": 42
+  },
+  "interpretation": [
+    "The primitive middle residual is not a single rational weight-four newform of level at most 150, up to the tested quadratic twists and scalar multiples.",
+    "The scan does not exclude higher level, non-rational coefficient fields, sums of forms, or a genuinely higher-rank geometric complex.",
+    "The proven weight-at-most-three cohomological statement is independent of this finite fingerprint scan."
+  ]
+}
