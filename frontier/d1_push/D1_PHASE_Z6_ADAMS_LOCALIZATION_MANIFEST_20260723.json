@@ -1,0 +1,56 @@
+{
+  "phase": "Z6 Adams localization",
+  "date": "2026-07-23",
+  "branch": "gpt56/d1-push-weight0-collapse-20260722",
+  "status": "complete at natural stopping point; crown open",
+  "principal_theorems": [
+    "MOORE_ROOT_NEGATION_REDUCTIONS_THEOREM.md",
+    "CYCLIC_RESOLVENT_HOOK_COLLAPSE_THEOREM.md",
+    "ADAMS_P_CYCLE_DETECTOR_THEOREM.md",
+    "ADAMS_DEFECT_FINITE_COLLISION_THEOREM.md",
+    "ADAMS_DEFECT_LOCAL_INERTIA_THEOREM.md",
+    "INFINITY_FORMAL_RIGIDITY_THEOREM.md",
+    "ADAMS_TOP_WEIGHT_EXTRACTION_THEOREM.md",
+    "ADAMS_TWO_DEGREE_CONCENTRATION_THEOREM.md",
+    "WEIGHTED_CORNER_ARTIN_SCHREIER_THEOREM.md",
+    "WEIGHTED_INFINITY_CORNER_ARTIN_SCHREIER_THEOREM.md",
+    "WEIGHTED_CORNER_ENDPOINT_LOCALIZATION_THEOREM.md"
+  ],
+  "status_file": "D1_PUSH_PHASE_Z6_ADAMS_LOCALIZATION_STATUS_20260723.md",
+  "source_audits": [
+    "moore_root_negation_symbolic_audit.py",
+    "adams_top_weight_audit.py",
+    "infinity_formal_rigidity_audit.py",
+    "weighted_corner_artin_schreier_audit.py",
+    "weighted_infinity_corner_audit.py",
+    "weighted_corner_endpoint_audit.py"
+  ],
+  "result_files": [
+    "adams_top_weight_audit_results_p47.json",
+    "weighted_corner_audit_results_p101.json",
+    "depressed_slice_extension_field_results_p17_p31.json",
+    "middle_residual_weight4_newform_scan_results.json"
+  ],
+  "jobs": {
+    "moore_root_negation_audit": "6a61c24b13e6ef894d54d3a0",
+    "adams_top_weight_audit": "6a61cbfdd09dc1f57c6c4b27",
+    "infinity_formal_rigidity_audit": "6a61c77113e6ef894d54d683",
+    "weighted_infinity_corner_audit": "6a61c9be13e6ef894d54d71c",
+    "weighted_corner_artin_schreier_audit": "6a61cc16d09dc1f57c6c4b2b",
+    "weighted_corner_endpoint_corrected_audit": "6a61ce9f13e6ef894d54d76b",
+    "extension_p17": "6a61c6fed09dc1f57c6c49dd",
+    "extension_p19": "6a61c71213e6ef894d54d65a",
+    "extension_p23": "6a61c729d09dc1f57c6c49ee",
+    "extension_p29": "6a61c74213e6ef894d54d66c",
+    "extension_p31": "6a61c75513e6ef894d54d67a",
+    "weight4_newform_scan": "6a61ce43d09dc1f57c6c4b65"
+  },
+  "cancelled_or_replaced_jobs": {
+    "cyclic_character_audit_inefficient": "6a61c52a13e6ef894d54d541",
+    "duplicate_infinity_rerun": "6a61c95613e6ef894d54d70c",
+    "level500_newform_scan_replaced": "6a61c611d09dc1f57c6c494d",
+    "level150_scan_first_code_error": "6a61ce1d13e6ef894d54d766",
+    "endpoint_audit_before_sign_checker_fix": "6a61cd67d09dc1f57c6c4b4e"
+  },
+  "terminal_open_gate": "uniform absolute effective virtual degree bounds for primitive H_c^2 and H_c^3 after all explicit Adams boundary and extremal summands are removed"
+}
