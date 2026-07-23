@@ -1,0 +1,89 @@
+{
+  "date": "2026-07-23",
+  "repository": "digitalgoldfisj79/multi-agent-environment",
+  "branch": "gpt56/d1-push-weight0-collapse-20260722",
+  "scientific_result": "The corrected complete Cartier support conjecture is refuted at p=223 by a nonzero complete filtration coefficient one level above the corrected boundary.",
+  "exact_identity": {
+    "prime": 223,
+    "specialization": "a=1, c=t, d=t^2",
+    "target_weight": 25308,
+    "corrected_boundary": 25086,
+    "dominant_w1_coefficient_mod_p": 14,
+    "complete_w1_to_w4_coefficient_mod_p": 12
+  },
+  "source_commits": [
+    {
+      "commit": "ea279dcc38b2ae14e538cbbc6284d4922a9f69e9",
+      "file": "frontier/d1_push/p223_full_cartier_weight_fourier.cpp",
+      "purpose": "Exact paired Fourier extractor"
+    },
+    {
+      "commit": "b9d8137d67a7c2e6824590b639be1e735f95c973",
+      "file": "frontier/d1_push/p223_full_cartier_weight_unpaired_verify.sh",
+      "purpose": "Independent unpaired summation mode"
+    },
+    {
+      "commit": "01449d54920977f215be3aadbac0ef878e7742bd",
+      "file": "frontier/d1_push/p223_full_cartier_weight_fourier_results.json",
+      "purpose": "Exact machine results"
+    },
+    {
+      "commit": "a1484d0878e4ecf6adf5caaf6e672513bb9be1de",
+      "file": "frontier/d1_push/P223_COMPLETE_CARTIER_WEIGHT_COUNTEREXAMPLE.md",
+      "purpose": "Formal counterexample record"
+    },
+    {
+      "commit": "b09cefb3cf0e9efd6e2431be21988f6abbb3b06d",
+      "file": "frontier/d1_push/D1_PUSH_PHASE_Z3_COMPLETE_CARTIER_STATUS_20260723.md",
+      "purpose": "Superseding programme status"
+    }
+  ],
+  "jobs": [
+    {
+      "job_id": "6a619aa513e6ef894d54ca7d",
+      "model": "F_223[s]/(s^2-3)",
+      "blocks": "w=1",
+      "coefficient": 14
+    },
+    {
+      "job_id": "6a619aaf13e6ef894d54ca7f",
+      "model": "F_223[s]/(s^2-3)",
+      "blocks": "w=1..4",
+      "coefficient": 12
+    },
+    {
+      "job_id": "6a619ab9d09dc1f57c6c3c83",
+      "model": "F_223[s]/(s^2-5)",
+      "blocks": "w=1",
+      "coefficient": 14
+    },
+    {
+      "job_id": "6a619ac4d09dc1f57c6c3c85",
+      "model": "F_223[s]/(s^2-5)",
+      "blocks": "w=1..4",
+      "coefficient": 12
+    },
+    {
+      "job_id": "6a619b1513e6ef894d54ca83",
+      "model": "F_223[s]/(s^2-3)",
+      "blocks": "w=1..4, unpaired all-element Fourier sum",
+      "coefficient": 12
+    }
+  ],
+  "verification": {
+    "exact_assignment_degree_bound": 33077,
+    "fourier_group_order": 49728,
+    "aliasing": false,
+    "quadratic_models_agree": true,
+    "paired_and_unpaired_agree": true,
+    "imaginary_components_zero": true,
+    "floating_point_used_in_claims": false
+  },
+  "epistemic_status": {
+    "corrected_complete_support_conjecture": "refuted",
+    "support_cutoff_route": "closed",
+    "cartier_nonvanishing": "open",
+    "function_field_d1_crown": "open",
+    "integer_fortune_conjecture": "open"
+  }
+}
