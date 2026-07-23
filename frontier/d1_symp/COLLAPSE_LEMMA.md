@@ -1,9 +1,9 @@
 # The collapse lemma: the p ≡ 2 (mod 3) half-theorem is one cubic sum
 
-**Date:** 2026-07-23. **Status:** Lemma 1 and its corollaries are
-**PROVED** (elementary, half a page) and **VERIFIED-NUMERICALLY** in
-exact arithmetic (`collapse_verify.py`). Section 4 (the route to the
-remaining bound) is a research plan, not a result.
+**Date:** 2026-07-23. **Status:** Lemma 1 and its numerical corollaries are
+**PROVED** (elementary, half a page) and **VERIFIED COMPUTATIONALLY** in
+exact arithmetic (`collapse_verify.py`). The absolute-constant estimate and
+the final nearby-cycle application ledger remain **OPEN**.
 
 ## 1. Statement
 
@@ -43,32 +43,29 @@ x = sy with s = t^{1/3} (unique cube root) preserves {Tr = 0} and turns
 t·Tr(y³) into Tr((sy)³), so σ_t(T_p) = T_p for all t. A Galois-fixed
 algebraic integer in ℚ(ζ_p) is a rational integer. ∎
 
-## 2. Corollaries (all PROVED, p ≡ 2 mod 3 throughout)
+## 2. Corollaries (PROVED numerically; categorical application still separate)
 
-1. **Full constancy in b.** D_b is literally independent of b ≠ 0 —
-   the probe's empirical finding, and WTCK.4's cube-class support law
-   in this sector, drop out of (ii) with no cohomology.
-2. **Punctual separation dissolved.** D_0 = −(p−1)·D_{b≠0} is an exact
-   identity. Step 4 of the WTCK phase plan ("separate the b=0
-   punctual term") is bookkeeping after all *in this sector* — the
-   growing, oscillating D_0 values in the probe table are exactly
-   −(p−1) times the constant.
-3. **Reformulation of the half-theorem.** The target
+1. **Full constancy in b.** D_b is literally independent of b ≠ 0.
+2. **Numerical punctual relation.** D_0 = −(p−1)D_{b≠0}. Thus D_0 is not
+   an independent numerical estimate in this sector. This does **not** by
+   itself prove that every punctual nearby-cycle constituent disappears;
+   the original categorical ledger must still be checked.
+3. **Analytic reformulation.** The target
    |D_b| ≤ C·p^{(p−3)/2} is equivalent to
 
-   \[
-   |T_p| \;\le\; C\,p^{(p-1)/2},
-   \]
+\[
+|T_p| \;\le\; C\,p^{(p-1)/2}.
+\]
 
-   square-root cancellation (in the hyperplane point count p^{p−1})
-   with an absolute constant, for the single cubic sum T_p. Combined
-   with the committed WTCK reduction, **this one inequality implies
-   FF-Fortune(p,1) for all p ≡ 2 (mod 3)**.
+This is square-root cancellation for one cubic sum on a hyperplane of
+cardinality p^{p−1}. It is the remaining analytic input for the proposed
+p ≡ 2 (mod 3) half-theorem. The final implication to FF-Fortune(p,1)
+remains **CONDITIONAL** until the endpoint/main/Tate/Artin–Schreier and
+nearby-fibre transport is written without gaps.
 
 ## 3. Exact verification
 
-`collapse_verify.py` computes Σ_u S_p(u,1) independently (only the
-p pairs (u,1), same degree-2 recurrence, exact ℤ[ζ_p]) and checks it
+`collapse_verify.py` computes Σ_u S_p(u,1) independently and checks it
 against the full double-sum deviations:
 
 ```
@@ -82,51 +79,62 @@ ALL COLLAPSE IDENTITIES VERIFIED EXACTLY
 
 Normalized values T_p/p^{(p−1)/2} for p = 5,…,53:
 0, +2.0000, +1.7059, −1.0605, −2.6823, +1.5852, −0.1260, +0.9223
-(sup 2.682; conjecture |T_p| ≤ 4·p^{(p−1)/2}).
+(sup 2.682; working conjecture |T_p| ≤ 4·p^{(p−1)/2}).
 
-## 4. Route to the bound (research plan — nothing here is proved)
+## 4. Current route after audit
 
-Over 𝔽̄_p, Weil restriction diagonalizes the trace form:
-F_{p^p} ⊗ 𝔽̄_p ≅ 𝔽̄_p^p via x ↦ (x, x^p, …), under which Tr(x) = Σx_i,
-Tr(x³) = Σx_i³, and arithmetic Frobenius acts as (p-power) ∘ (cyclic
-shift σ). So T_p is the exponential sum of the **split diagonal cubic
-on the hyperplane Σx_i = 0, for the form twisted by the cyclic shift**
-— Fermat-motive territory, where Frobenius acts *monomially* on
-Jacobi-sum classes indexed by cube-character vectors a ∈ (ℤ/3)^p.
-Two structural observations make an exact evaluation plausible:
+The ambient Fermat fixed-character shortcut previously sketched here is
+**INVALID** for the required object. The trace-zero condition is a linear
+section. Eliminating one coordinate gives
 
-- p ≡ 2 (mod 3) means multiplication by p negates ℤ/3-characters, so a
-  Frobenius-fixed class needs a_{i+1} = −a_i cyclically, forcing
-  a_0 = (−1)^p a_0 = −a_0 = 0: **no fixed primitive classes** (p odd).
-  Monomially-permuted non-fixed classes contribute 0 to the twisted
-  trace, however many there are — the exponential-dimensional
-  primitive part may vanish identically from T_p.
-- The coordinate-vanishing strata of {Σx_i = 0} are permuted by σ, and
-  p prime means the only σ-stable coordinate subsets are ∅ and all —
-  non-stable strata also contribute 0.
+\[
+\sum_{i=1}^{p-1}x_i^3-\left(\sum_{i=1}^{p-1}x_i\right)^3,
+\]
 
-If both filters survive rigorous bookkeeping (the object is Fermat ×
-Artin–Schreier on a hyperplane, so the mixed Gauss-sum version of the
-monomial calculus is needed; Davenport–Hasse relations control the
-Gauss sums over F_{p^p}), T_p collapses to an explicitly evaluable sum
-of O(1) monomials of weight ≤ (p−1)/2 — a closed form, hence the bound,
-hence the half-theorem. The data profile (bounded oscillation, sup
-2.68 < 4, the exactly-extremal −2 at p=11) is consistent with a trace
-of ≤ 4 such monomials. **Consistency check the framework passes:** for
-p ≡ 1 (mod 3), multiplication by p fixes ℤ/3-characters, and the fixed
-classes are exactly the two constant vectors (a,…,a), a ∈ {1,2} —
-matching the two cubic-character coefficients known to appear in that
-sector. References: Weil, *Numbers of solutions of equations in finite
-fields*; Katz, *Gauss Sums, Kloosterman Sums, and Monodromy*; Shioda's
-Fermat-motive calculus; Davenport–Hasse.
+which is not diagonal. Independent binary cubic-character labels describe
+the ambient tensor product, not the cohomology of this `(1,3)` linear
+section. See `frontier/d1_halftheorem/FAST_COLLAPSE_AND_FERMAT_AUDIT.md`.
 
-This section is the specialist hand-off: the p ≡ 1 (mod 3) analogue
-(χ₃-twists of the v-line, three cube-class values, two fixed classes)
-is the same computation without the vanishing shortcut.
+A new exact result is proved in
+`frontier/d1_symp/VIRTUAL_ADAMS_LOCAL_COLLAPSE_AND_FAILURE_CERTIFICATE.md`:
+for the rank-two cubic Airy sheaf A,
+
+\[
+\Psi^p(A)=\operatorname{Sym}^p A-\det(A)\otimes\operatorname{Sym}^{p-2}A
+\]
+
+has **zero virtual Swan conductor at infinity**. On the quadratic inertia
+cover, the p-th Adams operation raises the two order-p wild characters to
+the p-th power and kills them exactly, leaving an actual tame rank-two
+local inertia representation.
+
+This is genuine virtual cohomological cancellation, but it is local. It
+does not globalize naively: in the geometric `SL_2` representation ring,
+`Psi^p(Std)=Sym^p-Sym^{p-2}` has a negative irreducible multiplicity and
+is not an actual rank-two representation.
+
+The focused exact quotient probe
+`frontier/d1_symp/virtual_quotient_probe.py` reconstructs the two global
+L-polynomials modulo split coefficient primes. At p=11 their common-factor
+degree is at most one, so at least six residual eigenvalues remain after
+all factor cancellation. Therefore the especially simple “at most four
+residual eigenvalues” model is false. The absolute trace bound may still
+hold through structured Frobenius phase cancellation.
 
 ## 5. Honest boundary
 
-Lemma 1 closes two of the four WTCK phase-plan steps for p ≡ 2 (mod 3)
-and compresses the half-theorem into one inequality, but the
-inequality itself — the crown's remaining analytic content — is open.
-Function-field sibling only; integer Fortune untouched.
+**PROVED:** the collapse identity, integrality, full nonzero-fibre
+constancy, and local Adams Swan cancellation.
+
+**VERIFIED COMPUTATIONALLY:** exact collapse checks and the small-prime
+virtual-quotient factor probe.
+
+**OPEN:**
+
+\[
+|T_p|\le C p^{(p-1)/2}
+\]
+
+with absolute C; a global cross-symmetric-power Frobenius-correlation
+theorem; and the final categorical application ledger. Function-field
+sibling only; integer Fortune untouched.
