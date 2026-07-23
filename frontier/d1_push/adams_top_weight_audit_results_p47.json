@@ -1,0 +1,29 @@
+{
+  "status": "PASS",
+  "job_id": "6a61cbfdd09dc1f57c6c4b27",
+  "method": "exact symmetric-group conjugacy-type enumeration",
+  "max_prime": 47,
+  "prime_cases": 13,
+  "total_conjugacy_types": 267863,
+  "results": [
+    {"p": 5, "conjugacy_types": 7},
+    {"p": 7, "conjugacy_types": 15},
+    {"p": 11, "conjugacy_types": 56},
+    {"p": 13, "conjugacy_types": 101},
+    {"p": 17, "conjugacy_types": 297},
+    {"p": 19, "conjugacy_types": 490},
+    {"p": 23, "conjugacy_types": 1255},
+    {"p": 29, "conjugacy_types": 4565},
+    {"p": 31, "conjugacy_types": 6842},
+    {"p": 37, "conjugacy_types": 21637},
+    {"p": 41, "conjugacy_types": 44583},
+    {"p": 43, "conjugacy_types": 63261},
+    {"p": 47, "conjugacy_types": 124754}
+  ],
+  "checks": {
+    "p_cycle_character_identity": true,
+    "trivial_multiplicity_equals_one_every_case": true,
+    "sign_multiplicity_equals_one_every_case": true,
+    "failures": 0
+  }
+}
