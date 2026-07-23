@@ -1,0 +1,35 @@
+{
+  "date": "2026-07-23",
+  "job_id": "6a619f4b13e6ef894d54cabd",
+  "status": "PASS",
+  "method": "Exact FLINT Rabin certification of X^p+aX^3+bX^2+cX+d over every odd prime p<1500 and all 5,832 integral cubic tails with nonzero cubic coefficient and coefficient height at most 4.",
+  "range": {
+    "prime_min": 5,
+    "prime_max_exclusive": 1500,
+    "prime_count": 237,
+    "candidate_count_per_prime": 5832,
+    "requested_witnesses_per_prime": 3
+  },
+  "uncovered_primes": [5,571,701,751,761,773,839,859,887,971,977,1009,1033,1091,1093,1151,1171,1187,1201,1223,1229,1249,1291,1301,1367,1381,1409,1423,1433,1459,1481,1489,1493,1499],
+  "nondegenerate_uncovered_count": 33,
+  "first_nondegenerate_failure": 571,
+  "union_map_count_from_first_three_witnesses": 493,
+  "best_fixed_map": {
+    "tail": [-2,-1,0,-2],
+    "covered_prime_count": 8,
+    "covered_primes": [7,11,13,23,61,197,223,373]
+  },
+  "conclusions": {
+    "height4_family_covers_every_prime_below_1500": false,
+    "universal_fixed_height4_map_found": false,
+    "small_fixed_map_menu_found": false,
+    "bounded_height4_direct_route_refuted_as_uniform_mechanism": true,
+    "general_p_dependent_dynamical_route_refuted": false,
+    "d1_crown_proved": false
+  },
+  "notes": [
+    "The p=5 case is affected by the known small-characteristic leading/cubic collision and is excluded from the nondegenerate failure count.",
+    "Every listed nondegenerate uncovered prime exhausts all 5,832 height-4 tails with no irreducible polynomial.",
+    "Primes listed in the original phase1_failures field but not here had one or two witnesses rather than the requested three; they are not failures of existence."
+  ]
+}
