@@ -1,0 +1,34 @@
+{
+  "date": "2026-07-23",
+  "job_id": "6a61a5d3d09dc1f57c6c3da5",
+  "status": "PASS",
+  "data": {
+    "prime_count": 63,
+    "prime_max": 601,
+    "additional_large_primes": [401,503,601]
+  },
+  "observed_sqrt_envelopes": {
+    "N_square_minus_p": 4.875086364965062,
+    "N_nonsquare_minus_p": 4.609366142931224,
+    "square_class_difference": 5.079237907218051,
+    "square_class_sum_minus_2p": 8.666820204382333
+  },
+  "elliptic_library": {
+    "models": "y^2=x^3+A*x+B with -20<=A,B<=20, nonsingular",
+    "curve_count": 1676,
+    "maximum_single_trace_correlations": {
+      "sum": 0.5320802605989363,
+      "difference": 0.5319023835315646,
+      "square": 0.48507789158822406,
+      "nonsquare": 0.5150908719218776
+    },
+    "exact_short_decomposition_found": false,
+    "train_holdout_fit_stable": false
+  },
+  "conclusions": {
+    "fixed_sqrt_p_scale_supported_finitely": true,
+    "simple_elliptic_direct_sum_supported": false,
+    "genus_or_rank_bound_proved": false,
+    "uniform_N_below_2p_proved": false
+  }
+}
