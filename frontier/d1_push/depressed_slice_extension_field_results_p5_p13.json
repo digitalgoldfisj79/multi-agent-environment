@@ -1,0 +1,22 @@
+{
+  "status": "PASS",
+  "method": "exact Sage finite-field enumeration and irreducibility certification",
+  "normalization": "A_r = p*N_a(F_(p^r)) - p^(2r)",
+  "rows": [
+    {"p":5,"class":"square","A":[-5,25,-125,625,-3125]},
+    {"p":5,"class":"nonsquare_over_Fp","A":[5,25,125,625,3125]},
+    {"p":7,"class":"square","A":[21,-189,1029,-2205]},
+    {"p":7,"class":"nonsquare_over_Fp","A":[7,-189,343,-2205]},
+    {"p":11,"class":"square","A":[33,-473,-7293]},
+    {"p":11,"class":"nonsquare_over_Fp","A":[33,1815,3399]},
+    {"p":13,"class":"square","A":[-39,-325,22269]},
+    {"p":13,"class":"nonsquare_over_Fp","A":[-91,-325,-27859]}
+  ],
+  "job_ids": {
+    "p5":"6a61ae6cd09dc1f57c6c3ed0",
+    "p7":"6a61ae7fd09dc1f57c6c3ed8",
+    "p11":"6a61ae97d09dc1f57c6c3edc",
+    "p13":"6a61aeac13e6ef894d54cbe9"
+  },
+  "interpretation": "The p=5 sequence is rank-one in the audited range, but p=7,11,13 are not. These finite power traces rule out a universal rank-one explanation; they do not determine the general cohomological rank."
+}
