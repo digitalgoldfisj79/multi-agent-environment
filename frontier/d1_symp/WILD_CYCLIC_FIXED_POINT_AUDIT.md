@@ -1,7 +1,17 @@
 # Wild cyclic fixed-point audit on the smooth (2,3) model
 
 **Date:** 2026-07-23  
-**Status:** set-theoretic fixed locus and tangent obstruction are **PROVED**. A wild local-term formula remains **OPEN**.
+**Corrected status:** the set-theoretic fixed locus, tangent obstruction and completed fixed scheme for the bare cyclic shift `sigma` are **PROVED**. However, localization at this fixed scheme is **NOT A VALID ROUTE TO THE TARGET TRACE**: the relevant operator is `sigma` composed with Frobenius. See `COMPLETED_FIXED_SCHEME_AND_CORRESPONDENCE_CORRECTION.md`.
+
+## 0. Critical distinction
+
+The calculations below concern `Fix(sigma)`. They correctly describe the geometry of the bare cyclic automorphism, but the trace defining the function-field problem is the trace of
+
+\[
+\sigma\circ\operatorname{Frob}_p.
+\]
+
+The latter has a completely different fixed locus: its fixed-point equations reconstruct the original `F_{p^p}` trace equations. Therefore the earlier proposal to compute one wild local term at the unique `sigma`-fixed point is withdrawn.
 
 ## 1. The cyclic module
 
@@ -77,27 +87,65 @@ dQ_v(y)=dC_v(y)=0.
 
 Thus the unique fixed point has a nonzero fixed tangent vector on `X_p` for every `p>=7`.
 
-Equivalently, the scheme-theoretic fixed locus is nonreduced at `[v]`; the graph of `sigma` and the diagonal do not meet transversely.
+At `p=5`, the degree-four power sum is exceptional and the cubic tangent equation removes this direction.
 
-At `p=5`, the degree-four power sum is exceptional and the cubic tangent equation may remove this direction. This small-prime exception is irrelevant to the general obstruction.
+## 4. PROVED: completed fixed scheme
 
-## 4. Consequence for Route 2
+The full calculation is in `COMPLETED_FIXED_SCHEME_AND_CORRESPONDENCE_CORRECTION.md`. The result is
 
-The tempting argument
+\[
+\widehat{\mathcal O}_{\operatorname{Fix}(\sigma,\mathbf P(W)),[v]}
+\cong \overline{\mathbf F}_p[[t]]/(t^{p-2})
+\]
 
-> one fixed point implies a bounded Lefschetz local term
+and
 
-is invalid. The automorphism has order equal to the characteristic, is unipotent on the tangent representation, and its unique fixed point is wild and non-transverse. Ordinary semisimple or transverse Lefschetz formulas do not apply.
+\[
+\boxed{
+\widehat{\mathcal O}_{\operatorname{Fix}(\sigma,X_p),[v]}
+\cong \overline{\mathbf F}_p[[t]]/(t^{p-4}).
+}
+\]
 
-Any successful fixed-point proof must compute the full wild local term of this thickened fixed point and prove that its Frobenius-weight-normalized contribution is bounded independently of `p`.
+Hence the bare-shift fixed multiplicity is exactly `p-4`, not uniformly bounded.
 
-## 5. Smallest next theorem
+## 5. CORRECTION: why this does not localize T_p
 
-Determine the completed local ring of the fixed scheme of `sigma` on `X_p` at `[v]`, or at least its intersection multiplicity and the induced Artin--Schreier local system. Then apply a wild Lefschetz--Verdier or arithmetic Picard--Lefschetz formula.
+The relevant arithmetic operator is
 
-The key decision criterion is:
+\[
+\Phi=\sigma\circ\operatorname{Frob}_p,
+\]
 
-- if the local multiplicity/local term is uniformly bounded after the required cancellation, Route 2 may prove the theorem;
-- if it grows with `p` without a further signed cancellation, fixed-point localization alone cannot prove the absolute-constant bound.
+not `sigma`. Its fixed equations are, up to orientation,
 
-This is now the exact local calculation required by the cyclic linear-section route.
+\[
+x_{i+1}=x_i^p.
+\]
+
+Thus
+
+\[
+x_i=x_0^{p^i},\qquad x_0^{p^p}=x_0,
+\]
+
+and the defining equations become the original extension-field trace equations. In addition, `dFrob_p=0`, so `1-dPhi` is invertible: the nontransversality of `Fix(sigma)` is not the local obstruction for the target correspondence.
+
+Therefore the earlier statement
+
+> compute the wild local term of the unique thickened `sigma`-fixed point
+
+is not a valid next step for proving the `T_p` estimate.
+
+## 6. Correct remaining target
+
+The linear-section route still needs an exact decomposition of the `sigma Frob_p` trace, such as a Jacobi-sum or character-orbit decomposition valid for the `(1,3)` linear section. The unique bare-shift fixed point does not supply such a decomposition.
+
+The Airy formulation remains the cleanest exact statement of the missing theorem:
+
+\[
+|\operatorname{Tr}(F_p|V_p)-\operatorname{Tr}(F_p|W_p)|
+\le C p^{(p+1)/2}.
+\]
+
+The fixed-scheme result is retained as a correct theorem and a failure certificate, not as a route to the target trace.
