@@ -107,7 +107,7 @@ with the exact Adams projector, then remove the explicit Artin-Schreier central 
 
 ## 7. Epistemic status
 
-- coefficient-penc il reassembly: exact;
+- coefficient-pencil reassembly: exact;
 - pointwise irreducibility counts: exact FLINT certification;
 - Kummer, pair and `D` subtraction: exact finite-field formulas;
 - compact moments: exact integers before normalization;
