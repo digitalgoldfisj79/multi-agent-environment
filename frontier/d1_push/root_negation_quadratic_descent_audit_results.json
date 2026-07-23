@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "method": "exact FLINT factorisation",
+  "prime_range": "both square classes for every prime 5<=p<=43",
+  "claims_checked": [
+    "F_(c,d) irreducible iff F_(c,-d) irreducible iff G_(c,d^2) irreducible for every c and d!=0",
+    "N_a=2*#{(c,e nonzero square):G_(c,e) irreducible}"
+  ],
+  "mismatch_count": 0,
+  "job_id": "6a61b9d2d09dc1f57c6c43a2"
+}
