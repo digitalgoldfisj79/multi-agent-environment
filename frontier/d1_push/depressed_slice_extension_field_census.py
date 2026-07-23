@@ -32,7 +32,7 @@ def init_worker(p: int, r: int, a_int: int) -> None:
     R = PolynomialRing(F, "x")
     x = R.gen()
     ELS = list(F)
-    AA = F.fetch_int(a_int) if r > 1 else F(a_int)
+    AA = F(a_int)
 
 
 def count_for_c(i: int) -> int:
