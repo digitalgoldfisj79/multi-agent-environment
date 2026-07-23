@@ -1,0 +1,16 @@
+{
+  "status": "REJECTED",
+  "date": "2026-07-23",
+  "job_id": "6a61f6b5d09dc1f57c6c4fc9",
+  "hypothesis": "The primitive nonzero c-pencil Fourier trace is a scalar, dilation/inversion, conjugation and optional quadratic twist of the normalized even-character Hasse-Davenport/Jacobi trace sum.",
+  "method": "For p=31,43,59 and both square classes, compute the exact primitive c-pencil residual, its numerical additive DFT, the normalized even multiplicative-character Gauss-power sum, and optimize over all dilations, inversion, conjugation, quadratic twist and one complex scalar.",
+  "results": [
+    {"p":31,"A":1,"best_r2":0.18341113563840628,"rmse":1.0212908751430352,"max_residual":1.994162840949756},
+    {"p":31,"A":-1,"best_r2":0.17905526255564153,"rmse":1.4696774721310217,"max_residual":2.5924466601883727},
+    {"p":43,"A":1,"best_r2":0.1398537718372702,"rmse":1.1077035356078924,"max_residual":2.332379785821611},
+    {"p":43,"A":-1,"best_r2":0.16621333708529806,"rmse":0.984705143804105,"max_residual":2.161038328585903},
+    {"p":59,"A":1,"best_r2":0.1788700931795678,"rmse":1.0526684991296278,"max_residual":1.680096717320757},
+    {"p":59,"A":-1,"best_r2":0.10835569865017924,"rmse":1.1233127089868415,"max_residual":2.7934904941378096}
+  ],
+  "conclusion": "The primitive corner object is not a single normalized tame Jacobi/Hasse-Davenport trace up to the tested natural equivalences. The tame augmentation specialization remains a derived multi-component problem. This rejection prevents replacing the missing corner theorem by a false one-line character-sum identity."
+}
