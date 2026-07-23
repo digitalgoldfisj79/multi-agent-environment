@@ -55,25 +55,25 @@ Let `L_chi` denote the quadratic Kummer sheaf in the `e` coordinate. For `e!=0`,
 
 `1+chi(e)`
 
-is twice the indicator that `e` is a square. Combining RNQD.3 with CAW.1 gives:
+is twice the indicator that `e` is a square. An irreducible finite-field polynomial is separable, so every irreducible fibre lies in the étale complement `U_a`. Combining RNQD.3 with CAW.1 gives:
 
 ### Theorem CAW.2 — exact Adams expression for the depressed count
 
 `boxed( pN_a(p)`
 
-` =sum_((c,e) in F_p x F_p^*)`
+` =sum_((c,e) in U_a(F_p))`
 
 `   (1+chi(e)) Tr(Frob_(c,e) | psi^p P_a-P_a). )`
 
-Equivalently, in the Grothendieck group,
+Equivalently, put
 
-`pN_a(p)=Tr(Frob_p | RGamma_c(U_a, A_a))`
+`A_a=(1 direct_sum L_chi) tensor (psi^p P_a-P_a)`
 
-up to the explicit discriminant and infinity corrections, where
+on `U_a`. Grothendieck-Lefschetz gives the exact identity
 
-`A_a=(1 direct_sum L_chi) tensor (psi^p P_a-P_a).`
+`boxed( pN_a(p)=Tr(Frob_p | RGamma_c(U_a,A_a)). )`
 
-All correction strata are explicit because the finite discriminant has only the two components displayed above.
+There is no correction term in this affine compactly supported formula. The two finite discriminant components and the divisor at infinity enter only when `U_a` is compactified in order to analyse and bound its cohomology.
 
 ## 4. Known extremal collapse
 
@@ -148,7 +148,7 @@ This proposal has a terminal outcome.
 
 - Root-negation descended cover: exact theorem.
 - Adams p-cycle detector: exact representation-theoretic identity.
-- Exact global count formula: exact Grothendieck-Lefschetz reduction with explicit boundary strata.
+- Exact global count formula: exact Grothendieck-Lefschetz identity on the étale complement.
 - Complete extremal CM assembly: previously proved exact.
 - Middle ledger through `p=199`: exact finite computation.
 - Weight-three scaling: finite-data interpretation, not a theorem.
