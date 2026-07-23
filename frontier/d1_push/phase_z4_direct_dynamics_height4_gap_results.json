@@ -1,0 +1,25 @@
+{
+  "date": "2026-07-23",
+  "job_id": "6a61a3b713e6ef894d54cb0b",
+  "status": "PASS",
+  "method": "Exact FLINT Rabin certification over all 5,832 cubic tails with nonzero cubic coefficient and coefficient height at most 4, restricted to the eight nondegenerate height-3 failure primes.",
+  "height": 4,
+  "candidate_count": 5832,
+  "results": [
+    {"p":227,"tested":760,"found":[[-4,-4,4,2],[-4,-1,-2,1],[-4,1,-2,-1],[-4,4,4,-2],[-3,-4,-1,-1]]},
+    {"p":419,"tested":5832,"found":[[-4,-1,3,3],[-4,1,3,-3],[-2,-3,0,-4],[-2,3,0,4]]},
+    {"p":439,"tested":5406,"found":[[1,-2,-2,-4],[1,2,-2,4],[4,-4,-2,-2],[4,-2,-3,3],[4,-1,2,1]]},
+    {"p":461,"tested":748,"found":[[-4,-4,4,2],[-4,0,-3,-4],[-4,0,-3,4],[-4,4,4,-2],[-3,-4,-2,-4]]},
+    {"p":463,"tested":5832,"found":[[-2,-1,-4,-3],[-2,1,-4,3],[1,-4,-2,3],[1,4,-2,-3]]},
+    {"p":487,"tested":5832,"found":[[2,-1,4,4],[2,1,4,-4],[3,-1,-4,-4],[3,1,-4,4]]},
+    {"p":491,"tested":2229,"found":[[-4,-3,-3,-4],[-4,3,-3,4],[-3,-4,-4,-3],[-3,4,-4,3],[-1,-4,0,1]]},
+    {"p":499,"tested":5832,"found":[[-4,-1,-4,-3],[-4,1,-4,3],[1,-3,4,2],[1,3,4,-2]]}
+  ],
+  "conclusions": {
+    "all_height3_gaps_repaired_at_height4": true,
+    "universal_height4_map_established": false,
+    "simple_arithmetic_selection_rule_found": false,
+    "general_prime_theorem": false,
+    "d1_crown_proved": false
+  }
+}
