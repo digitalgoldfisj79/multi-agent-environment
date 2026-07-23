@@ -1,0 +1,36 @@
+{
+  "date": "2026-07-23",
+  "job_id": "6a619e9dd09dc1f57c6c3cdf",
+  "status": "PASS",
+  "method": "Exact cycle-type census over every t and q in the stated finite fields; upper-hook character chi_(V_2 tensor sign) evaluated from each Frobenius cycle type.",
+  "object": "q-averaged character sums for V_(p-3)=V_2 tensor sign",
+  "results": {
+    "7": {
+      "jmax": 7,
+      "upper_hook_q_average": [-1,39,77,255,-581,-315,21363],
+      "normalized_by_p_to_j_over_2": [-0.3779644730092272,5.571428571428571,4.157609203101499,5.204081632653061,-4.481578751395123,-0.9183673469387755,23.5406852387642],
+      "berlekamp_massey_degree_mod_1000000007": 4,
+      "berlekamp_massey_degree_mod_1000000009": 4
+    },
+    "11": {
+      "jmax": 5,
+      "upper_hook_q_average": [8,124,-124,3676,243],
+      "normalized_by_p_to_j_over_2": [2.412090756622109,11.272727272727273,-3.398855157058426,30.380165289256198,0.6055145184495584],
+      "berlekamp_massey_degree_mod_1000000007": 3,
+      "berlekamp_massey_degree_mod_1000000009": 3
+    },
+    "13": {
+      "jmax": 4,
+      "upper_hook_q_average": [5,109,-139,4613],
+      "normalized_by_p_to_j_over_2": [1.386750490563073,8.384615384615385,-2.965512587511802,27.29585798816568],
+      "berlekamp_massey_degree_mod_1000000007": 2,
+      "berlekamp_massey_degree_mod_1000000009": 2
+    }
+  },
+  "interpretation": {
+    "short_recurrence_found": false,
+    "reason": "For sequence lengths 7,5,4 the returned degrees 4,3,2 are the generic maximal Berlekamp-Massey degrees. They do not establish recurrences of those orders.",
+    "tiny_rank_model_supported": false,
+    "general_prime_theorem": false
+  }
+}
