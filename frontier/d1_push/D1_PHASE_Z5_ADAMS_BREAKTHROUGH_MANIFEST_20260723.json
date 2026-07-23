@@ -1,0 +1,47 @@
+{
+  "date": "2026-07-23",
+  "branch": "gpt56/d1-push-weight0-collapse-20260722",
+  "programme": "Phase Z5 cyclic-Adams and quadratic-descent breakthrough",
+  "theorem_files": [
+    "frontier/d1_push/ROOT_NEGATION_QUADRATIC_DESCENT_THEOREM.md",
+    "frontier/d1_push/MOORE_ARTIN_SCHREIER_REDUCTION_THEOREM.md",
+    "frontier/d1_push/CYCLIC_ADAMS_WEIGHT3_FRONTIER.md",
+    "frontier/d1_push/D1_PUSH_PHASE_Z5_ADAMS_BREAKTHROUGH_STATUS_20260723.md"
+  ],
+  "source_files": [
+    "frontier/d1_push/root_negation_quadratic_descent_audit.py",
+    "frontier/d1_push/root_negation_descent_discriminant_audit.py",
+    "frontier/d1_push/moore_artin_schreier_reduction_audit.py",
+    "frontier/d1_push/depressed_slice_extension_field_census.py",
+    "frontier/d1_push/discriminant_twist_k3_reduction_audit.py",
+    "frontier/d1_push/middle_configuration_residual_probe.py"
+  ],
+  "result_files": [
+    "frontier/d1_push/root_negation_quadratic_descent_audit_results.json",
+    "frontier/d1_push/root_negation_descent_discriminant_audit_results.json",
+    "frontier/d1_push/depressed_slice_extension_field_results_p5_p13.json",
+    "frontier/d1_push/middle_configuration_residual_results_p199.json"
+  ],
+  "compute_jobs": {
+    "root_negation_descent": "6a61b9d2d09dc1f57c6c43a2",
+    "descent_discriminant": "6a61bcb0d09dc1f57c6c4529",
+    "moore_recurrence_p5": "6a61af0213e6ef894d54cbf1",
+    "moore_recurrence_p7": "6a61af1a13e6ef894d54cbf3",
+    "extension_p5": "6a61ae6cd09dc1f57c6c3ed0",
+    "extension_p7": "6a61ae7fd09dc1f57c6c3ed8",
+    "extension_p11": "6a61ae97d09dc1f57c6c3edc",
+    "extension_p13": "6a61aeac13e6ef894d54cbe9",
+    "middle_residual_parallel": "6a61b6de13e6ef894d54cebf",
+    "middle_residual_compact": "6a61b974d09dc1f57c6c4368",
+    "D_K3_independent_audit": "6a61b3aad09dc1f57c6c4097"
+  },
+  "exact_outcomes": {
+    "root_negation_descent": "PASS through p=43, both square classes, zero mismatches",
+    "descent_discriminant": "PASS through p=101 for every c and nonzero e, both classes",
+    "moore_recurrence": "PASS at p=5,7, both classes",
+    "extension_sequences": "PASS at p=5,7,11,13",
+    "middle_residual": "PASS through p=199; maximum |E_mid|/p^(3/2)=4.492808420749096",
+    "D_K3_pointwise_reduction": "PASS for every q and every prime through p=199"
+  },
+  "open_terminal_gate": "Prove the Cyclic-Adams Weight-Three Lemma by localizing psi^p(P)-P on the two-branch descended cover and bounding the primitive weight-three Betti number uniformly."
+}
