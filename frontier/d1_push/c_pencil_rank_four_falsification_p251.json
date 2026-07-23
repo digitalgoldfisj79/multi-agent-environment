@@ -1,0 +1,33 @@
+{
+  "status": "PASS",
+  "date": "2026-07-23",
+  "job_id": "6a61eccb13e6ef894d54d99e",
+  "scope": "Out-of-sample exact primitive c-pencil census at p=251; exact Kummer/pair/D subtraction; numerical additive DFT.",
+  "p": 251,
+  "classes": [
+    {
+      "A": 1,
+      "primitive_sum": 6010,
+      "primitive_sum_over_p_3_2": 1.5113459612023097,
+      "second_moment_over_p3": 1.6401383877357034,
+      "max_abs_pointwise_over_p": 4.908366533864542,
+      "max_nonzero_fourier_over_p_3_2": 2.5980914751178146,
+      "max_nonzero_frequency": 117
+    },
+    {
+      "A": -1,
+      "primitive_sum": 8514,
+      "primitive_sum_over_p_3_2": 2.141031533057648,
+      "second_moment_over_p3": 1.6378576423026485,
+      "max_abs_pointwise_over_p": 5.115537848605578,
+      "max_nonzero_fourier_over_p_3_2": 3.2880013452528964,
+      "max_nonzero_frequency": 19
+    }
+  ],
+  "rank_four_falsification_gate": {
+    "threshold": 4.0,
+    "max_observed": 3.2880013452528964,
+    "pass": true
+  },
+  "interpretation": "The sharp effective-rank-four hypothesis survives the first out-of-sample prime beyond the p<=199 formulation range. This is finite evidence only and does not prove an l-adic rank bound."
+}
