@@ -1,0 +1,46 @@
+{
+  "status": "PASS",
+  "prime_range": "all primes 5<=p<=101",
+  "prime_cases": 24,
+  "weighted_exceptional_family": {
+    "job_id": "6a61c9be13e6ef894d54d71c",
+    "checks": [
+      "weighted exceptional specialization",
+      "square-value factorization",
+      "irreducibility iff C=-1 and D!=0",
+      "projected Adams trace p(p-1)"
+    ],
+    "failures": 0,
+    "p101": {
+      "irreducible_count": 100,
+      "expected_count": 100,
+      "projected_adams_trace": 10100,
+      "expected_projected_trace": 10100
+    }
+  },
+  "weighted_blowup_artin_schreier": {
+    "job_id": "6a61cc16d09dc1f57c6c4b2b",
+    "checks": [
+      "strict-transform equation",
+      "reciprocal Artin-Schreier equation",
+      "Adams character on C_p",
+      "affine Artin-Schreier trace sum"
+    ],
+    "failures": 0,
+    "p101_affine_trace_sum": 10100
+  },
+  "endpoint_localization": {
+    "initial_job_with_checker_sign_bug": "6a61cd67d09dc1f57c6c4b4e",
+    "corrected_job_id": "6a61ce9f13e6ef894d54d76b",
+    "checker_fix": "the S-chart identity was rewritten with the same overall sign as the exceptional equation",
+    "checks": [
+      "R endpoint exact chart identity",
+      "S endpoint exact chart identity",
+      "reciprocal x^p+x=b equation",
+      "Adams value zero on cycle type (p-1,1)",
+      "Adams value p on a p-cycle",
+      "Adams value zero at the identity"
+    ],
+    "failures_after_fix": 0
+  }
+}
