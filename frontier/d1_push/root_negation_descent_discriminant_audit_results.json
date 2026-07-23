@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "method": "exact FLINT polynomial discriminants modulo p",
+  "prime_range": "both square classes, every c, every nonzero e, every prime 5<=p<=101",
+  "formula": "Disc_Y(Y(Y^m+aY+c)^2-e)=(-1)^m*3*a*e^m*(e-B_a(c)), m=(p-1)/2",
+  "mismatch_count": 0,
+  "largest_cases_per_class": 10100,
+  "job_id": "6a61bcb0d09dc1f57c6c4529"
+}
