@@ -1,0 +1,27 @@
+{
+  "status": "PASS",
+  "date": "2026-07-23",
+  "job_id": "6a61dfc9d09dc1f57c6c4d9d",
+  "scope": "Exact primitive middle trace reassembled on the true c-pencil after Kummer, pair and D subtraction; numerical additive DFT; explicit c=0 and q=2 boundary values omitted from the primitive ledger.",
+  "rows": [
+    {"p":31,"classes":[{"A":1,"sum":196,"max_abs_pointwise_over_p":2.935483870967742,"second_moment_over_p3":1.2777013191903595,"spectral_entropy":0.8702500231860267,"max_fourier_over_p3_2":2.0184375768287315,"max_nonzero_fourier_over_p3_2":2.0184375768287315},{"A":-1,"sum":-360,"max_abs_pointwise_over_p":3.3225806451612905,"second_moment_over_p3":2.6865160618978887,"spectral_entropy":0.9061356786226781,"max_fourier_over_p3_2":2.8438322453270612,"max_nonzero_fourier_over_p3_2":2.8438322453270612}]},
+    {"p":43,"classes":[{"A":1,"sum":260,"max_abs_pointwise_over_p":3.186046511627907,"second_moment_over_p3":1.413108279774108,"spectral_entropy":0.8613102588029569,"max_fourier_over_p3_2":2.5541486583236237,"max_nonzero_fourier_over_p3_2":2.5541486583236237},{"A":-1,"sum":176,"max_abs_pointwise_over_p":2.883720930232558,"second_moment_over_p3":1.1449557900562215,"spectral_entropy":0.8729139027548062,"max_fourier_over_p3_2":2.209193377129087,"max_nonzero_fourier_over_p3_2":2.209193377129087}]},
+    {"p":59,"classes":[{"A":1,"sum":624,"max_abs_pointwise_over_p":3.152542372881356,"second_moment_over_p3":1.3587562506390625,"spectral_entropy":0.9457354047933404,"max_fourier_over_p3_2":1.8330520269581354,"max_nonzero_fourier_over_p3_2":1.8330520269581354},{"A":-1,"sum":854,"max_abs_pointwise_over_p":3.0847457627118646,"second_moment_over_p3":1.451375262319906,"spectral_entropy":0.8692438600446583,"max_fourier_over_p3_2":2.786494311461158,"max_nonzero_fourier_over_p3_2":2.786494311461158}]},
+    {"p":83,"classes":[{"A":1,"sum":-348,"max_abs_pointwise_over_p":4.9156626506024095,"second_moment_over_p3":2.3713795521758976,"spectral_entropy":0.9323029257538429,"max_fourier_over_p3_2":2.8009627608548215,"max_nonzero_fourier_over_p3_2":2.8009627608548215},{"A":-1,"sum":148,"max_abs_pointwise_over_p":3.1566265060240966,"second_moment_over_p3":1.6193162838609483,"spectral_entropy":0.8893875494066689,"max_fourier_over_p3_2":2.9829283196450946,"max_nonzero_fourier_over_p3_2":2.9829283196450946}]},
+    {"p":101,"classes":[{"A":1,"sum":2326,"max_abs_pointwise_over_p":3.1881188118811883,"second_moment_over_p3":1.2944838450122829,"spectral_entropy":0.9087410247369878,"max_fourier_over_p3_2":2.715158309525366,"max_nonzero_fourier_over_p3_2":2.715158309525366},{"A":-1,"sum":-1916,"max_abs_pointwise_over_p":5.02970297029703,"second_moment_over_p3":2.0811238657440883,"spectral_entropy":0.9407618784384525,"max_fourier_over_p3_2":2.807699375121764,"max_nonzero_fourier_over_p3_2":2.807699375121764}]},
+    {"p":127,"classes":[{"A":1,"sum":-2780,"max_abs_pointwise_over_p":5.149606299212598,"second_moment_over_p3":2.2465398316623406,"spectral_entropy":0.9053285710443616,"max_fourier_over_p3_2":3.85138337984372,"max_nonzero_fourier_over_p3_2":3.85138337984372},{"A":-1,"sum":778,"max_abs_pointwise_over_p":5.2204724409448815,"second_moment_over_p3":2.1672714526531416,"spectral_entropy":0.9155299101441178,"max_fourier_over_p3_2":3.1699329179198026,"max_nonzero_fourier_over_p3_2":3.1699329179198026}]},
+    {"p":167,"classes":[{"A":1,"sum":9696,"max_abs_pointwise_over_p":3.0059880239520957,"second_moment_over_p3":1.2213245709090979,"spectral_entropy":0.8824625783296561,"max_fourier_over_p3_2":4.492808420749096,"max_nonzero_fourier_over_p3_2":2.521660519190873},{"A":-1,"sum":8358,"max_abs_pointwise_over_p":5.005988023952096,"second_moment_over_p3":1.6414356914912689,"spectral_entropy":0.9107699210322372,"max_fourier_over_p3_2":3.8728231003115665,"max_nonzero_fourier_over_p3_2":2.7736273571162173}]},
+    {"p":199,"classes":[{"A":1,"sum":7462,"max_abs_pointwise_over_p":5.100502512562814,"second_moment_over_p3":1.6687401554120442,"spectral_entropy":0.9226681504889477,"max_fourier_over_p3_2":2.7861603294456034,"max_nonzero_fourier_over_p3_2":2.7861603294456034},{"A":-1,"sum":3086,"max_abs_pointwise_over_p":3.1959798994974875,"second_moment_over_p3":1.703561112549947,"spectral_entropy":0.9199478365409135,"max_fourier_over_p3_2":2.684026371275401,"max_nonzero_fourier_over_p3_2":2.684026371275401}]}
+  ],
+  "global": {
+    "prime_cases": 8,
+    "class_cases": 16,
+    "max_second_moment_over_p3": 2.6865160618978887,
+    "max_abs_pointwise_over_p": 5.2204724409448815,
+    "max_fourier_over_p3_2": 4.492808420749096,
+    "max_fourier_location": {"p":167,"A":1,"frequency":0},
+    "max_nonzero_fourier_over_p3_2": 3.85138337984372,
+    "max_nonzero_fourier_location": {"p":127,"A":1,"frequency":35},
+    "interpretation": "No visible growth in the normalized pointwise second moment or in the nonzero-frequency Fourier maximum through p=199. This supports, but does not prove, a bounded local-Fourier conductor defect for the primitive c-pencil sheaf."
+  }
+}
