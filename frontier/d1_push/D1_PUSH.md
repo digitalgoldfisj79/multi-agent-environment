@@ -131,3 +131,32 @@ from "prove an unspecified exponential-to-linear miracle" to "prove
 that *this specific, empirically verified* list of survivors is
 complete." That is the first time in the programme the door has had a
 shape.
+
+## 7. Status correction (2026-07-23): Route A is closed
+
+Read after the fact: the gpt56 branch's
+`P223_COMPLETE_CARTIER_WEIGHT_COUNTEREXAMPLE.md` (commit a1484d0,
+which *predates* their entire wild-trace phase) exactly refutes the
+Cartier support-cutoff strategy. At p = 223 with a = 1, c = t, d = t²,
+the complete four-block determinant coefficient at filtration weight
+25308 = (p−1)(p+3)/2 + (p−1) — one full level above the corrected
+boundary — equals 12 mod 223 ≠ 0. Verified five ways (paired Fourier in
+two quadratic models s²=3 and s²=5, w=1-only and full w≤4, plus an
+unpaired sweep of all 49728 elements of F_{p²}^*), exact arithmetic
+throughout, internally consistent (w=1 gives 14; lower blocks shift by
+−2). An earlier exact p=29 counterexample killed the uncorrected law.
+
+Consequences for the ledger above:
+- **Route A (support law + survivor sum) is CLOSED.** The support law I
+  verified at p = 17, 19, 23 is a genuine small-prime pattern that
+  leaks by p = 223 — the grouped cancellation is real but not a law.
+  Any surviving Cartier argument must tolerate unbounded filtration
+  support (global evaluation / residue / geometric), i.e. it stops
+  being the "sharper route" described in §6.
+- The gpt56 lane's wild-trace/WTCK reduction — and hence our
+  `frontier/d1_halftheorem/SYMP_LEMMA.md` — was built as the pivot
+  *after* this refutation and is untouched by it. The Sym^p moment
+  lemma is now the unique live analytic door for the p ≡ 2 (mod 3)
+  half-theorem.
+- Unchanged: this refutes a proof *strategy*, not Cartier nonvanishing
+  itself, the crown, or anything about integer Fortune.
