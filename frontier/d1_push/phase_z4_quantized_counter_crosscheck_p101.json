@@ -1,0 +1,15 @@
+{
+  "date": "2026-07-23",
+  "job_id": "6a61a539d09dc1f57c6c3d97",
+  "status": "PASS",
+  "prime": 101,
+  "implementations": [
+    "depressed_slice_irreducible_count.cpp: independent sparse polynomial/Rabin implementation",
+    "depressed_slice_irreducible_count_flint.py: FLINT modular composition with logarithmic Frobenius exponentiation"
+  ],
+  "exact_counts": [
+    {"a":1,"square_class":"square","cpp_N":76,"flint_N":76,"match":true},
+    {"a":2,"square_class":"nonsquare","cpp_N":116,"flint_N":116,"match":true}
+  ],
+  "all_match": true
+}
