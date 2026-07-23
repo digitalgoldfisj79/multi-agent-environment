@@ -1,0 +1,40 @@
+{
+  "date": "2026-07-23",
+  "job_id": "6a619f07d09dc1f57c6c3ce6",
+  "status": "PASS",
+  "method": "Exact O(p^2) cubic pair/mixed moment ledger for both square classes, followed by train/holdout comparison against small elliptic curve Frobenius traces and quadratic twists.",
+  "cases": 416,
+  "prime_min": 503,
+  "prime_max": 1999,
+  "max_Q3": 8,
+  "residual_envelopes": {
+    "M13_minus_first_cubic_mass_max_abs_over_p": 1.892925430210325,
+    "M23_minus_one_sixth_mass_max_abs_over_p": 1.6727976766698935,
+    "M33_minus_one_eighteenth_mass_max_abs_over_p": 1.0309398715703444
+  },
+  "small_elliptic_library": {
+    "models": "y^2=x^3+A*x+B with -5<=A,B<=5, nonsingular, plus square-class twists",
+    "feature_count": 240,
+    "largest_absolute_single_feature_correlation": {
+      "M13": 0.2022866415485127,
+      "M23_scaled_by_6": 0.15780984066587966,
+      "M33_scaled_by_18": 0.14285669183291075
+    },
+    "eight_feature_train_holdout": {
+      "M13_holdout_MAE": 929.4508627422664,
+      "M13_holdout_max_error": 3108.3216164034916,
+      "M23_scaled_by_6_holdout_MAE": 3888.7787255168496,
+      "M23_scaled_by_6_holdout_max_error": 13311.568505385876,
+      "M33_scaled_by_18_holdout_MAE": 6640.773158996218,
+      "M33_scaled_by_18_holdout_max_error": 31282.3166110306
+    },
+    "exact_low_height_decomposition_found": false
+  },
+  "conclusions": {
+    "O_p_residual_behaviour_supported_finitely": true,
+    "simple_elliptic_motive_model_supported": false,
+    "uniform_trace_bound_proved": false,
+    "all_degree_sieve_completed": false,
+    "d1_crown_proved": false
+  }
+}
