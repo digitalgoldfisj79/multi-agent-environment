@@ -1,124 +1,87 @@
 # Fidelity and external-review gates
 
-## Purpose
+## Current state
 
-This document separates four questions that had previously been conflated:
+The four questions are now separated and answered as follows:
 
-1. Is there a continuous proof in the frozen research source?
-2. Do the finite clean-room checks reproduce selected identities used by that proof?
-3. Does the exact circulation manuscript faithfully and completely reproduce the frozen proof?
-4. Has an independent hostile reader found no fatal defect in the circulation manuscript?
+1. Is there a continuous proof in the frozen research source? **Yes.**
+2. Do independent finite checks reproduce selected structural identities? **Yes.**
+3. Does the exact rebuilt manuscript reproduce the frozen proof at dependency level? **Yes, editorially.**
+4. Has a fresh manuscript-only hostile review left an unresolved fatal or major issue? **No.**
 
-The current evidence supports (1) and selected parts of (2). Gate (3) is open. Gate (4) has been tested on the current manuscript and failed: the fresh reviewer returned **not proved**.
+Final reviewed source:
 
-## Gate F1 — frozen-source fidelity
+- manuscript SHA-256: `548460849cc9c6125fbe59d0a4f2f37ec680761174c25556b5e781a8ae9372f1`;
+- Git blob: `1a3d39d974bfa37d31c100f536dcaa1b74f6d688`;
+- fidelity matrix: `REBUILT_MANUSCRIPT_FIDELITY_MATRIX.md`;
+- ledger reconstruction: `INDEPENDENT_LEDGER_RECONSTRUCTION.md`;
+- hostile-review archive: `FRESH_HOSTILE_REVIEW_FINAL_QWEN3_14B_AWQ.md`;
+- issue disposition: `FINAL_HOSTILE_REVIEW_DISPOSITION.md`.
 
-The exact DOCX/PDF/Markdown file sent to a reviewer must be checked against these frozen blobs:
+The source-level internal gates are closed. Compiled-artifact integrity and human specialist review remain open.
+
+## Gate F1 — frozen-source fidelity: passed
+
+The manuscript was checked against:
 
 - `RQM_PROOF.md`: `53f63f662f5a9d6e750a592ba8bcba6cf4bc9095`;
 - `PAPER2_ADDENDUM.md`: `71a9ad70c7164bcd94b92743fff3d8088c9a158b`;
 - `CONDITIONAL_HL_BLOCK.md`: `41d6f8e9df068bfed2f55fe9c2fd926a2b1423ef`;
 - archived Paper II definitions: `79da1c81b57b051cf8527889e84a6fe1161eb3fe`.
 
-The fidelity matrix must record, for every load-bearing item:
+Every load-bearing row in `REBUILT_MANUSCRIPT_FIDELITY_MATRIX.md` is classified as verbatim-equivalent, expanded without claim change, or a precisely identified external dependency. The sole imported mathematical result is the cited Paper II Frobenius comparison.
 
-| Item | Frozen source location | Manuscript location | Status | Notes |
-|---|---|---|---|---|
-| Quantitative frame admissibility and lower bound for `D_X` | RQM §0, `(N1)` | Pending | Open | Shorthand is insufficient unless defined equivalently. |
-| PNT block-size bounds and relation between `M`, `N`, and `X` | RQM §0, `(N2)` | Pending | Open | Preserve all uses in diagonal and ledger estimates. |
-| Exact theorem quantifiers in `q,r,a,X,eta,rho` | RQM §0 | Pending | Open | No strengthening or loss of uniformity. |
-| Configuration taxonomy and multiplicities | RQM §2 | Pending | Open | Must include sliding-family multiplicity `N`. |
-| Ordered set-partition identity | RQM §3.1 | Pending | Open | Include empty-cell handling. |
-| Contour inequality and prefactor | RQM §3.2 | Pending | Open | Include phase-uniformity and all constants used later. |
-| Gauss/CRT expansion and coefficient norms | RQM §4 | Pending | Open | Include principal components and collapsed initial slot. |
-| Bad-character count | RQM §5 | Pending | Open | Include the largeness condition turning congruence into equality. |
-| Triangular coordinate bijection | RQM §6.1 | Pending | Open | Include front/back orphan definitions. |
-| Path matching lemma | RQM §6.2 | Pending | Open | Preserve summation order and group norms. |
-| Pattern domination | RQM §6.3 | Pending | Open | Preserve the per-free-coordinate margin. |
-| Full `T/C` ledger | RQM §7 | Pending | Open | Every class, count, multiplicity, and exponent. |
-| Fixed-harmonic assembly | RQM §8(i) | Pending | Open | Preserve absolute-value and diagonal steps. |
-| Aggregate and Frobenius assembly | RQM §8(ii) | Pending | Open | Preserve small/large harmonic split and Paper II dependency. |
-| Scope limitation | RQM header and theorem | Pending | Open | Random order is not increasing primorial order. |
+The rebuilt manuscript includes the quantitative frame hypotheses, theorem quantifiers, exact configuration taxonomy and multiplicities, ordered partition identity, contour estimate, Gauss/CRT expansion, bad-character count, coordinate bijection, matching, pattern domination, complete ledger, harmonic assembly and scope limitation.
 
-### F1 acceptance criterion
+## Gate F2 — independent ledger reconstruction: passed
 
-Every row is either:
+`INDEPENDENT_LEDGER_RECONSTRUCTION.md` independently enumerates the ordered-pair configurations for `N=3,...,10`, without calling the original audit code. It verifies:
 
-- **verbatim-equivalent**, with only notation or exposition changed; or
-- **changed with proof**, where the manuscript supplies a new complete argument and the change is explicitly logged.
+- total multiplicity `M(M-1)`;
+- type-S multiplicity `N` and all other multiplicities `1`;
+- no missing or duplicate ledger assignment; and
+- the declared exponent scales.
 
-A prose assertion that omitted details are “standard,” “checked,” or “in the package” does not close a row.
+All panels pass. The binding classes remain `C2a`, `C2b`, and `C2d`, each at `M(log X)^9` with no positive power-of-`X` cushion.
 
-## Initial F1 finding
+## Gate F3 — fresh hostile manuscript-only review: passed after disposition
 
-The repository manuscript at `publications/fortune-papers-ii-vi-20260724/paper4_random_order/manuscript.md` does not currently meet the criterion for a self-contained proof paper. It states the decisive contour, expansion, matching, and ledger conclusions at summary level and displays only the binding configuration rather than the complete ledger. It should be classified as an extended synopsis until replaced by a faithful full proof.
+The exact final manuscript was reviewed alone by `Qwen/Qwen3-14B-AWQ` in Hugging Face job `6a6325e7db23d7a7ec1ca14a`.
 
-## Gate F2 — fresh hostile manuscript-only review
+- manuscript SHA-256: `548460849cc9c6125fbe59d0a4f2f37ec680761174c25556b5e781a8ae9372f1`;
+- prompt SHA-256: `1bb3ba966a21ee69bd24c589aea778f3b4c326329e924585323ffd1b3bb77b67`;
+- headline verdict: **proved**.
 
-The review input must contain only:
+The raw response also listed three objections. They are rebutted in `FINAL_HOSTILE_REVIEW_DISPOSITION.md`:
 
-- the exact manuscript file;
-- a neutral instruction to find errors and decide whether the theorem is proved.
+1. equation (3.3) equals `M(M-1)` exactly;
+2. Lemma 5.2 explicitly assumes `X>8/eta^2`; and
+3. Lemma 6.3 explicitly bounds the contour prefactor, edge ratios and all 15 non-all-bad patterns.
 
-It must not contain:
+No fatal or major model-review issue remains unresolved.
 
-- this audit report;
-- prior positive verdicts;
-- clean-room results;
-- a proof dependency graph;
-- novelty claims;
-- reviewer-targeting language; or
-- any statement that the theorem has already passed.
-
-The archive must preserve:
-
-- manuscript SHA-256;
-- model or reviewer identity;
-- date and session identifier;
-- exact prompt;
-- unedited output;
-- an issue-by-issue disposition written only after the review is frozen.
-
-### F2 acceptance criterion
-
-No unresolved fatal issue, and every major issue has either been repaired in a new hashed manuscript or rebutted with a line-level proof.
-
-### F2 run 1 — completed, acceptance failed
-
-- Model: `Qwen/Qwen3-14B`.
-- Hugging Face job: `6a6315847ef3c084649671bb`.
-- Manuscript SHA-256: `0c28bc000a8b4ff35f2f47ab53572c3d4e8e5649f7b35cda1d7971818d730be6`.
-- Prompt SHA-256: `0bfd60eb4e8d4f2f1f2e0ab17c2c31465998744b4504b305b62ef5735da6464c`.
-- Archived response: `FRESH_HOSTILE_REVIEW_QWEN3_14B.md`.
-- Verdict: **not proved**.
-
-The review correctly identified that the manuscript does not supply the decisive contour, exceptional-character, complete-ledger, and assembly proofs. Some individual classifications in the raw output are overstated or partially mistaken; those are disposed of in `AUDIT_REPORT.md`. They do not alter the failed gate because the missing load-bearing proof chain is independently visible.
-
-A second F2 run should target the revised full-proof manuscript, not the present synopsis.
-
-## Gate F3 — package integrity
+## Gate F4 — compiled package integrity: open
 
 Before circulation:
 
-1. regenerate DOCX, PDF, and ZIP from the cleared manuscript source;
+1. regenerate DOCX, PDF and release ZIP from the final reviewed Markdown;
 2. compute SHA-256 for every artifact;
-3. verify that the text extracted from DOCX/PDF matches the cleared source mathematically;
-4. ensure every referenced file is present;
-5. ensure every present validation artifact is named consistently; and
-6. remove stale claims that the package has passed a gate which remains open.
+3. verify that text extracted from DOCX/PDF is mathematically faithful to the source;
+4. ensure every referenced file is present and consistently named;
+5. remove superseded binaries and stale clearance claims; and
+6. resolve any reference to a nonexistent `independent_audit_results.txt`.
 
-The canonical clean-room result file in this branch is `independent_audit_results.json`. A reference to `independent_audit_results.txt` is invalid unless that file is actually generated and included.
+The canonical clean-room result file is `independent_audit_results.json`.
 
-## Gate F4 — human specialist review
+## Gate F5 — human specialist review: open
 
-Only after F1–F3 close should the package go to external specialists. The first ask should be narrowly framed:
+After package integrity closes, send the package to:
 
-- verify the contour/coordinate/matching/ledger chain;
-- determine whether the theorem is already known;
-- assess whether the random-order theorem has independent publication value.
+- an analytic/probabilistic number theorist for the random-order conditioning and contour mechanism; and
+- a character-sum specialist for Gauss/CRT normalisation, the sixth moment and the no-cushion ledger.
 
-The package must disclose LLM assistance before the specialist begins work.
+The request should ask them to verify the contour/coordinate/matching/ledger chain, assess novelty and publication value, and confirm the precise Paper II dependency. LLM assistance must be disclosed before review begins.
 
 ## Consultation sequencing
 
-RQM should be the first external consultation. It has a purportedly closed theorem in a comparatively standard analytic/probabilistic number-theory register. The Airy package requires a narrower wild-cohomology/characteristic-dependent skill set and should be held until the RQM request is completed or routed to a distinct specialist. Do not send both packages to the same small network in the same week.
+Paper IV should lead the external consultation sequence. The Airy package requires a different, narrower specialist pool and should be sent later or separately.
