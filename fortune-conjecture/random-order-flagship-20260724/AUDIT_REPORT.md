@@ -1,10 +1,15 @@
 # Adversarial mathematical audit
 
-## Decision
+## Revised decision
 
-**Gate result: PROVISIONAL PASS TO EXTERNAL REVIEW.**
+**Gate result: INTERNAL HOLD — FIDELITY AND FRESH-REVIEW GATES OPEN.**
 
-The main random-order theorem has a continuous proof under the explicit frame-admissibility hypothesis. A clean-room implementation reproduced every finite structural identity used in the proof. No fatal logical or normalisation gap was found. This is not yet a submission recommendation because novelty and field significance still require human specialist assessment.
+The frozen source `RQM_PROOF.md` contains a continuous proof under its explicit frame-admissibility hypothesis, and the clean-room implementation reproduced the finite structural identities selected for checking. Those facts do **not** by themselves establish that the auditor-edited manuscript is a faithful, complete rendering of the frozen proof. The earlier label “provisional pass to external review” therefore overstated what had been verified.
+
+No specialist should receive the manuscript until both of the following are complete:
+
+1. a claim-by-claim and dependency-level fidelity comparison between the frozen source blobs and the exact manuscript file sent for review; and
+2. a genuinely fresh hostile review of that manuscript alone, with no audit report, supportive context, validator output, or prior-session conclusions.
 
 ## Frozen source basis
 
@@ -15,9 +20,44 @@ The main random-order theorem has a continuous proof under the explicit frame-ad
 
 All source files were read from branch `gpt56/d1-gate-bridge-terminal-20260724`, except archived Paper II, which was read from `archive/fortune-paper2-20260720`.
 
-## Load-bearing proof chain
+## What the clean-room suite actually verifies
 
-1. Frame admissibility gives `D_X>0`, a lower bound for `D_X`, and diagonal control.
+The suite independently checks finite identities and selected normalisations:
+
+1. the `N`-or-`1` difference dichotomy;
+2. the coefficient taxonomy;
+3. the ordered set-partition identity at finite scale;
+4. a numerical instance of the contour inequality;
+5. Gauss/CRT coefficient norms;
+6. an end-to-end finite slot-character expansion;
+7. a finite sixth-moment exceptional-character count;
+8. moment and exact-sixth-moment calculations; and
+9. symbolic exponent arithmetic for the declared ledger classes.
+
+It does **not** independently verify:
+
+- that every hypothesis and quantifier in the frozen proof appears unchanged in the manuscript;
+- that the manuscript proves, rather than merely states, the contour, coordinate, matching, pattern-domination, and ledger steps;
+- that the ledger classification is exhaustive at manuscript level;
+- that every use of Paper II has been restated or cited correctly;
+- that the compiled DOCX/PDF is identical in mathematical content to the repository source; or
+- that no claim was strengthened during editorial reconstruction.
+
+## Initial fidelity findings
+
+The repository manuscript currently functions as a condensed research announcement, not a self-contained full proof. In particular:
+
+- the precise frame condition `(N1)` from the frozen source is replaced by undefined shorthand (“nondegenerate” and “admissible”);
+- the complete character-slot expansion, triangular coordinate bijection, path matching lemma, and pattern-domination proof are summarized rather than proved;
+- the full `T1–T3`, `C1`, `C2a–C2d`, `C3`, `C4` ledger and its multiplicity counts are omitted;
+- the binding-class calculation is displayed, but the assertion that all remaining classes are smaller is not established in the manuscript text; and
+- several largeness conditions and constants used to turn congruence into equality and control the harmonic tail are absorbed into prose rather than tracked.
+
+These omissions do not refute the frozen theorem. They refute the earlier claim that the reconstructed manuscript itself had already passed a complete proof audit.
+
+## Load-bearing proof chain in the frozen source
+
+1. Frame admissibility gives `D_X>0`, a quantitative lower bound for `D_X`, and diagonal control.
 2. Pair-index differences have coefficient patterns of length two to four.
 3. Conditioning on ranks gives an exact ordered set-partition law.
 4. Multivariate Cauchy gives decay controlled by ratio-character deficits.
@@ -25,58 +65,29 @@ All source files were read from branch `gpt56/d1-gate-bridge-terminal-20260724`,
 6. Sixth-moment orthogonality and unique factorisation bound the number of bad characters by `O(X log^3 X)`.
 7. Ratio coordinates form a tree, permitting an outer-to-inner matching sum.
 8. The all-bad pattern dominates every pattern containing good coordinates.
-9. The configuration ledger closes; the binding class is the four-endpoint, one-interior-micro-cell case.
+9. The configuration ledger closes.
 10. Diagonal and harmonic-tail estimates assemble the fixed-harmonic, aggregate, and Frobenius conclusions.
 
-## Issues found and resolved
+## No-cushion warning
 
-### Indexing conflict
+The binding classes `C2a`, `C2b`, and `C2d` close at exactly
 
-The source addendum used `N` for the number of block primes, whereas the RQM proof used `K` block primes and `N=K+1` path vertices. The manuscript now uses `K=|L_X|` and `N=K+1` consistently.
+`X^2 log^7 X = M log^9 X`
 
-### Reliance on Paper II
+up to constants and the relation `M asymp X^2/log^2 X`. There is no declared positive power-of-`X` cushion. A missing configuration family, an extra multiplicity factor, or a lost ratio-coordinate saving can therefore break the stated exponent. The clean-room exponent table checks the arithmetic of the declared classes; it does not substitute for an independent reconstruction of class exhaustiveness and multiplicities.
 
-The original proof referred repeatedly to Paper II equations. All definitions and load-bearing inequalities have been restated. Only the motivating interpretation remains companion-paper context.
+## Framing correction
 
-### Meaning of unconditional
+“No GRH” is literally correct, but incomplete as a summary. The theorem obtains cancellation after expectation over a uniformly random ordering. That permutation average is the principal source of cancellation and has no established analogue for the unique increasing primorial order. External material must state this in the same sentence as the no-GRH claim.
 
-The theorem is unconditional with respect to prime-distribution conjectures, but is proved under the stated smoothing-function admissibility condition. The abstract and theorem now say this explicitly.
+## Residual gates
 
-### Exact sixth moment
+1. Complete and archive the frozen-source-to-manuscript fidelity matrix.
+2. Run a fresh hostile manuscript-only review and preserve the exact input hash, model/session identity, prompt, and unedited output.
+3. Reconstruct the C2 ledger independently, without relying on the existing audit code.
+4. Resolve every package-manifest mismatch, including any reference to a missing `independent_audit_results.txt`.
+5. Only then approach an analytic/probabilistic number theorist and a character-sum specialist.
 
-The exact polynomial was obtained through finite exact enumeration plus polynomial determination. It is now labelled computer-assisted and is not used in the main proof.
+## External-review sequence
 
-### Novelty language
-
-The unverified phrase “first unconditional PGD2-type estimate” has been removed. The paper makes only the precise theorem claim and reports that a targeted search found no exact predecessor.
-
-### Boundary cases
-
-The empty initial cell, empty tail, orphan slots, binding exponent, and large-harmonic tail are now treated explicitly and independently checked.
-
-## Clean-room results
-
-Nine independent checks passed:
-
-1. `N`-or-`1` difference dichotomy;
-2. complete coefficient taxonomy;
-3. exact ordered set-partition identity;
-4. ratio-character contour inequality;
-5. Gauss/CRT coefficient norms;
-6. full end-to-end slot-character expansion;
-7. sixth-moment exceptional-character count;
-8. moment and exact-sixth-moment checks; and
-9. every configuration-ledger exponent.
-
-The binding classes C2a, C2b, and C2d reproduce `X^2 log^7 X = M log^9 X`.
-
-## Residual risks
-
-1. A referee may prefer a more invariant formulation of the smoothing class.
-2. The C2 configuration ledger should be independently reconstructed by a human reader without code.
-3. Absence from the literature cannot be certified by search alone.
-4. The theorem is a model theorem and must not be presented as direct control of the increasing primorial order.
-
-## Submission gate
-
-Send the manuscript for targeted external review now. Do not yet submit it to a journal or publish it as a final Zenodo preprint. A positive response from an analytic/probabilistic number theorist and a character-sum specialist is the remaining publication gate.
+The RQM manuscript should lead the consultation sequence because its frozen source claims a closed theorem and its human review question is sharply bounded. The Airy line should not be sent to the same small specialist pool in the same week; it remains a separate, higher-specialisation consultation after the RQM package has cleared its internal gates.
