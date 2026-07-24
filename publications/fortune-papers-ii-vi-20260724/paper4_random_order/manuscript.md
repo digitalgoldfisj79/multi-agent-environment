@@ -904,7 +904,8 @@ Equations (9.2)--(9.3) prove (2.6).
 Finally, use the precise comparison (2.3). Termwise,
 \[
 \frac{\mathcal E_a^\sigma}{m_a}
-\le M^2\max_qp_{q,a}+rac{\mathcal R_a^\sigma}{m_a}.
+\le M^2\max_qp_{q,a}+
+\frac{\mathcal R_a^\sigma}{m_a}.
 \]
 Moreover
 \[
