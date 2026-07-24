@@ -1,5 +1,5 @@
-# Triggered 24 July 2026 — verified script
-name: Repair Paper II final source
+# Triggered 24 July 2026 — reciprocal weight
+name: Repair Paper II reciprocal weight
 
 on:
   pull_request:
@@ -20,21 +20,19 @@ jobs:
         with:
           ref: publication/fortune-papers-ii-vi-20260724
           fetch-depth: 0
-      - name: Apply deterministic source repairs
-        run: python3 scripts/repair_paper2_final_v2.py
-      - name: Validate repaired source
+      - name: Apply reciprocal-weight admissibility repair
+        run: python3 scripts/repair_paper2_rho.py
+      - name: Validate source
         run: |
           set -euo pipefail
           F=publications/fortune-papers-ii-vi-20260724/paper2_revised/manuscript.md
-          grep -Fq 'all quotient sums below are therefore over' "$F"
-          grep -Fq 'Let \(L(X)\ge1\) satisfy \(L(X)=X^{o(1)}\)' "$F"
-          grep -Fq 'This manuscript does not reprove the source-to-frame transference step' "$F"
-          grep -Fq '\mathfrak S(m-n)\ge2C_2>0' "$F"
+          grep -Fq '\inf_{1/2\le |t|\le1}\rho(t)>0' "$F"
+          grep -Fq 'D_X\asymp_\rho|\mathcal Q_X|' "$F"
           sha256sum "$F"
       - name: Commit repaired source
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add publications/fortune-papers-ii-vi-20260724/paper2_revised/manuscript.md
-          git commit -m 'Repair final Paper II source and claim boundary'
+          git commit -m 'Add admissibility condition to Paper II reciprocal weight'
           git push origin HEAD:publication/fortune-papers-ii-vi-20260724
