@@ -2,9 +2,9 @@
 
 ## Current decision
 
-**SOURCE-LEVEL PASS — COMPILED-ARTIFACT AND HUMAN-REVIEW GATES OPEN.**
+**INTERNAL TECHNICAL PASS — EXTERNAL HUMAN REVIEW OPEN.**
 
-The original structural drafts did not contain the complete load-bearing proof record. Paper II has been rebuilt from its four-part archived manuscript. Paper III retains its concise narrative and now includes publication-quality continuous proofs of the complete frozen kernel, singular-series and conditional-theorem sources.
+The original structural drafts did not contain the complete load-bearing proof record. Paper II was rebuilt from its four-part archived manuscript. Paper III retains its concise narrative and now includes publication-quality continuous proofs of the complete frozen kernel, singular-series and conditional-theorem sources. Both exact sources and all compiled artifacts have passed the complete internal pipeline.
 
 ## Exact reviewed objects
 
@@ -56,12 +56,27 @@ Both final source objects were reviewed by `Qwen/Qwen3-14B-AWQ`.
 
 Paper III received a proved verdict with no fatal or major issue. Paper II's objections confuse the proved implication in Theorem 2.4 with proof of its open hypothesis and overlook explicit repairs already present in the exact text. `HOSTILE_REVIEW_DISPOSITION.md` resolves every objection. No fatal or major issue survives disposition.
 
+## Compiled-artifact verification
+
+The canonical visual-QA build is GitHub Actions run `30103406901`, artifact `8600618293`, digest `sha256:4c159708bda053c5d5288d8933f9dd2534a5286eb7e1e79af28c988e7de44ed7`.
+
+All automated gates passed: exact source hashes, source-marker scan, PDF/DOCX conversion, missing-glyph scan, text extraction, key-claim checks, A4 and embedded-font preflight, DOCX heading checks and checksum verification.
+
+Every rendered page was inspected:
+
+- Paper II PDF: 19 pages — passed.
+- Paper II DOCX: 20 rendered pages — passed.
+- Paper III PDF: 15 pages — passed.
+- Paper III DOCX: 16 rendered pages — passed.
+
+A clipped raw URL on an earlier Paper III PDF page 5 was detected during visual QA and repaired at the build layer using a Pandoc URL filter plus `xurl`. The final URL wraps inside the text block. No source or mathematical claim changed. Full details and final binary hashes are in `VISUAL_QA_REPORT.md`.
+
 ## Gate ledger
 
 1. Frozen-source fidelity — **passed**.
 2. Independent finite reconstruction — **passed**.
 3. Fresh exact-hash hostile review — **passed after disposition**.
-4. Compiled PDF/DOCX/ZIP integrity and page-level QA — **open**.
+4. Compiled PDF/DOCX/ZIP integrity and page-level QA — **passed**.
 5. External human specialist review — **open**.
 
 This is an internal technical audit, not human peer review, publication acceptance or a proof of Fortune's conjecture.
