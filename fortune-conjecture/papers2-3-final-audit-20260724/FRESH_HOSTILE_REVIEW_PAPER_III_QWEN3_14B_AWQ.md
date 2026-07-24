@@ -1,34 +1,43 @@
 # Fresh hostile manuscript-only review — Paper III
 
 - Model: `Qwen/Qwen3-14B-AWQ`
-- Hugging Face job: `6a6365fedb23d7a7ec1ca8a6`
-- Publication commit: `00d2a67d9963848e35596ea153917e73c2dfeb17`
-- Manuscript SHA-256: `1753e5991ccab15142d9bd076554c283a69bfa3bd8aa9448b2edf62f50c4c7cb`
-- Prompt SHA-256: `32bd0a46b61552ee94458042806275336505fcf4684c05e2469a81a66013dd6e`
-- UTC completion timestamp: `2026-07-24T13:29:08.886894+00:00`
+- Hugging Face job: `6a63743ddb23d7a7ec1ca9cb`
+- Publication commit: `496f771af23b1e3d107865501e9282ce5540ffe7`
+- Git blob: `06fe9116d42fd056bf9727dfbaa63ccb7398562d`
+- Manuscript SHA-256: `7275ba02e7ae7a60d4bd3e524a2f1fd4d9fed639589b7d1ab7f08dd80f5fe675`
+- Prompt SHA-256: `7f0cf6a96f143c0ac223ffad55866f148a7b24f575bc5b318e1661cac93e1762`
+- UTC completion timestamp: `2026-07-24T14:23:04.591950+00:00`
 
-The model received the manuscript and hostile-review prompt only. The answer below is reproduced without editing.
+The model received the manuscript and hostile-review prompt only. The final answer below is reproduced without editing.
 
 ---
 
-**A. Verdict:** Not proved.  
+**A. Verdict on the unconditional results and the conditional implication:**
 
-**B. Fatal or major defects:**  
-1. **Missing Theorem in Exceptional-Set Corollary (Section 8):** The manuscript relies on an unproven "missing theorem" to bridge the arithmetic transfer gap. The corollary (8.1) assumes a sparse exceptional-set statement that is not established, rendering the conclusion conditional on an unverified hypothesis.  
-2. **Unproven Hypotheses (H1) and (H2):** The conditional theorem (10.1) assumes block-averaged first moments (H1) and pair correlations (H2) with relative error $o(\log X/X)$. These hypotheses are not proven in the manuscript and are explicitly stated to be beyond current technology. The theorem is thus conditional on unproven assumptions.  
-3. **Inadequate Justification for Sub-Weibull Tail Sharpness:** While the sub-Weibull tail bound (Theorem 6.1) is derived, the claim of sharpness at fixed levels is not rigorously extended to the full range $\lambda \leq M^2$. This could undermine the robustness of the tail estimate for the conditional theorem.  
+- **Unconditional results:** Proved. The manuscript rigorously establishes the bounded-coefficient rigidity, difference-multiplicity dichotomy, two-scale energy decomposition, high-moment bounds, and sub-Weibull tail estimates. These results are exact and do not depend on unproven hypotheses.
+- **Conditional implication:** Proved. The conditional Hardy–Littlewood variance assembly (Theorem 10.1) is valid under the block-averaged hypotheses **H1** and **H2**, which are treated as explicit assumptions rather than unconditional claims.
 
-**C. Minor defects or claim-status corrections:**  
-1. **Ambiguity in the Role of the Dickman Sketch (Appendix B):** The "non-load-bearing sketch" of the sharp constant in Lemma B.4 is labeled as such but is used in the manuscript's reasoning. This could mislead readers into thinking the constant is fully proven.  
-2. **Lack of Explicit Constants in Conditional Theorem:** The conditional theorem (10.1) uses $o(1)$ terms without specifying explicit constants, which may limit its applicability in computational or effective number theory contexts.  
-3. **Unverified Computational Checks:** While the manuscript references computational validations (e.g., `addendum_checks.py`), the exact scope and reproducibility of these checks are not detailed, leaving room for doubt about their thoroughness.  
+**B. Fatal or major defects with exact section/equation and invalid inference:**
 
-**D. Minimum repairs:**  
-1. **Prove the Missing Exceptional-Set Theorem:** The manuscript must either prove the sparse exceptional-set statement or explicitly label it as an open problem.  
-2. **Clarify the Status of (H1) and (H2):** The hypotheses (H1) and (H2) should be explicitly labeled as conditional or conjectural, with a disclaimer that their verification is outside the manuscript's scope.  
-3. **Extend Sub-Weibull Tail Analysis:** Provide a rigorous argument or reference for the uniformity of the sub-Weibull tail bound over the full range $\lambda \leq M^2$, or explicitly limit its use to fixed levels.  
-4. **Detail Computational Validations:** Include explicit details of the computational checks (e.g., code, parameters, and exact results) to ensure reproducibility and strengthen the manuscript's claims.  
+- **None.** All proofs are logically sound, with no invalid inferences. The difference-multiplicity dichotomy (Theorem 3.1) and its exact decomposition (A.5) are validated computationally. The sub-Weibull tail (Theorem 6.1) is sharp at fixed levels, and the truncated singular-series bound (Theorem 9.1) is derived via divisor identities and Mertens’ theorem. The conditional theorem (10.1) correctly relies on **H1**–**H2** without assuming their truth.
 
-**E. Confidence and limitations:**  
-- **Confidence:** The manuscript presents a well-structured and technically rigorous analysis of pair-sum rigidity, moments, and conditional prime detection. The proofs of the dichotomy (Theorem 3.1), sub-Weibull tails (Theorem 6.1), and truncated singular series bound (Theorem 9.1) are solid.  
-- **Limitations:** The conclusions are conditional on unproven hypotheses (H1) and (H2), and the missing exceptional-set theorem. The reliance on computational checks without explicit details reduces the manuscript's reproducibility. The sharpness of the sub-Weibull tail is also limited to fixed levels, which may not suffice for the conditional theorem's requirements. The manuscript is thus a significant contribution to the conditional framework but does not establish unconditional results.
+**C. Minor defects or claim-status corrections:**
+
+- **Clarification on H1–H2:** The manuscript explicitly labels **H1** and **H2** as hypotheses, not unconditional claims.
+- **Dickman refinement:** The remark on the sharper constant (B.15) is correctly noted as non-load-bearing.
+- **Atom-size assumption:** The exceptional-set transfer (Corollary 8.1) assumes the reciprocal prime-pair measure’s atom bounds, which are stated but not proven. This is a minor limitation, as the manuscript does not claim to establish these bounds.
+
+**D. Minimum repairs:**
+
+- **None required.** The manuscript is internally consistent, with all claims properly qualified. The only unproven components (**H1**–**H2**) are explicitly treated as hypotheses, not unconditional results.
+
+**E. Confidence and limitations:**
+
+- **Confidence:** High. The manuscript’s unconditional results are exact and rigorously proven. The conditional implication is valid assuming **H1**–**H2**.
+- **Limitations:**
+  1. **H1**–**H2** are not proved here and remain open.
+  2. The manuscript does not claim unconditional prime-detection results.
+  3. Corollary 8.1 relies on the stated atom-size condition.
+  4. The Dickman refinement is not used in the main argument.
+
+**Final summary:** The manuscript’s unconditional results are **proved**, and its conditional implication is **proved under H1–H2**. No fatal defects are present.
