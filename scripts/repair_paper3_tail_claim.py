@@ -9,10 +9,6 @@ old_author = '  - "Edward Stewart Anthony Bozzard"'
 new_author = '  - "Edward Stewart Anthony Bozzard (ORCID 0009-0002-4052-0994)"'
 assert text.count(old_author) == 1
 text = text.replace(old_author, new_author)
-old_dickman = 'A standard Dickman-function analysis of the weighted divisor sum gives'
-new_dickman = 'A standard Dickman--de Bruijn analysis of the weighted divisor sum [3,4] gives'
-assert text.count(old_dickman) == 1
-text = text.replace(old_dickman, new_dickman)
 old_refs = '# References\n'
 new_refs = '''# References
 
