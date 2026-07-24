@@ -17,10 +17,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: 00d2a67d9963848e35596ea153917e73c2dfeb17
+          ref: 4866d113898a48f23feb9752576c350af97c6985
           fetch-depth: 0
 
-      - name: Install document toolchain
+      - name: Install fixed document toolchain
         run: |
           sudo apt-get update
           sudo apt-get install -y pandoc texlive-xetex texlive-fonts-recommended poppler-utils zip python3-docx libreoffice-writer
@@ -31,18 +31,18 @@ jobs:
           set -euo pipefail
           P2='publications/fortune-papers-ii-vi-20260724/paper2_revised/manuscript.md'
           P3='publications/fortune-papers-ii-vi-20260724/paper3_pair_sum/manuscript.md'
-          test "$(sha256sum "$P2" | awk '{print $1}')" = '632bb8f4fd89a51020069327a11fe57f8ae882e57bd4ae1a9ed0829030c32ce1'
-          test "$(sha256sum "$P3" | awk '{print $1}')" = '1753e5991ccab15142d9bd076554c283a69bfa3bd8aa9448b2edf62f50c4c7cb'
+          test "$(sha256sum "$P2" | awk '{print $1}')" = '0b9d8c96b0185827085955084507f7c1099803a4a1de46c0db2e3b81f3cdbb7a'
+          test "$(sha256sum "$P3" | awk '{print $1}')" = '7275ba02e7ae7a60d4bd3e524a2f1fd4d9fed639589b7d1ab7f08dd80f5fe675'
+          ! grep -nE 'TODO|TBD|PLACEHOLDER|\\setminus' "$P2" "$P3"
 
-      - name: Build publication-grade PDF and DOCX files
+      - name: Build PDF and editable DOCX files
         shell: bash
         run: |
           set -euo pipefail
           ROOT='publications/fortune-papers-ii-vi-20260724'
           DIST="$ROOT/papers2-3-dist"
           rm -rf "$DIST"
-          mkdir -p "$DIST/paper2_release" "$DIST/paper3_release" "$DIST/combined_release"
-
+          mkdir -p "$DIST/paper2_release" "$DIST/paper3_release" "$DIST/combined_release" "$DIST/build_logs"
           cp "$ROOT/paper2_revised/manuscript.md" "$DIST/paper2_release/manuscript.md"
           cp "$ROOT/paper2_revised/references.bib" "$DIST/paper2_release/references.bib"
           cp "$ROOT/paper3_pair_sum/manuscript.md" "$DIST/paper3_release/manuscript.md"
@@ -52,28 +52,24 @@ jobs:
           import re
           root=Path('publications/fortune-papers-ii-vi-20260724')
           dist=root/'papers2-3-dist'
-          specs=[('paper2_revised','paper2'),('paper3_pair_sum','paper3')]
-          records=[]
-          for srcdir,key in specs:
+          rows=[]
+          for srcdir,key in [('paper2_revised','paper2'),('paper3_pair_sum','paper3')]:
               source=(root/srcdir/'manuscript.md').read_text(encoding='utf-8')
-              bigl=source.count('\\Bigl'); bigr=source.count('\\Bigr')
               rendered=source.replace('\\Bigl','\\left').replace('\\Bigr','\\right')
               rendered,tags=re.subn(r'\\tag\{([^}]+)\}',r'\\qquad \\text{(\1)}',rendered)
-              out=dist/f'{key}_render_source.docx.md'
-              out.write_text(rendered,encoding='utf-8')
-              records.append((key,bigl,bigr,tags))
+              (dist/f'{key}_docx_source.md').write_text(rendered,encoding='utf-8')
+              rows.append((key,source.count('\\Bigl'),source.count('\\Bigr'),tags))
           with (dist/'TYPESETTING_COUNTS.tsv').open('w',encoding='utf-8') as f:
               f.write('paper\tBigl\tBigr\ttags\n')
-              for row in records:f.write('\t'.join(map(str,row))+'\n')
+              for row in rows: f.write('\t'.join(map(str,row))+'\n')
           PY
 
-          pandoc "$DIST/paper2_render_source.docx.md" \
+          pandoc "$DIST/paper2_docx_source.md" \
             --from=markdown+tex_math_dollars+tex_math_single_backslash+raw_tex \
             --to=docx --standalone --citeproc \
             --bibliography="$ROOT/paper2_revised/references.bib" \
             -o "$DIST/paper2_release/Paper_II_Prime_Detection_at_Primorial_Centres.docx"
-
-          pandoc "$DIST/paper3_render_source.docx.md" \
+          pandoc "$DIST/paper3_docx_source.md" \
             --from=markdown+tex_math_dollars+tex_math_single_backslash+raw_tex \
             --to=docx --standalone \
             -o "$DIST/paper3_release/Paper_III_Pair_Sum_Rigidity.docx"
@@ -92,25 +88,26 @@ jobs:
               doc.save(path)
           PY
 
+          set +e
           pandoc "$ROOT/paper2_revised/manuscript.md" \
             --from=markdown+tex_math_dollars+tex_math_single_backslash+raw_tex \
-            --standalone --citeproc \
-            --bibliography="$ROOT/paper2_revised/references.bib" \
+            --standalone --citeproc --bibliography="$ROOT/paper2_revised/references.bib" \
             --pdf-engine=xelatex -V geometry:margin=24mm -V papersize:a4 \
-            -o "$DIST/paper2_release/Paper_II_Prime_Detection_at_Primorial_Centres.pdf"
-
+            -o "$DIST/paper2_release/Paper_II_Prime_Detection_at_Primorial_Centres.pdf" \
+            2>"$DIST/build_logs/paper2_xelatex.stderr"
+          R2=$?
           pandoc "$ROOT/paper3_pair_sum/manuscript.md" \
             --from=markdown+tex_math_dollars+tex_math_single_backslash+raw_tex \
-            --standalone --pdf-engine=xelatex \
-            -V geometry:margin=24mm -V papersize:a4 \
-            -o "$DIST/paper3_release/Paper_III_Pair_Sum_Rigidity.pdf"
+            --standalone --pdf-engine=xelatex -V geometry:margin=24mm -V papersize:a4 \
+            -o "$DIST/paper3_release/Paper_III_Pair_Sum_Rigidity.pdf" \
+            2>"$DIST/build_logs/paper3_xelatex.stderr"
+          R3=$?
+          set -e
+          test "$R2" -eq 0 && test "$R3" -eq 0
+          ! grep -q 'Missing character' "$DIST/build_logs/paper2_xelatex.stderr"
+          ! grep -q 'Missing character' "$DIST/build_logs/paper3_xelatex.stderr"
 
-          test -s "$DIST/paper2_release/Paper_II_Prime_Detection_at_Primorial_Centres.pdf"
-          test -s "$DIST/paper2_release/Paper_II_Prime_Detection_at_Primorial_Centres.docx"
-          test -s "$DIST/paper3_release/Paper_III_Pair_Sum_Rigidity.pdf"
-          test -s "$DIST/paper3_release/Paper_III_Pair_Sum_Rigidity.docx"
-
-      - name: Add final audit records
+      - name: Add final audit records and build manifest
         shell: bash
         run: |
           set -euo pipefail
@@ -124,8 +121,20 @@ jobs:
           done
           cp "$DIST/combined_release/"*.md "$DIST/paper2_release/"
           cp "$DIST/combined_release/"*.md "$DIST/paper3_release/"
+          {
+            echo '# Canonical build manifest'
+            echo
+            echo '- Publication commit: `4866d113898a48f23feb9752576c350af97c6985`'
+            echo '- Paper II source SHA-256: `0b9d8c96b0185827085955084507f7c1099803a4a1de46c0db2e3b81f3cdbb7a`'
+            echo '- Paper III source SHA-256: `7275ba02e7ae7a60d4bd3e524a2f1fd4d9fed639589b7d1ab7f08dd80f5fe675`'
+            echo "- Pandoc: `$(pandoc --version | head -1)`"
+            echo "- XeTeX: `$(xelatex --version | head -1)`"
+            echo "- LibreOffice: `$(libreoffice --version)`"
+          } > "$DIST/combined_release/BUILD_MANIFEST.md"
+          cp "$DIST/combined_release/BUILD_MANIFEST.md" "$DIST/paper2_release/"
+          cp "$DIST/combined_release/BUILD_MANIFEST.md" "$DIST/paper3_release/"
 
-      - name: Verify extraction, metadata and package integrity
+      - name: Verify extraction, PDF preflight and DOCX structure
         shell: bash
         run: |
           set -euo pipefail
@@ -133,10 +142,9 @@ jobs:
           DIST="$ROOT/papers2-3-dist"
           P2="$DIST/paper2_release"
           P3="$DIST/paper3_release"
-
-          pandoc "$P2/Paper_II_Prime_Detection_at_Primorial_Centres.docx" -t plain -o "$P2/docx_extracted.txt"
+          pandoc "$P2/Paper_II_Prime_Detection_at_Primorial_Centres.docx" -t plain -o "$P2/docx_extracted.txt" 2>"$DIST/build_logs/paper2_docx_extract.stderr"
           pdftotext -layout "$P2/Paper_II_Prime_Detection_at_Primorial_Centres.pdf" "$P2/pdf_extracted.txt"
-          pandoc "$P3/Paper_III_Pair_Sum_Rigidity.docx" -t plain -o "$P3/docx_extracted.txt"
+          pandoc "$P3/Paper_III_Pair_Sum_Rigidity.docx" -t plain -o "$P3/docx_extracted.txt" 2>"$DIST/build_logs/paper3_docx_extract.stderr"
           pdftotext -layout "$P3/Paper_III_Pair_Sum_Rigidity.pdf" "$P3/pdf_extracted.txt"
 
           python3 - "$P2/docx_extracted.txt" "$P2/pdf_extracted.txt" "$P3/docx_extracted.txt" "$P3/pdf_extracted.txt" <<'PY'
@@ -146,14 +154,16 @@ jobs:
               s=unicodedata.normalize('NFKD',s).lower()
               return ' '.join(re.sub(r'[^a-z0-9]+',' ',s).split())
           checks={
-            1:[('block','variance','criterion'),('exact','weighted','harmonic','reduction'),('mobius','truncation'),('fortune','conjecture','not','proved'),('ai','assistance','disclosure')],
-            2:[('block','variance','criterion'),('exact','weighted','harmonic','reduction'),('mobius','truncation'),('fortune','conjecture','not','proved'),('ai','assistance','disclosure')],
-            3:[('difference','multiplicity','dichotomy'),('sub','weibull'),('block','averaged','conditional','criterion'),('hardy','littlewood'),('ai','assistance','disclosure')],
-            4:[('difference','multiplicity','dichotomy'),('sub','weibull'),('block','averaged','conditional','criterion'),('hardy','littlewood'),('ai','assistance','disclosure')],
+            1:[('block','variance','criterion'),('weighted','harmonic','reduction'),('truncation'),('fortune','conjecture','not','proved'),('ai','assistance','disclosure')],
+            2:[('block','variance','criterion'),('weighted','harmonic','reduction'),('truncation'),('fortune','conjecture','not','proved'),('ai','assistance','disclosure')],
+            3:[('difference','multiplicity','dichotomy'),('sub','weibull'),('appendix','b','truncated','singular','series'),('block','averaged','conditional','criterion'),('ai','assistance','disclosure')],
+            4:[('difference','multiplicity','dichotomy'),('sub','weibull'),('appendix','b','truncated','singular','series'),('block','averaged','conditional','criterion'),('ai','assistance','disclosure')],
           }
           for i,path in enumerate(sys.argv[1:],1):
-              text=norm(path); assert len(text)>12000,(path,len(text))
+              text=norm(path)
+              assert len(text)>12000,(path,len(text))
               for words in checks[i]: assert all(w in text for w in words),(path,words)
+              assert not any(x in text for x in ('delta p d sum u','phi2 u','consequently t j h 0'))
           PY
 
           pdfinfo "$P2/Paper_II_Prime_Detection_at_Primorial_Centres.pdf" > "$P2/pdfinfo.txt"
@@ -162,28 +172,49 @@ jobs:
           pdffonts "$P3/Paper_III_Pair_Sum_Rigidity.pdf" > "$P3/pdffonts.txt"
           grep -Fq '(A4)' "$P2/pdfinfo.txt"
           grep -Fq '(A4)' "$P3/pdfinfo.txt"
+          ! grep -q ' no ' "$P2/pdffonts.txt"
+          ! grep -q ' no ' "$P3/pdffonts.txt"
+
+          python3 - <<'PY'
+          from docx import Document
+          from pathlib import Path
+          for path in Path('publications/fortune-papers-ii-vi-20260724/papers2-3-dist').glob('paper*_release/*.docx'):
+              doc=Document(path)
+              headings=[p for p in doc.paragraphs if p.style and p.style.name.startswith('Heading')]
+              assert len(headings)>=18,(path,len(headings))
+              assert all(p.text.strip() for p in headings),path
+              texts='\n'.join(p.text for p in doc.paragraphs)
+              assert 'AI-assistance disclosure' in texts,path
+          PY
 
           cat > "$P2/TYPESETTING_NORMALISATIONS.md" <<'EOF'
           # Typesetting normalisations
 
-          The PDF is generated directly from the exact reviewed Markdown with Pandoc, citeproc and XeLaTeX. For editable DOCX/OMML output only, TeX `\tag{...}` commands become appended mathematical labels and `\Bigl`/`\Bigr` become `\left`/`\right`. These conversions preserve notation and equation numbering but not right-margin tag alignment in Word. No mathematical statement, hypothesis, exponent or symbol is changed.
+          Each PDF is generated directly from the exact reviewed Markdown with Pandoc and XeLaTeX. For editable DOCX/OMML output only, TeX `\tag{...}` commands become appended mathematical labels and `\Bigl`/`\Bigr` become `\left`/`\right`. These conversions preserve notation and equation numbering but not right-margin tag alignment in Word. No mathematical statement, hypothesis, exponent or symbol is changed.
           EOF
           cp "$P2/TYPESETTING_NORMALISATIONS.md" "$P3/TYPESETTING_NORMALISATIONS.md"
 
-          for D in "$P2" "$P3"; do
+      - name: Create checksum archives
+        shell: bash
+        run: |
+          set -euo pipefail
+          ROOT='publications/fortune-papers-ii-vi-20260724'
+          DIST="$ROOT/papers2-3-dist"
+          cp -r "$DIST/build_logs" "$DIST/combined_release/build_logs"
+          for D in "$DIST/paper2_release" "$DIST/paper3_release"; do
             (cd "$D" && find . -maxdepth 1 -type f ! -name SHA256SUMS -print0 | sort -z | xargs -0 sha256sum > SHA256SUMS)
           done
-          cp -r "$P2" "$DIST/combined_release/paper2_release"
-          cp -r "$P3" "$DIST/combined_release/paper3_release"
+          cp -r "$DIST/paper2_release" "$DIST/combined_release/paper2_release"
+          cp -r "$DIST/paper3_release" "$DIST/combined_release/paper3_release"
           (cd "$DIST/combined_release" && find . -type f ! -name SHA256SUMS -print0 | sort -z | xargs -0 sha256sum > SHA256SUMS)
-          (cd "$DIST" && zip -r -9 Paper_II_release.zip paper2_release && zip -r -9 Paper_III_release.zip paper3_release && zip -r -9 Papers_II_III_combined_release.zip combined_release)
+          (cd "$DIST" && zip -r -9 Paper_II_release.zip paper2_release >/dev/null && zip -r -9 Paper_III_release.zip paper3_release >/dev/null && zip -r -9 Papers_II_III_combined_release.zip combined_release >/dev/null)
           (cd "$DIST" && sha256sum Paper_II_release.zip Paper_III_release.zip Papers_II_III_combined_release.zip > RELEASE_ZIP_SHA256SUMS.txt)
 
-      - name: Upload release artifact
+      - name: Upload canonical release artifact
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: papers2-3-release
+          name: papers2-3-canonical-release
           path: publications/fortune-papers-ii-vi-20260724/papers2-3-dist/
           if-no-files-found: error
           retention-days: 30
