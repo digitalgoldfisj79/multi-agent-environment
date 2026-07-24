@@ -2,9 +2,10 @@
 
 ## Reviewed manuscript
 
+- Publication commit: `4866d113898a48f23feb9752576c350af97c6985`
 - Path: `publications/fortune-papers-ii-vi-20260724/paper2_revised/manuscript.md`
-- Git blob: `3ccd6a9b5487b9b97e79d366fcb5e6d581a6569e`
-- SHA-256: `632bb8f4fd89a51020069327a11fe57f8ae882e57bd4ae1a9ed0829030c32ce1`
+- Git blob: `745d262aee6ffb41de580c866246c99a34144c13`
+- SHA-256: `0b9d8c96b0185827085955084507f7c1099803a4a1de46c0db2e3b81f3cdbb7a`
 
 ## Frozen basis
 
@@ -53,8 +54,11 @@ The exact reconstructed source also repaired:
 2. division by a potentially zero harmonic mass `m_a`;
 3. an unstated diagonal summation estimate;
 4. a fixed-`epsilon` level-set cutoff that was not `X^{o(1)}`;
-5. an implicit singular-series lower bound; and
-6. an abbreviated moving-interval prime-power justification.
+5. an implicit singular-series lower bound;
+6. an abbreviated moving-interval prime-power justification; and
+7. the single unsupported set-difference glyph, replaced by the exactly equivalent condition `a in Z` with `a != 0`.
+
+The seventh repair is typesetting-only and changes no set, hypothesis or inference.
 
 ## Gate result
 
