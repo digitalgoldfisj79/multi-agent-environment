@@ -1,0 +1,138 @@
+name: Build Paper IV release artifacts
+
+on:
+  push:
+    branches:
+      - publication/fortune-papers-ii-vi-20260724
+    paths:
+      - .github/workflows/build-paper4-release.yml
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: publication/fortune-papers-ii-vi-20260724
+          fetch-depth: 0
+
+      - name: Install document toolchain
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y pandoc libreoffice-writer poppler-utils zip fonts-dejavu-core
+
+      - name: Build DOCX and PDF from reviewed Markdown
+        shell: bash
+        run: |
+          set -euo pipefail
+          SRC='publications/fortune-papers-ii-vi-20260724/paper4_random_order/manuscript.md'
+          DIST='publications/fortune-papers-ii-vi-20260724/paper4_random_order/dist'
+          PKG="$DIST/paper4_random_order_release"
+          rm -rf "$DIST"
+          mkdir -p "$PKG"
+
+          ACTUAL=$(sha256sum "$SRC" | awk '{print $1}')
+          EXPECTED='548460849cc9c6125fbe59d0a4f2f37ec680761174c25556b5e781a8ae9372f1'
+          test "$ACTUAL" = "$EXPECTED"
+
+          cp "$SRC" "$PKG/manuscript.md"
+
+          pandoc "$SRC" \
+            --from=markdown+tex_math_dollars+raw_tex \
+            --to=docx \
+            --standalone \
+            --toc \
+            --number-sections \
+            --metadata title='Prime Detection Along Random Primorial-Product Paths' \
+            --metadata subtitle='An unconditional reciprocal-frame theorem in the random-order model' \
+            --metadata author='Edward Stewart Anthony Bozzard (ORCID 0009-0002-4052-0994)' \
+            -o "$PKG/paper4_random_order.docx"
+
+          mkdir -p /tmp/lo-profile
+          libreoffice --headless \
+            -env:UserInstallation=file:///tmp/lo-profile \
+            --convert-to pdf \
+            --outdir "$PKG" \
+            "$PKG/paper4_random_order.docx"
+
+          test -s "$PKG/paper4_random_order.docx"
+          test -s "$PKG/paper4_random_order.pdf"
+
+      - name: Add audit records
+        shell: bash
+        run: |
+          set -euo pipefail
+          PKG='publications/fortune-papers-ii-vi-20260724/paper4_random_order/dist/paper4_random_order_release'
+          git fetch origin gpt56/random-order-flagship-audit-20260724
+          AUDIT_REF='origin/gpt56/random-order-flagship-audit-20260724'
+          BASE='fortune-conjecture/random-order-flagship-20260724'
+          for f in \
+            AUDIT_REPORT.md \
+            REBUILT_MANUSCRIPT_FIDELITY_MATRIX.md \
+            INDEPENDENT_LEDGER_RECONSTRUCTION.md \
+            FRESH_HOSTILE_REVIEW_FINAL_QWEN3_14B_AWQ.md \
+            FINAL_HOSTILE_REVIEW_DISPOSITION.md \
+            FIDELITY_AND_EXTERNAL_REVIEW_GATES.md \
+            QUALITY_ASSURANCE.md \
+            independent_audit_results.json
+          do
+            git show "$AUDIT_REF:$BASE/$f" > "$PKG/$f"
+          done
+
+      - name: Verify extracted text and build manifest
+        shell: bash
+        run: |
+          set -euo pipefail
+          DIST='publications/fortune-papers-ii-vi-20260724/paper4_random_order/dist'
+          PKG="$DIST/paper4_random_order_release"
+
+          pandoc "$PKG/paper4_random_order.docx" -t plain -o "$PKG/docx_extracted.txt"
+          pdftotext "$PKG/paper4_random_order.pdf" "$PKG/pdf_extracted.txt"
+
+          grep -Fq 'Theorem 2.1 (random-order reciprocal-frame theorem)' "$PKG/docx_extracted.txt"
+          grep -Fq 'Theorem 2.1 (random-order reciprocal-frame theorem)' "$PKG/pdf_extracted.txt"
+          grep -Fq 'Lemma 6.3 (all-bad pattern domination)' "$PKG/docx_extracted.txt"
+          grep -Fq 'Lemma 6.3 (all-bad pattern domination)' "$PKG/pdf_extracted.txt"
+          grep -Fq 'AI-assistance disclosure' "$PKG/docx_extracted.txt"
+          grep -Fq 'AI-assistance disclosure' "$PKG/pdf_extracted.txt"
+
+          {
+            echo '# Paper IV compiled-artifact build manifest'
+            echo
+            echo '- Source branch: `publication/fortune-papers-ii-vi-20260724`'
+            echo '- Reviewed source Git blob: `1a3d39d974bfa37d31c100f536dcaa1b74f6d688`'
+            echo '- Reviewed source SHA-256: `548460849cc9c6125fbe59d0a4f2f37ec680761174c25556b5e781a8ae9372f1`'
+            echo '- Build toolchain: pandoc + LibreOffice Writer on GitHub Actions Ubuntu runner'
+            echo '- DOCX and PDF extraction smoke tests: passed'
+            echo '- Visual page inspection: pending external QA after artifact download'
+          } > "$PKG/BUILD_MANIFEST.md"
+
+          (
+            cd "$PKG"
+            find . -maxdepth 1 -type f ! -name SHA256SUMS -print0 | sort -z | xargs -0 sha256sum > SHA256SUMS
+          )
+
+          (
+            cd "$DIST"
+            zip -r -9 paper4_random_order_release.zip paper4_random_order_release
+            sha256sum paper4_random_order_release.zip > paper4_random_order_release.zip.sha256
+          )
+
+      - name: Commit release artifacts
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add publications/fortune-papers-ii-vi-20260724/paper4_random_order/dist
+          git commit -m 'Build reviewed Paper IV release artifacts'
+          git push origin HEAD:publication/fortune-papers-ii-vi-20260724
+
+      - name: Upload release artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: paper4-random-order-release
+          path: publications/fortune-papers-ii-vi-20260724/paper4_random_order/dist/
+          if-no-files-found: error
+          retention-days: 30
