@@ -4,184 +4,52 @@ on:
   pull_request:
     branches:
       - gpt56/d1-gate-bridge-terminal-20260724
+    paths:
+      - .github/workflows/build-paper4-release.yml
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
-  build:
+  rebuild-papers-2-3:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
           ref: publication/fortune-papers-ii-vi-20260724
           fetch-depth: 0
-
-      - name: Install document toolchain
+      - name: Fetch frozen sources
         run: |
-          sudo apt-get update
-          sudo apt-get install -y pandoc texlive-xetex poppler-utils zip python3-docx
-
-      - name: Build publication-grade DOCX and PDF
-        shell: bash
-        run: |
-          set -euo pipefail
-          SRC='publications/fortune-papers-ii-vi-20260724/paper4_random_order/manuscript.md'
-          DIST='publications/fortune-papers-ii-vi-20260724/paper4_random_order/dist'
-          PKG="$DIST/paper4_random_order_release"
-          rm -rf "$DIST"
-          mkdir -p "$PKG"
-
-          EXPECTED='548460849cc9c6125fbe59d0a4f2f37ec680761174c25556b5e781a8ae9372f1'
-          ACTUAL=$(sha256sum "$SRC" | awk '{print $1}')
-          test "$ACTUAL" = "$EXPECTED"
-          cp "$SRC" "$PKG/manuscript.md"
-
-          python3 - "$SRC" "$DIST/render_source.docx.md" <<'PY'
-          import pathlib, re, sys
-          source = pathlib.Path(sys.argv[1]).read_text(encoding='utf-8')
-          assert source.count('\\Bigl') == 2
-          assert source.count('\\Bigr') == 2
-          rendered = source.replace('\\Bigl', '\\left').replace('\\Bigr', '\\right')
-          rendered, count = re.subn(r'\\tag\{([^}]+)\}', r'\\qquad \\text{(\1)}', rendered)
-          assert count == 48, count
-          pathlib.Path(sys.argv[2]).write_text(rendered, encoding='utf-8')
-          PY
-
-          pandoc "$DIST/render_source.docx.md" \
-            --from=markdown+tex_math_dollars+tex_math_single_backslash+raw_tex \
-            --to=docx --standalone \
-            -o "$PKG/paper4_random_order.docx"
-
-          python3 - "$PKG/paper4_random_order.docx" <<'PY'
-          from docx import Document
-          from docx.shared import Mm, Pt
-          import sys
-          path = sys.argv[1]
-          document = Document(path)
-          for section in document.sections:
-              section.page_width = Mm(210)
-              section.page_height = Mm(297)
-              section.top_margin = Mm(23)
-              section.bottom_margin = Mm(23)
-              section.left_margin = Mm(24)
-              section.right_margin = Mm(24)
-          document.styles['Normal'].font.size = Pt(10.5)
-          document.save(path)
-          PY
-
-          pandoc "$SRC" \
-            --from=markdown+tex_math_dollars+tex_math_single_backslash+raw_tex \
-            --standalone --pdf-engine=xelatex \
-            -V geometry:margin=24mm \
-            -V papersize:a4 \
-            -o "$PKG/paper4_random_order.pdf"
-
-          test -s "$PKG/paper4_random_order.docx"
-          test -s "$PKG/paper4_random_order.pdf"
-
-          cat > "$PKG/TYPESETTING_NORMALISATIONS.md" <<'EOF'
-          # Typesetting normalisations
-
-          The reviewed source file is included unchanged and retains SHA-256
-          `548460849cc9c6125fbe59d0a4f2f37ec680761174c25556b5e781a8ae9372f1`.
-
-          The PDF is generated directly from that source with XeLaTeX.
-
-          For DOCX/OMML output only, the temporary rendering copy applies two
-          notation-preserving conversions:
-
-          1. the two occurrences of `\Bigl` / `\Bigr` become `\left` / `\right`;
-          2. each `\tag{n}` becomes an appended mathematical label `(n)` because
-             Pandoc's DOCX writer does not preserve TeX equation tags.
-
-          The DOCX uses A4 pages with 24 mm horizontal and 23 mm vertical margins.
-          No mathematical statement, symbol, hypothesis, exponent or equation
-          number is changed.
-          EOF
-
-      - name: Add audit records
-        shell: bash
+          git fetch origin archive/fortune-paper2-20260720
+          git fetch origin claude/experimental-branch-review-am0zpg
+      - name: Rebuild manuscripts
+        run: python3 scripts/rebuild_papers2_3.py
+      - name: Validate source integrity
         run: |
           set -euo pipefail
-          PKG='publications/fortune-papers-ii-vi-20260724/paper4_random_order/dist/paper4_random_order_release'
-          git fetch origin gpt56/random-order-flagship-audit-20260724
-          AUDIT_REF='origin/gpt56/random-order-flagship-audit-20260724'
-          BASE='fortune-conjecture/random-order-flagship-20260724'
-          for f in \
-            AUDIT_REPORT.md \
-            REBUILT_MANUSCRIPT_FIDELITY_MATRIX.md \
-            INDEPENDENT_LEDGER_RECONSTRUCTION.md \
-            FRESH_HOSTILE_REVIEW_FINAL_QWEN3_14B_AWQ.md \
-            FINAL_HOSTILE_REVIEW_DISPOSITION.md \
-            FIDELITY_AND_EXTERNAL_REVIEW_GATES.md \
-            QUALITY_ASSURANCE.md \
-            independent_audit_results.json
-          do
-            git show "$AUDIT_REF:$BASE/$f" > "$PKG/$f"
-          done
-
-      - name: Verify extracted text and build manifest
-        shell: bash
+          P2=publications/fortune-papers-ii-vi-20260724/paper2_revised/manuscript.md
+          P3=publications/fortune-papers-ii-vi-20260724/paper3_pair_sum/manuscript.md
+          test -s "$P2" && test -s "$P3"
+          ! grep -nE 'TODO|TBD|PLACEHOLDER|\\x00' "$P2" "$P3"
+          grep -Fq 'The exact equivalence of these two open targets is not asserted' "$P2"
+          grep -Fq 'Appendix A. Complete kernel-theory proof' "$P3"
+          grep -Fq 'Appendix C. Corrected conditional Hardy--Littlewood theorem' "$P3"
+          wc -l -c "$P2" "$P3"
+          sha256sum "$P2" "$P3"
+      - name: Commit reconstructed manuscripts
         run: |
-          set -euo pipefail
-          DIST='publications/fortune-papers-ii-vi-20260724/paper4_random_order/dist'
-          PKG="$DIST/paper4_random_order_release"
-
-          pandoc "$PKG/paper4_random_order.docx" -t plain -o "$PKG/docx_extracted.txt"
-          pdftotext -layout "$PKG/paper4_random_order.pdf" "$PKG/pdf_extracted.txt"
-
-          python3 - "$PKG/docx_extracted.txt" "$PKG/pdf_extracted.txt" <<'PY'
-          import re, sys, unicodedata
-          def norm(path):
-              text = open(path, encoding='utf-8', errors='replace').read()
-              text = unicodedata.normalize('NFKD', text).lower()
-              return ' '.join(re.sub(r'[^a-z0-9]+', ' ', text).split())
-          needles = [
-              ('theorem', '2', '1', 'random', 'order', 'reciprocal', 'frame'),
-              ('lemma', '6', '3', 'all', 'bad', 'pattern', 'domination'),
-              ('ai', 'assistance', 'disclosure'),
-          ]
-          for path in sys.argv[1:]:
-              text = norm(path)
-              assert len(text) > 10000, (path, len(text))
-              for words in needles:
-                  assert all(word in text for word in words), (path, words)
-          PY
-
-          PDF_PAGES=$(pdfinfo "$PKG/paper4_random_order.pdf" | awk '/^Pages:/ {print $2}')
-          test "$PDF_PAGES" -ge 10
-          test "$PDF_PAGES" -le 20
-
-          {
-            echo '# Paper IV compiled-artifact build manifest'
-            echo
-            echo '- Source branch: `publication/fortune-papers-ii-vi-20260724`'
-            echo '- Reviewed source Git blob: `1a3d39d974bfa37d31c100f536dcaa1b74f6d688`'
-            echo '- Reviewed source SHA-256: `548460849cc9c6125fbe59d0a4f2f37ec680761174c25556b5e781a8ae9372f1`'
-            echo '- PDF toolchain: Pandoc + XeLaTeX, A4, 24 mm margins'
-            echo '- DOCX toolchain: Pandoc OMML + python-docx A4 page setup'
-            echo '- Normalised DOCX and PDF extraction tests: passed'
-            echo "- PDF page count on this runner: $PDF_PAGES"
-            echo '- Visual page inspection: pending after artifact download'
-          } > "$PKG/BUILD_MANIFEST.md"
-
-          (
-            cd "$PKG"
-            find . -maxdepth 1 -type f ! -name SHA256SUMS -print0 | sort -z | xargs -0 sha256sum > SHA256SUMS
-          )
-          (
-            cd "$DIST"
-            zip -r -9 paper4_random_order_release.zip paper4_random_order_release
-            sha256sum paper4_random_order_release.zip > paper4_random_order_release.zip.sha256
-          )
-
-      - name: Upload release artifact
-        if: always()
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add publications/fortune-papers-ii-vi-20260724/paper2_revised/manuscript.md publications/fortune-papers-ii-vi-20260724/paper2_revised/references.bib publications/fortune-papers-ii-vi-20260724/paper3_pair_sum/manuscript.md publications/fortune-papers-ii-vi-20260724/PAPERS_II_III_FROZEN_SOURCE_MANIFEST.tsv
+          git commit -m 'Rebuild Papers II and III from frozen proof sources'
+          git push origin HEAD:publication/fortune-papers-ii-vi-20260724
+      - name: Upload reconstructed manuscripts
         uses: actions/upload-artifact@v4
         with:
-          name: paper4-random-order-release
-          path: publications/fortune-papers-ii-vi-20260724/paper4_random_order/dist/
-          if-no-files-found: error
+          name: papers2-3-reconstructed-sources
+          path: |
+            publications/fortune-papers-ii-vi-20260724/paper2_revised/manuscript.md
+            publications/fortune-papers-ii-vi-20260724/paper3_pair_sum/manuscript.md
+            publications/fortune-papers-ii-vi-20260724/PAPERS_II_III_FROZEN_SOURCE_MANIFEST.tsv
           retention-days: 30
