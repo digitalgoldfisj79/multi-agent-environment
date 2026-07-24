@@ -1,0 +1,76 @@
+{
+  "overall": "PASS",
+  "checks": [
+    {
+      "name": "pair_sum_difference_dichotomy",
+      "status": "PASS",
+      "details": {
+        "N": 9,
+        "histogram": {"9": 72, "1": 1332}
+      }
+    },
+    {
+      "name": "coefficient_pattern_taxonomy",
+      "status": "PASS",
+      "details": {
+        "N_range": "2..10",
+        "N10_counts": [900, 90, 720, 1260]
+      }
+    },
+    {
+      "name": "ordered_set_partition_identity",
+      "status": "PASS",
+      "details": {"max_absolute_error": 1.134e-15}
+    },
+    {
+      "name": "ratio_character_contour_bound",
+      "status": "PASS",
+      "details": {"worst_ratio": 0.101015}
+    },
+    {
+      "name": "gauss_crt_coefficient_norms",
+      "status": "PASS",
+      "details": {
+        "max_l2_error": 4.44e-16,
+        "max_sup_ratio": 1.0,
+        "max_l1_ratio": 0.772458
+      }
+    },
+    {
+      "name": "end_to_end_slot_character_expansion",
+      "status": "PASS",
+      "details": {"max_absolute_error": 3.641e-16}
+    },
+    {
+      "name": "sixth_moment_bad_character_count",
+      "status": "PASS",
+      "details": {
+        "relative_orthogonality_error": 6.70e-16,
+        "collision_count": 545,
+        "observed_beta": 537,
+        "chebyshev_bound": 2750.89
+      }
+    },
+    {
+      "name": "moments_and_tail_scalar_check",
+      "status": "PASS",
+      "details": {"exact_N_range": "2..7", "tail_scalar_inequality": true}
+    },
+    {
+      "name": "configuration_ledger_exponents",
+      "status": "PASS",
+      "details": {
+        "T1": "X^2 log^0",
+        "T2": "X^2 log^-1",
+        "T3": "X^2 log^-1",
+        "C1": "X^0 log^8",
+        "C2a": "X^2 log^7",
+        "C2b": "X^2 log^7",
+        "C2c": "X^0 log^6",
+        "C2d": "X^2 log^7",
+        "C3": "X^0 log^6",
+        "C4": "X^1 log^3"
+      }
+    }
+  ]
+}
