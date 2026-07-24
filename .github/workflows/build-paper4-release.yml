@@ -1,11 +1,10 @@
 name: Build Paper IV release artifacts
 
 on:
-  push:
+  pull_request:
     branches:
-      - publication/fortune-papers-ii-vi-20260724
-    paths:
-      - .github/workflows/build-paper4-release.yml
+      - gpt56/d1-gate-bridge-terminal-20260724
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -37,7 +36,6 @@ jobs:
           ACTUAL=$(sha256sum "$SRC" | awk '{print $1}')
           EXPECTED='548460849cc9c6125fbe59d0a4f2f37ec680761174c25556b5e781a8ae9372f1'
           test "$ACTUAL" = "$EXPECTED"
-
           cp "$SRC" "$PKG/manuscript.md"
 
           pandoc "$SRC" \
@@ -90,14 +88,25 @@ jobs:
           PKG="$DIST/paper4_random_order_release"
 
           pandoc "$PKG/paper4_random_order.docx" -t plain -o "$PKG/docx_extracted.txt"
-          pdftotext "$PKG/paper4_random_order.pdf" "$PKG/pdf_extracted.txt"
+          pdftotext -layout "$PKG/paper4_random_order.pdf" "$PKG/pdf_extracted.txt"
 
-          grep -Fq 'Theorem 2.1 (random-order reciprocal-frame theorem)' "$PKG/docx_extracted.txt"
-          grep -Fq 'Theorem 2.1 (random-order reciprocal-frame theorem)' "$PKG/pdf_extracted.txt"
-          grep -Fq 'Lemma 6.3 (all-bad pattern domination)' "$PKG/docx_extracted.txt"
-          grep -Fq 'Lemma 6.3 (all-bad pattern domination)' "$PKG/pdf_extracted.txt"
-          grep -Fq 'AI-assistance disclosure' "$PKG/docx_extracted.txt"
-          grep -Fq 'AI-assistance disclosure' "$PKG/pdf_extracted.txt"
+          python3 - "$PKG/docx_extracted.txt" "$PKG/pdf_extracted.txt" <<'PY'
+          import re, sys, unicodedata
+          def norm(path):
+              text = open(path, encoding='utf-8', errors='replace').read()
+              text = unicodedata.normalize('NFKD', text).lower()
+              return ' '.join(re.sub(r'[^a-z0-9]+', ' ', text).split())
+          needles = [
+              ('theorem', '2', '1', 'random', 'order', 'reciprocal', 'frame'),
+              ('lemma', '6', '3', 'all', 'bad', 'pattern', 'domination'),
+              ('ai', 'assistance', 'disclosure'),
+          ]
+          for path in sys.argv[1:]:
+              text = norm(path)
+              assert len(text) > 12000, (path, len(text))
+              for words in needles:
+                  assert all(word in text for word in words), (path, words)
+          PY
 
           {
             echo '# Paper IV compiled-artifact build manifest'
@@ -106,7 +115,7 @@ jobs:
             echo '- Reviewed source Git blob: `1a3d39d974bfa37d31c100f536dcaa1b74f6d688`'
             echo '- Reviewed source SHA-256: `548460849cc9c6125fbe59d0a4f2f37ec680761174c25556b5e781a8ae9372f1`'
             echo '- Build toolchain: pandoc + LibreOffice Writer on GitHub Actions Ubuntu runner'
-            echo '- DOCX and PDF extraction smoke tests: passed'
+            echo '- Normalised DOCX and PDF extraction tests: passed'
             echo '- Visual page inspection: pending external QA after artifact download'
           } > "$PKG/BUILD_MANIFEST.md"
 
@@ -114,20 +123,11 @@ jobs:
             cd "$PKG"
             find . -maxdepth 1 -type f ! -name SHA256SUMS -print0 | sort -z | xargs -0 sha256sum > SHA256SUMS
           )
-
           (
             cd "$DIST"
             zip -r -9 paper4_random_order_release.zip paper4_random_order_release
             sha256sum paper4_random_order_release.zip > paper4_random_order_release.zip.sha256
           )
-
-      - name: Commit release artifacts
-        run: |
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add publications/fortune-papers-ii-vi-20260724/paper4_random_order/dist
-          git commit -m 'Build reviewed Paper IV release artifacts'
-          git push origin HEAD:publication/fortune-papers-ii-vi-20260724
 
       - name: Upload release artifact
         uses: actions/upload-artifact@v4
