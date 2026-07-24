@@ -140,18 +140,18 @@ S_\chi
 \left(E_+(q)-E_-(q)\right).
 \]
 
-For `A=+1` or `-1`, the elementary identity
+For `A=+1` or `-1`,
 
 \[
 E_{A\chi(q)}(q)
 =
-\frac12\left(E_+(q)+E_-(q)ight)
+\frac12\left(E_+(q)+E_-(q)\right)
 +
 \frac{A\chi(q)}2
-\left(E_+(q)-E_-(q)\right)
+\left(E_+(q)-E_-(q)\right).
 \]
 
-gives
+Therefore
 
 \[
 \boxed{
