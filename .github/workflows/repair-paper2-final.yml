@@ -20,7 +20,7 @@ jobs:
           ref: publication/fortune-papers-ii-vi-20260724
           fetch-depth: 0
       - name: Apply deterministic source repairs
-        run: python3 scripts/repair_paper2_final.py
+        run: python3 scripts/repair_paper2_final_v2.py
       - name: Validate repaired source
         run: |
           set -euo pipefail
