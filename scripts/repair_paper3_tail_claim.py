@@ -9,7 +9,7 @@ old_author = '  - "Edward Stewart Anthony Bozzard"'
 new_author = '  - "Edward Stewart Anthony Bozzard (ORCID 0009-0002-4052-0994)"'
 assert text.count(old_author) == 1
 text = text.replace(old_author, new_author)
-old_refs = '# References\n'
+old_refs = '# References'
 new_refs = '''# References
 
 1. E. S. A. Bozzard, *Prime Detection at Primorial Centres: Reciprocal Frames, Exact Moments, and Structural Obstructions*, companion manuscript, 2026.
