@@ -1,0 +1,8 @@
+paper	role	ref	path	blob
+II	archived manuscript part 1	archive/fortune-paper2-20260720	fortune-conjecture/paper2-prime-detection-20260720/manuscript/part_1_front_matter_to_reciprocal_frame.md	79da1c81b57b051cf8527889e84a6fe1161eb3fe
+II	archived manuscript part 2	archive/fortune-paper2-20260720	fortune-conjecture/paper2-prime-detection-20260720/manuscript/part_2_moments_mobius_and_density_obstruction.md	9fcaf35daded3706bc632751e25c634fca93e747
+II	archived manuscript part 3	archive/fortune-paper2-20260720	fortune-conjecture/paper2-prime-detection-20260720/manuscript/part_3_fourier_density_one_and_harmonic_scale.md	83fd9649e0481549753d82789f7014c346aa3013
+II	archived manuscript part 4	archive/fortune-paper2-20260720	fortune-conjecture/paper2-prime-detection-20260720/manuscript/part_4_methods_reproducibility_and_boundary.md	ea2a6736509996e5f7d8a564349635d082829789
+III	kernel proof	claude/experimental-branch-review-am0zpg	PAPER2_ADDENDUM.md	71a9ad70c7164bcd94b92743fff3d8088c9a158b
+III	singular-series proof	claude/experimental-branch-review-am0zpg	frontier/workbench/msLemma.develop.json	abe5cbb0577e35bf05db2302de6a7d73afd991bc
+III	conditional theorem	claude/experimental-branch-review-am0zpg	CONDITIONAL_HL_BLOCK.md	41d6f8e9df068bfed2f55fe9c2fd926a2b1423ef
