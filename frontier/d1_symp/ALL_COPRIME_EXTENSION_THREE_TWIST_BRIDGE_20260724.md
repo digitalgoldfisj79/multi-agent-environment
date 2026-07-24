@@ -230,21 +230,21 @@ There is one cube class. The coefficient can be taken to be `c=1`, and the odd-p
 
 ### Even `r`
 
-The field `k_r` contains `mu_3`. Choose a primitive cube root `omega`. Then
+There are exactly three cube classes. If `g` is any generator of the cyclic group `k_r^*`, one may take
 
 \[
-C_r=\{1,\omega,\omega^2\}
+C_r=\{1,g,g^2\}.
 \]
 
-after replacing `omega` by any representatives of the three cube classes. The exact primitive trace is
+The exact primitive trace is
 
 \[
 \boxed{
 Q^3\operatorname{Tr}(F^r|\mathcal D_p)
 =
 \frac13
-\sum_{j=0}^2
-\operatorname{Tr}(F_Q|\mathcal R_{p,\omega^j}).
+\sum_{c\in C_r}
+\operatorname{Tr}(F_Q|\mathcal R_{p,c}).
 }
 \]
 
@@ -257,18 +257,26 @@ The remaining even-power discrepancy is therefore the explicit number
 \operatorname{Tr}(F^r|\mathcal R_p)
 -
 \frac13
-\sum_{j=0}^2
-\operatorname{Tr}(F_Q|\mathcal R_{p,\omega^j}).
+\sum_{c\in C_r}
+\operatorname{Tr}(F_Q|\mathcal R_{p,c}).
 }
 \]
 
-Computing `Delta_{p,r}` is exactly the twisted `mu_3` Lefschetz/projector problem. No other part of the primitive comparison remains in degrees not divisible by `p`.
+The average is independent of the chosen representatives. Computing `Delta_{p,r}` is exactly the twisted `mu_3` Lefschetz/projector problem. No other part of the primitive comparison remains in degrees not divisible by `p`.
 
 ## 5. Why this is the arithmetic quadratic sector
 
-For odd `r`, arithmetic Frobenius exchanges the two nontrivial `mu_3` characters and their traces vanish. For even `r`, it fixes those characters, so they contribute separately. The three coefficient twists are defined over the quadratic extension in which `mu_3` splits and are permuted by the base-field arithmetic Frobenius.
+For odd `r`, arithmetic Frobenius exchanges the two nontrivial `mu_3` characters and their traces vanish. For even `r`, it fixes those characters, so they contribute separately.
 
-Thus `Delta_{p,r}` is not a generic failure of the Airy--primitive bridge. It is the exact quadratic/projector sector already present in the application ledger.
+On the cube-class quotient
+
+\[
+k_r^*/(k_r^*)^3\cong\mathbf Z/3\mathbf Z,
+\]
+
+the absolute `p`-Frobenius acts by multiplication by `p=-1 mod 3`. It therefore fixes the trivial cube class and exchanges the two nontrivial classes. Thus the two nontrivial coefficient-twist traces form the same arithmetic quadratic pair already present in the application ledger.
+
+Accordingly, `Delta_{p,r}` is not a generic failure of the Airy--primitive bridge. It is the exact quadratic/projector sector.
 
 ## 6. Exact `p=5`, `r=2` check
 
@@ -285,7 +293,7 @@ It finds:
 - the affine null cone has `625=25^2` points;
 - the cubic zero fibre has `25` points;
 - `#X_5(F_25)=1=#P^0(F_25)`, so the primitive second trace is zero;
-- for three cube-class representatives, the null-cone additive sums are
+- for representatives of the three cube classes, the null-cone additive sums are
 
 \[
 -50,\quad25,\quad25;
