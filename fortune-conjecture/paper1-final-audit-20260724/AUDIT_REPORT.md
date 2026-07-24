@@ -2,9 +2,9 @@
 
 ## Current decision
 
-**SOURCE-LEVEL PASS — COMPILED-ARTIFACT AND HUMAN-REVIEW GATES OPEN.**
+**INTERNAL TECHNICAL PASS — HUMAN SPECIALIST REVIEW OPEN.**
 
-Paper I has been reconstructed directly from the live Zenodo-deposited reviewed source and taken through exact archive verification, the full portable validator suite, an independent finite reconstruction and a fresh exact-hash hostile review.
+Paper I has been reconstructed directly from the live Zenodo-deposited reviewed source and taken through exact archive verification, the complete portable validator suite, an independent finite reconstruction, fresh exact-hash hostile review, reproducible binary production, checksum verification and page-by-page visual QA.
 
 ## Exact reviewed object
 
@@ -64,6 +64,21 @@ The exact final manuscript was supplied alone to `Qwen/Qwen3-14B-AWQ` in Hugging
 
 The review reports high confidence in the validity of the results and no fatal or major defect. Its two minor reservations concern finite constants and matrix eigenvalues not expanded line by line in the paper; both are independently reconstructed exactly in the deposited audit and are resolved in `HOSTILE_REVIEW_DISPOSITION.md`.
 
+## Canonical compiled artifacts
+
+GitHub Actions run `30108438561` built the exact source and produced artifact `8602624235`, digest
+
+`sha256:2ecb9ded8ce3e99d579470d9cfde286c10b5df4c63049a9e5474e1ac4effbdd5`.
+
+| File | Pages | SHA-256 |
+|---|---:|---|
+| PDF | 28 | `35b505c809afc178ced84060d7c67d04239552d42bff4c9a204cb06612757bd4` |
+| DOCX | 29 rendered pages | `05577ce07d092e1b7113c51c470bdaac4ff36eb74df621dc76c4d0452d14e6ae` |
+| Hardened release ZIP | — | `c267ee0cdbcc30ddffdb478b866767bb8bdd5141bb36ad657b8ca6b37b68dbb7` |
+| Zenodo new-version package | — | `4d9cd4ca9572e103f36b401da7b58d2ad667b4c5a3fa8f5262ae3995195e3016` |
+
+Every automated extraction, A4, font, missing-glyph, Office Math, heading and checksum gate passed. All 57 rendered pages were inspected and passed. The complete record is in `COMPILED_ARTIFACT_QA.md`.
+
 ## Fidelity incident
 
 An initial manual repository commit contained a compressed derivative rather than the complete reviewed manuscript. The mismatch was caught by the line-count and hash audit before hostile review or release. The deterministic Zenodo reconstruction replaced it. It is superseded and has no audit or release status.
@@ -75,7 +90,7 @@ An initial manual repository commit contained a compressed derivative rather tha
 3. Complete portable validation suite — **passed**.
 4. Independent finite reconstruction — **passed**.
 5. Fresh exact-hash hostile review — **passed after disposition**.
-6. Compiled PDF/DOCX/ZIP integrity and page-level QA — **open**.
+6. Compiled PDF/DOCX/ZIP integrity and page-level QA — **passed**.
 7. External human specialist review — **open**.
 
 This is an internal technical audit, not peer review, publication acceptance or proof of any open theorem.
