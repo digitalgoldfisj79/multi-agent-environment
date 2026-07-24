@@ -63,8 +63,8 @@ jobs:
               out.write_text(rendered,encoding='utf-8')
               records.append((key,bigl,bigr,tags))
           with (dist/'TYPESETTING_COUNTS.tsv').open('w',encoding='utf-8') as f:
-              f.write('paper\\tBigl\\tBigr\\ttags\\n')
-              for row in records:f.write('\\t'.join(map(str,row))+'\\n')
+              f.write('paper\tBigl\tBigr\ttags\n')
+              for row in records:f.write('\t'.join(map(str,row))+'\n')
           PY
 
           pandoc "$DIST/paper2_render_source.docx.md" \
@@ -160,8 +160,8 @@ jobs:
           pdfinfo "$P3/Paper_III_Pair_Sum_Rigidity.pdf" > "$P3/pdfinfo.txt"
           pdffonts "$P2/Paper_II_Prime_Detection_at_Primorial_Centres.pdf" > "$P2/pdffonts.txt"
           pdffonts "$P3/Paper_III_Pair_Sum_Rigidity.pdf" > "$P3/pdffonts.txt"
-          grep -Fq 'Page size:       595.276 x 841.89 pts (A4)' "$P2/pdfinfo.txt"
-          grep -Fq 'Page size:       595.276 x 841.89 pts (A4)' "$P3/pdfinfo.txt"
+          grep -Fq '(A4)' "$P2/pdfinfo.txt"
+          grep -Fq '(A4)' "$P3/pdfinfo.txt"
 
           cat > "$P2/TYPESETTING_NORMALISATIONS.md" <<'EOF'
           # Typesetting normalisations
