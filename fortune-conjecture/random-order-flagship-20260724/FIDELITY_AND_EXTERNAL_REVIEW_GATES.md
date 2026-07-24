@@ -2,12 +2,13 @@
 
 ## Current state
 
-The four questions are now separated and answered as follows:
+The technical questions are now separated and answered as follows:
 
 1. Is there a continuous proof in the frozen research source? **Yes.**
 2. Do independent finite checks reproduce selected structural identities? **Yes.**
 3. Does the exact rebuilt manuscript reproduce the frozen proof at dependency level? **Yes, editorially.**
 4. Has a fresh manuscript-only hostile review left an unresolved fatal or major issue? **No.**
+5. Do the compiled PDF, DOCX and release archive faithfully preserve the cleared source and pass technical QA? **Yes.**
 
 Final reviewed source:
 
@@ -16,9 +17,10 @@ Final reviewed source:
 - fidelity matrix: `REBUILT_MANUSCRIPT_FIDELITY_MATRIX.md`;
 - ledger reconstruction: `INDEPENDENT_LEDGER_RECONSTRUCTION.md`;
 - hostile-review archive: `FRESH_HOSTILE_REVIEW_FINAL_QWEN3_14B_AWQ.md`;
-- issue disposition: `FINAL_HOSTILE_REVIEW_DISPOSITION.md`.
+- issue disposition: `FINAL_HOSTILE_REVIEW_DISPOSITION.md`;
+- compiled-artifact record: `COMPILED_ARTIFACT_QA.md`.
 
-The source-level internal gates are closed. Compiled-artifact integrity and human specialist review remain open.
+All internal technical gates are closed. Human specialist review remains open.
 
 ## Gate F1 — frozen-source fidelity: passed
 
@@ -60,22 +62,30 @@ The raw response also listed three objections. They are rebutted in `FINAL_HOSTI
 
 No fatal or major model-review issue remains unresolved.
 
-## Gate F4 — compiled package integrity: open
+## Gate F4 — compiled package integrity: passed
 
-Before circulation:
+Canonical build:
 
-1. regenerate DOCX, PDF and release ZIP from the final reviewed Markdown;
-2. compute SHA-256 for every artifact;
-3. verify that text extracted from DOCX/PDF is mathematically faithful to the source;
-4. ensure every referenced file is present and consistently named;
-5. remove superseded binaries and stale clearance claims; and
-6. resolve any reference to a nonexistent `independent_audit_results.txt`.
+- GitHub Actions workflow run: `30085400790`;
+- publication commit: `af9350f06e41e94d79f583b2e8fca45b55b92852`;
+- artifact ID: `8593522378`;
+- artifact digest: `sha256:1875d3965d611cffa0a70afc223caf0e3119d93f79183f3f7a9be214f3486a51`.
 
-The canonical clean-room result file is `independent_audit_results.json`.
+All workflow steps passed. The final files are:
+
+- PDF SHA-256: `dc5ff454826f605d5fd4db4ba02f6a35df1013bde1cfe9a9d9e26a6c8fc6f1a3`;
+- DOCX SHA-256: `3ecac48465573b9305cafb119779a5e17c65b2bd2fc05f7d376ec55895b3b61b`;
+- canonical internal ZIP SHA-256: `19c790caa196cf6374f62f90e4d9da4ea2dfc559a4894fd8e7dfdb4a62b5ec43`.
+
+The package includes the exact reviewed source, compiled documents, audit files, extracted text, clean-room JSON, typesetting-normalisation record, build manifest and `SHA256SUMS`. Every checksum verified after download.
+
+The 12-page PDF passed extraction, openability, encryption, text-native and XFA checks and was inspected page by page at 180 dpi. The 15-page DOCX passed extraction, accessibility and heading-hierarchy checks and was inspected page by page. No clipping, overlap, raw TeX, missing glyph, malformed equation, blank contents field or duplicated heading numbering remains. Details are in `COMPILED_ARTIFACT_QA.md`.
+
+The canonical clean-room result file is `independent_audit_results.json`; the final package contains no stale reference to a nonexistent `independent_audit_results.txt`.
 
 ## Gate F5 — human specialist review: open
 
-After package integrity closes, send the package to:
+Send the technically cleared package to:
 
 - an analytic/probabilistic number theorist for the random-order conditioning and contour mechanism; and
 - a character-sum specialist for Gauss/CRT normalisation, the sixth moment and the no-cushion ledger.
