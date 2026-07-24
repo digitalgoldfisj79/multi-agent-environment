@@ -444,7 +444,7 @@ with \(t=i\) — and \((u',v')\):
 
 The index \(k\) appears in the right side of (A.4); on the left it can
 appear only inside \(v'\) (as \(k\ne i\)). So \(v'=\{k,t\}\) for some
-\(t\), and then (A.4) gives \(u'=(\{i,i,k,t\})\setminus\{k,i\}=\{i,t\}\).
+\(t\), and then (A.4) gives \(u'=\{i,t\}\) after removing one occurrence each of \(k\) and \(i\) from \(\{i,i,k,t\}\).
 Thus \((u',v')\) lies in the family (A.3), and \(r(D)=N\).
 
 *Case 2: all other differences.* Let \((u,v)\) be a representation of a
