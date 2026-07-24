@@ -1,0 +1,11 @@
+{
+  "U17": {"value": -255944298171217376101202104309234, "tenth_prime_ok": true, "matches_prediction": true},
+  "U15": {"value": 0, "tenth_prime_ok": true, "matches_prediction": true},
+  "anchors_p17": true,
+  "U23": {"value": 24420035557874291486685783320490312291163556150933, "tenth_prime_ok": true, "matches_prediction": true},
+  "U21": {"value": 1811942529812491726048499913466581810789054457, "tenth_prime_ok": true, "matches_prediction": true},
+  "anchors_p23": true,
+  "U29": {"value": -624252554084396763440186646610590357883743693997978553242566200210, "tenth_prime_ok": true, "matches_prediction": true},
+  "U27": {"value": 52044691388847887475857027569042615828726415261418059755550020, "tenth_prime_ok": true, "matches_prediction": true},
+  "anchors_p29": true
+}
