@@ -1,3 +1,4 @@
+# Exact reconstruction trigger: 24 July 2026
 name: Reconstruct Paper I from Zenodo
 
 on:
@@ -74,7 +75,7 @@ jobs:
           test "$(wc -l < "$F")" -ge 1900
           grep -Fq '## HTE4 (open)' "$F"
           grep -Fq '## HWF4 (open)' "$F"
-          grep -Fq 'No implication for Fortune' "$F"
+          grep -Fq "No implication for Fortune's conjecture is claimed" "$F"
           grep -Fq '## 11.2. AI-assistance disclosure' "$F"
           ! grep -nE 'TODO|TBD|PLACEHOLDER|\\x00' "$F"
 
