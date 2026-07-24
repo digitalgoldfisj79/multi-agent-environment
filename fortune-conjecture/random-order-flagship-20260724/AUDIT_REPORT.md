@@ -2,14 +2,15 @@
 
 ## Revised decision
 
-**Gate result: INTERNAL HOLD — FIDELITY AND FRESH-REVIEW GATES OPEN.**
+**Gate result: INTERNAL HOLD — FRESH HOSTILE REVIEW FAILED; FIDELITY GATE OPEN.**
 
 The frozen source `RQM_PROOF.md` contains a continuous proof under its explicit frame-admissibility hypothesis, and the clean-room implementation reproduced the finite structural identities selected for checking. Those facts do **not** by themselves establish that the auditor-edited manuscript is a faithful, complete rendering of the frozen proof. The earlier label “provisional pass to external review” therefore overstated what had been verified.
 
-No specialist should receive the manuscript until both of the following are complete:
+A fresh manuscript-only hostile review has now been completed. It returned **not proved** for the manuscript as supplied. No specialist should receive the manuscript until:
 
-1. a claim-by-claim and dependency-level fidelity comparison between the frozen source blobs and the exact manuscript file sent for review; and
-2. a genuinely fresh hostile review of that manuscript alone, with no audit report, supportive context, validator output, or prior-session conclusions.
+1. the manuscript has been rebuilt as a faithful, self-contained rendering of the frozen proof;
+2. a claim-by-claim and dependency-level fidelity comparison has been completed against the exact revised manuscript; and
+3. a new fresh hostile review of that revised manuscript closes with no unresolved fatal issue and every major issue repaired or rebutted line by line.
 
 ## Frozen source basis
 
@@ -55,6 +56,26 @@ The repository manuscript currently functions as a condensed research announceme
 
 These omissions do not refute the frozen theorem. They refute the earlier claim that the reconstructed manuscript itself had already passed a complete proof audit.
 
+## Fresh hostile manuscript-only review
+
+The exact circulation manuscript was supplied without the proof source, audit report, validator output, prior reviews, or a desired verdict to `Qwen/Qwen3-14B` in Hugging Face job `6a6315847ef3c084649671bb`.
+
+- Manuscript SHA-256: `0c28bc000a8b4ff35f2f47ab53572c3d4e8e5649f7b35cda1d7971818d730be6`.
+- Prompt SHA-256: `0bfd60eb4e8d4f2f1f2e0ab17c2c31465998744b4504b305b62ef5735da6464c`.
+- UTC completion: `2026-07-24T07:39:06.448438+00:00`.
+- Archived output: `FRESH_HOSTILE_REVIEW_QWEN3_14B.md`.
+- Verdict: **not proved**.
+
+The load-bearing findings are valid and independently visible in the manuscript: decisive definitions are imported only by vague reference; the contour estimate, exceptional-character argument, complete ledger, and dual-row assembly are asserted rather than proved; and the supporting checks are not substitutes for the missing asymptotic proof.
+
+The model output is evidence, not authority. Three points require qualification in the disposition:
+
+1. its description of the configuration identity as comparing a “simple quadratic” with a higher-order expression is algebraically mistaken, because `M(M-1)` is itself quartic in `N`; the valid criticism is that the manuscript does not derive the identity;
+2. failure to define the dependence of `C(eta,rho)` is a presentation/quantifier defect, but not independently a fatal mathematical error if the full proof supplies uniform control; and
+3. the manuscript does not need a separate proof that a random-order theorem fails to imply Fortune’s conjecture; the scope limitation is logically clear once the models are defined.
+
+Those overstatements do not affect the review gate. The omitted proof chain is sufficient to make the manuscript fail as a standalone theorem paper.
+
 ## Load-bearing proof chain in the frozen source
 
 1. Frame admissibility gives `D_X>0`, a quantitative lower bound for `D_X`, and diagonal control.
@@ -82,11 +103,12 @@ up to constants and the relation `M asymp X^2/log^2 X`. There is no declared pos
 
 ## Residual gates
 
-1. Complete and archive the frozen-source-to-manuscript fidelity matrix.
-2. Run a fresh hostile manuscript-only review and preserve the exact input hash, model/session identity, prompt, and unedited output.
+1. Replace the extended synopsis with a faithful full-proof manuscript.
+2. Complete and archive the frozen-source-to-manuscript fidelity matrix for that revised manuscript.
 3. Reconstruct the C2 ledger independently, without relying on the existing audit code.
-4. Resolve every package-manifest mismatch, including any reference to a missing `independent_audit_results.txt`.
-5. Only then approach an analytic/probabilistic number theorist and a character-sum specialist.
+4. Run a new fresh hostile review on the revised hashed manuscript and dispose of every issue.
+5. Resolve every package-manifest mismatch, including any reference to a missing `independent_audit_results.txt`.
+6. Only then approach an analytic/probabilistic number theorist and a character-sum specialist.
 
 ## External-review sequence
 
