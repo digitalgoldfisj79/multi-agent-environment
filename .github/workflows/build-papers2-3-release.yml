@@ -1,3 +1,4 @@
+# Canonical release trigger: 24 July 2026
 name: Build Papers II and III release artifacts
 
 on:
