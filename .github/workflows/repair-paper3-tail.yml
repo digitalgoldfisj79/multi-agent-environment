@@ -1,0 +1,30 @@
+name: Repair Paper III tail claim
+
+on:
+  pull_request:
+    branches:
+      - gpt56/d1-gate-bridge-terminal-20260724
+    paths:
+      - .github/workflows/repair-paper3-tail.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: publication/fortune-papers-ii-vi-20260724
+          fetch-depth: 0
+      - name: Apply deterministic source repair
+        run: python3 scripts/repair_paper3_tail_claim.py
+      - name: Commit repaired source
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add publications/fortune-papers-ii-vi-20260724/paper3_pair_sum/manuscript.md
+          git commit -m 'Remove unsupported tail claim from Paper III'
+          git push origin HEAD:publication/fortune-papers-ii-vi-20260724
