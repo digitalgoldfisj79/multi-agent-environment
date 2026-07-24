@@ -689,10 +689,13 @@ group and costs \(\operatorname{L1}(e_v)\); a bad coordinate has at most
 For sufficiently large \(X\), the sum over all patterns is at most twice the
 all-bad bound.
 
-**Proof.** Let \(P_0\) be the all-bad pattern and let \(P\) have \(f\ge1\)
-good vertices. Dividing (6.5) for \(P\) by its all-bad counterpart gives
+**Proof.** Let \(U(P)\) denote the right-hand side of (6.5), so that
+\(\Sigma(P)\le U(P)\). Let \(P_0\) be the all-bad pattern and let \(P\)
+have \(f\ge1\) good vertices. The all-bad upper bound \(U(P_0)\) is
+positive because the principal character is bad, hence \(\beta\ge1\), and
+every group norm is positive. Dividing the two upper bounds gives
 \[
-\frac{\Sigma(P)}{\Sigma(P_0)}
+\frac{U(P)}{U(P_0)}
 \le C_*K^2X^{-30f}
 \prod_{v\text{ good}}
 \frac{\operatorname{L1}(e_v)}{\beta\operatorname{SUP}(e_v)}.
@@ -704,13 +707,18 @@ By (6.6), for either a one-slot or two-slot edge,
 \]
 because \(\beta\ge1\). Also \(C_*K^2\le540X^2\) by (2.4). Hence
 \[
-\frac{\Sigma(P)}{\Sigma(P_0)}
+\frac{U(P)}{U(P_0)}
 \le540X^2\bigl(4\eta^2X^{-26}\bigr)^f
 \le X^{-23f}
 \]
 for sufficiently large \(X\). There are at most four ratio coordinates, so
-at most \(2^4-1=15\) non-all-bad patterns. Their total is at most
-\(15X^{-23}\Sigma(P_0)\le\Sigma(P_0)\), proving the factor two. \(\square\)
+at most \(2^4-1=15\) non-all-bad patterns. Therefore
+\[
+\sum_P\Sigma(P)\le\sum_PU(P)
+\le\bigl(1+15X^{-23}\bigr)U(P_0)\le2U(P_0),
+\]
+proving the claimed domination without dividing by an actual character sum.
+\(\square\)
 
 Combining Lemmas 5.1 and 6.1--6.3 gives the master estimate.
 
