@@ -21,24 +21,32 @@ The independent implementation, extended final Appendix B panels and shipped val
 
 Paper III received a proved verdict with no fatal or major defect. Paper II's listed objections confuse the proof of a criterion with proof of its displayed hypothesis or overlook explicit text already present. All objections are resolved in `HOSTILE_REVIEW_DISPOSITION.md`.
 
-## F4 — compiled package integrity: open
+## F4 — compiled package integrity: passed
 
-Required before circulation:
+Canonical visual-QA build:
 
-1. build PDFs directly from the exact Markdown sources with XeLaTeX;
-2. generate editable DOCX files with documented notation-only conversions;
-3. verify extracted mathematical text and claim boundaries;
-4. run PDF page-size, font and missing-glyph preflight checks;
-5. run DOCX heading and structural checks;
-6. inspect every rendered PDF and DOCX page;
-7. verify every packaged SHA-256 checksum; and
-8. create separate Paper II, Paper III and combined release archives.
+- GitHub Actions run: `30103406901`.
+- Workflow artifact: `8600618293`.
+- Artifact digest: `sha256:4c159708bda053c5d5288d8933f9dd2534a5286eb7e1e79af28c988e7de44ed7`.
+
+Passed checks:
+
+1. PDFs built directly from the exact Markdown sources with XeLaTeX;
+2. editable DOCX files generated with documented notation-only conversions;
+3. extracted mathematical text and claim-boundary statements verified;
+4. A4, embedded-font and zero-missing-glyph PDF preflight passed;
+5. DOCX heading and structural checks passed;
+6. every rendered PDF and DOCX page inspected;
+7. every per-file, per-package and artifact SHA-256 checksum verified; and
+8. separate Paper II, Paper III and combined release archives created.
+
+The page-level inspection covered 19 Paper II PDF pages, 20 Paper II DOCX pages, 15 Paper III PDF pages and 16 Paper III DOCX pages. A clipped raw URL found in an earlier Paper III PDF was repaired at the build layer and re-inspected. `VISUAL_QA_REPORT.md` records the complete result and binary hashes.
 
 Any source edit changes the hash and reopens F1 through F4.
 
 ## F5 — external human review: open
 
-After F4 closes, Paper II should be read by an analytic-number-theory specialist familiar with prime-detection variance reductions and character sums. Paper III should be read by an analytic or probabilistic number theorist familiar with additive energy, singular series and conditional Hardy--Littlewood arguments.
+Paper II should now be read by an analytic-number-theory specialist familiar with prime-detection variance reductions and character sums. Paper III should be read by an analytic or probabilistic number theorist familiar with additive energy, singular series and conditional Hardy--Littlewood arguments.
 
 ## Claim boundary
 
