@@ -9,7 +9,7 @@ This document separates four questions that had previously been conflated:
 3. Does the exact circulation manuscript faithfully and completely reproduce the frozen proof?
 4. Has an independent hostile reader found no fatal defect in the circulation manuscript?
 
-The current evidence supports (1) and selected parts of (2). It does not yet close (3) or (4).
+The current evidence supports (1) and selected parts of (2). Gate (3) is open. Gate (4) has been tested on the current manuscript and failed: the fresh reviewer returned **not proved**.
 
 ## Gate F1 — frozen-source fidelity
 
@@ -82,6 +82,19 @@ The archive must preserve:
 ### F2 acceptance criterion
 
 No unresolved fatal issue, and every major issue has either been repaired in a new hashed manuscript or rebutted with a line-level proof.
+
+### F2 run 1 — completed, acceptance failed
+
+- Model: `Qwen/Qwen3-14B`.
+- Hugging Face job: `6a6315847ef3c084649671bb`.
+- Manuscript SHA-256: `0c28bc000a8b4ff35f2f47ab53572c3d4e8e5649f7b35cda1d7971818d730be6`.
+- Prompt SHA-256: `0bfd60eb4e8d4f2f1f2e0ab17c2c31465998744b4504b305b62ef5735da6464c`.
+- Archived response: `FRESH_HOSTILE_REVIEW_QWEN3_14B.md`.
+- Verdict: **not proved**.
+
+The review correctly identified that the manuscript does not supply the decisive contour, exceptional-character, complete-ledger, and assembly proofs. Some individual classifications in the raw output are overstated or partially mistaken; those are disposed of in `AUDIT_REPORT.md`. They do not alter the failed gate because the missing load-bearing proof chain is independently visible.
+
+A second F2 run should target the revised full-proof manuscript, not the present synopsis.
 
 ## Gate F3 — package integrity
 
