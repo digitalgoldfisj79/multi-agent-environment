@@ -1,18 +1,18 @@
-# Main-branch status after the full Weil bridge and sparse hook identification
+# Main-branch status after the full Weil bridge and sparse Fourier--Cayley identification
 
 **Date:** 2026-07-24  
 **Branch:** `gpt56/d1-main-twisted-descent-20260724`  
 **Scope:** function-field `d=1` Fortune sibling only. Integer Fortune remains untouched.  
-**Status:** this file supersedes the earlier main-branch status notes on this branch.
+**Status:** this file supersedes every earlier main-branch status note on this branch.
 
 ## 1. Route discipline
 
 Only two branches remain admissible:
 
-1. the absolute Frobenius-correlation estimate;
-2. the explicit nested-section/nearby-cycle comparison into the hook irreducibility ledger.
+1. the absolute Airy Frobenius-correlation estimate;
+2. the global `S_p`-equivariant Fourier--Cayley comparison into the sparse hook irreducibility ledger.
 
-Coefficient resonance, bare-shift localization, generic complete-intersection bounds, common-factor collapse, slope pairing and unguided prime sweeps remain closed or non-decisive.
+Coefficient resonance, bare-shift localization, generic complete-intersection bounds, common-factor collapse, slope pairing, local vanishing cycles at the smooth sparse zero section and unguided prime sweeps are closed or non-decisive.
 
 ## 2. PROVED: exact geometric reduction
 
@@ -94,7 +94,7 @@ Consequently,
 
 in the Grothendieck group of semisimple Weil representations, with equality of the complete Frobenius determinant ratios.
 
-This closes the Airy-to-cyclic-linear-section comparison at all Frobenius powers. It is a semisimple virtual identity, not a constructed quasi-isomorphism.
+This closes the Airy-to-cyclic-linear-section comparison at every Frobenius power. It is a semisimple virtual identity, not a constructed quasi-isomorphism.
 
 ## 5. PROVED: precise sparse hook geometry
 
@@ -141,11 +141,58 @@ with
 \mathcal R_p^{ss}=\mathcal K_{ambient}(-3)^{ss}.
 \]
 
-Thus source and target are explicit alternating-hook objects in one nested root geometry.
-
 The prime `p=5` is exceptional: its full sparse family contains the Airy section rather than being a deeper section. It remains a separately proved base case.
 
-## 6. PROVED: finite normal-form and q-line arithmetic assembly
+## 6. PROVED: local vanishing-cycle no-go and exact Fourier--Cayley replacement
+
+The Jacobian of `s_1,...,s_m` is a truncated Vandermonde matrix. It has full rank throughout the separable root locus. Hence the sparse section is smooth there, and local iterated vanishing cycles at the zero section vanish on the locus carrying the irreducibility hook local system.
+
+The former local nearby-cycle proposal is therefore closed.
+
+Put
+
+\[
+S=(s_4,\ldots,s_{p-4}),
+\qquad
+c=p-7.
+\]
+
+Additive orthogonality gives
+
+\[
+\mathbf1_{S(x)=0}
+=
+Q^{-c}\sum_{\lambda\in\mathbf F_Q^c}
+\psi\left(\langle\lambda,S(x)\rangle\right).
+\]
+
+Sheaf-theoretically, on the total space of
+
+\[
+\mathcal E^\vee,
+\qquad
+\mathcal E=\bigoplus_{m=4}^{p-4}\mathcal O_{X_p}(m),
+\]
+
+the Fourier phase satisfies
+
+\[
+R\pi_!\mathcal L_\psi(\langle\lambda,S\rangle)
+\cong
+i_!\mathbf Q_\ell(-c)[-2c].
+\]
+
+Thus the correct application object is the global `S_p`-equivariant Fourier--Cayley complex. Weight compatibility forces the desired pure constituent to be
+
+\[
+\mathcal K_{ambient}\left(\frac{p-7}{2}\right)
+=
+\mathcal R_p\left(\frac{p-1}{2}\right).
+\]
+
+Isolation of this constituent and decomposition of the complementary Fourier strata remain open.
+
+## 7. PROVED: finite normal-form and q-line arithmetic assembly
 
 For
 
@@ -165,7 +212,7 @@ q=-3/c,
 
 The split and nonsplit changes of variable are defined over `F_p`, preserve irreducibility and give a bijection of constant parameters. The two arithmetic values `A=+1,-1` partition all `2(p-1)` cells.
 
-For generic `q!=2`, let `E_epsilon(q)` be the alternating hook `H_c^1` trace. Then
+For generic `q!=2`, let `E_\varepsilon(q)` be the alternating hook `H_c^1` trace. Then
 
 \[
 pI_\varepsilon(q)=p-E_\varepsilon(q).
@@ -181,13 +228,13 @@ S_0=\sum_{q\ne0,2}(E_+(q)+E_-(q)),
 S_\chi=\sum_{q\ne0,2}\chi(q)(E_+(q)-E_-(q)),
 \]
 
-and the two boundary counts
+and
 
 \[
 B_A=I_A(\infty)+I_{A\chi(2)}(2).
 \]
 
-Then the arithmetic count is exactly
+Then
 
 \[
 \boxed{
@@ -207,9 +254,9 @@ The parity-protected crown certificate is therefore
 
 for at least one sign `A`.
 
-The finite arithmetic assembly is complete. The remaining application theorem needs only the two global traces `S_0,S_chi` and the explicit boundary traces.
+The finite arithmetic assembly is complete. The application theorem now needs only the Fourier--Cayley identification of `S_0`, `S_\chi` and the explicit boundary traces.
 
-## 7. OPEN: analytic main theorem
+## 8. OPEN: analytic main theorem
 
 The estimate remains
 
@@ -227,37 +274,28 @@ or equivalently
 
 The virtual identity explains the exponential cancellation but does not prove the absolute constant governing the remaining difference between `U_p` and `U_{p-2}(-1)`.
 
-## 8. OPEN: exact application theorem
+## 9. OPEN: exact application theorem
 
-For `p>=11`, the sparse surface is cut out inside `X_p` by the `p-7` successive equations
+Construct the global Fourier--Cayley decomposition after alternating hook extraction and prove that:
 
-\[
-s_4,\ldots,s_{p-4}.
-\]
-
-The degree change from ambient middle cohomology `p-5` to surface middle cohomology `2` is also `p-7`. The required comparison is an iterated vanishing-cycle, or equivalent perverse complete-intersection, theorem along this sequence after alternating hook extraction.
-
-Weight compatibility forces the pure middle normalization
+1. its load-bearing pure constituent is
 
 \[
-\mathcal K_{ambient}
-\left(\frac{p-7}{2}\right)
+\mathcal K_{ambient}\left(\frac{p-7}{2}\right)
 =
-\mathcal R_p
-\left(\frac{p-1}{2}\right).
+\mathcal R_p\left(\frac{p-1}{2}\right);
 \]
 
-The comparison must identify the invariant and quadratic projectors producing `S_0` and `S_chi`. Its remaining cones must supply, with exact signs and twists:
+2. its invariant and quadratic arithmetic projectors give `S_0` and `S_\chi`;
+3. its complementary strata supply, with exact signs and twists:
+   - main, Tate and excluded Artin--Schreier terms;
+   - punctual/discriminant terms;
+   - `q=2`;
+   - `q=\infty`.
 
-1. main, Tate and excluded Artin--Schreier terms;
-2. punctual/nearby-cycle transport;
-3. discriminant fibres;
-4. `q=2`;
-5. `q=infinity`.
+After these traces are identified, the boxed q-line formula gives the final certificate without further geometric invention.
 
-After those traces are known, the q-line formula above gives the final certificate without further geometric invention.
-
-## 9. Verification status
+## 10. Verification status
 
 ### VERIFIED COMPUTATIONALLY
 
@@ -269,13 +307,13 @@ After those traces are known, the q-line formula above gives the final certifica
 - split/nonsplit normal-form cells and committed totals at `p=5,7,11`;
 - q-line projector reconstruction of `N_+,N_-` at `p=5,7,11`.
 
-These checks test structural consequences. The all-degree Weil identity, sparse-root identification and q-line formulas are symbolic proofs, not extrapolations from the checks.
+These checks test structural consequences. The all-degree Weil identity, sparse-root identification, Fourier delta identity and q-line formulas are symbolic proofs, not extrapolations from the checks.
 
-## 10. Stop rule
+## 11. Stop rule
 
 Continue only by:
 
 - proving the absolute Airy correlation estimate; or
-- constructing the iterated hook vanishing-cycle comparison and its explicit boundary complex.
+- isolating the Airy constituent and explicit boundary projectors inside the global Fourier--Cayley hook complex.
 
-Do not return to resonance coefficients, raw spectra, generic estimates, larger prime sweeps or surrogate invariants without a new formula directly targeting one of these statements.
+Do not return to resonance coefficients, local zero-section vanishing cycles, raw spectra, generic estimates, larger prime sweeps or surrogate invariants without a new formula directly targeting one of these statements.
