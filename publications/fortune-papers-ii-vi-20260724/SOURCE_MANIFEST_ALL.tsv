@@ -1,0 +1,22 @@
+paper	branch	path	role
+Paper II	archive/fortune-paper2-20260720	fortune-conjecture/paper2-prime-detection-20260720/manuscript/part_1_front_matter_to_reciprocal_frame.md	archived manuscript source
+Paper II	archive/fortune-paper2-20260720	fortune-conjecture/paper2-prime-detection-20260720/manuscript/part_2_moments_mobius_and_density_obstruction.md	archived manuscript source
+Paper II	archive/fortune-paper2-20260720	fortune-conjecture/paper2-prime-detection-20260720/manuscript/part_3_fourier_density_one_and_harmonic_scale.md	archived manuscript source
+Paper II	archive/fortune-paper2-20260720	fortune-conjecture/paper2-prime-detection-20260720/manuscript/part_4_methods_reproducibility_and_boundary.md	methods and reproducibility
+Paper II	gpt56/d1-gate-bridge-terminal-20260724	REVIEW_FORTUNE_RESEARCH.md	cold audit and revision findings
+Paper III	gpt56/d1-gate-bridge-terminal-20260724	PAPER2_ADDENDUM.md	dichotomy, moments, tails and transfer gap
+Paper III	gpt56/d1-gate-bridge-terminal-20260724	CONDITIONAL_HL_BLOCK.md	corrected conditional theorem
+Paper III	gpt56/d1-gate-bridge-terminal-20260724	addendum_checks.py	finite validation
+Paper IV	gpt56/d1-gate-bridge-terminal-20260724	RQM_PROOF.md	complete adjudicated proof
+Paper IV	gpt56/d1-gate-bridge-terminal-20260724	frontier/rqm_workbench/	independent assembly and closure audit
+Paper IV	gpt56/d1-gate-bridge-terminal-20260724	frontier/rqm_mc/	numerical diagnostic
+Paper V	gpt56/d1-gate-bridge-terminal-20260724	FRONTIER.md	general function-field programme
+Paper V	gpt56/d1-gate-bridge-terminal-20260724	D1_ATTACK.md	exact d=1 reductions and ledger
+Paper V	gpt56/d1-gate-bridge-terminal-20260724	frontier/d1_data/	finite certification data
+Paper V	gpt56/d1-gate-bridge-terminal-20260724	frontier/d1_workbench/	adversarial audit
+Paper VI	gpt56/d1-gate-bridge-terminal-20260724	frontier/d1_symp/CURRENT_STATUS_20260724.md	consolidated status
+Paper VI	gpt56/d1-gate-bridge-terminal-20260724	frontier/d1_symp/TERMINAL_RESEARCH_NOTE_DRAFT_20260724.md	research-note source
+Paper VI	gpt56/d1-gate-bridge-terminal-20260724	frontier/d1_symp/F3_PREREG8_INDEPENDENT_VERIFICATION_20260724.md	independent F3 audit
+Paper VI	gpt56/d1-gate-bridge-terminal-20260724	frontier/d1_symp/GATE0_PRIME_DEPENDENCY_AUDIT_20260724.md	dependency audit
+Paper VI	gpt56/d1-gate-bridge-terminal-20260724	frontier/d1_symp/BRIDGE_ASSESSMENT_20260724.md	application bridge audit
+Paper VI	gpt56/d1-gate-bridge-terminal-20260724	frontier/d1_symp/prereg8/	exact scripts and checkpoints
