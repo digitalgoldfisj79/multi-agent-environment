@@ -2,28 +2,25 @@
 
 **Date:** 2026-07-24  
 **Branch:** `gpt56/d1-main-twisted-descent-20260724`  
-**Scope:** function-field `d=1` Fortune sibling only.  
-**Status:** the sparse-root construction, hook extraction and Airy hook-multiplicity identity below are **PROVED**. The iterated vanishing-cycle comparison from the ambient complete intersection to the sparse surface remains **OPEN**.
+**Scope:** function-field `d=1` Fortune sibling; the nested-section theorem below assumes `p=5 mod 6` and `p>=11`. The already proved prime `p=5` is a separate exceptional base case.  
+**Status:** the sparse-root construction, irreducibility hook extraction and ambient hook-multiplicity identity below are **PROVED**. The iterated vanishing-cycle comparison from the ambient complete intersection to the sparse surface remains **OPEN**.
 
 ## 0. Result
 
-The source and target of the application theorem can now be placed in one explicit geometric diagram.
+For every half-theorem prime `p>=11`, the source and target of the application theorem lie in one explicit geometric diagram.
 
 - The Airy virtual module is the alternating hook multiplicity in the primitive cohomology of the smooth cyclic `(2,3)` complete intersection.
-- The irreducibility hook complex is the alternating hook-isotypic compactly supported cohomology of the sparse ordered-root surface inside that complete intersection.
-- The sparse surface is obtained by imposing the remaining power-sum equations
+- The sparse ordered-root surface is obtained inside that complete intersection by imposing
 
 \[
 s_4=s_5=\cdots=s_{p-4}=0.
 \]
 
-There are `p-7` additional equations. Since `p=5 mod 6`, this number is even. The only admissible geometric comparison is therefore an iterated vanishing-cycle or equivalent middle-dimensional comparison across this nested complete intersection, with the forced Tate twist
+- Its separable quotient carries the exact alternating hook local system whose trace is `p` times the irreducibility indicator.
 
-\[
-\frac{p-7}{2}.
-\]
+There are `p-7` additional equations. The required comparison is therefore an iterated vanishing-cycle, or equivalent perverse complete-intersection, theorem across this explicit nested section. Weight compatibility forces the Tate twist `(p-7)/2` on the pure middle term.
 
-The missing map is no longer undefined.
+At `p=5`, the sparse family only imposes `s_1=0`; it contains the Airy section rather than being cut out inside it. That prime is already proved directly and is excluded from the general nested-section statement.
 
 ## 1. Ambient ordered-root complete intersection
 
@@ -49,7 +46,7 @@ The ambient projective variety is
 X_p=\{s_2=s_3=0\}\subset\mathbf P(W).
 \]
 
-It is the smooth `(2,3)` complete intersection already used in the Airy--primitive bridge.
+It is the smooth `(2,3)` complete intersection used in the full Airy--primitive Weil bridge.
 
 ## 2. Successive power sums descend through translation
 
@@ -62,32 +59,24 @@ s_m(x+c)
 \binom mj c^{m-j}s_j(x).
 \]
 
-In characteristic `p`,
-
-\[
-s_0=p=0.
-\]
-
-Consequently, on the nested locus
+In characteristic `p`, `s_0=p=0`. Consequently, on
 
 \[
 s_1=s_2=\cdots=s_{m-1}=0,
 \]
 
-the function `s_m` is invariant under diagonal translation. Therefore each equation `s_m=0` descends successively to the quotient by `L`.
+the function `s_m` is invariant under diagonal translation. Each next equation therefore descends successively through the quotient by `L`.
 
-Define
+For `3<=m<=p-4`, define
 
 \[
 X_p^{(m)}
 =
 \{s_2=s_3=\cdots=s_m=0\}
-\subset\mathbf P(W),
-\qquad
-3\le m\le p-4.
+\subset\mathbf P(W).
 \]
 
-Thus
+For `p>=11`, this gives the nested sequence
 
 \[
 X_p=X_p^{(3)}
@@ -101,7 +90,7 @@ Put
 Y_p=X_p^{(p-4)}.
 \]
 
-It is cut out inside `X_p` by the `p-7` additional power sums `s_4,...,s_{p-4}` and has pure dimension two.
+The additional equations are `s_4,...,s_{p-4}`, exactly `p-7` equations.
 
 ## 3. Newton identities identify the sparse polynomial family
 
@@ -120,7 +109,7 @@ m e_m
 \sum_{j=1}^m(-1)^{j-1}e_{m-j}s_j.
 \]
 
-Every integer `1<=m<=p-4` is invertible in `kbar`. Induction gives
+Every `1<=m<=p-4` is invertible in the field. Induction gives
 
 \[
 s_1=\cdots=s_{p-4}=0
@@ -128,7 +117,7 @@ s_1=\cdots=s_{p-4}=0
 e_1=\cdots=e_{p-4}=0.
 \]
 
-Hence the ordered root tuples on the affine cone over `Y_p` are exactly the ordered roots of polynomials
+Hence the affine ordered-root locus above `Y_p` consists exactly of ordered roots of
 
 \[
 \boxed{
@@ -136,30 +125,30 @@ Z^p+A Z^3+B Z^2+C Z+D.
 }
 \]
 
-Diagonal translation of the roots corresponds to `Z -> Z+c`; in characteristic `p` it preserves this sparse family. Projective scaling of the root tuple gives the usual weighted scaling of `(A,B,C,D)`. Thus `Y_p/S_p`, with these translation and scaling identifications, is the geometric coefficient surface underlying the full degree-three-offset family.
+Conversely, every ordered root tuple of such a polynomial satisfies the displayed power-sum equations.
 
-## 4. Generic normal-form chart
+The coefficient map from ordered roots to `(A,B,C,D)` is finite. Before translation and projective scaling, the sparse coefficient locus has dimension four; quotienting the diagonal translation and root scaling directions gives pure dimension two. Thus `Y_p` is the two-dimensional ordered-root model of the degree-three-offset family for `p>=11`.
 
-On the open set `A C !=0`, translation uniquely removes `B`, since the new quadratic coefficient is `B+3Ac`. After depression, a scalar change of root variable normalizes the cubic and linear coefficients to `1` and `-3`. Over the base field this change has two quadratic forms according to whether the required square root exists.
+## 4. Generic normal-form chart and boundaries
+
+On `A C !=0`, translation uniquely removes `B`, because the new quadratic coefficient is `B+3Ac`. A scalar root change then normalizes the cubic and linear terms to `1` and `-3`. Over the base field the required square root produces the split and nonsplit quadratic readings.
 
 The resulting generic chart is
 
 \[
 P_{q,t}(Z)
-=qZ^p+Z^3-3Z-(q-2)t,
+=qZ^p+Z^3-3Z-(q-2)t.
 \]
 
-with the split and nonsplit quadratic readings recorded by the hook audit.
+The normalization omits precisely the boundary types already present in the hook ledger:
 
-The omitted loci are exactly the kinds of cells already present in the application ledger:
-
-- `C=0`, the `q=infinity` boundary;
+- `C=0`, corresponding to `q=infinity`;
 - the colliding-critical-value cell `q=2`;
 - the discriminant fibres `t=+1,-1`;
-- the loci where the depression or quadratic normalization degenerates;
+- degeneration of depression or scaling;
 - the arithmetic quadratic descent of the chosen square root.
 
-No new boundary family is introduced by the present construction.
+The chart identifies the existing fixed-`q` root covers with pullbacks of the generic separable ordered-root cover below. Recovering the raw coefficient counts also requires the finite orbit multiplicities and boundary cells already recorded in the ledger.
 
 ## 5. Separable ordered-root torsor
 
@@ -169,19 +158,19 @@ Let
 Y_p^{sep}\subset Y_p
 \]
 
-be the open locus where the coordinates `x_i` are pairwise distinct. The symmetric group `S_p` acts freely on this locus. Put
+be the open locus where the coordinates are pairwise distinct, and let
 
 \[
 \mathcal U_p=Y_p^{sep}/S_p.
 \]
 
-Then
+The action is free, so
 
 \[
 Y_p^{sep}\longrightarrow\mathcal U_p
 \]
 
-is the finite etale ordered-root `S_p`-torsor of the separable sparse polynomial family modulo translation and scaling.
+is the finite etale ordered-root `S_p`-torsor of the separable sparse family modulo translation and scaling.
 
 For
 
@@ -194,7 +183,7 @@ let `L_i` be the associated local system on `U_p`.
 
 ## 6. Exact irreducibility character
 
-Define the virtual hook representation
+Define
 
 \[
 \Lambda_p
@@ -202,7 +191,7 @@ Define the virtual hook representation
 \sum_{i=0}^{p-1}(-1)^iV_i.
 \]
 
-For a permutation `g in S_p`,
+For `g in S_p`,
 
 \[
 \operatorname{Tr}(g|\Lambda_p)
@@ -210,7 +199,7 @@ For a permutation `g in S_p`,
 \det(1-g|\mathrm{Std}).
 \]
 
-If `g` has more than one cycle, `Std` contains a nonzero fixed vector and the determinant is zero. If `g` is one `p`-cycle, its eigenvalues on `Std` are the nontrivial `p`-th roots of unity, so
+If `g` has more than one cycle, the determinant vanishes. If `g` is one `p`-cycle, the eigenvalues on `Std` are the nontrivial `p`-th roots of unity and
 
 \[
 \det(1-g|\mathrm{Std})
@@ -231,7 +220,7 @@ p,&g\text{ is a }p\text{-cycle},\\0,&\text{otherwise}.
 }
 \]
 
-At a finite-field point of `U_p`, Frobenius is a `p`-cycle on the roots exactly when the associated degree-`p` polynomial is irreducible. Hence the trace function of
+At a finite-field point of `U_p`, Frobenius is a `p`-cycle on the roots exactly when the degree-`p` polynomial is irreducible. Hence the virtual local system
 
 \[
 \mathcal L_{hook}
@@ -239,9 +228,9 @@ At a finite-field point of `U_p`, Frobenius is a `p`-cycle on the roots exactly 
 \sum_i(-1)^i\mathcal L_i
 \]
 
-is exactly `p` times the irreducibility indicator.
+has trace function exactly `p` times the irreducibility indicator.
 
-The global hook complex is
+Define the geometric sparse hook complex
 
 \[
 \boxed{
@@ -250,7 +239,7 @@ The global hook complex is
 }
 \]
 
-Equivalently, because `Y_p^{sep}->U_p` is an `S_p`-torsor,
+Equivalently,
 
 \[
 \boxed{
@@ -264,17 +253,17 @@ V_i,R\Gamma_c(Y_p^{sep},\mathbf Q_\ell)
 }
 \]
 
-The fixed-`q` hook pushforward followed by the `q`-line assembly is a Leray presentation of this single global complex on the generic normal-form chart. The separately computed `q=2`, `q=infinity` and discriminant cells are its compactification cones.
+On the generic normal-form chart, the fixed-`q` pushforward and subsequent `q`-line cohomology are a Leray presentation of the pullback of this object. The finite normalization factors and compactification cones must still be assembled to obtain the exact raw Fortune count.
 
-## 7. Airy primitive cohomology is also an alternating hook multiplicity
+## 7. Ambient Airy cohomology is an alternating hook multiplicity
 
 Let
 
 \[
-H_p=H^{p-5}_{prim}(X_p,\mathbf Q_\ell).
+H_p=H^{p-5}_{prim}(X_p,\mathbf Q_\ell)
 \]
 
-Define
+and define
 
 \[
 \mathcal K_{ambient}
@@ -283,13 +272,7 @@ Define
 \operatorname{Hom}_{S_p}(V_i,H_p).
 \]
 
-For an irreducible `S_p` representation indexed by a partition `lambda`, the Murnaghan--Nakayama rule gives
-
-\[
-\chi_\lambda(\text{a }p\text{-cycle})=0
-\]
-
-unless `lambda` is a hook `(p-i,1^i)`, in which case the value is `(-1)^i`. Therefore, for every Frobenius power,
+By the Murnaghan--Nakayama rule, an irreducible `S_p` character is zero on a `p`-cycle unless its partition is the hook `(p-i,1^i)`, in which case its value is `(-1)^i`. Therefore, for every Frobenius power,
 
 \[
 \operatorname{Tr}(F^r|\mathcal K_{ambient})
@@ -297,23 +280,23 @@ unless `lambda` is a hook `(p-i,1^i)`, in which case the value is `(-1)^i`. Ther
 \operatorname{Tr}(\sigma F^r|H_p).
 \]
 
-The cyclic two-block theorem gives the right side as
+The cyclic two-block theorem identifies the right side with
 
 \[
 \operatorname{Tr}(F^r|\mathcal D_p).
 \]
 
-Thus, in the semisimple virtual Weil category,
+Thus
 
 \[
 \boxed{
 \mathcal K_{ambient}^{ss}
 =
-\mathcal D_p^{ss}.
+\mathcal D_p^{ss}
 }
 \]
 
-Combining with the full Kummer bridge gives
+in the semisimple virtual Weil category. The full Kummer bridge then gives
 
 \[
 \boxed{
@@ -325,9 +308,9 @@ Combining with the full Kummer bridge gives
 
 This is the exact hook-theoretic form of the Airy--primitive identity.
 
-## 8. Forced normalization of the sparse comparison
+## 8. Forced normalization of a pure middle comparison
 
-The ambient primitive module has weight `p-5`. The load-bearing global cohomology of the sparse surface has middle weight two before boundary and mixed-weight corrections. Therefore the only Tate normalization compatible with the pure middle pieces is
+The ambient primitive module has weight `p-5`. The pure middle contribution of a smooth two-dimensional sparse-root stratum has weight two. A comparison of these pure middle terms therefore requires
 
 \[
 \boxed{
@@ -342,34 +325,26 @@ because
 (p-5)-2\left(\frac{p-7}{2}\right)=2.
 \]
 
-Equivalently, on the Airy side the forced normalization is
+Equivalently, using `R_p=K_ambient(-3)`, the Airy normalization is
 
 \[
 \boxed{
 \mathcal R_p
-\left(\frac{p-1}{2}\right),
+\left(\frac{p-1}{2}\right).
 }
 \]
 
-since
-
-\[
-\mathcal R_p
-=
-\mathcal K_{ambient}(-3).
-\]
-
-This determines the previously missing power of `p` in any valid application formula. It does not determine the boundary signs or prove the comparison.
+This determines the only possible Tate power for the pure middle comparison. It does not prove that the load-bearing hook constituent is pure, nor determine boundary signs.
 
 ## 9. Exact remaining application theorem
 
-There are `p-7` successive equations
+The number of successive equations
 
 \[
-s_4,\ldots,s_{p-4}.
+s_4,\ldots,s_{p-4}
 \]
 
-The required degree change from ambient middle degree `p-5` to surface middle degree `2` is also `p-7`. Ordinary restriction cannot make this change. The natural candidate is the iterated vanishing-cycle functor along this sequence, or an equivalent perverse complete-intersection construction.
+is `p-7`, equal to the required degree change from ambient middle degree `p-5` to surface middle degree `2`. Ordinary restriction does not produce that degree change. The natural main-branch object is the iterated vanishing-cycle, or equivalent perverse complete-intersection, construction along this sequence.
 
 Write schematically
 
@@ -379,11 +354,11 @@ Write schematically
 \phi_{s_{p-4}}\cdots\phi_{s_4}.
 \]
 
-The minimal application theorem is now:
+The minimal application theorem is:
 
-> After alternating hook extraction, the load-bearing pure part of the iterated vanishing-cycle complex `Phi_sp(Q_l)` is the ambient hook multiplicity `K_ambient((p-7)/2)`, and its remaining cones are exactly the main/Tate/Artin--Schreier, punctual, arithmetic-quadratic, `q=2`, `q=infinity` and discriminant boundary terms already listed in the hook ledger.
+> After alternating hook extraction, the load-bearing pure part of the iterated vanishing-cycle complex is `K_ambient((p-7)/2)`, while the remaining terms are the explicitly listed main/Tate/Artin--Schreier, punctual, arithmetic-quadratic, discriminant, `q=2` and `q=infinity` cones.
 
-In virtual notation, the desired identity has the form
+In virtual notation the desired identity has the form
 
 \[
 \boxed{
@@ -396,9 +371,7 @@ In virtual notation, the desired identity has the form
 }
 \]
 
-where `B_p` must be written explicitly from the known boundary cells.
-
-Equivalently,
+or equivalently
 
 \[
 \boxed{
@@ -411,21 +384,24 @@ Equivalently,
 }
 \]
 
+Here `B_p` must be written from the known boundary cells and normalization multiplicities.
+
 ## 10. What is closed and what remains
 
 ### PROVED
 
-1. The sparse ordered-root surface is the nested power-sum section `Y_p` of `X_p`.
+1. For `p>=11`, the sparse ordered-root surface is the nested power-sum section `Y_p` of `X_p`.
 2. Its separable quotient carries the exact alternating hook irreducibility local system.
-3. The post-pushforward hook construction is a Leray presentation of its global alternating hook cohomology.
+3. The generic fixed-`q` hook covers are pullbacks of this global ordered-root torsor.
 4. The Airy virtual module is the alternating hook multiplicity in ambient primitive cohomology.
-5. The Tate normalization of any pure middle comparison is forced.
+5. The Tate power of any pure middle comparison is forced.
 
 ### OPEN
 
 1. The iterated vanishing-cycle comparison.
-2. Identification of its boundary cones with exact signs and twists.
-3. The final positivity/certificate implication.
-4. Independently, the absolute Airy trace constant.
+2. The exact finite normalization from the quotient surface to the two arithmetic coefficient classes.
+3. Identification of all boundary cones with exact signs and twists.
+4. The final positivity/certificate implication.
+5. Independently, the absolute Airy trace constant.
 
-The application problem is now one specific nested-complete-intersection theorem, not a search for an unspecified source-to-target morphism.
+The application problem is now one specific nested-complete-intersection theorem plus a finite boundary ledger. It is no longer a search for an unspecified source-to-target object.
