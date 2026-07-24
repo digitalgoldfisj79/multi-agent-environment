@@ -14,6 +14,9 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      SOURCE_DATE_EPOCH: "1784900000"
+      TZ: UTC
     steps:
       - uses: actions/checkout@v4
         with:
@@ -33,7 +36,7 @@ jobs:
           P3='publications/fortune-papers-ii-vi-20260724/paper3_pair_sum/manuscript.md'
           test "$(sha256sum "$P2" | awk '{print $1}')" = '0b9d8c96b0185827085955084507f7c1099803a4a1de46c0db2e3b81f3cdbb7a'
           test "$(sha256sum "$P3" | awk '{print $1}')" = '7275ba02e7ae7a60d4bd3e524a2f1fd4d9fed639589b7d1ab7f08dd80f5fe675'
-          ! grep -nE 'TODO|TBD|PLACEHOLDER|\\setminus' "$P2" "$P3"
+          ! grep -nE 'TODO|TBD|PLACEHOLDER|\setminus' "$P2" "$P3"
 
       - name: Build PDF and editable DOCX files
         shell: bash
@@ -46,6 +49,10 @@ jobs:
           cp "$ROOT/paper2_revised/manuscript.md" "$DIST/paper2_release/manuscript.md"
           cp "$ROOT/paper2_revised/references.bib" "$DIST/paper2_release/references.bib"
           cp "$ROOT/paper3_pair_sum/manuscript.md" "$DIST/paper3_release/manuscript.md"
+          cat > "$DIST/xurl-header.tex" <<'EOF'
+          \usepackage{xurl}
+          \urlstyle{same}
+          EOF
 
           python3 - <<'PY'
           from pathlib import Path
@@ -75,9 +82,11 @@ jobs:
             -o "$DIST/paper3_release/Paper_III_Pair_Sum_Rigidity.docx"
 
           python3 - <<'PY'
+          from datetime import datetime, timezone
           from docx import Document
           from docx.shared import Mm, Pt
           from pathlib import Path
+          fixed=datetime(2026,7,24,12,0,0,tzinfo=timezone.utc)
           for path in Path('publications/fortune-papers-ii-vi-20260724/papers2-3-dist').glob('paper*_release/*.docx'):
               doc=Document(path)
               for sec in doc.sections:
@@ -85,6 +94,9 @@ jobs:
                   sec.top_margin=Mm(23); sec.bottom_margin=Mm(23)
                   sec.left_margin=Mm(24); sec.right_margin=Mm(24)
               doc.styles['Normal'].font.size=Pt(10.5)
+              doc.core_properties.created=fixed
+              doc.core_properties.modified=fixed
+              doc.core_properties.last_printed=None
               doc.save(path)
           PY
 
@@ -92,13 +104,15 @@ jobs:
           pandoc "$ROOT/paper2_revised/manuscript.md" \
             --from=markdown+tex_math_dollars+tex_math_single_backslash+raw_tex \
             --standalone --citeproc --bibliography="$ROOT/paper2_revised/references.bib" \
+            --include-in-header="$DIST/xurl-header.tex" \
             --pdf-engine=xelatex -V geometry:margin=24mm -V papersize:a4 \
             -o "$DIST/paper2_release/Paper_II_Prime_Detection_at_Primorial_Centres.pdf" \
             2>"$DIST/build_logs/paper2_xelatex.stderr"
           R2=$?
           pandoc "$ROOT/paper3_pair_sum/manuscript.md" \
             --from=markdown+tex_math_dollars+tex_math_single_backslash+raw_tex \
-            --standalone --pdf-engine=xelatex -V geometry:margin=24mm -V papersize:a4 \
+            --standalone --include-in-header="$DIST/xurl-header.tex" \
+            --pdf-engine=xelatex -V geometry:margin=24mm -V papersize:a4 \
             -o "$DIST/paper3_release/Paper_III_Pair_Sum_Rigidity.pdf" \
             2>"$DIST/build_logs/paper3_xelatex.stderr"
           R3=$?
@@ -119,6 +133,9 @@ jobs:
           for f in INDEPENDENT_CHECKS.md PAPER_II_FIDELITY_MATRIX.md PAPER_III_FIDELITY_MATRIX.md AUDIT_REPORT.md FRESH_HOSTILE_REVIEW_PAPER_II_QWEN3_14B_AWQ.md FRESH_HOSTILE_REVIEW_PAPER_III_QWEN3_14B_AWQ.md HOSTILE_REVIEW_DISPOSITION.md FIDELITY_AND_EXTERNAL_REVIEW_GATES.md; do
             git show "$REF:$BASE/$f" > "$DIST/combined_release/$f"
           done
+          if git cat-file -e "$REF:$BASE/VISUAL_QA_REPORT.md" 2>/dev/null; then
+            git show "$REF:$BASE/VISUAL_QA_REPORT.md" > "$DIST/combined_release/VISUAL_QA_REPORT.md"
+          fi
           cp "$DIST/combined_release/"*.md "$DIST/paper2_release/"
           cp "$DIST/combined_release/"*.md "$DIST/paper3_release/"
           {
@@ -127,6 +144,7 @@ jobs:
             echo '- Publication commit: `4866d113898a48f23feb9752576c350af97c6985`'
             echo '- Paper II source SHA-256: `0b9d8c96b0185827085955084507f7c1099803a4a1de46c0db2e3b81f3cdbb7a`'
             echo '- Paper III source SHA-256: `7275ba02e7ae7a60d4bd3e524a2f1fd4d9fed639589b7d1ab7f08dd80f5fe675`'
+            echo '- Long-URL wrapping: `xurl` enabled for both PDFs.'
             echo "- Pandoc: `$(pandoc --version | head -1)`"
             echo "- XeTeX: `$(xelatex --version | head -1)`"
             echo "- LibreOffice: `$(libreoffice --version)`"
@@ -190,7 +208,7 @@ jobs:
           cat > "$P2/TYPESETTING_NORMALISATIONS.md" <<'EOF'
           # Typesetting normalisations
 
-          Each PDF is generated directly from the exact reviewed Markdown with Pandoc and XeLaTeX. For editable DOCX/OMML output only, TeX `\tag{...}` commands become appended mathematical labels and `\Bigl`/`\Bigr` become `\left`/`\right`. These conversions preserve notation and equation numbering but not right-margin tag alignment in Word. No mathematical statement, hypothesis, exponent or symbol is changed.
+          Each PDF is generated directly from the exact reviewed Markdown with Pandoc, XeLaTeX, and the `xurl` package for safe wrapping of long URLs. For editable DOCX/OMML output only, TeX `\tag{...}` commands become appended mathematical labels and `\Bigl`/`\Bigr` become `\left`/`\right`. These conversions preserve notation and equation numbering but not right-margin tag alignment in Word. No mathematical statement, hypothesis, exponent or symbol is changed.
           EOF
           cp "$P2/TYPESETTING_NORMALISATIONS.md" "$P3/TYPESETTING_NORMALISATIONS.md"
 
@@ -207,7 +225,7 @@ jobs:
           cp -r "$DIST/paper2_release" "$DIST/combined_release/paper2_release"
           cp -r "$DIST/paper3_release" "$DIST/combined_release/paper3_release"
           (cd "$DIST/combined_release" && find . -type f ! -name SHA256SUMS -print0 | sort -z | xargs -0 sha256sum > SHA256SUMS)
-          (cd "$DIST" && zip -r -9 Paper_II_release.zip paper2_release >/dev/null && zip -r -9 Paper_III_release.zip paper3_release >/dev/null && zip -r -9 Papers_II_III_combined_release.zip combined_release >/dev/null)
+          (cd "$DIST" && zip -X -r -9 Paper_II_release.zip paper2_release >/dev/null && zip -X -r -9 Paper_III_release.zip paper3_release >/dev/null && zip -X -r -9 Papers_II_III_combined_release.zip combined_release >/dev/null)
           (cd "$DIST" && sha256sum Paper_II_release.zip Paper_III_release.zip Papers_II_III_combined_release.zip > RELEASE_ZIP_SHA256SUMS.txt)
 
       - name: Upload canonical release artifact
