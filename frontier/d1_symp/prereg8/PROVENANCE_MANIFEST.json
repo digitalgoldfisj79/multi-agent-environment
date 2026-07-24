@@ -1,0 +1,20 @@
+{
+  "f3_predictions.pkl": {
+    "sha256": "a92d8a5d8e7f291890ed84189f0aa9ebc3a9f61a819d3dd3ce4cc460e2e098f5",
+    "size_bytes": 252
+  },
+  "f3_verify.pkl": {
+    "sha256": "ee508fbfdb5aad214873df44e7dfdbb5eb0e7113a7778508c2a04096a5cae3ad",
+    "size_bytes": 329
+  },
+  "f3_verify.py": {
+    "sha256": "2f242c130ea273690fdeeb630870817997c3794b179e282c800a5991af7a13f6",
+    "size_bytes": 4985
+  },
+  "predict.py": {
+    "sha256": "8ef53588b566907bdbeb2a6aca2d07606ccf178220dc8c06d8618f0739bd0af2",
+    "size_bytes": 1624
+  },
+  "source_turn": "Claude continuation supplied by user on 2026-07-24",
+  "base_repository_commit": "f376dd54df2cabe0ca323d7609b9eaef02afdd4e"
+}
