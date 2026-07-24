@@ -1,0 +1,89 @@
+name: Reconstruct Paper I from Zenodo
+
+on:
+  pull_request:
+    branches:
+      - gpt56/d1-gate-bridge-terminal-20260724
+    paths:
+      - .github/workflows/reconstruct-paper1-from-zenodo.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  reconstruct:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: publication/fortune-papers-ii-vi-20260724
+          fetch-depth: 0
+
+      - name: Download and verify deposited archive
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/paper1
+          curl -L --fail --retry 3 \
+            'https://zenodo.org/api/records/21426465/files/consecutive_prime_partial_products_cold_review_reproducible.zip/content' \
+            -o /tmp/paper1/archive.zip
+          echo '651b17c92371b73eae5f224fdea78f85c6ea82bb94da6514d2b482a6b441a166  /tmp/paper1/archive.zip' | sha256sum -c -
+          unzip -q /tmp/paper1/archive.zip -d /tmp/paper1/unpacked
+          cd /tmp/paper1/unpacked/consecutive_prime_partial_products_cold_review_reproducible
+          python scripts/verify_manifest.py
+          test "$(sha256sum manuscript/consecutive_prime_partial_products_cold_review.md | awk '{print $1}')" = '12c990cd754d27a202ae956de74cb761514b3e65062b7710da3174932400aad1'
+
+      - name: Reconstruct hardened circulation source
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib
+
+          src = Path('/tmp/paper1/unpacked/consecutive_prime_partial_products_cold_review_reproducible/manuscript/consecutive_prime_partial_products_cold_review.md')
+          text = src.read_text(encoding='utf-8')
+          assert hashlib.sha256(text.encode()).hexdigest() == '12c990cd754d27a202ae956de74cb761514b3e65062b7710da3174932400aad1'
+
+          text = text.replace('author: "Anonymous manuscript for cold review"', 'author: "Bozzard, Edward Stewart Anthony (ORCID 0009-0002-4052-0994)"', 1)
+          text = text.replace('date: "18 July 2026"', 'date: "24 July 2026 - Original reproducibility archive DOI 10.5281/zenodo.21426465"', 1)
+
+          anchor = '''The numerical modulus panels reported in the supplement compare deterministic consecutive-prime prefixes with the exact independent-prefix laws. They are descriptive checks and are not used as proofs of HTE4 or of any asymptotic statement.\n\n'''
+          addition = '''## 11.1. Data and code availability\n\nThe complete reproducibility archive - including source code, validation scripts, production data, independently written verification code, manifests, and the cold-review manuscript - is deposited in Zenodo under DOI [10.5281/zenodo.21426465](https://doi.org/10.5281/zenodo.21426465). The archive can be verified from a fresh extraction using the bundled portable validation runner.\n\n## 11.2. AI-assistance disclosure\n\nThe research programme used large language models for structured literature triage, adversarial proof review, validator drafting, computational cross-checking, and editorial assembly. Every mathematical claim presented as a theorem is tied to an explicit proof or an independently reproducible exact computation. Open, conditional, computational, diagnostic, and negative results are labelled separately. The named author takes responsibility for the mathematical content, citations, code, and final presentation.\n\n'''
+          assert text.count(anchor) == 1
+          text = text.replace(anchor, anchor + addition, 1)
+
+          expected = '0e0f8a0d89209b8f4dd8c589526a89d57bd536f4889fdcd9c902a09b1a62f157'
+          actual = hashlib.sha256(text.encode()).hexdigest()
+          assert actual == expected, (actual, expected)
+
+          out = Path('publications/fortune-papers-ii-vi-20260724/paper1_collision_geometry/manuscript.md')
+          out.parent.mkdir(parents=True, exist_ok=True)
+          out.write_text(text, encoding='utf-8')
+          print('PAPER1_FINAL_SHA256', actual)
+          print('PAPER1_LINES', len(text.splitlines()))
+          PY
+
+      - name: Validate exact claim boundary
+        shell: bash
+        run: |
+          set -euo pipefail
+          F='publications/fortune-papers-ii-vi-20260724/paper1_collision_geometry/manuscript.md'
+          test "$(sha256sum "$F" | awk '{print $1}')" = '0e0f8a0d89209b8f4dd8c589526a89d57bd536f4889fdcd9c902a09b1a62f157'
+          test "$(wc -l < "$F")" -ge 1900
+          grep -Fq '## HTE4 (open)' "$F"
+          grep -Fq '## HWF4 (open)' "$F"
+          grep -Fq 'No implication for Fortune' "$F"
+          grep -Fq '## 11.2. AI-assistance disclosure' "$F"
+          ! grep -nE 'TODO|TBD|PLACEHOLDER|\\x00' "$F"
+
+      - name: Commit exact source
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add publications/fortune-papers-ii-vi-20260724/paper1_collision_geometry/manuscript.md
+          git commit -m 'Replace Paper I with exact Zenodo-derived reviewed source'
+          git push origin HEAD:publication/fortune-papers-ii-vi-20260724
