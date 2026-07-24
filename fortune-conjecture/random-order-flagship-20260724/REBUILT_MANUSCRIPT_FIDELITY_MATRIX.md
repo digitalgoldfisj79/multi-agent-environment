@@ -3,10 +3,11 @@
 ## Exact objects compared
 
 - Frozen proof source: `RQM_PROOF.md`, blob `53f63f662f5a9d6e750a592ba8bcba6cf4bc9095`, branch `gpt56/d1-gate-bridge-terminal-20260724`.
-- Rebuilt manuscript: `publications/fortune-papers-ii-vi-20260724/paper4_random_order/manuscript.md`, commit `8f719d79b40db7e69dd4716d70fc229a51c4451f`, blob `fb7df52c6007179c2e8f25729e03f8070aa84924`, branch `publication/fortune-papers-ii-vi-20260724`.
+- Rebuilt manuscript: `publications/fortune-papers-ii-vi-20260724/paper4_random_order/manuscript.md`, corrected commit `a082ec8d839e200fe568373ef9b81e2d8f0a72bd`, blob `cc7031d9731dee70432cacb821f1945efcfcd448`, SHA-256 `c7e337fd38a58cac2e98a2237eae6ad48681241f167504a546cb6fa978cbb7fa`, branch `publication/fortune-papers-ii-vi-20260724`.
 - Editorial rule: internal adjudication language, session-specific scratchpad paths, and non-load-bearing diagnostics were removed or moved to the verification section; no theorem hypothesis, exponent, multiplicity, or load-bearing proof step was intentionally weakened or strengthened.
+- Source-integrity scan: 28,748 characters, 992 lines, no control characters, no malformed `\frac`, and no unresolved editorial placeholders.
 
-This is an editorial claim-level comparison. It does not itself certify the mathematical correctness of the frozen proof. Fresh hostile review of the rebuilt exact blob remains a separate gate.
+This is an editorial claim-level comparison. It does not itself certify the mathematical correctness of the frozen proof. Fresh hostile review of the rebuilt exact SHA-256 remains a separate gate.
 
 ## Claim and dependency map
 
@@ -63,11 +64,16 @@ This is an editorial claim-level comparison. It does not itself certify the math
 5. Standard prime Gauss-sum facts were expanded into a short proof.
 6. The unused optional density-theorem strengthening was omitted.
 7. The random-permutation averaging was stated in the abstract and introduction as the substitute source of cancellation.
+8. A source-integrity scan found and corrected one missing LaTeX backslash before the review hash was frozen.
+
+## Independent ledger control
+
+`INDEPENDENT_LEDGER_RECONSTRUCTION.md` independently enumerates all ordered pair configurations for `N=3,...,10`, checks the exact `N`-versus-`1` multiplicity dichotomy, and verifies the rebuilt disjoint ledger at three micro thresholds. All panels passed. The independent exponent reconstruction again identifies `C2a`, `C2b`, and `C2d` as exactly binding.
 
 ## Current gate assessment
 
-- Frozen-source-to-manuscript dependency coverage: **editorially complete**.
-- Independent reconstruction of the binding ledger: **still required as a separate audit control**.
-- Fresh hostile review of the rebuilt exact blob: **running / not yet disposed of at creation of this matrix**.
+- Frozen-source-to-manuscript dependency coverage: **editorially complete for corrected SHA-256 `c7e337fd…cbb7fa`**.
+- Independent reconstruction of the binding ledger: **completed and passed**.
+- Fresh hostile review of the corrected exact SHA-256: **running; not yet disposed of**.
 - DOCX/PDF/ZIP generation and source-to-binary fidelity: **not yet performed**.
 - Human specialist circulation: **not cleared**.
