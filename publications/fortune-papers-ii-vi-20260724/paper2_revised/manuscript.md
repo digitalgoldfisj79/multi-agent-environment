@@ -275,14 +275,14 @@ The associated pair-space Frobenius energy is
 \tag{3.5}
 \]
 
-The earlier pair-lift and principal-cancellation reductions identify a bound
+The preceding pair-lift and principal-cancellation analysis supplies the following architectural input:
 
 \[
-\mathfrak F_X\ll MX^{o(1)}
+\mathfrak F_X\ll MX^{o(1)}.
 \tag{3.6}
 \]
 
-as a sufficient local input for the prime-detection architecture. The present paper analyses the exact content of (3.6). The distinction between this sufficient architecture and Theorem 2.4 should be kept explicit: the direct variance theorem is unconditional as an implication, while (3.6) is a harmonic sufficient target arising from the chosen reciprocal-frame reduction.
+Within that architecture, (3.6) is a sufficient local estimate. This manuscript does not reprove the source-to-frame transference step and does not assert that (3.6) is equivalent to Theorem 2.4. Theorem 2.4 is an unconditional implication from a direct von Mangoldt variance bound; (3.6) is the separate harmonic target whose exact internal structure is analysed below.
 
 ## Exact harmonic aggregation
 
@@ -295,7 +295,9 @@ m_a=\sum_{q\in\mathcal Q_X}p_{q,a},
 \tag{3.7}
 \]
 
-and
+If \(m_a=0\), then every \(p_{q,a}=0\) and hence \(\Psi_a\equiv0\). Such harmonics are omitted from every quotient by \(m_a\); all quotient sums below are therefore over \(a\ge1\) with \(m_a>0\).
+
+Define
 
 \[
 \mathcal E_a=\sum_{u\ne v}|\Psi_a(S_u-S_v)|^2.
@@ -317,7 +319,7 @@ Because the full row measure is symmetric,
 \boxed{
 \mathfrak F_X
 \le
-2\sum_{a\ge1}\frac{\mathcal E_a}{m_a}.
+2\sum_{\substack{a\ge1\\m_a>0}}\frac{\mathcal E_a}{m_a}.
 }
 \tag{3.10}
 \]
@@ -328,8 +330,8 @@ Because the full row measure is symmetric,
 \left|\sum_{a\ge1}\Psi_a(L)\right|^2
 \le
 \left(\sum_{a\ge1}m_a\right)
-\left(\sum_{a\ge1}\frac{|\Psi_a(L)|^2}{m_a}\right)
-=\frac12\sum_{a\ge1}\frac{|\Psi_a(L)|^2}{m_a}.
+\left(\sum_{\substack{a\ge1\\m_a>0}}\frac{|\Psi_a(L)|^2}{m_a}\right)
+=\frac12\sum_{\substack{a\ge1\\m_a>0}}\frac{|\Psi_a(L)|^2}{m_a}.
 \]
 
 Since \(|2\Re z|^2\le4|z|^2\), summing over \(u\ne v\) proves (3.10). \(\square\)
@@ -406,12 +408,23 @@ The customary absolute target \(|\mathcal R_a|\ll MX^{o(1)}\), and the stronger 
 More precisely, Proposition 3.1 shows that the smallest aggregate target in this frame is
 
 \[
-\sum_{a\ge1}\frac{\mathcal R_a}{m_a}
+\sum_{\substack{a\ge1\\m_a>0}}\frac{\mathcal R_a}{m_a}
 \ll MX^{o(1)},
 \tag{3.17}
 \]
 
-because the corresponding weighted sum of diagonal terms is \(o(M)\) for the critical prime shell. Uniform control of every small \(a\) is a convenient sufficient condition, not a necessary quantifier.
+because the corresponding weighted sum of diagonal terms is \(o(M)\) for the critical prime shell. Indeed,
+\[
+\frac{\kappa_{2,a}}{m_a}
+=\frac{\sum_q w_{q,a}^2}{D_X\sum_q w_{q,a}}
+\le \frac{\max_q w_{q,a}}{D_X},
+\]
+and Schwartz decay gives \(\sum_{a\ge1}\max_q w_{q,a}=O_\rho(1)\), whereas the prime number theorem gives \(D_X\asymp_\rho |\mathcal Q_X|\asymp H/\log H\). Thus
+\[
+M(M-1)\sum_{\substack{a\ge1\\m_a>0}}\frac{\kappa_{2,a}}{m_a}
+\ll_\rho \frac{M^2\log H}{H}=o(M),
+\]
+since \(M\asymp X^2/\log^2X\) and \(H\asymp X^2\). Uniform control of every small \(a\) is a convenient sufficient condition, not a necessary quantifier.
 
 # Exact Lebesgue moments of the pair-sum kernel
 
@@ -506,10 +519,10 @@ The residual is \(\mathcal R_a=\int K_X\,d\mu_{X,a}\). Since only an upper bound
 \mathcal R_a\le \int (K_X)_+\,d\mu_{X,a}.
 \]
 
-**Proposition 4.3 (one-sided level-set criterion).** Fix \(\varepsilon>0\). It is sufficient to prove, for dyadic
+**Proposition 4.3 (one-sided level-set criterion).** Let \(L(X)\ge1\) satisfy \(L(X)=X^{o(1)}\). It is sufficient to prove, for dyadic
 
 \[
-MX^\varepsilon\le \lambda\le M^2,
+ML(X)\le \lambda\le M^2,
 \]
 
 that
@@ -521,7 +534,7 @@ that
 \tag{4.5}
 \]
 
-**Proof.** Split \((K_X)_+\) at \(MX^\varepsilon\) and apply the dyadic layer-cake inequality. The low part contributes at most \(MX^\varepsilon\), and each dyadic high level contributes \(MX^{o(1)}\). The logarithmic number of levels is absorbed into \(X^{o(1)}\). \(\square\)
+**Proof.** Split \((K_X)_+\) at \(ML(X)\) and apply the dyadic layer-cake inequality. The low part contributes at most \(ML(X)=MX^{o(1)}\), and each dyadic high level contributes \(MX^{o(1)}\). The logarithmic number of levels is absorbed into \(X^{o(1)}\). \(\square\)
 
 This is strictly weaker than the squared-kernel estimate obtained from Chebyshev and Theorem 4.2. It allows an exceptional set of reciprocal pairs of total mass about \(1/M\) to carry the maximal kernel value.
 
@@ -728,7 +741,12 @@ for every \(j\), and
 H_2\!\left(a\left(\frac1n-\frac1m\right)\right)=M.
 \]
 
-The kernel equals \(M^2-M\). Moreover, \(m-n\) is even, so its singular series is bounded below by a positive absolute constant. The prime number theorem gives
+The kernel equals \(M^2-M\). Moreover, \(m-n\) is even. For the binary singular series,
+\[
+\mathfrak S(d)=2C_2\prod_{\substack{p\mid d\\p>2}}\frac{p-1}{p-2}
+\qquad(d\ \text{even}),
+\]
+so \(\mathfrak S(m-n)\ge2C_2>0\) uniformly. The prime number theorem gives
 
 \[
 |\mathcal A_X|\asymp\frac{X^2}{\log^2X}\asymp M,
@@ -941,7 +959,7 @@ Consequently,
 \tag{8.3}
 \]
 
-**Proof.** If \(F_n\) is composite, then there is no prime at any offset \(2\le m<p_{n+1}^2\). For every \(x\) in the integration range, \((x,x+h_n]\) lies inside that failed interval. Its von Mangoldt mass comes only from proper prime powers. As in Lemma 2.3, their total weight is \(O(\log P_n\log\log P_n)=o(h_n)\), uniformly in \(x\). Thus the absolute error is at least \(h_n/2\) throughout an interval of length \(y_n/4\), giving (8.2). Summing the resulting indicator inequality gives (8.3). \(\square\)
+**Proof.** If \(F_n\) is composite, then there is no prime at any offset \(2\le m<p_{n+1}^2\). For every \(x\) in the integration range, \((x,x+h_n]\) lies inside that failed interval. Its von Mangoldt mass comes only from proper prime powers. The proof of Lemma 2.3 is translation-uniform throughout this range: each exponent \(k\ge2\) contributes at most one \(k\)-th power because consecutive \(k\)-th powers near \(P_n\) are separated by more than \(h_n\), and its weight is \(O(\log P_n/k)\). Summing over \(k\ll\log P_n\) gives \(O(\log P_n\log\log P_n)=o(h_n)\), uniformly in \(x\). Thus the absolute error is at least \(h_n/2\) throughout an interval of length \(y_n/4\), giving (8.2). Summing the resulting indicator inequality gives (8.3). \(\square\)
 
 A bound
 
