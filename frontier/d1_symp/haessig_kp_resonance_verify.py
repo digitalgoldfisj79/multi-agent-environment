@@ -74,6 +74,34 @@ def rank_mod_p(matrix: list[list[int]], p: int) -> int:
     return rank
 
 
+def determinant_mod_p(matrix: list[list[int]], p: int) -> int:
+    """Exact determinant modulo p by fraction-free Gaussian elimination."""
+    a = [[entry % p for entry in row] for row in matrix]
+    n = len(a)
+    determinant = 1
+
+    for col in range(n):
+        pivot = next((r for r in range(col, n) if a[r][col]), None)
+        if pivot is None:
+            return 0
+        if pivot != col:
+            a[col], a[pivot] = a[pivot], a[col]
+            determinant = -determinant
+
+        pivot_value = a[col][col]
+        determinant = (determinant * pivot_value) % p
+        inverse = pow(pivot_value, -1, p)
+
+        for row in range(col + 1, n):
+            if not a[row][col]:
+                continue
+            factor = a[row][col] * inverse % p
+            for j in range(col, n):
+                a[row][j] = (a[row][j] - factor * a[col][j]) % p
+
+    return determinant % p
+
+
 def p_valuation(n: int, p: int) -> int:
     if n == 0:
         raise ValueError("p-adic valuation of zero is not used here")
@@ -121,6 +149,9 @@ def verify_prime(p: int) -> None:
     matrix = coefficient_matrix(p)
     rank = rank_mod_p(matrix, p)
     assert rank == p - 1, (p, rank)
+
+    internal_minor = [row[1:p] for row in matrix[1:p]]
+    assert determinant_mod_p(internal_minor, p) == p - 1, p
 
     determinant = determinant_abs_formula(p)
     assert p_valuation(determinant, p) == 2, p
