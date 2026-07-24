@@ -2,9 +2,10 @@
 
 ## Reviewed manuscript
 
+- Publication commit: `00d2a67d9963848e35596ea153917e73c2dfeb17`
 - Path: `publications/fortune-papers-ii-vi-20260724/paper3_pair_sum/manuscript.md`
-- Git blob: `bf9f31087836930f25883ed42ca1bf1f309dab34`
-- SHA-256: `8b9aeac471774f86080cc5e444179d9533bf8f492dedc99a4647f87987b6bae1`
+- Git blob: `05463cd60819598045ad41658d6bfd491e572691`
+- SHA-256: `1753e5991ccab15142d9bd076554c283a69bfa3bd8aa9448b2edf62f50c4c7cb`
 
 ## Frozen basis
 
@@ -31,15 +32,17 @@ The concise standalone paper remains the main narrative. The complete frozen pro
 | Truncated singular-series local factors | Reproduced in Appendix B |
 | Exact divisor identity | Reproduced with proof |
 | Uniform `|T_j(H)| <= 2H log X` input | Reproduced with proof |
-| Dickman constant | Explicitly non-load-bearing sketch |
+| Dickman constant | Explicitly non-load-bearing sketch with standard references |
 | Infinite Euler-product tail beyond the truncation | Unsupported claim removed; not used |
 | Block-averaged first and pair hypotheses | Reproduced as assumptions |
 | Conditional variance assembly | Reproduced with proof |
 | Earlier pointwise Hardy--Littlewood formulation | Excluded as vacuously strong |
 
-## Final source repair
+## Final source repairs
 
 The first assembled manuscript retained an orphan sentence claiming that the omitted infinite Euler-product tail was `1+O(1/X)` and citing a later lemma that had not been included. The conditional theorem uses only the finite truncated singular series, so the unsupported and unused claim was removed rather than reconstructed speculatively. A following non-load-bearing heuristic paragraph was also removed. No proved theorem or hypothesis changed.
+
+The final immutable object adds the author's ORCID and a short bibliography for the companion Paper II, Hardy--Littlewood pair heuristics, de Bruijn smooth-number theory and Tenenbaum's reference text. Those additions are editorial only.
 
 ## Dependency on Paper II
 
