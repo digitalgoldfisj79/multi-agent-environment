@@ -53,6 +53,13 @@ jobs:
           \usepackage{xurl}
           \urlstyle{same}
           EOF
+          cat > "$DIST/url-wrap.lua" <<'EOF'
+          function Code(el)
+            if string.match(el.text, '^https?://') then
+              return pandoc.RawInline('latex', '\\url{' .. el.text .. '}')
+            end
+          end
+          EOF
 
           python3 - <<'PY'
           from pathlib import Path
@@ -104,14 +111,14 @@ jobs:
           pandoc "$ROOT/paper2_revised/manuscript.md" \
             --from=markdown+tex_math_dollars+tex_math_single_backslash+raw_tex \
             --standalone --citeproc --bibliography="$ROOT/paper2_revised/references.bib" \
-            --include-in-header="$DIST/xurl-header.tex" \
+            --lua-filter="$DIST/url-wrap.lua" --include-in-header="$DIST/xurl-header.tex" \
             --pdf-engine=xelatex -V geometry:margin=24mm -V papersize:a4 \
             -o "$DIST/paper2_release/Paper_II_Prime_Detection_at_Primorial_Centres.pdf" \
             2>"$DIST/build_logs/paper2_xelatex.stderr"
           R2=$?
           pandoc "$ROOT/paper3_pair_sum/manuscript.md" \
             --from=markdown+tex_math_dollars+tex_math_single_backslash+raw_tex \
-            --standalone --include-in-header="$DIST/xurl-header.tex" \
+            --standalone --lua-filter="$DIST/url-wrap.lua" --include-in-header="$DIST/xurl-header.tex" \
             --pdf-engine=xelatex -V geometry:margin=24mm -V papersize:a4 \
             -o "$DIST/paper3_release/Paper_III_Pair_Sum_Rigidity.pdf" \
             2>"$DIST/build_logs/paper3_xelatex.stderr"
@@ -144,7 +151,7 @@ jobs:
             echo '- Publication commit: `4866d113898a48f23feb9752576c350af97c6985`'
             echo '- Paper II source SHA-256: `0b9d8c96b0185827085955084507f7c1099803a4a1de46c0db2e3b81f3cdbb7a`'
             echo '- Paper III source SHA-256: `7275ba02e7ae7a60d4bd3e524a2f1fd4d9fed639589b7d1ab7f08dd80f5fe675`'
-            echo '- Long-URL wrapping: `xurl` enabled for both PDFs.'
+            echo '- Long-URL wrapping: inline-code URLs are converted to `\\url{...}` for PDF typesetting; `xurl` is enabled.'
             echo "- Pandoc: `$(pandoc --version | head -1)`"
             echo "- XeTeX: `$(xelatex --version | head -1)`"
             echo "- LibreOffice: `$(libreoffice --version)`"
@@ -208,7 +215,7 @@ jobs:
           cat > "$P2/TYPESETTING_NORMALISATIONS.md" <<'EOF'
           # Typesetting normalisations
 
-          Each PDF is generated directly from the exact reviewed Markdown with Pandoc, XeLaTeX, and the `xurl` package for safe wrapping of long URLs. For editable DOCX/OMML output only, TeX `\tag{...}` commands become appended mathematical labels and `\Bigl`/`\Bigr` become `\left`/`\right`. These conversions preserve notation and equation numbering but not right-margin tag alignment in Word. No mathematical statement, hypothesis, exponent or symbol is changed.
+          Each PDF is generated directly from the exact reviewed Markdown with Pandoc and XeLaTeX. For PDF layout only, inline-code strings beginning with `http://` or `https://` are converted to `\url{...}` and typeset with `xurl`, preventing right-margin clipping without changing their visible content. For editable DOCX/OMML output only, TeX `\tag{...}` commands become appended mathematical labels and `\Bigl`/`\Bigr` become `\left`/`\right`. These conversions preserve notation and equation numbering but not right-margin tag alignment in Word. No mathematical statement, hypothesis, exponent or symbol is changed.
           EOF
           cp "$P2/TYPESETTING_NORMALISATIONS.md" "$P3/TYPESETTING_NORMALISATIONS.md"
 
