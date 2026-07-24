@@ -1,46 +1,69 @@
 # Quality assurance and package integrity
 
-## Canonical branch artifacts
+## Canonical source and result artifacts
 
-The canonical clean-room result artifact in this branch is:
+The canonical reviewed manuscript source is:
 
-- `independent_audit_results.json`
+- path: `publications/fortune-papers-ii-vi-20260724/paper4_random_order/manuscript.md`;
+- Git blob: `1a3d39d974bfa37d31c100f536dcaa1b74f6d688`;
+- SHA-256: `548460849cc9c6125fbe59d0a4f2f37ec680761174c25556b5e781a8ae9372f1`.
 
-No file named `independent_audit_results.txt` is currently canonical. A generated package must not reference that filename unless a text export is generated and included in the same archive.
+The canonical clean-room result artifact is:
+
+- `independent_audit_results.json`.
+
+No file named `independent_audit_results.txt` is canonical, and the final release package does not reference or require one.
 
 ## Scope of the result artifact
 
-`independent_audit_results.json` records finite exact or numerical checks of selected identities and exponent calculations. Its `PASS` status means that those declared checks completed successfully. It does not certify:
+`independent_audit_results.json` records finite exact or numerical checks of selected identities and exponent calculations. Its `PASS` status means that those declared checks completed successfully. It does not by itself certify manuscript completeness, fidelity, ledger exhaustiveness, novelty, asymptotic correctness, publication suitability or human peer review. Those questions are controlled separately by the fidelity matrix, independent ledger reconstruction, hostile review and compiled-artifact QA.
 
-- the completeness of the circulation manuscript;
-- fidelity to frozen proof blobs;
-- exhaustiveness of the configuration classification;
-- novelty;
-- asymptotic correctness beyond the proved reductions; or
-- suitability for journal submission.
+## Canonical compiled artifacts
 
-## Required pre-circulation QA
+The reproducible GitHub build is:
 
-Before any package is sent externally:
+- workflow run: `30085400790`;
+- publication commit: `af9350f06e41e94d79f583b2e8fca45b55b92852`;
+- artifact ID: `8593522378`;
+- artifact digest: `sha256:1875d3965d611cffa0a70afc223caf0e3119d93f79183f3f7a9be214f3486a51`.
 
-1. close the fidelity and fresh-review gates in `FIDELITY_AND_EXTERNAL_REVIEW_GATES.md`;
-2. regenerate the manuscript PDF and DOCX from the cleared source;
-3. extract text from both binaries and compare all theorem statements, hypotheses, displayed formulae, section ordering, and caveats with the cleared source;
-4. regenerate the archive manifest from the actual files included;
-5. verify that every filename referenced by `README`, review memo, metadata, and QA documents exists exactly once in the archive;
-6. compute SHA-256 hashes for the source, PDF, DOCX, review memo, validation code, result JSON, and ZIP;
-7. run the validator from a clean environment against the exact archived inputs; and
-8. record the validator command, dependency versions, exit status, and unedited output.
+All workflow steps passed.
 
-## Gate status at this revision
+Canonical file hashes:
 
-- Frozen-source proof audit: substantive but authored within the same LLM-assisted programme.
+- PDF: `dc5ff454826f605d5fd4db4ba02f6a35df1013bde1cfe9a9d9e26a6c8fc6f1a3`;
+- DOCX: `3ecac48465573b9305cafb119779a5e17c65b2bd2fc05f7d376ec55895b3b61b`;
+- internal release ZIP: `19c790caa196cf6374f62f90e4d9da4ea2dfc559a4894fd8e7dfdb4a62b5ec43`.
+
+The release archive contains the exact source, PDF, DOCX, audit records, raw hostile review, issue disposition, independent ledger reconstruction, result JSON, extracted text, typesetting-normalisation record, build manifest and `SHA256SUMS`. All listed hashes verified after download.
+
+## Completed QA
+
+1. Frozen-source fidelity matrix — passed.
+2. Independent ledger reconstruction — passed.
+3. Fresh manuscript-only hostile review and issue disposition — passed.
+4. Source SHA-256 enforcement in clean build environment — passed.
+5. DOCX and PDF compilation — passed.
+6. Normalised text extraction checks for theorem, matching lemma, disclosure and document scale — passed.
+7. PDF preflight — openable, unencrypted, text-native, 12 pages, no XFA and no warnings.
+8. DOCX accessibility audit — zero high-, medium- or low-severity findings.
+9. DOCX heading hierarchy — 12 Heading 1 and 18 Heading 2 paragraphs, without a skipped level.
+10. Page-by-page visual inspection — all 12 PDF pages and 15 DOCX pages passed; no raw TeX, clipping, overlap, missing glyphs, malformed equations, blank contents field or duplicated section numbering.
+11. Per-file and ZIP checksum verification — passed.
+
+The final PDF is generated directly from the exact reviewed source using XeLaTeX. The editable DOCX uses two documented notation-only rendering normalisations required by Pandoc's OMML writer; these do not change mathematical content or numbering. See `TYPESETTING_NORMALISATIONS.md` in the release package.
+
+## Gate status
+
+- Frozen-source proof audit: passed at internal technical level.
 - Finite clean-room checks: passed for the declared cases.
-- Manuscript fidelity: open.
-- Fresh manuscript-only hostile review: open until a successful archived run exists.
+- Manuscript fidelity: passed.
+- Independent ledger reconstruction: passed.
+- Fresh manuscript-only hostile review: passed after issue disposition.
+- Compiled-artifact integrity and visual QA: passed.
 - Human specialist review: not started.
-- Journal submission or final Zenodo release: not cleared.
+- Journal submission or final Zenodo release: not yet cleared by human review.
 
 ## Failure rule
 
-Any missing referenced file, hash mismatch, binary/source discrepancy, stale gate statement, or unarchived manuscript edit reopens package integrity and blocks circulation.
+Any source edit, missing referenced file, hash mismatch, binary/source discrepancy, stale gate statement or change to the compilation pipeline reopens package integrity. A changed manuscript must receive a new SHA-256, fidelity update, hostile-review disposition and compiled-artifact QA before circulation.
