@@ -1,0 +1,92 @@
+{
+  "paper2_revised": {
+    "metadata": {
+      "title": "Prime Detection at Primorial Centres",
+      "upload_type": "publication",
+      "publication_type": "preprint",
+      "description": "Revised foundational reciprocal-frame manuscript. Draft package with source, PDF, DOCX, claim ledger, and reproducibility manifest.",
+      "creators": [{"name": "Bozzard, Edward Stewart Anthony", "orcid": "0009-0002-4052-0994"}],
+      "publication_date": "2026-07-24",
+      "version": "2.0.0-draft",
+      "license": "CC-BY-4.0",
+      "keywords": ["Fortune's conjecture", "number theory", "prime detection", "reproducible research"],
+      "related_identifiers": [
+        {"identifier": "10.5281/zenodo.21426465", "relation": "isSupplementTo", "resource_type": "publication-article"},
+        {"identifier": "10.5281/zenodo.21457113", "relation": "isNewVersionOf", "resource_type": "publication-article"}
+      ],
+      "notes": "DOI for this version should be reserved in Zenodo before the final PDF is frozen."
+    }
+  },
+  "paper3_pair_sum": {
+    "metadata": {
+      "title": "Pair-Sum Rigidity, Exceptional Sets, and Conditional Prime Detection at Primorial Centres",
+      "upload_type": "publication",
+      "publication_type": "preprint",
+      "description": "Unconditional pair-sum kernel theory and conditional boundary. Draft package with source, PDF, DOCX, claim ledger, and reproducibility manifest.",
+      "creators": [{"name": "Bozzard, Edward Stewart Anthony", "orcid": "0009-0002-4052-0994"}],
+      "publication_date": "2026-07-24",
+      "version": "0.1.0",
+      "license": "CC-BY-4.0",
+      "keywords": ["Fortune's conjecture", "number theory", "prime detection", "reproducible research"],
+      "related_identifiers": [
+        {"identifier": "10.5281/zenodo.21426465", "relation": "isSupplementTo", "resource_type": "publication-article"},
+        {"identifier": "10.5281/zenodo.21457113", "relation": "references", "resource_type": "publication-article"}
+      ],
+      "notes": "DOI for this version should be reserved in Zenodo before the final PDF is frozen."
+    }
+  },
+  "paper4_random_order": {
+    "metadata": {
+      "title": "Prime Detection Along Random Primorial-Product Paths",
+      "upload_type": "publication",
+      "publication_type": "preprint",
+      "description": "Complete random-order model theorem. Draft package with source, PDF, DOCX, claim ledger, and reproducibility manifest.",
+      "creators": [{"name": "Bozzard, Edward Stewart Anthony", "orcid": "0009-0002-4052-0994"}],
+      "publication_date": "2026-07-24",
+      "version": "0.1.0",
+      "license": "CC-BY-4.0",
+      "keywords": ["Fortune's conjecture", "number theory", "prime detection", "reproducible research"],
+      "related_identifiers": [
+        {"identifier": "10.5281/zenodo.21426465", "relation": "isSupplementTo", "resource_type": "publication-article"},
+        {"identifier": "10.5281/zenodo.21457113", "relation": "references", "resource_type": "publication-article"}
+      ],
+      "notes": "DOI for this version should be reserved in Zenodo before the final PDF is frozen."
+    }
+  },
+  "paper5_function_fields": {
+    "metadata": {
+      "title": "Fortunate Polynomials over Finite Fields",
+      "upload_type": "publication",
+      "publication_type": "preprint",
+      "description": "General function-field framework and exact d=1 reductions. Draft package with source, PDF, DOCX, claim ledger, and reproducibility manifest.",
+      "creators": [{"name": "Bozzard, Edward Stewart Anthony", "orcid": "0009-0002-4052-0994"}],
+      "publication_date": "2026-07-24",
+      "version": "0.1.0",
+      "license": "CC-BY-4.0",
+      "keywords": ["Fortune's conjecture", "number theory", "prime detection", "reproducible research"],
+      "related_identifiers": [
+        {"identifier": "10.5281/zenodo.21426465", "relation": "isSupplementTo", "resource_type": "publication-article"},
+        {"identifier": "10.5281/zenodo.21457113", "relation": "references", "resource_type": "publication-article"}
+      ],
+      "notes": "DOI for this version should be reserved in Zenodo before the final PDF is frozen."
+    }
+  },
+  "paper6_airy": {
+    "metadata": {
+      "title": "Characteristic-Boundary Cubic Airy Moments and a Function-Field Fortune Problem",
+      "upload_type": "publication",
+      "publication_type": "preprint",
+      "description": "Specialist Airy/Dwork boundary manuscript. Draft package with source, PDF, DOCX, claim ledger, and reproducibility manifest.",
+      "creators": [{"name": "Bozzard, Edward Stewart Anthony", "orcid": "0009-0002-4052-0994"}],
+      "publication_date": "2026-07-24",
+      "version": "0.1.0",
+      "license": "CC-BY-4.0",
+      "keywords": ["Fortune's conjecture", "number theory", "prime detection", "reproducible research"],
+      "related_identifiers": [
+        {"identifier": "10.5281/zenodo.21426465", "relation": "isSupplementTo", "resource_type": "publication-article"},
+        {"identifier": "10.5281/zenodo.21457113", "relation": "references", "resource_type": "publication-article"}
+      ],
+      "notes": "DOI for this version should be reserved in Zenodo before the final PDF is frozen."
+    }
+  }
+}
