@@ -1,42 +1,52 @@
-# Random-order flagship audit package
+# Random-order reciprocal-energy flagship audit
 
-This directory records an adversarial audit of the combined random-order integer sequel. The audit edited and reconstructed manuscript material; it is therefore not independent authorship validation and must not be treated as such.
+## Current status
 
-## Current gate
+**INTERNAL TECHNICAL PASS — HUMAN SPECIALIST REVIEW OPEN.**
 
-**Internal hold.** The frozen RQM proof source and the selected finite checks remain substantive, but the exact circulation manuscript has not yet passed:
+Paper IV has been rebuilt from the frozen proof source as a self-contained theorem paper. Frozen-source fidelity, independent ledger reconstruction, fresh manuscript-only hostile review, compiled-artifact integrity, accessibility, PDF preflight, checksum verification and page-by-page visual QA have passed.
 
-1. a frozen-source-to-manuscript fidelity audit; and
-2. a fresh, context-free hostile review of the manuscript alone.
+This is not human peer review, journal acceptance or a proof of Fortune's conjecture. The result remains a random-permutation model theorem and does not cover the unique increasing primorial order.
 
-Do not send the manuscript to a specialist, submit it to a journal, or publish it as a final Zenodo preprint until both gates are closed.
+## Canonical reviewed source
 
-## Core result under audit
+- Source path: `publications/fortune-papers-ii-vi-20260724/paper4_random_order/manuscript.md`.
+- Git blob: `1a3d39d974bfa37d31c100f536dcaa1b74f6d688`.
+- SHA-256: `548460849cc9c6125fbe59d0a4f2f37ec680761174c25556b5e781a8ae9372f1`.
 
-For a uniformly random ordering of the primes in `[X,2X)`, form the nested prime-prefix products and all unordered pair sums. The frozen source claims that, for the reciprocal Fourier frame with prime moduli of size `X^2`,
+## Canonical compiled artifacts
 
-`E_sigma E_a <= C M (log X)^9`
+- GitHub Actions workflow run: `30085400790`.
+- Publication commit: `af9350f06e41e94d79f583b2e8fca45b55b92852`.
+- Artifact ID: `8593522378`.
+- Artifact digest: `sha256:1875d3965d611cffa0a70afc223caf0e3119d93f79183f3f7a9be214f3486a51`.
+- PDF SHA-256: `dc5ff454826f605d5fd4db4ba02f6a35df1013bde1cfe9a9d9e26a6c8fc6f1a3`.
+- DOCX SHA-256: `3ecac48465573b9305cafb119779a5e17c65b2bd2fc05f7d376ec55895b3b61b`.
+- Internal release ZIP SHA-256: `19c790caa196cf6374f62f90e4d9da4ea2dfc559a4894fd8e7dfdb4a62b5ec43`.
 
-uniformly in the natural harmonic range, together with weighted aggregate and Frobenius-energy bounds, under a quantitative frame-admissibility hypothesis.
+## Audit records
 
-The result uses no GRH, but its cancellation comes from expectation over a uniformly random ordering. It does not cover the increasing primorial order and does not prove Fortune's conjecture.
+- `AUDIT_REPORT.md` — current decision and complete audit summary.
+- `REBUILT_MANUSCRIPT_FIDELITY_MATRIX.md` — claim-level source-to-manuscript mapping.
+- `INDEPENDENT_LEDGER_RECONSTRUCTION.md` — independent finite reconstruction of configuration multiplicities and ledger exhaustiveness.
+- `FRESH_HOSTILE_REVIEW_FINAL_QWEN3_14B_AWQ.md` — unedited final manuscript-only model review.
+- `FINAL_HOSTILE_REVIEW_DISPOSITION.md` — line-by-line disposition of the model's objections.
+- `COMPILED_ARTIFACT_QA.md` — PDF, DOCX and archive hashes; extraction, preflight, accessibility and visual-inspection results.
+- `FIDELITY_AND_EXTERNAL_REVIEW_GATES.md` — formal gate register.
+- `QUALITY_ASSURANCE.md` — package-integrity rules and canonical artifact record.
+- `independent_audit_results.json` — canonical clean-room finite-check result file.
 
-## Files
+There is no canonical `independent_audit_results.txt`. Any package or memo referencing that filename is stale.
 
-- `AUDIT_REPORT.md`: revised correctness gate, scope of the clean-room checks, and no-cushion warning.
-- `FIDELITY_AND_EXTERNAL_REVIEW_GATES.md`: mandatory internal gates and initial source/manuscript findings.
-- `FRESH_HOSTILE_REVIEW_PROMPT.md`: fixed prompt for a manuscript-only review in a clean session.
-- `NOVELTY_AUDIT.md`: theorem-specific literature comparison.
-- `PROOF_DEPENDENCY_GRAPH.md`: load-bearing proof structure.
-- `EXTERNAL_REVIEW_MEMO.md`: compact specialist brief with provenance disclosure.
-- `CLAIM_STATUS.md`: source-versus-manuscript epistemic ledger.
-- `QUALITY_ASSURANCE.md`: canonical package-integrity and verification-artifact record.
-- `independent_audit_results.json`: clean-room finite results.
+## Principal mathematical risk
 
-## Package integrity
+The binding classes `C2a`, `C2b` and `C2d` close at exactly `M(log X)^9` without a positive power-of-`X` cushion. External human review should therefore concentrate on the contour/coordinate/matching/ledger chain, including configuration exhaustiveness, orphan handling and the three binding multiplicities.
 
-The canonical machine-readable result file is `independent_audit_results.json`. Any generated archive that references `independent_audit_results.txt` must either include that text export or remove the reference. Binary PDF/DOCX/ZIP artifacts are not considered cleared merely because the repository Markdown has been corrected; their hashes and contents must be revalidated after regeneration.
+## External-review sequence
 
-## Consultation sequence
+Paper IV should lead the human consultation sequence. Send it first to:
 
-RQM should lead the external consultation sequence after its internal gates close. The Airy package should be held back from the same small specialist pool until the RQM consultation has been completed or clearly routed elsewhere.
+1. an analytic/probabilistic number theorist; and
+2. a character-sum specialist.
+
+The Airy package requires a different, narrower specialist pool and should be sent later or separately. LLM assistance must be disclosed before review begins.
