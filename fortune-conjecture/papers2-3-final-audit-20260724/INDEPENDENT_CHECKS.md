@@ -2,11 +2,11 @@
 
 ## Exact reviewed objects
 
-- Publication commit: `00d2a67d9963848e35596ea153917e73c2dfeb17`
-- Paper II Git blob: `3ccd6a9b5487b9b97e79d366fcb5e6d581a6569e`
-- Paper II SHA-256: `632bb8f4fd89a51020069327a11fe57f8ae882e57bd4ae1a9ed0829030c32ce1`
-- Paper III Git blob: `05463cd60819598045ad41658d6bfd491e572691`
-- Paper III SHA-256: `1753e5991ccab15142d9bd076554c283a69bfa3bd8aa9448b2edf62f50c4c7cb`
+- Publication commit: `4866d113898a48f23feb9752576c350af97c6985`
+- Paper II Git blob: `745d262aee6ffb41de580c866246c99a34144c13`
+- Paper II SHA-256: `0b9d8c96b0185827085955084507f7c1099803a4a1de46c0db2e3b81f3cdbb7a`
+- Paper III Git blob: `06fe9116d42fd056bf9727dfbaa63ccb7398562d`
+- Paper III SHA-256: `7275ba02e7ae7a60d4bd3e524a2f1fd4d9fed639589b7d1ab7f08dd80f5fe675`
 
 ## From-scratch reconstruction
 
@@ -22,7 +22,9 @@ Hugging Face CPU job `6a6359807ef3c0846496771d` used an implementation written i
 Every case passed. The unedited machine-readable result had SHA-256
 `64d58a105af8e2f9f2fd6708b1bcad701d44ab19aecc70e4f0c89c476cef9ef0`.
 
-The later corrections do not alter any checked finite identity. Paper II's final changes concern admissibility, zero-mass quotients, an explicit diagonal estimate, an `X^{o(1)}` threshold, an explicit standard singular-series factor, a translation-uniform prime-power explanation and the status of an imported transference step. Paper III's mathematical repair removes an unused unsupported infinite-tail assertion; its final ORCID and bibliography additions are editorial only.
+After the publication-quality rewrite of Paper III Appendix B, Hugging Face job `6a6371fe7ef3c08464967840` independently repeated the exact divisor identity in five rational-arithmetic panels, using prime sets through `13` and `H` through `500`. It also checked the finite upper bound for `beta_j(H)`. Every panel passed with the terminal result `APPENDIX_B_EXACT_PANELS_PASS`.
+
+The final source edits do not alter a checked finite identity. Paper II's final edit replaces `a in Z setminus {0}` by the notation-equivalent phrase `a in Z with a != 0`. Paper III's final edits rewrite the same frozen singular-series proof in publication notation, remove an unsupported and unused sign inference, and remove a typesetting-only unsupported set-difference glyph.
 
 ## Shipped Paper II validators
 
