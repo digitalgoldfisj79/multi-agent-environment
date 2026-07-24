@@ -249,7 +249,11 @@ H_2(\theta)=\sum_{j\le k}e(\theta S_{jk})
 \tag{3.2}
 \]
 
-Fix a nonnegative even Schwartz function \(\rho\), and let \(\mathcal Q_X\) be the primes in \([H,2H)\), with \(H\asymp X^2\). For \(q\in\mathcal Q_X\) and \(a\in\mathbb Z\setminus\{0\}\), set
+Fix a nonnegative even Schwartz function \(\rho\) such that
+\[
+\inf_{1/2\le |t|\le1}\rho(t)>0,
+\]
+and let \(\mathcal Q_X\) be the primes in \([H,2H)\), with \(H\asymp X^2\). This admissibility condition guarantees \(D_X>0\) and the comparison \(D_X\asymp_\rho|\mathcal Q_X|\) used below. For \(q\in\mathcal Q_X\) and \(a\in\mathbb Z\setminus\{0\}\), set
 
 \[
 w_{q,a}=\rho(Ha/q),
