@@ -6,24 +6,36 @@
 - Paper II source SHA-256: `0b9d8c96b0185827085955084507f7c1099803a4a1de46c0db2e3b81f3cdbb7a`
 - Paper III source SHA-256: `7275ba02e7ae7a60d4bd3e524a2f1fd4d9fed639589b7d1ab7f08dd80f5fe675`
 
-## Canonical visual-QA build
+## Visual-QA build and final package build
 
-- GitHub Actions run: `30103406901` (`Build Papers II and III release artifacts`, run number 5)
-- Workflow artifact: `8600618293`
-- Artifact digest: `sha256:4c159708bda053c5d5288d8933f9dd2534a5286eb7e1e79af28c988e7de44ed7`
-- Toolchain: Pandoc, XeLaTeX, LibreOffice Writer, Poppler and python-docx on Ubuntu 24.04
-- PDF URL handling: inline-code URLs were converted to `\url{...}` for PDF layout and typeset with `xurl`; visible URL content was unchanged.
+The page-by-page inspection was performed on GitHub Actions run `30103406901` (run number 5), workflow artifact `8600618293`, artifact digest `sha256:4c159708bda053c5d5288d8933f9dd2534a5286eb7e1e79af28c988e7de44ed7`.
+
+After the compiled-artifact gate was closed, the exact same sources and build script were rerun solely to package the updated audit records:
+
+- Final packaging run: `30104113908` (run number 6)
+- Final workflow artifact: `8600903341`
+- Final artifact digest: `sha256:7e6b6bce5fcc2292a52f3edabc2a1571ce48f26d47e95c5af99c5e868be6fe02`
+
+Both builds used Pandoc, XeLaTeX, LibreOffice Writer, Poppler and python-docx on Ubuntu 24.04. Inline-code URLs were converted to `\url{...}` for PDF layout and typeset with `xurl`; visible URL content was unchanged.
+
+Every PDF and DOCX page from the final packaging run was rendered again and compared pixel-for-pixel with the inspected run-number-5 pages. All 70 rendered pages were identical. The differing binary hashes arise from non-visual container metadata such as PDF document identifiers and ZIP member timestamps, not from page content.
 
 All workflow gates passed: exact source hashes, source-marker scan, PDF and DOCX generation, missing-glyph check, text extraction, key-claim checks, A4 preflight, embedded-font check, DOCX heading check and internal checksum verification.
 
-## Final binary objects
+## Final packaged binary objects
 
 | File | Pages | SHA-256 |
 |---|---:|---|
-| `Paper_II_Prime_Detection_at_Primorial_Centres.pdf` | 19 | `1e6c5a65e33ae0ab1f46dacf56ac845b87338efc180e884438731e6a42743336` |
-| `Paper_II_Prime_Detection_at_Primorial_Centres.docx` | 20 rendered pages | `32da59889a824794bdd5aa142ff971518ecc3b32c4dfad21f79e3634e14d2d7b` |
-| `Paper_III_Pair_Sum_Rigidity.pdf` | 15 | `1c7bd70d06ddf1088f8d19493119a78040bd5dd02a4cee57de18f4aaa8cfa468` |
-| `Paper_III_Pair_Sum_Rigidity.docx` | 16 rendered pages | `039cf37d5886271d71d98b9b78669293f7002b391abccda2ae030d32d0b132cc` |
+| `Paper_II_Prime_Detection_at_Primorial_Centres.pdf` | 19 | `f5e0949b17352c87ada31410c5608a4d6a9a2b3a8d52c2a80bb5a12301173acd` |
+| `Paper_II_Prime_Detection_at_Primorial_Centres.docx` | 20 rendered pages | `2127b750d4a3024fdf07be55b17274e57fc8aa7064d65ef555dbe27079d394c3` |
+| `Paper_III_Pair_Sum_Rigidity.pdf` | 15 | `626854ada0350c127eab605e37a25cbaa37d4c4908bbad7a0accdd73af9b991b` |
+| `Paper_III_Pair_Sum_Rigidity.docx` | 16 rendered pages | `77d95649d61a78d0ebaf36482ca36a228627e0f6dc321630db9f68dd979d145e` |
+
+Final release archives:
+
+- Paper II release ZIP: `c07e11c9021b8eb3ade21326c4fbf3b46f5f851246466593e0a39c520a56d227`
+- Paper III release ZIP: `3b237c76b704944777f304fbfd496133fb1fc3042906026d73082cb960fb718b`
+- Combined release ZIP: `43dd1faa00bfd4b7eb7a5ffd6749cb042ce6417f54df1bb4f441a3b96bf0b5b7`
 
 Both PDFs are A4. Every listed PDF font is embedded and subsetted. Both XeLaTeX logs contain zero missing-character warnings.
 
@@ -46,7 +58,7 @@ This was a build-layer repair. It did not alter either reviewed Markdown source 
 
 ## Checksum result
 
-The downloaded GitHub artifact digest matched exactly. Every per-paper checksum, combined-package checksum and release-ZIP checksum in the artifact verified successfully.
+The downloaded final GitHub artifact digest matched exactly. Every per-paper checksum, combined-package checksum and release-ZIP checksum in the artifact verified successfully.
 
 ## Gate conclusion
 
