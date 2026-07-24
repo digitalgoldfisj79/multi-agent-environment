@@ -2,10 +2,11 @@
 
 ## Exact reviewed objects
 
+- Publication commit: `00d2a67d9963848e35596ea153917e73c2dfeb17`
 - Paper II Git blob: `3ccd6a9b5487b9b97e79d366fcb5e6d581a6569e`
 - Paper II SHA-256: `632bb8f4fd89a51020069327a11fe57f8ae882e57bd4ae1a9ed0829030c32ce1`
-- Paper III Git blob: `bf9f31087836930f25883ed42ca1bf1f309dab34`
-- Paper III SHA-256: `8b9aeac471774f86080cc5e444179d9533bf8f492dedc99a4647f87987b6bae1`
+- Paper III Git blob: `05463cd60819598045ad41658d6bfd491e572691`
+- Paper III SHA-256: `1753e5991ccab15142d9bd076554c283a69bfa3bd8aa9448b2edf62f50c4c7cb`
 
 ## From-scratch reconstruction
 
@@ -21,7 +22,7 @@ Hugging Face CPU job `6a6359807ef3c0846496771d` used an implementation written i
 Every case passed. The unedited machine-readable result had SHA-256
 `64d58a105af8e2f9f2fd6708b1bcad701d44ab19aecc70e4f0c89c476cef9ef0`.
 
-The later editorial corrections do not alter any checked finite identity. Paper II's final changes concern admissibility, zero-mass quotients, an explicit diagonal estimate, an `X^{o(1)}` threshold, an explicit standard singular-series factor, a translation-uniform prime-power explanation and the status of an imported transference step. Paper III's final change removes an unused unsupported infinite-tail assertion.
+The later corrections do not alter any checked finite identity. Paper II's final changes concern admissibility, zero-mass quotients, an explicit diagonal estimate, an `X^{o(1)}` threshold, an explicit standard singular-series factor, a translation-uniform prime-power explanation and the status of an imported transference step. Paper III's mathematical repair removes an unused unsupported infinite-tail assertion; its final ORCID and bibliography additions are editorial only.
 
 ## Shipped Paper II validators
 
