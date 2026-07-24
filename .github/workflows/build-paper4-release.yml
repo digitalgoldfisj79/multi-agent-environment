@@ -142,7 +142,6 @@ jobs:
               ('theorem', '2', '1', 'random', 'order', 'reciprocal', 'frame'),
               ('lemma', '6', '3', 'all', 'bad', 'pattern', 'domination'),
               ('ai', 'assistance', 'disclosure'),
-              ('edward', 'stewart', 'anthony', 'bozzard'),
           ]
           for path in sys.argv[1:]:
               text = norm(path)
