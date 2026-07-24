@@ -103,6 +103,12 @@ Since \(\rho\) is even,
 \[
 \sum_{a\ge1}m_a=\frac12.
 \]
+If \(m_a=0\), then every \(p_{q,a}=0\), hence
+\(\Psi_a=\mathcal E_a^\sigma=\mathcal R_a^\sigma=0\). Throughout,
+quotients by \(m_a\) are defined to be zero at such harmonics;
+equivalently, every weighted harmonic sum may be restricted to
+\(m_a>0\).
+
 For pair indices \(u,v\), define
 \[
 D_{u,v}^\sigma=S_u^\sigma-S_v^\sigma
@@ -116,8 +122,17 @@ Write
 \[
 \kappa_{2,a}=\sum_{q\in\mathcal Q_X}p_{q,a}^2.
 \]
-Expanding the square and separating equal and unequal moduli gives the exact
-decomposition
+For each ordered pair \(u\ne v\), direct expansion gives
+\[
+|\Psi_a(D_{u,v}^\sigma)|^2
+=\sum_{q,r\in\mathcal Q_X}p_{q,a}p_{r,a}
+e\!\left(aD_{u,v}^\sigma\left(\frac1q-\frac1r\right)\right).
+\]
+When \(q=r\), the phase is one and the contribution is
+\(\kappa_{2,a}\). There are exactly \(M(M-1)\) ordered pairs
+\(u\ne v\). When \(q\ne r\),
+\(1/q-1/r=(r-q)/(qr)\). Therefore separating equal and unequal
+moduli gives the exact decomposition
 \[
 \mathcal E_a^\sigma=M(M-1)\kappa_{2,a}+\mathcal R_a^\sigma,
 \tag{2.1}
@@ -535,11 +550,16 @@ For \(X>8/\eta^2\),
 \#\{\ell_1\ell_2\ell_3\equiv\ell_4\ell_5\ell_6\pmod{qr}\}.
 \tag{5.10}
 \]
-Both products are positive integers below
-\((2X)^3=8X^3<\eta^2X^4\le qr\). The congruence is therefore equality. Unique
-factorisation forces equality of the two three-element multisets, so there are
-at most \(6K^3\) solutions. Chebyshev's inequality at level \((3K/4)^6\)
-gives
+Every \(\ell\in\mathcal L\) is below \(2X<H\le q,r\) for sufficiently
+large \(X\), so all six primes are units modulo \(qr\) and character
+orthogonality applies without omitted zero terms. Both triple products are
+positive integers below
+\((2X)^3=8X^3<\eta^2X^4\le qr\). The congruence is therefore equality as
+integers. Unique factorisation then forces the right-hand triple to be a
+permutation of the left-hand multiset. There are \(K^3\) ordered choices for
+the left triple and at most \(3!=6\) ordered permutations for the right triple
+(fewer when primes repeat), hence at most \(6K^3\) solutions. Chebyshev's
+inequality at level \((3K/4)^6\) gives
 \[
 \beta(3K/4)^6\le6\varphi(qr)K^3.
 \]
@@ -640,10 +660,12 @@ where
 D(0)=1,
 \qquad D(f)=C_*K^2X^{-30f}\ (f\ge1),
 \]
+Here \(\operatorname{Orph}=1\) when no orphan is present; otherwise it is
+the \(\ell^1\)-cost of the orphan slot and
 \[
-\operatorname{Orph}\le2\eta X^2,
+\operatorname{Orph}\le2\eta X^2.
 \]
-and, for group size one or two respectively,
+For group size one or two respectively,
 \[
 \operatorname{SUP}(1)=\frac2{\eta X^2},
 \quad \operatorname{L1}(1)=2\eta X^2,
@@ -667,15 +689,28 @@ group and costs \(\operatorname{L1}(e_v)\); a bad coordinate has at most
 For sufficiently large \(X\), the sum over all patterns is at most twice the
 all-bad bound.
 
-**Proof.** Relative to the all-bad pattern, changing a vertex to good introduces
+**Proof.** Let \(P_0\) be the all-bad pattern and let \(P\) have \(f\ge1\)
+good vertices. Dividing (6.5) for \(P\) by its all-bad counterpart gives
+\[
+\frac{\Sigma(P)}{\Sigma(P_0)}
+\le C_*K^2X^{-30f}
+\prod_{v\text{ good}}
+\frac{\operatorname{L1}(e_v)}{\beta\operatorname{SUP}(e_v)}.
+\]
+By (6.6), for either a one-slot or two-slot edge,
 \[
 \frac{\operatorname{L1}(e)}{\beta\operatorname{SUP}(e)}
+\le\frac{4\eta^2X^4}{\beta}\le4\eta^2X^4,
 \]
-and the decay \(X^{-30}\), together with a share of the prefactor
-\(C_*K^2\). Since \(\beta\ge1\), \(K\le3X/\log X\), and (6.6) holds, each
-changed vertex gains at least \(X^{-23}\), for either group size. There are at
-most four ratio coordinates, so the total of all non-all-bad patterns is at
-most \(16X^{-23}\) times the all-bad bound. \(\square\)
+because \(\beta\ge1\). Also \(C_*K^2\le540X^2\) by (2.4). Hence
+\[
+\frac{\Sigma(P)}{\Sigma(P_0)}
+\le540X^2\bigl(4\eta^2X^{-26}\bigr)^f
+\le X^{-23f}
+\]
+for sufficiently large \(X\). There are at most four ratio coordinates, so
+at most \(2^4-1=15\) non-all-bad patterns. Their total is at most
+\(15X^{-23}\Sigma(P_0)\le\Sigma(P_0)\), proving the factor two. \(\square\)
 
 Combining Lemmas 5.1 and 6.1--6.3 gives the master estimate.
 
@@ -703,11 +738,15 @@ Use
 N\le\frac{4X}{\log X}.
 \tag{7.1}
 \]
-We assign configurations disjointly as follows. First place every configuration
-with at least two micro cells into T1. Among configurations with exactly one
-micro cell, place \(m=2\) in T2 and \(m=3\) in T3; the remaining \(m=4\)
-configurations are C2a--C2d according to the micro-cell position. Configurations
-with no micro cell are C1, C3, or C4 according to \(m=4,3,2\).
+The following assignment is disjoint and exhaustive. By Lemma 3.3,
+\(m\in\{2,3,4\}\), so a configuration has exactly \(m+1\) cells. Let \(h\)
+be the number of micro cells. If \(h\ge2\), assign it to T1. If \(h=1\),
+assign \(m=2\) to T2 and \(m=3\) to T3. For \(m=4\), the unique micro cell
+is either initial, interior, or terminal: an interior cell gives C2a; an
+initial cell gives C2c when \(n_0=0\) and C2b when \(0<n_0<w_0\); a terminal
+cell gives C2d. Finally, if \(h=0\), assign \(m=4,3,2\) to C1, C3, C4,
+respectively. These alternatives are mutually exclusive and cover every
+possible \((m,h)\) and every position of the unique micro cell.
 
 ## Trivial classes
 
@@ -894,9 +933,21 @@ For \(a\ge H\), the trivial bound is
 \[
 |\mathcal R_a^\sigma|\le M^2m_a^2.
 \]
-Schwartz decay and (N1) imply \(m_a\ll_\rho a^{-6}\), so
+Choose a Schwartz seminorm \(C_{6,\rho}\) such that
+\(\rho(t)\le C_{6,\rho}(1+|t|)^{-6}\). For
+\(q\in[H,2H)\) and \(a\ge1\), one has \(Ha/q\ge a/2\). Using (N1),
 \[
-\sum_{a\ge H}M^2m_a\ll X^4H^{-5}=o(1).
+m_a
+=\frac1{D_X}\sum_{q\in\mathcal Q_X}\rho(Ha/q)
+\le\frac{C_{6,\rho}|\mathcal Q_X|}{
+\delta_\rho|\mathcal Q_X|}(1+a/2)^{-6}
+\ll_\rho a^{-6}.
+\]
+Consequently
+\[
+\sum_{a\ge H}M^2m_a
+\ll_\rho M^2\sum_{a\ge H}a^{-6}
+\ll X^4H^{-5}=o(1).
 \tag{9.3}
 \]
 Equations (9.2)--(9.3) prove (2.6).
