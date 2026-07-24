@@ -1,5 +1,5 @@
-# Triggered 24 July 2026
-name: Cleanup Paper III Appendix B
+# Triggered 24 July 2026 — glyph cleanup
+name: Cleanup Paper III final source
 
 on:
   pull_request:
@@ -20,20 +20,21 @@ jobs:
         with:
           ref: publication/fortune-papers-ii-vi-20260724
           fetch-depth: 0
-      - name: Apply deterministic cleanup
-        run: python3 scripts/repair_paper3_appendix_b_cleanup.py
+      - name: Remove unsupported set-difference glyph
+        run: python3 scripts/repair_paper3_setminus.py
       - name: Validate cleaned source
         run: |
           set -euo pipefail
           F=publications/fortune-papers-ii-vi-20260724/paper3_pair_sum/manuscript.md
+          ! grep -Fq '\setminus' "$F"
+          grep -Fq 'after removing one occurrence each' "$F"
           grep -Fq 'u\text{ odd and squarefree}' "$F"
           grep -Fq 'f=\mathbf 1*h' "$F"
-          ! grep -Fq 'm odd,\ squarefree' "$F"
           sha256sum "$F"
       - name: Commit cleaned source
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add publications/fortune-papers-ii-vi-20260724/paper3_pair_sum/manuscript.md
-          git commit -m 'Clean Paper III Appendix B notation'
+          git commit -m 'Remove unsupported Paper III set-difference glyph'
           git push origin HEAD:publication/fortune-papers-ii-vi-20260724
