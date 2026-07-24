@@ -954,7 +954,3 @@ in Paper II. \(\square\)
 
 
 # References
-
-1. E. S. A. Bozzard, *Prime Detection at Primorial Centres*, Paper II.
-2. G. H. Hardy and J. E. Littlewood, *Some problems of Partitio Numerorum*.
-3. Standard references on additive energy, moment methods, and Barban--Davenport--Halberstam theory.
