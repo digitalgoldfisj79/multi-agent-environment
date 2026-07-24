@@ -1,0 +1,37 @@
+name: Repair Paper II set-difference glyph
+
+on:
+  pull_request:
+    branches:
+      - gpt56/d1-gate-bridge-terminal-20260724
+    paths:
+      - .github/workflows/repair-paper2-setminus.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: publication/fortune-papers-ii-vi-20260724
+          fetch-depth: 0
+      - name: Apply deterministic glyph repair
+        run: python3 scripts/repair_paper2_setminus.py
+      - name: Validate repaired source
+        run: |
+          set -euo pipefail
+          F=publications/fortune-papers-ii-vi-20260724/paper2_revised/manuscript.md
+          ! grep -Fq '\setminus' "$F"
+          grep -Fq 'with \(a\ne0\)' "$F"
+          sha256sum "$F"
+      - name: Commit repaired source
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add publications/fortune-papers-ii-vi-20260724/paper2_revised/manuscript.md
+          git commit -m 'Remove unsupported Paper II set-difference glyph'
+          git push origin HEAD:publication/fortune-papers-ii-vi-20260724
