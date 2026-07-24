@@ -2,9 +2,9 @@
 
 ## Current decision
 
-**Gate result: SOURCE-LEVEL PASS — COMPILED-ARTIFACT AND HUMAN-REVIEW GATES OPEN.**
+**Gate result: INTERNAL TECHNICAL PASS — HUMAN SPECIALIST REVIEW OPEN.**
 
-The original 207-line Paper IV manuscript was a condensed research announcement and failed manuscript-only hostile review because it omitted the load-bearing proof chain. It has been replaced by a 1,051-line proof manuscript faithfully reconstructed from frozen `RQM_PROOF.md`.
+The original 207-line Paper IV manuscript was a condensed research announcement and failed manuscript-only hostile review because it omitted the load-bearing proof chain. It has been replaced by a 1,051-line proof manuscript faithfully reconstructed from frozen `RQM_PROOF.md`, independently checked at the configuration-ledger level, reviewed alone by a third-party model, and compiled through a reproducible publication workflow whose output has passed extraction, checksum, accessibility, PDF-preflight and page-by-page visual QA.
 
 Final reviewed source:
 
@@ -13,15 +13,15 @@ Final reviewed source:
 - SHA-256: `548460849cc9c6125fbe59d0a4f2f37ec680761174c25556b5e781a8ae9372f1`;
 - source scan: 30,976 characters, 1,051 lines, no control characters or unresolved placeholders.
 
-The source-level gates now close as follows:
+The gates now close as follows:
 
 1. frozen-source fidelity — **passed**;
 2. independent ledger reconstruction — **passed**;
 3. fresh manuscript-only hostile review — **passed after disposition**;
-4. compiled PDF/DOCX/ZIP integrity — **open**;
+4. compiled PDF/DOCX/ZIP integrity — **passed**;
 5. human specialist review — **open**.
 
-This is not a claim of human peer review or publication acceptance.
+This is not a claim of human peer review, journal acceptance, or a proof of Fortune's conjecture.
 
 ## Frozen source basis
 
@@ -87,6 +87,20 @@ The response also listed three objections. `FINAL_HOSTILE_REVIEW_DISPOSITION.md`
 
 There is no unresolved fatal or major issue from the fresh hostile review. The model output is evidence, not mathematical authority; the source remains subject to human specialist scrutiny.
 
+## Compiled-artifact QA
+
+The canonical publication build is GitHub Actions workflow run `30085400790`, publication commit `af9350f06e41e94d79f583b2e8fca45b55b92852`, artifact ID `8593522378`, artifact digest `sha256:1875d3965d611cffa0a70afc223caf0e3119d93f79183f3f7a9be214f3486a51`.
+
+All workflow steps passed. The downloaded package then passed independent checksum verification and visual inspection.
+
+- PDF SHA-256: `dc5ff454826f605d5fd4db4ba02f6a35df1013bde1cfe9a9d9e26a6c8fc6f1a3`;
+- DOCX SHA-256: `3ecac48465573b9305cafb119779a5e17c65b2bd2fc05f7d376ec55895b3b61b`;
+- canonical internal ZIP SHA-256: `19c790caa196cf6374f62f90e4d9da4ea2dfc559a4894fd8e7dfdb4a62b5ec43`.
+
+The PDF is A4, 12 pages, text-native, unencrypted, without XFA or preflight warnings. Every page was rendered at 180 dpi and inspected; no clipping, overlap, raw TeX, malformed equation, missing glyph or page-boundary defect remains. The DOCX is A4 and renders to 15 pages; its accessibility audit has zero findings, its heading hierarchy has no skipped level, all 48 equation labels are present, and every page was inspected. Details are in `COMPILED_ARTIFACT_QA.md`.
+
+The visual gate caught and eliminated an earlier build-only defect in which TeX single-backslash delimiters were rendered literally. The final PDF uses XeLaTeX directly from the reviewed source. The DOCX uses documented notation-only OMML normalisations; the source itself remains unchanged.
+
 ## No-cushion warning
 
 The binding classes close at
@@ -99,10 +113,11 @@ up to constants and `M asymp X^2/log^2 X`. There is no positive power-of-`X` cus
 
 “No GRH” is literally correct but incomplete unless paired with the source of cancellation. The theorem obtains cancellation after expectation over a uniformly random ordering. It gives no pointwise theorem for the unique increasing primorial order and does not prove Fortune's conjecture.
 
-## Remaining gates
+## Remaining gate
 
-1. Regenerate PDF, DOCX and release ZIP from final SHA-256 `548460849c…9372f1`.
-2. Hash every compiled artifact and verify mathematical text fidelity to the Markdown source.
-3. Remove stale binaries and manifest references, including any invalid `independent_audit_results.txt` reference.
-4. Send the cleared package first to an analytic/probabilistic number theorist and a character-sum specialist.
-5. Keep the Airy consultation separate or later because it requires a narrower specialist pool.
+Send the technically cleared package first to:
+
+1. an analytic/probabilistic number theorist to inspect the ordered-partition and contour mechanism; and
+2. a character-sum specialist to inspect Gauss/CRT normalisation, the sixth moment, matching and the no-cushion ledger.
+
+The Airy consultation should remain separate or later because it requires a narrower specialist pool.
