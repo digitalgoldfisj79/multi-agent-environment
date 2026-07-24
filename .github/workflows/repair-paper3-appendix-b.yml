@@ -1,0 +1,40 @@
+name: Repair Paper III Appendix B
+
+on:
+  pull_request:
+    branches:
+      - gpt56/d1-gate-bridge-terminal-20260724
+    paths:
+      - .github/workflows/repair-paper3-appendix-b.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: publication/fortune-papers-ii-vi-20260724
+          fetch-depth: 0
+      - name: Apply deterministic Appendix B repair
+        run: python3 scripts/repair_paper3_appendix_b.py
+      - name: Validate repaired source
+        run: |
+          set -euo pipefail
+          F=publications/fortune-papers-ii-vi-20260724/paper3_pair_sum/manuscript.md
+          grep -Fq 'Notice that no sign assertion for \(T_j(H)\) is needed or made.' "$F"
+          grep -Fq '\mathfrak S_j(d)' "$F"
+          grep -Fq '\varphi_2(u)' "$F"
+          ! grep -Fq 'delta_p(d) =' "$F"
+          ! grep -Fq 'Consequently T_j(H) < 0' "$F"
+          sha256sum "$F"
+      - name: Commit repaired source
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add publications/fortune-papers-ii-vi-20260724/paper3_pair_sum/manuscript.md
+          git commit -m 'Rewrite Paper III Appendix B in publication notation'
+          git push origin HEAD:publication/fortune-papers-ii-vi-20260724
