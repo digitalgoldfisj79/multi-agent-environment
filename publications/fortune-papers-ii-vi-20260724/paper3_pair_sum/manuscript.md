@@ -955,8 +955,7 @@ converges.  Hence, for \(V\ge1\),
 
 \[
 \begin{aligned}
-\sum_{\substack{u\ge V\\u\ {
-m odd,\ squarefree}}}
+\sum_{\substack{u\ge V\\u\text{ odd and squarefree}}}
  \frac{1}{u\varphi_2(u)}
 &\le
  \sum_b\frac{h(b)}{b^2}
@@ -978,7 +977,7 @@ Also, by (B.5),
 \tag{B.14}
 \]
 
-where (B.12) was used after expanding \(f=1*h\).  Equations
+where (B.12) was used after expanding \(f=\mathbf 1*h\).  Equations
 (B.6)--(B.14) give (B.8).
 
 The lower bound in (B.9) is the term \(u=1\).  Extending the positive sum in
