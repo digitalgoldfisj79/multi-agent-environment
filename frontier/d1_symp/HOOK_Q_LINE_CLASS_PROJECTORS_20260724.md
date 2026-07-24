@@ -209,14 +209,14 @@ Thus the remaining application theorem need not reconstruct each fixed-`q` hook 
 
 ## 6. Exact remaining comparison
 
-The nested sparse-root theorem identifies the geometric source of the q-line hook system. The required vanishing-cycle comparison can now be stated componentwise:
+The sparse-root theorem identifies the geometric source of the q-line hook system. The corrected global Fourier--Cayley comparison can now be stated componentwise:
 
-1. identify the pure middle trace of the invariant projector `S_0`;
-2. identify the pure middle trace of the quadratic projector `S_chi`;
-3. compute the lower-weight and punctual cones contributing to `B_A` and the main term `p-2`;
+1. isolate the pure ambient Airy constituent whose invariant projector contributes to `S_0`;
+2. isolate its arithmetic quadratic projector contributing to `S_chi`;
+3. identify the complementary Fourier strata contributing to `B_A`, the discriminant terms and the main term `p-2`;
 4. insert the transported trace bound into the boxed certificate.
 
-The arithmetic assembly after these traces are known is complete.
+The arithmetic assembly after these traces are known is complete. Local vanishing cycles at the smooth sparse zero section are not the comparison mechanism.
 
 ## 7. Verification
 
