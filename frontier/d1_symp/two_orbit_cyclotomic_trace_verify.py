@@ -87,7 +87,6 @@ def verify_prime(p: int) -> None:
     assert len(squares) == len(nonsquares) == (p - 1) // 2
     assert squares.isdisjoint(nonsquares)
 
-    # Representatives for Gal(K^+/Q)=F_p^*/{+-1}.
     representatives = []
     seen = set()
     for multiplier in range(1, p):
@@ -113,7 +112,6 @@ def verify_prime(p: int) -> None:
         total = add(total, value)
     assert trace_gamma == total
 
-    # Initial coefficient argument for maximal gamma orbit.
     h = (p - 2) // 3
     scalar = pow(factorial(h), -1, p)
     initial = {s * (1 + eta) * scalar % p for s in squares}
@@ -122,7 +120,7 @@ def verify_prime(p: int) -> None:
     assert total[1:] == (0,) * (p - 1)
     print(
         f"p={p}: eta={eta}, two full orbits, gamma degree={(p-1)//2}, "
-        f"p*T_p={total[0]}: PASS"
+        f"-p*T_p={total[0]}: PASS"
     )
 
 
