@@ -48,15 +48,21 @@ and use
 \end{cases}
 \]
 
-In particular,
+The critical special values are
 
 \[
 \boxed{
-\operatorname{Tr}(\alpha^{p-1})=-1.
+\operatorname{Tr}(\alpha^{p-1})=-1,
 }
 \]
 
-Also
+\[
+\boxed{
+\operatorname{Tr}(\alpha^{2p-2})=-1,
+}
+\]
+
+and
 
 \[
 \boxed{
@@ -64,7 +70,13 @@ Also
 }
 \]
 
-For the second identity, only `j=p-1` and `j=2p-2` contribute. Lucas' theorem gives
+For `2p-2`, Lucas' theorem gives
+
+\[
+\binom{2p-2}{p-1}=0,
+\]
+
+so only `j=2p-2` contributes. For `2p-1`,
 
 \[
 \binom{2p-1}{p-1}=1,
@@ -73,7 +85,7 @@ For the second identity, only `j=p-1` and `j=2p-2` contribute. Lucas' theorem gi
 \quad\text{in }\mathbf F_p,
 \]
 
-so
+and therefore
 
 \[
 \operatorname{Tr}(\alpha^{2p-1})
@@ -259,9 +271,104 @@ With `r=0`,
 
 This is the desired contradiction. \(\square\)
 
-## 5. Möbius transforms
+## 5. Quartic polynomial transforms
 
 ### Theorem 5.1
+
+Let `p>=11` be an odd prime and let `h in F_p[X]` have degree four. Then
+
+\[
+\beta=h(\alpha)
+\]
+
+cannot satisfy
+
+\[
+\operatorname{Tr}(\beta^m)=0
+\qquad(1\le m\le p-4).
+\]
+
+### Proof
+
+Translate the input to remove the cubic coefficient. After scaling and deleting an output constant, reduce to
+
+\[
+\beta=\alpha^4+r\alpha^2+s\alpha.
+\]
+
+There are two cases.
+
+### Case 1: `p congruent 1 mod 4`
+
+Put
+
+\[
+m=\frac{p-1}{4}.
+\]
+
+Then `m<=p-4`, and `beta^m` has degree exactly `p-1` with leading coefficient one. Hence
+
+\[
+\operatorname{Tr}(\beta^m)=-1.
+\]
+
+### Case 2: `p congruent 3 mod 4`
+
+Put
+
+\[
+m=\frac{p+1}{4}.
+\]
+
+The polynomial `beta^m` has degree `p+1`. As in the cubic case, only its `X^(p-1)` coefficient contributes to the trace. That coefficient is
+
+\[
+mr,
+\]
+
+so vanishing forces `r=0`.
+
+Now use the next moment
+
+\[
+m+1=\frac{p+5}{4}.
+\]
+
+The polynomial
+
+\[
+(X^4+sX)^{m+1}
+\]
+
+has degree `p+5`. Since `p+5<2p-2` for `p>=11`, only its `X^(p-1)` coefficient contributes. The required deficit from the top degree is six, obtained by choosing the linear term in exactly two factors. Therefore
+
+\[
+\operatorname{Tr}(\beta^{m+1})
+=-\binom{m+1}{2}s^2.
+\]
+
+The binomial coefficient is nonzero modulo `p`, so vanishing forces `s=0`.
+
+Finally put
+
+\[
+n=\frac{p-1}{2}.
+\]
+
+Then `n<=p-4`, and for the remaining pure fourth power
+
+\[
+\operatorname{Tr}(\beta^n)
+=
+\operatorname{Tr}(\alpha^{2p-2})
+=-1.
+\]
+
+Both cases contradict the trace conditions. \(\square\)
+
+## 6. Möbius transforms
+
+### Theorem 6.1
 
 Let
 
@@ -328,13 +435,14 @@ and
 
 Thus every non-affine Möbius transform fails the first trace condition. \(\square\)
 
-## 6. Consequence for the constructive route
+## 7. Consequence for the constructive route
 
 For `p congruent 5 mod 6`, `p>=11`, none of the following can produce a cubic-tail witness from the canonical Artin--Schreier extension:
 
 1. a quadratic polynomial transform;
 2. a cubic polynomial transform;
-3. a non-affine Möbius transform.
+3. a quartic polynomial transform;
+4. a non-affine Möbius transform.
 
 Affine transforms produce only
 
@@ -344,8 +452,8 @@ T^p-T-c,
 
 the excluded constant/linear-offset Artin--Schreier family.
 
-Therefore the simplest constructive programme cannot consist of applying a low-degree Tschirnhaus transform to a known Artin--Schreier generator. Any surviving constructive route must use a transform of degree at least four, a genuinely multivariate construction, or a different extension.
+Therefore a surviving constructive route must use a polynomial transform of degree at least five, a genuinely multivariate construction, a more complicated rational transform, or a different extension.
 
-## 7. Verification
+## 8. Verification
 
-`artin_schreier_low_degree_no_go_verify.py` checks the trace identities and both critical cubic moments at all admitted primes below `200`.
+`artin_schreier_low_degree_no_go_verify.py` checks the critical trace identities and the quadratic, cubic and quartic gates at all admitted primes below `200`.
