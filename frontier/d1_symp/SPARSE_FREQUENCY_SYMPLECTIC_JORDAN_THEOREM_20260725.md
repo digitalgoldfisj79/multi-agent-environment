@@ -48,9 +48,7 @@ Since `p-7<p`, all factorials through `(p-7)!` are invertible and
 \tau_b=\exp(bD)
 \]
 
-is exactly the translation action `f(T)->f(T+b)` on `V_p`.
-
-Thus the additive affine subgroup acts through the indecomposable unipotent module
+is exactly the translation action `f(T)->f(T+b)` on `V_p`. Thus the additive affine subgroup acts through the indecomposable unipotent module
 
 \[
 J_{p-7}.
@@ -144,8 +142,7 @@ Therefore
 and induction yields
 
 \[
-\boxed{
-c_a=\kappa a}
+\boxed{c_a=\kappa a}
 \]
 
 for one scalar `kappa`.
@@ -156,9 +153,7 @@ The Wronskian form has
 \omega_p(e_a,e_{p-a})=2a-p=2a
 \]
 
-in characteristic `p`. Thus it is the case `kappa=2`.
-
-Consequently:
+in characteristic `p`, so it is the case `kappa=2`. Consequently
 
 \[
 \boxed{
@@ -167,34 +162,36 @@ Consequently:
 }
 \]
 
-In particular, the symplectic polarization is canonical up to the unavoidable scalar on the one-dimensional value character.
+The symplectic polarization is therefore canonical up to the unavoidable scalar on the one-dimensional value character.
 
-## 4. Relation to the full modular normal block
+## 4. Relation to the modular normal filtration
 
-The full cyclic normal representation at the Smith diagonal is
+The full cyclic normal representation at the Smith diagonal is the previously proved block
 
 \[
 J_{p-1}=k[\varepsilon]/(\varepsilon^{p-1}).
 \]
 
-The cubic multiplier directions remove four levels: the constant direction and the three degrees `1,2,3`. The surviving sparse-frequency quotient is the even block
+The coefficient space used in the Smith-defect phase is not literally the quotient of this block by four normal submodules. The exact relation is mediated by the proved Pascal coefficient--normal pairing:
 
-\[
-\boxed{J_{p-7}.}
-\]
+- the nonconstant coefficient directions `T,T^2,...,T^(p-4)` form one translation block `J_(p-4)`;
+- they pair perfectly with the first `p-4` levels of the normal Jordan filtration;
+- separating the three multiplier directions `T,T^2,T^3` leaves the sparse-frequency quotient `V_p`, whose translation block is `J_(p-7)`.
 
-The half-dimensional Lagrangian is the first half of its monodromy filtration. Therefore the number
+Thus `J_(p-7)` is the residual coefficient-side Jordan block after the multiplier/sparse-frequency separation. It should not be conflated with a literal quotient of the full normal block `J_(p-1)`.
+
+The half-dimensional Lagrangian is the first half of the residual coefficient monodromy filtration. Therefore
 
 \[
 \frac{p-7}{2}
 \]
 
-appearing in the required Airy Tate twist is simultaneously:
+is simultaneously:
 
 - half the sparse-frequency codimension;
 - the dimension of the canonical Lagrangian;
-- half the length of the residual symplectic Jordan block;
-- the exponent in the punctured-affine factor
+- half the length of the residual symplectic coefficient Jordan block;
+- the exponent in
   \[
   R\Gamma_c(\mathbf A^{(p-7)/2}\setminus0).
   \]
@@ -203,7 +200,7 @@ appearing in the required Airy Tate twist is simultaneously:
 
 The remaining wild-infinity problem is now a representation-compatible vanishing-cycle statement rather than a search for a cancellation pattern:
 
-> **Symplectic Jordan oscillator lemma.** The Airy-isotypic wild-infinity Smith-defect complex attached to the regular symplectic Jordan block `(V_p,omega_p,D)` is the oscillator complex induced from its intrinsic Lagrangian `L_p`; after deleting the origin its virtual Weil class is
+> **Symplectic Jordan oscillator lemma.** The Airy-isotypic wild-infinity Smith-defect complex attached to the regular symplectic coefficient block `(V_p,omega_p,D)` is the oscillator complex induced from its intrinsic Lagrangian `L_p`; after deleting the origin its virtual Weil class is
 > \[
 > \mathcal D_p\otimes R\Gamma_c(\mathcal L_p\setminus0)
 > =\mathcal D_p(-(p-7)/2)-\mathcal D_p.
@@ -215,10 +212,11 @@ This lemma is sufficient for the Airy constituent in the global Fourier--Cayley 
 
 ### Proved
 
-- the frequency translation representation is one Jordan block `J_(p-7)`;
+- the sparse-frequency translation representation is one block `J_(p-7)`;
 - the Wronskian form makes it a regular symplectic nilpotent module;
 - the lower half of the Jordan flag is the intrinsic Lagrangian;
-- the affine-conformal symplectic form is unique up to scalar.
+- the affine-conformal symplectic form is unique up to scalar;
+- the precise relation to the separate coefficient and normal Jordan filtrations.
 
 ### Open
 
