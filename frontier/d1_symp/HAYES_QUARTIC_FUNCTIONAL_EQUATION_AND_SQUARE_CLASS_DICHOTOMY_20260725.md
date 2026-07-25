@@ -3,7 +3,7 @@
 **Date:** 2026-07-25  
 **Branch:** `gpt56/d1-boulders-hayes-first-20260725`  
 **Scope:** the universal rank-four Hayes sheaf for `p congruent 5 mod 6`.  
-**Status:** **PROVED**.
+**Status:** **PROVED**. The fibrewise quadratic factorisation below does not by itself produce rank-two local systems.
 
 ## 1. Coefficient notation
 
@@ -198,7 +198,7 @@ L(z)
 }
 \]
 
-This is a reciprocal quartic with constant multiplier `mu`. Its four reciprocal roots can be grouped into two `mu`-reciprocal pairs. If the pair traces are `r` and `s`, then
+This is a reciprocal quartic with constant multiplier `mu`. At each Frobenius element its four reciprocal roots can be grouped into two `mu`-reciprocal pairs. If the corresponding pair traces are denoted `r` and `s`, then
 
 \[
 r+s=-C_1,
@@ -213,7 +213,7 @@ L(z)
 =(1-rz+\mu z^2)(1-sz+\mu z^2).
 \]
 
-Consequently the `p`-th reciprocal-root power sum is
+Consequently, fibrewise,
 
 \[
 \boxed{
@@ -223,6 +223,8 @@ Consequently the `p`-th reciprocal-root power sum is
 \]
 
 where `D_p` is the Dickson polynomial.
+
+This is an identity for each Frobenius polynomial. It does **not** assert that `r` and `s` are traces of two globally defined rank-two local systems.
 
 ### Opposite-sign sector: `a=-b`
 
@@ -263,7 +265,7 @@ a
 =b.
 \]
 
-Hence:
+Hence
 
 \[
 \boxed{
@@ -275,13 +277,13 @@ The sector annihilated by the quadratic projector is precisely the opposite-sign
 
 ## 6. Refined analytic wall
 
-The selected family has a constant reciprocal multiplier
+The selected Frobenius polynomials have the constant reciprocal multiplier
 
 \[
 \boxed{\mu=p\chi(-1).}
 \]
 
-The local degree-`p` coefficient is therefore
+Fibrewise, their prime-degree coefficient can be written
 
 \[
 I_p(u,1,v)
@@ -291,18 +293,14 @@ D_p(r_{u,v},\mu)+D_p(s_{u,v},\mu)
 \right)
 \]
 
-for nonsquare `v`, where `r_(u,v)` and `s_(u,v)` are the roots of
+for nonsquare `v`.
 
-\[
-X^2+C_1(u,v)X+C_2(u,v)-2\mu=0.
-\]
+The valid geometric conclusion is that the rank-four Hayes system is an orthogonal-similitude system with an explicit orientation character. Passing from the fibrewise pair traces `r,s` to rank-two Weil sheaves requires a Spin-lift theorem and is not automatic from the quartic factorisation.
 
-The factor-`p` correlation theorem is consequently a correlation of two rank-two Dickson traces on a canonical double cover of the nonsquare parameter surface, rather than an unrestricted rank-four Adams problem.
-
-## 7. Next gate
+## 7. Correct next gate
 
 The next theorem is:
 
-> **Spin/Dickson cover theorem.** Construct the canonical double cover on which the two reciprocal pair traces `r,s` are defined as rank-two Weil local systems, determine its branch and boundary divisors, and decide whether the combined sum of their `p`-th Dickson traces has bounded conductor after the nonsquare projector.
+> **Orthogonal orientation and Spin-lift gate.** Determine the orthogonal-similitude pairing and orientation cover of the universal Hayes sheaf. On that cover, compute the second Stiefel--Whitney obstruction to a `Spin_4` lift. If a lift exists, construct the two half-spin rank-two local systems and rewrite the selected Adams correlation through them. If the obstruction is nonzero, close the rank-two transfer route.
 
-This is strictly sharper than the generic rank-four Adams conductor gate.
+Even if the Spin lift exists, a separate correlation estimate remains necessary; a fibrewise quadratic factorisation alone does not give bounded conductor.
