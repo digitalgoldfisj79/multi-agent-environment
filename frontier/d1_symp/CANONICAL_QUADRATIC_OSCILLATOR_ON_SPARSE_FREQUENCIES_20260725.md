@@ -2,8 +2,16 @@
 
 **Date:** 2026-07-25  
 **Branch:** `gpt56/d1-main-twisted-descent-20260724`  
-**Scope:** quadratic local model suggested by the wild-infinity residue pairing.  
-**Status:** the algebraic and Gauss-sum statements are **PROVED**. Identification with the actual wild-infinity Hessian is **OPEN**.
+**Scope:** one exactly evaluable quadratic model compatible with the wild-infinity residue polarization.  
+**Status:** the algebraic and Gauss-sum statements are **PROVED**. This model is **NOT** identified with the actual Pascal wild-infinity nearby-cycle phase.
+
+## 0. Scope warning
+
+The actual high coefficient--normal map in the Laurent expansion is the Pascal matrix `D` proved anti-symplectic in
+
+`PASCAL_SPARSE_BLOCK_ANTI_SYMPLECTIC_THEOREM_20260725.md`.
+
+The degree-reversal involution used below is a simpler anti-symplectic polarization on the same residue symplectic space. The resulting quadratic form demonstrates that the required half-twist has an exact oscillator model with trivial arithmetic sign. It does not prove that the wild Smith-defect phase has this Hessian or is right-equivalent to this quadratic form.
 
 ## 1. Degree reversal
 
@@ -16,7 +24,7 @@ Let
 \{e_a=T^a:4\le a\le p-4\}
 \]
 
-be the canonical high-degree representative of the sparse frequency quotient. Define the degree-reversal involution
+be the canonical high-degree representative of the sparse frequency quotient. Define
 
 \[
 \boxed{
@@ -24,13 +32,7 @@ be the canonical high-degree representative of the sparse frequency quotient. De
 }
 \]
 
-It exchanges the lower and upper Lagrangians and satisfies
-
-\[
-\mathcal R^2=1.
-\]
-
-For the residue symplectic form
+It exchanges the lower and upper Lagrangians and satisfies `R^2=1`. For
 
 \[
 \omega_p(e_a,e_b)
@@ -48,14 +50,12 @@ one has
 
 Thus degree reversal is anti-symplectic.
 
-## 2. Symmetric Hessian form
+## 2. Symmetric model form
 
 Define
 
 \[
-B_p(v,w)
-=
-\omega_p(v,\mathcal Rw).
+B_p(v,w)=\omega_p(v,\mathcal Rw).
 \]
 
 Because `R` is an anti-symplectic involution, `B_p` is symmetric. On the monomial basis,
@@ -67,9 +67,7 @@ B_p(e_a,e_b)
 }
 \]
 
-Every diagonal entry is nonzero modulo `p`, so `B_p` is nondegenerate. Over a `p`-adic integral lift, every entry is a unit.
-
-The associated quadratic form is
+Every diagonal entry is nonzero modulo `p`. The associated quadratic form is
 
 \[
 Q_p(v)=\frac12B_p(v,v).
@@ -81,13 +79,11 @@ Writing
 v=\sum_{a=4}^{p-4}x_ae_a,
 \]
 
-one obtains in characteristic `p`
+one obtains
 
 \[
 \boxed{
-Q_p(v)
-=
-\sum_{a=4}^{p-4}a x_a^2.
+Q_p(v)=\sum_{a=4}^{p-4}a x_a^2.
 }
 \]
 
@@ -100,75 +96,43 @@ Its dimension is
 
 ## 3. Determinant square class
 
-Pair the coefficient `a` with `p-a`. Their product is
-
-\[
-a(p-a)=-a^2.
-\]
-
-There are `m` such pairs. Therefore
+Pair `a` with `p-a`. Their product is `-a^2`; hence
 
 \[
 \boxed{
-\det Q_p
-\equiv(-1)^m
+\det Q_p\equiv(-1)^m
 \quad\text{modulo squares.}
 }
 \]
 
-The factors of `2` relating the quadratic coefficient matrix and the Hessian occur to the even power `2m` and do not alter the square class.
-
 ## 4. Exact quadratic exponential sum
 
-Let `q=p^r` and let `psi_q` be the standard nontrivial additive character of `F_q`. Put
+Let `q=p^r`, and let `psi_q` be the standard nontrivial additive character. With
 
 \[
-G_q=\sum_{x\in\mathbf F_q}\psi_q(x^2).
+G_q=\sum_x\psi_q(x^2),
+\qquad G_q^2=\chi_q(-1)q,
 \]
 
-For `a!=0`,
+one has
 
 \[
-\sum_x\psi_q(ax^2)=\chi_q(a)G_q.
-\]
-
-Hence
-
-\[
-\sum_{v\in\mathcal V_p(\mathbf F_q)}
-\psi_q(Q_p(v))
+\sum_{v\in\mathcal V_p(\mathbf F_q)}\psi_q(Q_p(v))
 =
-\chi_q(\det Q_p)G_q^{2m}.
-\]
-
-The one-dimensional quadratic Gauss identity is
-
-\[
-G_q^2=\chi_q(-1)q.
-\]
-
-Using the determinant square class,
-
-\[
 \chi_q(\det Q_p)G_q^{2m}
-=
-\chi_q((-1)^m)\chi_q(-1)^m q^m
 =q^m.
 \]
 
-Thus, for every Frobenius degree,
+Therefore
 
 \[
 \boxed{
-\sum_{v\in\mathcal V_p(\mathbf F_q)}
-\psi_q(Q_p(v))
-=q^{(p-7)/2}.
+\sum_v\psi_q(Q_p(v))
+=q^{(p-7)/2},
 }
 \]
 
-There is no quadratic Kummer sign.
-
-Removing the origin gives
+with no quadratic Kummer sign. Removing the origin gives
 
 \[
 \boxed{
@@ -177,7 +141,7 @@ Removing the origin gives
 }
 \]
 
-In virtual Weil notation, the quadratic oscillator contributes exactly
+The virtual Weil class of this model is
 
 \[
 \boxed{
@@ -185,44 +149,33 @@ In virtual Weil notation, the quadratic oscillator contributes exactly
 }
 \]
 
-Tensoring with the Airy block gives
+Tensoring with the Airy block gives the formally required class
 
 \[
 \boxed{
-\mathcal D_p(-(p-7)/2)-\mathcal D_p,
+\mathcal D_p(-(p-7)/2)-\mathcal D_p.
 }
 \]
 
-which is exactly the open-sector Airy class required by the Fourier localization triangle.
-
-## 5. What has and has not been achieved
+## 5. Scientific use and limitation
 
 ### Proved
 
-1. Degree reversal is the anti-symplectic involution complementary to the intrinsic pole-order Lagrangian.
-2. It produces a canonical nondegenerate symmetric form on the sparse frequency quotient.
-3. The resulting quadratic phase has exact all-power sum `q^((p-7)/2)`.
-4. Its arithmetic sign is identically trivial.
-5. The punctured quadratic oscillator has precisely the virtual Tate class required for Airy transport.
+1. Degree reversal is an explicit anti-symplectic involution of the residue-paired sparse frequency space.
+2. It produces a nondegenerate symmetric model form.
+3. The model has exact all-power sum `q^((p-7)/2)` and trivial arithmetic sign.
+4. The punctured model has precisely the virtual Tate class required for Airy transport.
 
-### Open
+### Not proved
 
-It has not been proved that the actual integral wild-infinity Smith-defect phase is formally equivalent to `Q_p`. The residue symplectic form determines the candidate Hessian, but the nonlinear extension terms in the divided-power/Jordan filtration still have to be removed or controlled.
+The actual Pascal anti-symplectic correspondence need not equal or be integrally conjugate to degree reversal. The actual wild-infinity Smith-defect phase has not been shown to have Hessian `B_p`.
 
-## 6. Final local lemma
+The load-bearing theorem is the Pascal oscillator nearby-cycle realization stated in
 
-The Airy transport is reduced to the following sharply stated formal theorem:
+`MAIN_BRANCH_STATUS_AFTER_PASCAL_OSCILLATOR_REDUCTION_20260725.md`.
 
-> **Wild-infinity quadratic normal-form lemma.** In the Airy-isotypic cyclic trivial-minus-nontrivial Smith-defect complex, after the proved elimination of the cubic multiplier, Tate, discriminant and affine-quotient terms, the formal phase on the sparse frequency normal space has Hessian `B_p` and is integrally right-equivalent to
-> \[
-> Q_p=\sum_{a=4}^{p-4}a x_a^2.
-> \]
-> The equivalence must commute with Frobenius and the cyclic projector.
+## 6. Verification
 
-Because `p` is odd and `B_p` is integrally nondegenerate, once the Hessian identification is proved, the ordinary formal Morse elimination of higher terms gives the oscillator class above. The remaining load-bearing issue is therefore the Hessian identification, not the evaluation of the resulting quadratic complex.
-
-## 7. Verification
-
-The determinant, complementary-degree pairing and Gauss-sign cancellation are checked by
+The determinant and Gauss-sign cancellation are checked by
 
 `frontier/d1_symp/canonical_quadratic_oscillator_verify.py`.
