@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Deterministic checks for DIVIDED_ADAMS_HASSE_COEFFICIENT_20260725.md.
 
-The proof is symbolic.  This script verifies its finite recurrences, the
-committed exact calibrations, and a broad nonvanishing range.  It does not
+The proof is symbolic. This script verifies its finite recurrences, the
+committed exact calibrations, and a broad nonvanishing range. It does not
 replace the uniform proof still required for H_p != 0.
 """
 
@@ -20,11 +20,11 @@ EXACT_T = {
     41: 285608599198466451834837856911313,
     47: -36201375290118292903477796139763762494,
     53: 625211553014678241605175931243651758726469297,
+    71: 36727396978062655326395765238086038211050946366161670340353263984,
 }
 
 
 def inv(x: int, p: int) -> int:
-    """Multiplicative inverse in F_p, with an explicit zero check."""
     x %= p
     if x == 0:
         raise ZeroDivisionError(f"attempted inversion of zero modulo {p}")
@@ -32,7 +32,6 @@ def inv(x: int, p: int) -> int:
 
 
 def vp(n: int, p: int) -> tuple[int, int]:
-    """Return (v_p(n), p-free quotient)."""
     if n == 0:
         raise ValueError("v_p(0) is not finite")
     value = 0
@@ -43,16 +42,6 @@ def vp(n: int, p: int) -> tuple[int, int]:
 
 
 def edge_polynomial_coefficients(p: int) -> list[int]:
-    """Coefficients of F_h in F_p.
-
-    The two equivalent recurrences are checked term by term:
-
-      f_(n+1) = -f_n/[9(n+1)(3n+4)]
-
-    and, using p=3h+2,
-
-      f_(n+1) = f_n/[27(n+1)(2h-n)].
-    """
     if p % 6 != 5:
         raise ValueError("this verifier is for p = 5 mod 6")
     h = (p - 2) // 3
@@ -67,7 +56,6 @@ def edge_polynomial_coefficients(p: int) -> list[int]:
         assert first == second
         coeffs.append(first)
 
-    # Closed factorial form f_n=(2h-n)!/[27^n n! (2h)!].
     denom_common = factorial(2 * h) % p
     for n, value in enumerate(coeffs):
         closed = factorial(2 * h - n) % p
@@ -78,7 +66,6 @@ def edge_polynomial_coefficients(p: int) -> list[int]:
 
 
 def logarithmic_derivative(coeffs: list[int], p: int) -> list[int]:
-    """Return r_n for F'/F through n=len(F)-2."""
     h = len(coeffs) - 1
     result: list[int] = []
     for n in range(h):
@@ -87,7 +74,6 @@ def logarithmic_derivative(coeffs: list[int], p: int) -> list[int]:
             value -= coeffs[i] * result[n - i]
         result.append(value % p)
 
-    # Independent Rayleigh/Riccati recurrence.
     assert result[0] == (-inv(36, p)) % p
     for n in range(1, h):
         convolution = sum(
@@ -99,7 +85,6 @@ def logarithmic_derivative(coeffs: list[int], p: int) -> list[int]:
 
 
 def hasse_coefficient(p: int) -> tuple[int, int, int]:
-    """Return (H_p, scalar part, endpoint part) in F_p."""
     h = (p - 2) // 3
     coeffs = edge_polynomial_coefficients(p)
     rayleigh = logarithmic_derivative(coeffs, p)
@@ -113,8 +98,6 @@ def hasse_coefficient(p: int) -> tuple[int, int, int]:
     ) % p
     endpoint = log_coefficient * inv(fact_h, p) % p
 
-    # Wilson simplification valid because h is odd:
-    # (2h+1)! = 1/h!, hence scalar=(h!)^3/6.
     assert h % 2 == 1
     assert fact_2h1 * fact_h % p == 1
     assert scalar == pow(fact_h, 3, p) * inv(6, p) % p
@@ -123,7 +106,6 @@ def hasse_coefficient(p: int) -> tuple[int, int, int]:
 
 
 def primes_below(limit: int) -> list[int]:
-    """Simple deterministic sieve."""
     if limit <= 2:
         return []
     sieve = bytearray(b"\x01") * limit
@@ -137,7 +119,6 @@ def primes_below(limit: int) -> list[int]:
 
 
 def verify_calibrations() -> None:
-    """Check the exact T_p values against the Hasse initial form."""
     assert hasse_coefficient(5)[0] == 0
     assert EXACT_T[5] == 0
 
@@ -149,6 +130,7 @@ def verify_calibrations() -> None:
         41: (15, 13, 38, 31),
         47: (17, 4, 15, 28),
         53: (19, 10, 13, 30),
+        71: (25, 32, 45, 65),
     }
 
     for p, (valuation, unit, scalar, endpoint) in expected_rows.items():
@@ -166,7 +148,6 @@ def verify_calibrations() -> None:
 
 
 def verify_nonvanishing_scan(limit: int = 1500) -> None:
-    """Verify H_p != 0 in the stated finite range."""
     zeros: list[int] = []
     checked = 0
     for p in primes_below(limit):
@@ -185,11 +166,6 @@ def verify_nonvanishing_scan(limit: int = 1500) -> None:
 
 
 def verify_walk_coefficients() -> None:
-    """Check the two closed-walk coefficients in the divided trace.
-
-    A one-excursion cyclic word contributes p rotations before division
-    by p.  Two isolated excursions contribute p(p-3)/2 rotations.
-    """
     for p in (5, 7, 11, 17, 23):
         one_excursion_after_division = p // p
         two_excursions_before_division = p * (p - 3) // 2
