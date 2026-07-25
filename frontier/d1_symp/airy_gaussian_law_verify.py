@@ -48,7 +48,15 @@ EXACT_T = {
     71: 36727396978062655326395765238086038211050946366161670340353263984,
 }
 
-SCAN_LIMIT = 20000
+# The document reports the scan over p < 10^5; the verifier must reproduce that
+# range, not a smaller one.  Override with argv[1] for a quick run.
+SCAN_LIMIT = 100000
+
+# Rigorously excluded constant, witnessed at p = 57653.  Everything beyond this
+# finite exclusion (unboundedness, the 2 sqrt(log p) limsup law) is CONJECTURAL:
+# a finite sample cannot separate N(0,2) from a sufficiently wide bounded law.
+WITNESS_PRIME = 57653
+EXCLUDED_CONSTANT = 4.8468292139
 
 
 def primes_upto(n: int) -> list[int]:
@@ -130,9 +138,19 @@ def check_gaussian_law() -> None:
         sub = np.array([r for p, r in zip(ps, vals) if p <= bound])
         running.append(float(np.abs(sub).max()))
         print(f"    max|rho_p| for p <= {bound:>6} : {running[-1]:.4f}")
-    assert running[-1] > 4.0, "running maximum did not exceed 4"
     assert running == sorted(running), "running maximum must be non-decreasing"
-    print("    PASS  consistent with N(0,2); no absolute constant exists\n")
+
+    # The only RIGOROUS claim: a finite exclusion witnessed at a named prime.
+    if SCAN_LIMIT >= WITNESS_PRIME:
+        witness = abs(rho(WITNESS_PRIME))
+        beaten = [p for p, r in zip(ps, vals) if abs(r) > 4.0]
+        print(f"    witness p={WITNESS_PRIME}: |rho_p| = {witness:.10f}")
+        print(f"    => no absolute constant C < {EXCLUDED_CONSTANT} is admissible")
+        print(f"    C = 4 fails at {len(beaten)} primes below {SCAN_LIMIT}")
+        assert witness > EXCLUDED_CONSTANT - 1e-6, "witness value not reproduced"
+        assert len(beaten) >= 20, "expected many primes exceeding C = 4"
+    print("    PASS  consistent with N(0,2); C = 4 rigorously excluded.")
+    print("    NOTE  unboundedness is CONJECTURAL, not established by this test.\n")
 
 
 def check_adams_no_gain() -> None:
@@ -157,7 +175,19 @@ def check_adams_no_gain() -> None:
 
 
 def check_singular_locus() -> None:
-    print("[4] the cubic {Tr(x^3)=0} in P(ker Tr) has exactly one singular point")
+    print("[4] the cubic {Tr(x^3)=0} in P(ker Tr) has exactly one singular point (p > 3)")
+
+    # p = 3 is genuinely degenerate: cubing IS Frobenius, so by additivity
+    # Tr(x^3) = (Tr x)^3 = Tr(x), which vanishes identically on ker Tr.
+    g3 = [1, -1, 0, 1]  # t^3 = t + 1 over F_3
+    elts3 = list(_all_elements(3))
+    ker3 = [e for e in elts3 if _trace(e, g3, 3) == 0]
+    cube_tr = [_trace(_mul(_mul(e, e, g3, 3), e, g3, 3), g3, 3) for e in ker3]
+    assert len(ker3) == 9, f"expected |ker Tr| = 9 in F_27, got {len(ker3)}"
+    assert all(t == 0 for t in cube_tr), "p=3 cubic should vanish identically on ker Tr"
+    print(f"    p= 3: DEGENERATE - cubic vanishes on all {len(ker3)} points of ker Tr;")
+    print("          Lemma 5.1 is false at p = 3 and must exclude it")
+
     for p in (5, 7):
         # build F_{p^p} = F_p[t]/(g), g monic irreducible of degree p
         g = None
@@ -179,7 +209,7 @@ def check_singular_locus() -> None:
         assert all(_in_prime_field(e) for e in singular), f"p={p}: non-scalar singular point"
         assert len(singular) == p - 1, f"p={p}: expected {p-1} scalars, got {len(singular)}"
         print(f"    p={p:>2}: singular locus = {{[1]}}, {len(singular)} affine points, all in F_p")
-    print("    PASS  exactly one singular point for each tested p\n")
+    print("    PASS  one singular point for p = 5, 7; p = 3 degenerate as expected\n")
 
 
 def _all_elements(p: int):
@@ -236,6 +266,11 @@ def _is_irreducible(g, p) -> bool:
 
 
 def main() -> None:
+    global SCAN_LIMIT
+    import sys
+
+    if len(sys.argv) > 1:
+        SCAN_LIMIT = int(sys.argv[1])
     check_calibration()
     check_gaussian_law()
     check_adams_no_gain()
