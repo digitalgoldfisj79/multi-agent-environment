@@ -2,18 +2,18 @@
 
 **Date:** 2026-07-25  
 **Branch:** `gpt56/d1-main-twisted-descent-20260724`  
-**Scope:** formal local model of the Smith defect at the cyclic diagonal at infinity.  
-**Status:** the expansion, determinant and tail-support statements are **PROVED**. Clean integral Fourier elimination and the residual vanishing cycles remain **OPEN**.
+**Scope:** formal filtered model of the Smith defect at the cyclic diagonal at infinity.  
+**Status:** the expansion, determinant and associated-graded tail statements are **PROVED**. Clean integral Fourier elimination through the nonsplit Jordan extensions is **OPEN**.
 
 ## 1. Coefficient variables
 
-Write the complete polynomial phase as
+Write
 
 \[
 f_a(T)=\sum_{m=1}^{p-4}a_mT^m,
 \]
 
-where
+with
 
 \[
 (a_1,a_2,a_3)=(u_1,u_2,u_3),
@@ -21,17 +21,11 @@ where
 a_m=\lambda_m\quad(4\le m\le p-4).
 \]
 
-Thus the multiplier and sparse-frequency variables form one vector
+The multiplier and sparse-frequency variables therefore form one vector of dimension `p-4`.
 
-\[
-a=(a_1,\ldots,a_{p-4})
-\]
+## 2. Formal expansion at infinity
 
-of dimension `p-4`.
-
-## 2. Formal expansion at the diagonal at infinity
-
-Use the coordinate `z=1/t` at infinity and write a point near the cyclic diagonal as
+Choose a formal diagonal parameter `z` and write
 
 \[
 z_i=z(1+w_i),
@@ -39,21 +33,14 @@ z_i=z(1+w_i),
 x_i=z_i^{-1}=z^{-1}(1+w_i)^{-1}.
 \]
 
-For every `m<p`,
+For `m<p`,
 
 \[
-x_i^m
-=z^{-m}\sum_{j\ge0}(-1)^j
+x_i^m=z^{-m}\sum_{j\ge0}(-1)^j
 \binom{m+j-1}{j}w_i^j.
 \]
 
-Put
-
-\[
-s_j(w)=\sum_{i=1}^p w_i^j.
-\]
-
-The constant term vanishes after summing over `i` because `p=0`. Hence the cyclic phase has the exact formal expansion
+Put `s_j(w)=sum_i w_i^j`. The constant term vanishes after summing over the `p` factors, so
 
 \[
 \boxed{
@@ -65,14 +52,14 @@ The constant term vanishes after summing over `i` because `p=0`. Hence the cycli
 }
 \]
 
-## 3. The Pascal matrix is unimodular
+The choice of `z` is not a `C_p`-equivariant splitting of the diagonal normal sequence; no such splitting exists. Changing the choice acts triangularly on the power sums. Consequently the statements below are canonical on the associated graded of the Jordan/divided-power filtration, while the extension data between levels remain part of the open integral problem.
 
-For `n>=1`, define
+## 3. Unimodular Pascal determinant
+
+For `n>=1`, let
 
 \[
-B_n=(b_{j,m})_{1\le j,m\le n},
-\qquad
-b_{j,m}=\binom{m+j-1}{j}.
+B_n=\left(\binom{m+j-1}{j}\right)_{1\le j,m\le n}.
 \]
 
 ### Lemma 3.1
@@ -81,42 +68,24 @@ b_{j,m}=\binom{m+j-1}{j}.
 \boxed{\det B_n=1.}
 \]
 
-### Proof
-
-For fixed `j`, the function
+For fixed `j`, `P_j(x)=binom(x+j-1,j)` is a degree-`j` polynomial with zero constant term and leading coefficient `1/j!`. The evaluation matrix of `x,x^2,...,x^n` at `1,...,n` has determinant
 
 \[
-P_j(x)=\binom{x+j-1}{j}
-\]
-
-is a polynomial of degree `j`, has zero constant term, and has leading coefficient `1/j!`. The matrix `B_n` evaluates the basis `P_1,...,P_n` at `x=1,...,n`.
-
-Replacing `P_j` by its leading monomial changes the determinant by the product of the leading coefficients. The evaluation matrix of `x,x^2,...,x^n` at `1,...,n` has determinant
-
-\[
-\left(\prod_{m=1}^n m\right)
+\left(\prod_{m=1}^nm\right)
 \prod_{1\le a<b\le n}(b-a)
 =
-\prod_{j=1}^n j!.
+\prod_{j=1}^nj!.
 \]
 
-Multiplying by `prod_j(1/j!)` gives one. \(\square\)
+The triangular change from the monomials to the `P_j` multiplies this by `prod_j(1/j!)`, giving one.
 
-The row signs `(-1)^j` change only the determinant sign. Therefore, for
+For `n=p-4`, the signed Laurent coefficient matrix
 
 \[
-n=p-4,
+M_{j,m}=(-1)^j\binom{m+j-1}{j}z^{-m}
 \]
 
-the coefficient matrix
-
-\[
-M_{j,m}=(-1)^j\binom{m+j-1}{j}z^{-m},
-\qquad
-1\le j,m\le p-4,
-\]
-
-has determinant
+has
 
 \[
 \boxed{
@@ -124,35 +93,24 @@ has determinant
 }
 \]
 
-It is a unit over the Laurent field `k((z))`. More importantly, its numerical determinant is `+-1`, so no factor of `p` or any other denominator occurs.
+Its numerical determinant is `+-1`; no factor of `p` or any denominator occurs.
 
-## 4. Perfect coefficient--normal pairing
+## 4. Unimodular filtered coefficient--normal pairing
 
-Let `c_j(a,z)` be the coefficient of `s_j(w)` in the phase. For `1<=j<=p-4`,
-
-\[
-(c_1,\ldots,c_{p-4})^t=M(a_1,\ldots,a_{p-4})^t.
-\]
-
-Hence
+Let `c_j(a,z)` be the coefficient of `s_j(w)`. For `1<=j<=p-4`,
 
 \[
-\boxed{
-(a_1,\ldots,a_{p-4})
-\longleftrightarrow
-(c_1,\ldots,c_{p-4})
-}
+(c_1,\ldots,c_{p-4})^t
+=M(a_1,\ldots,a_{p-4})^t.
 \]
 
-is an invertible integral linear change of frequency coordinates after the natural Laurent weighting at infinity.
+Thus, in any chosen formal splitting, the coefficient variables and the first `p-4` power-sum levels are related by an invertible integral linear transformation. Because changes of splitting are triangular, this gives a canonical perfect pairing on the associated graded of the Jordan filtration.
 
-Thus the multiplier plus sparse-frequency space pairs perfectly with the first `p-4` power-sum levels of the modular Jordan normal representation.
+This is the local algebraic reason that the number of multiplier plus sparse-frequency variables is exactly `p-4`.
 
-This is the local algebraic reason the number of coefficient variables is exactly `p-4`.
+## 5. Lucas support and the residual three levels
 
-## 5. Only three normal levels remain
-
-For `1<=m<p` and `1<=j<p`, Lucas' theorem gives
+For `1<=m,j<p`, Lucas' theorem gives
 
 \[
 \binom{m+j-1}{j}\equiv0\pmod p
@@ -160,21 +118,17 @@ For `1<=m<p` and `1<=j<p`, Lucas' theorem gives
 m+j>p.
 \]
 
-Therefore a monomial of degree `m` contributes only to levels
+A monomial of degree `m` therefore contributes only to levels `j<=p-m`.
 
-\[
-1\le j\le p-m.
-\]
-
-Since `m<=p-4`, the sparse coefficients contribute no terms beyond `j=p-4`. The final three levels
+For the sparse coefficients `m>=4`, no term occurs beyond `j=p-4`. The final levels
 
 \[
 s_{p-3},\qquad s_{p-2},\qquad s_{p-1}
 \]
 
-are fed only by the cubic multiplier variables `a_1,a_2,a_3`.
+are fed only by `a_1,a_2,a_3`.
 
-After the perfect pairing with levels `1,...,p-4`, the formal normal problem has a residual tail of dimension three. This matches the three nonconstant tail coefficients remaining in
+Hence, on the associated graded, the first `p-4` normal levels pair unimodularly with all coefficient variables and only a three-level tail remains. This matches the three nonconstant tail coefficients in
 
 \[
 T^p+AT^3+BT^2+CT+D
@@ -182,46 +136,35 @@ T^p+AT^3+BT^2+CT+D
 
 after the sparse power-sum equations and before the final affine/projective quotient.
 
-## 6. Consequence for Fourier elimination
+## 6. Consequence and limitation
 
-At the level of the formal phase, there is no `p`-adic resonance in the middle normal directions. The pairing matrix is unimodular. Therefore any unexplained constituent cannot be attributed to a singular coefficient-to-normal Jacobian in those `p-4` directions.
+There is no `p`-adic resonance in the associated-graded coefficient-to-normal matrix. An unexplained constituent cannot be blamed on a singular middle-level Jacobian.
 
-A clean integral Fourier--Deligne or Dwork elimination theorem should remove these paired directions and leave only:
+A clean integral Fourier theorem should eliminate the paired associated-graded levels and leave:
 
 1. the three deepest Jordan levels;
-2. the fixed diagonal Tate line;
+2. the fixed-diagonal Tate line;
 3. the explicit discriminant and quotient boundaries.
 
-This is a strict reduction of the wild-infinity theorem from a `p-1` dimensional indecomposable normal block to a three-level residual tail, provided clean integral elimination is established.
+However, unimodularity does **not** prove that Fourier transform commutes with the nonsplit Jordan filtration. The missing calculation must control the extension data, pole-order filtration in `z`, Frobenius, and the cyclic trivial-minus-nontrivial character difference. The earlier full-rank global Dwork defect is not contradicted.
 
-## 7. What is not yet proved
+## 7. Exact next theorem
 
-Unimodularity of the formal coefficient matrix does not by itself prove that integral compactly supported Fourier transform commutes with the Jordan filtration. The missing step must control:
+Prove clean integral Fourier elimination for this unimodular filtered pairing. It must show that the middle associated-graded pairs contribute only the forced Tate shift, control the extensions between them, and reduce the Smith-defect complex to the three residual tail levels. Then compute that residual complex and compare its cubic specialization with `R_p((p-1)/2)` and the q-line ledger.
 
-- extension data between the one-dimensional associated-graded levels;
-- the pole-order filtration in `z`;
-- Frobenius on the resulting Dwork/nearby-cycle complex;
-- the cyclic trivial-minus-nontrivial character difference.
-
-The full-rank Dwork defect found earlier is global and is not contradicted by the local unimodular pairing.
-
-## 8. Exact next theorem
-
-Prove a clean integral Fourier-elimination theorem for the unimodular Pascal pairing. It should identify the Fourier transform along the first `p-4` Jordan levels with a Tate shift and reduce the Smith-defect complex to the three residual tail levels. Then compute that residual complex and compare its cubic specialization with `R_p((p-1)/2)` and the q-line ledger.
-
-## 9. Ruling
+## 8. Ruling
 
 ### PROVED
 
-- the exact Laurent/Hasse expansion at infinity;
+- the exact formal Laurent expansion;
 - `det B_n=1`;
-- perfect integral pairing of all `p-4` coefficient variables with the first `p-4` Jordan levels;
-- only three deepest normal levels remain unpaired.
+- a perfect integral pairing on the associated graded of the first `p-4` Jordan levels;
+- only three deepest levels remain on that associated graded.
 
 ### OPEN
 
-- clean integral Fourier elimination through the nonsemisimple Jordan extensions;
+- clean integral elimination through the nonsplit extensions;
 - the residual three-level vanishing-cycle complex;
 - the crown.
 
-The wild-infinity wall is now a three-level integral extension problem, not an uncontrolled `p`-dimensional stationary-phase problem.
+The wild-infinity wall is a three-level integral extension problem after a unimodular associated-graded reduction, not an uncontrolled `p`-dimensional stationary-phase problem.
