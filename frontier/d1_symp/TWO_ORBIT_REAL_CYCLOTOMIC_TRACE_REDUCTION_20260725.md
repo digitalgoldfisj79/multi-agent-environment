@@ -5,7 +5,7 @@
 **Scope:** analytic `d=1` Airy wall, primes `p congruent 5 mod 6`, `p>=11`.  
 **Status:** **PROVED**.
 
-## 1. Local values
+## 1. Local values and sign convention
 
 Let
 
@@ -15,21 +15,21 @@ t_u=-\sum_{x\in\mathbf F_p}\zeta_p^{x^3+ux},
 f_p(u)=D_p(t_u,p).
 \]
 
-The frozen convention gives
+With this explicit Haessig/Dwork local sign and the repository's positively normalized `T_p`, the exact identity is
 
 \[
-\sum_{u\in\mathbf F_p}f_p(u)=pT_p.
+\boxed{
+\sum_{u\in\mathbf F_p}f_p(u)=-pT_p.
+}
 \]
+
+This is the sign recorded in `DIVIDED_ADAMS_HASSE_COEFFICIENT_20260725.md` and reproduced by the exact verifier below. Absolute estimates are of course unchanged.
 
 Since cubing is a bijection of `F_p`,
 
 \[
 t_0=-\sum_y\zeta_p^y=0,
-\]
-
-and hence
-
-\[
+\qquad
 f_p(0)=0.
 \]
 
@@ -80,28 +80,24 @@ Choose a nonsquare
 Such a choice exists for every admitted prime `p>=11`. Then
 
 \[
-\boxed{
 \sum_{s\text{ square}}f_p(s)
 =
-\operatorname{Tr}_{K_p^+/\mathbf Q}(f_p(1)),
-}
+\operatorname{Tr}_{K_p^+/\mathbf Q}(f_p(1))
 \]
 
 and
 
 \[
-\boxed{
 \sum_{s\text{ square}}f_p(\eta s)
 =
 \operatorname{Tr}_{K_p^+/\mathbf Q}(f_p(\eta)).
-}
 \]
 
 Therefore
 
 \[
 \boxed{
-pT_p
+-pT_p
 =
 \operatorname{Tr}_{K_p^+/\mathbf Q}
 \left(f_p(1)+f_p(\eta)\right).
@@ -164,7 +160,7 @@ The rank-two Airy Frobenius eigenvalues at `u` have complex absolute value `sqrt
 |f_p(u)|\le2p^{p/2}
 \]
 
-for every embedding. Consequently
+for every embedding, and
 
 \[
 |\tau(\gamma_p)|\le4p^{p/2}
@@ -211,7 +207,7 @@ C p^{(p+1)/2}.
 ### Proved
 
 1. The local values form exactly two full real-cyclotomic Galois orbits, indexed by square class.
-2. The complete Airy sum is the trace of `gamma_p=f_p(1)+f_p(eta)`.
+2. The signed complete Airy sum is the field trace of `gamma_p=f_p(1)+f_p(eta)`.
 3. `gamma_p` itself generates the maximal real cyclotomic field.
 4. The terminal bound is one square-root cancellation across its full set of real embeddings.
 
@@ -227,4 +223,4 @@ A sign/correlation theorem for the full real orbit of `gamma_p`, equivalently th
 
 ## 7. Verification
 
-`two_orbit_cyclotomic_trace_verify.py` checks the two Galois orbits, the exact trace identity and maximal orbit of `gamma_p` at the calibrated primes.
+`two_orbit_cyclotomic_trace_verify.py` checks the two Galois orbits, the signed trace identity and maximal orbit of `gamma_p` at the calibrated primes.
