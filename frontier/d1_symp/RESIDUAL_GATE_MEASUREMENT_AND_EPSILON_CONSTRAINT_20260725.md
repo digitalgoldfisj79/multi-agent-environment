@@ -36,22 +36,46 @@ of the tolerance `2p d_A` is
 
 ## 3. The gate unwinds to the original main-term statement
 
-With `B_A = 0`, `S_A = 2p(p-2-N_A)`, so the sufficient condition
-`|S_A| < 2p d_A` is *identically*
+The sufficient condition `|S_A| < 2p d_A` is *identically* `0 < N_A < 2p`,
+i.e. `|N_A - C_A| < d_A` where the deviation is `|S_A|/(2p)`. When `B_A = 0`
+this reads `|N_A - (p-2)| < p-2`; `B_+ = 0` is proved uniformly, and
+`B_- = 0` holds at `p = 53,71`, but **`B_- = 6,4,6,2` at `p = 11,17,23,29`**,
+so the `A=-1` threshold there is `d_- = min(C_-, 2p-C_-)`, not `p-2`.
 
-\[
-\boxed{\ \left|N_A-(p-2)\right|<p-2,\ }
-\]
-
-and `E_A = o(p^2)` is *identically* `|N_A - (p-2)| = o(p)`.
-
-Observed deviations `|N_A-(p-2)|`, both classes:
+Deviation `|S_A|/(2p)` against its own threshold `d_A`:
 
 | `p` | 11 | 17 | 23 | 29 | 53 | 71 |
 |---|---|---|---|---|---|---|
-| `A=+1` | `5` | `3` | `9` | `9` | `5` | `3` |
-| `A=-1` | `1` | `5` | `5` | `1` | `13` | `7` |
-| threshold `p-2` | `9` | `15` | `21` | `27` | `51` | `69` |
+| dev `A=+1` | `5` | `3` | `9` | `9` | `5` | `3` |
+| `d_+` | `9` | `15` | `21` | `27` | `51` | `69` |
+| dev `A=-1` | `1` | `5` | `5` | `1` | `13` | `7` |
+| `d_-` | `7` | `15` | `19` | `29` | `51` | `69` |
+| `1.5 sqrt p` | `5.0` | `6.2` | `7.2` | `8.1` | `10.9` | `12.6` |
+
+**Correction.** An earlier version of this table gave `p-2` as the threshold
+for both classes and reported `N_- = 8, 10` at `p = 11, 17`. That used
+`B_- = 0`, which is false at those primes. The correct counts are
+
+\[
+N_-=14,\,14,\,22,\,28\quad(p=11,17,23,29),
+\]
+
+verified by direct census below. The deviations and the `d_A` column in
+`residual_gate_measurement_verify.py` were already correct; only this prose
+table was wrong.
+
+### Independent census
+
+The ledger was checked against a direct count, not merely re-read. For
+`f = X^p + aX^3 + cX + d` one has `X^p = -(aX^3+cX+d) mod f`, so the Frobenius
+is composition with a **fixed cubic** and `f` is irreducible iff
+`phi^{o p}(X) = X mod f` and `f` has no root in `F_p`. This makes each test
+`O(p^3)` rather than generic modular exponentiation. The resulting census
+reproduces `N_A = C_A - S_A/(2p)` exactly at `p = 11,17,23,29` for both
+classes (`14,14 / 18,14 / 12,22 / 36,28`), independently confirming both the
+ledger and the committed `S_0, S_chi, B_A`. Extending the census past `p = 71`
+with this algorithm is the concrete way to test whether the deviation really
+grows like `sqrt p`.
 
 This should be stated plainly in the programme status: **the residual gate is
 not a new, easier problem.** It is the original error-versus-main-term
