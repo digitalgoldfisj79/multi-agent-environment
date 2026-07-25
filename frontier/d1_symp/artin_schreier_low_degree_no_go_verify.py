@@ -18,13 +18,12 @@ def trace_power_of_alpha(p: int, exponent: int) -> list[int]:
     """Return Tr(alpha^exponent) in basis 1,alpha,...,alpha^(p-1).
 
     Uses alpha^p=alpha+1 after the conjugate-sum formula.
-    Only exponents used here are at most 2p-1.
+    All exponents used here are at most 2p-1.
     """
     result = [0] * p
     for j in range(p - 1, exponent + 1, p - 1):
         coefficient = (-comb(exponent, j)) % p
         remaining = exponent - j
-        # remaining is at most p here.  Reduce alpha^p=alpha+1.
         if remaining == p:
             result[1] = (result[1] + coefficient) % p
             result[0] = (result[0] + coefficient) % p
@@ -33,12 +32,17 @@ def trace_power_of_alpha(p: int, exponent: int) -> list[int]:
     return result
 
 
+def assert_minus_one_trace(p: int, exponent: int) -> None:
+    value = trace_power_of_alpha(p, exponent)
+    assert value[0] == p - 1
+    assert all(x == 0 for x in value[1:])
+
+
 def verify_prime(p: int) -> None:
     # Universal trace identities.
-    assert trace_power_of_alpha(p, p - 1)[0] == p - 1
-    assert all(x == 0 for x in trace_power_of_alpha(p, p - 1)[1:])
-    assert trace_power_of_alpha(p, 2 * p - 1)[0] == p - 1
-    assert all(x == 0 for x in trace_power_of_alpha(p, 2 * p - 1)[1:])
+    assert_minus_one_trace(p, p - 1)
+    assert_minus_one_trace(p, 2 * p - 2)
+    assert_minus_one_trace(p, 2 * p - 1)
 
     # Quadratic critical moment.
     quadratic_moment = (p - 1) // 2
@@ -47,26 +51,47 @@ def verify_prime(p: int) -> None:
 
     # Cubic first gate and final contradiction.
     h = (p - 2) // 3
-    first_moment = h + 1
-    final_moment = 2 * h + 1
-    assert 3 * first_moment == p + 1
-    assert 3 * final_moment == 2 * p - 1
-    assert first_moment <= p - 4
-    assert final_moment <= p - 4
+    cubic_first = h + 1
+    cubic_final = 2 * h + 1
+    assert 3 * cubic_first == p + 1
+    assert 3 * cubic_final == 2 * p - 1
+    assert cubic_first <= p - 4
+    assert cubic_final <= p - 4
 
-    # For beta=X^3+rX, coefficient of X^(p-1) in beta^m is m*r.
     for r in range(p):
-        trace_first = (-first_moment * r) % p
+        trace_first = (-cubic_first * r) % p
         if trace_first == 0:
             assert r == 0
 
-    # Pure-cube final trace is -1.
-    final_trace = trace_power_of_alpha(p, 3 * final_moment)
-    assert final_trace[0] == p - 1
-    assert all(x == 0 for x in final_trace[1:])
+    assert_minus_one_trace(p, 3 * cubic_final)
+
+    # Quartic gates.
+    if p % 4 == 1:
+        quartic_direct = (p - 1) // 4
+        assert quartic_direct <= p - 4
+        assert 4 * quartic_direct == p - 1
+    else:
+        quartic_first = (p + 1) // 4
+        quartic_second = quartic_first + 1
+        quartic_final = (p - 1) // 2
+        assert quartic_first <= p - 4
+        assert quartic_second <= p - 4
+        assert quartic_final <= p - 4
+
+        for r in range(p):
+            if (-quartic_first * r) % p == 0:
+                assert r == 0
+
+        coefficient = comb(quartic_second, 2) % p
+        assert coefficient != 0
+        for s in range(p):
+            if (-coefficient * s * s) % p == 0:
+                assert s == 0
+
+        assert 4 * quartic_final == 2 * p - 2
+        assert_minus_one_trace(p, 4 * quartic_final)
 
     # Möbius logarithmic-derivative identity at every base-field r.
-    # f(r)=f'(r)=-1, hence sum 1/(alpha+i-r)=-1.
     for r in range(p):
         f_r = (pow(r, p, p) - r - 1) % p
         fprime_r = (-1) % p
@@ -74,8 +99,7 @@ def verify_prime(p: int) -> None:
         assert fprime_r * pow(f_r, -1, p) % p == 1
 
     print(
-        f"p={p}: quadratic m={quadratic_moment}, "
-        f"cubic gates {first_moment},{final_moment}: PASS"
+        f"p={p}: quadratic, cubic and quartic gates PASS"
     )
 
 
