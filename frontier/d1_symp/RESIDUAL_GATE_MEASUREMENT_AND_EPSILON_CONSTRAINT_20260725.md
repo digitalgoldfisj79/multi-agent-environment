@@ -1,131 +1,207 @@
-# Measuring the residual gate, and a p-adic constraint on the transport sign
+# Measuring the residual gate and the p-adic constraint on the transport sign
 
-**Date:** 2026-07-25
-**Branch:** `claude/airy-next-after-circularity-8jlrek`
-**Scope:** the conditional ledger gate of `CONDITIONAL_LEDGER_GATE_AFTER_ACTUAL_PASCAL_OSCILLATOR_20260725.md`.
-**Status:** the gate arithmetic is confirmed. Two observations follow from measuring `E_A` on committed data, which had not been done.
+**Date:** 2026-07-25  
+**Branch:** `gpt56/airy-gaussian-independent-audit-20260725`  
+**Scope:** the conditional ledger gate after the actual Pascal oscillator theorem.  
+**Status:** the finite measurements and gate arithmetic are confirmed. The residual gate is the original q-line main-term problem, and a nonzero Airy coefficient requires a Tate-normalized virtual residual with an exact denominator.
 
-## 1. What was checked
+## 1. Independent checks
 
-Both new verifiers were run independently and pass:
-`pascal_actual_oscillator_verify.py` (42 primes to 199; `p=11` oscillator sum
-`121 = 11^2`, punctured `120`; joint order `>= 5` with zero ordinary Hessian)
-and `terminal_quantum_bar_verify.py` (`p = 3,5,7,11`, terminal homology
-`{1:1, 2:1}`).
+Both new verifiers pass independently:
 
-The gate arithmetic is also confirmed. With `C_A = p-2+B_A`,
-`d_A = min{C_A, 2p-C_A}` and `N_A = C_A - S_A/(2p)`, the chain
-`|S_A| < 2p d_A` `=>` `0 < N_A < 2p`, and
-`|E_A| < 2p d_A - 2(p-1) sqrt p` after subtracting the Airy term, is correct.
-`N_A` is a non-negative integer at all six committed primes.
+- `pascal_actual_oscillator_verify.py`: block theorem through odd primes `p<=199`, exact `p=11` sum `121=11^2`, punctured sum `120`, and zero ordinary Hessian of the nonlinear high phase;
+- `terminal_quantum_bar_verify.py`: terminal homology `{1:1,2:1}` at `p=3,5,7,11`.
 
-## 2. `E_A` is exactly computable, and the gate already passes
+The ledger identity
 
-`S_A = S_0 + A S_chi` is committed at `p = 11,17,23,29` and (via `N_+`, `N_-`)
-at `p = 53,71`; `p rho_p = T_p/p^((p-3)/2)` is exactly computable. So
-`E_A = S_A - eps_A p rho_p` is exact for each `eps_A in {0,+1,-1}`.
+\[
+N_A=C_A-\frac{S_A}{2p},
+\qquad
+C_A=p-2+B_A,
+\]
 
-Result: **the sufficient condition holds at every committed prime, for every
-`eps_A`, with one marginal exception** (`p=11`, `A=+1`, `eps=+1`, giving
-`132` against a threshold of `131.7`). The margin then widens rapidly. Usage
-of the tolerance `2p d_A` is
+and the implication
+
+\[
+|S_A|<2p\min(C_A,2p-C_A)
+\Longrightarrow
+0<N_A<2p
+\]
+
+are exact.
+
+## 2. Exact finite measurement of `E_A`
+
+Every ingredient is committed at
+
+\[
+p=11,17,23,29,53,71.
+\]
+
+For each `epsilon_A in {0,+1,-1}`, define
+
+\[
+E_A=S_A-\epsilon_A p\rho_p,
+\qquad
+p\rho_p=\frac{T_p}{p^{(p-3)/2}}.
+\]
+
+The sufficient Airy-subtracted inequality holds at every committed prime for every `epsilon_A`, except the marginal case
+
+\[
+p=11,\quad A=+1,\quad\epsilon_A=+1,
+\]
+
+where `132` exceeds the strict threshold `131.7`.
+
+The raw tolerance usage
+
+\[
+\max_A\frac{|S_A|}{2p d_A}
+\]
+
+is
 
 | `p` | 11 | 17 | 23 | 29 | 53 | 71 |
 |---|---:|---:|---:|---:|---:|---:|
-| `max_A |S_A| / 2p d_A` | `0.56` | `0.33` | `0.43` | `0.33` | `0.25` | `0.10` |
+| usage | `0.56` | `0.33` | `0.43` | `0.33` | `0.25` | `0.10` |
 
-## 3. The gate unwinds to the original main-term statement
+This is calibration only; it is not an asymptotic estimate.
 
-With `B_A = 0`, `S_A = 2p(p-2-N_A)`, so the sufficient condition
-`|S_A| < 2p d_A` is *identically*
+## 3. The residual gate is not a smaller theorem
+
+When `B_A=0`,
 
 \[
-\boxed{\ \left|N_A-(p-2)\right|<p-2,\ }
+S_A=2p(p-2-N_A),
 \]
 
-and `E_A = o(p^2)` is *identically* `|N_A - (p-2)| = o(p)`.
+so
 
-Observed deviations `|N_A-(p-2)|`, both classes:
+\[
+\boxed{
+|S_A|<2p d_A
+\iff
+|N_A-(p-2)|<p-2.
+}
+\]
+
+Because the Airy contribution is `O(p^(3/2))=o(p^2)`, requiring `E_A=o(p^2)` is equivalent at the main scale to
+
+\[
+\boxed{N_A-(p-2)=o(p)}
+\]
+
+when `B_A=0`. In general the centre is `p-2+B_A`; the same reduction holds if `B_A=o(p)`.
+
+The observed deviations are of square-root size:
 
 | `p` | 11 | 17 | 23 | 29 | 53 | 71 |
-|---|---|---|---|---|---|---|
+|---|---:|---:|---:|---:|---:|---:|
 | `A=+1` | `5` | `3` | `9` | `9` | `5` | `3` |
 | `A=-1` | `1` | `5` | `5` | `1` | `13` | `7` |
-| threshold `p-2` | `9` | `15` | `21` | `27` | `51` | `69` |
 
-This should be stated plainly in the programme status: **the residual gate is
-not a new, easier problem.** It is the original error-versus-main-term
-statement in its sharpest form. Among `p^2` polynomials each irreducible with
-probability `~1/p`, the count has mean `~p` and standard deviation `~sqrt p`;
-the observed deviations are `1..13` against `1.5 sqrt p = 5.0..12.6`, entirely
-consistent. Failure needs a `~sqrt p`-sigma fluctuation, exactly as
-`D1_ATTACK.md` said at the outset.
+They are consistent with the original `D1_ATTACK.md` picture of a count of order `p` fluctuating on scale `sqrt(p)`.
 
-What the Pascal and quantum-bar theorems genuinely deliver is the *terminal
-skeleton* of the object and the retirement of the Airy boulder. They do not
-bound the deviation, and no reformulation so far has made that bound easier.
+The Pascal and quantum-bar theorems therefore deliver the terminal skeleton and retire the absolute Airy bound as a prerequisite. They do not bound the q-line deviation.
 
-## 4. A p-adic constraint on `eps_A` that has not been recorded
+## 4. Exact p-adic valuation
 
-`S_A` is a rational integer. But `p rho_p = T_p/p^((p-3)/2)` is **not** a
-`p`-adic integer for `p > 17`. Using the proved valuation
-`v_p(T_p) = (p+4)/3`,
+The proved valuation is
 
 \[
-v_p\!\left(p\rho_p\right)=\frac{p+4}3-\frac{p-3}2=-\frac{p-17}6,
+v_p(T_p)=\frac{p+4}{3}.
 \]
 
-confirmed exactly at all six primes (`0, 0, -1, -2, -6, -9` for
-`p = 11,17,23,29,53,71`, against `-(p-17)/6 = -(-1), 0, 1, 2, 6, 9`).
-
-Therefore, if `eps_A != 0`, then
+Hence
 
 \[
-\boxed{\ v_p(E_A)=-\frac{p-17}6\ }
+\boxed{
+v_p(p\rho_p)
+=\frac{p+4}{3}-\frac{p-3}{2}
+=-\frac{p-17}{6}.
+}
 \]
 
-exactly: the complementary complex must carry a Tate twist supplying precisely
-that growing `p`-power denominator. This is a hard, checkable constraint on the
-bridge that is currently unstated, and it forces a dichotomy:
+The exact valuations at the six committed primes are
 
-- **If `E_A` is an ordinary integer** — as it would be if the complementary
-  object is assembled from honest `q`-line and boundary point counts — then
-  `eps_A = 0` is forced for every `p > 17`. The Airy constituent then does not
-  appear in either arithmetic projector, `S_A = E_A`, and **the entire Airy
-  input is irrelevant to the crown.** That would be a major structural finding,
-  and would explain why the transport has resisted construction.
-- **If `E_A` is a twisted trace**, its denominator must match
-  `p^((p-17)/6)` on the nose. Since the Pascal oscillator twist is
-  `m = (p-7)/2`, there is room, but the normalisation
-  `Tr(F | D_p(m)) = T_p/p^((p-3)/2)` divides by `p^((p-3)/2)` rather than
-  `p^m`, and the discrepancy between `(p-3)/2` and `(p-7)/2` should be
-  reconciled explicitly before the gate is relied on.
+\[
+\boxed{1,\ 0,\ -1,\ -2,\ -6,\ -9}
+\]
 
-**Recommended check, cheap and decisive:** state which of the two holds. If the
-first, the conditional gate is vacuous in its Airy term and the programme
-should say so; if the second, verify the twist bookkeeping against
-`v_p(E_A) = -(p-17)/6` at `p = 23, 29, 53, 71`, where every quantity is
-already committed.
+for `p=11,17,23,29,53,71`. The earlier prose value `0` at `p=11` was a transcription error; the formula and verifier give `1`.
 
-## 5. Repository hygiene
+Thus `p rho_p` is not a `p`-adic integer for `p>17`.
 
-The branch head `c4d0432` is built on `06b5fc0`, **not** on the corrected
-`55adf06`. It therefore still carries, in
-`AIRY_GAUSSIAN_LAW_AND_TARGET_FALSIFICATION_20260725.md`:
+## 5. Integrality dichotomy
 
-- the title and section 3 ruling asserting the target "is false", which the
-  independent audit itself required be demoted to the finite exclusion
-  `C < 4.8468292139`;
-- **Lemma 5.1 stated for "every odd prime", which is false at `p = 3`**, where
-  `Tr(x^3) = (Tr x)^3 = Tr(x)` vanishes identically on `ker Tr`;
-- the withdrawn recommendation to obtain `(M_p, S_p)` by scalar fitting.
+Suppose
 
-`55adf06` should be merged before PR #17 is merged, or the false lemma enters
-the main line.
+\[
+S_A=\epsilon_A p\rho_p+E_A.
+\]
 
-## 6. Verification
+### If `E_A` is an untwisted integral trace
 
-`residual_gate_measurement_verify.py` recomputes `p rho_p` exactly from the
-committed `T_p`, reproduces `N_A` from `S_0`, `S_chi`, `B_A` at all six primes,
-evaluates `E_A` for each `eps_A`, and asserts the valuation identity
-`v_p(p rho_p) = -(p-17)/6`.
+If `E_A` is the trace of an honest untwisted q-line or boundary complex, then it is algebraically integral. Since `S_A` is an integer, negative valuation of `p rho_p` forces
+
+\[
+\boxed{\epsilon_A=0\qquad(p>17).}
+\]
+
+Under this interpretation the Airy term does not occur in either raw arithmetic projector.
+
+### If `E_A` is a Tate-normalized virtual trace
+
+A nonzero `epsilon_A` is possible only when `E_A` carries the compensating denominator
+
+\[
+\boxed{v_p(E_A)=-\frac{p-17}{6}.}
+\]
+
+The exponent bookkeeping is consistent. The Kummer bridge gives
+
+\[
+\operatorname{Tr}(F\mid\mathcal D_p)=\frac{T_p}{p^2},
+\]
+
+and the oscillator twist is
+
+\[
+m=\frac{p-7}{2}.
+\]
+
+Therefore
+
+\[
+\operatorname{Tr}(F\mid\mathcal D_p(m))
+=\frac{T_p}{p^{2+m}}
+=\frac{T_p}{p^{(p-3)/2}}
+=p\rho_p,
+\]
+
+because
+
+\[
+2+m=\frac{p-3}{2}.
+\]
+
+There is no unresolved exponent gap. The unresolved issue is categorical: the bridge must state whether its residual is raw and integral or Tate-normalized and virtual, and it must exhibit the compensating twists explicitly.
+
+Scalar data alone cannot decide `epsilon_A`; it only imposes this exact valuation constraint.
+
+## 6. Repository hygiene
+
+Corrected commit `55adf068773c88f81790b295165c417a627c8076` and measurement commit `89467e2ceb63cd703ad545d15f12d3b10cd755d2` were merged into the PR #17 head at
+
+`c6334d34d837d89d8d993b6d41c10f8744a3ebef`.
+
+The false global-unboundedness ruling, the characteristic-3 version of Lemma 5.1, and the scalar `(M_p,S_p)` fitting recommendation are no longer present on the PR branch.
+
+## 7. Verification
+
+`residual_gate_measurement_verify.py` recomputes `p rho_p` exactly, reconstructs `N_A` from the committed ledger, evaluates every `E_A`, and asserts
+
+\[
+v_p(p\rho_p)=-(p-17)/6.
+\]
