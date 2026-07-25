@@ -2,7 +2,6 @@
 
 **Date:** 2026-07-25  
 **Branch:** `gpt56/d1-main-twisted-descent-20260724`  
-**Parent head before this status:** `c080357ec96b8a93be8e56271d7965dbf5da2a12`  
 **Scope:** function-field `d=1` Fortune sibling only. Papers V and VI remain frozen.
 
 ## Ruling
@@ -17,7 +16,7 @@ The corrected configuration/Fourier programme has nevertheless advanced material
 - the Laurent/Pascal coefficient--normal map is an exact anti-symplectic isomorphism;
 - its graph is a canonical Lagrangian correspondence;
 - the cubic-origin affine and projective normalizations are completely calibrated;
-- the oscillator attached to any realized polarization has exactly the required half-codimension Tate size.
+- a compatible oscillator model has exactly the required half-codimension Tate size.
 
 The remaining application theorem is one nonlinear nearby-cycle realization statement, written precisely below.
 
@@ -76,7 +75,7 @@ h_{p,r}(0)
 }
 \]
 
-Thus the semisimplified affine object is
+Thus
 
 \[
 \boxed{
@@ -141,7 +140,7 @@ R\Gamma_c(\mathbf A^1\times\mathbf G_m)
 }
 \]
 
-Translation and scaling at the cubic origin are therefore closed bookkeeping, not part of the remaining wall.
+Translation and scaling at the cubic origin are therefore closed bookkeeping.
 
 ## 4. Canonical symplectic sparse-frequency geometry
 
@@ -169,7 +168,6 @@ It carries the nondegenerate alternating form
 \omega_p([f],[g])
 =[T^{p-1}](f'g-fg').
 }
-\]
 
 On monomials,
 
@@ -189,13 +187,7 @@ At root infinity, with `z=T^(-1)`, this is exactly
 }
 \]
 
-Translation acts by one regular nilpotent block
-
-\[
-J_{p-7},
-\]
-
-and the intrinsic lower half
+Translation acts by one regular nilpotent block `J_(p-7)`, and
 
 \[
 \mathcal L_p
@@ -206,9 +198,7 @@ and the intrinsic lower half
 \{T^4,\ldots,T^{(p-1)/2}\}
 \]
 
-is a canonical affine-invariant Lagrangian.
-
-The affine-conformal alternating form is unique up to scalar.
+is a canonical affine-invariant Lagrangian. The affine-conformal alternating form is unique up to scalar.
 
 ## 5. Exact anti-symplectic Pascal theorem
 
@@ -217,7 +207,7 @@ Read:
 - `PASCAL_SPARSE_BLOCK_ANTI_SYMPLECTIC_THEOREM_20260725.md`;
 - `pascal_sparse_antisymplectic_verify.py`.
 
-For sparse coefficient and high normal indices
+For
 
 \[
 H=\{4,\ldots,p-4\},
@@ -242,7 +232,7 @@ A binomial/hockey-stick calculation proves
 \boxed{D^tWD=-W.}
 \]
 
-Thus the actual high Pascal coefficient--normal map is anti-symplectic. Its graph
+Thus the actual high Pascal coefficient--normal map is anti-symplectic, and its graph
 
 \[
 \Gamma_D
@@ -253,9 +243,7 @@ Thus the actual high Pascal coefficient--normal map is anti-symplectic. Its grap
 
 is Lagrangian.
 
-This is the exact linear correspondence present in the committed wild-infinity expansion. It is stronger than the earlier determinant-one result.
-
-## 6. Oscillator evaluation and its limitation
+## 6. Compatible oscillator model and its limitation
 
 Read:
 
@@ -263,11 +251,10 @@ Read:
 - `canonical_quadratic_oscillator_verify.py`;
 - `GEOMETRIC_WEIL_KERNEL_APPLICABILITY_AUDIT_20260725.md`.
 
-Degree reversal supplies one explicit anti-symplectic polarization and the nondegenerate quadratic form
+Degree reversal supplies one explicit anti-symplectic polarization and the nondegenerate model
 
 \[
-Q_p
-=
+Q_p=
 \sum_{a=4}^{p-4}a x_a^2.
 \]
 
@@ -281,13 +268,13 @@ For every `q=p^r`,
 }
 \]
 
-The punctured oscillator has virtual class
+The punctured model has virtual class
 
 \[
-\mathbf Q_\ell(-(p-7)/2)-\mathbf Q_\ell.
+\mathbf Q_\ell(-(p-7)/2)-\mathbf Q_\ell,
 \]
 
-Consequently its tensor product with the Airy block is exactly
+and therefore its Airy tensor has the formally required class
 
 \[
 \boxed{
@@ -295,9 +282,7 @@ Consequently its tensor product with the Airy block is exactly
 }
 \]
 
-This is the open-sector Airy class required by Fourier localization.
-
-However, the actual Pascal map is `D`, not degree reversal. The branch has **not** proved that the wild Smith-defect phase is right-equivalent to the displayed quadratic form. The quadratic note is an exact oscillator model, not an identification theorem.
+However, the actual Pascal map is `D`, not degree reversal. The branch has **not** proved that the wild Smith-defect phase is right-equivalent to the displayed quadratic form. This is an exactly evaluated compatible model, not the identification theorem.
 
 Published geometric Weil theory supplies the canonical oscillator kernel and its normalization once the wild nearby-cycle complex is realized as the Lagrangian kernel attached to `Gamma_D`. It does not prove that realization.
 
@@ -308,7 +293,7 @@ Read:
 - `Q_LINE_P11_R3_INDEPENDENT_VERIFICATION_20260725.md`;
 - `qline_p11_r3_parallel_verify.py`.
 
-A fresh CPU-XL calculation factored every polynomial in all
+A fresh CPU-XL calculation factored all
 
 \[
 (11^3-2)11^3=1,769,899
@@ -323,8 +308,6 @@ generic `(q,t)` cells. It returned
 S_3=-7007.
 }
 \]
-
-This independently confirms the previously committed third trace.
 
 Under the standard assumption that the algebraic cubic-power contribution is an integral multiple of `11^3`, the nearest algebraic value leaves residual `-352`, forcing a pure weight-one rank at least `10`. This is a conditional lower bound, not a proof of growth with `p`.
 
@@ -344,7 +327,7 @@ The Fourier localization triangle gives
 +[\mathcal K_X(p-7)].
 \]
 
-The ambient primitive Airy block in `K_X` is `D_p`. To obtain the required sparse weight-two constituent
+The ambient primitive Airy block in `K_X` is `D_p`. To obtain
 
 \[
 \mathcal D_p(m)
@@ -372,13 +355,13 @@ This is one sharply stated new geometric theorem. It is not supplied by the ordi
 
 If proved, the lemma completes the missing **application-side transport** from the ambient Airy module into the sparse/q-line irreducibility complex.
 
-It would not by itself prove the absolute estimate
+It would not by itself prove
 
 \[
 |T_p|\le C p^{(p-1)/2}
 \]
 
-or an alternative terminal q-line certificate. The analytic main-branch wall therefore remains:
+or an alternative terminal q-line certificate. The analytic wall remains:
 
 - prove the absolute Airy estimate; or
 - prove a weaker one-sided, congruence or nonvanishing theorem sufficient to exclude simultaneous failure of both arithmetic classes.
@@ -387,7 +370,7 @@ or an alternative terminal q-line certificate. The analytic main-branch wall the
 
 Remote exact runs:
 
-1. `6a64cb547ef3c0846496861f`: all new affine-origin, symplectic, Jordan and quadratic-oscillator verifiers passed.
+1. `6a64cb547ef3c0846496861f`: all new affine-origin, symplectic, Jordan and quadratic-model verifiers passed.
 2. `6a64cc947ef3c08464968642`: Pascal anti-symplectic verifier passed through the tested prime range.
 3. `6a64c6c87ef3c084649685c3`: independent `p=11,r=3` q-line census passed.
 
@@ -399,7 +382,7 @@ Remote exact runs:
 - free affine-group quotient calibration;
 - sparse residue symplectic form and regular Jordan structure;
 - anti-symplectic Pascal coefficient--normal theorem;
-- exact oscillator normalization for the compatible quadratic model.
+- exact oscillator normalization for a compatible quadratic model.
 
 ### Published external theorem
 
