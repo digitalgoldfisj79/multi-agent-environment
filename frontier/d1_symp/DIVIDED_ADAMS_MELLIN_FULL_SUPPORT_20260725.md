@@ -5,7 +5,7 @@
 **Scope:** function-field `d=1` Fortune sibling, primes `p=5 mod 6`.  
 **Status:** the Mellin factorisation is **PROVED**. Exact support computations close bounded character support and simple character-pairing as routes to the absolute Airy bound.
 
-## 1. Local trace function
+## 1. Local trace function and sign
 
 Let
 
@@ -25,13 +25,15 @@ The local rank-two Adams trace is
 f_p(u)=D_p(t_u,p).
 \]
 
-Its complete sum is the already proved identity
+With this explicit local sign and the repository's positively normalized `T_p`,
 
 \[
-\sum_{u\in\mathbf F_p}f_p(u)=pT_p
+\boxed{
+\sum_{u\in\mathbf F_p}f_p(u)=-pT_p.
+}
 \]
 
-in the repository's frozen sign convention. Since `f_p(0)=0`, the same sum may be taken over `F_p^*`.
+Since `f_p(0)=0`, the same sum may be taken over `F_p^*`. This corrects the stale opposite sign formerly displayed in this note; it agrees with `DIVIDED_ADAMS_HASSE_COEFFICIENT_20260725.md` and the exact cyclotomic verifier.
 
 ## 2. Exact multiplicative Mellin factorisation
 
@@ -41,7 +43,7 @@ Let `E=F_(p^p)` and
 \Psi(z)=\psi(\operatorname{Tr}_{E/\mathbf F_p}z).
 \]
 
-The extension-field Airy identity gives, up to the frozen global sign,
+The extension-field Airy identity is
 
 \[
 f_p(u)=-\sum_{x\in E}\Psi(x^3+ux).
@@ -89,7 +91,7 @@ Cubing is a bijection of `F_p^*` because `p=2 mod 3`. Substituting `s=t^3` yield
 For the trivial character,
 
 \[
-\mathcal M_p(1)=pT_p.
+\boxed{\mathcal M_p(1)=-pT_p.}
 \]
 
 ## 3. Geometric interpretation
@@ -152,7 +154,7 @@ There is no nontrivial translation period or antiperiod in any tested case. For 
 5,8,11,14=(p-1)/2,
 \]
 
-so the values span the full real cyclotomic field dimension.
+so the values span the full real cyclotomic field dimension. The latter statement is now proved uniformly by `LOCAL_AIRY_ADAMS_CYCLOTOMIC_INITIAL_TERM_20260725.md`.
 
 ## 5. Ruling
 
@@ -162,6 +164,7 @@ so the values span the full real cyclotomic field dimension.
 2. The support is generically full, not a bounded collection of cubic, quadratic or other low-order characters.
 3. There is no exact period, antiperiod or uniform character-pair cancellation visible in the value function.
 4. The exact Mellin transform does not reduce to a bounded-conductor curve; it is two Gauss factors times a Kummer sum on the original cubic linear section.
+5. The local values and their square-class combination do not descend to a bounded-degree cyclotomic field.
 
 The exceptional quadratic zero at `p=11` is not stable and cannot support a theorem.
 
@@ -173,4 +176,4 @@ The absolute estimate
 |T_p|\le C p^{(p-1)/2}
 \]
 
-requires cancellation inside the full-support Kummer sum, or an equivalent characteristic-`p` correlation theorem. Mellin diagonalisation alone does not reduce the complexity.
+requires cancellation inside the full-support Kummer sum, square-root cancellation across the full real-cyclotomic orbit, or an equivalent characteristic-`p` correlation theorem. Mellin diagonalisation alone does not reduce the complexity.
