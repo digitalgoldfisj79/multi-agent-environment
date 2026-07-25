@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Exact verification that I_-(infinity)=0 at p=53 and p=71.
+"""Exact complete finite-boundary census at p=53 and p=71.
 
 For prime degree p, a monic polynomial f over F_p is irreducible iff
 
@@ -7,11 +7,9 @@ For prime degree p, a monic polynomial f over F_p is irreducible iff
     and
     X^(p^p)=X mod f.
 
-The script checks every constant d in the boundary family
+The script checks every constant in all four q-line boundary readings:
 
-    X^p + a X^3 + d
-
-for the stated nonsquare a.
+    I_+(infinity), I_-(infinity), I_+(2), I_-(2).
 """
 
 from __future__ import annotations
@@ -89,8 +87,8 @@ def gcd_polynomial(a, b, p):
     return [(value * inverse) % p for value in a]
 
 
-def boundary_polynomial(p, cubic, constant):
-    return [constant, 0, 0, cubic] + [0] * (p - 4) + [1]
+def sparse_polynomial(p, cubic, linear, constant):
+    return [constant % p, linear % p, 0, cubic % p] + [0] * (p - 4) + [1]
 
 
 def classify(polynomial, p):
@@ -108,28 +106,53 @@ def classify(polynomial, p):
     return "other"
 
 
-def verify(p, nonsquare):
+def census(p, cubic, linear):
     counts = {"linear": 0, "other": 0, "irreducible": 0}
-    irreducible_constants = []
+    constants = []
     for constant in range(p):
-        result = classify(boundary_polynomial(p, nonsquare, constant), p)
+        result = classify(sparse_polynomial(p, cubic, linear, constant), p)
         counts[result] += 1
         if result == "irreducible":
-            irreducible_constants.append(constant)
+            constants.append(constant)
+    return counts, constants
 
-    assert not irreducible_constants
-    expected = {
+
+def verify(p, nonsquare):
+    # q=infinity, square and nonsquare readings.
+    infinity_square, square_constants = census(p, 1, 0)
+    infinity_nonsquare, nonsquare_constants = census(p, nonsquare, 0)
+
+    inverse_two = pow(2, -1, p)
+    q2_linear = -3 * inverse_two % p
+    q2_square_cubic = inverse_two
+    q2_nonsquare_cubic = pow(2 * nonsquare % p, -1, p)
+    q2_square, q2_square_constants = census(p, q2_square_cubic, q2_linear)
+    q2_nonsquare, q2_nonsquare_constants = census(
+        p, q2_nonsquare_cubic, q2_linear
+    )
+
+    assert not square_constants
+    assert not nonsquare_constants
+    assert not q2_square_constants
+    assert not q2_nonsquare_constants
+
+    expected_nonsquare_infinity = {
         53: {"linear": 35, "other": 18, "irreducible": 0},
         71: {"linear": 47, "other": 24, "irreducible": 0},
     }[p]
-    assert counts == expected
-    print(f"p={p}, a={nonsquare}: {counts}, I_-(infinity)=0: PASS")
+    assert infinity_nonsquare == expected_nonsquare_infinity
+
+    print(f"p={p}: I_+(infinity)=I_-(infinity)=I_+(2)=I_-(2)=0")
+    print(f"  infinity square:    {infinity_square}")
+    print(f"  infinity nonsquare: {infinity_nonsquare}")
+    print(f"  q=2 square:         {q2_square}")
+    print(f"  q=2 nonsquare:      {q2_nonsquare}")
 
 
 def main():
     verify(53, 2)
     verify(71, 7)
-    print("Q_INFINITY_NONSQUARE_COUNTEREXAMPLE_VERIFY: PASS")
+    print("COMPLETE_BOUNDARY_COUNTEREXAMPLE_VERIFY: PASS")
 
 
 if __name__ == "__main__":
