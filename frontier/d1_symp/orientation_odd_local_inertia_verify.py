@@ -10,17 +10,32 @@ from __future__ import annotations
 import sympy as sp
 
 
+def reduce_power(expr, variable, modulus_degree: int, modulus_value) -> sp.Expr:
+    """Reduce variable**modulus_degree to modulus_value term by term."""
+    output = 0
+    for term in sp.Add.make_args(sp.expand(expr)):
+        exponent = int(term.as_powers_dict().get(variable, 0))
+        coefficient = term / variable**exponent
+        quotient, remainder = divmod(exponent, modulus_degree)
+        output += coefficient * modulus_value**quotient * variable**remainder
+    return sp.expand(output)
+
+
 def check_s_infinity() -> None:
     z, u, a = sp.symbols("z u a", nonzero=True)
-    b = -u / (12 * a)
+    # 3*a^4=1, hence 1/a=3*a^3.
+    b = -u * a**3 / 4
     x = a / z + b * z
-    # Work through the orders needed, imposing 3*a**4=1.
-    critical = sp.expand(3 * x**4 + u * x**2 - z**-4)
-    critical = sp.expand(critical.subs(a**4, sp.Rational(1, 3)))
-    assert sp.expand(critical).coeff(z, -4) == 0
-    assert sp.simplify(sp.expand(critical).coeff(z, -2)) == 0
+    critical = reduce_power(
+        3 * x**4 + u * x**2 - z**-4,
+        a,
+        4,
+        sp.Rational(1, 3),
+    )
+    assert critical.coeff(z, -4) == 0
+    assert sp.simplify(critical.coeff(z, -2)) == 0
 
-    value = sp.expand(4 * x**3 + 2 * u * x)
+    value = reduce_power(4 * x**3 + 2 * u * x, a, 4, sp.Rational(1, 3))
     assert sp.simplify(value.coeff(z, -3) - 4 * a**3) == 0
     assert sp.simplify(value.coeff(z, -1) - u * a) == 0
     print("s=infinity stationary expansion: PASS")
@@ -28,24 +43,27 @@ def check_s_infinity() -> None:
 
 def check_u_infinity_large() -> None:
     z, s, a = sp.symbols("z s a", nonzero=True)
-    c = -s / (2 * a)
+    # a^2=-1/3, hence 1/a=-3*a and -s/(2a)=3*s*a/2.
+    c = sp.Rational(3, 2) * s * a
     x = a / z + c * z**3
-    critical = sp.expand(3 * x**4 + z**-2 * x**2 - s)
-    # Reduce powers using a^2=-1/3.
-    critical = sp.rem(
-        sp.Poly(sp.together(critical * z**4), a),
-        sp.Poly(3 * a**2 + 1, a),
-    ).as_expr() / z**4
-    assert sp.expand(critical).coeff(z, -4) == 0
-    assert sp.expand(critical).coeff(z, 0) == 0
+    critical = reduce_power(
+        3 * x**4 + z**-2 * x**2 - s,
+        a,
+        2,
+        -sp.Rational(1, 3),
+    )
+    assert critical.coeff(z, -4) == 0
+    assert critical.coeff(z, 0) == 0
 
-    value = sp.expand(4 * x**3 + 2 * z**-2 * x)
-    reduced = sp.rem(
-        sp.Poly(sp.together(value * z**3), a),
-        sp.Poly(3 * a**2 + 1, a),
-    ).as_expr() / z**3
-    assert sp.simplify(sp.expand(reduced).coeff(z, -3) - 2 * a / 3) == 0
-    assert sp.simplify(sp.expand(reduced).coeff(z, 1) - s / a) == 0
+    value = reduce_power(
+        4 * x**3 + 2 * z**-2 * x,
+        a,
+        2,
+        -sp.Rational(1, 3),
+    )
+    assert sp.simplify(value.coeff(z, -3) - 2 * a / 3) == 0
+    # s/a=-3*s*a under a^2=-1/3.
+    assert sp.simplify(value.coeff(z, 1) + 3 * s * a) == 0
     print("u=infinity large-branch expansion: PASS")
 
 
@@ -59,11 +77,7 @@ def check_u_infinity_small() -> None:
 
 
 def induced_character(d: int, exponent: int) -> list[int]:
-    """Character of Psi^exponent(Ind from the trivial index-d subgroup model).
-
-    On the tame quotient C_d, the induction character is d at identity and zero
-    elsewhere.  Adams sends chi(g) to chi(g^exponent).
-    """
+    """Tame quotient character of the Adams image of an index-d induction."""
     return [d if (exponent * k) % d == 0 else 0 for k in range(d)]
 
 
@@ -84,7 +98,6 @@ def check_regular_adams() -> None:
 
 def check_s_zero_class() -> None:
     # In R(C2), (3*1+chi)*(chi-1)=2*(chi-1).
-    # Store coefficients in basis [1, chi], with chi^2=1.
     left = (-3 + 1, 3 - 1)
     right = (-2, 2)
     assert left == right
