@@ -3,7 +3,7 @@
 **Date:** 2026-07-26  
 **Branch:** `gpt56/fortune-strategy-synthesis-audit-20260726`  
 **Scope:** proposed paired square-class compactification after the secondary Hattori--Stallings/Artin--Schreier construction.  
-**Status:** the Kummer classification, sign-twist criterion, common quotient, fixed-locus theorem, general-type quotient and point-count ledgers below are **PROVED**. The function-field `d=1` crown remains **OPEN**.
+**Status:** the Kummer classification, sign-twist criterion, common quotient, fixed-locus theorem and point-count ledgers below are **PROVED**. The quotient has one isolated wild singularity whose discrepancy and regular-model behaviour remain **OPEN**. The function-field `d=1` crown remains **OPEN**.
 
 ## 1. Fixed cubic slices and scalar weights
 
@@ -238,7 +238,7 @@ Put
 
 This is the natural proper compactification of `U_p`.
 
-## 5. The root cycle has one projective fixed point
+## 5. One projective fixed point and the wild-local wall
 
 Let `sigma` be the standard `p`-cycle. In characteristic `p`, its action on
 
@@ -266,7 +266,7 @@ For every `1 <= m <= p-2`,
 
 Therefore `q` lies on `mathscr Y_p`, and it is the complete fixed locus of every nonidentity element of `C_p`.
 
-### Theorem 5.1 -- quasi-etale general-type quotient
+### Theorem 5.1 -- exact fixed-locus and quasi-etale statement
 
 The quotient map
 
@@ -274,30 +274,30 @@ The quotient map
 \mathscr Y_p\longrightarrow\mathscr Q_p
 \]
 
-is free in codimension one and ramified only at `q`. Hence it is quasi-etale in codimension one.
+is free in codimension one and has one isolated wild quotient point, the image of `q`.
 
-The canonical class of the smooth complete intersection is
+The canonical class of the smooth source is
 
 \[
 K_{\mathscr Y_p}
 =
 \mathcal O_{\mathscr Y_p}
-\left(\frac{(p-7)(p-2)}2\right).
+\left(\frac{(p-7)(p-2)}2\right),
 \]
 
-For every admitted prime `p>=11` this is ample. Since there is no divisorial ramification,
+which is ample for every admitted `p>=11`.
 
-\[
-K_{\mathscr Y_p}=\pi^*K_{\mathscr Q_p}
-\]
+This does **not** by itself prove that the modular quotient is `Q`-Gorenstein, canonical, Witt-rational or that a resolution has the same canonical positivity. In characteristic `p`, those implications require an explicit theorem about the isolated wild `C_p` quotient singularity.
 
-as rational canonical divisors. It follows that `K_(mathscr Q_p)` is ample and
+What can be stated without that missing theorem is:
 
-\[
-\boxed{\kappa(\mathscr Q_p)=2.}
-\]
+1. the source compactification is a smooth surface of general type;
+2. the quotient is étale in codimension one and has only one local obstruction;
+3. `H^0(mathscr Y_p,K_(mathscr Y_p))` is nonzero;
+4. as a nonzero module for a `p`-group in characteristic `p`, it has a nonzero `C_p`-invariant vector;
+5. that invariant form descends on the smooth locus of `mathscr Q_p` and defines a nonzero reflexive canonical form.
 
-Every regular proper compactification of the same function field is therefore birationally of general type. There is no alternative Fano or rationally connected compactification of the common quotient hiding behind a different boundary choice.
+Thus the natural quotient is not in an automatic Fano/rationally-connected/Hodge-vanishing situation. Whether the reflexive form extends regularly across a resolution is part of the unresolved wild-local calculation. This local issue is real, but the point-count obstruction below already closes the standard congruence strategy independently of it.
 
 ## 6. Exact compactified point-count ledger
 
@@ -426,17 +426,17 @@ which is the original positivity target and, through the q-line ledger, exactly 
 2. The nonsquare class is a sign twist only for `p=1 mod 4`.
 3. The correct common quotient has point count `(N_++N_-)/2` on the irreducibility level.
 4. Its class difference is a Kummer-local-system trace, not an ordinary compactification eigenspace.
-5. The natural proper quotient has exactly one wild fixed point and is of general type.
-6. Its exact point count is `1+(p-1)W_p`.
+5. The root-cycle action on the smooth projective sparse surface has one isolated fixed point.
+6. The exact proper quotient count is `1+(p-1)W_p`.
 7. A standard mod-`p` rational-point congruence cannot exclude `W_p=0`.
 
 ### Closed
 
 1. A universal quadratic-twist compactification with two ordinary Frobenius eigenspaces.
 2. Explaining the mod-12 active mode by the scalar sign involution.
-3. Obtaining the crown from a Fano/rationally connected compactification of the common quotient.
-4. Obtaining the crown from a standard `#X = 1 mod p` theorem.
-5. Treating the common quotient point problem as smaller than invariant q-line nonsaturation.
+3. Obtaining the crown from a standard `#X = 1 mod p` theorem.
+4. Treating the common quotient point problem as smaller than invariant q-line nonsaturation.
+5. Claiming Fano/rationally-connected geometry from the quotient without resolving the isolated wild singularity.
 
 ### Remaining theorem
 
@@ -452,7 +452,9 @@ or equivalently
 \boxed{N_++N_->0.}
 \]
 
-A useful continuation would need a genuinely new one-sided compactly-supported Frobenius theorem for this specific general-type Kummer quotient. Ordinary twist decomposition, proper point congruences and boundary bookkeeping do not provide it.
+A useful continuation would need a genuinely new one-sided compactly-supported Frobenius theorem for this specific Kummer quotient. Ordinary twist decomposition, proper point congruences and boundary bookkeeping do not provide it.
+
+The isolated wild singularity may be studied independently, but resolving it cannot by itself overcome Theorem 6.1 and the congruence circularity in Section 7.
 
 ## 9. Verification
 
