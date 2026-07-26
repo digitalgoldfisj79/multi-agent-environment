@@ -309,6 +309,6 @@ This is narrower than the former wild Rees statement: the algebraic differential
 `global_sparse_smoothness_verify.py` checks:
 
 1. the multiplicity/Vandermonde singularity argument for every prime through `499`;
-2. exhaustive Jacobian ranks over `F_p` at the feasible primes `p=5,7`;
+2. exhaustive Jacobian ranks over `F_7`;
 3. the complete-intersection dimension and Chern-class arithmetic;
 4. the tensor-product dimension no-go against the exact `p=13` profile.
