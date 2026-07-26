@@ -1,0 +1,70 @@
+{
+  "classification": "proved cyclic-transfer and Artin--Schreier quotient identities; nonemptiness of the g=1 curve remains open",
+  "rows": [
+    {
+      "abstract_counterexample_all_Fp_values_zero": true,
+      "degree_p_shift_classes": 4,
+      "global_artin_schreier_coordinate_on_nonzero_slice": true,
+      "number_of_subset_orbits": 2,
+      "p": 5,
+      "sigma_weighted_minus_weighted_equals_minus_transfer": true,
+      "split_shift_classes": 1,
+      "subset_degree": 2,
+      "transfer_equals_e_p_minus_3": true
+    },
+    {
+      "abstract_counterexample_all_Fp_values_zero": true,
+      "degree_p_shift_classes": 6,
+      "global_artin_schreier_coordinate_on_nonzero_slice": true,
+      "number_of_subset_orbits": 5,
+      "p": 7,
+      "sigma_weighted_minus_weighted_equals_minus_transfer": true,
+      "split_shift_classes": 1,
+      "subset_degree": 4,
+      "transfer_equals_e_p_minus_3": true
+    },
+    {
+      "abstract_counterexample_all_Fp_values_zero": true,
+      "degree_p_shift_classes": 10,
+      "global_artin_schreier_coordinate_on_nonzero_slice": true,
+      "number_of_subset_orbits": 15,
+      "p": 11,
+      "sigma_weighted_minus_weighted_equals_minus_transfer": true,
+      "split_shift_classes": 1,
+      "subset_degree": 8,
+      "transfer_equals_e_p_minus_3": true
+    },
+    {
+      "abstract_counterexample_all_Fp_values_zero": true,
+      "degree_p_shift_classes": 12,
+      "global_artin_schreier_coordinate_on_nonzero_slice": true,
+      "number_of_subset_orbits": 22,
+      "p": 13,
+      "sigma_weighted_minus_weighted_equals_minus_transfer": true,
+      "split_shift_classes": 1,
+      "subset_degree": 10,
+      "transfer_equals_e_p_minus_3": true
+    },
+    {
+      "abstract_counterexample_all_Fp_values_zero": true,
+      "degree_p_shift_classes": 16,
+      "global_artin_schreier_coordinate_on_nonzero_slice": true,
+      "number_of_subset_orbits": 40,
+      "p": 17,
+      "sigma_weighted_minus_weighted_equals_minus_transfer": true,
+      "split_shift_classes": 1,
+      "subset_degree": 14,
+      "transfer_equals_e_p_minus_3": true
+    }
+  ],
+  "status": "PASS",
+  "theorem_checks": {
+    "artin_schreier_structure_alone_does_not_force_Fp_point": true,
+    "e_p_minus_3_is_cyclic_transfer": true,
+    "explicit_y_satisfies_sigma_y_minus_y_equals_one": true,
+    "g_equals_one_slice_is_exact_irreducibility_section": true,
+    "g_equals_y_p_minus_y_is_invariant": true,
+    "g_value_is_frobenius_shift": true,
+    "nonzero_cubic_slice_is_trace_surjective": true
+  }
+}
