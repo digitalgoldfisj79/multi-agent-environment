@@ -1,0 +1,19 @@
+{
+  "classification": "proved degree obstruction with exact p=5 boundary",
+  "rows": [
+    {"p":5,"maximum_degree_fprime_times_support":5,"minimum_degree_P_times_f":5,"split_torsor_excluded":false},
+    {"p":7,"maximum_degree_fprime_times_support":5,"minimum_degree_P_times_f":7,"split_torsor_excluded":true},
+    {"p":11,"maximum_degree_fprime_times_support":5,"minimum_degree_P_times_f":11,"split_torsor_excluded":true},
+    {"p":17,"maximum_degree_fprime_times_support":5,"minimum_degree_P_times_f":17,"split_torsor_excluded":true},
+    {"p":23,"maximum_degree_fprime_times_support":5,"minimum_degree_P_times_f":23,"split_torsor_excluded":true},
+    {"p":29,"maximum_degree_fprime_times_support":5,"minimum_degree_P_times_f":29,"split_torsor_excluded":true}
+  ],
+  "status": "PASS",
+  "theorem_checks": {
+    "distinct_root_support_degree_at_most_three": true,
+    "logarithmic_derivative_identity": "f_prime R = P f",
+    "split_torsor_implies_p_at_most_five": true,
+    "p5_square_boundary_example": true,
+    "p5_nonsquare_boundary_example": true
+  }
+}
