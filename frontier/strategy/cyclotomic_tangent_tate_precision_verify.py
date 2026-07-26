@@ -2,8 +2,8 @@
 """Structural regression for the cyclotomic tangent/Tate precision theorem.
 
 Let R=F_p[epsilon]/(epsilon^2), modelling O/(pi^2) for
-O=Z_p[zeta_p], pi=zeta_p-1.  The coefficient character sends a generator
-tau of C_p to 1+epsilon.  The script checks:
+O=Z_p[zeta_p], pi=zeta_p-1. The coefficient character sends a generator
+tau of C_p to 1+epsilon. The script checks:
 
 * tau^p=1 and the cyclic norm is zero;
 * the Tate complex alternates multiplication by epsilon and zero;
@@ -97,7 +97,8 @@ def run_prime(p: int) -> dict[str, object]:
         "tate_odd_dimension": 1,
         "coefficient_bockstein": coefficient_bockstein,
         "norm_bockstein": norm_bockstein,
-        "frobenius_tangent_coefficients": tangent_coefficients,
+        "frobenius_tangent_coefficient_count": len(tangent_coefficients),
+        "frobenius_tangent_coefficient_range": [0, p - 1],
         "count_cyclotomic_order_in_raw_hook": p - 1,
         "moment_cyclotomic_order_in_raw_hook": p,
         "minimum_raw_modulus_exponent_for_moment": p + 1,
