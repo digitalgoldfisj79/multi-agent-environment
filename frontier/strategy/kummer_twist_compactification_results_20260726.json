@@ -1,0 +1,20 @@
+{
+  "classification": "proved Kummer-twist and projective-quotient identities plus exact finite regression; crown remains open",
+  "rows": [
+    {"p":7,"n":4,"sign_exponent":2,"sign_represents_nontrivial_class":false,"N2":1,"Nplus":10,"Nminus":8,"W":10,"projective_quotient_points":61,"boundary_points":7,"cubic_open_points":54,"projective_quotient_mod_p":5,"standard_congruence_holds":false},
+    {"p":11,"n":8,"sign_exponent":4,"sign_represents_nontrivial_class":false,"N2":1,"Nplus":14,"Nminus":14,"W":15,"projective_quotient_points":151,"boundary_points":11,"cubic_open_points":140,"projective_quotient_mod_p":8,"standard_congruence_holds":false},
+    {"p":13,"n":10,"sign_exponent":5,"sign_represents_nontrivial_class":true,"N2":2,"Nplus":10,"Nminus":6,"W":10,"projective_quotient_points":121,"boundary_points":25,"cubic_open_points":96,"projective_quotient_mod_p":4,"standard_congruence_holds":false},
+    {"p":17,"n":14,"sign_exponent":7,"sign_represents_nontrivial_class":true,"N2":1,"Nplus":18,"Nminus":14,"W":17,"projective_quotient_points":273,"boundary_points":17,"cubic_open_points":256,"projective_quotient_mod_p":1,"standard_congruence_holds":true},
+    {"p":23,"n":20,"sign_exponent":10,"sign_represents_nontrivial_class":false,"N2":2,"Nplus":12,"Nminus":22,"W":19,"projective_quotient_points":419,"boundary_points":45,"cubic_open_points":374,"projective_quotient_mod_p":5,"standard_congruence_holds":false}
+  ],
+  "status": "PASS",
+  "theorem_checks": {
+    "square_classes_are_H1_mu_p_minus_3": true,
+    "sign_twist_only_for_p_1_mod_4": true,
+    "p_3_mod_4_requires_nonquadratic_scalar_cocycle": true,
+    "projective_Cp_fixed_locus_is_one_progression_point": true,
+    "compactified_point_count_is_1_plus_p_minus_1_times_W": true,
+    "standard_mod_p_point_congruence_does_not_prove_positivity": true,
+    "paired_class_modes_are_existing_sum_difference_modes": true
+  }
+}
