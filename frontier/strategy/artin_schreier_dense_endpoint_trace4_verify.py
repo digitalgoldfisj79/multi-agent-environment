@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
 """Structural regression for the uniform degree-(p+1)/2 endpoint no-go.
 
-The proof is algebraic.  At the endpoint n=(p+1)/2, the reciprocal
-semiconjugacy coefficient gives
+The proof is algebraic. At n=(p+1)/2 the reciprocal semiconjugacy gives
 
   C + 3*s3 + 3*s4 = -lambda^(-1)*binom(n,2),
   lambda^(-1)=4*s3.
@@ -11,10 +10,9 @@ The Artin--Schreier trace filtration gives
 
   Tr(R(alpha)^4)=-(C+3*s3+3*s4)=-s3/2.
 
-But a cubic-tail minimal polynomial forces Tr(beta^4)=0, while s3 is
-nonzero.  This script checks all modular scalar identities for admitted
-primes below 500 and independently checks the trace formula on the exact
-p=11,17 cube-gap candidates.
+A cubic-tail minimal polynomial forces Tr(beta^4)=0, while s3 is nonzero.
+The script checks the modular scalar identities below p=500 and evaluates
+the exact p=11,17 cube-gap candidates.
 """
 from __future__ import annotations
 
@@ -61,7 +59,6 @@ def trace_alpha_power(exponent: int, p: int) -> int:
 
 
 def direct_trace_four(s: list[int], p: int) -> int:
-    n = (p + 1) // 2
     R = list(reversed(s))
     fourth = power(R, 4, p)
     return sum(
@@ -71,7 +68,7 @@ def direct_trace_four(s: list[int], p: int) -> int:
 
 
 def main() -> None:
-    rows = []
+    checked_primes = []
     for p in primes_below(500):
         if p < 11 or p % 6 != 5:
             continue
@@ -84,12 +81,7 @@ def main() -> None:
             forced_trace = lambda_inverse * choose_n_2 % p
             assert forced_trace == -s3 * inv2 % p
             assert forced_trace != 0
-        rows.append({
-            "p": p,
-            "n": n,
-            "binom_n_2": choose_n_2,
-            "trace_multiplier_on_s3": (-inv2) % p,
-        })
+        checked_primes.append(p)
 
     candidates = {
         11: [(4, 10, 4, 2), (7, 2, 6, 4)],
@@ -107,7 +99,12 @@ def main() -> None:
 
     output = {
         "classification": "symbolic structural regression with exact finite candidates",
-        "prime_rows": rows,
+        "checked_primes": checked_primes,
+        "number_of_primes": len(checked_primes),
+        "identity": {
+            "binom_n_2": "-1/8 mod p",
+            "forced_trace_four": "-s3/2 mod p",
+        },
         "finite_candidate_checks": finite,
         "status": "PASS",
     }
@@ -115,7 +112,7 @@ def main() -> None:
         "artin_schreier_dense_endpoint_trace4_results_20260726.json"
     )
     path.write_text(json.dumps(output, indent=2, sort_keys=True) + "\n")
-    print(f"checked {len(rows)} admitted primes below 500")
+    print(f"checked {len(checked_primes)} admitted primes below 500")
     print("ARTIN_SCHREIER_DENSE_ENDPOINT_TRACE4_VERIFY: PASS")
 
 
