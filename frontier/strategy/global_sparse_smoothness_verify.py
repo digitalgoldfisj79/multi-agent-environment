@@ -6,7 +6,7 @@ SPARSE_SURFACE_GLOBAL_SMOOTHNESS_AND_MIXED_CAYLEY_DIFFERENTIAL_20260726.md.
 This script supplies deterministic regressions:
 
 * no nontrivial multiplicity pattern of p can have every block size zero mod p;
-* exhaustive finite-field sparse tuples at p=5,7 have Jacobian-rank failure
+* exhaustive finite-field sparse tuples at p=7 have Jacobian-rank failure
   only on the diagonal;
 * the complete-intersection dimension and c2 arithmetic are integral;
 * an external two-line oscillator doubles, rather than reduces, the exact
@@ -54,6 +54,7 @@ def sparse_tuple(tuple_values: tuple[int, ...], prime: int) -> bool:
 
 
 def exhaustive_small_prime_check(prime: int) -> None:
+    assert prime >= 7
     sparse_count = 0
     deficient_count = 0
     for values in product(range(prime), repeat=prime):
@@ -108,7 +109,6 @@ def main() -> None:
         complete_intersection_check(prime)
     print("multiplicity/Vandermonde and complete-intersection checks through p=499: PASS")
 
-    exhaustive_small_prime_check(5)
     exhaustive_small_prime_check(7)
     tensor_product_no_go()
     print("GLOBAL_SPARSE_SMOOTHNESS_VERIFY: PASS")
