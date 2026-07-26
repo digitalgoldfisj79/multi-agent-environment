@@ -1,0 +1,27 @@
+{
+  "identities": {
+    "circularity": "Tmid = (I4+1-p^3)/(p-1) - s p",
+    "crown_equivalence": "Tmid > -p(p+1+s) iff I4>p-1 iff W>0",
+    "fixed_point_count": "#Fix(F sigma | X_p) = p I4 + p",
+    "orbit_quantization": "Tmid = p(N2+(Nplus+Nminus)/2-(p+1+s))",
+    "projector": "sum_i (-1)^i Tr(F|M_i) = Tr(F sigma|H^2_prim(Y_p))",
+    "qline_bridge": "Tmid = p(N2-3-s+(Bplus+Bminus)/2)-S0/2"
+  },
+  "projector": {
+    "5": {"group_order": 120, "nonzero_conjugacy_classes": 1, "weighted_character_sum": 120},
+    "7": {"group_order": 5040, "nonzero_conjugacy_classes": 1, "weighted_character_sum": 5040},
+    "11": {"group_order": 39916800, "nonzero_conjugacy_classes": 1, "weighted_character_sum": 39916800},
+    "13": {"group_order": 6227020800, "nonzero_conjugacy_classes": 1, "weighted_character_sum": 6227020800},
+    "17": {"group_order": 355687428096000, "nonzero_conjugacy_classes": 1, "weighted_character_sum": 355687428096000},
+    "23": {"group_order": 25852016738884976640000, "nonzero_conjugacy_classes": 1, "weighted_character_sum": 25852016738884976640000}
+  },
+  "rows": [
+    {"Bminus": null, "Bplus": null, "I4": 124, "N2": 1, "Nminus": 6, "Nplus": 4, "S0": null, "T_air_raw": 0, "Tmid": 0, "W": 6, "airy_equals_Tmid": true, "normalized_airy": "0", "p": 5, "qline_bridge_Tmid": null, "s": 0, "threshold": -30},
+    {"Bminus": null, "Bplus": null, "I4": 426, "N2": 1, "Nminus": 8, "Nplus": 10, "S0": null, "T_air_raw": null, "Tmid": 7, "W": 10, "airy_equals_Tmid": null, "normalized_airy": null, "p": 7, "qline_bridge_Tmid": null, "s": 1, "threshold": -63},
+    {"Bminus": 6, "Bplus": 0, "I4": 1660, "N2": 1, "Nminus": 14, "Nplus": 14, "S0": -44, "T_air_raw": 322102, "Tmid": 22, "W": 15, "airy_equals_Tmid": true, "normalized_airy": "22", "p": 11, "qline_bridge_Tmid": 22, "s": 1, "threshold": -143},
+    {"Bminus": null, "Bplus": null, "I4": 1572, "N2": 2, "Nminus": 6, "Nplus": 10, "S0": null, "T_air_raw": null, "Tmid": -52, "W": 10, "airy_equals_Tmid": null, "normalized_airy": null, "p": 13, "qline_bridge_Tmid": null, "s": 0, "threshold": -182},
+    {"Bminus": 4, "Bplus": 0, "I4": 4640, "N2": 1, "Nminus": 14, "Nplus": 18, "S0": 34, "T_air_raw": 11899821517, "Tmid": -17, "W": 17, "airy_equals_Tmid": false, "normalized_airy": "29", "p": 17, "qline_bridge_Tmid": -17, "s": 0, "threshold": -306},
+    {"Bminus": 6, "Bplus": 0, "I4": 9636, "N2": 2, "Nminus": 22, "Nplus": 12, "S0": 322, "T_air_raw": -1010446643080743, "Tmid": -92, "W": 19, "airy_equals_Tmid": false, "normalized_airy": "-561/23", "p": 23, "qline_bridge_Tmid": -92, "s": -1, "threshold": -529}
+  ],
+  "status": "PASS"
+}

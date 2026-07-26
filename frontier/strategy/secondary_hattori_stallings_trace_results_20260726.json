@@ -1,0 +1,101 @@
+{
+  "classification": "proved algebraic secondary-trace identities plus exact finite regression; crown remains open",
+  "moment_rows": [
+    {
+      "c_moment_mod_p": 0,
+      "count": 4,
+      "p": 5,
+      "raw_F_sigma_count_trace": 20,
+      "raw_F_sigma_tangent_trace": 0,
+      "secondary_count": 4,
+      "secondary_tangent_mod_p": 0,
+      "square_class": "+"
+    },
+    {
+      "c_moment_mod_p": 1,
+      "count": 6,
+      "p": 5,
+      "raw_F_sigma_count_trace": 30,
+      "raw_F_sigma_tangent_trace": 5,
+      "secondary_count": 6,
+      "secondary_tangent_mod_p": 1,
+      "square_class": "-"
+    },
+    {
+      "c_moment_mod_p": 1,
+      "count": 10,
+      "p": 7,
+      "raw_F_sigma_count_trace": 70,
+      "raw_F_sigma_tangent_trace": 7,
+      "secondary_count": 10,
+      "secondary_tangent_mod_p": 1,
+      "square_class": "+"
+    },
+    {
+      "c_moment_mod_p": 4,
+      "count": 8,
+      "p": 7,
+      "raw_F_sigma_count_trace": 56,
+      "raw_F_sigma_tangent_trace": 28,
+      "secondary_count": 8,
+      "secondary_tangent_mod_p": 4,
+      "square_class": "-"
+    },
+    {
+      "c_moment_mod_p": 1,
+      "count": 14,
+      "p": 11,
+      "raw_F_sigma_count_trace": 154,
+      "raw_F_sigma_tangent_trace": 11,
+      "secondary_count": 14,
+      "secondary_tangent_mod_p": 1,
+      "square_class": "+"
+    },
+    {
+      "c_moment_mod_p": 1,
+      "count": 14,
+      "p": 11,
+      "raw_F_sigma_count_trace": 154,
+      "raw_F_sigma_tangent_trace": 11,
+      "secondary_count": 14,
+      "secondary_tangent_mod_p": 1,
+      "square_class": "-"
+    }
+  ],
+  "prime_rows": [
+    {
+      "p": 5,
+      "normalizer_invariant": {"identity_coefficient": 7, "nonidentity_coefficient": 16, "underlying_trace": 35, "coinvariant_trace": 71, "secondary_from_quotient_defect": 16},
+      "irreducible_orbit_hs_coefficients": [0, 1, 1, 1, 1]
+    },
+    {
+      "p": 7,
+      "normalizer_invariant": {"identity_coefficient": 11, "nonidentity_coefficient": 22, "underlying_trace": 77, "coinvariant_trace": 143, "secondary_from_quotient_defect": 22},
+      "irreducible_orbit_hs_coefficients": [0, 1, 1, 1, 1, 1, 1]
+    },
+    {
+      "p": 11,
+      "normalizer_invariant": {"identity_coefficient": 19, "nonidentity_coefficient": 34, "underlying_trace": 209, "coinvariant_trace": 359, "secondary_from_quotient_defect": 34},
+      "irreducible_orbit_hs_coefficients": [0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+    },
+    {
+      "p": 17,
+      "normalizer_invariant": {"identity_coefficient": 31, "nonidentity_coefficient": 52, "underlying_trace": 527, "coinvariant_trace": 863, "secondary_from_quotient_defect": 52},
+      "irreducible_orbit_hs_coefficients": [0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+    },
+    {
+      "p": 23,
+      "normalizer_invariant": {"identity_coefficient": 43, "nonidentity_coefficient": 70, "underlying_trace": 989, "coinvariant_trace": 1583, "secondary_from_quotient_defect": 70},
+      "irreducible_orbit_hs_coefficients": [0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+    }
+  ],
+  "status": "PASS",
+  "theorem_checks": {
+    "bi_equivariant_tangent_recovers_committed_moment": true,
+    "hs_coefficient_equals_divided_twisted_trace": true,
+    "local_term_formula_is_the_irreducibility_fourier_sum": true,
+    "nonvanishing_not_implied": true,
+    "normalizer_defect_formula": true,
+    "regular_orbit_shift_detection": true
+  }
+}

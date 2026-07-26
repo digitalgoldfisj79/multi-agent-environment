@@ -1,0 +1,39 @@
+{
+  "classification": "exact finite-group regression; no polynomial census",
+  "results": [
+    {
+      "complete_ab_plane_support": 5,
+      "fixed_class_character_support": 125,
+      "log_homomorphism_checks": 120,
+      "one_square_class_support": 125,
+      "p": 5,
+      "plane_checks": 25,
+      "quadratic_nonzero_a_average_support": 100,
+      "status": true,
+      "trivial_nonzero_a_average_support": 125
+    },
+    {
+      "complete_ab_plane_support": 343,
+      "fixed_class_character_support": 16807,
+      "log_homomorphism_checks": 160,
+      "one_square_class_support": 16807,
+      "p": 7,
+      "plane_checks": 49,
+      "quadratic_nonzero_a_average_support": 14406,
+      "status": true,
+      "trivial_nonzero_a_average_support": 16807
+    },
+    {
+      "complete_ab_plane_support": 19487171,
+      "fixed_class_character_support": 2357947691,
+      "log_homomorphism_checks": 160,
+      "one_square_class_support": 2357947691,
+      "p": 11,
+      "plane_checks": 121,
+      "quadratic_nonzero_a_average_support": 2143588810,
+      "status": true,
+      "trivial_nonzero_a_average_support": 2357947691
+    }
+  ],
+  "status": "PASS"
+}

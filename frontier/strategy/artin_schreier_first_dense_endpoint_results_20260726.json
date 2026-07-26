@@ -1,0 +1,22 @@
+{
+  "classification": "exact computer-assisted finite theorem; no irreducibility census",
+  "results": {
+    "11": {
+      "candidates": [
+        {"ratio_residual_8s4_plus_3s3":4,"s3_to_sn":[4,10,4,2],"wronskian_support":[[9,1]]},
+        {"ratio_residual_8s4_plus_3s3":4,"s3_to_sn":[7,2,6,4],"wronskian_support":[[9,1],[11,4]]}
+      ],
+      "cube_gap_solution_count":2,
+      "degree_half_endpoint_exists":false
+    },
+    "17": {
+      "candidates": [
+        {"ratio_residual_8s4_plus_3s3":15,"s3_to_sn":[1,10,5,8,13,7,9],"wronskian_support":[[15,1],[17,1]]},
+        {"ratio_residual_8s4_plus_3s3":1,"s3_to_sn":[16,9,0,7,14,9,1],"wronskian_support":[[15,1],[17,14]]}
+      ],
+      "cube_gap_solution_count":2,
+      "degree_half_endpoint_exists":false
+    }
+  },
+  "status":"PASS"
+}

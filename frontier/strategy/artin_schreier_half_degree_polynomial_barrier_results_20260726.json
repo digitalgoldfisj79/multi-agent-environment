@@ -1,0 +1,28 @@
+{
+  "classification": "symbolic structural regression; no prime census",
+  "p11_endpoint_discriminant_6_nonsquare": true,
+  "results": [
+    {"checked_s_count": 2, "excluded_max_degree": 7, "first_not_excluded_degree": 8, "m": 6, "p": 17, "status": true},
+    {"checked_s_count": 3, "excluded_max_degree": 10, "first_not_excluded_degree": 11, "m": 8, "p": 23, "status": true},
+    {"checked_s_count": 4, "excluded_max_degree": 13, "first_not_excluded_degree": 14, "m": 10, "p": 29, "status": true},
+    {"checked_s_count": 6, "excluded_max_degree": 19, "first_not_excluded_degree": 20, "m": 14, "p": 41, "status": true},
+    {"checked_s_count": 7, "excluded_max_degree": 22, "first_not_excluded_degree": 23, "m": 16, "p": 47, "status": true},
+    {"checked_s_count": 8, "excluded_max_degree": 25, "first_not_excluded_degree": 26, "m": 18, "p": 53, "status": true},
+    {"checked_s_count": 9, "excluded_max_degree": 28, "first_not_excluded_degree": 29, "m": 20, "p": 59, "status": true},
+    {"checked_s_count": 11, "excluded_max_degree": 34, "first_not_excluded_degree": 35, "m": 24, "p": 71, "status": true},
+    {"checked_s_count": 13, "excluded_max_degree": 40, "first_not_excluded_degree": 41, "m": 28, "p": 83, "status": true},
+    {"checked_s_count": 14, "excluded_max_degree": 43, "first_not_excluded_degree": 44, "m": 30, "p": 89, "status": true},
+    {"checked_s_count": 16, "excluded_max_degree": 49, "first_not_excluded_degree": 50, "m": 34, "p": 101, "status": true},
+    {"checked_s_count": 17, "excluded_max_degree": 52, "first_not_excluded_degree": 53, "m": 36, "p": 107, "status": true},
+    {"checked_s_count": 18, "excluded_max_degree": 55, "first_not_excluded_degree": 56, "m": 38, "p": 113, "status": true},
+    {"checked_s_count": 21, "excluded_max_degree": 64, "first_not_excluded_degree": 65, "m": 44, "p": 131, "status": true},
+    {"checked_s_count": 22, "excluded_max_degree": 67, "first_not_excluded_degree": 68, "m": 46, "p": 137, "status": true},
+    {"checked_s_count": 24, "excluded_max_degree": 73, "first_not_excluded_degree": 74, "m": 50, "p": 149, "status": true},
+    {"checked_s_count": 27, "excluded_max_degree": 82, "first_not_excluded_degree": 83, "m": 56, "p": 167, "status": true},
+    {"checked_s_count": 28, "excluded_max_degree": 85, "first_not_excluded_degree": 86, "m": 58, "p": 173, "status": true},
+    {"checked_s_count": 29, "excluded_max_degree": 88, "first_not_excluded_degree": 89, "m": 60, "p": 179, "status": true},
+    {"checked_s_count": 31, "excluded_max_degree": 94, "first_not_excluded_degree": 95, "m": 64, "p": 191, "status": true},
+    {"checked_s_count": 32, "excluded_max_degree": 97, "first_not_excluded_degree": 98, "m": 66, "p": 197, "status": true}
+  ],
+  "status": "PASS"
+}

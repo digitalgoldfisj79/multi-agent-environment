@@ -1,0 +1,54 @@
+{
+  "cases": [
+    {
+      "a": 1,
+      "c": 2,
+      "d": 2,
+      "krylov_rank": 5,
+      "p": 5,
+      "relation_zero": true
+    },
+    {
+      "a": 2,
+      "c": 0,
+      "d": 1,
+      "krylov_rank": 5,
+      "p": 5,
+      "relation_zero": true
+    },
+    {
+      "a": 1,
+      "c": 0,
+      "d": 1,
+      "krylov_rank": 7,
+      "p": 7,
+      "relation_zero": true
+    },
+    {
+      "a": 3,
+      "c": 1,
+      "d": 1,
+      "krylov_rank": 7,
+      "p": 7,
+      "relation_zero": true
+    },
+    {
+      "a": 1,
+      "c": 2,
+      "d": 2,
+      "krylov_rank": 11,
+      "p": 11,
+      "relation_zero": true
+    },
+    {
+      "a": 2,
+      "c": 0,
+      "d": 1,
+      "krylov_rank": 11,
+      "p": 11,
+      "relation_zero": true
+    }
+  ],
+  "classification": "structural regression; not a prime census",
+  "status": "PASS"
+}

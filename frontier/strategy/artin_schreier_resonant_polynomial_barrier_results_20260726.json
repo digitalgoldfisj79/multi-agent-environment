@@ -1,0 +1,28 @@
+{
+  "classification": "symbolic structural regression; no prime census",
+  "results": [
+    {"cube_root_identity": true, "m": 4, "obstruction_coefficient_m_minus_1_for_r_1": 4, "p": 11, "status": true},
+    {"cube_root_identity": true, "m": 6, "obstruction_coefficient_m_minus_1_for_r_1": 6, "p": 17, "status": true},
+    {"cube_root_identity": true, "m": 8, "obstruction_coefficient_m_minus_1_for_r_1": 8, "p": 23, "status": true},
+    {"cube_root_identity": true, "m": 10, "obstruction_coefficient_m_minus_1_for_r_1": 10, "p": 29, "status": true},
+    {"cube_root_identity": true, "m": 14, "obstruction_coefficient_m_minus_1_for_r_1": 14, "p": 41, "status": true},
+    {"cube_root_identity": true, "m": 16, "obstruction_coefficient_m_minus_1_for_r_1": 16, "p": 47, "status": true},
+    {"cube_root_identity": true, "m": 18, "obstruction_coefficient_m_minus_1_for_r_1": 18, "p": 53, "status": true},
+    {"cube_root_identity": true, "m": 20, "obstruction_coefficient_m_minus_1_for_r_1": 20, "p": 59, "status": true},
+    {"cube_root_identity": true, "m": 24, "obstruction_coefficient_m_minus_1_for_r_1": 24, "p": 71, "status": true},
+    {"cube_root_identity": true, "m": 28, "obstruction_coefficient_m_minus_1_for_r_1": 28, "p": 83, "status": true},
+    {"cube_root_identity": true, "m": 30, "obstruction_coefficient_m_minus_1_for_r_1": 30, "p": 89, "status": true},
+    {"cube_root_identity": true, "m": 34, "obstruction_coefficient_m_minus_1_for_r_1": 34, "p": 101, "status": true},
+    {"cube_root_identity": true, "m": 36, "obstruction_coefficient_m_minus_1_for_r_1": 36, "p": 107, "status": true},
+    {"cube_root_identity": true, "m": 38, "obstruction_coefficient_m_minus_1_for_r_1": 38, "p": 113, "status": true},
+    {"cube_root_identity": true, "m": 44, "obstruction_coefficient_m_minus_1_for_r_1": 44, "p": 131, "status": true},
+    {"cube_root_identity": true, "m": 46, "obstruction_coefficient_m_minus_1_for_r_1": 46, "p": 137, "status": true},
+    {"cube_root_identity": true, "m": 50, "obstruction_coefficient_m_minus_1_for_r_1": 50, "p": 149, "status": true},
+    {"cube_root_identity": true, "m": 56, "obstruction_coefficient_m_minus_1_for_r_1": 56, "p": 167, "status": true},
+    {"cube_root_identity": true, "m": 58, "obstruction_coefficient_m_minus_1_for_r_1": 58, "p": 173, "status": true},
+    {"cube_root_identity": true, "m": 60, "obstruction_coefficient_m_minus_1_for_r_1": 60, "p": 179, "status": true},
+    {"cube_root_identity": true, "m": 64, "obstruction_coefficient_m_minus_1_for_r_1": 64, "p": 191, "status": true},
+    {"cube_root_identity": true, "m": 66, "obstruction_coefficient_m_minus_1_for_r_1": 66, "p": 197, "status": true}
+  ],
+  "status": "PASS"
+}

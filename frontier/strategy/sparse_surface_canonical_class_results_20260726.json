@@ -1,0 +1,19 @@
+{
+  "classification": "proved adjunction ledger; rational-point theorem not supplied",
+  "formula": "K_Y=O((p-7)(p-2)/2)",
+  "rows": [
+    {"p":5,"ambient_projective_dimension":2,"complete_intersection_degrees":[],"canonical_coefficient":-3,"classification":"Fano"},
+    {"p":7,"ambient_projective_dimension":4,"complete_intersection_degrees":[2,3],"canonical_coefficient":0,"classification":"trivial-canonical"},
+    {"p":11,"ambient_projective_dimension":8,"complete_intersection_degrees":[2,3,4,5,6,7],"canonical_coefficient":18,"classification":"ample-canonical"},
+    {"p":17,"ambient_projective_dimension":14,"complete_intersection_degrees":[2,3,4,5,6,7,8,9,10,11,12,13],"canonical_coefficient":75,"classification":"ample-canonical"},
+    {"p":23,"ambient_projective_dimension":20,"complete_intersection_degrees":[2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19],"canonical_coefficient":168,"classification":"ample-canonical"},
+    {"p":29,"ambient_projective_dimension":26,"complete_intersection_degrees":[2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25],"canonical_coefficient":297,"classification":"ample-canonical"}
+  ],
+  "ruling": {
+    "admitted_p_at_least_11_is_fano": false,
+    "admitted_p_at_least_11_is_rationally_connected_by_standard_CI_criterion": false,
+    "standard_Fano_Esnault_shortcut_applies": false,
+    "quotient_compactification_still_requires_separate_analysis": true
+  },
+  "status": "PASS"
+}

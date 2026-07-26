@@ -1,0 +1,118 @@
+{
+  "11": {
+    "branch_certificate": {
+      "critical_value_scalar_mod_p": 7,
+      "degree": 9,
+      "finite_simple_branch_points": 8,
+      "infinity_ramification_index": 9
+    },
+    "cohomological_degrees": {
+      "affine_cone": [
+        3,
+        4
+      ],
+      "primitive_projective": [
+        2
+      ],
+      "sawin_affine_after_translation_torsor": [
+        5,
+        6
+      ]
+    },
+    "ordinary_discriminant_component_count": 55,
+    "ordinary_discriminant_hook_profile": [
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "p": 11,
+    "primitive_H2_hook_profile": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      6,
+      14,
+      12,
+      6,
+      3,
+      1
+    ],
+    "primitive_even_hook_mass": 21,
+    "primitive_nontrivial_hook_mass": 42,
+    "primitive_odd_hook_mass": 21,
+    "primitive_sign_hook_mass": 1,
+    "sawin_affine_mid_hook_betti_contribution": 82,
+    "sawin_affine_nontrivial_hook_betti_contribution": 84,
+    "sawin_target": 10
+  },
+  "13": {
+    "branch_certificate": {
+      "critical_value_scalar_mod_p": 8,
+      "degree": 11,
+      "finite_simple_branch_points": 10,
+      "infinity_ramification_index": 11
+    },
+    "cohomological_degrees": {
+      "affine_cone": [
+        3,
+        4
+      ],
+      "primitive_projective": [
+        2
+      ],
+      "sawin_affine_after_translation_torsor": [
+        5,
+        6
+      ]
+    },
+    "ordinary_discriminant_component_count": 78,
+    "ordinary_discriminant_hook_profile": [
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "p": 13,
+    "primitive_H2_hook_profile": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      11,
+      35,
+      51,
+      49,
+      34,
+      16,
+      4,
+      0
+    ],
+    "primitive_even_hook_mass": 100,
+    "primitive_nontrivial_hook_mass": 200,
+    "primitive_odd_hook_mass": 100,
+    "primitive_sign_hook_mass": 0,
+    "sawin_affine_mid_hook_betti_contribution": 400,
+    "sawin_affine_nontrivial_hook_betti_contribution": 400,
+    "sawin_target": 12
+  }
+}

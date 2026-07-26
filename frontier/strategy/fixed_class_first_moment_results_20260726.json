@@ -1,0 +1,48 @@
+{
+  "classification": "exact finite regressions and counterexamples; no uniform nonvanishing theorem",
+  "identity_rows": {
+    "5": {
+      "+": {"a": 1, "count": 4, "c_moment": 0, "qline_c_moment": 0, "full_translation_weight": 0, "cell_counts": [0,0,2,2,0]},
+      "-": {"a": 2, "count": 6, "c_moment": 1, "qline_c_moment": 1, "full_translation_weight": 4, "cell_counts": [2,2,2,0,0]}
+    },
+    "7": {
+      "+": {"a": 1, "count": 10, "c_moment": 1, "qline_c_moment": 1, "full_translation_weight": 6, "cell_counts": [2,2,2,2,0,2,0]},
+      "-": {"a": 3, "count": 8, "c_moment": 4, "qline_c_moment": 4, "full_translation_weight": 3, "cell_counts": [0,2,0,0,2,2,2]}
+    },
+    "11": {
+      "+": {"a": 1, "count": 14, "c_moment": 1, "qline_c_moment": 1, "cell_counts": [0,0,2,2,0,2,4,0,2,2,0]},
+      "-": {"a": 2, "count": 14, "c_moment": 1, "qline_c_moment": 1, "cell_counts": [4,0,2,0,2,0,2,2,0,2,0]}
+    }
+  },
+  "odd_reducible_parity_rows": {
+    "11": {
+      "+": {"irreducible_count":14,"irreducible_c_moment":1,"odd_reducible_count":8,"odd_reducible_c_moment":2,"even_factor_count":18,"even_factor_c_moment":1},
+      "-": {"irreducible_count":14,"irreducible_c_moment":1,"odd_reducible_count":14,"odd_reducible_c_moment":2,"even_factor_count":12,"even_factor_c_moment":1}
+    },
+    "17": {
+      "+": {"irreducible_count":18,"irreducible_c_moment":14,"odd_reducible_count":26,"odd_reducible_c_moment":16,"even_factor_count":52,"even_factor_c_moment":10},
+      "-": {"irreducible_count":14,"irreducible_c_moment":1,"odd_reducible_count":42,"odd_reducible_c_moment":14,"even_factor_count":40,"even_factor_c_moment":8}
+    },
+    "23": {
+      "+": {"irreducible_count":12,"irreducible_c_moment":9,"odd_reducible_count":70,"odd_reducible_c_moment":19,"even_factor_count":94,"even_factor_c_moment":3},
+      "-": {"irreducible_count":22,"irreducible_c_moment":10,"odd_reducible_count":70,"odd_reducible_c_moment":14,"even_factor_count":84,"even_factor_c_moment":7}
+    },
+    "29": {
+      "+": {"irreducible_count":36,"irreducible_c_moment":26,"odd_reducible_count":106,"odd_reducible_c_moment":14,"even_factor_count":138,"even_factor_c_moment":28},
+      "-": {"irreducible_count":28,"irreducible_c_moment":15,"odd_reducible_count":130,"odd_reducible_c_moment":28,"even_factor_count":122,"even_factor_c_moment":25}
+    },
+    "41": {
+      "+": {"irreducible_count":50,"irreducible_c_moment":20,"odd_reducible_count":216,"odd_reducible_c_moment":20,"even_factor_count":294,"even_factor_c_moment":15},
+      "-": {"irreducible_count":34,"irreducible_c_moment":19,"odd_reducible_count":270,"odd_reducible_c_moment":24,"even_factor_count":256,"even_factor_c_moment":12}
+    },
+    "47": {
+      "+": {"irreducible_count":38,"irreducible_c_moment":25,"odd_reducible_count":298,"odd_reducible_c_moment":21,"even_factor_count":400,"even_factor_c_moment":17},
+      "-": {"irreducible_count":40,"irreducible_c_moment":9,"odd_reducible_count":314,"odd_reducible_c_moment":42,"even_factor_count":382,"even_factor_c_moment":12}
+    },
+    "53": {
+      "+": {"irreducible_count":56,"irreducible_c_moment":9,"odd_reducible_count":366,"odd_reducible_c_moment":32,"even_factor_count":514,"even_factor_c_moment":30},
+      "-": {"irreducible_count":38,"irreducible_c_moment":48,"odd_reducible_count":408,"odd_reducible_c_moment":50,"even_factor_count":490,"even_factor_c_moment":26}
+    }
+  },
+  "status": "PASS"
+}

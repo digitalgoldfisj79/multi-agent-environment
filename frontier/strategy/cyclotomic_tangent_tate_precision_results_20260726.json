@@ -1,0 +1,24 @@
+{
+  "classification": "symbolic structural regression; crown remains open",
+  "ring_model": "F_p[epsilon]/(epsilon^2)",
+  "rows": [
+    {"coefficient_bockstein":1,"count_cyclotomic_order_in_raw_hook":4,"frobenius_tangent_coefficient_count":5,"frobenius_tangent_coefficient_range":[0,4],"minimum_raw_modulus_exponent_for_moment":6,"moment_cyclotomic_order_in_raw_hook":5,"norm":[0,0],"norm_bockstein":0,"p":5,"tate_even_dimension":1,"tate_odd_dimension":1,"tau_to_p":[1,0]},
+    {"coefficient_bockstein":1,"count_cyclotomic_order_in_raw_hook":10,"frobenius_tangent_coefficient_count":11,"frobenius_tangent_coefficient_range":[0,10],"minimum_raw_modulus_exponent_for_moment":12,"moment_cyclotomic_order_in_raw_hook":11,"norm":[0,0],"norm_bockstein":0,"p":11,"tate_even_dimension":1,"tate_odd_dimension":1,"tau_to_p":[1,0]},
+    {"coefficient_bockstein":1,"count_cyclotomic_order_in_raw_hook":16,"frobenius_tangent_coefficient_count":17,"frobenius_tangent_coefficient_range":[0,16],"minimum_raw_modulus_exponent_for_moment":18,"moment_cyclotomic_order_in_raw_hook":17,"norm":[0,0],"norm_bockstein":0,"p":17,"tate_even_dimension":1,"tate_odd_dimension":1,"tau_to_p":[1,0]},
+    {"coefficient_bockstein":1,"count_cyclotomic_order_in_raw_hook":22,"frobenius_tangent_coefficient_count":23,"frobenius_tangent_coefficient_range":[0,22],"minimum_raw_modulus_exponent_for_moment":24,"moment_cyclotomic_order_in_raw_hook":23,"norm":[0,0],"norm_bockstein":0,"p":23,"tate_even_dimension":1,"tate_odd_dimension":1,"tau_to_p":[1,0]},
+    {"coefficient_bockstein":1,"count_cyclotomic_order_in_raw_hook":28,"frobenius_tangent_coefficient_count":29,"frobenius_tangent_coefficient_range":[0,28],"minimum_raw_modulus_exponent_for_moment":30,"moment_cyclotomic_order_in_raw_hook":29,"norm":[0,0],"norm_bockstein":0,"p":29,"tate_even_dimension":1,"tate_odd_dimension":1,"tau_to_p":[1,0]},
+    {"coefficient_bockstein":1,"count_cyclotomic_order_in_raw_hook":40,"frobenius_tangent_coefficient_count":41,"frobenius_tangent_coefficient_range":[0,40],"minimum_raw_modulus_exponent_for_moment":42,"moment_cyclotomic_order_in_raw_hook":41,"norm":[0,0],"norm_bockstein":0,"p":41,"tate_even_dimension":1,"tate_odd_dimension":1,"tau_to_p":[1,0]},
+    {"coefficient_bockstein":1,"count_cyclotomic_order_in_raw_hook":46,"frobenius_tangent_coefficient_count":47,"frobenius_tangent_coefficient_range":[0,46],"minimum_raw_modulus_exponent_for_moment":48,"moment_cyclotomic_order_in_raw_hook":47,"norm":[0,0],"norm_bockstein":0,"p":47,"tate_even_dimension":1,"tate_odd_dimension":1,"tau_to_p":[1,0]},
+    {"coefficient_bockstein":1,"count_cyclotomic_order_in_raw_hook":52,"frobenius_tangent_coefficient_count":53,"frobenius_tangent_coefficient_range":[0,52],"minimum_raw_modulus_exponent_for_moment":54,"moment_cyclotomic_order_in_raw_hook":53,"norm":[0,0],"norm_bockstein":0,"p":53,"tate_even_dimension":1,"tate_odd_dimension":1,"tau_to_p":[1,0]},
+    {"coefficient_bockstein":1,"count_cyclotomic_order_in_raw_hook":58,"frobenius_tangent_coefficient_count":59,"frobenius_tangent_coefficient_range":[0,58],"minimum_raw_modulus_exponent_for_moment":60,"moment_cyclotomic_order_in_raw_hook":59,"norm":[0,0],"norm_bockstein":0,"p":59,"tate_even_dimension":1,"tate_odd_dimension":1,"tau_to_p":[1,0]},
+    {"coefficient_bockstein":1,"count_cyclotomic_order_in_raw_hook":70,"frobenius_tangent_coefficient_count":71,"frobenius_tangent_coefficient_range":[0,70],"minimum_raw_modulus_exponent_for_moment":72,"moment_cyclotomic_order_in_raw_hook":71,"norm":[0,0],"norm_bockstein":0,"p":71,"tate_even_dimension":1,"tate_odd_dimension":1,"tau_to_p":[1,0]}
+  ],
+  "status": "PASS",
+  "theorem_checks": {
+    "coefficient_character_is_nonsplit_extension": true,
+    "raw_hook_mod_pi2_is_blind_for_p_at_least_5": true,
+    "raw_precision_needed_for_first_moment": "mod pi^(p+1)",
+    "tate_and_bockstein_do_not_determine_frobenius_tangent": true,
+    "tate_complex_differentials": ["epsilon", "0"]
+  }
+}
