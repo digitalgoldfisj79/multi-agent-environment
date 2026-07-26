@@ -90,21 +90,16 @@ def run_prime(p: int) -> dict[str, object]:
     minus_elementary = {mask: p - 1 for mask in all_masks}
     assert difference == minus_elementary
 
-    # If a is the fixed nonzero value of e_{p-3}, then
-    # y=-weighted/a has sigma(y)-y=1.
     for a in range(1, p):
         inverse_a = pow(a, -1, p)
         y = scale_polynomial(weighted, -inverse_a, p)
         sigma_y_minus_y = add_polynomials(
             shift_polynomial(y, p, 1), scale_polynomial(y, -1, p), p
         )
-        # On the quotient by e_{p-3}-a, e_{p-3}/a is 1.
         assert sigma_y_minus_y == {
             mask: inverse_a for mask in all_masks
         }
 
-    # Point-level Artin--Schreier ledger: Frobenius on T^p-T=g acts by
-    # translation g. For prime p, g=0 is split and every g!=0 has degree p.
     shift_classes = [
         {
             "g": g,
@@ -114,9 +109,9 @@ def run_prime(p: int) -> dict[str, object]:
         }
         for g in range(p)
     ]
+    assert sum(row["split_over_Fp"] for row in shift_classes) == 1
+    assert sum(row["degree_p_artin_schreier"] for row in shift_classes) == p - 1
 
-    # Counterexample to abstract positivity: g(x)=x^p-x is nonconstant as a
-    # polynomial but is zero at every x in F_p.
     abstract_counterexample_values = [
         (pow(x, p, p) - x) % p for x in range(p)
     ]
@@ -129,8 +124,9 @@ def run_prime(p: int) -> dict[str, object]:
         "transfer_equals_e_p_minus_3": True,
         "sigma_weighted_minus_weighted_equals_minus_transfer": True,
         "global_artin_schreier_coordinate_on_nonzero_slice": True,
-        "shift_classes": shift_classes,
-        "abstract_nonvanishing_counterexample": abstract_counterexample_values,
+        "split_shift_classes": 1,
+        "degree_p_shift_classes": p - 1,
+        "abstract_counterexample_all_Fp_values_zero": True,
     }
 
 
