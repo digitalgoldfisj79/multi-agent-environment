@@ -18,409 +18,314 @@ The synthesis is serious and useful as an adversarial review. Its provenance doe
 4. `B_+=0` is not the same as uniform `B_A=0`; the nonsquare boundary is nonzero at several committed primes.
 5. The finite `N3` table is important evidence that the raw count is not visibly centred at `p-2` with bounded `sqrt(p)` fluctuations.
 6. General-purpose complete-intersection Betti bounds remain exponentially too large in the coupled regime `n=q=p`.
-7. The integer problem remains far beyond existing pointwise short-interval technology; averaged theorems have the wrong quantifier for an exponentially sparse prescribed sequence.
+7. Integer Fortune is far beyond current pointwise short-interval technology.
 
-### False or materially overstated
+### False or overstated
 
-1. **The catastrophic Sawin fork is false.** `B(pi)` is defined for an arbitrary representation, and Sawin applies it directly to the two direct sums of even and odd hooks that represent `Lambda`. There is no automatic lower bound of one Betti number per hook and no counting-only conclusion `B>=p-1`.
-2. **The exact rootless-tail factor does not prove `B(pi)=o(p)` false.** It is an exact local exclusion count and a compelling singular-series heuristic, not an asymptotic formula for the irreducible count or the von Mangoldt sum.
-3. **The full `h=4` theorem can already be stated without pinning a density constant.** The exact sufficient target is an aggregate hook Betti bound `B_Lambda<=p-1`. Whether the observed density tends to `e/3`, `0.842`, or another constant is not needed to state that theorem.
-4. **The claimed Wan--Zhang matching lower bound is not a lower bound for this Fortune variety.** It concerns a worst-case class in a general family, so it rules out generic uniform technology, not a structure-specific collapse here.
-5. **Relocating the local factor into the main term is not bookkeeping.** It requires a new cohomological or asymptotic theorem identifying an actual top-weight constituent. Without that theorem, the proposed recentering is merely the original count problem in different notation.
-6. **A census to `p=400--500` cannot pin an asymptotic constant.** It can discriminate finite-range models and discover structure, but it cannot establish the limiting main term.
+1. The proposed catastrophic ambiguity in Sawin's `B(pi)` is not real. `B(pi)` is defined for arbitrary representations, and Sawin applies it directly to the aggregate direct sums of all even and all odd hooks.
+2. The exact rootless-tail factor does not prove `B(pi)=o(p)` false. It is a local-factor theorem and a strong density heuristic, not an asymptotic irreducible-count theorem or a cohomological main-term decomposition.
+3. The claimed matching generic Betti lower bound does not apply to the Fortune variety. General-purpose near-sharpness says the generic theorem cannot help; it does not lower-bound this structured example.
+4. Extending the census cannot determine an asymptotic constant. It can discriminate finite-range models only.
+5. Relocating the local factor into a new main term is not bookkeeping. It requires a singular-series theorem or an object-level top-weight decomposition.
 
-The correct verdict is therefore not “the geometric packaging may be void.” The full four-parameter aggregate packaging is valid and sharply stated, but proving its aggregate Betti bound remains a major structure-specific problem.
+### Corrected strategic conclusion
 
-## 1. Primary-source audit of Sawin's `B(pi)`
-
-Reference: Will Sawin, *Square-root cancellation for sums of factorization functions over short intervals in function fields*, arXiv:1809.05137v2.
-
-### 1.1 Definition
-
-Sawin's Definition 4.1 begins:
-
-> For `pi` a representation of `S_n`, let `B(pi)=...`.
-
-There is no irreducibility hypothesis. Proposition 4.2 is likewise stated for an arbitrary representation `pi`.
-
-Moreover, the definition is compatible with direct sums:
+The full `h=4` aggregate route remains mathematically live. Its exact sufficient target is
 
 \[
-B(\pi_1\oplus\pi_2)=B(\pi_1)+B(\pi_2),
+\boxed{B_\Lambda=B(\pi_+)+B(\pi_-)\le p-1.}
 \]
 
-because it is a sum of dimensions of invariant cohomology groups.
+This target is linear, structure-specific and far beyond generic Betti technology, but it is not structurally impossible.
 
-### 1.2 What Sawin does for `Lambda`
+The q-line `h=2` route should be used only for exact cancellation, congruence, arithmetic descent and transport diagnostics—not as the primary absolute-Betti packaging.
 
-In the proof of Corollary 4.7 Sawin uses
+## 1. Primary-source reading of Sawin
+
+Sawin's Definition 3.1 introduces trace functions for a representation `pi` of `S_n` and explicitly says that `pi` is not necessarily irreducible. Definition 4.1 then defines
 
 \[
-\Lambda
-=
-\sum_i(-1)^iF_{\wedge^i\mathrm{std}}
-=
-F_{\pi_+}-F_{\pi_-},
+B(\pi)=\sum_{i=0}^{2\dim X-1}\dim\left(H_c^i(X_{n,m,c})\otimes\pi\right)^{S_n}.
 \]
 
-where
+In the von Mangoldt application Sawin takes
 
 \[
-\pi_+=\bigoplus_{i\ \mathrm{even}}\wedge^i\mathrm{std},
+\pi_+=\bigoplus_{i\ \mathrm{even}}\bigwedge^i\mathrm{Std}_n,
 \qquad
-\pi_-=\bigoplus_{i\ \mathrm{odd}}\wedge^i\mathrm{std}.
+\pi_-=\bigoplus_{i\ \mathrm{odd}}\bigwedge^i\mathrm{Std}_n,
 \]
 
-He explicitly observes that each is a sum of distinct irreducibles and hence a subrepresentation of the regular representation. Corollary 4.4 is then applied directly to each aggregate representation.
+and applies the estimate directly to these two reducible representations.
 
-Therefore the synthesis's proposed dichotomy
+Therefore the synthesis's alternatives
 
-> if `B` is per irreducible, the `p-1` nontrivial hooks force aggregate `B>=p-1`
+- `B` is aggregate, so the route is live;
+- `B` is per irreducible, so summing `p-1` hooks makes the route void
 
-is invalid. Even if one decomposes the direct sums, a nonzero representation does not force its corresponding isotypic compactly supported cohomology to have dimension at least one. The relevant term can vanish. Counting representation summands is not a lower bound for `B`.
+are not two possible readings. The first is the paper's actual formulation.
 
-### 1.3 Correct aggregate object
+Furthermore, the claim that the aggregate is at least `p-1` "by counting alone" is false. A representation appearing in `pi_+` or `pi_-` need not appear in the cohomology of `X_{n,m,c}`. There is no one-dimensional contribution forced for each hook.
 
-Define
+## 2. Exact full-interval threshold
+
+At
+
+\[
+n=p,\qquad m=p-4,\qquad q=p,
+\]
+
+Sawin's Proposition 4.2 has error exponent
+
+\[
+\frac12\left(
+\left\lfloor\frac np\right\rfloor
+-
+\left\lfloor\frac mp\right\rfloor
++n-m+1
+\right)
+=3.
+\]
+
+Let
 
 \[
 B_\Lambda=B(\pi_+)+B(\pi_-).
 \]
 
-This is the exact nonnegative integer controlling the triangle-inequality application of Proposition 4.2 to the von Mangoldt function.
-
-It is this aggregate object—not a hypothetical per-hook minimum—that the full function-field crown programme must control.
-
-## 2. Exact `h=4` packaging threshold
-
-Set
+Then
 
 \[
-n=q=p,
-\qquad h=4,
-\qquad m=n-h=p-4,
-\]
-
-and take the short interval centred at `T^p-T`:
-
-\[
-\mathcal I_4=
-\{T^p-T+aT^3+bT^2+cT+d:(a,b,c,d)\in F_p^4\}.
-\]
-
-Sawin's exponent is
-
-\[
-\frac12\left(
- n-m+\left\lfloor\frac np\right\rfloor
- -\left\lfloor\frac mp\right\rfloor+1
-\right)
-=
-\frac12(4+1-0+1)=3.
-\]
-
-Thus Proposition 4.2 gives
-
-\[
-\boxed{
 \left|
-\sum_{f\in\mathcal I_4}\Lambda(f)-p^4
+\sum_{\deg g<4}\Lambda(T^p-T+g)-p^4
 \right|
 \le B_\Lambda p^3.
-}
 \]
 
-### 2.1 Exact weighted-count identity
-
-Because `p` is prime, a degree-`p` prime power is either:
-
-1. an irreducible polynomial of degree `p`, carrying von Mangoldt weight `p`; or
-2. the `p`-th power of a monic linear polynomial.
-
-Inside this interval the second family is exactly
+Let `I_4` be the number of irreducibles in the four-parameter interval. The only degree-`p` non-irreducible prime powers in the interval are
 
 \[
 (T-a)^p=T^p-a,
 \qquad a\in F_p,
 \]
 
-and each carries weight one. Therefore, if `I_4` denotes the number of irreducible polynomials in the interval,
+and each has von Mangoldt weight `1`. Thus
 
 \[
 \boxed{
-\sum_{f\in\mathcal I_4}\Lambda(f)=pI_4+p.
+\sum_{\deg g<4}\Lambda(T^p-T+g)=pI_4+p.
 }
 \]
 
-The crown condition is
+The crown is `I_4>p-1`, equivalently the weighted sum is greater than `p^2`. Sawin therefore proves the crown whenever
 
 \[
-I_4>p-1,
+p^4-B_\Lambda p^3>p^2.
 \]
 
-which is equivalent to
-
-\[
-pI_4+p>p^2.
-\]
-
-The Sawin lower bound closes this whenever
-
-\[
-p^4-B_\Lambda p^3>p^2,
-\]
-
-i.e.
+Equivalently,
 
 \[
 B_\Lambda<p-\frac1p.
 \]
 
-Since `B_Lambda` is an integer, the exact clean sufficient theorem is
+Since `B_Lambda` is an integer, the exact clean sufficient condition is
 
 \[
 \boxed{B_\Lambda\le p-1.}
 \]
 
-This is the correct geometric crown target. It is linear and sharp at the scale relevant to this method. It does not require `B_Lambda=o(p)`, and it does not require an empirical limiting density to be known first.
+This is the corrected theorem target. `sawin_packaging_threshold_verify.py` checks the exponent, the weighted identity and the integer threshold independently.
 
-## 3. The packaging table: what survives
+## 3. The local factor does not imply `B=o(p)` is false
 
-For general interval dimension `h`, with `n=q=p` and `m=p-h`, Sawin's exponent is
-
-\[
-\frac{h+2}{2}
-\]
-
-as long as `1<=h<p`. Comparing `B p^{(h+2)/2}` with main term `p^h` gives the sufficient scale
+Theorem D1.5 proves that each cubic-tail slice has exactly
 
 \[
-B<p^{h/2-1}.
+\frac{p^2-1}{3}
 \]
 
-Hence:
+rootless pairs. Relative to the independent-root baseline, this gives the singular-series factor tending to `e/3`.
 
-| packaging | triangle-bound requirement | audit ruling |
-|---|---:|---|
-| full `h=4` | `B<p` | valid and live; exact integer target `B_Lambda<=p-1` |
-| cubic-averaged `h=3` | `B<sqrt(p)` | valid but harder normalization/projector details must be stated |
-| fixed-class `h=2` | `B<1` | generic absolute-Betti route cannot work unless the relevant aggregate cohomology vanishes |
-
-The synthesis is therefore right that the fixed-class q-line packaging is self-defeating for a straightforward Weil-plus-total-Betti argument. It is wrong to propagate that conclusion upward to the full `h=4` aggregate interval.
-
-The q-line remains valuable for exact identities, arithmetic projectors, congruences and structural diagnostics. It should not be treated as the most favourable packaging for an absolute cohomological estimate.
-
-## 4. Local factor and deviation: evidence is not a theorem
-
-`D1_ATTACK.md`, Theorem D1.5, proves an exact degree-one local statement: for each relevant slice, the number of `(c,d)` pairs whose cubic tail has no `F_p` root is
+This is an exact statement about exclusion of linear factors. It does not prove
 
 \[
-\frac{p^2-1}{3}.
+I_4=\left(\frac e3+o(1)\right)p^3
 \]
 
-After the standard independent-local-factor heuristic, this predicts a leading density involving
+or the corresponding asymptotic for the von Mangoldt sum. Higher-degree factors and their correlations remain uncontrolled.
 
-\[
-\frac e3\approx0.906.
-\]
-
-The committed finite data are consistent with a persistent linear deficit from the naive main term. That is important evidence and should affect strategy.
-
-It does **not** prove any of the following:
-
-\[
-I_4\sim\frac e3p^3,
-\qquad
-\sum_{f\in\mathcal I_4}\Lambda(f)\sim\frac e3p^4,
-\qquad
-B_\Lambda\ge\left(1-\frac e3\right)p
-\quad\text{for all large }p.
-\]
-
-The first implication would require control of all higher-degree factor obstructions and their correlations. The exact rootless count only removes linear factors.
-
-The third implication additionally conflates two distinct quantities:
-
-- the observed normalized Frobenius trace defect
-  \[
-  \frac{|\sum\Lambda-p^4|}{p^3};
-  \]
-- the nonnegative total Betti dimension `B_Lambda` that bounds that trace.
-
-Finite data give lower bounds on `B_Lambda` at those individual primes through the trace inequality, but do not prove an asymptotic lower bound.
+There is a second conflation in the synthesis. A measured trace defect may lower-bound the Betti sum needed to support that trace at an individual prime, but `B(pi)` is a total cohomological dimension, not the normalized trace itself. An empirical linear trace defect does not establish an asymptotic linear lower bound for `B(pi)` without a theorem identifying the relevant weight and constituent.
 
 Accordingly:
 
-- `B_Lambda=o(p)` is strongly disfavoured by current data;
-- it has **not** been disproved by Theorem D1.5;
-- and it is not the necessary target in any case, because `B_Lambda<=p-1` suffices.
+- `B=o(p)` is unnecessarily strong for the crown;
+- the exact target is `B_Lambda<=p-1`;
+- the local factor suggests a sharp-constant phenomenon but does not prove a lower bound on `B_Lambda`.
 
-## 5. Why “move the local factor into the main term” is new mathematics
+## 4. Recentring at `sigma_p` is a new theorem
 
-The synthesis proposes writing
+Writing
 
 \[
 \sum\Lambda=\sigma_pp^4+\text{residual}
 \]
 
-and then bounding the residual on a smaller scale.
+is useful only if `sigma_p p^4` is proved to be a genuine main term. That requires one of:
 
-This is legitimate only after proving one of:
+1. a local-to-global singular-series asymptotic;
+2. a cohomological decomposition isolating a top-weight constituent with this trace;
+3. an exact mass formula separating local obstructions from the remaining oscillatory complex.
 
-1. an asymptotic singular-series theorem for the full irreducible count;
-2. a cohomological decomposition isolating a top-weight constituent with trace `sigma_p p^4`;
-3. an exact inclusion-exclusion or mass formula separating the local obstruction from the oscillatory remainder.
+Without such a theorem, selecting `sigma_p` from the rootless-tail heuristic or a numerical fit merely redefines the residual. It does not improve the bound.
 
-None follows from the rootless-tail count alone. Without such a theorem, choosing `sigma_p` from finite data or a heuristic and calling the remainder an error is a tautological recentering.
+Extending the census to `p=400` or `500` can test whether finite data lean towards `e/3` or `0.842`; it cannot determine a limiting constant.
 
-Thus Step 2 of the synthesis is not bookkeeping. It is potentially a major theorem, and may be essentially as hard as the crown.
+## 5. The fixed-class `h=2` warning is valid
 
-## 6. Audit of the Wan--Zhang claim
+For general interval dimension `h=n-m`, Sawin's error at `n=q=p` is
 
-Wan and Zhang's 2025 paper gives general upper bounds for total Betti numbers of affine varieties/exponential sums and discusses lower bounds showing that their general dependence is close to optimal in a worst-case class.
+\[
+B p^{(h+2)/2}
+\]
 
-That supports the strategic conclusion:
+against main term `p^h`. Error below main therefore requires
 
-> no generic complete-intersection Betti theorem is likely to turn an exponential `p^{O(p)}` bound into the required linear bound for every family.
+\[
+B<p^{h/2-1}.
+\]
 
-It does **not** show that the specific Fortune interval variety has Betti number at least `(d-1)^n`, nor that a structure-specific linear collapse is impossible. The synthesis's wording must distinguish a worst-case lower bound for a class from a lower bound on this object.
+This gives:
 
-The Pascal, hook and quantum-bar structure is precisely why a special collapse remains logically possible.
+| packaging | required aggregate `B` |
+|---|---:|
+| full interval, `h=4` | `<p` |
+| one coefficient averaged, `h=3` | `<sqrt(p)` |
+| fixed cubic class, `h=2` | `<1` |
 
-## 7. The function-field window theorem
+The `h=2` conclusion is correct for a generic main-minus-absolute-error argument. Since `B` is a nonnegative integer, `<1` means exact vanishing of the non-top isotypic cohomology.
 
-The synthesis contains an internal contradiction: two adversarial reviewers downgrade the window route to “needs major breakthrough,” while Step 6 says it is a short Weil-RH argument.
+This explains why the q-line projector is self-defeating as the primary generic Betti packaging. It can still be valuable for:
 
-The mathematical core of Step 6 appears correct.
+- an exact virtual cancellation;
+- a congruence or parity certificate;
+- a direct global trace calculation;
+- an arithmetic descent projector;
+- diagnosing a higher-dimensional comparison.
 
-Let `P_d` have degree `n`, and vary offsets `m` with `deg m<h`. Reversal turns the short interval into one congruence class for the even characters modulo a power of `T`. Character orthogonality and the function-field Riemann hypothesis give a weighted prime-polynomial estimate of the form
+It does not imply that the `h=4` aggregate packaging is void.
+
+## 6. Generic Betti bounds do not lower-bound this variety
+
+The cited modern general-purpose bounds remain enormous for dimension four cut out from ambient dimension `p` by degrees growing with `p`. Their broad near-sharpness confirms that no generic complete-intersection theorem will prove a linear bound.
+
+It does not follow that the Fortune variety itself has exponential Betti number. The lower-bound examples used to establish near-sharpness are generic or specially constructed worst cases, not the sparse additive/Symmetric-group/Pascal variety here.
+
+The correct conclusion is:
+
+> any proof of `B_Lambda<=p-1` must exploit the specific structure of the Fortune family.
+
+That is a difficulty classification, not a no-go theorem.
+
+## 7. The function-field half-degree window
+
+The synthesis is internally inconsistent about the `ff-window` route: both reviewers downgraded it while Step 6 still called it a short Weil proof.
+
+The short proof appears to be essentially correct. Let `P_d` have degree `n`, and vary offsets in a short interval of dimension `h`. Reversal identifies the interval condition with fixed low coefficients, and orthogonality over even Dirichlet characters gives a weighted prime sum with main term `q^h`. Function-field RH bounds each nonprincipal character sum by `O(nq^{n/2})`, uniformly in the prescribed centre. Thus
 
 \[
 \sum_{\deg m<h}\Lambda(P_d+m)
-=
-q^h+O(nq^{n/2}),
+=q^h+O(nq^{n/2}).
 \]
 
-uniformly in the centre, with harmless convention-dependent constants. Prime-power contamination is also `O(nq^{n/2})`.
-
-Therefore positivity of an irreducible contribution follows once
+After subtracting prime-power contamination of the same square-root scale, an irreducible exists when
 
 \[
 q^h\gg nq^{n/2},
 \]
 
-i.e.
+or
 
 \[
-\boxed{h>\frac n2+\log_qn+O(1).}
+\boxed{
+h>\frac n2+\log_qn+O(1).
+}
 \]
 
-Combining this with the elementary reduction that a reducible offset coprime to `P_d` has degree at least `2d+2` gives the genuine theorem shape:
+Combining this with the rough-offset lemma should give the centre-preserving theorem that the Fortunate element is irreducible or has degree in
 
-> the minimal offset is irreducible, or has degree in
-> \[
-> [\,2d+2,\ n/2+\log_qn+O(1)\,].
-> \]
+\[
+[2d+2,\ n/2+\log_qn+O(1)].
+\]
 
-For `d=1`, `q=p`, `n=p`, this is a centre-preserving window of degree approximately `p/2`, far above the crown's degree-three target but still a valid unconditional Fortune-type result.
+This is far wider than the `d=1` crown and should be advertised only as a benchmark theorem. Before publication, the reversal convention, even-character count, endpoint, and prime-power constants should be written out fully.
 
-The exact modulus convention and constants should be written carefully, but no major new theorem appears necessary. The appendix downgrade is unsupported unless the reviewers were evaluating a stronger statement.
+## 8. Integer Fortune
 
-## 8. Integer side: serious but not a theorem-level closure
+The synthesis's strategic conclusion is broadly sound: no existing pointwise prime-gap theorem approaches a `(log N)^2` interval at prescribed primorial centres, and averaged theorems have the wrong quantifier.
 
-The following points are sound:
+The exact statements should remain narrower than some of the rhetoric:
 
-1. A prime in the interval of length `p_{n+1}^2` is a sufficient condition for Fortune, not an equivalent reformulation.
-2. Current pointwise prime-gap technology is enormously too weak for a `(log N)^2` interval at a prescribed primorial centre.
-3. Almost-all short-interval theorems do not control an exponentially sparse prescribed sequence unless their exceptional set is empty.
-4. The Baker--Harman--Pintz pointwise exponent `0.525` and the newer Guth--Maynard asymptotic exponent `17/30` remain polynomial-window results, nowhere near polylogarithmic length.
-5. Maier's phenomenon warns that a uniform short-interval asymptotic at logarithmic scales is false and that primorial moduli are not generic.
+- the short-window implication is stronger than Fortune, not equivalent;
+- current sieve inputs based only on divisor counts have no residual room beyond the free primorial roughness;
+- Maynard-Tao and almost-all results do not address a single prescribed centre;
+- Maier obstructs naive uniform logarithmic-scale asymptotics;
+- none of this proves that every conceivable centre-specific method is impossible.
 
-The synthesis's strategic recommendation to stop attacking integer Fortune with the present toolkit is reasonable.
-
-However, phrases such as “categorically dead,” “no sieve can do this,” or “Maier rules it out” are not mathematical no-go theorems for the prescribed primorial centres. Maier obstructs uniform or naive generic asymptotics; a centre-specific identity or new transference principle is not logically excluded.
-
-The integer section should therefore be labelled a technology audit and resource-allocation verdict, not a proof of impossibility.
+The rational allocation decision remains: do not prioritise integer Fortune while the function-field crown has a concrete geometric target.
 
 ## 9. Revised programme
 
 ### Phase A — correct the record
 
-1. Replace the standing `B(pi)=o(p)` formulation by the exact aggregate sufficient target
-   \[
-   B_\Lambda\le p-1.
-   \]
-2. Retain the finite-density measurements as empirical evidence, not a proof of a limiting linear defect.
-3. Correct the degree-one micro-lemma and the one-way integer implication.
-4. Record explicitly that the q-line `h=2` package is not the favourable package for an absolute Betti estimate.
+1. Replace the false degree-one bijectivity explanation.
+2. Label the integer window as sufficient, not equivalent.
+3. Correct `B_+=0` versus `B_-=0` statements.
+4. Remove claims that the local factor proves `B=o(p)` false.
+5. Replace the standing `B=o(p)` target by `B_Lambda<=p-1`.
 
-### Phase B — write the theorem that is already available
+### Phase B — publish the centre-preserving half-degree theorem
 
-Write the centre-preserving function-field window theorem with
+Write and audit the `n/2+log_q n` theorem separately. It is a real result but not a crown strategy.
 
-\[
-h>n/2+\log_qn+O(1).
-\]
+### Phase C — attack the full `h=4` aggregate geometry
 
-This is useful publication-grade context, but not progress from degree `p/2` to degree three.
+The object is the pair of aggregate even/odd hook complexes. The target is total non-top Betti mass at most `p-1`.
 
-### Phase C — return to the full `h=4` aggregate geometry
+The existing Fourier-Cayley, Pascal, Smith and quantum-bar work should be reinterpreted at this aggregate level. In particular, determine whether their terminal two-line skeleton is a statement about the actual nonnegative cohomology or only a virtual alternating trace.
 
-Construct the actual aggregate objects
+### Phase D — retain q-line only for exact mechanisms
 
-\[
-\pi_+=\bigoplus_{i\ even}\wedge^i\mathrm{std},
-\qquad
-\pi_-=\bigoplus_{i\ odd}\wedge^i\mathrm{std},
-\]
+Use the fixed-class q-line for exact transport, congruence, sign, Tate-normalization and arithmetic projector calculations. Do not seek a generic `B<1` estimate.
 
-and target
+### Phase E — singular-series programme must earn its main term
 
-\[
-B(\pi_+)+B(\pi_-)\le p-1.
-\]
+Attempt an object-level or local-to-global proof of the `e/3` constituent. Do not recenter on empirical grounds alone.
 
-The Pascal oscillator and terminal quantum-bar theorems are potentially relevant here because they predict massive cancellation/vanishing across the aggregate hook complex. They should not be forced through the fixed-class q-line packaging unless the comparison theorem naturally lands there.
+## 10. Highest-value next action — completed
 
-### Phase D — use the q-line only for mechanisms it can support
+The primary-source ambiguity in Sawin has been settled. The next decisive action was to test whether the rank-two braided object underlying the aggregate hook detector remains within the linear Betti budget before virtual signs are applied.
 
-Continue q-line work only where it supplies:
+That computation is now recorded in:
 
-- exact projector identities;
-- a congruence or parity certificate;
-- a canonical transport comparison;
-- direct global trace cancellation not obtained by summing fibrewise absolute bounds.
+- `CWEDGE_TERMINAL_BAR_PROBE_20260726.md`;
+- `cwedge_terminal_bar_probe.py`;
+- `AGGREGATE_H4_BETTI_PROGRAMME_20260726.md`.
 
-Do not seek a generic `B<1` theorem by ordinary Weil estimates.
+The full `C_wedge` terminal homology has dimensions `4,4,12` at `p=3,5,7` in stable finite-field computations, with exact cyclotomic `H_1` confirmation at those primes. At `p=11`, stable modular first homology alone has dimension `22`, exceeding the doubled Sawin budget `20`.
 
-### Phase E — singular-series work must earn its main term
+This does not refute the aggregate route. It proves that the scalar two-line skeleton does not automatically control the unsigned aggregate Betti sum. The immediate next theorem is the characteristic-zero lift at `p=11` and identification of the excess terminal classes.
 
-Before recentering at `e/3` or another constant, prove a genuine local-to-global theorem or identify the corresponding top-weight cohomological constituent. Further census work should be tied to discriminating explicit structural models, not advertised as pinning an asymptotic constant.
+## 11. Final ruling
 
-## 10. Final ruling
+The synthesis's broad pessimism about integer Fortune is reasonable. Its proposed retirement of the full function-field packaging is not.
 
-The synthesis materially improves the strategic picture, especially on the integer/function-field separation, the fixed-class packaging penalty and the need to treat empirical linear drift seriously.
-
-Its central proposed gate, however, was misread:
+The corrected scientific position is:
 
 \[
 \boxed{
-\text{Sawin already packages }\Lambda\text{ using the aggregate even/odd hook representations.}
+\text{the full }h=4\text{ route is live, with exact target }B_\Lambda\le p-1,
 }
 \]
 
-Therefore the full `h=4` route is not void. Its correct theorem-level target is
-
-\[
-\boxed{B(\pi_+)+B(\pi_-)\le p-1.}
-\]
-
-That target remains extremely difficult, but it is precise, internally consistent and does not depend on pinning a heuristic density constant.
-
-The revised scientific position is:
-
-- integer Fortune: strategically out of reach with current methods, not formally impossible;
-- function-field window: apparently provable by standard RH machinery and should be written separately;
-- function-field crown: live at the aggregate `h=4` level, with the actual wall an exponential-to-linear aggregate hook-cohomology collapse;
-- fixed-class q-line: valuable for exact cancellation and congruence, not for a generic absolute Betti bound;
-- singular-series constant: important empirical hypothesis, not yet a proved main term.
+but a virtual Airy/Pascal identity is insufficient. The next wall is an unsigned, parity-separated Betti comparison, and the first rank-two computation shows that an additional quotient, differential or weight exclusion may be required from `p=11` onward.
