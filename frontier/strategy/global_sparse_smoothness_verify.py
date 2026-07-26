@@ -5,7 +5,7 @@ The mathematical proof is the multiplicity/Vandermonde argument in
 SPARSE_SURFACE_GLOBAL_SMOOTHNESS_AND_MIXED_CAYLEY_DIFFERENTIAL_20260726.md.
 This script supplies deterministic regressions:
 
-* no nontrivial multiplicity pattern of p can have every block size zero mod p;
+* every proper positive multiplicity is nonzero modulo the prime p;
 * exhaustive finite-field sparse tuples at p=7 have Jacobian-rank failure
   only on the diagonal;
 * the complete-intersection dimension and c2 arithmetic are integral;
@@ -16,7 +16,7 @@ from __future__ import annotations
 
 from itertools import product
 from math import comb, factorial, isqrt
-from typing import Iterable, List
+from typing import Iterable
 
 
 def primes_up_to(limit: int) -> Iterable[int]:
@@ -28,22 +28,10 @@ def primes_up_to(limit: int) -> Iterable[int]:
             yield candidate
 
 
-def partitions(total: int, minimum: int = 1) -> Iterable[List[int]]:
-    if total == 0:
-        yield []
-        return
-    for first in range(minimum, total + 1):
-        for tail in partitions(total - first, first):
-            yield [first] + tail
-
-
 def multiplicity_vandermonde_check(prime: int) -> None:
-    for parts in partitions(prime):
-        if len(parts) == 1:
-            assert parts == [prime]
-            continue
-        assert any(part % prime for part in parts)
-        assert not all(part % prime == 0 for part in parts)
+    # In any partition of the prime p into at least two positive parts,
+    # every part lies in {1,...,p-1}; hence no part vanishes in F_p.
+    assert all(multiplicity % prime for multiplicity in range(1, prime))
 
 
 def sparse_tuple(tuple_values: tuple[int, ...], prime: int) -> bool:
