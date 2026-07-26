@@ -71,18 +71,9 @@ def permutation_trace(p: int, shift: int, twist: int) -> int:
 
 def run_prime(p: int) -> dict[str, object]:
     coefficients = [((r + 1) * (p - 2) - 3) for r in range(p)]
-    extraction = []
     for r in range(p):
         trace_value = underlying_twisted_trace(coefficients, r)
         assert trace_value == p * coefficients[r]
-        extraction.append(
-            {
-                "r": r,
-                "coefficient": coefficients[r],
-                "twisted_trace": trace_value,
-                "divided_trace": trace_value // p,
-            }
-        )
 
     identity_coefficient = 2 * p - 3
     nonidentity_coefficient = 3 * p + 1
@@ -96,14 +87,10 @@ def run_prime(p: int) -> dict[str, object]:
     ) // (p - 1)
     assert secondary_from_quotient_defect == nonidentity_coefficient
 
-    orbit_detection = []
     for shift in range(p):
-        row = []
         for twist in range(p):
             value = permutation_trace(p, shift, twist)
             assert value == (p if shift == twist else 0)
-            row.append(value // p)
-        orbit_detection.append(row)
 
     # One irreducible polynomial gives one cyclic-ordering orbit for each
     # nonzero Frobenius shift.  Any fixed nonzero coefficient therefore detects
@@ -116,7 +103,6 @@ def run_prime(p: int) -> dict[str, object]:
 
     return {
         "p": p,
-        "coefficient_extraction": extraction,
         "normalizer_invariant": {
             "identity_coefficient": identity_coefficient,
             "nonidentity_coefficient": nonidentity_coefficient,
@@ -124,7 +110,6 @@ def run_prime(p: int) -> dict[str, object]:
             "coinvariant_trace": coinvariant_trace,
             "secondary_from_quotient_defect": secondary_from_quotient_defect,
         },
-        "regular_orbit_divided_trace_matrix": orbit_detection,
         "irreducible_orbit_hs_coefficients": irreducible_hs,
     }
 
