@@ -1,0 +1,38 @@
+{
+  "5": {
+    "fixed_class_counts": {
+      "N_minus": 6,
+      "N_plus": 4
+    },
+    "global_indicator_total": 20,
+    "mod_p_masses": {
+      "quadratic_mode": 3,
+      "trivial_mode": 0
+    },
+    "naive_mod_p2": {
+      "fibres_changed_by_a_to_a_plus_p": 40,
+      "reducible_fibres_with_nonzero_lift": 42,
+      "three_times_indicator_count": 10,
+      "weighted_mass": 0
+    },
+    "p": 5
+  },
+  "7": {
+    "fixed_class_counts": {
+      "N_minus": 8,
+      "N_plus": 10
+    },
+    "global_indicator_total": 54,
+    "mod_p_masses": {
+      "quadratic_mode": 4,
+      "trivial_mode": 1
+    },
+    "naive_mod_p2": {
+      "fibres_changed_by_a_to_a_plus_p": 120,
+      "reducible_fibres_with_nonzero_lift": 76,
+      "three_times_indicator_count": 15,
+      "weighted_mass": 22
+    },
+    "p": 7
+  }
+}
