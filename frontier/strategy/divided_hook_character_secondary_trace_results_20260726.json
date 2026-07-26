@@ -1,0 +1,16 @@
+{
+  "classification": "exact character-theoretic structural regression",
+  "ordinary_divided_perfect_complex_exists": false,
+  "rows": [
+    {"count_order_after_raw_hook":4,"grothendieck_identity":"lambda_-1(V)=p*trivial-regular","integral_virtual_character":false,"moment_order_after_raw_hook":5,"nontrivial_fourier_multiplicity":"-1/5","normalized_character":{"identity":0,"nonidentity":1},"p":5,"raw_hook_character":{"identity":0,"nonidentity":5},"trivial_fourier_multiplicity":"4/5"},
+    {"count_order_after_raw_hook":10,"grothendieck_identity":"lambda_-1(V)=p*trivial-regular","integral_virtual_character":false,"moment_order_after_raw_hook":11,"nontrivial_fourier_multiplicity":"-1/11","normalized_character":{"identity":0,"nonidentity":1},"p":11,"raw_hook_character":{"identity":0,"nonidentity":11},"trivial_fourier_multiplicity":"10/11"},
+    {"count_order_after_raw_hook":16,"grothendieck_identity":"lambda_-1(V)=p*trivial-regular","integral_virtual_character":false,"moment_order_after_raw_hook":17,"nontrivial_fourier_multiplicity":"-1/17","normalized_character":{"identity":0,"nonidentity":1},"p":17,"raw_hook_character":{"identity":0,"nonidentity":17},"trivial_fourier_multiplicity":"16/17"},
+    {"count_order_after_raw_hook":22,"grothendieck_identity":"lambda_-1(V)=p*trivial-regular","integral_virtual_character":false,"moment_order_after_raw_hook":23,"nontrivial_fourier_multiplicity":"-1/23","normalized_character":{"identity":0,"nonidentity":1},"p":23,"raw_hook_character":{"identity":0,"nonidentity":23},"trivial_fourier_multiplicity":"22/23"},
+    {"count_order_after_raw_hook":28,"grothendieck_identity":"lambda_-1(V)=p*trivial-regular","integral_virtual_character":false,"moment_order_after_raw_hook":29,"nontrivial_fourier_multiplicity":"-1/29","normalized_character":{"identity":0,"nonidentity":1},"p":29,"raw_hook_character":{"identity":0,"nonidentity":29},"trivial_fourier_multiplicity":"28/29"},
+    {"count_order_after_raw_hook":40,"grothendieck_identity":"lambda_-1(V)=p*trivial-regular","integral_virtual_character":false,"moment_order_after_raw_hook":41,"nontrivial_fourier_multiplicity":"-1/41","normalized_character":{"identity":0,"nonidentity":1},"p":41,"raw_hook_character":{"identity":0,"nonidentity":41},"trivial_fourier_multiplicity":"40/41"},
+    {"count_order_after_raw_hook":46,"grothendieck_identity":"lambda_-1(V)=p*trivial-regular","integral_virtual_character":false,"moment_order_after_raw_hook":47,"nontrivial_fourier_multiplicity":"-1/47","normalized_character":{"identity":0,"nonidentity":1},"p":47,"raw_hook_character":{"identity":0,"nonidentity":47},"trivial_fourier_multiplicity":"46/47"},
+    {"count_order_after_raw_hook":52,"grothendieck_identity":"lambda_-1(V)=p*trivial-regular","integral_virtual_character":false,"moment_order_after_raw_hook":53,"nontrivial_fourier_multiplicity":"-1/53","normalized_character":{"identity":0,"nonidentity":1},"p":53,"raw_hook_character":{"identity":0,"nonidentity":53},"trivial_fourier_multiplicity":"52/53"}
+  ],
+  "secondary_trace_formula": "M=(H-p*N)/(p*pi) mod pi",
+  "status": "PASS"
+}
