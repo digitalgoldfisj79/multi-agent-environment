@@ -1,0 +1,20 @@
+{
+  "checked_primes": [11,17,23,29,41,47,53,59,71,83,89,101,107,113,131,137,149,167,173,179,191,197,227,233,239,251,257,263,269,281,293,311,317,347,353,359,383,389,401,419,431,443,449,461,467,479,491],
+  "classification": "symbolic structural regression with exact finite candidates",
+  "finite_candidate_checks": {
+    "11": [
+      {"s3_to_sn": [4,10,4,2], "trace_four": 6},
+      {"s3_to_sn": [7,2,6,4], "trace_four": 10}
+    ],
+    "17": [
+      {"s3_to_sn": [1,10,5,8,13,7,9], "trace_four": 2},
+      {"s3_to_sn": [16,9,0,7,14,9,1], "trace_four": 12}
+    ]
+  },
+  "identity": {
+    "binom_n_2": "-1/8 mod p",
+    "forced_trace_four": "-s3/2 mod p"
+  },
+  "number_of_primes": 47,
+  "status": "PASS"
+}
