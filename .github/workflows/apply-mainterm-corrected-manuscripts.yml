@@ -1,15 +1,6 @@
 name: Apply corrected Papers II and III manuscripts
 
 on:
-  push:
-    branches:
-      - gpt56/fortune-mainterm-correction-programme-20260727
-    paths:
-      - .github/workflows/apply-mainterm-corrected-manuscripts.yml
-      - scripts/mainterm_correction_payloads/**
-  pull_request:
-    branches:
-      - gpt56/fortune-mainterm-correction-programme-20260727
   workflow_dispatch:
 
 permissions:
