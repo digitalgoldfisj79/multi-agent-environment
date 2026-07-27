@@ -84,7 +84,13 @@ present paper asks whether integral first-order information or quotient geometry
 contains a stronger positivity mechanism.
 
 All results below are unconditional unless marked as exact computer-assisted
-or open.  No theorem in this paper proves the universal crown.
+or open.  No theorem in this paper proves the universal crown.  Throughout,
+\(F\) denotes the Frobenius operator whose fixed points are the
+\(\mathbf F_p\)-points in the trace formula.  The coefficient cyclic group and
+the root-cycle group are distinct copies of \(C_p\).  We use the standard
+periodic Tate complex for cyclic groups [@BrownCohomology], the standard
+Artin--Schreier classification of free \(C_p\)-torsors in characteristic
+\(p\), and Kummer cohomology for \(\mu_n\) with \(p\nmid n\).
 
 # 2. A fixed-class Cartier first moment
 
@@ -116,6 +122,14 @@ C_1(f_{a,c,d})=c\,1_{f_{a,c,d}\ \mathrm{irreducible}}.
 \]
 In particular, nonvanishing of this Cartier mass is a sufficient fixed-class
 existence certificate.
+
+### Proof
+
+Sum the pointwise identity
+\(C_1(f_{a,c,d})=c\,1_{f_{a,c,d}\,\mathrm{irreducible}}\) over all
+\((c,d)\).  The right-hand side is exactly the definition of \(M_a\).
+If the fixed class were empty, every indicator would vanish and the sum would
+be zero; therefore \(M_a\ne0\) implies \(N_a>0\).  \(\square\)
 
 The theorem does not assert that the mass is always nonzero.  Exact computation
 finds nonzero values in both classes throughout a large tested range, apart
@@ -155,6 +169,17 @@ Equivalently,
 \[
 M_a=-\sum_{b,c,d}b^{p-1}C_1(F_{a,b,c,d}).
 \]
+
+### Proof
+
+Partition the irreducible full-family polynomials into translation orbits.
+Each orbit has one depressed representative with coefficient \(c_0\), and
+the displayed orbit calculation gives
+\(\sum_t b_t^{p-1}c_t=-c_0\).  Summing this equality over all irreducible
+orbits gives the first formula.  Replacing
+\(c\,1_{F\,\mathrm{irreducible}}\) by the pointwise cofactor \(C_1(F)\)
+gives the second.  \(\square\)
+
 Thus the depressed first moment is a boundary coefficient of the canonical
 full-family Cartier function, not an isolated low-degree monomial of the
 depressed determinant.
@@ -175,6 +200,15 @@ we obtain the reciprocal form.
 M_A=-3\sum_{q\in\mathbf F_p^*}q^{-1}I_{A\chi(q)}(q).
 }
 \]
+
+### Proof
+
+The change of variables \(q=-3/c\) is a bijection from
+\(\mathbf F_p^*\) to itself and gives \(c=-3q^{-1}\).  The arithmetic
+class \(A\) selects the cell reading \(A\chi(q)\), while the omitted
+boundary \(c=0\) has weight zero in \(M_A\).  Substitution in the defining
+sum for \(M_A\) gives the formula.  \(\square\)
+
 The unweighted cell main term cancels because
 $\sum_{q\ne0}q^{-1}=0$.  The coefficient $q^{-1}$ is, however, an
 $\mathbf F_p$-valued Hasse weight rather than a bounded-rank characteristic-zero
@@ -207,6 +241,13 @@ we have the following exact tangent formula.
 \frac{\mathcal F_a-N_a}{\pi}\equiv M_a\pmod\pi.
 }
 \]
+
+### Proof
+
+Insert \(\zeta^c=1+c\pi+O(\pi^2)\) term by term in the finite Fourier
+sum.  The constant terms sum to \(N_a\), and the coefficients of \(\pi\)
+sum to \(M_a\).  Dividing the difference by \(\pi\) and reducing modulo
+\(\pi\) gives the second congruence.  \(\square\)
 
 Thus the first moment is the first integral derivative of the irreducibility
 Fourier transform.  Semisimplification at $\pi=0$ retains $N_a$ but discards
@@ -255,6 +296,17 @@ The displayed sequence represents the nonzero class in
 \]
 In particular it is nonsplit.
 
+### Proof
+
+A splitting would provide a \(C_p\)-invariant lift of the quotient generator
+\(1\in k\).  Every lift is \(1+u\pi\) for some \(u\in k\), but
+\[
+(\tau-1)(1+u\pi)=\pi\ne0
+\]
+in \(R\).  Hence no invariant lift exists.  Since
+\(\operatorname{Ext}^1_{k[C_p]}(k,k)\cong k\) is one-dimensional, the
+nonsplit extension is its nonzero class.  \(\square\)
+
 For a cyclic module, the periodic Tate complex alternates $\tau-1$ and the norm
 $\mathcal N=1+\tau+\cdots+\tau^{p-1}$ [@BrownCohomology].  Here
 \[
@@ -296,6 +348,16 @@ Reduction modulo $\pi$, the two Tate groups, the extension class, the
 coefficient Bockstein and cyclic equivariance do not determine the first
 cyclotomic Frobenius tangent.  The missing coefficient ranges over all of
 $\mathbf F_p$ in the family $\Phi_\lambda$.
+
+### Proof
+
+Multiplication by \(1+\lambda\pi\) commutes with multiplication by
+\(1+\pi\), so every \(\Phi_\lambda\) is \(C_p\)-equivariant.  Modulo
+\(\pi\) it is the identity; on \(\pi R\) it is also the identity because
+\(\pi^2=0\).  Thus all graded, Tate and Bockstein data are independent of
+\(\lambda\).  The coefficient of \(\pi\) in its trace is exactly
+\(\lambda\), and distinct \(\lambda\in\mathbf F_p\) give every possible
+tangent coefficient.  \(\square\)
 
 There are also two distinct cyclic directions.  The coefficient Fourier group
 weights $c$ by $\zeta^c$.  The root-cycle hook has value $p$ on a full
@@ -341,6 +403,15 @@ The class function $\Theta_p/p$ is not the character of a virtual
 finite-dimensional representation of $C_p$ over any characteristic-zero field.
 Consequently no ordinary perfect integral complex realises the divided hook.
 
+### Proof
+
+The irreducible characters of \(C_p\) form a basis of its characteristic-zero
+representation ring, and every virtual representation has integral
+multiplicities in that basis.  The multiplicities \((p-1)/p\) and
+\(-1/p\) computed above are nonintegral.  Hence \(\Theta_p/p\) is not a
+virtual character.  The Euler character of an ordinary perfect complex is a
+virtual character, so no such complex can realise it.  \(\square\)
+
 The desired moment can still be written at trace level:
 \[
 \boxed{
@@ -370,10 +441,13 @@ For every $r$,
 
 ### Proof
 
-Write $\Phi$ as a matrix over $A$.  Its Hattori--Stallings trace is the sum of
-the diagonal group-ring entries.  On a regular lattice, multiplication by
-$\sigma^j$ followed by $\sigma^{-r}$ has ordinary trace $p$ if $j=r$ and zero
-otherwise.  Summing the diagonal coefficients proves the formula.  $\square$
+Write \(\Phi\) as a matrix over \(A\), and write its \(i\)-th diagonal
+entry as \(\sum_j a_{i,j}\sigma^j\).  The Hattori--Stallings coefficient is
+\(h_r=\sum_i a_{i,r}\), with alternating signs across the complex.  On the
+regular \(\mathbf Z[C_p]\)-lattice, multiplication by \(\sigma^{j-r}\) has
+trace \(p\) when \(j=r\) and zero otherwise.  Therefore the ordinary
+alternating trace of \(\Phi\sigma^{-r}\) is
+\(p\sum_i a_{i,r}=p h_r\).  \(\square\)
 
 Thus $h_r$ is a canonical integral divided trace at a fixed root-cycle shift.
 If a normaliser makes all nonidentity coefficients equal to $h_*$, then
@@ -449,6 +523,19 @@ is represented in the root-cycle direction by
 \]
 The construction is trace-surjective.
 
+### Proof
+
+From \(\sigma(y)=y+1\),
+\[
+\sigma(g)=(y+1)^p-(y+1)=y^p-y=g
+\]
+in characteristic \(p\).  Thus \(g\) descends to \(Y_a\).  The equation
+\(T^p-T=g\) has the translation action \(T\mapsto T+1\); pulling it back
+along the invariant function \(g:Y_a\to\mathbf A^1\) yields the same free
+\(C_p\)-torsor because \(y\) is a coordinate on each root-cycle fibre.
+Finally, \(t/a\) has cyclic trace one, which is the stated trace-surjectivity.
+\(\square\)
+
 Let $z\in Y_a(\mathbf F_p)$ and choose $x$ above it.  There is a unique
 $r\in\mathbf F_p$ with $F(x)=\sigma^r x$.  Since $y$ is defined over
 $\mathbf F_p$,
@@ -473,6 +560,18 @@ N_a=\operatorname{card}\{g=1\}(\mathbf F_p),
 \qquad
 M_a=\sum_{z\in\{g=1\}(\mathbf F_p)}c(z)\pmod p.
 \]
+### Proof
+
+If \(g(z)=r\ne0\), then \(F(x)=\sigma^r x\).  Since a nonzero element of
+\(C_p\) generates the whole group, the Frobenius orbit of any coordinate has
+length \(p\); its characteristic polynomial is therefore irreducible of
+degree \(p\).  Conversely, choose one root of an irreducible fixed-class
+polynomial and order its Frobenius conjugates.  Quotienting the \(p\) cyclic
+rotations gives one rational quotient point, and choosing the ordering with
+Frobenius shift \(r\) places it on the level \(g=r\).  Projection recovers
+\((c,d)\), proving the bijection.  The two displayed formulas follow by
+taking \(r=1\) and summing the coefficient \(c\).  \(\square\)
+
 The first moment is therefore an ordinary weighted rational-point sum on an
 honest quotient level.
 
@@ -509,12 +608,13 @@ $\deg R\le3$.  In reduced form the logarithmic derivative is
 \frac{f'}f=\frac PR,
 \qquad P\ne0,
 \]
-because $f'=3aX^2+c$ is nonzero.  Hence
+because \(f'=3aX^2+c\) is nonzero when \(a\ne0\).  After cancelling all
+common factors, the reduced numerator \(P\) is therefore nonzero.  Hence
 \[
 f'R=Pf.
 \]
-The left side has degree at most five, while the right side has degree at least
-$p$.  Thus $p\le5$, a contradiction.  The quotient has no $r=0$ points, and
+The left side has degree at most \(2+3=5\).  Since \(P\ne0\), the right
+side has degree \(\deg P+p\ge p\).  Thus $p\le5$, a contradiction.  The quotient has no $r=0$ points, and
 each of its $p-1$ nonzero levels has $N_a$ points by Theorem 9.3.  $\square$
 
 The Artin--Schreier structure alone does not force the $g=1$ level to be
@@ -553,10 +653,13 @@ nonquadratic Kummer cocycle.
 
 ### Proof
 
-In exponent notation, Frobenius coboundaries are multiples of
-$p-1\equiv2\pmod n$, so the two cohomology classes are even and odd exponents.
-The sign element has exponent $n/2=(p-3)/2$, which is odd precisely when
-$p\equiv1\pmod4$.  $\square$
+Choose \(\lambda\) with \(\lambda^n=a\) over an algebraic closure.  Its
+descent cocycle is \(\lambda^{p-1}\in\mu_n\).  If \(\mu_n\) is written
+additively as \(\mathbf Z/n\), changing \(\lambda\) changes the exponent
+by a Frobenius coboundary, a multiple of
+\(p-1\equiv2\pmod n\).  Hence the two classes are the even and odd exponent
+classes.  The sign element has exponent \(n/2=(p-3)/2\), which is odd
+precisely when \(p\equiv1\pmod4\).  \(\square\)
 
 Thus the two coefficient classes are not universally quadratic sign twists.
 Let $D_p$ be the full $\mu_n$-quotient of the $g=1$ level and let $U_p$ be the
@@ -576,6 +679,18 @@ lifts is
 \operatorname{card}U_p(\mathbf F_p)=\frac{p-1}{2}(N_{\mathrm{sq}}+N_{\mathrm{ns}}).
 }
 \]
+
+### Proof
+
+The fibre above a rational quotient point is a \(\mu_n\)-torsor whose class
+is one of the two elements of \(H^1(\mathbf F_p,\mu_n)\).  Twisting by that
+class makes the fibre trivial in exactly one of the two arithmetic forms.
+A trivial fibre has
+\(\operatorname{card}\mu_n(\mathbf F_p)=\gcd(n,p-1)=2\) rational lifts.
+Thus the total number of rational lifts across the two forms is twice the
+quotient count, giving the first formula.  On the complete root-cycle open,
+each irreducible contributes one point for each of the \(p-1\) nonzero
+Frobenius shifts, giving the second.  \(\square\)
 
 This is a positive geometric carrier, but its rational-point theorem is exactly
 cubic positivity.  The class difference is a Kummer-local-system trace rather
@@ -608,12 +723,15 @@ point.
 
 ### Proof
 
-A fixed class in
+A class fixed by \(\sigma\) in
 \[
 W=\{\sum x_i=0\}/\mathbf F_p(1,\ldots,1)
 \]
-satisfies $x_{i+1}-x_i=t$.  Modulo diagonal translation and projective scaling,
-the unique nonzero solution is the displayed arithmetic progression.  It lies
+means that \(\sigma x-x\) is diagonal.  Hence
+\(x_{i+1}-x_i=t\) for one constant \(t\), and induction gives
+\(x_i=x_0+it\).  If \(t=0\), the class is zero in \(W\); otherwise diagonal
+translation removes \(x_0\) and projective scaling makes \(t=1\), giving the
+unique nonzero class represented by the displayed progression.  It lies
 on the sparse surface because
 \[
 \sum_{i\in\mathbf F_p}i^m=0
@@ -666,6 +784,17 @@ Its boundary and cubic open satisfy
 }
 \]
 
+### Proof
+
+Partition rational quotient points by their Frobenius shift.  The unique
+projective fixed point supplies the constant term one.  For each
+\(r\in\mathbf F_p^*\), every nonlinear affine irreducible orbit contributes
+exactly one point, and there are \(W_p\) such affine-equivalence classes;
+this gives \((p-1)W_p\).  On the boundary, only the quadratic classes and the
+fixed progression remain, giving \(1+(p-1)N_2\).  The complement is the
+fixed-cubic open, whose count is Theorem 11.2 multiplied by the \(p-1\)
+nonzero shifts.  The boundary and open counts add to the total.  \(\square\)
+
 The three formulas are mutually exact.  In particular,
 \[
 \operatorname{card}\mathscr Q_p(\mathbf F_p)\equiv1-W_p\pmod p.
@@ -686,8 +815,10 @@ the crown from its exact failure configuration.
 
 # 14. Reproducibility and exact checks
 
-A clean-room script independently verifies the algebraic carriers and finite
-ledgers used in this paper.
+Every uniform theorem in the preceding sections is proved symbolically.  The
+clean-room script described here supplies independent finite regressions of the
+algebraic carriers and point-count ledgers; no theorem is inferred from a
+finite scan.
 
 1.  Over the dual numbers $\mathbf F_p[\epsilon]/(\epsilon^2)$ at
     $p=5,7,11$, it checks $\tau^p=1$, zero norm, equality of kernel and image of
