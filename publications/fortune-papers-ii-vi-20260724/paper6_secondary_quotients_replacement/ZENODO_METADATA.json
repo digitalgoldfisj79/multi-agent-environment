@@ -1,0 +1,19 @@
+{
+  "metadata": {
+    "title": "Secondary Traces and Kummer Quotients for the Function-Field Fortune Crown",
+    "upload_type": "publication",
+    "publication_type": "preprint",
+    "description": "Replacement Paper VI and conclusion of the six-paper sequence. It constructs the fixed-class cyclotomic tangent, Hattori--Stallings divided trace, explicit Artin--Schreier irreducibility quotient, corrected Kummer forms and exact compactified point count, and isolates the remaining one-sided Frobenius/nonvanishing theorem. Internal technical package; not human peer reviewed.",
+    "creators": [
+      {"name": "Bozzard, Edward Stewart Anthony", "orcid": "0009-0002-4052-0994"}
+    ],
+    "publication_date": "2026-07-27",
+    "version": "1.0.0-internal",
+    "license": "CC-BY-4.0",
+    "keywords": ["Hattori--Stallings trace", "Artin--Schreier", "Kummer theory", "cyclotomic tangent", "finite fields", "Fortune's conjecture", "reproducible research"],
+    "related_identifiers": [
+      {"identifier": "10.5281/zenodo.21426465", "relation": "isSupplementTo", "resource_type": "publication-article"}
+    ],
+    "notes": "Neither the function-field d=1 crown nor the integer Fortune conjecture is proved. Reserve a final DOI only after external human specialist review is disposed."
+  }
+}
