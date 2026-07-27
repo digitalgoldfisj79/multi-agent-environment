@@ -150,8 +150,8 @@ jobs:
           source = Path(sys.argv[1]).read_text(encoding='utf-8')
           old_inline = r'q\in\mathbf F_p^*\setminus\{2\}'
           new_inline = r'q\in\mathbf F_p^\times,\ q\ne2'
-          if source.count(old_inline) != 1:
-              raise SystemExit(f'Expected one Paper V inline domain normalisation, found {source.count(old_inline)}')
+          if source.count(old_inline) != 2:
+              raise SystemExit(f'Expected two Paper V inline domain normalisations, found {source.count(old_inline)}')
           normalised = source.replace(old_inline, new_inline)
           normalised = re.sub(r'(?<!\n)\n\\\[\n', '\n\n\\[\n', normalised)
           normalised = re.sub(r'\n\\\]\n(?!\n)', '\n\\]\n\n', normalised)
@@ -248,8 +248,8 @@ jobs:
           from docx import Document
           from pathlib import Path
           import sys
-          doc = Document(sys.argv[1])
-          Path(sys.argv[2]).write_text('\n'.join(p.text for p in doc.paragraphs), encoding='utf-8')
+          document = Document(sys.argv[1])
+          Path(sys.argv[2]).write_text('\n'.join(p.text for p in document.paragraphs), encoding='utf-8')
           PY
 
             mkdir -p "$dir/docx-render"
