@@ -1,11 +1,11 @@
 # Papers V--VI automated release status
 
 - workflow: Build replacement Papers V and VI
-- run ID: `30257936063`
+- run ID: `30258356537`
 - attempt: `1`
-- source commit: `a45d917a121beb49df3445447408a220ee5002c4`
+- source commit: `56c22d967908cb97a3f274bc796e55d90da969b3`
 - conclusion: **failure**
-- run URL: https://github.com/digitalgoldfisj79/multi-agent-environment/actions/runs/30257936063
+- run URL: https://github.com/digitalgoldfisj79/multi-agent-environment/actions/runs/30258356537
 
 A success conclusion means the independent reconstructions, frozen-source checks, canonical PDF/LaTeX/DOCX builds, targeted equation conversion, semantic extraction, PDF preflight, independent LibreOffice render, equation/accessibility audit, checksums and artefact upload all passed.
 
