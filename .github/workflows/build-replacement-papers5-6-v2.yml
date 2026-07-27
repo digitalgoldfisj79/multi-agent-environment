@@ -125,7 +125,20 @@ jobs:
 
             if [[ "$STEM" == fortune-paper-vi ]]; then
               NORMAL="$RUNNER_TEMP/$STEM-typeset.md"
-              normalise_blocks "$SRC/manuscript.md" "$NORMAL"
+              python3 - "$SRC/manuscript.md" "$NORMAL" <<'PY'
+          from pathlib import Path
+          import sys
+          source = Path(sys.argv[1]).read_text(encoding='utf-8')
+          needle = '\\]\n### Proof'
+          if source.count(needle) != 1:
+              raise SystemExit(
+                  f'Expected one Paper VI proof-boundary normalisation, '
+                  f'found {source.count(needle)}'
+              )
+          Path(sys.argv[2]).write_text(
+              source.replace(needle, '\\]\n\n### Proof'), encoding='utf-8'
+          )
+          PY
               PDF_SOURCE="$NORMAL"
               TEX_SOURCE="$NORMAL"
             fi
