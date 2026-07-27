@@ -659,6 +659,7 @@ Its boundary and cubic open satisfy
 \boxed{
 \operatorname{card}(\mathscr Q_p\setminus U_p)(\mathbf F_p)=1+(p-1)N_2,
 }
+\]
 \[
 \boxed{
 \operatorname{card}U_p(\mathbf F_p)=\frac{p-1}{2}(N_{\mathrm{sq}}+N_{\mathrm{ns}}).
