@@ -12,4 +12,4 @@ No source amendment is made in response. The manuscript review gate is closed at
 
 The referee explicitly confirmed the publication boundary: neither the function-field crown nor the integer Fortune conjecture is proved. The paper proves the stated structural identities, obstruction theorems and quotient formulas and terminates at the open one-sided Frobenius/rational-point theorem.
 
-This disposition closes the final source-review prerequisite for the combined Papers V--VI canonical release workflow.
+This disposition closes the final source-review prerequisite for the combined Papers V--VI canonical release workflow. The subsequent release build is a binary and reproducibility gate only; it does not modify the reviewed manuscript.
