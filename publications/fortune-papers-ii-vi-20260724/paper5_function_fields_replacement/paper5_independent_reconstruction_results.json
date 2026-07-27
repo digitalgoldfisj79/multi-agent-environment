@@ -1,0 +1,50 @@
+{
+  "censuses": [
+    {
+      "p": 5,
+      "nonsquare": 2,
+      "I4": 124,
+      "N2": 1,
+      "N_plus": 4,
+      "N_minus": 6,
+      "orbit_rhs": 124,
+      "fixed_count": 625,
+      "fixed_rhs": 625
+    },
+    {
+      "p": 7,
+      "nonsquare": 3,
+      "I4": 426,
+      "N2": 1,
+      "N_plus": 10,
+      "N_minus": 8,
+      "orbit_rhs": 426,
+      "fixed_count": 2989,
+      "fixed_rhs": 2989
+    },
+    {
+      "p": 11,
+      "nonsquare": 2,
+      "I4": 1660,
+      "N2": 1,
+      "N_plus": 14,
+      "N_minus": 14,
+      "orbit_rhs": 1660,
+      "fixed_count": 18271,
+      "fixed_rhs": 18271
+    }
+  ],
+  "hook_character_by_cycle_type": {
+    "2": {"2": 2, "1+1": 0},
+    "3": {"3": 3, "2+1": 0, "1+1+1": 0},
+    "5": {"5": 5, "4+1": 0, "3+2": 0, "3+1+1": 0, "2+2+1": 0, "2+1+1+1": 0, "1+1+1+1+1": 0},
+    "7": {"7": 7, "6+1": 0, "5+2": 0, "5+1+1": 0, "4+3": 0, "4+2+1": 0, "4+1+1+1": 0, "3+3+1": 0, "3+2+2": 0, "3+2+1+1": 0, "3+1+1+1+1": 0, "2+2+2+1": 0, "2+2+1+1+1": 0, "2+1+1+1+1+1": 0, "1+1+1+1+1+1+1": 0},
+    "11": {"11": 11}
+  },
+  "conclusions": {
+    "orbit_formula": "passed at p=5,7,11 by independent exhaustive census",
+    "fixed_point_formula": "p*I4+p follows from degree-1/degree-p Frobenius orbit classification and matches the census",
+    "alternating_hook_projector": "det(1-g|Std) vanishes off the p-cycle class and equals p on it",
+    "parity": "N_+ and N_- are even in every census"
+  }
+}
