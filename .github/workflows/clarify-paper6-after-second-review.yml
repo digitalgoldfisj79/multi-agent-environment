@@ -1,0 +1,93 @@
+name: Clarify Paper VI after second referee review
+
+on:
+  push:
+    branches:
+      - publication/fortune-papers-ii-vi-20260724
+    paths:
+      - .github/workflows/clarify-paper6-after-second-review.yml
+
+permissions:
+  contents: write
+
+jobs:
+  clarify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: publication/fortune-papers-ii-vi-20260724
+          fetch-depth: 0
+      - name: Apply final exact clarifications
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('publications/fortune-papers-ii-vi-20260724/paper6_secondary_quotients_replacement/manuscript.md')
+          s=p.read_text()
+          replacements=[
+          ('''The irreducible characters of \\(C_p\\) form a basis of its characteristic-zero
+          representation ring, and every virtual representation has integral
+          multiplicities in that basis.  The multiplicities \\((p-1)/p\\) and
+          \\(-1/p\\) computed above are nonintegral.''',
+          '''For a class function \\(\\varphi\\), the multiplicity of an irreducible character
+          \\(\\chi_j\\) is the Fourier inner product
+          \\[
+          \\langle\\varphi,\\chi_j\\rangle
+          =\\frac1p\\sum_{r=0}^{p-1}\\varphi(\\sigma^r)\\overline{\\chi_j(\\sigma^r)}.
+          \\]
+          Applied to \\(\\Theta_p/p\\), this equals \\((p-1)/p\\) for the trivial
+          character and \\(-1/p\\) for every nontrivial character.  The irreducible
+          characters form a free integral basis of the characteristic-zero
+          representation ring, so every virtual representation has integral
+          multiplicities in that basis.  The displayed multiplicities are nonintegral.'''),
+          ('''Conversely, choose one root of an irreducible fixed-class
+          polynomial and order its Frobenius conjugates.  Quotienting the \\(p\\) cyclic
+          rotations gives one rational quotient point, and choosing the ordering with
+          Frobenius shift \\(r\\) places it on the level \\(g=r\\).''',
+          '''Conversely, let \\(\\alpha\\) be a root of an irreducible fixed-class polynomial.
+          For a chosen \\(r\\ne0\\), order the roots so that Frobenius advances by
+          \\(r\\) positions; equivalently, if \\(s r\\equiv1\\pmod p\\), use the ordering
+          \\((\\alpha,F^s\\alpha,F^{2s}\\alpha,\\ldots,F^{(p-1)s}\\alpha)\\), with the
+          index convention adjusted to the chosen action of \\(\\sigma\\).  There are
+          exactly \\(p\\) choices of the initial root, and they differ exactly by the
+          \\(p\\) cyclic rotations.  Hence they determine one quotient point, and its
+          Frobenius shift is \\(r\\), so it lies on \\(g=r\\).'''),
+          ('''because \\(f'=3aX^2+c\\) is nonzero when \\(a\\ne0\\).''',
+          '''because \\(f'=3aX^2+c\\) has degree exactly two when \\(p>3\\) and
+          \\(a\\ne0\\), and in particular \\(\\deg f'=2<p=\\deg f\\).'''),
+          ('''Thus the two coefficient classes are not universally quadratic sign twists.
+          Let \\(D_p\\) be the full \\(\\mu_n\\)-quotient of the \\(g=1\\) level and let \\(U_p\\) be the
+          quotient of the complete fixed-cubic root-cycle open.''',
+          '''Thus the two coefficient classes are not universally quadratic sign twists.
+          On the irreducibility level one has \\(d\\ne0\\).  If
+          \\(\\zeta\\in\\mu_n\\) stabilises a point under the scalar action, then the
+          transformed constant coefficient satisfies \\(\\zeta^3d=d\\), so
+          \\(\\zeta^3=1\\).  For admitted primes \\(p\\equiv5\\pmod6\\),
+          \\(\\gcd(3,n)=1\\), and therefore \\(\\zeta=1\\).  The geometric action is free
+          on the irreducibility level, so the fibre of its geometric quotient is a
+          \\(\\mu_n\\)-torsor.  Let \\(D_p\\) be this full \\(\\mu_n\\)-quotient of the
+          \\(g=1\\) level and let \\(U_p\\) be the quotient of the complete fixed-cubic
+          root-cycle open.'''),
+          ('''The boundary and open counts add to the total.  \\(\\square\\)
+
+          The three formulas are mutually exact.''',
+          '''The boundary and open counts add to the total.  \\(\\square\\)
+
+          This theorem is an exact identity for every possible value of \\(W_p\\),
+          including \\(W_p=0\\); it makes no positivity claim.  The three formulas are
+          mutually exact.''')]
+          for old,new in replacements:
+              if old not in s:
+                  raise SystemExit('missing expected block: '+old[:180])
+              s=s.replace(old,new,1)
+          p.write_text(s)
+          PY
+          wc -l -c publications/fortune-papers-ii-vi-20260724/paper6_secondary_quotients_replacement/manuscript.md
+          sha256sum publications/fortune-papers-ii-vi-20260724/paper6_secondary_quotients_replacement/manuscript.md
+      - name: Commit final clarifications
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add publications/fortune-papers-ii-vi-20260724/paper6_secondary_quotients_replacement/manuscript.md
+          git commit -m 'Clarify Paper VI quotient and character proofs'
+          git push origin HEAD:publication/fortune-papers-ii-vi-20260724
