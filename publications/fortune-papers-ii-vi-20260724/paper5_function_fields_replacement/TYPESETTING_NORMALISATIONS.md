@@ -11,8 +11,9 @@ Documented notation normalisations:
 3. For the DOCX branch only, the two occurrences of the domain condition `q\in\mathbf F_p^*\setminus\{2\}` are written equivalently as `q\in\mathbf F_p^\times,\ q\ne2`. The set and its mathematical meaning are unchanged.
 4. Ordinary inline and display mathematics remain native editable OMML. Four q-line displays that LibreOffice Math mistranslates are converted from their exact TeX expressions to centred transparent 300-dpi PNG equation images. Each image carries the exact TeX expression as alternative text; the authoritative Markdown and generated LaTeX remain in the release package.
 5. Blank lines are inserted around display delimiters in the temporary DOCX source so each targeted equation image occupies a separate centred paragraph. This changes only Markdown block parsing, not mathematical content.
-6. The conversion is deterministic and guarded: exactly four displays must be converted; the build fails on any Pandoc `Could not convert TeX math` warning, insufficient OMML objects, insufficient equation images, literal TeX leakage, literal Markdown headings, or an abnormally short LibreOffice render extraction.
-7. Straight ASCII hyphens in source titles may render typographically as en/em dashes; mathematical minus signs remain equation objects.
-8. Line wrapping and page breaks may differ between PDF and DOCX, but theorem numbering, symbols and mathematical content must match the authoritative source.
+6. Every DOCX section is set deterministically to A4 portrait dimensions with 25 mm margins. Pandoc otherwise defaults the Word section to US Letter even when the canonical PDF is A4.
+7. The conversion is deterministic and guarded: exactly four displays must be converted; the build fails on any Pandoc `Could not convert TeX math` warning, insufficient OMML objects, insufficient equation images, literal TeX leakage, literal Markdown headings, non-A4 output, unembedded PDF fonts or an abnormally short LibreOffice render extraction.
+8. Straight ASCII hyphens in source titles may render typographically as en/em dashes; mathematical minus signs remain equation objects.
+9. Line wrapping and page breaks may differ between PDF and DOCX, but theorem numbering, symbols and mathematical content must match the authoritative source.
 
 Any additional conversion must be added to this file. A change to mathematical source text would reset source-fidelity and exact-hash review gates; the normalisations above are build-only and leave the reviewed Markdown hash unchanged.
