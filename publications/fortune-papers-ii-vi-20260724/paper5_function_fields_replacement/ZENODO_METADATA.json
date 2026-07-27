@@ -1,0 +1,19 @@
+{
+  "metadata": {
+    "title": "Fortunate Polynomials over Finite Fields: Exact Normal Forms, Sparse Geometry, and the Function-Field d=1 Crown",
+    "upload_type": "publication",
+    "publication_type": "preprint",
+    "description": "Replacement Paper V. It continues the integer-side derandomisation boundary of Papers III and IV into a finite-field irreducibility laboratory, proves the exact d=1 crown coordinates, sparse-surface smoothness, p-cycle fixed-point circularity and q-line saturation identity, and leaves a one-sided nonvanishing theorem open. Internal technical package; not human peer reviewed.",
+    "creators": [
+      {"name": "Bozzard, Edward Stewart Anthony", "orcid": "0009-0002-4052-0994"}
+    ],
+    "publication_date": "2026-07-27",
+    "version": "1.0.0-internal",
+    "license": "CC-BY-4.0",
+    "keywords": ["function fields", "irreducible polynomials", "Fortune's conjecture", "finite fields", "Frobenius traces", "reproducible research"],
+    "related_identifiers": [
+      {"identifier": "10.5281/zenodo.21426465", "relation": "isSupplementTo", "resource_type": "publication-article"}
+    ],
+    "notes": "The function-field d=1 crown and the integer Fortune conjecture remain open. Reserve a final DOI only after external human specialist review is disposed."
+  }
+}
