@@ -1,0 +1,155 @@
+name: Build replacement Papers V and VI
+
+on:
+  push:
+    branches:
+      - publication/fortune-papers-ii-vi-20260724
+    paths:
+      - .github/workflows/build-replacement-papers5-6.yml
+      - publications/fortune-papers-ii-vi-20260724/paper5_function_fields_replacement/**
+      - publications/fortune-papers-ii-vi-20260724/paper6_secondary_quotients_replacement/**
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: publication/fortune-papers-ii-vi-20260724
+          fetch-depth: 0
+
+      - name: Install publication toolchain
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y pandoc texlive-xetex texlive-latex-extra texlive-fonts-recommended biber poppler-utils qpdf libreoffice zip unzip g++
+          python3 -m pip install --break-system-packages python-docx pypdf
+
+      - name: Run independent mathematical reconstructions
+        run: |
+          set -euo pipefail
+          P5=publications/fortune-papers-ii-vi-20260724/paper5_function_fields_replacement
+          P6=publications/fortune-papers-ii-vi-20260724/paper6_secondary_quotients_replacement
+          python3 "$P5/paper5_independent_reconstruction.py" > "$P5/independent_reconstruction_run.log"
+          g++ -O2 -std=c++17 "$P5/sparse_surface_singularity_independent.cpp" -o /tmp/p5_singularity
+          (cd "$P5" && /tmp/p5_singularity > sparse_surface_singularity_run.log)
+          python3 "$P6/paper6_independent_reconstruction.py" > "$P6/independent_reconstruction_run.log"
+
+      - name: Validate frozen source hygiene
+        run: |
+          set -euo pipefail
+          for P in \
+            publications/fortune-papers-ii-vi-20260724/paper5_function_fields_replacement \
+            publications/fortune-papers-ii-vi-20260724/paper6_secondary_quotients_replacement; do
+            test -s "$P/manuscript.md"
+            test -s "$P/references.bib"
+            test -s "$P/CLAIM_STATUS.md"
+            test -s "$P/SOURCE_FIDELITY_MATRIX.md"
+            ! grep -nE 'TODO|TBD|PLACEHOLDER|REPLACE_ME|\\x00' "$P/manuscript.md" "$P/CLAIM_STATUS.md" "$P/SOURCE_FIDELITY_MATRIX.md"
+            grep -Fq 'The function-field' "$P/manuscript.md"
+            wc -l -c "$P/manuscript.md"
+            sha256sum "$P/manuscript.md"
+          done
+
+      - name: Build publication artefacts
+        run: |
+          set -euo pipefail
+          ROOT=publications/fortune-papers-ii-vi-20260724
+          OUT="$RUNNER_TEMP/fortune-papers5-6-release"
+          mkdir -p "$OUT/paper5" "$OUT/paper6"
+          build_one () {
+            SRC="$1"; DEST="$2"; STEM="$3"
+            pandoc -f markdown+tex_math_single_backslash "$SRC/manuscript.md" --citeproc --pdf-engine=xelatex \
+              -V papersize=a4 -V geometry:margin=25mm -V colorlinks=true -o "$DEST/$STEM.pdf"
+            pandoc -f markdown+tex_math_single_backslash "$SRC/manuscript.md" --citeproc -o "$DEST/$STEM.docx"
+            pandoc -f markdown+tex_math_single_backslash "$SRC/manuscript.md" --citeproc -s -t latex -o "$DEST/$STEM.tex"
+            cp "$SRC/manuscript.md" "$DEST/"
+            cp "$SRC/references.bib" "$DEST/"
+            cp "$SRC/CLAIM_STATUS.md" "$DEST/"
+            cp "$SRC/SOURCE_FIDELITY_MATRIX.md" "$DEST/"
+            cp "$SRC/SOURCE_MANIFEST.tsv" "$DEST/"
+            cp "$SRC/INDEPENDENT_RECONSTRUCTION.md" "$DEST/"
+            cp "$SRC"/*independent_reconstruction*.py "$DEST/" 2>/dev/null || true
+            cp "$SRC"/*independent_reconstruction*_results.json "$DEST/" 2>/dev/null || true
+            cp "$SRC"/*singularity* "$DEST/" 2>/dev/null || true
+            cp "$SRC"/INDEPENDENT_REVIEW_PROMPT.md "$DEST/" 2>/dev/null || true
+            cp "$SRC"/INDEPENDENT_REVIEW_RAW.md "$DEST/" 2>/dev/null || true
+            cp "$SRC"/INDEPENDENT_REVIEW_DISPOSITION.md "$DEST/" 2>/dev/null || true
+          }
+          build_one "$ROOT/paper5_function_fields_replacement" "$OUT/paper5" "fortune-paper-v"
+          build_one "$ROOT/paper6_secondary_quotients_replacement" "$OUT/paper6" "fortune-paper-vi"
+          echo "$OUT" > "$RUNNER_TEMP/release_path"
+
+      - name: PDF and DOCX semantic/preflight audit
+        run: |
+          set -euo pipefail
+          OUT=$(cat "$RUNNER_TEMP/release_path")
+          for D in "$OUT/paper5" "$OUT/paper6"; do
+            PDF=$(find "$D" -maxdepth 1 -name '*.pdf' | head -1)
+            DOCX=$(find "$D" -maxdepth 1 -name '*.docx' | head -1)
+            qpdf --check "$PDF"
+            pdfinfo "$PDF" | tee "$D/PDF_INFO.txt"
+            pdffonts "$PDF" | tee "$D/PDF_FONTS.txt"
+            pdftotext "$PDF" "$D/PDF_EXTRACTED.txt"
+            pandoc "$DOCX" -t plain -o "$D/DOCX_EXTRACTED.txt"
+            grep -Fq 'function-field' "$D/PDF_EXTRACTED.txt"
+            grep -Fq 'function-field' "$D/DOCX_EXTRACTED.txt"
+            grep -Fq 'crown remains open' "$D/PDF_EXTRACTED.txt"
+            grep -Fq 'crown remains open' "$D/DOCX_EXTRACTED.txt"
+            mkdir -p "$D/docx-render"
+            libreoffice --headless --convert-to pdf --outdir "$D/docx-render" "$DOCX" >/tmp/libreoffice.log 2>&1
+            RENDERED=$(find "$D/docx-render" -name '*.pdf' | head -1)
+            test -s "$RENDERED"
+            pdfinfo "$RENDERED" | tee "$D/DOCX_RENDER_INFO.txt"
+            pdftotext "$RENDERED" "$D/DOCX_RENDER_EXTRACTED.txt"
+            grep -Fq 'function-field' "$D/DOCX_RENDER_EXTRACTED.txt"
+          done
+
+      - name: DOCX structure and accessibility audit
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          from docx import Document
+          import json, os
+          out=Path(os.environ['RUNNER_TEMP'])/'fortune-papers5-6-release'
+          for d in (out/'paper5',out/'paper6'):
+              docx=next(d.glob('*.docx'))
+              doc=Document(docx)
+              headings=[]
+              empty_headings=[]
+              for i,p in enumerate(doc.paragraphs):
+                  if p.style and p.style.name.startswith('Heading'):
+                      headings.append((i,p.style.name,p.text))
+                      if not p.text.strip(): empty_headings.append(i)
+              findings=[]
+              if not headings: findings.append('no headings')
+              if empty_headings: findings.append(f'empty headings: {empty_headings}')
+              if not doc.core_properties.title: findings.append('missing title metadata')
+              tables=len(doc.tables)
+              report={'file':docx.name,'paragraphs':len(doc.paragraphs),'headings':headings,'tables':tables,'findings':findings}
+              (d/'DOCX_ACCESSIBILITY_AUDIT.json').write_text(json.dumps(report,indent=2))
+              if findings: raise SystemExit(report)
+          PY
+
+      - name: Package and checksum
+        run: |
+          set -euo pipefail
+          OUT=$(cat "$RUNNER_TEMP/release_path")
+          printf '%s\n' "Repository commit: $GITHUB_SHA" > "$OUT/BUILD_PROVENANCE.txt"
+          (cd "$OUT" && find . -type f ! -name SHA256SUMS -print0 | sort -z | xargs -0 sha256sum > SHA256SUMS)
+          (cd "$OUT" && sha256sum -c SHA256SUMS)
+          (cd "$OUT" && zip -r ../fortune-papers-v-vi-internal-release.zip .)
+          sha256sum "$RUNNER_TEMP/fortune-papers-v-vi-internal-release.zip" > "$OUT/ARCHIVE_SHA256.txt"
+
+      - name: Upload canonical internal release
+        uses: actions/upload-artifact@v4
+        with:
+          name: fortune-papers-v-vi-internal-release
+          path: |
+            ${{ runner.temp }}/fortune-papers5-6-release
+            ${{ runner.temp }}/fortune-papers-v-vi-internal-release.zip
+          retention-days: 90
