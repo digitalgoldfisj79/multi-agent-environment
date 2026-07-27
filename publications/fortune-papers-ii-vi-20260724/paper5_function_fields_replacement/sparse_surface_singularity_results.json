@@ -1,0 +1,9 @@
+{
+  "p": 7,
+  "ambient_vectors": 823543,
+  "cone_points": 5047,
+  "singular_points": 7,
+  "diagonal_points": 7,
+  "mismatches": 0,
+  "conclusion": "the affine singular locus equals the diagonal line at p=7"
+}
