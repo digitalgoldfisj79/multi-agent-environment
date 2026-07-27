@@ -1,0 +1,100 @@
+name: Apply corrected Papers II and III manuscripts
+
+on:
+  push:
+    branches:
+      - gpt56/fortune-mainterm-correction-programme-20260727
+    paths:
+      - .github/workflows/apply-mainterm-corrected-manuscripts.yml
+      - scripts/mainterm_correction_payloads/**
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: apply-mainterm-corrected-manuscripts
+  cancel-in-progress: true
+
+jobs:
+  apply:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: gpt56/fortune-mainterm-correction-programme-20260727
+          fetch-depth: 0
+
+      - name: Decode exact corrected sources
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import base64, hashlib, zlib
+
+          root = Path('scripts/mainterm_correction_payloads')
+          p2b64 = ''.join((root / f'paper2.part{i:02d}').read_text().strip() for i in range(4))
+          p3b64 = (root / 'paper3_manuscript_corrected.md.zlib.b64').read_text().strip()
+
+          outputs = [
+              (
+                  Path('publications/fortune-papers-ii-vi-20260724/paper2_revised/manuscript.md'),
+                  zlib.decompress(base64.b64decode(p2b64)),
+                  'c49e924aae223cba97a8118457e704374840f5e2cbfe4a527d2973c98502b500',
+              ),
+              (
+                  Path('publications/fortune-papers-ii-vi-20260724/paper3_pair_sum/manuscript.md'),
+                  zlib.decompress(base64.b64decode(p3b64)),
+                  'f841f0482f477409c0799fdea333ca93eb558285c2741ec88763ca02d02c143b',
+              ),
+          ]
+          for path, data, expected in outputs:
+              actual = hashlib.sha256(data).hexdigest()
+              if actual != expected:
+                  raise SystemExit(f'{path}: {actual} != {expected}')
+              text = data.decode('utf-8')
+              if any(token in text for token in ('TODO', 'TBD', 'PLACEHOLDER', '\x00')):
+                  raise SystemExit(f'{path}: source hygiene failure')
+              path.write_bytes(data)
+              print(actual, path, len(text.splitlines()), len(data))
+
+          refs = Path('publications/fortune-papers-ii-vi-20260724/paper2_revised/references.bib')
+          entry = r'''
+
+          @article{hardy-littlewood1923,
+            author = {Hardy, G. H. and Littlewood, J. E.},
+            title = {Some Problems of Partitio Numerorum. III. On the Expression of a Number as a Sum of Primes},
+            journal = {Acta Mathematica},
+            volume = {44},
+            pages = {1--70},
+            year = {1923},
+            doi = {10.1007/BF02403921}
+          }
+          '''
+          text = refs.read_text(encoding='utf-8')
+          if 'hardy-littlewood1923' not in text:
+              refs.write_text(text.rstrip() + entry + '\n', encoding='utf-8')
+          PY
+
+      - name: Validate corrected theorem boundaries
+        run: |
+          set -euo pipefail
+          P2=publications/fortune-papers-ii-vi-20260724/paper2_revised/manuscript.md
+          P3=publications/fortune-papers-ii-vi-20260724/paper3_pair_sum/manuscript.md
+          grep -Fq 'prime-pair detector' "$P2"
+          grep -Fq 'double-von-Mangoldt' "$P2"
+          grep -Fq 'single-walk' "$P2"
+          grep -Fq 'four-linear-form' "$P3"
+          grep -Fq 'superseded' "$P3"
+          grep -Fq 'The unconditional kernel theory' "$P3"
+          sha256sum "$P2" "$P3"
+
+      - name: Commit corrected manuscripts
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add \
+            publications/fortune-papers-ii-vi-20260724/paper2_revised/manuscript.md \
+            publications/fortune-papers-ii-vi-20260724/paper2_revised/references.bib \
+            publications/fortune-papers-ii-vi-20260724/paper3_pair_sum/manuscript.md
+          git commit -m 'Replace Papers II and III with main-term-corrected editions' || exit 0
+          git push origin HEAD:gpt56/fortune-mainterm-correction-programme-20260727
