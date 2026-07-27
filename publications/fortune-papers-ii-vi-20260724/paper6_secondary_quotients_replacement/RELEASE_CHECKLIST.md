@@ -10,8 +10,16 @@
 - [x] Self-contained theorem manuscript.
 - [x] Initial manuscript-only review archived and disposed.
 - [x] Proof exposition strengthened after initial review.
-- [ ] Final exact-hash manuscript-only review passed and disposed.
-- [ ] Final manuscript Git blob and SHA-256 recorded.
+- [x] Final exact-hash manuscript-only review passed and disposed.
+- [x] Final manuscript Git blob and SHA-256 recorded.
+
+Final reviewed source:
+
+- commit: `f8dda702141e85a07d0a20d08ed543bad6c6f270`;
+- manuscript Git blob: `6e42cce0331dcf6b532d2c88819303f858ae4fd9`;
+- manuscript SHA-256: `12879f46044fa3cc598ebe60c9419b78d8d32cfeb518dbad5a5d8d4589eb88dd`;
+- referee job: `6a671d607ef3c0846496a4d1`;
+- verdict: **PROVED AS STATED**.
 
 ## Build/QA gates
 
