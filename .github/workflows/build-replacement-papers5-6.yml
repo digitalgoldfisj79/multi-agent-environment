@@ -8,6 +8,7 @@ on:
       - .github/workflows/build-replacement-papers5-6.yml
       - scripts/pandoc_targeted_display_math_images.py
       - scripts/centre_docx_equation_images.py
+      - scripts/set_docx_a4.py
       - publications/fortune-papers-ii-vi-20260724/paper5_function_fields_replacement/INDEPENDENT_REVIEW_DISPOSITION_FINAL.md
       - publications/fortune-papers-ii-vi-20260724/paper6_secondary_quotients_replacement/INDEPENDENT_REVIEW_DISPOSITION_FINAL.md
       - publications/fortune-papers-ii-vi-20260724/paper5_function_fields_replacement/manuscript.md
@@ -198,6 +199,7 @@ jobs:
                 --metadata title="$TITLE" --metadata author='Edward Stewart Anthony Bozzard' \
                 -o "$DEST/$STEM.docx"
             fi
+            python3 "$GITHUB_WORKSPACE/scripts/set_docx_a4.py" "$DEST/$STEM.docx"
 
             pandoc -f markdown+tex_math_single_backslash "$TEX_SOURCE" \
               --resource-path="$SRC" --bibliography="$SRC/references.bib" --citeproc -s -t latex \
@@ -372,6 +374,7 @@ jobs:
           OUT=$(cat "$RUNNER_TEMP/release_path")
           cp "$GITHUB_WORKSPACE/scripts/pandoc_targeted_display_math_images.py" "$OUT/"
           cp "$GITHUB_WORKSPACE/scripts/centre_docx_equation_images.py" "$OUT/"
+          cp "$GITHUB_WORKSPACE/scripts/set_docx_a4.py" "$OUT/"
           printf '%s\n' "Repository commit: $GITHUB_SHA" > "$OUT/BUILD_PROVENANCE.txt"
           (cd "$OUT" && find . -type f ! -name SHA256SUMS -print0 | sort -z | xargs -0 sha256sum > SHA256SUMS)
           (cd "$OUT" && sha256sum -c SHA256SUMS)
@@ -409,7 +412,7 @@ jobs:
           - conclusion: **$RUN_STATUS**
           - run URL: https://github.com/$GITHUB_REPOSITORY/actions/runs/$RUN_ID
 
-          A success conclusion means the independent reconstructions, frozen-source checks, canonical PDF/LaTeX/DOCX builds, targeted equation conversion, semantic extraction, PDF preflight, independent LibreOffice render, equation/accessibility audit, checksums and artefact upload all passed.
+          A success conclusion means the independent reconstructions, frozen-source checks, canonical PDF/LaTeX/DOCX builds, targeted equation conversion, A4 normalisation, semantic extraction, PDF preflight, independent LibreOffice render, equation/accessibility audit, checksums and artefact upload all passed.
           EOF
           if [[ -f "$RUNNER_TEMP/build-publication-artefacts.log" ]]; then
             {
