@@ -1,0 +1,1 @@
+Trigger the exact-hash Paper II and chunk-verified Paper III manuscript application workflow.
