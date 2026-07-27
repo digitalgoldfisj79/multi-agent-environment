@@ -241,7 +241,19 @@ jobs:
             pdfinfo "$PDF" | tee "$dir/PDF_INFO.txt"
             grep -Fq 'A4' "$dir/PDF_INFO.txt"
             pdffonts "$PDF" | tee "$dir/PDF_FONTS.txt"
-            awk 'NR>2 && NF>=4 && $4 != "yes" {print; bad=1} END {exit bad}' "$dir/PDF_FONTS.txt"
+            python3 - "$dir/PDF_FONTS.txt" <<'PY'
+          from pathlib import Path
+          import sys
+          path = Path(sys.argv[1])
+          failures=[]
+          for line in path.read_text(errors='replace').splitlines()[2:]:
+              fields=line.split()
+              if len(fields) >= 5 and fields[-5] != 'yes':
+                  failures.append(line)
+          if failures:
+              raise SystemExit('Unembedded PDF fonts:\n' + '\n'.join(failures))
+          print(f'{path}: all listed fonts embedded')
+          PY
             pdftotext -layout "$PDF" "$dir/PDF_EXTRACTED.txt"
 
             python3 - "$DOCX" "$dir/DOCX_EXTRACTED.txt" <<'PY'
