@@ -77,7 +77,8 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends \
             pandoc texlive-xetex texlive-latex-extra texlive-fonts-recommended \
-            lmodern biber poppler-utils qpdf libreoffice-writer zip unzip g++ fonts-dejavu-core
+            lmodern biber poppler-utils qpdf libreoffice-writer libreoffice-math \
+            zip unzip g++ fonts-dejavu-core
           python3 -m pip install --break-system-packages python-docx pypdf
           pandoc --version | head -2
           xelatex --version | head -1
@@ -132,7 +133,10 @@ jobs:
           build_one () {
             SRC="$1"; DEST="$2"; STEM="$3"; TITLE="$4"
             echo "=== Building $STEM from $SRC ==="
+            PDF_SOURCE="$SRC/manuscript.md"
             DOCX_SOURCE="$SRC/manuscript.md"
+            TEX_SOURCE="$SRC/manuscript.md"
+
             if [[ "$STEM" == 'fortune-paper-v' ]]; then
               DOCX_SOURCE="$RUNNER_TEMP/$STEM-docx-normalised.md"
               python3 - "$SRC/manuscript.md" "$DOCX_SOURCE" <<'PY'
@@ -145,22 +149,39 @@ jobs:
           Path(sys.argv[2]).write_text(normalised)
           PY
             fi
-            (
-              cd "$SRC"
-              pandoc -f markdown+tex_math_single_backslash manuscript.md \
-                --bibliography=references.bib --citeproc --pdf-engine=xelatex \
-                --metadata title="$TITLE" --metadata author='Edward Stewart Anthony Bozzard' \
-                -V papersize=a4 -V geometry:margin=25mm -V colorlinks=true \
-                -o "$DEST/$STEM.pdf"
-              pandoc -f markdown+tex_math_single_backslash "$DOCX_SOURCE" \
-                --resource-path="$SRC" --bibliography="$SRC/references.bib" --citeproc \
-                --metadata title="$TITLE" --metadata author='Edward Stewart Anthony Bozzard' \
-                -o "$DEST/$STEM.docx"
-              pandoc -f markdown+tex_math_single_backslash manuscript.md \
-                --bibliography=references.bib --citeproc -s -t latex \
-                --metadata title="$TITLE" --metadata author='Edward Stewart Anthony Bozzard' \
-                -o "$DEST/$STEM.tex"
-            )
+
+            if [[ "$STEM" == 'fortune-paper-vi' ]]; then
+              NORMAL_SOURCE="$RUNNER_TEMP/$STEM-typeset-normalised.md"
+              python3 - "$SRC/manuscript.md" "$NORMAL_SOURCE" <<'PY'
+          from pathlib import Path
+          import sys
+          source = Path(sys.argv[1]).read_text()
+          needle = '\\]\n### Proof'
+          if source.count(needle) != 1:
+              raise SystemExit(f'Expected exactly one Paper VI Markdown-boundary normalisation, found {source.count(needle)}')
+          normalised = source.replace(needle, '\\]\n\n### Proof')
+          Path(sys.argv[2]).write_text(normalised)
+          PY
+              PDF_SOURCE="$NORMAL_SOURCE"
+              DOCX_SOURCE="$NORMAL_SOURCE"
+              TEX_SOURCE="$NORMAL_SOURCE"
+            fi
+
+            pandoc -f markdown+tex_math_single_backslash "$PDF_SOURCE" \
+              --resource-path="$SRC" --bibliography="$SRC/references.bib" --citeproc \
+              --pdf-engine=xelatex \
+              --metadata title="$TITLE" --metadata author='Edward Stewart Anthony Bozzard' \
+              -V papersize=a4 -V geometry:margin=25mm -V colorlinks=true \
+              -o "$DEST/$STEM.pdf"
+            pandoc -f markdown+tex_math_single_backslash "$DOCX_SOURCE" \
+              --resource-path="$SRC" --bibliography="$SRC/references.bib" --citeproc \
+              --metadata title="$TITLE" --metadata author='Edward Stewart Anthony Bozzard' \
+              -o "$DEST/$STEM.docx"
+            pandoc -f markdown+tex_math_single_backslash "$TEX_SOURCE" \
+              --resource-path="$SRC" --bibliography="$SRC/references.bib" --citeproc -s -t latex \
+              --metadata title="$TITLE" --metadata author='Edward Stewart Anthony Bozzard' \
+              -o "$DEST/$STEM.tex"
+
             cp "$SRC"/{manuscript.md,references.bib,CLAIM_STATUS.md,SOURCE_FIDELITY_MATRIX.md,SOURCE_MANIFEST.tsv,INDEPENDENT_RECONSTRUCTION.md,CITATION.cff,ZENODO_METADATA.json,RELEASE_CHECKLIST.md,TYPESETTING_NORMALISATIONS.md} "$DEST/"
             sha256sum "$SRC/manuscript.md" > "$DEST/MANUSCRIPT_SHA256.txt"
             find "$SRC" -maxdepth 1 -type f \( -name '*independent_reconstruction*.py' -o -name '*independent_reconstruction*_results.json' -o -name '*singularity*' -o -name 'INDEPENDENT_REVIEW*.md' \) -exec cp {} "$DEST/" \;
@@ -201,9 +222,10 @@ jobs:
             python3 - "$D" <<'PY'
           import pathlib, re, sys
           d = pathlib.Path(sys.argv[1])
+          def raw(path):
+              return path.read_text(errors='replace').lower()
           def norm(path):
-              s = path.read_text(errors='replace').lower()
-              return re.sub(r'\s+', ' ', s)
+              return re.sub(r'\s+', ' ', raw(path))
           texts = {
               'pdf': norm(d/'PDF_EXTRACTED.txt'),
               'docx': norm(d/'DOCX_EXTRACTED.txt'),
@@ -214,11 +236,19 @@ jobs:
               missing = [term for term in required if term not in text]
               if missing:
                   raise SystemExit(f'{d.name} {label}: missing semantic markers {missing}')
+              if '### proof' in text:
+                  raise SystemExit(f'{d.name} {label}: literal Markdown proof heading leaked into output')
           for label in ('docx', 'docx-render'):
               bad = [token for token in (r'\bigl', r'\bigr', '$$') if token in texts[label]]
               if bad:
                   raise SystemExit(f'{d.name} {label}: literal TeX leaked into output: {bad}')
-          print(f'{d.name}: semantic extraction checks passed')
+          if len(texts['docx-render']) < 0.90 * len(texts['docx']):
+              raise SystemExit(
+                  f"{d.name}: rendered DOCX extraction is too short "
+                  f"({len(texts['docx-render'])} versus {len(texts['docx'])}); "
+                  'equation objects may not have rendered'
+              )
+          print(f'{d.name}: semantic extraction and equation-render completeness checks passed')
           PY
           done
 
@@ -227,7 +257,7 @@ jobs:
           python3 - <<'PY'
           from pathlib import Path
           from docx import Document
-          import json, os
+          import json, os, zipfile
           out = Path(os.environ['RUNNER_TEMP']) / 'fortune-papers5-6-release'
           for d in (out/'paper5', out/'paper6'):
               docx = next(d.glob('*.docx'))
@@ -241,7 +271,11 @@ jobs:
               if empty: findings.append(f'empty headings: {empty}')
               if not (doc.core_properties.title or '').strip(): findings.append('missing title metadata')
               if not (doc.core_properties.author or '').strip(): findings.append('missing author metadata')
-              report={'file':docx.name,'paragraphs':len(doc.paragraphs),'headings':headings,'tables':len(doc.tables),'findings':findings}
+              with zipfile.ZipFile(docx) as z:
+                  xml = z.read('word/document.xml').decode('utf-8')
+              omath_count = xml.count('<m:oMath')
+              if omath_count < 20: findings.append(f'too few OMML equation objects: {omath_count}')
+              report={'file':docx.name,'paragraphs':len(doc.paragraphs),'headings':headings,'tables':len(doc.tables),'omath_count':omath_count,'findings':findings}
               (d/'DOCX_ACCESSIBILITY_AUDIT.json').write_text(json.dumps(report,indent=2))
               if findings: raise SystemExit(report)
           PY
