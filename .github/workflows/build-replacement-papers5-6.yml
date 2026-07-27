@@ -5,18 +5,58 @@ on:
     branches:
       - publication/fortune-papers-ii-vi-20260724
     paths:
-      - .github/workflows/build-replacement-papers5-6.yml
-      - publications/fortune-papers-ii-vi-20260724/paper5_function_fields_replacement/**
-      - publications/fortune-papers-ii-vi-20260724/paper6_secondary_quotients_replacement/**
+      - publications/fortune-papers-ii-vi-20260724/paper5_function_fields_replacement/INDEPENDENT_REVIEW_DISPOSITION_FINAL.md
+      - publications/fortune-papers-ii-vi-20260724/paper6_secondary_quotients_replacement/INDEPENDENT_REVIEW_DISPOSITION_FINAL.md
   workflow_dispatch:
 
 permissions:
   contents: read
 
+concurrency:
+  group: replacement-papers-v-vi-release
+  cancel-in-progress: true
+
 jobs:
-  build-and-audit:
+  readiness:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    outputs:
+      ready: ${{ steps.check.outputs.ready }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: publication/fortune-papers-ii-vi-20260724
+          fetch-depth: 0
+      - id: check
+        name: Check both final-review gates
+        shell: bash
+        run: |
+          set -euo pipefail
+          ROOT=publications/fortune-papers-ii-vi-20260724
+          required=(
+            "$ROOT/paper5_function_fields_replacement/INDEPENDENT_REVIEW_RAW_FINAL.md"
+            "$ROOT/paper5_function_fields_replacement/INDEPENDENT_REVIEW_DISPOSITION_FINAL.md"
+            "$ROOT/paper6_secondary_quotients_replacement/INDEPENDENT_REVIEW_RAW_FINAL.md"
+            "$ROOT/paper6_secondary_quotients_replacement/INDEPENDENT_REVIEW_DISPOSITION_FINAL.md"
+          )
+          missing=0
+          for f in "${required[@]}"; do
+            if [[ ! -s "$f" ]]; then
+              echo "Not ready: missing $f"
+              missing=1
+            fi
+          done
+          if [[ "$missing" -eq 0 ]]; then
+            echo 'ready=true' >> "$GITHUB_OUTPUT"
+          else
+            echo 'ready=false' >> "$GITHUB_OUTPUT"
+            echo 'Combined release build skipped successfully until both exact-hash reviews are frozen.'
+          fi
+
+  build-and-audit:
+    needs: readiness
+    if: needs.readiness.outputs.ready == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
         with:
@@ -64,15 +104,18 @@ jobs:
       - name: Build publication artefacts
         run: |
           set -euo pipefail
-          ROOT=publications/fortune-papers-ii-vi-20260724
+          ROOT="$GITHUB_WORKSPACE/publications/fortune-papers-ii-vi-20260724"
           OUT="$RUNNER_TEMP/fortune-papers5-6-release"
           mkdir -p "$OUT/paper5" "$OUT/paper6"
           build_one () {
             SRC="$1"; DEST="$2"; STEM="$3"
-            pandoc -f markdown+tex_math_single_backslash "$SRC/manuscript.md" --citeproc --pdf-engine=xelatex \
-              -V papersize=a4 -V geometry:margin=25mm -V colorlinks=true -o "$DEST/$STEM.pdf"
-            pandoc -f markdown+tex_math_single_backslash "$SRC/manuscript.md" --citeproc -o "$DEST/$STEM.docx"
-            pandoc -f markdown+tex_math_single_backslash "$SRC/manuscript.md" --citeproc -s -t latex -o "$DEST/$STEM.tex"
+            (
+              cd "$SRC"
+              pandoc -f markdown+tex_math_single_backslash manuscript.md --citeproc --pdf-engine=xelatex \
+                -V papersize=a4 -V geometry:margin=25mm -V colorlinks=true -o "$DEST/$STEM.pdf"
+              pandoc -f markdown+tex_math_single_backslash manuscript.md --citeproc -o "$DEST/$STEM.docx"
+              pandoc -f markdown+tex_math_single_backslash manuscript.md --citeproc -s -t latex -o "$DEST/$STEM.tex"
+            )
             cp "$SRC/manuscript.md" "$DEST/"
             cp "$SRC/references.bib" "$DEST/"
             cp "$SRC/CLAIM_STATUS.md" "$DEST/"
@@ -100,6 +143,8 @@ jobs:
           for D in "$OUT/paper5" "$OUT/paper6"; do
             PDF=$(find "$D" -maxdepth 1 -name '*.pdf' | head -1)
             DOCX=$(find "$D" -maxdepth 1 -name '*.docx' | head -1)
+            test -s "$PDF"
+            test -s "$DOCX"
             qpdf --check "$PDF"
             pdfinfo "$PDF" | tee "$D/PDF_INFO.txt"
             pdffonts "$PDF" | tee "$D/PDF_FONTS.txt"
