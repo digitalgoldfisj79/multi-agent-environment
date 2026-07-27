@@ -110,9 +110,11 @@ irreducible.
 
 ### Proof
 
-Every irreducible factor of \(m\) is absent from \(P_d\), and therefore has
-degree at least \(d+1\).  A reducible polynomial has at least two irreducible
-factors counted with multiplicity.  Their degrees add, giving
+Factor \(m\) uniquely, up to units and ordering, as a product of monic
+irreducible polynomials.  Coprimality with \(P_d\) means that none of these
+irreducible factors occurs among the factors of \(P_d\); hence each has
+degree at least \(d+1\).  Because \(m\) is reducible, at least two factors
+occur when multiplicity is counted.  Their degrees add, giving
 \(\deg m\ge2(d+1)\).  The final assertion follows immediately.  \(\square\)
 
 This is the exact function-field analogue of the elementary integer observation
@@ -159,15 +161,22 @@ We next rewrite this inequality in exact nonnegative coordinates.
 
 Let
 \[
-N_2(p)=\#\{d\in\mathbf F_p:T^p+T^2+d\ \text{is irreducible}\}.
+N_2(p)=\operatorname{card}\{d\in\mathbf F_p:T^p+T^2+d\ \text{is irreducible}\}.
 \]
-Consider the sector \(a=0\), \(b\ne0\).  Translation changes the coefficient
-of \(T\) by \(2bt\), so there is a unique translation that makes the total
-linear coefficient zero.  After this depression, the monic affine scaling
-\(T\mapsto\lambda T\), followed by division by \(\lambda\), sends
-\(b\mapsto b\lambda\); a unique scaling makes \(b=1\).  Thus every irreducible
-quadratic-tail orbit has a unique representative \(T^p+T^2+d\), and the orbit
-has size \(p(p-1)\).  Adding the \(p-1\) constant Artin--Schreier values gives
+Consider the sector \(a=0\), \(b\ne0\).  In
+\(T^p-T+bT^2+cT+d\), translation \(T\mapsto T+t\) changes the total
+linear coefficient \(c-1\) to \(c-1+2bt\).  Since \(2b\ne0\), exactly
+one \(t\in\mathbf F_p\) makes it zero.  The depressed polynomial then has
+the form \(T^p+bT^2+d'\).  Monic affine scaling acts by
+\[
+\lambda^{-1}f(\lambda T)=T^p+(b\lambda)T^2+d'/\lambda,
+\]
+because \(\lambda^p=\lambda\).  Exactly one nonzero \(\lambda\), namely
+\(b^{-1}\), sends the quadratic coefficient to one.  A stabiliser preserving
+both the zero linear coefficient and the normalisation \(b=1\) must therefore
+have \(t=0\) and \(\lambda=1\).  Thus every irreducible quadratic-tail
+orbit has a unique representative \(T^p+T^2+d\), and its orbit has size
+\(p(p-1)\).  Adding the \(p-1\) constant Artin--Schreier values gives
 \[
 I_{a=0}=(p-1)+p(p-1)N_2(p).
 \]
@@ -181,10 +190,17 @@ F_{a,c,d}(T)=T^p+aT^3+cT+d
 \]
 and
 \[
-N_a(p)=\#\{(c,d)\in\mathbf F_p^2:F_{a,c,d}\ \text{is irreducible}\}.
+N_a(p)=\operatorname{card}\{(c,d)\in\mathbf F_p^2:F_{a,c,d}\ \text{is irreducible}\}.
 \]
-A monic affine scaling changes \(a\) by a square.  Therefore \(N_a(p)\) depends
-only on the square class \(A=\chi(a)\in\{+1,-1\}\).  Choose one square and one
+For \(\lambda\in\mathbf F_p^*\), monic scaling gives
+\[
+\lambda^{-1}F_{a,c,d}(\lambda T)
+=T^p+(a\lambda^2)T^3+cT+d/\lambda.
+\]
+It is a coefficient-wise bijection preserving irreducibility.  Hence two
+nonzero cubic coefficients give isomorphic depressed slices exactly when
+their ratio is a square, and \(N_a(p)\) depends only on
+\(A=\chi(a)\in\{+1,-1\}\).  Choose one square and one
 nonsquare representative, and denote the corresponding counts by
 \(N_{\mathrm{sq}}(p)\) and \(N_{\mathrm{ns}}(p)\).
 
@@ -296,8 +312,12 @@ units, the Jacobian is the truncated Vandermonde matrix
 \[
 \bigl(x_i^{m-1}\bigr)_{1\le m\le p-4,\ 1\le i\le p},
 \]
-whose rank is \(\min(r,p-4)\).  A rank failure therefore requires
-\(r\le p-5\).
+Columns belonging to equal coordinate values coincide.  After retaining
+one column for each distinct value, the column rank is that of the
+\((p-4)\times r\) matrix \((\alpha_j^{m-1})\).  Every square minor of
+order at most \(\min(r,p-4)\) formed from its first rows is a nonzero
+Vandermonde determinant, so the rank is \(\min(r,p-4)\).  The required
+Jacobian rank is \(p-4\); a failure therefore requires \(r\le p-5\).
 
 The defining equations give
 \[
@@ -312,6 +332,12 @@ matrix.  Thus every \(n_j=0\) in \(\mathbf F_p\).  If \(r\ge2\), then
 Conversely every diagonal point lies on the cone and has deficient Jacobian
 rank.  The affine quotient by \(L\) therefore has only its vertex singular, and
 projectivisation removes that vertex.  \(\square\)
+
+Throughout the cohomological sections, \(F\) denotes the Frobenius
+operator normalised so that its fixed points are the \(\mathbf F_p\)-points
+in the Grothendieck--Lefschetz formula and \(\mathbf Q_\ell(-1)\) has
+eigenvalue \(p\).  Cohomology is taken with \(\mathbf Q_\ell\)-coefficients
+for \(\ell\ne p\).
 
 By weak Lefschetz [@SGA2; @MilneEtale],
 \[
@@ -336,7 +362,10 @@ The translation map
 q:X_p\longrightarrow C_p
 \]
 is an \(S_p\)-equivariant torsor under \(\mathbf A^1\), on which \(S_p\) acts
-trivially.  Hence
+trivially.  It is Zariski locally the projection
+\(U\times\mathbf A^1\to U\).  Since
+\(H_c^2(\mathbf A^1,\mathbf Q_\ell)=\mathbf Q_\ell(-1)\) and the other
+compactly supported groups vanish, proper base change gives
 \[
 Rq_!\mathbf Q_\ell\cong\mathbf Q_\ell(-1)[-2].
 \]
@@ -347,15 +376,20 @@ M_\rho=\operatorname{Hom}_{S_p}
 \bigl(\rho,H^2_{\mathrm{prim}}(Y_p,\mathbf Q_\ell)\bigr).
 \]
 The punctured cone is the \(\mathbf G_m\)-bundle associated to
-\(\mathcal O_{Y_p}(-1)\).  The cone vertex carries only the trivial
-representation.  The localisation sequence for the zero section, together
-with the Lefschetz concentration above, gives
+\(\mathcal O_{Y_p}(-1)\).  Apply the localisation triangle for the zero
+section in the total line bundle and the Gysin map given by its first Chern
+class.  On a nontrivial \(\rho\)-isotypic component, the cone vertex
+contributes nothing and the ambient cohomology of \(Y_p\) is concentrated
+in \(M_\rho\subset H^2\).  The resulting two adjacent compactly supported
+groups are
 \[
 H_c^3(C_p)_\rho\cong M_\rho,
 \qquad
 H_c^4(C_p)_\rho\cong M_\rho(-1).
 \]
-Applying the translation torsor yields the following exact transfer.
+Tensoring these two groups with
+\(H_c^2(\mathbf A^1)=\mathbf Q_\ell(-1)\) shifts degree by two and adds
+one Tate twist.  This yields the following exact transfer.
 
 ## Theorem 6.1 (nontrivial Sawin-cone transfer)
 
@@ -435,8 +469,20 @@ Let its roots be \(r,s\), and put \(\delta=b^2-3au\).  As a polynomial in
 \qquad
 F(T)=T^p+aT^3+bT^2+uT.
 \]
-The quadratic character sum over \(d\) is \((p-1)\chi(\varepsilon_p3a)\) when
-\(F(r)=F(s)\), and \(-\chi(\varepsilon_p3a)\) otherwise, where
+For a nonzero scalar \(\kappa\), the standard quadratic-character identity is
+\[
+\sum_{d\in\mathbf F_p}\chi(\kappa(d-u)(d-v))
+=\begin{cases}
+(p-1)\chi(\kappa),&u=v,\\
+-\chi(\kappa),&u\ne v.
+\end{cases}
+\]
+Indeed, in the first case every term except the double root is the square
+class \(\chi(\kappa)\); in the second, translation and scaling reduce to
+\(\sum_x\chi(x(x-1))=-1\).  Applying this with
+\(\kappa=\varepsilon_p3a\) gives
+\((p-1)\chi(\varepsilon_p3a)\) when \(F(r)=F(s)\), and
+\(-\chi(\varepsilon_p3a)\) otherwise, where
 \(\varepsilon_p=(-1)^{(p-1)/2}\).
 
 Writing \(\Delta=r-s\), direct use of the symmetric functions of \(r,s\)
@@ -483,8 +529,13 @@ If the cycle lengths of \(g\) are \(\lambda_1,\ldots,\lambda_r\), then
 =\frac{\prod_j(1-t^{\lambda_j})}{1-t}.
 \]
 At \(t=1\) this vanishes unless \(g\) is one \(p\)-cycle, when it equals
-\(p\).  The class has \((p-1)!\) elements, so the character value, class size
-and projector denominator cancel exactly.
+\(p\).  The class has \((p-1)!\) elements, and all its elements are conjugate.
+Its total scalar in the projector is explicitly
+\[
+\frac{p(p-1)!}{p!}=1.
+\]
+Thus the character value, class size and projector denominator cancel
+exactly.
 
 ## Theorem 8.1 (alternating-hook projector)
 
@@ -499,10 +550,15 @@ There is no missing factor of \(p\).
 
 # 9. Fixed points and exact circularity
 
-The safe fixed-point calculation is on the affine variety \(X_p\).  A point
-fixed by \(F\sigma\) is determined by an element
-\(\alpha\in\mathbf F_{p^p}\) and the ordered list of its Frobenius conjugates.
-Since \(p\) is prime, \(\alpha\) has degree one or \(p\).
+The safe fixed-point calculation is on the affine variety \(X_p\).  Let
+\(F(x)=x^p\) on geometric points and let
+\(\sigma=(1\ 2\ \cdots\ p)\).  An \(F\sigma\)-fixed tuple is uniquely
+of the form
+\[
+(\alpha,F\alpha,\ldots,F^{p-1}\alpha)
+\]
+for some \(\alpha\in\mathbf F_{p^p}\).  The degree of \(\alpha\) over
+\(\mathbf F_p\) divides the prime \(p\), so it is one or \(p\).
 
 - Degree \(p\) produces an irreducible polynomial in \(\mathcal I_4\), and each
   irreducible contributes \(p\) choices of the first root.
@@ -512,7 +568,7 @@ Since \(p\) is prime, \(\alpha\) has degree one or \(p\).
 ## Theorem 9.1 (exact fixed-point count)
 
 \[
-\boxed{\#\operatorname{Fix}(F\sigma\mid X_p)=pI_4(p)+p.}
+\boxed{\operatorname{card}\operatorname{Fix}(F\sigma\mid X_p)=pI_4(p)+p.}
 \]
 The extra \(p\) is the prime-power correction.  Equivalently,
 \[
@@ -589,7 +645,7 @@ In both cases the constant parameter map is bijective and irreducibility is
 preserved.  Let
 \[
 I_\varepsilon(q)=
-\#\{\delta\in\mathbf F_p:G_{q,\varepsilon,\delta}\ \text{irreducible}\}.
+\operatorname{card}\{\delta\in\mathbf F_p:G_{q,\varepsilon,\delta}\ \text{irreducible}\}.
 \]
 The locus \(c=0\) is denoted \(q=\infty\).  Then
 \[
@@ -633,8 +689,15 @@ S_0=
 S_\chi=
 \sum_{q\ne0,2}\chi(q)\bigl(E_+(q)-E_-(q)\bigr).
 \]
-Since the arithmetic class \(A\) selects the reading
-\(\varepsilon=A\chi(q)\), one obtains the exact ledger.
+For each generic \(q\), the selected reading satisfies
+\[
+E_{A\chi(q)}(q)=\frac12\Bigl(E_+(q)+E_-(q)
++A\chi(q)(E_+(q)-E_-(q))\Bigr).
+\]
+Summing over the \(p-2\) values \(q\in\mathbf F_p^*\setminus\{2\}\)
+gives \(\tfrac12(S_0+A S_\chi)\).  Substituting
+\(I_\varepsilon(q)=1-E_\varepsilon(q)/p\) into the finite cell assembly
+yields the exact ledger.
 
 ## Theorem 10.1 (q-line class projectors)
 
@@ -701,8 +764,9 @@ the ledger cannot distinguish zero from a positive \(2p\)-multiple.
 
 # 12. Exact computation and reproducibility
 
-The theorem statements above do not rely on asymptotic fitting.  The repository
-contains independent finite checks of each structural identity.
+All uniform statements above have already been proved symbolically.  The
+computations in this section are independent regression checks of those proofs;
+they are not used to extrapolate a theorem from finitely many primes.
 
 A clean-room implementation written for this manuscript exhaustively tests
 irreducibility in the full \(p^4\) interval at \(p=5,7,11\) using the
@@ -745,9 +809,11 @@ The following routes are now closed as independent reductions.
 4.  An identification of the full primitive trace with the earlier cubic Airy
     trace: exact values disagree beyond the first small coincidence.
 
-The surviving theorem must exclude the exact zero value of one of the
-nonnegative normal-form coordinates, or equivalently prove that an associated
-compactly supported Frobenius trace cannot attain its saturation value.  Paper
+By Corollary 4.2 the crown is exactly \(W_p>0\), and by Theorem 11.1 the
+cubic contribution is exactly the invariant saturation defect.  Therefore any
+surviving proof must exclude the exact zero value of one of these nonnegative
+coordinates, or equivalently prove that the associated compactly supported
+Frobenius trace cannot attain its saturation value.  Paper
 VI studies first-order integral information that is invisible to the ordinary
 semisimple projector: fixed-class Cartier moments, cyclotomic tangents,
 Hattori--Stallings divided traces, and the Artin--Schreier/Kummer quotient
