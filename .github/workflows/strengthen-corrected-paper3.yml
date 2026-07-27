@@ -23,8 +23,9 @@ jobs:
         run: |
           set -euo pipefail
           P=publications/fortune-papers-ii-vi-20260724/paper3_pair_sum/manuscript.md
-          grep -Fq 'These are exactly the N sliding representations' "$P"
-          grep -Fq 'Proof of the expansion' "$P"
+          grep -Fq 'Expanded multiplicity proof' "$P"
+          grep -Fq 'Expanded labelled-lift count' "$P"
+          grep -Fq 'Proof of (10.1)' "$P"
           grep -Fq 'A second live route starts' "$P"
           ! grep -nE 'TODO|TBD|PLACEHOLDER' "$P"
           sha256sum "$P"
