@@ -1,9 +1,9 @@
 name: Build replacement Papers V and VI
 
 on:
-  push:
+  pull_request:
     branches:
-      - publication/fortune-papers-ii-vi-20260724
+      - gpt56/d1-gate-bridge-terminal-20260724
     paths:
       - .github/workflows/build-replacement-papers5-6.yml
       - publications/fortune-papers-ii-vi-20260724/paper5_function_fields_replacement/INDEPENDENT_REVIEW_DISPOSITION_FINAL.md
