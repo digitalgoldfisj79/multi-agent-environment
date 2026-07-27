@@ -36,7 +36,7 @@ jobs:
 
           root = Path('scripts/mainterm_correction_payloads')
           p2b64 = ''.join((root / f'paper2.part{i:02d}').read_text().strip() for i in range(4))
-          p3b64 = (root / 'paper3_manuscript_corrected.md.zlib.b64').read_text().strip()
+          p3b64 = ''.join((root / f'paper3.part{i:02d}').read_text().strip() for i in range(3))
 
           outputs = [
               (
