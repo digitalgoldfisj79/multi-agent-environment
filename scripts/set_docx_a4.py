@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
-"""Set every DOCX section to A4 and apply one documented render normalisation."""
+"""Set every DOCX section to A4 with 25 mm margins.
+
+This utility deliberately changes section geometry only. It must not assign to
+paragraph.text or otherwise reconstruct runs, because doing so destroys inline
+images and equation objects in the affected paragraph.
+"""
 
 from __future__ import annotations
 
@@ -25,23 +30,5 @@ for section in document.sections:
     section.left_margin = Mm(25)
     section.right_margin = Mm(25)
 
-# Pandoc/Word typographically converts the source spelling Artin--Schreier to
-# an en dash. LibreOffice preserves that glyph in its PDF text extraction,
-# whereas the deterministic audit compares against the source-style spelling.
-# Normalise only this named phrase in the editable DOCX; no formula or claim is
-# changed, and the authoritative reviewed Markdown and XeLaTeX PDF are untouched.
-normalised = 0
-for paragraph in document.paragraphs:
-    original = paragraph.text
-    revised = original
-    for dash in ("–", "—", "‑"):
-        revised = revised.replace(f"Artin{dash}Schreier", "Artin--Schreier")
-    if revised != original:
-        paragraph.text = revised
-        normalised += 1
-
 document.save(path)
-print(
-    f"Set {len(document.sections)} DOCX section(s) to A4 with 25 mm margins; "
-    f"normalised {normalised} Artin--Schreier paragraph(s): {path}"
-)
+print(f"Set {len(document.sections)} DOCX section(s) to A4/25 mm: {path}")
