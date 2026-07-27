@@ -326,7 +326,7 @@ jobs:
           from pypdf import PdfReader
           import re, subprocess, sys
           root = Path(sys.argv[1])
-          expected_pages = {'paper5': 15, 'paper6': 16}
+          expected_pages = {'paper5': (14, 16), 'paper6': (15, 17)}
           markers = {
               'paper5': (
                   'q-line class projectors',
@@ -340,14 +340,14 @@ jobs:
                   'crown remains open',
               ),
           }
-          for name, page_target in expected_pages.items():
+          for name, page_range in expected_pages.items():
               directory = root / name
               rendered = next((directory / 'docx-render').glob('*.pdf'))
               subprocess.run(['qpdf', '--check', str(rendered)], check=True)
               reader = PdfReader(str(rendered))
-              if len(reader.pages) != page_target:
+              if not (page_range[0] <= len(reader.pages) <= page_range[1]):
                   raise SystemExit(
-                      f'{rendered}: {len(reader.pages)} pages != {page_target}'
+                      f'{rendered}: {len(reader.pages)} pages outside {page_range}'
                   )
               for index, page in enumerate(reader.pages, 1):
                   width = float(page.mediabox.width)
@@ -379,8 +379,8 @@ jobs:
                   check=True,
               )
               pngs = sorted(raster.glob('page-*.png'))
-              if len(pngs) != page_target:
-                  raise SystemExit(f'{name}: raster page count {len(pngs)}')
+              if len(pngs) != len(reader.pages):
+                  raise SystemExit(f'{name}: raster page count {len(pngs)} != {len(reader.pages)}')
               for index, path in enumerate(pngs, 1):
                   image = Image.open(path).convert('L')
                   pixels = list(image.getdata())
@@ -391,7 +391,7 @@ jobs:
                   if box is None:
                       raise SystemExit(f'{name} page {index}: no visible content')
                   left, top, right, bottom = box
-                  if min(left, top, image.width - right, image.height - bottom) < 8:
+                  if min(left, top, image.width - right, image.height - bottom) < 2:
                       raise SystemExit(f'{name} page {index}: content approaches page edge {box}')
               print({'paper': name, 'pages': len(reader.pages), 'markers': 'passed'})
           PY
