@@ -6,6 +6,8 @@ on:
       - publication/fortune-papers-ii-vi-20260724
     paths:
       - .github/workflows/build-replacement-papers5-6.yml
+      - scripts/pandoc_targeted_display_math_images.py
+      - scripts/centre_docx_equation_images.py
       - publications/fortune-papers-ii-vi-20260724/paper5_function_fields_replacement/INDEPENDENT_REVIEW_DISPOSITION_FINAL.md
       - publications/fortune-papers-ii-vi-20260724/paper6_secondary_quotients_replacement/INDEPENDENT_REVIEW_DISPOSITION_FINAL.md
       - publications/fortune-papers-ii-vi-20260724/paper5_function_fields_replacement/manuscript.md
@@ -32,7 +34,7 @@ jobs:
           ref: publication/fortune-papers-ii-vi-20260724
           fetch-depth: 0
       - id: check
-        name: Check both final-review gates
+        name: Check final-review gates
         shell: bash
         run: |
           set -euo pipefail
@@ -44,9 +46,9 @@ jobs:
             "$ROOT/paper6_secondary_quotients_replacement/INDEPENDENT_REVIEW_DISPOSITION_FINAL.md"
           )
           missing=0
-          for f in "${required[@]}"; do
-            if [[ ! -s "$f" ]]; then
-              echo "Not ready: missing $f"
+          for file in "${required[@]}"; do
+            if [[ ! -s "$file" ]]; then
+              echo "Not ready: missing $file"
               missing=1
             fi
           done
@@ -54,7 +56,6 @@ jobs:
             echo 'ready=true' >> "$GITHUB_OUTPUT"
           else
             echo 'ready=false' >> "$GITHUB_OUTPUT"
-            echo 'Combined release build skipped until both exact-hash reviews are frozen.'
           fi
 
   build-and-audit:
@@ -97,28 +98,30 @@ jobs:
       - name: Validate frozen source hygiene
         run: |
           set -euo pipefail
-          for P in \
+          for paper in \
             publications/fortune-papers-ii-vi-20260724/paper5_function_fields_replacement \
             publications/fortune-papers-ii-vi-20260724/paper6_secondary_quotients_replacement; do
-            for f in manuscript.md references.bib CLAIM_STATUS.md SOURCE_FIDELITY_MATRIX.md \
+            for file in manuscript.md references.bib CLAIM_STATUS.md SOURCE_FIDELITY_MATRIX.md \
               SOURCE_MANIFEST.tsv CITATION.cff ZENODO_METADATA.json RELEASE_CHECKLIST.md \
               TYPESETTING_NORMALISATIONS.md INDEPENDENT_REVIEW_RAW_FINAL.md \
               INDEPENDENT_REVIEW_DISPOSITION_FINAL.md; do
-              test -s "$P/$f" || { echo "Missing required file: $P/$f"; exit 1; }
+              test -s "$paper/$file" || { echo "Missing required file: $paper/$file"; exit 1; }
             done
             if grep -nE 'TODO|TBD|PLACEHOLDER|REPLACE_ME' \
-              "$P/manuscript.md" "$P/CLAIM_STATUS.md" "$P/SOURCE_FIDELITY_MATRIX.md"; then
-              echo "Unresolved placeholder found in $P"
+              "$paper/manuscript.md" "$paper/CLAIM_STATUS.md" "$paper/SOURCE_FIDELITY_MATRIX.md"; then
+              echo "Unresolved placeholder found in $paper"
               exit 1
             fi
-            python3 - "$P/manuscript.md" <<'PY'
-          import hashlib, pathlib, sys
-          p = pathlib.Path(sys.argv[1])
-          data = p.read_bytes()
+            python3 - "$paper/manuscript.md" <<'PY'
+          import hashlib
+          import pathlib
+          import sys
+          path = pathlib.Path(sys.argv[1])
+          data = path.read_bytes()
           if b'\x00' in data:
-              raise SystemExit(f'NUL byte in {p}')
-          print(f'{p}: {len(data)} bytes, {data.count(chr(10).encode()) + 1} lines')
-          print(hashlib.sha256(data).hexdigest(), p)
+              raise SystemExit(f'NUL byte in {path}')
+          print(f'{path}: {len(data)} bytes, {data.count(bytes([10])) + 1} lines')
+          print(hashlib.sha256(data).hexdigest(), path)
           PY
           done
 
@@ -130,6 +133,7 @@ jobs:
           ROOT="$GITHUB_WORKSPACE/publications/fortune-papers-ii-vi-20260724"
           OUT="$RUNNER_TEMP/fortune-papers5-6-release"
           mkdir -p "$OUT/paper5" "$OUT/paper6"
+
           build_one () {
             SRC="$1"; DEST="$2"; STEM="$3"; TITLE="$4"
             echo "=== Building $STEM from $SRC ==="
@@ -141,12 +145,17 @@ jobs:
               DOCX_SOURCE="$RUNNER_TEMP/$STEM-docx-normalised.md"
               python3 - "$SRC/manuscript.md" "$DOCX_SOURCE" <<'PY'
           from pathlib import Path
+          import re
           import sys
-          source = Path(sys.argv[1]).read_text()
-          normalised = source.replace(r'\Bigl(', '(').replace(r'\Bigr)', ')')
-          if normalised == source:
-              raise SystemExit('Expected Paper V DOCX delimiter normalisation was not applied')
-          Path(sys.argv[2]).write_text(normalised)
+          source = Path(sys.argv[1]).read_text(encoding='utf-8')
+          old_inline = r'q\in\mathbf F_p^*\setminus\{2\}'
+          new_inline = r'q\in\mathbf F_p^\times,\ q\ne2'
+          if source.count(old_inline) != 1:
+              raise SystemExit(f'Expected one Paper V inline domain normalisation, found {source.count(old_inline)}')
+          normalised = source.replace(old_inline, new_inline)
+          normalised = re.sub(r'(?<!\n)\n\\\[\n', '\n\n\\[\n', normalised)
+          normalised = re.sub(r'\n\\\]\n(?!\n)', '\n\\]\n\n', normalised)
+          Path(sys.argv[2]).write_text(normalised, encoding='utf-8')
           PY
             fi
 
@@ -155,12 +164,11 @@ jobs:
               python3 - "$SRC/manuscript.md" "$NORMAL_SOURCE" <<'PY'
           from pathlib import Path
           import sys
-          source = Path(sys.argv[1]).read_text()
+          source = Path(sys.argv[1]).read_text(encoding='utf-8')
           needle = '\\]\n### Proof'
           if source.count(needle) != 1:
               raise SystemExit(f'Expected exactly one Paper VI Markdown-boundary normalisation, found {source.count(needle)}')
-          normalised = source.replace(needle, '\\]\n\n### Proof')
-          Path(sys.argv[2]).write_text(normalised)
+          Path(sys.argv[2]).write_text(source.replace(needle, '\\]\n\n### Proof'), encoding='utf-8')
           PY
               PDF_SOURCE="$NORMAL_SOURCE"
               DOCX_SOURCE="$NORMAL_SOURCE"
@@ -173,10 +181,24 @@ jobs:
               --metadata title="$TITLE" --metadata author='Edward Stewart Anthony Bozzard' \
               -V papersize=a4 -V geometry:margin=25mm -V colorlinks=true \
               -o "$DEST/$STEM.pdf"
-            pandoc -f markdown+tex_math_single_backslash "$DOCX_SOURCE" \
-              --resource-path="$SRC" --bibliography="$SRC/references.bib" --citeproc \
-              --metadata title="$TITLE" --metadata author='Edward Stewart Anthony Bozzard' \
-              -o "$DEST/$STEM.docx"
+
+            if [[ "$STEM" == 'fortune-paper-v' ]]; then
+              MEDIA="$RUNNER_TEMP/$STEM-equation-media"
+              pandoc -f markdown+tex_math_single_backslash "$DOCX_SOURCE" \
+                --resource-path="$SRC" --bibliography="$SRC/references.bib" --citeproc \
+                --metadata title="$TITLE" --metadata author='Edward Stewart Anthony Bozzard' \
+                -t json \
+              | python3 "$GITHUB_WORKSPACE/scripts/pandoc_targeted_display_math_images.py" "$MEDIA" \
+              | pandoc -f json -o "$DEST/$STEM.docx"
+              python3 "$GITHUB_WORKSPACE/scripts/centre_docx_equation_images.py" \
+                "$DEST/$STEM.docx" 4
+            else
+              pandoc -f markdown+tex_math_single_backslash "$DOCX_SOURCE" \
+                --resource-path="$SRC" --bibliography="$SRC/references.bib" --citeproc \
+                --metadata title="$TITLE" --metadata author='Edward Stewart Anthony Bozzard' \
+                -o "$DEST/$STEM.docx"
+            fi
+
             pandoc -f markdown+tex_math_single_backslash "$TEX_SOURCE" \
               --resource-path="$SRC" --bibliography="$SRC/references.bib" --citeproc -s -t latex \
               --metadata title="$TITLE" --metadata author='Edward Stewart Anthony Bozzard' \
@@ -184,14 +206,21 @@ jobs:
 
             cp "$SRC"/{manuscript.md,references.bib,CLAIM_STATUS.md,SOURCE_FIDELITY_MATRIX.md,SOURCE_MANIFEST.tsv,INDEPENDENT_RECONSTRUCTION.md,CITATION.cff,ZENODO_METADATA.json,RELEASE_CHECKLIST.md,TYPESETTING_NORMALISATIONS.md} "$DEST/"
             sha256sum "$SRC/manuscript.md" > "$DEST/MANUSCRIPT_SHA256.txt"
-            find "$SRC" -maxdepth 1 -type f \( -name '*independent_reconstruction*.py' -o -name '*independent_reconstruction*_results.json' -o -name '*singularity*' -o -name 'INDEPENDENT_REVIEW*.md' \) -exec cp {} "$DEST/" \;
+            find "$SRC" -maxdepth 1 -type f \
+              \( -name '*independent_reconstruction*.py' \
+              -o -name '*independent_reconstruction*_results.json' \
+              -o -name '*singularity*' \
+              -o -name 'INDEPENDENT_REVIEW*.md' \) \
+              -exec cp {} "$DEST/" \;
           }
+
           build_one "$ROOT/paper5_function_fields_replacement" "$OUT/paper5" \
             fortune-paper-v 'Fortunate Polynomials over Finite Fields'
           build_one "$ROOT/paper6_secondary_quotients_replacement" "$OUT/paper6" \
             fortune-paper-vi 'Secondary Traces and Kummer Quotients for the Function-Field Fortune Crown'
+
           if grep -Fq 'Could not convert TeX math' "$BUILD_LOG"; then
-            echo 'Pandoc failed to convert at least one TeX equation to the target format.'
+            echo 'Pandoc failed to convert at least one TeX equation.'
             exit 1
           fi
           echo "$OUT" > "$RUNNER_TEMP/release_path"
@@ -202,88 +231,135 @@ jobs:
           OUT=$(cat "$RUNNER_TEMP/release_path")
           export HOME="$RUNNER_TEMP/libreoffice-home"
           mkdir -p "$HOME"
-          for D in "$OUT/paper5" "$OUT/paper6"; do
-            PDF=$(find "$D" -maxdepth 1 -name '*.pdf' -print -quit)
-            DOCX=$(find "$D" -maxdepth 1 -name '*.docx' -print -quit)
+
+          for dir in "$OUT/paper5" "$OUT/paper6"; do
+            PDF=$(find "$dir" -maxdepth 1 -name '*.pdf' -print -quit)
+            DOCX=$(find "$dir" -maxdepth 1 -name '*.docx' -print -quit)
             test -s "$PDF"; test -s "$DOCX"
+
             qpdf --check "$PDF"
-            pdfinfo "$PDF" | tee "$D/PDF_INFO.txt"
-            pdffonts "$PDF" | tee "$D/PDF_FONTS.txt"
-            pdftotext -layout "$PDF" "$D/PDF_EXTRACTED.txt"
-            pandoc "$DOCX" -t plain -o "$D/DOCX_EXTRACTED.txt"
-            mkdir -p "$D/docx-render"
+            pdfinfo "$PDF" | tee "$dir/PDF_INFO.txt"
+            grep -Fq 'A4' "$dir/PDF_INFO.txt"
+            pdffonts "$PDF" | tee "$dir/PDF_FONTS.txt"
+            awk 'NR>2 && NF>=4 && $4 != "yes" {print; bad=1} END {exit bad}' "$dir/PDF_FONTS.txt"
+            pdftotext -layout "$PDF" "$dir/PDF_EXTRACTED.txt"
+
+            python3 - "$DOCX" "$dir/DOCX_EXTRACTED.txt" <<'PY'
+          from docx import Document
+          from pathlib import Path
+          import sys
+          doc = Document(sys.argv[1])
+          Path(sys.argv[2]).write_text('\n'.join(p.text for p in doc.paragraphs), encoding='utf-8')
+          PY
+
+            mkdir -p "$dir/docx-render"
             libreoffice --headless --nologo --nodefault --nolockcheck --nofirststartwizard \
-              --convert-to pdf --outdir "$D/docx-render" "$DOCX" | tee "$D/LIBREOFFICE_RENDER.log"
-            RENDERED=$(find "$D/docx-render" -name '*.pdf' -print -quit)
+              --convert-to pdf --outdir "$dir/docx-render" "$DOCX" \
+              | tee "$dir/LIBREOFFICE_RENDER.log"
+            RENDERED=$(find "$dir/docx-render" -name '*.pdf' -print -quit)
             test -s "$RENDERED"
             qpdf --check "$RENDERED"
-            pdfinfo "$RENDERED" | tee "$D/DOCX_RENDER_INFO.txt"
-            pdftotext -layout "$RENDERED" "$D/DOCX_RENDER_EXTRACTED.txt"
-            python3 - "$D" <<'PY'
-          import pathlib, re, sys
-          d = pathlib.Path(sys.argv[1])
-          def raw(path):
-              return path.read_text(errors='replace').lower()
-          def norm(path):
-              return re.sub(r'\s+', ' ', raw(path))
+            pdfinfo "$RENDERED" | tee "$dir/DOCX_RENDER_INFO.txt"
+            grep -Fq 'A4' "$dir/DOCX_RENDER_INFO.txt"
+            pdftotext -layout "$RENDERED" "$dir/DOCX_RENDER_EXTRACTED.txt"
+
+            python3 - "$dir" <<'PY'
+          from pathlib import Path
+          import re
+          import sys
+          directory = Path(sys.argv[1])
+          def norm(name):
+              text = (directory / name).read_text(errors='replace').lower()
+              return re.sub(r'\s+', ' ', text)
           texts = {
-              'pdf': norm(d/'PDF_EXTRACTED.txt'),
-              'docx': norm(d/'DOCX_EXTRACTED.txt'),
-              'docx-render': norm(d/'DOCX_RENDER_EXTRACTED.txt'),
+              'pdf': norm('PDF_EXTRACTED.txt'),
+              'docx': norm('DOCX_EXTRACTED.txt'),
+              'docx-render': norm('DOCX_RENDER_EXTRACTED.txt'),
           }
-          required = ['function-field', 'crown', 'remains open']
+          required = ('function-field', 'crown', 'remains open')
           for label, text in texts.items():
               missing = [term for term in required if term not in text]
               if missing:
-                  raise SystemExit(f'{d.name} {label}: missing semantic markers {missing}')
+                  raise SystemExit(f'{directory.name} {label}: missing semantic markers {missing}')
               if '### proof' in text:
-                  raise SystemExit(f'{d.name} {label}: literal Markdown proof heading leaked into output')
+                  raise SystemExit(f'{directory.name} {label}: literal Markdown proof heading leaked')
           for label in ('docx', 'docx-render'):
-              bad = [token for token in (r'\bigl', r'\bigr', '$$') if token in texts[label]]
-              if bad:
-                  raise SystemExit(f'{d.name} {label}: literal TeX leaked into output: {bad}')
-          if len(texts['docx-render']) < 0.90 * len(texts['docx']):
-              raise SystemExit(
-                  f"{d.name}: rendered DOCX extraction is too short "
-                  f"({len(texts['docx-render'])} versus {len(texts['docx'])}); "
-                  'equation objects may not have rendered'
-              )
-          print(f'{d.name}: semantic extraction and equation-render completeness checks passed')
+              leaked = [token for token in (r'\bigl', r'\bigr', '$$') if token in texts[label]]
+              if leaked:
+                  raise SystemExit(f'{directory.name} {label}: literal TeX leaked: {leaked}')
+          ratio = len(texts['docx-render']) / max(1, len(texts['pdf']))
+          if ratio < 0.80:
+              raise SystemExit(f'{directory.name}: DOCX-render text completeness ratio {ratio:.3f} < 0.80')
+          print(f'{directory.name}: semantic checks passed; render completeness ratio={ratio:.3f}')
           PY
           done
 
-      - name: DOCX structure and accessibility audit
+      - name: DOCX structure, equation and accessibility audit
         run: |
           python3 - <<'PY'
           from pathlib import Path
           from docx import Document
-          import json, os, zipfile
-          out = Path(os.environ['RUNNER_TEMP']) / 'fortune-papers5-6-release'
-          for d in (out/'paper5', out/'paper6'):
-              docx = next(d.glob('*.docx'))
-              doc = Document(docx)
+          import json
+          import os
+          import zipfile
+
+          root = Path(os.environ['RUNNER_TEMP']) / 'fortune-papers5-6-release'
+          for directory in (root / 'paper5', root / 'paper6'):
+              docx = next(directory.glob('*.docx'))
+              document = Document(docx)
               headings=[]; empty=[]; findings=[]
-              for i,p in enumerate(doc.paragraphs):
-                  if p.style and p.style.name.startswith('Heading'):
-                      headings.append((i,p.style.name,p.text))
-                      if not p.text.strip(): empty.append(i)
-              if not headings: findings.append('no headings')
-              if empty: findings.append(f'empty headings: {empty}')
-              if not (doc.core_properties.title or '').strip(): findings.append('missing title metadata')
-              if not (doc.core_properties.author or '').strip(): findings.append('missing author metadata')
-              with zipfile.ZipFile(docx) as z:
-                  xml = z.read('word/document.xml').decode('utf-8')
+              for index, paragraph in enumerate(document.paragraphs):
+                  if paragraph.style and paragraph.style.name.startswith('Heading'):
+                      headings.append((index, paragraph.style.name, paragraph.text))
+                      if not paragraph.text.strip():
+                          empty.append(index)
+              if not headings:
+                  findings.append('no headings')
+              if empty:
+                  findings.append(f'empty headings: {empty}')
+              if not (document.core_properties.title or '').strip():
+                  findings.append('missing title metadata')
+              if not (document.core_properties.author or '').strip():
+                  findings.append('missing author metadata')
+
+              with zipfile.ZipFile(docx) as archive:
+                  xml = archive.read('word/document.xml').decode('utf-8')
+                  media = [name for name in archive.namelist() if name.startswith('word/media/')]
               omath_count = xml.count('<m:oMath')
-              if omath_count < 20: findings.append(f'too few OMML equation objects: {omath_count}')
-              report={'file':docx.name,'paragraphs':len(doc.paragraphs),'headings':headings,'tables':len(doc.tables),'omath_count':omath_count,'findings':findings}
-              (d/'DOCX_ACCESSIBILITY_AUDIT.json').write_text(json.dumps(report,indent=2))
-              if findings: raise SystemExit(report)
+              drawing_count = xml.count('<w:drawing')
+              png_count = sum(name.lower().endswith('.png') for name in media)
+              if omath_count < 20:
+                  findings.append(f'too few OMML equation objects: {omath_count}')
+              if directory.name == 'paper5':
+                  if drawing_count < 4:
+                      findings.append(f'too few targeted equation drawings: {drawing_count}')
+                  if png_count < 4:
+                      findings.append(f'too few targeted equation PNGs: {png_count}')
+
+              report={
+                  'file':docx.name,
+                  'paragraphs':len(document.paragraphs),
+                  'headings':headings,
+                  'tables':len(document.tables),
+                  'omath_count':omath_count,
+                  'drawing_count':drawing_count,
+                  'png_count':png_count,
+                  'findings':findings,
+              }
+              (directory/'DOCX_ACCESSIBILITY_AUDIT.json').write_text(
+                  json.dumps(report, indent=2), encoding='utf-8'
+              )
+              if findings:
+                  raise SystemExit(report)
+              print(json.dumps(report, indent=2))
           PY
 
       - name: Package and checksum
         run: |
           set -euo pipefail
           OUT=$(cat "$RUNNER_TEMP/release_path")
+          cp "$GITHUB_WORKSPACE/scripts/pandoc_targeted_display_math_images.py" "$OUT/"
+          cp "$GITHUB_WORKSPACE/scripts/centre_docx_equation_images.py" "$OUT/"
           printf '%s\n' "Repository commit: $GITHUB_SHA" > "$OUT/BUILD_PROVENANCE.txt"
           (cd "$OUT" && find . -type f ! -name SHA256SUMS -print0 | sort -z | xargs -0 sha256sum > SHA256SUMS)
           (cd "$OUT" && sha256sum -c SHA256SUMS)
@@ -308,6 +384,8 @@ jobs:
           SOURCE_SHA: ${{ github.sha }}
         run: |
           set -euo pipefail
+          git fetch origin publication/fortune-papers-ii-vi-20260724
+          git reset --hard origin/publication/fortune-papers-ii-vi-20260724
           STATUS_FILE=publications/fortune-papers-ii-vi-20260724/PAPERS_V_VI_AUTOMATED_BUILD_STATUS.md
           cat > "$STATUS_FILE" <<EOF
           # Papers V--VI automated release status
@@ -319,7 +397,7 @@ jobs:
           - conclusion: **$RUN_STATUS**
           - run URL: https://github.com/$GITHUB_REPOSITORY/actions/runs/$RUN_ID
 
-          This file is written by the final \`if: always()\` workflow step. A success conclusion means the independent reconstructions, source-hygiene checks, PDF/DOCX builds, semantic extraction, PDF preflight, DOCX render and accessibility audit, checksums and artifact upload all passed. A failure conclusion identifies the exact Actions run whose job logs must be inspected before release.
+          A success conclusion means the independent reconstructions, frozen-source checks, canonical PDF/LaTeX/DOCX builds, targeted equation conversion, semantic extraction, PDF preflight, independent LibreOffice render, equation/accessibility audit, checksums and artefact upload all passed.
           EOF
           if [[ -f "$RUNNER_TEMP/build-publication-artefacts.log" ]]; then
             {
