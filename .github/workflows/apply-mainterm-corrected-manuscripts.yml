@@ -86,9 +86,9 @@ jobs:
           grep -Fq 'prime-pair detector' "$P2"
           grep -Fq 'double-von-Mangoldt' "$P2"
           grep -Fq 'single-walk' "$P2"
-          grep -Fq 'four-linear-form' "$P3"
-          grep -Fq 'superseded' "$P3"
-          grep -Fq 'The unconditional kernel theory' "$P3"
+          grep -Fq 'aggregated four-linear-form' "$P3"
+          grep -Fq 'unconditional kernel theorems are unchanged' "$P3"
+          grep -Fq 'first circulation edition used a first moment centred at' "$P3"
           sha256sum "$P2" "$P3"
 
       - name: Commit corrected manuscripts
