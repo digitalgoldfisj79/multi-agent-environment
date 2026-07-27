@@ -122,11 +122,14 @@ jobs:
       - name: Build publication artefacts
         run: |
           set -euo pipefail
+          BUILD_LOG="$RUNNER_TEMP/build-publication-artefacts.log"
+          exec > >(tee "$BUILD_LOG") 2>&1
           ROOT="$GITHUB_WORKSPACE/publications/fortune-papers-ii-vi-20260724"
           OUT="$RUNNER_TEMP/fortune-papers5-6-release"
           mkdir -p "$OUT/paper5" "$OUT/paper6"
           build_one () {
             SRC="$1"; DEST="$2"; STEM="$3"; TITLE="$4"
+            echo "=== Building $STEM from $SRC ==="
             (
               cd "$SRC"
               pandoc -f markdown+tex_math_single_backslash manuscript.md \
@@ -261,6 +264,16 @@ jobs:
 
           This file is written by the final \`if: always()\` workflow step. A success conclusion means the independent reconstructions, source-hygiene checks, PDF/DOCX builds, semantic extraction, PDF preflight, DOCX render and accessibility audit, checksums and artifact upload all passed. A failure conclusion identifies the exact Actions run whose job logs must be inspected before release.
           EOF
+          if [[ -f "$RUNNER_TEMP/build-publication-artefacts.log" ]]; then
+            {
+              echo
+              echo '## Publication build log tail'
+              echo
+              echo '```text'
+              tail -n 160 "$RUNNER_TEMP/build-publication-artefacts.log"
+              echo '```'
+            } >> "$STATUS_FILE"
+          fi
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
           git add "$STATUS_FILE"
