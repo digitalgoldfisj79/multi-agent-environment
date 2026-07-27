@@ -1,0 +1,13 @@
+cff-version: 1.2.0
+message: "Please cite this preprint and its exact release version."
+title: "Fortunate Polynomials over Finite Fields: Exact Normal Forms, Sparse Geometry, and the Function-Field d=1 Crown"
+type: article
+authors:
+  - family-names: Bozzard
+    given-names: Edward Stewart Anthony
+    orcid: "https://orcid.org/0009-0002-4052-0994"
+version: "1.0.0-internal"
+date-released: "2026-07-27"
+license: CC-BY-4.0
+repository-code: "https://github.com/digitalgoldfisj79/multi-agent-environment"
+abstract: "Exact affine normal forms, sparse ordered-root geometry, p-cycle fixed-point circularity and q-line saturation for the function-field d=1 Fortune crown. The universal crown remains open."
