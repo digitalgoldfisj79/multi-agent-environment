@@ -1,1 +1,1 @@
-Trigger the exact-hash application of the main-term-corrected Papers II and III sources.
+Rerun the exact-hash application of the main-term-corrected Papers II and III sources after replacing the Paper III payload with independently hashed chunks.
