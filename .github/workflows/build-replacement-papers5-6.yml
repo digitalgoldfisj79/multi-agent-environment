@@ -5,8 +5,11 @@ on:
     branches:
       - publication/fortune-papers-ii-vi-20260724
     paths:
+      - .github/workflows/build-replacement-papers5-6.yml
       - publications/fortune-papers-ii-vi-20260724/paper5_function_fields_replacement/INDEPENDENT_REVIEW_DISPOSITION_FINAL.md
       - publications/fortune-papers-ii-vi-20260724/paper6_secondary_quotients_replacement/INDEPENDENT_REVIEW_DISPOSITION_FINAL.md
+      - publications/fortune-papers-ii-vi-20260724/paper5_function_fields_replacement/manuscript.md
+      - publications/fortune-papers-ii-vi-20260724/paper6_secondary_quotients_replacement/manuscript.md
   workflow_dispatch:
 
 permissions:
@@ -49,14 +52,17 @@ jobs:
             echo 'ready=true' >> "$GITHUB_OUTPUT"
           else
             echo 'ready=false' >> "$GITHUB_OUTPUT"
-            echo 'Combined release build skipped successfully until both exact-hash reviews are frozen.'
+            echo 'Combined release build skipped until both exact-hash reviews are frozen.'
           fi
 
   build-and-audit:
     needs: readiness
     if: needs.readiness.outputs.ready == 'true'
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 75
+    env:
+      DEBIAN_FRONTEND: noninteractive
+      PYTHONUNBUFFERED: '1'
     steps:
       - uses: actions/checkout@v4
         with:
@@ -65,19 +71,25 @@ jobs:
 
       - name: Install publication toolchain
         run: |
+          set -euo pipefail
           sudo apt-get update
-          sudo apt-get install -y pandoc texlive-xetex texlive-latex-extra texlive-fonts-recommended biber poppler-utils qpdf libreoffice zip unzip g++
+          sudo apt-get install -y --no-install-recommends \
+            pandoc texlive-xetex texlive-latex-extra texlive-fonts-recommended \
+            biber poppler-utils qpdf libreoffice-writer zip unzip g++ fonts-dejavu-core
           python3 -m pip install --break-system-packages python-docx pypdf
+          pandoc --version | head -2
+          xelatex --version | head -1
+          libreoffice --version
 
       - name: Run independent mathematical reconstructions
         run: |
           set -euo pipefail
           P5=publications/fortune-papers-ii-vi-20260724/paper5_function_fields_replacement
           P6=publications/fortune-papers-ii-vi-20260724/paper6_secondary_quotients_replacement
-          python3 "$P5/paper5_independent_reconstruction.py" > "$P5/independent_reconstruction_run.log"
+          python3 "$P5/paper5_independent_reconstruction.py" | tee "$P5/independent_reconstruction_run.log"
           g++ -O2 -std=c++17 "$P5/sparse_surface_singularity_independent.cpp" -o /tmp/p5_singularity
-          (cd "$P5" && /tmp/p5_singularity > sparse_surface_singularity_run.log)
-          python3 "$P6/paper6_independent_reconstruction.py" > "$P6/independent_reconstruction_run.log"
+          (cd "$P5" && /tmp/p5_singularity | tee sparse_surface_singularity_run.log)
+          python3 "$P6/paper6_independent_reconstruction.py" | tee "$P6/independent_reconstruction_run.log"
 
       - name: Validate frozen source hygiene
         run: |
@@ -85,20 +97,26 @@ jobs:
           for P in \
             publications/fortune-papers-ii-vi-20260724/paper5_function_fields_replacement \
             publications/fortune-papers-ii-vi-20260724/paper6_secondary_quotients_replacement; do
-            test -s "$P/manuscript.md"
-            test -s "$P/references.bib"
-            test -s "$P/CLAIM_STATUS.md"
-            test -s "$P/SOURCE_FIDELITY_MATRIX.md"
-            test -s "$P/CITATION.cff"
-            test -s "$P/ZENODO_METADATA.json"
-            test -s "$P/RELEASE_CHECKLIST.md"
-            test -s "$P/TYPESETTING_NORMALISATIONS.md"
-            test -s "$P/INDEPENDENT_REVIEW_RAW_FINAL.md"
-            test -s "$P/INDEPENDENT_REVIEW_DISPOSITION_FINAL.md"
-            ! grep -nE 'TODO|TBD|PLACEHOLDER|REPLACE_ME|\x00' "$P/manuscript.md" "$P/CLAIM_STATUS.md" "$P/SOURCE_FIDELITY_MATRIX.md"
-            grep -Fq 'The function-field' "$P/manuscript.md"
-            wc -l -c "$P/manuscript.md"
-            sha256sum "$P/manuscript.md" | tee "$P/MANUSCRIPT_SHA256.txt"
+            for f in manuscript.md references.bib CLAIM_STATUS.md SOURCE_FIDELITY_MATRIX.md \
+              SOURCE_MANIFEST.tsv CITATION.cff ZENODO_METADATA.json RELEASE_CHECKLIST.md \
+              TYPESETTING_NORMALISATIONS.md INDEPENDENT_REVIEW_RAW_FINAL.md \
+              INDEPENDENT_REVIEW_DISPOSITION_FINAL.md; do
+              test -s "$P/$f" || { echo "Missing required file: $P/$f"; exit 1; }
+            done
+            if grep -nE 'TODO|TBD|PLACEHOLDER|REPLACE_ME' \
+              "$P/manuscript.md" "$P/CLAIM_STATUS.md" "$P/SOURCE_FIDELITY_MATRIX.md"; then
+              echo "Unresolved placeholder found in $P"
+              exit 1
+            fi
+            python3 - "$P/manuscript.md" <<'PY'
+          import hashlib, pathlib, sys
+          p = pathlib.Path(sys.argv[1])
+          data = p.read_bytes()
+          if b'\x00' in data:
+              raise SystemExit(f'NUL byte in {p}')
+          print(f'{p}: {len(data)} bytes, {data.count(chr(10).encode()) + 1} lines')
+          print(hashlib.sha256(data).hexdigest(), p)
+          PY
           done
 
       - name: Build publication artefacts
@@ -108,61 +126,74 @@ jobs:
           OUT="$RUNNER_TEMP/fortune-papers5-6-release"
           mkdir -p "$OUT/paper5" "$OUT/paper6"
           build_one () {
-            SRC="$1"; DEST="$2"; STEM="$3"
+            SRC="$1"; DEST="$2"; STEM="$3"; TITLE="$4"
             (
               cd "$SRC"
-              pandoc -f markdown+tex_math_single_backslash manuscript.md --citeproc --pdf-engine=xelatex \
-                -V papersize=a4 -V geometry:margin=25mm -V colorlinks=true -o "$DEST/$STEM.pdf"
-              pandoc -f markdown+tex_math_single_backslash manuscript.md --citeproc -o "$DEST/$STEM.docx"
-              pandoc -f markdown+tex_math_single_backslash manuscript.md --citeproc -s -t latex -o "$DEST/$STEM.tex"
+              pandoc -f markdown+tex_math_single_backslash manuscript.md \
+                --bibliography=references.bib --citeproc --pdf-engine=xelatex \
+                --metadata title="$TITLE" --metadata author='Edward Stewart Anthony Bozzard' \
+                -V papersize=a4 -V geometry:margin=25mm -V colorlinks=true \
+                -o "$DEST/$STEM.pdf"
+              pandoc -f markdown+tex_math_single_backslash manuscript.md \
+                --bibliography=references.bib --citeproc \
+                --metadata title="$TITLE" --metadata author='Edward Stewart Anthony Bozzard' \
+                -o "$DEST/$STEM.docx"
+              pandoc -f markdown+tex_math_single_backslash manuscript.md \
+                --bibliography=references.bib --citeproc -s -t latex \
+                --metadata title="$TITLE" --metadata author='Edward Stewart Anthony Bozzard' \
+                -o "$DEST/$STEM.tex"
             )
-            cp "$SRC/manuscript.md" "$DEST/"
-            cp "$SRC/references.bib" "$DEST/"
-            cp "$SRC/CLAIM_STATUS.md" "$DEST/"
-            cp "$SRC/SOURCE_FIDELITY_MATRIX.md" "$DEST/"
-            cp "$SRC/SOURCE_MANIFEST.tsv" "$DEST/"
-            cp "$SRC/INDEPENDENT_RECONSTRUCTION.md" "$DEST/"
-            cp "$SRC/CITATION.cff" "$DEST/"
-            cp "$SRC/ZENODO_METADATA.json" "$DEST/"
-            cp "$SRC/RELEASE_CHECKLIST.md" "$DEST/"
-            cp "$SRC/TYPESETTING_NORMALISATIONS.md" "$DEST/"
-            cp "$SRC/MANUSCRIPT_SHA256.txt" "$DEST/"
-            cp "$SRC"/*independent_reconstruction*.py "$DEST/" 2>/dev/null || true
-            cp "$SRC"/*independent_reconstruction*_results.json "$DEST/" 2>/dev/null || true
-            cp "$SRC"/*singularity* "$DEST/" 2>/dev/null || true
-            cp "$SRC"/INDEPENDENT_REVIEW*.md "$DEST/" 2>/dev/null || true
+            cp "$SRC"/{manuscript.md,references.bib,CLAIM_STATUS.md,SOURCE_FIDELITY_MATRIX.md,SOURCE_MANIFEST.tsv,INDEPENDENT_RECONSTRUCTION.md,CITATION.cff,ZENODO_METADATA.json,RELEASE_CHECKLIST.md,TYPESETTING_NORMALISATIONS.md} "$DEST/"
+            sha256sum "$SRC/manuscript.md" > "$DEST/MANUSCRIPT_SHA256.txt"
+            find "$SRC" -maxdepth 1 -type f \( -name '*independent_reconstruction*.py' -o -name '*independent_reconstruction*_results.json' -o -name '*singularity*' -o -name 'INDEPENDENT_REVIEW*.md' \) -exec cp {} "$DEST/" \;
           }
-          build_one "$ROOT/paper5_function_fields_replacement" "$OUT/paper5" "fortune-paper-v"
-          build_one "$ROOT/paper6_secondary_quotients_replacement" "$OUT/paper6" "fortune-paper-vi"
+          build_one "$ROOT/paper5_function_fields_replacement" "$OUT/paper5" \
+            fortune-paper-v 'Fortunate Polynomials over Finite Fields'
+          build_one "$ROOT/paper6_secondary_quotients_replacement" "$OUT/paper6" \
+            fortune-paper-vi 'Secondary Traces and Kummer Quotients for the Function-Field Fortune Crown'
           echo "$OUT" > "$RUNNER_TEMP/release_path"
 
       - name: PDF and DOCX semantic/preflight audit
         run: |
           set -euo pipefail
           OUT=$(cat "$RUNNER_TEMP/release_path")
+          export HOME="$RUNNER_TEMP/libreoffice-home"
+          mkdir -p "$HOME"
           for D in "$OUT/paper5" "$OUT/paper6"; do
-            PDF=$(find "$D" -maxdepth 1 -name '*.pdf' | head -1)
-            DOCX=$(find "$D" -maxdepth 1 -name '*.docx' | head -1)
-            test -s "$PDF"
-            test -s "$DOCX"
+            PDF=$(find "$D" -maxdepth 1 -name '*.pdf' -print -quit)
+            DOCX=$(find "$D" -maxdepth 1 -name '*.docx' -print -quit)
+            test -s "$PDF"; test -s "$DOCX"
             qpdf --check "$PDF"
             pdfinfo "$PDF" | tee "$D/PDF_INFO.txt"
             pdffonts "$PDF" | tee "$D/PDF_FONTS.txt"
-            pdftotext "$PDF" "$D/PDF_EXTRACTED.txt"
+            pdftotext -layout "$PDF" "$D/PDF_EXTRACTED.txt"
             pandoc "$DOCX" -t plain -o "$D/DOCX_EXTRACTED.txt"
-            grep -Fq 'function-field' "$D/PDF_EXTRACTED.txt"
-            grep -Fq 'function-field' "$D/DOCX_EXTRACTED.txt"
-            grep -Fq 'crown remains open' "$D/PDF_EXTRACTED.txt"
-            grep -Fq 'crown remains open' "$D/DOCX_EXTRACTED.txt"
             mkdir -p "$D/docx-render"
-            libreoffice --headless --convert-to pdf --outdir "$D/docx-render" "$DOCX" >/tmp/libreoffice.log 2>&1
-            RENDERED=$(find "$D/docx-render" -name '*.pdf' | head -1)
+            libreoffice --headless --nologo --nodefault --nolockcheck --nofirststartwizard \
+              --convert-to pdf --outdir "$D/docx-render" "$DOCX" | tee "$D/LIBREOFFICE_RENDER.log"
+            RENDERED=$(find "$D/docx-render" -name '*.pdf' -print -quit)
             test -s "$RENDERED"
             qpdf --check "$RENDERED"
             pdfinfo "$RENDERED" | tee "$D/DOCX_RENDER_INFO.txt"
-            pdftotext "$RENDERED" "$D/DOCX_RENDER_EXTRACTED.txt"
-            grep -Fq 'function-field' "$D/DOCX_RENDER_EXTRACTED.txt"
-            grep -Fq 'crown remains open' "$D/DOCX_RENDER_EXTRACTED.txt"
+            pdftotext -layout "$RENDERED" "$D/DOCX_RENDER_EXTRACTED.txt"
+            python3 - "$D" <<'PY'
+          import pathlib, re, sys
+          d = pathlib.Path(sys.argv[1])
+          def norm(path):
+              s = path.read_text(errors='replace').lower()
+              return re.sub(r'\s+', ' ', s)
+          texts = {
+              'pdf': norm(d/'PDF_EXTRACTED.txt'),
+              'docx': norm(d/'DOCX_EXTRACTED.txt'),
+              'docx-render': norm(d/'DOCX_RENDER_EXTRACTED.txt'),
+          }
+          required = ['function-field', 'crown', 'remains open']
+          for label, text in texts.items():
+              missing = [term for term in required if term not in text]
+              if missing:
+                  raise SystemExit(f'{d.name} {label}: missing semantic markers {missing}')
+          print(f'{d.name}: semantic extraction checks passed')
+          PY
           done
 
       - name: DOCX structure and accessibility audit
@@ -171,20 +202,19 @@ jobs:
           from pathlib import Path
           from docx import Document
           import json, os
-          out=Path(os.environ['RUNNER_TEMP'])/'fortune-papers5-6-release'
-          for d in (out/'paper5',out/'paper6'):
-              docx=next(d.glob('*.docx'))
-              doc=Document(docx)
-              headings=[]
-              empty_headings=[]
+          out = Path(os.environ['RUNNER_TEMP']) / 'fortune-papers5-6-release'
+          for d in (out/'paper5', out/'paper6'):
+              docx = next(d.glob('*.docx'))
+              doc = Document(docx)
+              headings=[]; empty=[]; findings=[]
               for i,p in enumerate(doc.paragraphs):
                   if p.style and p.style.name.startswith('Heading'):
                       headings.append((i,p.style.name,p.text))
-                      if not p.text.strip(): empty_headings.append(i)
-              findings=[]
+                      if not p.text.strip(): empty.append(i)
               if not headings: findings.append('no headings')
-              if empty_headings: findings.append(f'empty headings: {empty_headings}')
-              if not doc.core_properties.title: findings.append('missing title metadata')
+              if empty: findings.append(f'empty headings: {empty}')
+              if not (doc.core_properties.title or '').strip(): findings.append('missing title metadata')
+              if not (doc.core_properties.author or '').strip(): findings.append('missing author metadata')
               report={'file':docx.name,'paragraphs':len(doc.paragraphs),'headings':headings,'tables':len(doc.tables),'findings':findings}
               (d/'DOCX_ACCESSIBILITY_AUDIT.json').write_text(json.dumps(report,indent=2))
               if findings: raise SystemExit(report)
@@ -197,7 +227,7 @@ jobs:
           printf '%s\n' "Repository commit: $GITHUB_SHA" > "$OUT/BUILD_PROVENANCE.txt"
           (cd "$OUT" && find . -type f ! -name SHA256SUMS -print0 | sort -z | xargs -0 sha256sum > SHA256SUMS)
           (cd "$OUT" && sha256sum -c SHA256SUMS)
-          (cd "$OUT" && zip -r ../fortune-papers-v-vi-internal-release.zip .)
+          (cd "$OUT" && zip -qr "$RUNNER_TEMP/fortune-papers-v-vi-internal-release.zip" .)
           sha256sum "$RUNNER_TEMP/fortune-papers-v-vi-internal-release.zip" > "$OUT/ARCHIVE_SHA256.txt"
 
       - name: Upload canonical internal release
