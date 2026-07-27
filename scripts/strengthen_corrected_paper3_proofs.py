@@ -1,28 +1,17 @@
 from pathlib import Path
+import re
 
 path = Path('publications/fortune-papers-ii-vi-20260724/paper3_pair_sum/manuscript.md')
 text = path.read_text(encoding='utf-8')
 
-replacements = [
-(
-'''If two representations satisfy
-\[
-S_u-S_v=S_{u'}-S_{v'},
-\]
-then
-\[
-S_u+S_{v'}=S_{u'}+S_v.
-\]
-The resulting relation has coefficients bounded by four, so rigidity forces
-the endpoint multiset identity
-\[
-u\uplus v'=u'\uplus v.
-\]
-If \(u\) and \(v\) share an index, the difference is a single-walk difference
-and the shared index is the only free parameter. If they are disjoint, the
-multiset identity forces \(u'=u\) and \(v'=v\). \(\square\)
-''',
-'''If two representations satisfy
+
+def sub_once(pattern: str, replacement: str, source: str) -> str:
+    updated, count = re.subn(pattern, replacement, source, count=1, flags=re.S)
+    if count != 1:
+        raise SystemExit(f'expected one regex match, found {count}: {pattern[:100]}')
+    return updated
+
+proof3 = r'''If two representations satisfy
 \[
 S_u-S_v=S_{u'}-S_{v'},
 \]
@@ -48,29 +37,20 @@ The pairwise distinctness of the values \(P_i-P_k\) follows by applying
 Theorem 2.1 to the resulting coefficient-bounded relation. The fully expanded
 case analysis is reproduced independently in Appendix A.2. \(\square\)
 '''
-),
-(
-'''Orthogonality counts two ordered \(k\)-tuples of unordered pairs with equal
-endpoint sum. Rigidity forces equality of the total endpoint multiset. For a
-fixed labelled \(2k\)-set, the number of ordered decompositions into \(k\)
-unordered pairs is
-\[
-(2k-1)!!\,k!=\frac{(2k)!}{2^k}.
-\]
-There are \(M^k\) choices on the first side. \(\square\)
-''',
-'''Orthogonality counts two ordered \(k\)-tuples of unordered pairs with equal
+text = sub_once(
+    r'(# 3\. Difference-multiplicity dichotomy.*?### Proof\n\n).*?(\n# 4\. Exact two-scale energy decomposition)',
+    lambda m: m.group(1) + proof3 + m.group(2),
+    text,
+)
+
+proof5 = r'''Orthogonality counts two ordered \(k\)-tuples of unordered pairs with equal
 endpoint sum. The induced integer relation has coefficients bounded by
 \(2k\), so Theorem 2.1 forces equality of the total endpoint multiset.
 Fix that multiset and replace repeated entries temporarily by distinct labels.
 Every unlabelled ordered decomposition has at least one labelled lift, and
 different unlabelled decompositions have disjoint sets of labelled lifts.
-A labelled \(2k\)-set has
-\[
-(2k-1)!!
-\]
-partitions into \(k\) unordered pairs and \(k!\) orders of those pairs, hence
-at most
+A labelled \(2k\)-set has \((2k-1)!!\) partitions into \(k\) unordered pairs
+and \(k!\) orders of those pairs, hence at most
 \[
 (2k-1)!!\,k!=\frac{(2k)!}{2^k}
 \]
@@ -78,16 +58,13 @@ unlabelled ordered decompositions. There are \(M^k\) choices for the first
 \(k\)-tuple. This is also the labelled-lift argument recorded in Appendix
 A.3. \(\square\)
 '''
-),
-(
-'''Choose \(k=\lfloor\sqrt{s/(2M)}\rfloor\). Markov's inequality and Lemma 5.1 give
-\[
-\operatorname{meas}\{|H_2|^2\ge s\}
-\le \frac{(2k)!}{2^k}\left(\frac Ms\right)^k.
-\]
-Stirling's inequality and the choice of \(k\) yield the displayed bound. The centred form follows by taking \(s=M+\lambda\) and checking the elementary one-variable inequality for \(\lambda/M\ge121\). \(\square\)
-''',
-'''Choose \(k=\lfloor\sqrt{s/(2M)}\rfloor\). Since \(s\ge2M\), one has
+text = sub_once(
+    r'(# 5\. High moments.*?### Proof\n\n).*?(\n# 6\. Sub-Weibull Lebesgue tails)',
+    lambda m: m.group(1) + proof5 + m.group(2),
+    text,
+)
+
+proof6 = r'''Choose \(k=\lfloor\sqrt{s/(2M)}\rfloor\). Since \(s\ge2M\), one has
 \(k\ge1\); and since \(|H_2|^2\le M^2\), it is enough to consider
 \(s\le M^2\), for which \(k\ll N<X/2\) for all sufficiently large \(X\).
 Thus the hypothesis \(X>2k+1\) of Lemma 5.1 is available uniformly.
@@ -110,12 +87,13 @@ because \(2k\ge\sqrt{2s/M}-2\). For the centred form take
 for \(t\ge121\); its derivative is negative there and the value at \(121\)
 is negative. The same details are recorded in Appendix A.3. \(\square\)
 '''
-),
-(
-'''The proof is the one-failure argument: a failed centre has \(Z_j=0\) and costs
-\(\gg X^2\), while \(N\asymp X/\log X\).
-''',
-'''### Proof
+text = sub_once(
+    r'(# 6\. Sub-Weibull Lebesgue tails.*?### Proof\n\n).*?(\nThe exponent constant)',
+    lambda m: m.group(1) + proof6 + m.group(2),
+    text,
+)
+
+proof9 = r'''### Proof
 
 Let \(B_X\) be the number of failed centres. At each such centre \(Z_j=0\),
 while \(\lambda_j\ge cX\); hence
@@ -131,13 +109,16 @@ B_X\ll \frac{L(X)}{\log X}=o(1).
 Since \(B_X\) is a nonnegative integer, it is eventually zero. Candidate
 collapse then makes every corresponding Fortunate offset prime. \(\square\)
 '''
-),
-(
-'''Thus the corrected second moment is an aggregated four-linear-form prime
+text = sub_once(
+    r'The proof is the one-failure argument:.*?N\\asymp X/\\log X\)\.',
+    proof9.rstrip(),
+    text,
+)
+
+old = '''Thus the corrected second moment is an aggregated four-linear-form prime
 correlation. A two-output model for
-\(\Lambda(P_j+m)\Lambda(P_j+m+d)\) alone does not represent it.
-''',
-'''### Proof of the expansion
+\(\Lambda(P_j+m)\Lambda(P_j+m+d)\) alone does not represent it.'''
+new = r'''### Proof of the expansion
 
 Expanding \(Z_j^2\) gives an ordered sum over two successful offsets
 \((m,n)\). The diagonal \(m=n\) contributes exactly \(Z_j\). Every
@@ -150,46 +131,41 @@ Thus this unweighted formulation of the corrected second moment is an
 aggregated four-linear-form prime correlation. A two-output model for
 \(\Lambda(P_j+m)\Lambda(P_j+m+d)\) alone does not represent this particular
 expansion. The weighted shifted detector of Paper II provides a distinct
-one-sided formulation and is not excluded by this observation.
-'''
-),
-(
-'''The new analytic problem is to derive (C1)--(C2), or an equivalent signed
+one-sided formulation and is not excluded by this observation.'''
+if text.count(old) != 1:
+    raise SystemExit(f'covariance anchor count {text.count(old)}')
+text = text.replace(old, new)
+
+old = '''The new analytic problem is to derive (C1)--(C2), or an equivalent signed
 transference theorem, with all four primality conditions coupled until after
-centring.
-''',
-'''The new analytic problem along this unweighted route is to derive
+centring.'''
+new = '''The new analytic problem along this unweighted route is to derive
 (C1)--(C2), or an equivalent signed transference theorem, with all four
 primality conditions coupled until after centring. A second live route starts
 from the recentered weighted shifted detector \(\Psi_j-\mu_j\), where
 candidate collapse already encodes offset primality; that route requires a
 fresh proof of its principal term and source-to-frame transference rather than
-an additional explicit offset-prime factor.
-'''
-),
-(
-'''The next integer theorem should therefore be an exact signed decomposition of
+an additional explicit offset-prime factor.'''
+if text.count(old) != 1:
+    raise SystemExit(f'route anchor count {text.count(old)}')
+text = text.replace(old, new)
+
+old = '''The next integer theorem should therefore be an exact signed decomposition of
 the prime-pair variance. The single-walk kernel is the first natural harmonic
 object, as shown by the corrected Fourier identity in Paper II. Further
 pair-sum moments or random-order derandomisation are secondary until that
-source bridge is established.
-''',
-'''The next integer theorem should therefore be a corrected source-to-frame
+source bridge is established.'''
+new = '''The next integer theorem should therefore be a corrected source-to-frame
 transference for at least one of two routes: the unweighted four-form variance
 above, or the recentered weighted shifted detector of Paper II. The
 single-walk kernel is the first exact harmonic object for the explicit
 double-von-Mangoldt source. The older pair-sum frame may still reappear after a
 correct principal-term subtraction, but no such implication is presently
 proved. Further pair-sum moments or random-order derandomisation are secondary
-until one of these bridges is established.
-'''
-),
-]
-
-for old, new in replacements:
-    if text.count(old) != 1:
-        raise SystemExit(f'expected exactly one match, found {text.count(old)} for:\n{old[:100]}')
-    text = text.replace(old, new)
+until one of these bridges is established.'''
+if text.count(old) != 1:
+    raise SystemExit(f'boundary anchor count {text.count(old)}')
+text = text.replace(old, new)
 
 path.write_text(text, encoding='utf-8')
 print(path, len(text.splitlines()))
