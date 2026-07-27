@@ -1,0 +1,363 @@
+name: Build corrected Papers II and III final release
+
+on:
+  pull_request:
+    branches:
+      - gpt56/fortune-mainterm-correction-programme-20260727
+    paths:
+      - .github/workflows/build-corrected-papers2-3-final.yml
+      - publications/fortune-papers-ii-vi-20260724/papers2-3-final-build-trigger.md
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: corrected-papers-ii-iii-final
+  cancel-in-progress: true
+
+jobs:
+  release:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    env:
+      DEBIAN_FRONTEND: noninteractive
+      PYTHONUNBUFFERED: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: gpt56/fortune-mainterm-correction-programme-20260727
+          fetch-depth: 0
+
+      - name: Install publication toolchain
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            pandoc texlive-xetex texlive-latex-extra texlive-fonts-recommended \
+            texlive-science lmodern biber poppler-utils qpdf \
+            libreoffice-writer libreoffice-math zip unzip fonts-dejavu-core
+          python3 -m pip install --break-system-packages python-docx pypdf pillow
+          pandoc --version | head -2
+          xelatex --version | head -1
+          libreoffice --version
+
+      - name: Freeze and validate corrected sources
+        run: |
+          set -euo pipefail
+          ROOT=publications/fortune-papers-ii-vi-20260724
+          P2="$ROOT/paper2_revised"
+          P3="$ROOT/paper3_pair_sum"
+          for f in \
+            "$P2/manuscript.md" "$P2/references.bib" "$P2/CLAIM_STATUS.md" \
+            "$P2/INDEPENDENT_REVIEW_DISPOSITION_FINAL.md" \
+            "$P3/manuscript.md" "$P3/CLAIM_STATUS.md" \
+            "$P3/INDEPENDENT_REVIEW_DISPOSITION_FINAL.md"; do
+            test -s "$f" || { echo "Missing required file: $f"; exit 1; }
+          done
+          ! grep -nE 'TODO|TBD|PLACEHOLDER|REPLACE_ME|\\x00' \
+            "$P2/manuscript.md" "$P3/manuscript.md" \
+            "$P2/CLAIM_STATUS.md" "$P3/CLAIM_STATUS.md"
+          grep -Fq 'Two corrected transference routes remain open' "$P2/manuscript.md"
+          grep -Fq 'Exact Fourier source identity' "$P2/manuscript.md"
+          grep -Fq 'Proof of Theorem 9.1' "$P3/manuscript.md"
+          grep -Fq 'Proof of (10.1)' "$P3/manuscript.md"
+          grep -Fq 'INTERNAL TECHNICAL PASS' "$P2/INDEPENDENT_REVIEW_DISPOSITION_FINAL.md"
+          grep -Fq 'INTERNAL TECHNICAL PASS' "$P3/INDEPENDENT_REVIEW_DISPOSITION_FINAL.md"
+          sha256sum "$P2/manuscript.md" "$P3/manuscript.md" | tee "$RUNNER_TEMP/SOURCE_SHA256.txt"
+
+      - name: Build canonical PDF DOCX and LaTeX
+        run: |
+          set -euo pipefail
+          ROOT="$GITHUB_WORKSPACE/publications/fortune-papers-ii-vi-20260724"
+          OUT="$RUNNER_TEMP/fortune-papers-ii-iii-corrected-release"
+          LOG="$RUNNER_TEMP/papers-ii-iii-build.log"
+          mkdir -p "$OUT/paper2" "$OUT/paper3"
+          exec > >(tee "$LOG") 2>&1
+
+          normalise_blocks () {
+            python3 - "$1" "$2" <<'PY'
+          from pathlib import Path
+          import re, sys
+          source = Path(sys.argv[1]).read_text(encoding='utf-8')
+          source = re.sub(r'(?<!\n)\n\\\[\n', '\n\n\\[\n', source)
+          source = re.sub(r'\n\\\]\n(?!\n)', '\n\\]\n\n', source)
+          source = source.replace('—', '--').replace('–', '-')
+          Path(sys.argv[2]).write_text(source, encoding='utf-8')
+          PY
+          }
+
+          build_one () {
+            SRC="$1"; DEST="$2"; STEM="$3"; TITLE="$4"; BIB="$5"
+            DOCX_SOURCE="$RUNNER_TEMP/$STEM-docx.md"
+            normalise_blocks "$SRC/manuscript.md" "$DOCX_SOURCE"
+            BIB_ARGS=()
+            if [[ -n "$BIB" ]]; then
+              BIB_ARGS=(--bibliography="$BIB" --citeproc)
+            fi
+
+            echo "=== Building $STEM ==="
+            pandoc -f markdown+tex_math_single_backslash "$SRC/manuscript.md" \
+              --resource-path="$SRC" "${BIB_ARGS[@]}" \
+              --pdf-engine=xelatex --metadata title="$TITLE" \
+              --metadata author='Edward Stewart Anthony Bozzard' \
+              -V papersize=a4 -V geometry:margin=25mm -V colorlinks=true \
+              -V fontsize=10pt -o "$DEST/$STEM.pdf"
+
+            MEDIA="$RUNNER_TEMP/$STEM-equation-media"
+            pandoc -f markdown+tex_math_single_backslash "$DOCX_SOURCE" \
+              --resource-path="$SRC" "${BIB_ARGS[@]}" \
+              --metadata title="$TITLE" \
+              --metadata author='Edward Stewart Anthony Bozzard' -t json \
+            | python3 "$GITHUB_WORKSPACE/scripts/pandoc_all_math_images.py" "$MEDIA" \
+            | pandoc -f json -o "$DEST/$STEM.docx"
+            python3 "$GITHUB_WORKSPACE/scripts/set_docx_a4.py" "$DEST/$STEM.docx"
+            if test -f "$GITHUB_WORKSPACE/scripts/centre_docx_equation_images.py"; then
+              python3 "$GITHUB_WORKSPACE/scripts/centre_docx_equation_images.py" "$DEST/$STEM.docx"
+            fi
+
+            pandoc -f markdown+tex_math_single_backslash "$SRC/manuscript.md" \
+              --resource-path="$SRC" "${BIB_ARGS[@]}" -s -t latex \
+              --metadata title="$TITLE" \
+              --metadata author='Edward Stewart Anthony Bozzard' \
+              -o "$DEST/$STEM.tex"
+
+            cp "$SRC/manuscript.md" "$SRC/CLAIM_STATUS.md" \
+              "$SRC/INDEPENDENT_REVIEW_DISPOSITION_FINAL.md" "$DEST/"
+            test ! -f "$SRC/CORRECTION_NOTICE_20260727.md" || \
+              cp "$SRC/CORRECTION_NOTICE_20260727.md" "$DEST/"
+            test -z "$BIB" || cp "$BIB" "$DEST/references.bib"
+            sha256sum "$SRC/manuscript.md" > "$DEST/MANUSCRIPT_SHA256.txt"
+          }
+
+          build_one "$ROOT/paper2_revised" "$OUT/paper2" \
+            fortune-paper-ii-corrected 'Prime Detection at Primorial Centres' \
+            "$ROOT/paper2_revised/references.bib"
+          build_one "$ROOT/paper3_pair_sum" "$OUT/paper3" \
+            fortune-paper-iii-corrected \
+            'Pair-Sum Rigidity, Exceptional Sets, and Conditional Prime Detection at Primorial Centres' ''
+
+          if grep -Fq 'Could not convert TeX math' "$LOG"; then
+            echo 'Pandoc math-conversion warning detected'
+            exit 1
+          fi
+          echo "$OUT" > "$RUNNER_TEMP/release_path"
+
+      - name: Audit canonical PDFs
+        run: |
+          set -euo pipefail
+          OUT=$(cat "$RUNNER_TEMP/release_path")
+          python3 - "$OUT" <<'PY'
+          from pathlib import Path
+          from pypdf import PdfReader
+          import json, subprocess, sys
+          root = Path(sys.argv[1])
+          reports = {}
+          for name in ('paper2', 'paper3'):
+              directory = root / name
+              pdf = next(directory.glob('*.pdf'))
+              subprocess.run(['qpdf', '--check', str(pdf)], check=True)
+              reader = PdfReader(str(pdf))
+              if not (8 <= len(reader.pages) <= 80):
+                  raise SystemExit(f'{pdf}: implausible page count {len(reader.pages)}')
+              for index, page in enumerate(reader.pages, 1):
+                  width = float(page.mediabox.width)
+                  height = float(page.mediabox.height)
+                  if abs(width - 595.28) > 3 or abs(height - 841.89) > 3:
+                      raise SystemExit(f'{pdf} page {index} not A4: {width}x{height}')
+              fonts = directory / 'PDF_FONTS.txt'
+              with fonts.open('w') as handle:
+                  subprocess.run(['pdffonts', str(pdf)], stdout=handle, text=True, check=True)
+              failures = []
+              for line in fonts.read_text(errors='replace').splitlines()[2:]:
+                  fields = line.split()
+                  if len(fields) >= 5 and fields[-5] != 'yes':
+                      failures.append(line)
+              if failures:
+                  raise SystemExit('Unembedded PDF fonts:\n' + '\n'.join(failures))
+              extracted = directory / 'PDF_EXTRACTED.txt'
+              subprocess.run(['pdftotext', '-layout', str(pdf), str(extracted)], check=True)
+              text = extracted.read_text(errors='replace').lower()
+              markers = {
+                  'paper2': ('candidate collapse', 'corrected source-to-walk identity', "no prime-pair asymptotic"),
+                  'paper3': ('difference-multiplicity dichotomy', 'proof of theorem 9.1', "fortune's conjecture remain open"),
+              }[name]
+              missing = [m for m in markers if m not in text]
+              if missing:
+                  raise SystemExit(f'{name}: missing PDF markers {missing}')
+              reports[name] = {'pages': len(reader.pages), 'bytes': pdf.stat().st_size}
+          (root / 'PDF_AUDIT.json').write_text(json.dumps(reports, indent=2), encoding='utf-8')
+          print(json.dumps(reports, indent=2))
+          PY
+
+      - name: Audit DOCX structure
+        run: |
+          set -euo pipefail
+          OUT=$(cat "$RUNNER_TEMP/release_path")
+          python3 - "$OUT" <<'PY'
+          from pathlib import Path
+          from docx import Document
+          import json, sys, zipfile
+          root = Path(sys.argv[1])
+          reports = {}
+          for name in ('paper2', 'paper3'):
+              directory = root / name
+              docx = next(directory.glob('*.docx'))
+              document = Document(str(docx))
+              headings = [p.text for p in document.paragraphs if p.style and p.style.name.startswith('Heading')]
+              findings = []
+              if len(headings) < 5: findings.append(f'only {len(headings)} headings')
+              if not (document.core_properties.title or '').strip(): findings.append('missing title metadata')
+              if not (document.core_properties.author or '').strip(): findings.append('missing author metadata')
+              for section in document.sections:
+                  if abs(section.page_width.inches - 8.2677) > 0.03: findings.append('non-A4 width')
+                  if abs(section.page_height.inches - 11.6929) > 0.03: findings.append('non-A4 height')
+              with zipfile.ZipFile(docx) as archive:
+                  xml = archive.read('word/document.xml').decode('utf-8')
+                  media = [x for x in archive.namelist() if x.startswith('word/media/')]
+              drawings = xml.count('<w:drawing')
+              equation_alt = xml.count('Equation:')
+              pngs = sum(x.lower().endswith('.png') for x in media)
+              omath = xml.count('<m:oMath')
+              if drawings < 40: findings.append(f'too few equation drawings: {drawings}')
+              if equation_alt != drawings: findings.append(f'alt texts {equation_alt} != drawings {drawings}')
+              if pngs < 30: findings.append(f'too few equation PNGs: {pngs}')
+              if omath != 0: findings.append(f'unexpected OfficeMath nodes: {omath}')
+              report = {'paragraphs': len(document.paragraphs), 'headings': len(headings), 'drawings': drawings, 'equation_alt_texts': equation_alt, 'unique_pngs': pngs, 'findings': findings}
+              (directory / 'DOCX_STRUCTURE_AUDIT.json').write_text(json.dumps(report, indent=2), encoding='utf-8')
+              reports[name] = report
+              if findings: raise SystemExit(report)
+          print(json.dumps(reports, indent=2))
+          PY
+
+      - name: Render and raster-audit DOCX files
+        run: |
+          set -euo pipefail
+          OUT=$(cat "$RUNNER_TEMP/release_path")
+          for paper in paper2 paper3; do
+            DIR="$OUT/$paper"
+            DOCX=$(find "$DIR" -maxdepth 1 -name '*.docx' -print -quit)
+            PROFILE="$RUNNER_TEMP/lo-$paper"
+            RENDER="$DIR/docx-render"
+            mkdir -p "$PROFILE" "$RENDER"
+            libreoffice -env:UserInstallation="file://$PROFILE" \
+              --headless --nologo --nodefault --nolockcheck --nofirststartwizard \
+              --convert-to pdf --outdir "$RENDER" "$DOCX" \
+              | tee "$DIR/LIBREOFFICE_RENDER.log"
+            test -s "$(find "$RENDER" -name '*.pdf' -print -quit)"
+          done
+          python3 - "$OUT" <<'PY'
+          from pathlib import Path
+          from PIL import Image, ImageOps, ImageDraw
+          from pypdf import PdfReader
+          import json, re, subprocess, sys
+          root = Path(sys.argv[1])
+          reports = {}
+          for name in ('paper2', 'paper3'):
+              directory = root / name
+              rendered = next((directory / 'docx-render').glob('*.pdf'))
+              subprocess.run(['qpdf', '--check', str(rendered)], check=True)
+              reader = PdfReader(str(rendered))
+              if not (8 <= len(reader.pages) <= 90):
+                  raise SystemExit(f'{rendered}: implausible page count {len(reader.pages)}')
+              for index, page in enumerate(reader.pages, 1):
+                  width, height = float(page.mediabox.width), float(page.mediabox.height)
+                  if abs(width - 595.28) > 4 or abs(height - 841.89) > 4:
+                      raise SystemExit(f'{rendered} page {index} not A4: {width}x{height}')
+              extracted = directory / 'DOCX_RENDER_EXTRACTED.txt'
+              subprocess.run(['pdftotext', '-layout', str(rendered), str(extracted)], check=True)
+              text = re.sub(r'\s+', ' ', extracted.read_text(errors='replace').lower())
+              required = {
+                  'paper2': ('candidate collapse', 'corrected theorem boundary'),
+                  'paper3': ('difference-multiplicity dichotomy', 'corrected covariance problem'),
+              }[name]
+              missing = [m for m in required if m not in text]
+              if missing: raise SystemExit(f'{name}: missing DOCX-render markers {missing}')
+              for leaked in ('### proof', r'\bigl', r'\bigr', '$$', 'placeholder'):
+                  if leaked in text: raise SystemExit(f'{name}: leaked source token {leaked}')
+              raster = directory / 'docx-render-raster'
+              raster.mkdir(exist_ok=True)
+              subprocess.run(['pdftocairo', '-png', '-r', '120', str(rendered), str(raster / 'page')], check=True)
+              pngs = sorted(raster.glob('page-*.png'))
+              if len(pngs) != len(reader.pages): raise SystemExit(f'{name}: raster count mismatch')
+              thumbs = []
+              for index, path in enumerate(pngs, 1):
+                  image = Image.open(path).convert('L')
+                  pixels = list(image.getdata())
+                  dark_fraction = sum(value < 245 for value in pixels) / len(pixels)
+                  if dark_fraction < 0.0015: raise SystemExit(f'{name} page {index}: apparently blank')
+                  box = image.point(lambda value: 255 if value < 245 else 0).getbbox()
+                  if box is None: raise SystemExit(f'{name} page {index}: no visible content')
+                  left, top, right, bottom = box
+                  if min(left, top, image.width-right, image.height-bottom) < 2:
+                      raise SystemExit(f'{name} page {index}: content at edge {box}')
+                  thumb = ImageOps.contain(image.convert('RGB'), (260, 368))
+                  canvas = Image.new('RGB', (280, 400), 'white')
+                  canvas.paste(thumb, ((280-thumb.width)//2, 18))
+                  ImageDraw.Draw(canvas).text((8, 380), f'{name} page {index}', fill='black')
+                  thumbs.append(canvas)
+              cols = 4
+              rows = (len(thumbs)+cols-1)//cols
+              sheet = Image.new('RGB', (cols*280, rows*400), 'white')
+              for i, thumb in enumerate(thumbs): sheet.paste(thumb, ((i%cols)*280, (i//cols)*400))
+              sheet.save(directory / 'DOCX_CONTACT_SHEET.png')
+              reports[name] = {'rendered_pages': len(reader.pages), 'raster_pages': len(pngs)}
+          (root / 'DOCX_RENDER_AUDIT.json').write_text(json.dumps(reports, indent=2), encoding='utf-8')
+          print(json.dumps(reports, indent=2))
+          PY
+
+      - name: Assemble release controls and checksums
+        run: |
+          set -euo pipefail
+          OUT=$(cat "$RUNNER_TEMP/release_path")
+          ROOT=publications/fortune-papers-ii-vi-20260724
+          cp "$ROOT/PAPERS_II_III_MAINTTERM_CORRECTION_STATUS_20260727.md" "$OUT/" || true
+          cp frontier/integer_mainterm_correction/MAINTERM_CORRECTION_AND_PROGRAMME_STATUS_20260727.md "$OUT/" || true
+          cp frontier/integer_mainterm_correction/RECENTERED_ONE_SIDED_SOURCE_IDENTITY_20260727.md "$OUT/" || true
+          cp frontier/integer_mainterm_correction/TWO_SIDED_SIGNED_DIVISOR_FRAME_20260727.md "$OUT/" || true
+          cp frontier/integer_mainterm_correction/prime_pair_calibration.py "$OUT/" || true
+          cp frontier/integer_mainterm_correction/prime_pair_calibration_results.csv "$OUT/" || true
+          cp scripts/pandoc_all_math_images.py scripts/set_docx_a4.py "$OUT/"
+          test ! -f scripts/centre_docx_equation_images.py || cp scripts/centre_docx_equation_images.py "$OUT/"
+          printf '%s\n' "Repository commit: $GITHUB_SHA" > "$OUT/BUILD_PROVENANCE.txt"
+          cp "$RUNNER_TEMP/SOURCE_SHA256.txt" "$OUT/SOURCE_SHA256.txt"
+          (cd "$OUT" && find . -type f ! -name SHA256SUMS -print0 | sort -z | xargs -0 sha256sum > SHA256SUMS)
+          (cd "$OUT" && sha256sum -c SHA256SUMS)
+          (cd "$OUT" && zip -qr "$RUNNER_TEMP/fortune-papers-ii-iii-corrected-final.zip" .)
+          sha256sum "$RUNNER_TEMP/fortune-papers-ii-iii-corrected-final.zip" > "$OUT/ARCHIVE_SHA256.txt"
+
+      - name: Upload corrected final release
+        uses: actions/upload-artifact@v4
+        with:
+          name: fortune-papers-ii-iii-corrected-final
+          path: |
+            ${{ runner.temp }}/fortune-papers-ii-iii-corrected-release
+            ${{ runner.temp }}/fortune-papers-ii-iii-corrected-final.zip
+          retention-days: 90
+
+      - name: Record final build status
+        if: always()
+        env:
+          RUN_STATUS: ${{ job.status }}
+          RUN_ID: ${{ github.run_id }}
+          SOURCE_SHA: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          git fetch origin gpt56/fortune-mainterm-correction-programme-20260727
+          git reset --hard origin/gpt56/fortune-mainterm-correction-programme-20260727
+          STATUS=publications/fortune-papers-ii-vi-20260724/PAPERS_II_III_CORRECTED_FINAL_BUILD_STATUS.md
+          cat > "$STATUS" <<EOF
+          # Corrected Papers II--III final automated release status
+
+          - run ID: \`$RUN_ID\`
+          - source commit: \`$SOURCE_SHA\`
+          - conclusion: **$RUN_STATUS**
+          - run URL: https://github.com/$GITHUB_REPOSITORY/actions/runs/$RUN_ID
+
+          A success conclusion means the corrected-source and review-disposition gates, PDF/DOCX/LaTeX builds, A4 and embedded-font checks, equation-image structure checks, independent LibreOffice rendering, semantic marker tests, raster blank/edge checks, checksums and artifact upload all passed.
+          EOF
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add "$STATUS"
+          git commit -m "Record corrected Papers II-III final workflow $RUN_ID: $RUN_STATUS" || exit 0
+          git push origin HEAD:gpt56/fortune-mainterm-correction-programme-20260727
