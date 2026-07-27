@@ -1,5 +1,5 @@
-# Deterministic release trigger
+# Final deterministic release trigger
 
-This source-neutral marker triggers the v2 Papers V--VI canonical build and audit. It does not modify either reviewed manuscript or any mathematical claim.
+This source-neutral marker triggers the final Papers V--VI canonical build and audit. It does not modify either reviewed manuscript, its exact hash, or any mathematical claim.
 
-Clean trigger issued after the superseded concurrent run had terminated.
+Final all-equation DOCX route triggered after local 31-page visual QA.
