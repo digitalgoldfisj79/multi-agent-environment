@@ -1,9 +1,9 @@
 name: Build replacement Papers V and VI
 
 on:
-  pull_request:
+  push:
     branches:
-      - gpt56/d1-gate-bridge-terminal-20260724
+      - publication/fortune-papers-ii-vi-20260724
     paths:
       - .github/workflows/build-replacement-papers5-6.yml
       - publications/fortune-papers-ii-vi-20260724/paper5_function_fields_replacement/INDEPENDENT_REVIEW_DISPOSITION_FINAL.md
@@ -13,7 +13,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   group: replacement-papers-v-vi-release
@@ -238,3 +238,31 @@ jobs:
             ${{ runner.temp }}/fortune-papers5-6-release
             ${{ runner.temp }}/fortune-papers-v-vi-internal-release.zip
           retention-days: 90
+
+      - name: Record observable workflow status
+        if: always()
+        env:
+          RUN_STATUS: ${{ job.status }}
+          RUN_ID: ${{ github.run_id }}
+          RUN_ATTEMPT: ${{ github.run_attempt }}
+          SOURCE_SHA: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          STATUS_FILE=publications/fortune-papers-ii-vi-20260724/PAPERS_V_VI_AUTOMATED_BUILD_STATUS.md
+          cat > "$STATUS_FILE" <<EOF
+          # Papers V--VI automated release status
+
+          - workflow: Build replacement Papers V and VI
+          - run ID: \`$RUN_ID\`
+          - attempt: \`$RUN_ATTEMPT\`
+          - source commit: \`$SOURCE_SHA\`
+          - conclusion: **$RUN_STATUS**
+          - run URL: https://github.com/$GITHUB_REPOSITORY/actions/runs/$RUN_ID
+
+          This file is written by the final \`if: always()\` workflow step. A success conclusion means the independent reconstructions, source-hygiene checks, PDF/DOCX builds, semantic extraction, PDF preflight, DOCX render and accessibility audit, checksums and artifact upload all passed. A failure conclusion identifies the exact Actions run whose job logs must be inspected before release.
+          EOF
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add "$STATUS_FILE"
+          git commit -m "Record Papers V-VI workflow $RUN_ID: $RUN_STATUS" || exit 0
+          git push origin HEAD:publication/fortune-papers-ii-vi-20260724
