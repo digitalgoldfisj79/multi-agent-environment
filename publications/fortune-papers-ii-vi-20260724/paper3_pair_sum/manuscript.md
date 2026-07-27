@@ -5,28 +5,33 @@ subtitle: |
   An unconditional kernel theory and an exact conditional boundary
 author:
   - "Edward Stewart Anthony Bozzard (ORCID 0009-0002-4052-0994)"
-date: "24 July 2026"
+date: "27 July 2026"
 lang: en-GB
 abstract: |
   For the superincreasing primorial-prefix walk, we prove an exact
-  difference-multiplicity dichotomy for the pair-sum set: every nonzero
-  difference has multiplicity either one or exactly the walk length. This gives
-  a two-scale decomposition of all harmonic energies and exposes a necessary
-  single-walk subproblem. We then prove high-moment bounds and a sub-Weibull
-  Lebesgue tail for the centred pair-sum kernel, including exact sixth and third
-  centred moments. The resulting Lebesgue theory is exponentially stronger
-  than the level-set estimate needed by the reciprocal prime-sampling
-  architecture.
-
-  The remaining obstruction is therefore arithmetic concentration on sparse
-  exceptional sets. We formulate that transfer gap exactly and complement it
-  with a truncated-singular-series calculation. Under block-averaged first
-  moments and block-averaged Hardy--Littlewood pair correlations with relative
-  error \(o(\log X/X)\), the variance criterion from the preceding paper closes
-  and Fortune's conjecture follows for all sufficiently large indices. No
-  unconditional prime-detection claim is made.
+  difference-multiplicity dichotomy for the pair-sum set, a two-scale energy
+  decomposition, high-moment bounds and a sub-Weibull Lebesgue tail. These
+  unconditional kernel theorems are unchanged. This corrected edition removes
+  the former Hardy--Littlewood criterion centred at the generic shifted-prime
+  mean. Candidate collapse shows that below the square threshold the source is
+  instead a two-prime count: both the offset and the shifted output must be
+  prime. We formulate the correctly scaled prime-pair baselines, prove the
+  corresponding all-centres variance implication, and identify the new
+  arithmetic requirement as an aggregated four-linear-form covariance theorem
+  or an equivalent signed two-prime transference identity. The reciprocal
+  exceptional-set problem remains a valid model problem, but no implication
+  from it to the corrected detector is asserted.
 keywords: ["superincreasing sequences", "pair-sum sets", "additive energy", "sub-Weibull tails", "Hardy--Littlewood", "Fortune's conjecture"]
 ---
+
+
+> **Correction notice (27 July 2026).** Sections 9--10 and Appendices B--C of
+> the first circulation edition used a first moment centred at \(NH\). That
+> centring is conjecturally incorrect after candidate collapse: a prime output
+> below \(\ell_{j+1}^2\) forces the offset itself to be prime. The unconditional
+> kernel theory in Sections 1--8 and Appendix A is unaffected. The former
+> singular-series and conditional sections are archived separately and are not
+> part of the corrected theorem sequence.
 
 # 1. Setting
 
@@ -110,6 +115,22 @@ If \(u\) and \(v\) share an index, the difference is a single-walk difference
 and the shared index is the only free parameter. If they are disjoint, the
 multiset identity forces \(u'=u\) and \(v'=v\). \(\square\)
 
+### Expanded multiplicity proof
+
+The endpoint-multiset identity gives the full classification directly. If
+\(u=\{i,t\}\) and \(v=\{k,t\}\) share an index, then
+\(D=P_i-P_k\). In
+\(u\uplus v'=u'\uplus v\), the occurrence of \(k\) on the right can be
+supplied on the left only by \(v'\), so \(v'=\{k,s\}\) for a unique
+\(s\), and cancellation gives \(u'=\{i,s\}\). These are exactly the
+\(N\) sliding representations. If \(u\cap v=\varnothing\), both entries of
+\(v\) must be supplied by the two-entry multiset \(v'\); hence \(v'=v\)
+and then \(u'=u\). Finally, equality
+\(P_i-P_k=P_{i'}-P_{k'}\) is itself a coefficient-bounded relation, so
+Theorem 2.1 makes the ordered endpoint pairs equal. This proves the count and
+the pairwise distinctness. Appendix A.2 records the same case analysis in the
+frozen numbering.
+
 # 4. Exact two-scale energy decomposition
 
 For any nonnegative function \(T\) on the nonzero integers,
@@ -157,6 +178,17 @@ unordered pairs is
 \]
 There are \(M^k\) choices on the first side. \(\square\)
 
+### Expanded labelled-lift count
+
+For completeness, repeated endpoint indices cause no loss in Lemma 5.1.
+Replace the occurrences in the common \(2k\)-multiset temporarily by distinct
+labels. Every unlabelled ordered decomposition into pairs has at least one
+labelled lift, while two different unlabelled decompositions have disjoint
+sets of lifts. A labelled \(2k\)-set has \((2k-1)!!\) pair partitions and
+\(k!\) orders of the pairs, giving at most
+\((2k-1)!!k!=(2k)!/2^k\) unlabelled ordered decompositions. Appendix A.3
+gives the identical argument in full.
+
 # 6. Sub-Weibull Lebesgue tails
 
 ## Theorem 6.1
@@ -182,6 +214,25 @@ Choose \(k=\lfloor\sqrt{s/(2M)}\rfloor\). Markov's inequality and Lemma 5.1 give
 \le \frac{(2k)!}{2^k}\left(\frac Ms\right)^k.
 \]
 Stirling's inequality and the choice of \(k\) yield the displayed bound. The centred form follows by taking \(s=M+\lambda\) and checking the elementary one-variable inequality for \(\lambda/M\ge121\). \(\square\)
+
+### Uniformity in the moment order
+
+In Theorem 6.1, levels above \(M^2\) are empty. For
+\(2M\le s\le M^2\), the selected order
+\(k=\lfloor\sqrt{s/(2M)}\rfloor\) satisfies \(k\ll N<X/2\), so
+\(X>2k+1\) holds for all sufficiently large \(X\). Stirling gives
+\[
+\frac{(2k)!}{2^k}(M/s)^k
+\le e\sqrt{2k}\left(\frac{2k^2M}{e^2s}\right)^k
+\le e\sqrt{2k}\,e^{-2k}.
+\]
+Since \(2k\ge\sqrt{2s/M}-2\), this is the stated bound. For
+\(s=M+\lambda\), the remaining inequality is
+\[
+3+\tfrac14\log(2(t+1))-\sqrt{2(t+1)}+\sqrt t\le0,
+\quad t=\lambda/M\ge121;
+\]
+it is negative at \(121\) and decreasing thereafter.
 
 The exponent constant \(\sqrt2\) is sharp in the fixed-level limiting law: \(H_2/\sqrt M\) has the moments of \(g^2/\sqrt2\) to leading order, with \(g\) standard complex Gaussian.
 
@@ -228,97 +279,162 @@ e^{-\sqrt t}.
 
 The missing theorem is a sparse exceptional-set statement forbidding polynomially many arithmetic atoms from concentrating on exponentially small sets.
 
-# 9. Truncated singular series at a primorial centre
+# 9. Corrected prime-pair source
 
-Let
+For a primorial centre \(P_j\), set
 \[
-\Psi_j(H)=\sum_{2\le m\le H}\Lambda(P_j+m)
+Z_j(H)=\sum_{2\le m\le H}
+\mathbf1_{\mathbb P}(m)\mathbf1_{\mathbb P}(P_j+m).
+\tag{9.1}
+\]
+Below \(\ell_{j+1}^2\), candidate collapse makes \(Z_j>0\) exactly equivalent
+to the existence of a prime in the required interval.
+
+The Hardy--Littlewood calibration is
+\[
+\lambda_j(H)=\mathfrak S(P_j)
+\int_{\ell_j}^{H}\frac{dt}{\log t\,\log(P_j+t)},
+\qquad
+\mathfrak S(P_j)
+=2C_2\prod_{2<p\le\ell_j}\frac{p-1}{p-2}.
+\tag{9.2}
+\]
+It predicts \(\lambda_j(H)\asymp X\). This is a conjectural baseline, not a
+proved first moment.
+
+## Theorem 9.1 (correctly centred all-centres criterion)
+
+Let \(\lambda_j\) be any deterministic baselines satisfying
+\(cX\le\lambda_j\le CX\). If
+\[
+\sum_{j<N}|Z_j(H)-\lambda_j|^2
+\ll NX L(X),
+\qquad L(X)=o(\log X),
+\tag{9.3}
+\]
+then every centre in the block succeeds and the corresponding Fortunate
+numbers are prime.
+
+The proof is the one-failure argument: a failed centre has \(Z_j=0\) and costs
+\(\gg X^2\), while \(N\asymp X/\log X\).
+
+### Proof of Theorem 9.1
+
+Let \(B_X\) count failed centres. At each failure \(Z_j=0\) and
+\(\lambda_j\ge cX\), so
+\[
+B_Xc^2X^2\le\sum_{j<N}|Z_j-\lambda_j|^2\ll NXL(X).
+\]
+As \(N\asymp X/\log X\), this gives
+\(B_X\ll L(X)/\log X=o(1)\). The integer \(B_X\) is therefore eventually
+zero, and candidate collapse completes the implication.
+
+# 10. The corrected covariance problem
+
+The square of the detector has the exact expansion
+\[
+Z_j(H)^2
+=Z_j(H)+2\sum_{1\le d<H}C_j(H;d),
+\tag{10.1}
+\]
+where
+\[
+C_j(H;d)=
+\sum_{\substack{2\le m\\m+d\le H}}
+\mathbf1_{\mathbb P}(m)
+\mathbf1_{\mathbb P}(m+d)
+\mathbf1_{\mathbb P}(P_j+m)
+\mathbf1_{\mathbb P}(P_j+m+d).
+\tag{10.2}
+\]
+### Proof of (10.1)
+
+Expanding \(Z_j^2\) gives ordered pairs \((m,n)\) of successful offsets.
+The diagonal \(m=n\) contributes \(Z_j\). Every off-diagonal ordered pair is
+uniquely \((m,m+d)\) or \((m+d,m)\) with \(d\ge1\); the two orders carry
+the same four prime indicators. Hence the off-diagonal contribution is
+\(2\sum_{1\le d<H}C_j(H;d)\), proving (10.1).
+
+Thus this unweighted formulation of the corrected second moment is an
+aggregated four-linear-form prime correlation. A two-output model for
+\(\Lambda(P_j+m)\Lambda(P_j+m+d)\) alone does not represent this particular
+expansion. The weighted shifted detector of Paper II supplies a distinct
+one-sided formulation and is not excluded by this observation.
+
+A sufficient conditional input is the pair of block estimates
+\[
+\sum_{j<N}\lambda_j Z_j
+=\sum_{j<N}\lambda_j^2+O(NXL(X)),
+\tag{C1}
 \]
 and
 \[
-\pi_{2,j}(H;d)=
-\sum_{\substack{2\le m\\m+d\le H}}
-\Lambda(P_j+m)\Lambda(P_j+m+d).
+\sum_{j<N}\left(Z_j+2\sum_{d<H}C_j(H;d)\right)
+=\sum_{j<N}(\lambda_j^2+\lambda_j)+O(NXL(X)).
+\tag{C2}
 \]
-For primes up to the block endpoint, the local pair factor is
+Under (C1)--(C2),
 \[
-\frac{p(p-2)}{(p-1)^2}\quad(p\nmid d),\qquad
-\frac{p}{p-1}\quad(p\mid d),
+\sum_{j<N}|Z_j-\lambda_j|^2
+=\sum_{j<N}\lambda_j+O(NXL(X))
+\ll NXL(X),
+\tag{10.3}
 \]
-and it vanishes for odd \(d\).
+for \(L(X)\ge1\). Hence \(L(X)=o(\log X)\) implies Fortune for all
+sufficiently large indices by Theorem 9.1.
 
-Let \(\mathfrak S_j(d)\) be the resulting truncated singular series and
-\[
-T_j(H)=\sum_{0<|d|<H}(H-|d|)(\mathfrak S_j(d)-1).
-\]
+Conditions (C1)--(C2) are deliberately aggregated. Uniform asymptotics for
+every displacement \(d\) are stronger than the variance expansion requires.
+The new analytic problem along this unweighted route is to derive
+(C1)--(C2), or an equivalent signed transference theorem, with all four
+primality conditions coupled until after centring. A second live route starts
+from the recentered weighted shifted detector \(\Psi_j-\mu_j\), where
+candidate collapse already encodes offset primality; that route requires a
+fresh proof of its principal term and source-to-frame transference rather than
+an additional explicit offset-prime factor.
 
-## Theorem 9.1
+# 11. Revised boundary and research direction
 
-Uniformly in the block,
-\[
-|T_j(H)|\le2H\log X
-\]
-for all sufficiently large \(X\).
+The unconditional conclusions are:
 
-The truncation at the block prime scale changes the natural logarithm from \(\log H\) to \(\log X\). This is the exact scale needed by the block variance argument.
+1. the pair-sum difference multiplicities are exactly \(N\) or one;
+2. the pair-sum kernel has sub-Weibull Lebesgue tails;
+3. any pair-sum energy proof must control the necessary single-walk energy;
+4. Lebesgue control alone does not control sparse reciprocal sampling.
 
-# 10. A corrected conditional Hardy--Littlewood criterion
+The corrected arithmetic conclusions are:
 
-Assume the block-averaged hypotheses
-\[
-\sum_{j<N}\Psi_j(H)=NH+O(NH\varepsilon)
-\tag{H1}
-\]
-and, uniformly for \(0<|d|<H\),
-\[
-\sum_{j<N}\pi_{2,j}(H;d)
-=(H-|d|)\sum_{j<N}\mathfrak S_j(d)+O(NH\varepsilon).
-\tag{H2}
-\]
+1. the old first moment \(NH\) is withdrawn as a conjectural calibration;
+2. the direct source is the prime-pair count \(Z_j\) with mean of order \(X\);
+3. its second moment is a four-form correlation, not the former two-output
+   singular-series problem;
+4. no source-to-reciprocal implication is currently proved.
 
-## Theorem 10.1
-
-If
-\[
-\varepsilon=o(\log X/X),
-\]
-then
-\[
-\sum_{j<N}(\Psi_j(H)-H)^2
-\le \bigl(2+O(\eta X\varepsilon)+o(1)\bigr)NHX.
-\]
-Hence the deterministic criterion from Paper II holds and Fortune's conjecture follows for all sufficiently large \(n\).
-
-### Proof
-
-Expand the variance. The diagonal satisfies
-\[
-\sum_j\sum_m\Lambda(P_j+m)^2
-\le(2+o(1))NHX(1+O(\varepsilon)).
-\]
-For the off-diagonal, sum (H2) over \(d\). The constant part contributes \(N(H^2-H)\), while Theorem 9.1 contributes \(O(NH\log X)\). The total hypothesis error is \(O(NH^2\varepsilon)\). The \(NH^2\) main terms cancel, leaving
-\[
-\sum_jE_j(H)^2
-\le(2+o(1))NHX+O(NH\log X)+O(NH^2\varepsilon).
-\]
-Divide by \(NHX\) and use \(H=\eta X^2\). \(\square\)
-
-Neither (H1) nor (H2) alone forces a prime at every centre. Their block-averaged nature is essential; the earlier pointwise formulation was vacuously too strong.
-
-# 11. Boundary and research direction
-
-The unconditional kernel theory is much stronger than the required Lebesgue-level estimate. The conditional theorem shows exactly how accurate a block-averaged arithmetic model would have to be. Current technology gives neither the exceptional-set transfer nor (H1)--(H2) at the required strength.
-
-The next integer problem is therefore a transference or derandomisation theorem, not another moment computation.
+The next integer theorem should therefore be a corrected source-to-frame
+transference for at least one of two routes: the unweighted four-form variance
+above, or the recentered weighted shifted detector of Paper II. The
+single-walk kernel is the first exact harmonic object for the explicit
+double-von-Mangoldt source. The older pair-sum frame may still reappear after a
+correct principal-term subtraction, but no such implication is presently
+proved. Further pair-sum moments or random-order derandomisation are secondary
+until one of these bridges is established.
 
 ## AI-assistance disclosure
 
-The research programme used large language models for structured literature triage, symbolic and computational cross-checking, adversarial review, software drafting, and editorial assembly. Every mathematical claim included as a theorem was checked against an explicit proof or an independently reproducible exact computation. Conjectural, conditional, computational, and negative results are labelled separately. The named author takes responsibility for the content, citations, code, and final presentation.
+The research programme used large language models for structured literature
+triage, symbolic and computational cross-checking, adversarial review, software
+drafting, and editorial assembly. Every mathematical claim included as a
+theorem was checked against an explicit proof or an independently reproducible
+exact computation. Conjectural, conditional, computational, and negative
+results are labelled separately. The named author takes responsibility for the
+content, citations, code, and final presentation.
 
 ## Data, code, and reproducibility
 
-The source record for this draft is the public repository `https://github.com/digitalgoldfisj79/multi-agent-environment` on branch `gpt56/d1-gate-bridge-terminal-20260724`. The Zenodo package accompanying this manuscript contains the manuscript source, compiled PDF, a claim-status ledger, a source-file manifest, machine-readable metadata, and checksums.
-
+The corrected source and calibration scripts are recorded on branch
+`gpt56/fortune-mainterm-correction-programme-20260727`. The exact kernel
+verifiers from the first edition remain applicable to Sections 1--8 and
+Appendix A.
 
 # Appendix A. Complete kernel-theory proof
 
@@ -745,402 +861,6 @@ proving such a bound is proposed here.
    \(N=24\) (200{,}000 samples), the empirical tail respects (A.9) at every
    measurable level \(\lambda/M\in\{2,4,8,16,32,64\}\), and the empirical
    exponent constant is \(\approx1.5\), consistent with Remark A.8.
-
-# Appendix B. Truncated singular-series proof
-
-This appendix gives the complete proof of the only singular-series estimate used
-by the conditional theorem.  The sharper Dickman--de Bruijn constant in Remark
-B.4 is explicitly non-load-bearing.
-
-For a fixed centre \(P_j\), put
-
-\[
-A_j=\prod_{p\le \ell_j}p,
-\qquad
-A'_j=A_j/2,
-\qquad
-\varphi_2(u)=\prod_{p\mid u}(p-2),
-\]
-
-where every divisor of \(A'_j\) is odd and squarefree.  Also write
-
-\[
-C_j=\prod_{2<p\le\ell_j}\frac{p(p-2)}{(p-1)^2}.
-\]
-
-## B.1 Local factors and the finite singular series
-
-**Lemma B.1.**  For the pair
-\((P_j+m,P_j+m+d)\), the local factor at a prime \(p\le\ell_j\) is
-
-\[
-\delta_p(d)=
-\begin{cases}
-\dfrac{p(p-2)}{(p-1)^2},&p\nmid d,\\[6pt]
-\dfrac{p}{p-1},&p\mid d.
-\end{cases}
-\tag{B.1}
-\]
-
-Consequently the truncated singular series is
-
-\[
-\mathfrak S_j(d)
- =\prod_{p\le\ell_j}\delta_p(d)
- =\mathbf 1_{2\mid d}\,2C_j
-   \prod_{\substack{2<p\le\ell_j\\p\mid d}}
-   \frac{p-1}{p-2}.
-\tag{B.2}
-\]
-
-**Proof.**  Since \(p\mid P_j\), the forbidden residue classes for \(m\)
-modulo \(p\) are \(0\) and \(-d\).  They are distinct when \(p\nmid d\),
-leaving \(p-2\) admissible residues, and coincide when \(p\mid d\), leaving
-\(p-1\).  Multiplication by the two von Mangoldt normalising factors
-\((p/(p-1))^2\) gives (B.1).  At \(p=2\), the factor is \(0\) for odd \(d\)
-and \(2\) for even \(d\), which yields (B.2).  \(\square\)
-
-For later use define
-
-\[
-\lambda_p(d)=\delta_p(d)-1
-=-\frac{1}{(p-1)^2}
- +\mathbf 1_{p\mid d}\frac{p}{(p-1)^2}.
-\]
-
-Expanding the finite Euler product gives the exact identity
-
-\[
-\mathfrak S_j(d)-1
- =\sum_{\substack{r\mid A_j\\r>1}}
-   \frac{1}{\varphi(r)^2}
-   \sum_{s\mid r}\mu(r/s)s\,\mathbf 1_{s\mid d}.
-\tag{B.3}
-\]
-
-No estimate for the omitted infinite Euler-product tail is asserted or used:
-the conditional theorem is formulated entirely with the finite product
-\(\mathfrak S_j(d)\).
-
-## B.2 Exact divisor identity
-
-For an integer \(s\ge1\), let
-
-\[
-W_H(s)=\sum_{\substack{1\le d<H\\s\mid d}}(H-d).
-\]
-
-If \(s\ge H\), then \(W_H(s)=0\).  If \(1\le s<H\) and
-\(\rho_s\) is the least nonnegative residue of \(H\) modulo \(s\), then
-
-\[
-W_H(s)=\frac{H^2}{2s}-\frac H2+E_H(s),
-\qquad
-E_H(s)=\frac{\rho_s}{2}\left(1-\frac{\rho_s}{s}\right),
-\tag{B.4}
-\]
-
-and therefore
-
-\[
-0\le E_H(s)\le \frac{s}{8}.
-\tag{B.5}
-\]
-
-Recall
-
-\[
-T_j(H)=2\sum_{1\le d<H}(H-d)\bigl(\mathfrak S_j(d)-1\bigr).
-\]
-
-**Lemma B.2 (exact divisor identity).**
-
-\[
-T_j(H)
-=-H(H-1)
- +4C_j
-  \sum_{\substack{u\mid A'_j\\2u<H}}
-  \frac{W_H(2u)}{\varphi_2(u)}.
-\tag{B.6}
-\]
-
-**Proof.**  Insert (B.3), interchange the finite sums and collect the
-coefficient of \(W_H(s)\).  For \(s=1\), that coefficient is
-
-\[
-\prod_{p\mid A_j}\left(1-\frac{1}{(p-1)^2}\right)-1=-1,
-\]
-
-because the factor at \(p=2\) vanishes.  For \(s>1\), the coefficient is zero
-unless \(s\) is even.  Writing \(s=2u\), with \(u\mid A'_j\), direct
-multiplication gives \(2C_j/\varphi_2(u)\).  Since
-\(W_H(1)=H(H-1)/2\), formula (B.6) follows.  \(\square\)
-
-As a check, for \(A_j=2\cdot3\) and \(H=5\), one has
-\(C_j=3/4\), \(W_H(2)=4\), and (B.6) gives
-\(-20+4(3/4)4=-8\), equal to the direct sum.
-
-## B.3 Uniform second-moment bound
-
-Define
-
-\[
-\beta_j(H)=2C_j
-\sum_{\substack{u\mid A'_j\\u<H/2}}
-\frac{1}{\varphi_2(u)}.
-\tag{B.7}
-\]
-
-**Lemma B.3.**  Uniformly in \(j\),
-
-\[
-T_j(H)=-\beta_j(H)H+O(H),
-\tag{B.8}
-\]
-
-with an absolute implied constant.  Moreover,
-
-\[
-2C_j\le\beta_j(H)
-\le\prod_{p\le\ell_j}\frac{p}{p-1}
-=(e^\gamma+o(1))\log\ell_j.
-\tag{B.9}
-\]
-
-Consequently, in the regime \(H\asymp X^2\) and
-\(X\le\ell_j<2X\),
-
-\[
-|T_j(H)|\le 2H\log X
-\tag{B.10}
-\]
-
-for all sufficiently large \(X\), uniformly in the block.
-
-**Proof.**  Insert (B.4) into (B.6).  The complete \(H^2\)-coefficient
-cancels because
-
-\[
-C_j\sum_{u\mid A'_j}\frac{1}{u\varphi_2(u)}
- =\prod_{2<p\le\ell_j}
-  \frac{p(p-2)}{(p-1)^2}
-  \left(1+\frac{1}{p(p-2)}\right)=1.
-\tag{B.11}
-\]
-
-It remains to bound the truncated tail in (B.11) and the error in (B.4).
-Put
-
-\[
-f(u)=\frac{u}{\varphi_2(u)}
-\]
-
-on odd squarefree integers.  Then
-
-\[
-f(u)=\sum_{b\mid u}h(b),
-\qquad
-h(p)=\frac{2}{p-2},
-\]
-
-with \(h\) multiplicative and squarefree-supported.  The Euler product
-
-\[
-\sum_b\frac{h(b)}b
- =\prod_{p>2}\left(1+\frac{2}{p(p-2)}\right)
-\tag{B.12}
-\]
-
-converges.  Hence, for \(V\ge1\),
-
-\[
-\begin{aligned}
-\sum_{\substack{u\ge V\\u\text{ odd and squarefree}}}
- \frac{1}{u\varphi_2(u)}
-&\le
- \sum_b\frac{h(b)}{b^2}
- \sum_{m\ge V/b}\frac{1}{m^2}\\
-&\ll \frac1V\sum_{b\le V}\frac{h(b)}b
-   +\sum_{b>V}\frac{h(b)}{b^2}
- \ll \frac1V.
-\end{aligned}
-\tag{B.13}
-\]
-
-Taking \(V=H/2\), the omitted \(H^2\)-tail is \(O(H)\).
-Also, by (B.5),
-
-\[
-4C_j\sum_{2u<H}\frac{E_H(2u)}{\varphi_2(u)}
- \le C_j\sum_{u<H/2}f(u)
- \ll H,
-\tag{B.14}
-\]
-
-where (B.12) was used after expanding \(f=\mathbf 1*h\).  Equations
-(B.6)--(B.14) give (B.8).
-
-The lower bound in (B.9) is the term \(u=1\).  Extending the positive sum in
-(B.7) over every divisor of \(A'_j\) gives
-
-\[
-\begin{aligned}
-\beta_j(H)
-&\le 2C_j\prod_{2<p\le\ell_j}
-       \left(1+\frac{1}{p-2}\right)\\
-&=\prod_{p\le\ell_j}\frac{p}{p-1},
-\end{aligned}
-\]
-
-and Mertens' theorem proves (B.9).  Finally, (B.8), (B.9),
-\(\ell_j<2X\), and \(e^\gamma<2\) imply (B.10) for sufficiently large
-\(X\).  Notice that no sign assertion for \(T_j(H)\) is needed or made.
-\(\square\)
-
-**Remark B.4 (sharper constant; non-load-bearing sketch).**  Let
-
-\[
-\theta_j=\frac{\log H}{\log\ell_j},
-\qquad
-I(\theta)=\int_0^\theta\rho(v)\,dv,
-\]
-
-where \(\rho\) is the Dickman function.  Standard smooth-number asymptotics
-suggest
-
-\[
-T_j(H)=-I(\theta_j)H\log\ell_j\,(1+o(1)).
-\tag{B.15}
-\]
-
-In the Paper II regime \(H=\eta X^2\), one has
-\(\theta_j\to2\) and
-\(I(2)=3-2\log2\).  This refinement is not used anywhere in the
-conditional theorem; only the proved bound (B.10) is used.
-
----
-
-# Appendix C. Corrected conditional Hardy--Littlewood theorem
-
-This appendix reproduces the corrected block-averaged theorem from frozen blob `41d6f8e9df068bfed2f55fe9c2fd926a2b1423ef`. It supersedes the earlier pointwise formulation, which was vacuously strong.
-
-## C.1 Block-averaged conditional criterion
-
-Let \(\varepsilon=\varepsilon(X)\ge0\). Assume, for all sufficiently
-large \(X\):
-
-**(H1) block-averaged first moment.**
-\[
-\sum_{j<N}\Psi_j(H)=NH+O(NH\varepsilon).
-\]
-
-**(H2) block-averaged pair correlation, uniformly in the shift.** For
-every \(0<|d|<H\),
-\[
-\sum_{j<N}\pi_{2,j}(H;d)
-=(H-|d|)\sum_{j<N}\mathfrak S_j(d)+O(NH\varepsilon).
-\]
-
-If \(\varepsilon(X)=o(\log X/X)\), then Paper II hypothesis (2.7) holds
-with
-\[
-L(X)\;\le\;2+O(\eta X\varepsilon)+o(1)\;=\;o(\log X),
-\]
-and consequently, by Paper II Theorem 2.4, every centre in the block
-contains a prime in \([P_j+2,P_j+H]\) for all large \(X\); Fortune's
-conjecture holds for all sufficiently large \(n\).
-
-Neither (H1) nor (H2) individually implies the conclusion trivially:
-(H1) controls only the block *mean* of the \(E_j\), and (H2) controls
-correlations on average over the block — a single centre may a priori
-fail while the averages hold, and it is exactly the variance mechanism of
-Theorem 2.4 that excludes this.
-
-### Proof
-
-Expand the block variance:
-\[
-\sum_{j<N}E_j(H)^2
-=\sum_j\Psi_j^2-2H\sum_j\Psi_j+NH^2.
-\tag{1}
-\]
-
-**Diagonal.** \(\Psi_j^2=\sum_m\Lambda(P_j+m)^2
-+\sum_{m\ne m'}\Lambda(P_j+m)\Lambda(P_j+m')\). Since
-\(\Lambda(P_j+m)\le\log(P_j+H)\le(1+o(1))\,2X\) uniformly in the block
-(\(\log P_j\le\vartheta(2X)(1+o(1))\)),
-\[
-\sum_j\sum_m\Lambda(P_j+m)^2
-\le(1+o(1))\,2X\sum_j\Psi_j(H)
-\overset{\text{(H1)}}{=}(2+o(1))NHX\,(1+O(\varepsilon)).
-\tag{2}
-\]
-
-**Off-diagonal.** The \(m\ne m'\) part regroups by \(d=m'-m\):
-\(\sum_{m\ne m'}\Lambda\Lambda=\sum_{0<|d|<H}\pi_{2,j}(H;d)\) up to the
-boundary convention absorbed in (H2)'s error. Summing (H2) over the
-\(2(H-1)\) values of \(d\):
-\[
-\sum_j\sum_{m\ne m'}\Lambda\Lambda
-=\sum_{0<|d|<H}(H-|d|)\sum_j\mathfrak S_j(d)+O(NH^2\varepsilon).
-\tag{3}
-\]
-Write \(\mathfrak S_j=1+(\mathfrak S_j-1)\). The 1-part contributes
-\(N\sum_{0<|d|<H}(H-|d|)=N(H^2-H)\). The remainder is
-\(\sum_jT_j(H)\) with
-\(T_j(H)=\sum_{0<|d|<H}(H-|d|)(\mathfrak S_j(d)-1)\), and the **proved
-truncated-singular-series lemma** gives \(|T_j(H)|\le2H\log X\) for all
-large \(X\), uniformly in \(j\). Hence
-\[
-\sum_j\sum_{m\ne m'}\Lambda\Lambda
-=N(H^2-H)+O(NH\log X)+O(NH^2\varepsilon).
-\tag{4}
-\]
-
-**Assembly.** By (H1), \(-2H\sum_j\Psi_j=-2NH^2+O(NH^2\varepsilon)\).
-Adding (2), (4), \(-2NH^2+O(NH^2\varepsilon)\), and \(NH^2\) in (1):
-\[
-\sum_{j<N}E_j(H)^2
-\le(2+o(1))NHX
-+O(NH\log X)+O(NH^2\varepsilon)-NH.
-\]
-Dividing by \(NHX\) and using \(H=\eta X^2\):
-\[
-L(X)\le 2+o(1)+O\!\left(\frac{\log X}{X}\right)+O(\eta X\varepsilon)
-=2+O(\eta X\varepsilon)+o(1).
-\]
-With \(\varepsilon=o(\log X/X)\) this is \(o(\log X)\), so (2.7) holds
-and Theorem 2.4 applies. Coverage of every \(n\) by dyadic blocks is as
-in Paper II. \(\square\)
-
-## C.2 Remarks
-
-1. **Where each ingredient is load-bearing.** The diagonal (2) needs only
-   (H1) and saturates the budget at \(L\approx2\); the constant 2 is the
-   block-maximal \(\log P_j/X\le2+o(1)\) and could be refined to
-   \(\int\)-averaged form. The off-diagonal needs (H2) *and* the
-   singular-series bound \(|T_j|\le2H\log X\): without the latter, (4)
-   would carry an uncontrolled \(N\cdot O(H\cdot?)\) term. This is
-   exactly the role the truncated-series lemma was built for, restoring
-   the intended content of the conditional bridge.
-2. **The threshold is genuinely \(\varepsilon=o(\log X/X)\).** At
-   \(\varepsilon\asymp\log X/X\) the term \(O(\eta X\varepsilon)\) is
-   \(O(\log X)\) and (2.7) fails to improve on trivial; below it, the
-   criterion closes. Unlike the superseded pointwise version, no
-   sub-hypothesis here forces the conclusion by itself.
-3. **Explicit-constant variant.** If (H1)–(H2) are assumed with a named
-   constant \(C_0\) (error \(\le C_0NH\varepsilon\)), the argument gives
-   the numerical threshold
-   \(L\le2+2C_0\eta X\varepsilon+o(1)\), which combined with the
-   explicit-margin form of Theorem 2.4
-   (\(L\le(\eta/4C-\epsilon)\log X\) suffices) yields fully effective
-   statements; with anonymous \(\ll\)-constants only the asymptotic form
-   above is available.
-4. **What this does not do.** (H1)–(H2) at the required strength are far
-   beyond current technology, unconditionally or on GRH, for these
-   exponentially sparse prescribed centres; the theorem is a calibration
-   of the conditional boundary, not progress toward it.
-
 
 # References
 
