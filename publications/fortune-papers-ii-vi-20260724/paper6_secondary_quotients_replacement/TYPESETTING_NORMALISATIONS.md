@@ -12,6 +12,7 @@ Documented notation normalisations:
 4. Artin--Schreier and Kummer dashes are typographic in prose; algebraic minus signs remain equation objects.
 5. One missing blank line between the final display in Theorem 9.3 and its `### Proof` heading is inserted in the temporary typesetting source. The reviewed words, equations and ordering are unchanged; the insertion prevents Pandoc from printing the Markdown heading marker literally in PDF and DOCX.
 6. Display equations remain native OMML in DOCX and native TeX in PDF. The runner installs LibreOffice Math before rendering the DOCX, and the build rejects both literal TeX leakage and an abnormally short rendered-text extraction.
-7. Page breaks may differ between formats; theorem numbering, symbols and mathematical content must not.
+7. Every DOCX section is set deterministically to A4 portrait dimensions with 25 mm margins. Pandoc otherwise defaults the Word section to US Letter even when the canonical PDF is A4.
+8. Page breaks may differ between formats; theorem numbering, symbols and mathematical content must not.
 
 Any additional conversion must be documented and re-audited.
