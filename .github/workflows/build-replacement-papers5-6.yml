@@ -10,6 +10,8 @@ on:
       - publications/fortune-papers-ii-vi-20260724/paper6_secondary_quotients_replacement/INDEPENDENT_REVIEW_DISPOSITION_FINAL.md
       - publications/fortune-papers-ii-vi-20260724/paper5_function_fields_replacement/manuscript.md
       - publications/fortune-papers-ii-vi-20260724/paper6_secondary_quotients_replacement/manuscript.md
+      - publications/fortune-papers-ii-vi-20260724/paper5_function_fields_replacement/TYPESETTING_NORMALISATIONS.md
+      - publications/fortune-papers-ii-vi-20260724/paper6_secondary_quotients_replacement/TYPESETTING_NORMALISATIONS.md
   workflow_dispatch:
 
 permissions:
@@ -130,6 +132,19 @@ jobs:
           build_one () {
             SRC="$1"; DEST="$2"; STEM="$3"; TITLE="$4"
             echo "=== Building $STEM from $SRC ==="
+            DOCX_SOURCE="$SRC/manuscript.md"
+            if [[ "$STEM" == 'fortune-paper-v' ]]; then
+              DOCX_SOURCE="$RUNNER_TEMP/$STEM-docx-normalised.md"
+              python3 - "$SRC/manuscript.md" "$DOCX_SOURCE" <<'PY'
+          from pathlib import Path
+          import sys
+          source = Path(sys.argv[1]).read_text()
+          normalised = source.replace(r'\Bigl(', '(').replace(r'\Bigr)', ')')
+          if normalised == source:
+              raise SystemExit('Expected Paper V DOCX delimiter normalisation was not applied')
+          Path(sys.argv[2]).write_text(normalised)
+          PY
+            fi
             (
               cd "$SRC"
               pandoc -f markdown+tex_math_single_backslash manuscript.md \
@@ -137,8 +152,8 @@ jobs:
                 --metadata title="$TITLE" --metadata author='Edward Stewart Anthony Bozzard' \
                 -V papersize=a4 -V geometry:margin=25mm -V colorlinks=true \
                 -o "$DEST/$STEM.pdf"
-              pandoc -f markdown+tex_math_single_backslash manuscript.md \
-                --bibliography=references.bib --citeproc \
+              pandoc -f markdown+tex_math_single_backslash "$DOCX_SOURCE" \
+                --resource-path="$SRC" --bibliography="$SRC/references.bib" --citeproc \
                 --metadata title="$TITLE" --metadata author='Edward Stewart Anthony Bozzard' \
                 -o "$DEST/$STEM.docx"
               pandoc -f markdown+tex_math_single_backslash manuscript.md \
@@ -154,6 +169,10 @@ jobs:
             fortune-paper-v 'Fortunate Polynomials over Finite Fields'
           build_one "$ROOT/paper6_secondary_quotients_replacement" "$OUT/paper6" \
             fortune-paper-vi 'Secondary Traces and Kummer Quotients for the Function-Field Fortune Crown'
+          if grep -Fq 'Could not convert TeX math' "$BUILD_LOG"; then
+            echo 'Pandoc failed to convert at least one TeX equation to the target format.'
+            exit 1
+          fi
           echo "$OUT" > "$RUNNER_TEMP/release_path"
 
       - name: PDF and DOCX semantic/preflight audit
@@ -195,6 +214,10 @@ jobs:
               missing = [term for term in required if term not in text]
               if missing:
                   raise SystemExit(f'{d.name} {label}: missing semantic markers {missing}')
+          for label in ('docx', 'docx-render'):
+              bad = [token for token in (r'\bigl', r'\bigr', '$$') if token in texts[label]]
+              if bad:
+                  raise SystemExit(f'{d.name} {label}: literal TeX leaked into output: {bad}')
           print(f'{d.name}: semantic extraction checks passed')
           PY
           done
