@@ -2,18 +2,18 @@
 
 The reviewed Markdown source is authoritative.
 
-The canonical PDF and LaTeX source are generated directly from that exact reviewed Markdown. The editable DOCX is generated from the same source after only the notation- and structure-preserving converter normalisations listed below. No theorem statement, equation content, proof text or mathematical ordering is changed.
+The canonical PDF and LaTeX source are generated directly from that exact reviewed Markdown. The DOCX is an editable-prose publication copy generated from the same source after only the notation- and structure-preserving converter normalisations below. No theorem statement, equation content, proof text or mathematical ordering is changed.
 
-Documented notation normalisations:
+Documented normalisations:
 
-1. The cubic class counts use `N_{\mathrm{sq}}` and `N_{\mathrm{ns}}`, not unbraced `N_+` and `N_-`, because the latter produced ambiguous OMML subscripts in an early DOCX render.
+1. The cubic class counts use `N_{\mathrm{sq}}` and `N_{\mathrm{ns}}`, not unbraced `N_+` and `N_-`, because the latter produced ambiguous subscripts in early office renders.
 2. Cardinalities use `\operatorname{card}` rather than `\#`; an early LibreOffice render displayed `#` as an invalid equation glyph.
-3. For the DOCX branch only, the two occurrences of the domain condition `q\in\mathbf F_p^*\setminus\{2\}` are written equivalently as `q\in\mathbf F_p^\times,\ q\ne2`. The set and its mathematical meaning are unchanged.
-4. Ordinary inline and display mathematics remain native editable OMML. Four q-line displays that LibreOffice Math mistranslates are converted from their exact TeX expressions to centred transparent 300-dpi PNG equation images. Each image carries the exact TeX expression as alternative text; the authoritative Markdown and generated LaTeX remain in the release package.
-5. Blank lines are inserted around display delimiters in the temporary DOCX source so each targeted equation image occupies a separate centred paragraph. This changes only Markdown block parsing, not mathematical content.
-6. Every DOCX section is set deterministically to A4 portrait dimensions with 25 mm margins. Pandoc otherwise defaults the Word section to US Letter even when the canonical PDF is A4.
-7. The conversion is deterministic and guarded: exactly four displays must be converted; the build fails on any Pandoc `Could not convert TeX math` warning, insufficient OMML objects, insufficient equation images, literal TeX leakage, literal Markdown headings, non-A4 output, unembedded PDF fonts or an abnormally short LibreOffice render extraction.
-8. Straight ASCII hyphens in source titles may render typographically as en/em dashes; mathematical minus signs remain equation objects.
-9. Line wrapping and page breaks may differ between PDF and DOCX, but theorem numbering, symbols and mathematical content must match the authoritative source.
+3. Blank lines are inserted around display delimiters in a temporary converter source so Pandoc parses every display as a separate block. The reviewed Markdown file itself is unchanged.
+4. For DOCX only, every Pandoc math node is rendered from its exact TeX by a single deterministic LaTeX/preview batch and embedded as a transparent 300-dpi equation image. There are 359 equation occurrences (277 inline and 82 display) representing 273 unique TeX expressions. Each occurrence carries the exact TeX as alternative text. Prose, headings, citations and lists remain editable.
+5. This all-equation image route supersedes the mixed OMML route. Manual page QA showed that LibreOffice could silently omit valid inline OMML even when package-level and text-extraction checks passed. The image route renders every equation consistently in Word-compatible and LibreOffice-compatible output.
+6. Every DOCX section is set to A4 portrait with 25 mm margins. The geometry utility modifies section properties only and must not reconstruct paragraph runs, because assigning to `paragraph.text` destroys embedded equation images.
+7. The build verifies the exact equation counts, image/drawing counts, alternative text, A4 geometry, canonical PDF font embedding, independent LibreOffice rendering, page counts, absence of source-token leakage, checksums and page-level visual QA.
+8. Straight ASCII hyphens in source titles may render typographically as en/em dashes; mathematical minus signs are inside the exact TeX equation images.
+9. Line wrapping and page breaks may differ between the canonical PDF and editable-prose DOCX, but theorem numbering, symbols and mathematical content must match the authoritative source.
 
-Any additional conversion must be added to this file. A change to mathematical source text would reset source-fidelity and exact-hash review gates; the normalisations above are build-only and leave the reviewed Markdown hash unchanged.
+A change to mathematical source text resets source-fidelity and exact-hash review gates. These normalisations are build-only and leave the reviewed Markdown hash unchanged.
