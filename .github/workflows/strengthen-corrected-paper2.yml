@@ -26,7 +26,7 @@ jobs:
           grep -Fq 'Two corrected transference routes remain open' "$P"
           grep -Fq 'Expanded Fourier-sign verification' "$P"
           grep -Fq 'Expanded coprimality and prime-power details' "$P"
-          grep -Fq 'the present manuscript neither proves nor rules out such a theorem' "$P"
+          grep -Fq 'Route A starts' "$P"
           ! grep -nE 'TODO|TBD|PLACEHOLDER' "$P"
           sha256sum "$P"
       - name: Commit amendment
