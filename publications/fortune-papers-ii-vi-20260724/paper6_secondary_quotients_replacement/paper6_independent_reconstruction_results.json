@@ -1,0 +1,34 @@
+{
+  "tangent_dual_number_checks": {
+    "5": {"tau_power_p":[1,0],"norm":[0,0],"kernel_size":5,"image_size":5,"frobenius_tangents":[0,1,2,3,4]},
+    "7": {"tau_power_p":[1,0],"norm":[0,0],"kernel_size":7,"image_size":7,"frobenius_tangents":[0,1,2,3,4,5,6]},
+    "11": {"tau_power_p":[1,0],"norm":[0,0],"kernel_size":11,"image_size":11,"frobenius_tangents":[0,1,2,3,4,5,6,7,8,9,10]}
+  },
+  "divided_hook_character_checks": {
+    "5":{"trivial_multiplicity":"4/5","nontrivial_multiplicity":"-1/5","virtual_character":false},
+    "7":{"trivial_multiplicity":"6/7","nontrivial_multiplicity":"-1/7","virtual_character":false},
+    "11":{"trivial_multiplicity":"10/11","nontrivial_multiplicity":"-1/11","virtual_character":false}
+  },
+  "hattori_stallings_checks": {
+    "5":{"trials":20,"formula":"Tr_Z(Phi sigma^{-r})=p h_r","passed":true},
+    "7":{"trials":20,"formula":"Tr_Z(Phi sigma^{-r})=p h_r","passed":true}
+  },
+  "no_split_finite_checks": {
+    "7":{"squarefree_completely_split_cases":0,"parameter_triples_checked":294},
+    "11":{"squarefree_completely_split_cases":0,"parameter_triples_checked":1210}
+  },
+  "kummer_checks": {
+    "5":{"n":2,"H1_class_count":2,"sign_nontrivial":true,"p_mod_4":1},
+    "11":{"n":8,"H1_class_count":2,"sign_nontrivial":false,"p_mod_4":3},
+    "17":{"n":14,"H1_class_count":2,"sign_nontrivial":true,"p_mod_4":1},
+    "23":{"n":20,"H1_class_count":2,"sign_nontrivial":false,"p_mod_4":3},
+    "29":{"n":26,"H1_class_count":2,"sign_nontrivial":true,"p_mod_4":1}
+  },
+  "point_count_checks": [
+    {"p":7,"N2":1,"N_sq":10,"N_ns":8,"W":10,"Q_points":61,"boundary_points":7,"open_points":54,"Q_mod_p":5},
+    {"p":11,"N2":1,"N_sq":14,"N_ns":14,"W":15,"Q_points":151,"boundary_points":11,"open_points":140,"Q_mod_p":8},
+    {"p":17,"N2":1,"N_sq":18,"N_ns":14,"W":17,"Q_points":273,"boundary_points":17,"open_points":256,"Q_mod_p":1},
+    {"p":23,"N2":2,"N_sq":12,"N_ns":22,"W":19,"Q_points":419,"boundary_points":45,"open_points":374,"Q_mod_p":5}
+  ],
+  "conclusion":"All independent algebraic and finite regressions passed; none proves nonvanishing of the quotient open."
+}
