@@ -2,14 +2,25 @@
 title: "Prime Detection at Primorial Centres"
 subtitle: "Reciprocal frames, exact moments, and structural obstructions"
 author: "Bozzard, Edward Stewart Anthony (ORCID 0009-0002-4052-0994)"
-date: "24 July 2026"
+date: "27 July 2026"
 ---
 
-**Abstract.** Let \(P_n=\prod_{p\le p_n}p\) and let \(F_n\) be the least integer \(m>1\) for which \(P_n+m\) is prime. Since every prime factor of \(F_n\) exceeds \(p_n\), a composite \(F_n\) is at least \(p_{n+1}^2\). This paper continues the collision-geometry programme of Paper I and studies the analytic interface between consecutive-prime partial products and prime detection at primorial centres. We first prove that a random-scale second moment for the complete shifted von Mangoldt detector, with only an \(o(\log X)\) loss, already forces every centre in a dyadic block to contain a prime below \(p_{n+1}^2\). We then formulate a principal-cancelled reciprocal frame on the pair-sum set of the primorial-prefix path. Its harmonic energies admit an exact one-sided decomposition: the lower side of the centred prime-gap residual is automatic, and only an upper estimate is load-bearing. We prove an exact Lebesgue fourth-moment formula for the pair-sum polynomial, a growing-degree Möbius truncation theorem with negligible Frobenius tail, a semiprime resonance obstruction to Hardy--Littlewood density replacement, and exact character-diagonal and character-ratio identities showing that CRT de-tensorisation reconstructs the original additive kernel in the unequal-character sector. For a possible density-one route we prove a cubic failure certificate, but also show that primorial-centre phases are macroscopically coherent at the natural zero-pair scale and that the effective explicit-formula conductor migrates by a factor asymptotic to \(p_{n+1}\) between successive indices. Finally, we give exact harmonic aggregation and Fourier-scale conservation identities and quantify why power-scale large values do not yield the exponentially precise phase alignment needed for divisor pinning. No proof of Fortune's conjecture is claimed. The results isolate a signed reciprocal sampling theorem for the consecutive-prime prefix-product walk as the remaining analytic boundary.
+**Abstract.** Let \(P_n=\prod_{p\le p_n}p\) and let \(F_n\) be the least integer \(m>1\) for which \(P_n+m\) is prime. Below the square threshold \(p_{n+1}^2\), candidate collapse forces every prime-producing offset to be prime. The shifted von Mangoldt detector is therefore a weighted prime-pair detector, not an ordinary short-interval prime sum. This corrected edition proves an exact prime-pair detector identity, gives two block-variance criteria centred at any baselines of the conjecturally correct sizes, and derives an exact Fourier source identity whose kernel is the single primorial-prefix walk and whose source contains both prime factors. Under the Hardy--Littlewood model the weighted main term is \(\mathfrak S(P_j)\int dt/\log t\), asymptotic to \(e^\gamma H/2\), rather than \(H\). The earlier reciprocal pair-sum frame and all of its internal moment, Möbius, character and no-go theorems are retained as independent structural results, but no source-to-frame implication from the corrected detector is claimed. The programme boundary is now a two-sided signed prime-pair transference theorem; work on the unweighted reciprocal frame alone cannot prove Fortune's conjecture.
 
 **Keywords:** Fortunate numbers; primorials; primes in short intervals; reciprocal exponential sums; Barban--Davenport--Halberstam variance; multiplicative characters; sieve parity.
 
 **MSC 2020:** 11N05, 11N13, 11N35, 11L07, 11B83.
+
+> **Correction notice (27 July 2026).** The first circulation edition centred
+> \(\Psi_j(H)=\sum_{m\le H}\Lambda(P_j+m)\) at \(H\). The implication
+> from that variance hypothesis was valid, but the centring was not calibrated
+> to candidate collapse. Below \(\ell_{j+1}^2\), a prime value
+> \(P_j+m\) forces \(m\) itself to be prime. The correct source is therefore
+> a prime-pair correlation. Sections 2--3 and the programme boundary have been
+> replaced accordingly. Every exact theorem internal to the reciprocal frame
+> remains valid as a theorem about that frame, but its connection to Fortune is
+> reopened.
+
 
 # Introduction
 
@@ -43,11 +54,15 @@ so the pointwise problem is at the Cramér--Granville scale at a prescribed and 
 
 Paper I [@bozzard2026paper1] studied the deterministic cumulative-product path formed by consecutive primes in a dyadic block. It proved exact collision identities, low-transport and offset-slice bounds, average almost-injectivity, an interval-graph Smith-form theorem, and a detailed decomposition of the centred two-run energy. It deliberately stopped before claiming a prime-offset theorem. The present paper begins at that interface.
 
-There are two complementary analytic entry points.
+There are now two analytically distinct objects.
 
-First, one may work directly with the complete shifted von Mangoldt detector at the primorial centres. We prove that a random-scale block second moment with loss \(o(\log X)\) implies the existence of a prime in every required interval. This is stronger than an almost-all conclusion: because a single failed centre contributes quadratically, the natural variance scale already excludes every failure.
+First, the exact Fortune detector below the square threshold is the two-prime count
+\[
+Z_j(H)=\#\{m\le H:m\text{ and }P_j+m\text{ are prime}\}.
+\]
+A failed centre contributes the square of a main term of order \(X\), so a block variance at the random scale \(NX\) with loss \(o(\log X)\) still excludes every failure. For the weighted detector the corresponding mean is of order \(H\) and the random variance scale is \(NHX\).
 
-Second, one may pass through a principal-cancelled reciprocal frame obtained from the low-frequency prime-modulus shell of the shifted detector. Its rows are indexed by primes \(q\asymp X^2\) and small nonzero additive harmonics, while its columns are indexed by pair sums of consecutive-prime prefixes. The exact dual-row kernel is
+Second, the preceding programme introduced a principal-cancelled reciprocal frame whose columns are pair sums of consecutive-prime prefixes. Its exact internal kernel is
 
 \[
 \left|H_2\!\left(a\left(\frac1q-\frac1r\right)\right)\right|^2-M,
@@ -60,12 +75,12 @@ where \(M\) is the number of pair sums and \(e(x)=e^{2\pi i x}\). This formulati
 
 The principal results are as follows.
 
-1. A complete shifted-prime variance bound
+1. Exact candidate collapse gives
    \[
-   \sum_j\left|\sum_{2\le m\le H}(\Lambda(P_j+m)-1)\right|^2
-   \ll NHX L(X),\qquad L(X)=o(\log X),
+   \Psi_j(H)=\sum_{\substack{m\le H\\m\text{ prime}}}\Lambda(P_j+m)+R_j(H),
+   \qquad R_j(H)=O(X\log X),
    \]
-   with \(H\asymp X^2\), forces every centre in the block to contain a prime.
+   and the unweighted prime-pair count \(Z_j(H)\) is an exact existence detector. Correctly scaled block-variance bounds for \(Z_j\) or its weighted form force every centre.
 2. The reciprocal-frame harmonic energy satisfies an exact decomposition
    \[
    \mathcal E_a=M(M-1)\kappa_{2,a}+\mathcal R_a.
@@ -87,7 +102,7 @@ The principal results are as follows.
 7. Fortune failure implies a cubic local Selberg-energy lower bound. Nevertheless, averaging over the primorial index is coherent at the natural zero-pair scale, and the dominant explicit-formula conductor changes by an unbounded factor at each step.
 8. Harmonic aggregation can be made exact without truncation, but the critical shell has only bounded effective harmonic dimension. Narrowing the physical window and summing translates reconstructs the original Fourier transform exactly. Large-value information at a power scale also does not imply the exponentially precise phase alignment needed for divisor pinning.
 
-These statements are exact theorems or exact algebraic reductions. Finite computations are used only to validate identities and to record non-load-bearing diagnostics. No asymptotic conclusion is inferred from a finite panel.
+The prime-pair identities and variance implications are exact. The Hardy--Littlewood main terms are explicitly conjectural calibrations. The reciprocal-frame statements are exact theorems or exact algebraic reductions internal to that frame. Finite computations are used only to test calibration and validate identities; no asymptotic theorem is inferred from a finite panel.
 
 # Primorial blocks and the direct detector
 
@@ -148,81 +163,268 @@ P_j+r\text{ prime}.
 
 **Proof.** Every prime factor of \(m\) exceeds \(\ell_j\), hence is at least \(\ell_{j+1}\). If \(m\) were composite, then \(m\ge \ell_{j+1}^2\), contrary to the hypothesis. \(\square\)
 
-This binary-prime reformulation is exact, but it does not remove the parity problem. The direct detector below does not impose primality on the offset; it asks only for a prime value of \(P_j+m\).
+This binary-prime reformulation is exact and exposes the parity problem: below the square threshold, successful outputs and admissible offsets must both be prime.
 
-## Proper prime powers
+## Exact collapse of the detector
 
 Fix \(0<\eta<1\) and put
-
 \[
 H=\eta X^2.
 \tag{2.4}
 \]
-
-For all sufficiently large \(X\), one has \(H<\ell_{j+1}^2\) uniformly in the block. Define
-
+For all sufficiently large \(X\), \(H<\ell_{j+1}^2\) uniformly in the block.
+Define the unweighted prime-pair detector
 \[
-\Psi_j(H)=\sum_{2\le m\le H}\Lambda(P_j+m),
-\qquad
-E_j(H)=\Psi_j(H)-H.
+Z_j(H)=
+\sum_{2\le m\le H}
+\mathbf 1_{\mathbb P}(m)\mathbf 1_{\mathbb P}(P_j+m),
 \tag{2.5}
 \]
-
-**Lemma 2.3 (prime-power contamination).** Uniformly in \(j\), the contribution to \(\Psi_j(H)\) from proper prime powers is
-
+and the weighted prime-pair detector
 \[
-O(X\log X)=o(H).
+Y_j(H)=
+\sum_{2\le m\le H}
+\mathbf 1_{\mathbb P}(m)\Lambda(P_j+m).
 \tag{2.6}
 \]
+The lower cutoff \(m>\ell_j\) is automatic: if a prime \(m\le\ell_j\), then
+\(m\mid P_j\) and \(P_j+m\) is divisible by \(m\).
 
-**Proof.** Near \(P_j\), consecutive squares are separated by \(\gg P_j^{1/2}\), which is exponentially larger than \(H\). The same is true for every higher power. Thus the interval \([P_j+2,P_j+H]\) contains at most one \(k\)-th power for each \(k\ge2\). If that power is \(r^k\), its von Mangoldt weight is
+**Proposition 2.3 (exact candidate-collapse detector).** For every \(j\):
 
+1. \(Z_j(H)>0\) if and only if \([P_j+2,P_j+H]\) contains a prime;
+2. if
+   \[
+   \Psi_j(H)=\sum_{2\le m\le H}\Lambda(P_j+m),
+   \]
+   then
+   \[
+   \boxed{\Psi_j(H)=Y_j(H)+R_j(H)},
+   \tag{2.7}
+   \]
+   where \(R_j(H)\) is supported on proper prime powers \(P_j+m=r^k\), \(k\ge2\), and
+   \[
+   R_j(H)=O(X\log X)=o(H)
+   \tag{2.8}
+   \]
+   uniformly in \(j\).
+
+**Proof.** If \(P_j+m\) is prime, then \((m,P_j)=1\); otherwise a common
+prime divisor would divide the prime output. Lemma 2.2 therefore forces \(m\)
+to be prime. This proves the first assertion and identifies every prime term in
+\(\Psi_j\) with a term of \(Y_j\). The remaining von Mangoldt terms are proper
+prime powers. Near \(P_j\), consecutive \(k\)-th powers are separated by more
+than \(H\); for each \(k\ge2\) there is at most one, with weight
+\(O(X/k)\). Summing over \(k\ll X\) gives \(O(X\log X)\). \(\square\)
+
+Thus the complete shifted detector is a weighted prime-pair detector plus a
+negligible prime-power remainder. It is not naturally centred at the ordinary
+short-interval mean \(H\).
+
+## Correct block-variance implications
+
+The following criteria separate the exact implication from the conjectural
+choice of main term.
+
+**Theorem 2.4 (unweighted prime-pair block criterion).** Let \(\lambda_j>0\)
+satisfy
 \[
-\log r\le \frac{\log(2P_j)}k\ll\frac Xk.
+cX\le\lambda_j\le CX
+\tag{2.9}
+\]
+uniformly for fixed constants \(c,C>0\). If
+\[
+\sum_{j=0}^{N-1}|Z_j(H)-\lambda_j|^2
+\ll NX L(X),
+\qquad L(X)=o(\log X),
+\tag{2.10}
+\]
+then every centre in the block contains a prime in \([P_j+2,P_j+H]\).
+
+**Proof.** If \(B_X\) centres fail, then \(Z_j=0\) at each of them, so
+\[
+B_Xc^2X^2\le\sum_j|Z_j-\lambda_j|^2\ll NXL(X).
+\]
+Since \(N\asymp X/\log X\), \(B_X\ll L(X)/\log X=o(1)\). Integrality gives
+\(B_X=0\) for sufficiently large \(X\). \(\square\)
+
+**Theorem 2.5 (weighted prime-pair block criterion).** Let \(\mu_j>0\) satisfy
+\[
+cH\le\mu_j\le CH.
+\tag{2.11}
+\]
+If
+\[
+\sum_{j=0}^{N-1}|Y_j(H)-\mu_j|^2
+\ll NHX L(X),
+\qquad L(X)=o(\log X),
+\tag{2.12}
+\]
+then every centre in the block contains a prime in the required interval.
+
+The proof is identical: at a failed centre \(Y_j=0\), and
+\(H\asymp X^2\). Proposition 2.3 allows \(Y_j\) to be replaced by \(\Psi_j\)
+only after the prime-power remainder and the corresponding change of centring
+are retained explicitly.
+
+## A double-von-Mangoldt source
+
+For analytic decomposition it is convenient to retain von Mangoldt weights on
+both prime variables:
+\[
+T_j(H)=\sum_{2\le m\le H}\Lambda(m)\Lambda(P_j+m).
+\tag{2.13}
 \]
 
-The possible exponents satisfy \(k\ll X\). Summing \(X/k\) gives \(O(X\log X)\). \(\square\)
-
-## A second moment that forces every centre
-
-**Theorem 2.4 (block-variance criterion).** Suppose that for some function \(L(X)\),
-
+**Lemma 2.6 (failure contamination for the double source).** If the centre
+\(P_j\) has no prime in \([P_j+2,P_j+H]\), then
 \[
-\sum_{j=0}^{N-1}|E_j(H)|^2
-\le C NHX L(X),
-\tag{2.7}
+T_j(H)=O(X(\log X)^2).
+\tag{2.14}
 \]
 
-where \(C\) is fixed and \(L(X)=o(\log X)\). Then, for all sufficiently large \(X\), every centre \(P_j\) in the block has a prime in \([P_j+2,P_j+H]\). Consequently, the corresponding Fortunate numbers are prime.
+**Proof.** Every nonzero term must have \(P_j+m=r^k\) with \(k\ge2\).
+For each exponent \(k\), the interval contains at most one such power.
+Moreover \(\Lambda(P_j+m)\ll X/k\) and \(\Lambda(m)\le\log H\ll\log X\).
+Summing over \(k\ll X\) gives the result. \(\square\)
 
-**Proof.** Let \(B_X\) be the number of centres with no prime in the interval. At such a centre, Lemma 2.3 gives
-
+The Hardy--Littlewood model predicts the main term
 \[
-\Psi_j(H)=o(H),
+\nu_j(H)=\mathfrak S(P_j)H\asymp H\log X.
+\tag{2.15}
+\]
+Thus a failed centre is separated from the predicted mean by
+\(\asymp H\log X\), despite the residual prime-power contamination.
+
+**Theorem 2.7 (double-von-Mangoldt block criterion).** Let deterministic
+baselines \(\nu_j\) satisfy
+\[
+cH\log X\le\nu_j\le CH\log X.
+\]
+If
+\[
+\sum_{j<N}|T_j(H)-\nu_j|^2
+\ll NHX(\log X)^2L(X),
+\qquad L(X)=o(\log X),
+\tag{2.16}
+\]
+then every centre in the block succeeds.
+
+**Proof.** At a failed centre Lemma 2.6 gives
+\(|T_j-\nu_j|\gg H\log X\). Hence
+\[
+B_XH^2(\log X)^2
+\ll NHX(\log X)^2L(X),
+\]
+and \(B_X\ll L(X)/\log X=o(1)\). \(\square\)
+
+This source is particularly useful because it is an exact additive correlation
+of two von Mangoldt sequences; no division by \(\log m\) or replacement of a
+prime indicator is required.
+
+## Conjectural Hardy--Littlewood calibration
+
+For the even primorial difference \(P_j\), define
+\[
+\mathfrak S(P_j)
+=2C_2\prod_{\substack{p\mid P_j\\p>2}}\frac{p-1}{p-2},
+\qquad
+C_2=\prod_{p>2}\frac{p(p-2)}{(p-1)^2}.
+\tag{2.17}
+\]
+Mertens' product theorem gives
+\[
+\mathfrak S(P_j)\sim e^\gamma\log\ell_j.
+\tag{2.18}
+\]
+The standard Hardy--Littlewood prime-pair model predicts
+\[
+\lambda_j(H)=
+\mathfrak S(P_j)
+\int_{\ell_j}^{H}
+\frac{dt}{\log t\,\log(P_j+t)},
+\tag{2.19}
+\]
+and
+\[
+\mu_j(H)=
+\mathfrak S(P_j)
+\int_{\ell_j}^{H}\frac{dt}{\log t}.
+\tag{2.20}
+\]
+Uniformly in a dyadic block, \(\lambda_j(H)\asymp X\) and
+\(\mu_j(H)\asymp H\). Moreover
+\[
+\frac{\mu_j(H)}H\longrightarrow\frac{e^\gamma}{2}
+\tag{2.21}
+\]
+in the idealised square-boundary scaling. The convergence is logarithmically
+slow, so finite data at modest primes need not visibly separate \(H\) from
+\(\mu_j(H)\).
+
+Equations (2.19)--(2.21) are conjectural calibrations, not proved asymptotics.
+Theorems 2.4--2.5 require only baselines of the displayed sizes.
+
+# Exact Fourier source identity
+
+Let
+\[
+a_H(m)=\Lambda(m)\mathbf1_{[2,H]}(m),
+\]
+and let \(b_X(n)=\Lambda(n)\) on the finite interval
+\([P_0+2,P_{N-1}+H]\), zero elsewhere. Put
+\[
+A_H(\theta)=\sum_m a_H(m)e(-m\theta),
+\qquad
+B_X(\theta)=\sum_n b_X(n)e(n\theta),
+\qquad
+G_X(\theta)=A_H(\theta)B_X(\theta).
+\tag{2.22}
 \]
 
-so \(|E_j(H)|\ge H/2\) for sufficiently large \(X\). Therefore
-
+**Theorem 2.8 (corrected source-to-walk identity).** One has exactly
 \[
-B_X\frac{H^2}{4}
-\le
-\sum_j|E_j(H)|^2
-\le C NHX L(X).
+\boxed{
+T_j(H)=\int_0^1G_X(\theta)e(-P_j\theta)\,d\theta.
+}
+\tag{2.23}
+\]
+If
+\[
+F_X(\theta)=\sum_{j<N}e(P_j\theta),
+\qquad
+V_X(\theta)=\sum_{j<N}\nu_j e(P_j\theta),
+\]
+then
+\[
+\boxed{
+\begin{aligned}
+\sum_{j<N}|T_j-\nu_j|^2
+={}&\int_0^1\!\int_0^1
+G_X(\alpha)\overline{G_X(\beta)}
+F_X(\beta-\alpha)\,d\alpha\,d\beta\\
+&-2\Re\int_0^1G_X(\alpha)V_X(-\alpha)\,d\alpha
++\sum_{j<N}\nu_j^2.
+\end{aligned}}
+\tag{2.24}
 \]
 
-Using \(N\asymp X/\log X\) and \(H=\eta X^2\),
+**Proof.** Expanding (2.23), orthogonality forces
+\(n-m-P_j=0\), leaving the defining correlation \(T_j\). Squaring, summing
+over \(j\), and interchanging the finite sums and integrals gives the first
+term in (2.24); the cross term and baseline square are immediate. \(\square\)
 
-\[
-B_X\ll \frac{L(X)}{\log X}=o(1).
-\]
-
-Since \(B_X\) is an integer, it is eventually zero. The interval length is below \(\ell_{j+1}^2\), so Proposition 2.1 completes the implication. \(\square\)
-
-The scale on the right of (2.7) is the natural short-interval variance scale suggested by the Selberg integral and by probabilistic models of \(\psi(x+H)-\psi(x)\) [@goldston-montgomery1987; @montgomery-soundararajan2004]. The novelty of Theorem 2.4 is not the variance heuristic but the quantifier: an \(o(\log X)\) loss is already strong enough to pass from a block mean square to every one of the \(N\asymp X/\log X\) primorial centres.
+The first exact harmonic object attached to the corrected source is therefore
+the single-walk polynomial \(F_X\), with source
+\(G_X=A_HB_X\) containing both von Mangoldt factors. Any reciprocal or
+divisor-frame transference must preserve both factors and their common offset
+variable, or prove a separate signed inequality that removes one of them. The
+unweighted pair-sum frame below contains no such source factor and is retained
+as a model problem rather than a proved reduction of (2.16).
 
 # The reciprocal pair-sum frame
 
-The direct variance in Theorem 2.4 is the cleanest sufficient condition. A complementary harmonic architecture isolates a smaller reciprocal sampling problem and connects it to the cumulative-product geometry of Paper I.
+The corrected criteria in Theorems 2.4--2.7 are the direct Fortune implications. The following reciprocal pair-sum frame is an independent structural model inherited from the earlier programme; no transference from the corrected two-prime source is presently proved.
 
 Let
 
@@ -279,14 +481,14 @@ The associated pair-space Frobenius energy is
 \tag{3.5}
 \]
 
-The preceding pair-lift and principal-cancellation analysis supplies the following architectural input:
+The earlier uncorrected architecture proposed the following local target:
 
 \[
 \mathfrak F_X\ll MX^{o(1)}.
 \tag{3.6}
 \]
 
-Within that architecture, (3.6) is a sufficient local estimate. This manuscript does not reprove the source-to-frame transference step and does not assert that (3.6) is equivalent to Theorem 2.4. Theorem 2.4 is an unconditional implication from a direct von Mangoldt variance bound; (3.6) is the separate harmonic target whose exact internal structure is analysed below.
+Equation (3.6) is not presently derived from Theorems 2.4--2.7. After candidate-collapse correction, the exact source identity (2.24) contains the additional prime-offset factor \(A_H\). Consequently (3.6) is treated only as a deterministic model estimate whose exact internal structure is analysed below. Proving it, including for the increasing order, would not by itself prove Fortune without a new signed two-prime transference theorem.
 
 ## Exact harmonic aggregation
 
@@ -1172,66 +1374,79 @@ Selected checks are shown below.
 
 The supplementary archive contains the source manuscript, validators, phase reports, data summaries, a manifest, and checksums. The numerical panels are descriptive and are not used to establish any theorem.
 
-# The remaining theorem boundary
+# The corrected theorem boundary
 
-The results above progressively remove non-load-bearing formulations.
+The correction changes the order of the integer programme.
 
-- The direct problem does not require a prime offset; any shifted prime below the square threshold suffices.
-- A natural block second moment already proves every centre, provided its loss is \(o(\log X)\).
-- In the reciprocal frame, the lower side of the centred residual is automatic.
-- A weighted aggregate over harmonics is sufficient; uniformity in every harmonic is stronger than necessary.
-- The pair-sum kernel has exactly the expected Lebesgue \(L^2\)-mass.
-- High Möbius degree is negligible.
-- Positive density replacement is invalid because of resonant composites.
-- The CRT character diagonal is not load-bearing, and the unequal-character sector reconstructs the original phase.
-- Primorial-index averaging is coherent at the critical zero scale and unstable in conductor.
-- Long harmonic averaging and finite divisor certificates do not survive exact Fourier accounting.
+- Below the square threshold, every prime output has a prime offset.
+- The natural existence variable is \(Z_j(H)\), with conjectural mean of order
+  \(X\), not a generic shifted-prime count.
+- The weighted detector has conjectural main term \(\mu_j(H)\), asymptotic to
+  \((e^\gamma/2)H\), rather than \(H\).
+- A failed centre still contributes quadratically, so the random-scale block
+  criteria (2.10) and (2.12) prove every centre with an \(o(\log X)\) loss.
+- The exact Fourier source is \(G_X=A_HB_X\), and its first geometric kernel is
+  the single-walk polynomial \(F_X\).
+- The reciprocal pair-sum frame omits \(A_H\). Its internal identities remain
+  correct, but its connection to Fortune is unproved and must be reconstructed.
 
-For the reciprocal architecture, the clean open target is the weighted one-sided estimate
-
+The primary target is therefore
 \[
 \boxed{
-\sum_{a\ge1}\frac1{m_a}
-\sum_{\substack{q,r\in\mathcal Q_X\\q\ne r}}
- p_{q,a}p_{r,a}
-\left(
-\left|H_2\!\left(a\left(\frac1q-\frac1r\right)\right)\right|^2-M
-\right)
-\ll MX^{o(1)}.
+\sum_{j<N}|Z_j(H)-\lambda_j(H)|^2
+\ll NX L(X),
+\qquad L(X)=o(\log X),
 }
 \tag{12.1}
 \]
-
-The prime support in (12.1) may be replaced by the growing-degree cumulative Möbius detector of Theorem 5.2, but the retained degrees must remain signed and coupled. The theorem is a deterministic transference statement: the reciprocal prime-pair sampling measure must not place excessive mass on the high-value sets of a lacunary pair-sum polynomial generated by one consecutive-prime prefix-product walk.
-
-For the direct architecture, the open target is
-
+with \(\lambda_j\) given conjecturally by (2.19), or the weighted analogue
 \[
 \boxed{
-\sum_{j<N}
-\left|
-\sum_{2\le m\le\eta X^2}
-(\Lambda(P_j+m)-1)
-\right|^2
+\sum_{j<N}|Y_j(H)-\mu_j(H)|^2
 \ll NHX L(X),
 \qquad L(X)=o(\log X).
 }
 \tag{12.2}
 \]
 
-A proof of (12.2) would establish Fortune's conjecture for all sufficiently large indices. A proof of (12.1) would close the reciprocal-frame route to the corresponding principal-cancelled Frobenius estimate. The exact equivalence of these two open targets is not asserted; they are complementary boundaries reached from the same primorial geometry.
+A third, analytically natural target uses the double-von-Mangoldt source:
+\[
+\boxed{
+\sum_{j<N}|T_j(H)-\nu_j(H)|^2
+\ll NHX(\log X)^2L(X),
+\qquad L(X)=o(\log X).
+}
+\tag{12.3}
+\]
+Here \(\nu_j(H)=\mathfrak S(P_j)H\) conjecturally.
+
+The next theorem obligation is an exact signed decomposition of (2.24) in
+which both prime factors remain coupled. Only after such a decomposition is
+proved can one determine whether the existing reciprocal frame, the
+single-walk energy isolated in Paper III, or a new kernel is the correct
+analytic target.
+
+The former weighted one-sided pair-sum estimate remains a well-defined model
+problem, but it is no longer presented as the principal Fortune boundary.
 
 # Conclusion
 
-Consecutive-prime partial products carry enough exact structure to support a detailed analytic reduction, but not enough currently known cancellation to prove Fortune's conjecture. The present sequel supplies three kinds of result.
+The exact collision, moment, Möbius, character and no-go results of the
+reciprocal-frame analysis survive. The arithmetic interface has nevertheless
+changed materially. Candidate collapse means that prime detection at a
+primorial centre is a prime-pair problem at the square-root sieve boundary.
+The previous centring at \(H\) and the conditional first moment built on it
+cannot be retained as the conjecturally correct model.
 
-First, it gives positive reductions: a block second moment that forces every centre; an exact harmonic aggregate; an exact one-sided residual; an exact pair-sum fourth moment; and a growing-degree Möbius truncation.
+The corrected route is now explicit: calibrate the prime-pair main term; prove
+the block-variance implication around that main term; derive a signed
+source-to-frame identity retaining both prime factors; and only then
+attack the resulting deterministic energy. Theorem 2.8 completes the first
+exact source step and shows why the single-walk kernel precedes the pair-sum
+kernel.
 
-Second, it gives exact obstruction theorems: semiprime resonance defeats positive density replacement; the unequal-character CRT sector reconstructs the additive kernel; the primorial-index average is coherent at critical zero spacing and migrates in conductor; Fourier-scale conservation defeats an artificial long harmonic average; and power-scale large values do not imply divisor-level phase precision.
-
-Third, it identifies the remaining mathematics. The obstacle is not a missing algebraic reformulation. It is a signed arithmetic transference theorem for the consecutive-prime prefix-product walk, or a direct sparse-centre Selberg-integral theorem at interval length \((\log P)^2\). Neither is supplied by current generic sieve, large-sieve, Kloosterman, factorial-sum, or pair-correlation machinery.
-
-No implication beyond the stated conditional criteria is claimed. The value of the analysis is the exact boundary: future progress must create genuinely new cancellation rather than another equivalent decomposition of the same reciprocal kernel.
+No prime-pair asymptotic, source-to-reciprocal transference theorem, or proof of
+Fortune's conjecture is claimed.
 
 # AI-assistance disclosure
 
