@@ -1,0 +1,173 @@
+name: Build corrected Papers II and III final release v2
+
+on:
+  pull_request:
+    branches: [gpt56/fortune-mainterm-correction-programme-20260727]
+    paths:
+      - .github/workflows/build-corrected-papers2-3-final-v2.yml
+      - publications/fortune-papers-ii-vi-20260724/papers2-3-final-build-v2-trigger.md
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    env:
+      DEBIAN_FRONTEND: noninteractive
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: gpt56/fortune-mainterm-correction-programme-20260727
+          fetch-depth: 0
+
+      - name: Install toolchain
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends pandoc texlive-xetex \
+            texlive-latex-extra texlive-fonts-recommended texlive-science lmodern \
+            poppler-utils qpdf libreoffice-writer libreoffice-math zip unzip
+          python3 -m pip install --break-system-packages python-docx pypdf pillow
+
+      - name: Validate final review and source gates
+        run: |
+          set -euo pipefail
+          R=publications/fortune-papers-ii-vi-20260724
+          for d in paper2_revised paper3_pair_sum; do
+            test -s "$R/$d/manuscript.md"
+            test -s "$R/$d/CLAIM_STATUS.md"
+            test -s "$R/$d/INDEPENDENT_REVIEW_DISPOSITION_FINAL.md"
+            grep -Fq 'INTERNAL TECHNICAL PASS' "$R/$d/INDEPENDENT_REVIEW_DISPOSITION_FINAL.md"
+            ! grep -nE 'TODO|TBD|PLACEHOLDER|REPLACE_ME' "$R/$d/manuscript.md"
+          done
+          sha256sum "$R/paper2_revised/manuscript.md" "$R/paper3_pair_sum/manuscript.md" | tee /tmp/source-sha256.txt
+
+      - name: Build release files
+        run: |
+          set -euo pipefail
+          R="$GITHUB_WORKSPACE/publications/fortune-papers-ii-vi-20260724"
+          O="$RUNNER_TEMP/fortune-papers-ii-iii-corrected-final"
+          mkdir -p "$O/paper2" "$O/paper3"
+
+          build() {
+            SRC="$1"; DEST="$2"; STEM="$3"; TITLE="$4"; BIB="$5"
+            ARGS=()
+            if test -n "$BIB"; then ARGS=(--bibliography="$BIB" --citeproc); fi
+            pandoc -f markdown+tex_math_single_backslash "$SRC/manuscript.md" \
+              --resource-path="$SRC" "${ARGS[@]}" --pdf-engine=xelatex \
+              --metadata title="$TITLE" --metadata author='Edward Stewart Anthony Bozzard' \
+              -V papersize=a4 -V geometry:margin=25mm -V colorlinks=true -V fontsize=10pt \
+              -o "$DEST/$STEM.pdf"
+            MEDIA="$RUNNER_TEMP/$STEM-media"
+            pandoc -f markdown+tex_math_single_backslash "$SRC/manuscript.md" \
+              --resource-path="$SRC" "${ARGS[@]}" -t json \
+            | python3 scripts/pandoc_all_math_images.py "$MEDIA" \
+            | pandoc -f json --metadata title="$TITLE" \
+                --metadata author='Edward Stewart Anthony Bozzard' -o "$DEST/$STEM.docx"
+            python3 scripts/set_docx_a4.py "$DEST/$STEM.docx"
+            test ! -f scripts/centre_docx_equation_images.py || \
+              python3 scripts/centre_docx_equation_images.py "$DEST/$STEM.docx"
+            pandoc -f markdown+tex_math_single_backslash "$SRC/manuscript.md" \
+              --resource-path="$SRC" "${ARGS[@]}" -s -t latex \
+              --metadata title="$TITLE" --metadata author='Edward Stewart Anthony Bozzard' \
+              -o "$DEST/$STEM.tex"
+            cp "$SRC/manuscript.md" "$SRC/CLAIM_STATUS.md" \
+              "$SRC/INDEPENDENT_REVIEW_DISPOSITION_FINAL.md" "$DEST/"
+            test ! -f "$SRC/CORRECTION_NOTICE_20260727.md" || cp "$SRC/CORRECTION_NOTICE_20260727.md" "$DEST/"
+            test -z "$BIB" || cp "$BIB" "$DEST/references.bib"
+          }
+
+          build "$R/paper2_revised" "$O/paper2" fortune-paper-ii-corrected \
+            'Prime Detection at Primorial Centres' "$R/paper2_revised/references.bib"
+          build "$R/paper3_pair_sum" "$O/paper3" fortune-paper-iii-corrected \
+            'Pair-Sum Rigidity, Exceptional Sets, and Conditional Prime Detection at Primorial Centres' ''
+          echo "$O" > /tmp/release-path
+
+      - name: Structural and rendering QA
+        run: |
+          set -euo pipefail
+          O=$(cat /tmp/release-path)
+          python3 - "$O" <<'PY'
+          from pathlib import Path
+          from pypdf import PdfReader
+          from docx import Document
+          import subprocess, sys, zipfile, json
+          root=Path(sys.argv[1]); report={}
+          for name in ('paper2','paper3'):
+              d=root/name; pdf=next(d.glob('*.pdf')); docx=next(d.glob('*.docx'))
+              subprocess.run(['qpdf','--check',str(pdf)],check=True)
+              pages=PdfReader(str(pdf)).pages
+              if not 8 <= len(pages) <= 80: raise SystemExit(f'{name} PDF pages {len(pages)}')
+              for p in pages:
+                  if abs(float(p.mediabox.width)-595.28)>3 or abs(float(p.mediabox.height)-841.89)>3:
+                      raise SystemExit(f'{name} PDF not A4')
+              subprocess.run(['pdftotext','-layout',str(pdf),str(d/'PDF_EXTRACTED.txt')],check=True)
+              text=(d/'PDF_EXTRACTED.txt').read_text(errors='replace').lower()
+              required={'paper2':('candidate collapse','source-to-walk identity'),
+                        'paper3':('difference-multiplicity dichotomy','corrected covariance problem')}[name]
+              if len(text)<5000 or any(x not in text for x in required): raise SystemExit(f'{name} PDF text gate')
+              document=Document(str(docx))
+              if len([p for p in document.paragraphs if p.style and p.style.name.startswith('Heading')])<5:
+                  raise SystemExit(f'{name} DOCX headings')
+              for section in document.sections:
+                  if abs(section.page_width.inches-8.2677)>0.03 or abs(section.page_height.inches-11.6929)>0.03:
+                      raise SystemExit(f'{name} DOCX not A4')
+              with zipfile.ZipFile(docx) as z:
+                  xml=z.read('word/document.xml').decode('utf-8')
+              drawings=xml.count('<w:drawing'); alts=xml.count('Equation:')
+              if drawings<40 or drawings!=alts or '<m:oMath' in xml: raise SystemExit(f'{name} DOCX math package')
+              report[name]={'pdf_pages':len(pages),'docx_drawings':drawings}
+          (root/'STRUCTURE_QA.json').write_text(json.dumps(report,indent=2))
+          print(json.dumps(report,indent=2))
+          PY
+          for n in paper2 paper3; do
+            D="$O/$n"; DOCX=$(find "$D" -maxdepth 1 -name '*.docx' -print -quit)
+            mkdir -p "$D/docx-render" "$RUNNER_TEMP/lo-$n"
+            libreoffice -env:UserInstallation="file://$RUNNER_TEMP/lo-$n" --headless \
+              --nologo --nodefault --nolockcheck --nofirststartwizard \
+              --convert-to pdf --outdir "$D/docx-render" "$DOCX"
+            RP=$(find "$D/docx-render" -name '*.pdf' -print -quit)
+            qpdf --check "$RP"
+            pdftotext -layout "$RP" "$D/DOCX_RENDER_EXTRACTED.txt"
+            pdftocairo -png -r 120 "$RP" "$D/docx-render/page"
+          done
+
+      - name: Package and checksum
+        run: |
+          set -euo pipefail
+          O=$(cat /tmp/release-path)
+          cp /tmp/source-sha256.txt "$O/SOURCE_SHA256.txt"
+          cp frontier/integer_mainterm_correction/MAINTERM_CORRECTION_AND_PROGRAMME_STATUS_20260727.md "$O/" || true
+          cp frontier/integer_mainterm_correction/RECENTERED_ONE_SIDED_SOURCE_IDENTITY_20260727.md "$O/" || true
+          cp frontier/integer_mainterm_correction/prime_pair_calibration.py "$O/" || true
+          cp frontier/integer_mainterm_correction/prime_pair_calibration_results.csv "$O/" || true
+          printf 'Repository commit: %s\n' "$GITHUB_SHA" > "$O/BUILD_PROVENANCE.txt"
+          (cd "$O" && find . -type f ! -name SHA256SUMS -print0 | sort -z | xargs -0 sha256sum > SHA256SUMS && sha256sum -c SHA256SUMS)
+          (cd "$O" && zip -qr "$RUNNER_TEMP/fortune-papers-ii-iii-corrected-final.zip" .)
+          sha256sum "$RUNNER_TEMP/fortune-papers-ii-iii-corrected-final.zip" > "$O/ARCHIVE_SHA256.txt"
+
+      - name: Upload final corrected release
+        uses: actions/upload-artifact@v4
+        with:
+          name: fortune-papers-ii-iii-corrected-final-v2
+          path: |
+            ${{ runner.temp }}/fortune-papers-ii-iii-corrected-final
+            ${{ runner.temp }}/fortune-papers-ii-iii-corrected-final.zip
+          retention-days: 90
+
+      - name: Record final status
+        if: always()
+        env:
+          RUN_STATUS: ${{ job.status }}
+          RUN_ID: ${{ github.run_id }}
+        run: |
+          git fetch origin gpt56/fortune-mainterm-correction-programme-20260727
+          git reset --hard origin/gpt56/fortune-mainterm-correction-programme-20260727
+          F=publications/fortune-papers-ii-vi-20260724/PAPERS_II_III_CORRECTED_FINAL_BUILD_STATUS.md
+          printf '# Corrected Papers II--III final build\n\n- run ID: `%s`\n- conclusion: **%s**\n- URL: https://github.com/%s/actions/runs/%s\n' "$RUN_ID" "$RUN_STATUS" "$GITHUB_REPOSITORY" "$RUN_ID" > "$F"
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add "$F"; git commit -m "Record corrected Papers II-III v2 build $RUN_ID: $RUN_STATUS" || exit 0
+          git push origin HEAD:gpt56/fortune-mainterm-correction-programme-20260727
