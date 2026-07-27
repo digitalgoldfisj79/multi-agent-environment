@@ -1,10 +1,19 @@
 # Papers V--VI automated release status
 
 - workflow: Build replacement Papers V and VI
-- run ID: `30257892981`
+- run ID: `30257936063`
 - attempt: `1`
-- source commit: `f7734d111caf2fdb256f9d01adad1b5760b9a765`
-- conclusion: **cancelled**
-- run URL: https://github.com/digitalgoldfisj79/multi-agent-environment/actions/runs/30257892981
+- source commit: `a45d917a121beb49df3445447408a220ee5002c4`
+- conclusion: **failure**
+- run URL: https://github.com/digitalgoldfisj79/multi-agent-environment/actions/runs/30257936063
 
 A success conclusion means the independent reconstructions, frozen-source checks, canonical PDF/LaTeX/DOCX builds, targeted equation conversion, semantic extraction, PDF preflight, independent LibreOffice render, equation/accessibility audit, checksums and artefact upload all passed.
+
+## Publication build log tail
+
+```text
+=== Building fortune-paper-v from /home/runner/work/multi-agent-environment/multi-agent-environment/publications/fortune-papers-ii-vi-20260724/paper5_function_fields_replacement ===
+Converted 4 targeted display equations to PNG images.
+Centred 4 image-only paragraphs in /home/runner/work/_temp/fortune-papers5-6-release/paper5/fortune-paper-v.docx
+=== Building fortune-paper-vi from /home/runner/work/multi-agent-environment/multi-agent-environment/publications/fortune-papers-ii-vi-20260724/paper6_secondary_quotients_replacement ===
+```
