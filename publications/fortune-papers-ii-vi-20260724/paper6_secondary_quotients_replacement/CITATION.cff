@@ -1,0 +1,13 @@
+cff-version: 1.2.0
+message: "Please cite this preprint and its exact release version."
+title: "Secondary Traces and Kummer Quotients for the Function-Field Fortune Crown"
+type: article
+authors:
+  - family-names: Bozzard
+    given-names: Edward Stewart Anthony
+    orcid: "https://orcid.org/0009-0002-4052-0994"
+version: "1.0.0-internal"
+date-released: "2026-07-27"
+license: CC-BY-4.0
+repository-code: "https://github.com/digitalgoldfisj79/multi-agent-environment"
+abstract: "Cyclotomic tangents, Hattori--Stallings divided traces, Artin--Schreier descent, Kummer forms and exact quotient point counts at the terminal function-field d=1 Fortune frontier. The crown remains open."
