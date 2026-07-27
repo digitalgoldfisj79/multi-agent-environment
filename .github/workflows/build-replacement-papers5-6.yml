@@ -49,10 +49,16 @@ jobs:
             test -s "$P/references.bib"
             test -s "$P/CLAIM_STATUS.md"
             test -s "$P/SOURCE_FIDELITY_MATRIX.md"
-            ! grep -nE 'TODO|TBD|PLACEHOLDER|REPLACE_ME|\\x00' "$P/manuscript.md" "$P/CLAIM_STATUS.md" "$P/SOURCE_FIDELITY_MATRIX.md"
+            test -s "$P/CITATION.cff"
+            test -s "$P/ZENODO_METADATA.json"
+            test -s "$P/RELEASE_CHECKLIST.md"
+            test -s "$P/TYPESETTING_NORMALISATIONS.md"
+            test -s "$P/INDEPENDENT_REVIEW_RAW_FINAL.md"
+            test -s "$P/INDEPENDENT_REVIEW_DISPOSITION_FINAL.md"
+            ! grep -nE 'TODO|TBD|PLACEHOLDER|REPLACE_ME|\x00' "$P/manuscript.md" "$P/CLAIM_STATUS.md" "$P/SOURCE_FIDELITY_MATRIX.md"
             grep -Fq 'The function-field' "$P/manuscript.md"
             wc -l -c "$P/manuscript.md"
-            sha256sum "$P/manuscript.md"
+            sha256sum "$P/manuscript.md" | tee "$P/MANUSCRIPT_SHA256.txt"
           done
 
       - name: Build publication artefacts
@@ -73,12 +79,15 @@ jobs:
             cp "$SRC/SOURCE_FIDELITY_MATRIX.md" "$DEST/"
             cp "$SRC/SOURCE_MANIFEST.tsv" "$DEST/"
             cp "$SRC/INDEPENDENT_RECONSTRUCTION.md" "$DEST/"
+            cp "$SRC/CITATION.cff" "$DEST/"
+            cp "$SRC/ZENODO_METADATA.json" "$DEST/"
+            cp "$SRC/RELEASE_CHECKLIST.md" "$DEST/"
+            cp "$SRC/TYPESETTING_NORMALISATIONS.md" "$DEST/"
+            cp "$SRC/MANUSCRIPT_SHA256.txt" "$DEST/"
             cp "$SRC"/*independent_reconstruction*.py "$DEST/" 2>/dev/null || true
             cp "$SRC"/*independent_reconstruction*_results.json "$DEST/" 2>/dev/null || true
             cp "$SRC"/*singularity* "$DEST/" 2>/dev/null || true
-            cp "$SRC"/INDEPENDENT_REVIEW_PROMPT.md "$DEST/" 2>/dev/null || true
-            cp "$SRC"/INDEPENDENT_REVIEW_RAW.md "$DEST/" 2>/dev/null || true
-            cp "$SRC"/INDEPENDENT_REVIEW_DISPOSITION.md "$DEST/" 2>/dev/null || true
+            cp "$SRC"/INDEPENDENT_REVIEW*.md "$DEST/" 2>/dev/null || true
           }
           build_one "$ROOT/paper5_function_fields_replacement" "$OUT/paper5" "fortune-paper-v"
           build_one "$ROOT/paper6_secondary_quotients_replacement" "$OUT/paper6" "fortune-paper-vi"
@@ -104,9 +113,11 @@ jobs:
             libreoffice --headless --convert-to pdf --outdir "$D/docx-render" "$DOCX" >/tmp/libreoffice.log 2>&1
             RENDERED=$(find "$D/docx-render" -name '*.pdf' | head -1)
             test -s "$RENDERED"
+            qpdf --check "$RENDERED"
             pdfinfo "$RENDERED" | tee "$D/DOCX_RENDER_INFO.txt"
             pdftotext "$RENDERED" "$D/DOCX_RENDER_EXTRACTED.txt"
             grep -Fq 'function-field' "$D/DOCX_RENDER_EXTRACTED.txt"
+            grep -Fq 'crown remains open' "$D/DOCX_RENDER_EXTRACTED.txt"
           done
 
       - name: DOCX structure and accessibility audit
@@ -129,8 +140,7 @@ jobs:
               if not headings: findings.append('no headings')
               if empty_headings: findings.append(f'empty headings: {empty_headings}')
               if not doc.core_properties.title: findings.append('missing title metadata')
-              tables=len(doc.tables)
-              report={'file':docx.name,'paragraphs':len(doc.paragraphs),'headings':headings,'tables':tables,'findings':findings}
+              report={'file':docx.name,'paragraphs':len(doc.paragraphs),'headings':headings,'tables':len(doc.tables),'findings':findings}
               (d/'DOCX_ACCESSIBILITY_AUDIT.json').write_text(json.dumps(report,indent=2))
               if findings: raise SystemExit(report)
           PY
