@@ -1,0 +1,16 @@
+{
+  "status": "PASS",
+  "scope": "exact h-shift second-moment identity and positive-sieve scale arithmetic",
+  "exact_cases": [
+    {"values":[2,3,5,7],"baseline":11,"direct_variance":36,"diagonal":87,"off_diagonal":202,"expanded_variance":36,"by_shift":{"-3":14,"-2":31,"-1":56,"1":56,"2":31,"3":14}},
+    {"values":[0,4,0,9,1],"baseline":8,"direct_variance":36,"diagonal":98,"off_diagonal":98,"expanded_variance":36,"by_shift":{"-4":0,"-3":4,"-2":36,"-1":9,"1":9,"2":36,"3":4,"4":0}},
+    {"values":[6,1,8,2,3,5],"baseline":17,"direct_variance":64,"diagonal":139,"off_diagonal":486,"expanded_variance":64,"by_shift":{"-5":30,"-4":23,"-3":55,"-2":84,"-1":51,"1":51,"2":84,"3":55,"4":23,"5":30}}
+  ],
+  "scale_cases": [
+    {"X":101,"H":8160.800000000001,"expected_pair_count_scale":80.80000000000001,"positive_sieve_pair_count_scale":1768.274516390207,"squared_prime_weight_scale":217274.54066407014,"desired_diagonal_scale":17555782.88565687,"positive_sieve_diagonal_scale":384201033.316663,"loss_factor":21.884585598888698,"X_over_logX":21.884585598888698},
+    {"X":503,"H":202407.2,"expected_pair_count_scale":402.40000000000003,"positive_sieve_pair_count_scale":32538.263165591998,"squared_prime_weight_scale":9790371.00395698,"desired_diagonal_scale":3939645291.9922886,"positive_sieve_diagonal_scale":318561668215.5333,"loss_factor":80.86049494431411,"X_over_logX":80.86049494431411},
+    {"X":1009,"H":814464.8,"expected_pair_count_scale":807.2,"positive_sieve_pair_count_scale":117753.12378828664,"squared_prime_weight_scale":48705958.829575844,"desired_diagonal_scale":39315449967.23363,"positive_sieve_diagonal_scale":5735278799286.237,"loss_factor":145.8784982510984,"X_over_logX":145.87849825109842},
+    {"X":10007,"H":80112039.2,"expected_pair_count_scale":8005.6,"positive_sieve_pair_count_scale":8697393.355651947,"squared_prime_weight_scale":8496208236.038009,"desired_diagonal_scale":68017244654425.88,"positive_sieve_diagonal_scale":7.389486506035232e+16,"loss_factor":1086.4136798805769,"X_over_logX":1086.413679880577}
+  ],
+  "boundary": "The scale calculation is a method obstruction for positive sieve majorants, not a lower bound for the true diagonal or a proof of the correlation theorem."
+}

@@ -1,0 +1,34 @@
+{
+  "status": "PASS",
+  "scope": "exact complete-character identity and finite prime-modulus frame calibration",
+  "parameters": {
+    "eta": 0.8,
+    "targets": [11, 23, 53, 131, 257, 503]
+  },
+  "direct_character_check": {
+    "X": 5,
+    "N": 2,
+    "H": 20,
+    "q_shell_count": 4,
+    "direct_character_energy": 18.000000000000004,
+    "gram_energy": 18.0,
+    "identity_error": 3.552713678800501e-15,
+    "imaginary_residue": 0.0
+  },
+  "summary": {
+    "minimum_eigenvalue": 0.984375,
+    "maximum_eigenvalue": 1.015625,
+    "maximum_operator_norm": 0.015625,
+    "maximum_row_sum": 0.015625,
+    "largest_X": 503
+  },
+  "rows": [
+    {"X":11,"N":4,"H":96,"q_shell_count":19,"minimum_eigenvalue":1.0,"maximum_eigenvalue":1.0,"operator_norm_D_minus_I":0.0,"maximum_off_diagonal_row_sum":0.0,"total_off_diagonal_mass":0.0,"nonzero_off_diagonal_pairs":0,"maximum_shell_divisor_count":0,"theorem_row_bound":0.21385718804411946,"gap_divisor_histogram":{}},
+    {"X":23,"N":6,"H":423,"q_shell_count":64,"minimum_eigenvalue":0.984375,"maximum_eigenvalue":1.015625,"operator_norm_D_minus_I":0.015625,"maximum_off_diagonal_row_sum":0.015625,"total_off_diagonal_mass":0.03125,"nonzero_off_diagonal_pairs":1,"maximum_shell_divisor_count":1,"theorem_row_bound":0.1483847530355986,"gap_divisor_histogram":{"2":1}},
+    {"X":53,"N":12,"H":2247,"q_shell_count":276,"minimum_eigenvalue":0.9929804033640784,"maximum_eigenvalue":1.0093907883264195,"operator_norm_D_minus_I":0.009390788326419486,"maximum_off_diagonal_row_sum":0.014492753623188406,"total_off_diagonal_mass":0.07246376811594202,"nonzero_off_diagonal_pairs":10,"maximum_shell_divisor_count":1,"theorem_row_bound":0.1445016792453779,"gap_divisor_histogram":{"2":1,"3":3,"5":1,"6":2,"7":3}},
+    {"X":131,"N":24,"H":13728,"q_shell_count":1376,"minimum_eigenvalue":0.9981050302195544,"maximum_eigenvalue":1.0019310001133777,"operator_norm_D_minus_I":0.0019310001133776566,"maximum_off_diagonal_row_sum":0.003633720930232558,"total_off_diagonal_mass":0.02616279069767442,"nonzero_off_diagonal_pairs":18,"maximum_shell_divisor_count":1,"theorem_row_bound":0.11723351581592947,"gap_divisor_histogram":{"3":3,"4":3,"5":3,"6":2,"7":1,"9":1,"12":2,"15":2,"22":1}},
+    {"X":257,"N":43,"H":52839,"q_shell_count":4689,"minimum_eigenvalue":0.9992733552782455,"maximum_eigenvalue":1.0009492149703445,"operator_norm_D_minus_I":0.000949214970344503,"maximum_off_diagonal_row_sum":0.0019193857965451055,"total_off_diagonal_mass":0.023885689912561313,"nonzero_off_diagonal_pairs":54,"maximum_shell_divisor_count":2,"theorem_row_bound":0.11053946464991614,"gap_divisor_histogram":{"2":1,"3":2,"4":3,"5":2,"6":3,"7":2,"8":2,"9":2,"10":1,"11":4,"12":5,"13":1,"14":1,"15":1,"16":1,"17":3,"18":3,"20":1,"21":2,"23":2,"24":4,"25":1,"27":1,"28":3,"29":1,"31":1,"35":2,"36":1}},
+    {"X":503,"N":73,"H":202407,"q_shell_count":16029,"minimum_eigenvalue":0.9997516526537591,"maximum_eigenvalue":1.0002920196466432,"operator_norm_D_minus_I":0.00029201964664316016,"maximum_off_diagonal_row_sum":0.0004990953896063385,"total_off_diagonal_mass":0.016220600162206,"nonzero_off_diagonal_pairs":127,"maximum_shell_divisor_count":2,"theorem_row_bound":0.09277488304394872,"gap_divisor_histogram":{"2":4,"3":1,"4":6,"5":3,"7":1,"8":1,"9":3,"10":4,"11":2,"12":4,"13":2,"14":4,"15":3,"16":1,"17":1,"18":6,"19":4,"20":5,"21":3,"22":2,"23":1,"24":3,"25":3,"26":2,"27":1,"28":3,"29":3,"30":2,"31":2,"32":1,"33":3,"34":2,"35":1,"36":1,"37":4,"38":2,"39":2,"40":2,"41":2,"42":2,"43":3,"44":1,"45":3,"46":2,"48":1,"49":1,"50":2,"52":4,"53":1,"54":1,"56":1,"59":3,"61":1,"63":1,"64":1,"68":1,"69":1}}
+  ],
+  "boundary": "Finite calibration is not used to prove the asymptotic theorem; the uniform frame bound follows from shell-divisor counting and the PNT."
+}

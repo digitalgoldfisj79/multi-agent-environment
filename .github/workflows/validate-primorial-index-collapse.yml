@@ -1,0 +1,124 @@
+name: Validate primorial-index collapse
+
+on:
+  pull_request:
+    branches: [publication/fortune-papers-ii-vi-20260724]
+    paths:
+      - .github/workflows/validate-primorial-index-collapse.yml
+      - frontier/integer_source_frame_bridge/**
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check theorem package
+        run: |
+          set -euo pipefail
+          ROOT=frontier/integer_source_frame_bridge
+          for file in \
+            PRIMORIAL_INDEX_SHRINKING_TARGET_COLLAPSE_20260728.md \
+            PRIMITIVE_RATIONAL_FREQUENCY_COLLAPSE_20260728.md \
+            PRIMORIAL_RAMANUJAN_PROJECTOR_COLLAPSE_20260728.md \
+            EXACT_SMOOTH_PRIMITIVE_CENTRING_20260728.md \
+            EXPLICIT_CANDIDATE_PROJECTOR_PRINCIPAL_TERM_20260728.md \
+            EULER_BUCHSTAB_DETECTOR_IDENTITY_20260728.md \
+            FIRST_ORDER_PRIME_MODULUS_GRAM_20260728.md \
+            FIRST_ORDER_DIAGONAL_THEOREM_20260728.md \
+            NORMALIZED_TAIL_CHAOS_ENERGY_IDENTITY_20260728.md \
+            BUCHSTAB_MARTINGALE_COLLAPSE_20260728.md \
+            BALANCED_CERTIFICATE_DISPERSION_IDENTITY_20260728.md; do
+            test -s "$ROOT/$file"
+          done
+          ! grep -RInE 'TODO|TBD|PLACEHOLDER|REPLACE_ME' \
+            "$ROOT/PRIMITIVE_RATIONAL_FREQUENCY_COLLAPSE_20260728.md" \
+            "$ROOT/PRIMORIAL_RAMANUJAN_PROJECTOR_COLLAPSE_20260728.md" \
+            "$ROOT/EXACT_SMOOTH_PRIMITIVE_CENTRING_20260728.md" \
+            "$ROOT/EXPLICIT_CANDIDATE_PROJECTOR_PRINCIPAL_TERM_20260728.md" \
+            "$ROOT/EULER_BUCHSTAB_DETECTOR_IDENTITY_20260728.md" \
+            "$ROOT/FIRST_ORDER_PRIME_MODULUS_GRAM_20260728.md" \
+            "$ROOT/FIRST_ORDER_DIAGONAL_THEOREM_20260728.md" \
+            "$ROOT/NORMALIZED_TAIL_CHAOS_ENERGY_IDENTITY_20260728.md" \
+            "$ROOT/BUCHSTAB_MARTINGALE_COLLAPSE_20260728.md" \
+            "$ROOT/BALANCED_CERTIFICATE_DISPERSION_IDENTITY_20260728.md"
+          grep -Fq 'Theorem 3.2 (exact new-modulus residual)' "$ROOT/EXACT_SMOOTH_PRIMITIVE_CENTRING_20260728.md"
+          grep -Fq 'Theorem 3.1' "$ROOT/EULER_BUCHSTAB_DETECTOR_IDENTITY_20260728.md"
+          grep -Fq 'Theorem 6.1' "$ROOT/FIRST_ORDER_DIAGONAL_THEOREM_20260728.md"
+          grep -Fq 'Theorem 7.1' "$ROOT/BUCHSTAB_MARTINGALE_COLLAPSE_20260728.md"
+          grep -Fq 'Retracted:' "$ROOT/BALANCED_CERTIFICATE_DISPERSION_IDENTITY_20260728.md"
+
+      - name: Install dependencies
+        run: python -m pip install --disable-pip-version-check sympy
+
+      - name: Verify shrinking target
+        run: python frontier/integer_source_frame_bridge/primorial_shrinking_target_verify.py > /tmp/shrinking.json
+      - name: Verify primitive rational frequencies
+        run: python frontier/integer_source_frame_bridge/primitive_rational_frequency_verify.py > /tmp/primitive.json
+      - name: Verify Ramanujan candidate projector
+        run: python frontier/integer_source_frame_bridge/primorial_ramanujan_projector_verify.py > /tmp/projector.json
+      - name: Verify exact smooth primitive centring
+        run: python frontier/integer_source_frame_bridge/exact_smooth_primitive_centring_verify.py > /tmp/smooth-centring.json
+      - name: Verify explicit candidate principal
+        run: python frontier/integer_source_frame_bridge/explicit_candidate_principal_verify.py > /tmp/principal.json
+      - name: Verify Euler–Buchstab and first-order Gram
+        run: python frontier/integer_source_frame_bridge/euler_buchstab_first_order_verify.py > /tmp/euler-first-order.json
+      - name: Verify Buchstab martingale
+        run: python frontier/integer_source_frame_bridge/buchstab_martingale_verify.py > /tmp/buchstab-martingale.json
+      - name: Verify corrected balanced identity
+        run: python frontier/integer_source_frame_bridge/balanced_certificate_dispersion_verify.py > /tmp/balanced-diagnostic.json
+
+      - name: Check validation boundaries
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          root=Path('frontier/integer_source_frame_bridge')
+          names=(
+              'primorial_shrinking_target',
+              'primitive_rational_frequency',
+              'primorial_ramanujan_projector',
+              'exact_smooth_primitive_centring',
+              'explicit_candidate_principal',
+              'euler_buchstab_first_order',
+              'buchstab_martingale',
+              'balanced_certificate_dispersion',
+          )
+          data={n:json.loads((root/f'{n}_results.json').read_text()) for n in names}
+          assert all(v['status']=='PASS' for v in data.values())
+          assert max(r['grouping_error'] for r in data['primitive_rational_frequency']['rows'])<3e-9
+          assert max(r['maximum_exact_projector_error'] for r in data['primorial_ramanujan_projector']['rows'])<2e-10
+          assert max(r['new_residual_error'] for r in data['exact_smooth_primitive_centring']['rows'])<3e-8
+          assert data['explicit_candidate_principal']['constants']['e_gamma_over_2_minus_log_two']>0
+          assert max(r['product_error'] for r in data['euler_buchstab_first_order']['rows'])<2e-10
+          assert max(r['maximum_character_error'] for r in data['euler_buchstab_first_order']['rows'])<2e-8
+          assert max(c['quadratic_variation_error'] for c in data['buchstab_martingale']['cases'])<2e-12
+          assert max(c['maximum_prime_indicator_error'] for c in data['buchstab_martingale']['cases'])<2e-12
+          agg=data['balanced_certificate_dispersion']['aggregate']
+          assert agg['second_moment_error']<2e-10 and agg['shifted_identity_error']<2e-10
+          print('all Euler–Buchstab critical gates passed')
+          PY
+
+      - name: Upload validation record
+        uses: actions/upload-artifact@v4
+        with:
+          name: primorial-index-collapse-validation
+          path: |
+            /tmp/*.json
+            frontier/integer_source_frame_bridge/*_results.json
+            frontier/integer_source_frame_bridge/PRIMITIVE_RATIONAL_FREQUENCY_COLLAPSE_20260728.md
+            frontier/integer_source_frame_bridge/PRIMORIAL_RAMANUJAN_PROJECTOR_COLLAPSE_20260728.md
+            frontier/integer_source_frame_bridge/EXACT_SMOOTH_PRIMITIVE_CENTRING_20260728.md
+            frontier/integer_source_frame_bridge/EXPLICIT_CANDIDATE_PROJECTOR_PRINCIPAL_TERM_20260728.md
+            frontier/integer_source_frame_bridge/EULER_BUCHSTAB_DETECTOR_IDENTITY_20260728.md
+            frontier/integer_source_frame_bridge/FIRST_ORDER_PRIME_MODULUS_GRAM_20260728.md
+            frontier/integer_source_frame_bridge/FIRST_ORDER_DIAGONAL_THEOREM_20260728.md
+            frontier/integer_source_frame_bridge/NORMALIZED_TAIL_CHAOS_ENERGY_IDENTITY_20260728.md
+            frontier/integer_source_frame_bridge/BUCHSTAB_MARTINGALE_COLLAPSE_20260728.md
+            frontier/integer_source_frame_bridge/BALANCED_CERTIFICATE_DISPERSION_IDENTITY_20260728.md
+          retention-days: 90

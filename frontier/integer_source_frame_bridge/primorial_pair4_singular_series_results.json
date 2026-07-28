@@ -1,0 +1,39 @@
+{
+  "status": "PASS",
+  "scope": "exact local mean-one identities and finite truncated triangular averages",
+  "parameters": {"eta":0.8,"targets":[7,11,17,23],"prime_truncation_multiple_of_H":4},
+  "local_checks": [
+    {"p":2,"dividing_P_mean":[1,1],"nondividing_P_mean":null},
+    {"p":3,"dividing_P_mean":[1,1],"nondividing_P_mean":[1,1]},
+    {"p":5,"dividing_P_mean":[1,1],"nondividing_P_mean":[1,1]},
+    {"p":7,"dividing_P_mean":[1,1],"nondividing_P_mean":[1,1]},
+    {"p":11,"dividing_P_mean":[1,1],"nondividing_P_mean":[1,1]},
+    {"p":13,"dividing_P_mean":[1,1],"nondividing_P_mean":[1,1]},
+    {"p":17,"dividing_P_mean":[1,1],"nondividing_P_mean":[1,1]},
+    {"p":19,"dividing_P_mean":[1,1],"nondividing_P_mean":[1,1]},
+    {"p":23,"dividing_P_mean":[1,1],"nondividing_P_mean":[1,1]},
+    {"p":29,"dividing_P_mean":[1,1],"nondividing_P_mean":[1,1]},
+    {"p":31,"dividing_P_mean":[1,1],"nondividing_P_mean":[1,1]},
+    {"p":37,"dividing_P_mean":[1,1],"nondividing_P_mean":[1,1]},
+    {"p":41,"dividing_P_mean":[1,1],"nondividing_P_mean":[1,1]},
+    {"p":43,"dividing_P_mean":[1,1],"nondividing_P_mean":[1,1]},
+    {"p":47,"dividing_P_mean":[1,1],"nondividing_P_mean":[1,1]},
+    {"p":53,"dividing_P_mean":[1,1],"nondividing_P_mean":[1,1]},
+    {"p":59,"dividing_P_mean":[1,1],"nondividing_P_mean":[1,1]},
+    {"p":61,"dividing_P_mean":[1,1],"nondividing_P_mean":[1,1]},
+    {"p":67,"dividing_P_mean":[1,1],"nondividing_P_mean":[1,1]},
+    {"p":71,"dividing_P_mean":[1,1],"nondividing_P_mean":[1,1]},
+    {"p":73,"dividing_P_mean":[1,1],"nondividing_P_mean":[1,1]},
+    {"p":79,"dividing_P_mean":[1,1],"nondividing_P_mean":[1,1]},
+    {"p":83,"dividing_P_mean":[1,1],"nondividing_P_mean":[1,1]},
+    {"p":89,"dividing_P_mean":[1,1],"nondividing_P_mean":[1,1]},
+    {"p":97,"dividing_P_mean":[1,1],"nondividing_P_mean":[1,1]}
+  ],
+  "truncated_averages": [
+    {"X":7,"H":39,"primorial_digits":3,"prime_cutoff":156,"primes_in_truncation":36,"total_nonzero_triangular_weight":1482,"normalised_truncated_average":0.8474350656968448,"absolute_error_from_one":0.1525649343031552,"logX_over_H":0.049895132027059315,"error_divided_by_logX_over_H":3.0577118068435136},
+    {"X":11,"H":96,"primorial_digits":4,"prime_cutoff":384,"primes_in_truncation":76,"total_nonzero_triangular_weight":9120,"normalised_truncated_average":0.9225819723939654,"absolute_error_from_one":0.07741802760603456,"logX_over_H":0.02497807575831636,"error_divided_by_logX_over_H":3.0994392184217197},
+    {"X":17,"H":231,"primorial_digits":6,"prime_cutoff":924,"primes_in_truncation":157,"total_nonzero_triangular_weight":53130,"normalised_truncated_average":0.9639938596291382,"absolute_error_from_one":0.036006140370861806,"logX_over_H":0.012264992831412191,"error_divided_by_logX_over_H":2.9356837680855015},
+    {"X":23,"H":423,"primorial_digits":9,"prime_cutoff":1692,"primes_in_truncation":263,"total_nonzero_triangular_weight":178506,"normalised_truncated_average":0.9782993627978329,"absolute_error_from_one":0.021700637202167083,"logX_over_H":0.007412515876901063,"error_divided_by_logX_over_H":2.927567045055616}
+  ],
+  "boundary": "The finite truncated averages validate the local formulas only. The asymptotic full-product theorem is proved analytically in the note."
+}
