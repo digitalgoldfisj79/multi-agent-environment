@@ -1,0 +1,106 @@
+name: Validate Fable M7 M1 M3 programme
+
+on:
+  pull_request:
+    branches:
+      - publication/fortune-papers-ii-vi-20260724
+    paths:
+      - .github/workflows/validate-fable-programme-m7-m1-m3.yml
+      - frontier/fable_programme/**
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate programme records
+        run: |
+          set -euo pipefail
+          ROOT=frontier/fable_programme
+          for file in \
+            M7_FUNCTION_FIELD_SOURCE_FRAME_LAB_20260728.md \
+            M1_SKEW_FROBENIUS_THEOREM_PACKAGE_20260728.md \
+            M3_DEPTH_TWO_AND_SLOPE_AUDIT_20260728.md \
+            PROGRAMME_STATUS_AFTER_M7_M1_M3_20260728.md \
+            ff_source_frame_lab.cpp \
+            ff_source_frame_main_results.json \
+            ff_source_frame_multiseed_results.json \
+            depth2_crown_verify.py \
+            depth2_crown_results.json; do
+            test -s "$ROOT/$file"
+          done
+          ! grep -RInE 'TODO|TBD|PLACEHOLDER|REPLACE_ME' "$ROOT"
+          grep -Fq '#Q_p(F_p) not congruent 1 mod p^2' "$ROOT/M3_DEPTH_TWO_AND_SLOPE_AUDIT_20260728.md"
+          grep -Fq 'weighted_source_energy' "$ROOT/ff_source_frame_main_results.json"
+
+      - name: Recompute complete-ordering M7 laboratory
+        run: |
+          set -euo pipefail
+          g++ -O3 -std=c++17 frontier/fable_programme/ff_source_frame_lab.cpp -o /tmp/ff_source_frame_lab
+          LAB_SEED=8888 /tmp/ff_source_frame_lab > /tmp/ff_source_frame_recomputed.json
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+
+          got = json.loads(Path('/tmp/ff_source_frame_recomputed.json').read_text())
+          expected = json.loads(Path('frontier/fable_programme/ff_source_frame_main_results.json').read_text())
+          assert len(got) == len(expected) == 2
+          row = next(r for r in got if r['d'] == 3)
+          exp = next(r for r in expected if r['d'] == 3)
+          assert row['orders'] == 40320
+          assert row['K'] == 8
+          assert row['offsets'] == 74
+          assert row['shells'] == 116
+          assert row['shell_pairs'] == 2048
+          assert row['pearson']['weighted_source_energy'] > 0.99
+          assert row['spearman']['weighted_source_energy'] > 0.99
+          for key in ('pair_mean', 'pair_square_mean', 'single_mean', 'single_square_mean'):
+              assert abs(row['pearson'][key]) < 0.2, (key, row['pearson'][key])
+              assert abs(row['spearman'][key]) < 0.2, (key, row['spearman'][key])
+          for family in ('pearson', 'spearman'):
+              for key, value in exp[family].items():
+                  assert abs(row[family][key] - value) < 2e-7, (family, key, row[family][key], value)
+          print(json.dumps(row, indent=2))
+          PY
+
+      - name: Recompute depth-two crown regression
+        run: |
+          set -euo pipefail
+          python3 frontier/fable_programme/depth2_crown_verify.py > /tmp/depth2_recomputed.json
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          got = json.loads(Path('/tmp/depth2_recomputed.json').read_text())
+          expected = json.loads(Path('frontier/fable_programme/depth2_crown_results.json').read_text())
+          assert got == expected
+          for row in got['rows']:
+              p = row['p']
+              assert row['recovered_W_mod_p2'] == row['W']
+              assert 0 <= row['W'] < p*p
+              assert (row['Q_mod_p2'] == 1) == (row['W'] == 0)
+          print(json.dumps(got, indent=2))
+          PY
+
+      - name: Check theorem package boundaries
+        run: |
+          set -euo pipefail
+          ROOT=frontier/fable_programme
+          grep -Fq 'does not classify every dynamically special cubic map' "$ROOT/M1_SKEW_FROBENIUS_THEOREM_PACKAGE_20260728.md"
+          grep -Fq 'Newton-polygon blindness' "$ROOT/M3_DEPTH_TWO_AND_SLOPE_AUDIT_20260728.md"
+          grep -Fq 'does not prove that no corrected source-to-frame theorem' "$ROOT/M7_FUNCTION_FIELD_SOURCE_FRAME_LAB_20260728.md"
+
+      - name: Upload validation outputs
+        uses: actions/upload-artifact@v4
+        with:
+          name: fable-programme-m7-m1-m3-validation
+          path: |
+            /tmp/ff_source_frame_recomputed.json
+            /tmp/depth2_recomputed.json
+            frontier/fable_programme
+          retention-days: 90
