@@ -1,0 +1,91 @@
+name: Validate Fable M7 cross-field robustness
+
+on:
+  pull_request:
+    branches:
+      - publication/fortune-papers-ii-vi-20260724
+    paths:
+      - .github/workflows/validate-fable-m7-crossfield.yml
+      - frontier/fable_programme/M7_CROSSFIELD_ROBUSTNESS_CORRECTION_20260728.md
+      - frontier/fable_programme/generalize_ff_source_frame_lab.py
+      - frontier/fable_programme/ff_source_frame_crossfield_results.json
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Generate and compile cross-field laboratory
+        run: |
+          set -euo pipefail
+          python3 frontier/fable_programme/generalize_ff_source_frame_lab.py \
+            frontier/fable_programme/ff_source_frame_lab.cpp \
+            /tmp/ff_source_frame_crossfield.cpp
+          g++ -O3 -std=c++17 /tmp/ff_source_frame_crossfield.cpp -o /tmp/ff_source_frame_crossfield
+
+      - name: Recompute q=3 complete-ordering regression
+        run: |
+          set -euo pipefail
+          LAB_SEED=8888 /tmp/ff_source_frame_crossfield 3 3 40320 2048 > /tmp/q3d3.json
+
+      - name: Recompute q=2 complete-shell robustness regression
+        run: |
+          set -euo pipefail
+          LAB_SEED=8888 /tmp/ff_source_frame_crossfield 2 5 720 100000 > /tmp/q2d5.json
+
+      - name: Compare exact cross-field outputs
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+
+          expected = json.loads(Path('frontier/fable_programme/ff_source_frame_crossfield_results.json').read_text())
+          got = json.loads(Path('/tmp/q3d3.json').read_text()) + json.loads(Path('/tmp/q2d5.json').read_text())
+          assert {(r['q'], r['d']) for r in got} == {(3,3),(2,5)}
+          for row in got:
+              exp = next(r for r in expected if (r['q'],r['d']) == (row['q'],row['d']))
+              assert row['orders'] == exp['orders']
+              assert row['shell_pairs'] == exp['shell_pairs']
+              assert row['pearson']['weighted_source_energy'] > 0.999
+              assert row['spearman']['weighted_source_energy'] > 0.999
+              for key in ('pair_mean','pair_square_mean','single_mean','single_square_mean'):
+                  assert abs(row['pearson'][key]) < 0.15, (row['q'], key, row['pearson'][key])
+                  assert abs(row['spearman'][key]) < 0.18, (row['q'], key, row['spearman'][key])
+              for family in ('pearson','spearman'):
+                  for key,value in exp[family].items():
+                      assert abs(row[family][key]-value) < 2e-7, (row['q'],family,key,row[family][key],value)
+          Path('/tmp/crossfield_recomputed.json').write_text(json.dumps(got,indent=2)+'\n')
+          print(json.dumps(got,indent=2))
+          PY
+
+      - name: Validate correction boundaries
+        run: |
+          set -euo pipefail
+          NOTE=frontier/fable_programme/M7_CROSSFIELD_ROBUSTNESS_CORRECTION_20260728.md
+          grep -Fq 'does not prove that a deeper analytic expansion can never produce the old pair-sum kernel' "$NOTE"
+          grep -Fq 'P+P=0' "$NOTE"
+          ! grep -RInE 'TODO|TBD|PLACEHOLDER|REPLACE_ME' \
+            frontier/fable_programme/M7_CROSSFIELD_ROBUSTNESS_CORRECTION_20260728.md \
+            frontier/fable_programme/generalize_ff_source_frame_lab.py \
+            frontier/fable_programme/ff_source_frame_crossfield_results.json
+
+      - name: Upload cross-field validation
+        uses: actions/upload-artifact@v4
+        with:
+          name: fable-m7-crossfield-validation
+          path: |
+            /tmp/ff_source_frame_crossfield.cpp
+            /tmp/q3d3.json
+            /tmp/q2d5.json
+            /tmp/crossfield_recomputed.json
+            frontier/fable_programme/M7_CROSSFIELD_ROBUSTNESS_CORRECTION_20260728.md
+            frontier/fable_programme/generalize_ff_source_frame_lab.py
+            frontier/fable_programme/ff_source_frame_crossfield_results.json
+          retention-days: 90
