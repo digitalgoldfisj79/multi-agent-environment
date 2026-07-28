@@ -1,0 +1,15 @@
+{
+  "rows": [
+    {"p": 5, "constraint_count": 1, "constraint_rank": 1, "affine_tangent_dimension": 4, "projective_surface_tangent_dimension": 2, "generator_matrix_basis_i2_i3": [[1, 3], [0, 1]], "fixed_dimension": 1, "nontrivial_unipotent": true},
+    {"p": 7, "constraint_count": 3, "constraint_rank": 3, "affine_tangent_dimension": 4, "projective_surface_tangent_dimension": 2, "generator_matrix_basis_i2_i3": [[1, 3], [0, 1]], "fixed_dimension": 1, "nontrivial_unipotent": true},
+    {"p": 11, "constraint_count": 7, "constraint_rank": 7, "affine_tangent_dimension": 4, "projective_surface_tangent_dimension": 2, "generator_matrix_basis_i2_i3": [[1, 3], [0, 1]], "fixed_dimension": 1, "nontrivial_unipotent": true},
+    {"p": 13, "constraint_count": 9, "constraint_rank": 9, "affine_tangent_dimension": 4, "projective_surface_tangent_dimension": 2, "generator_matrix_basis_i2_i3": [[1, 3], [0, 1]], "fixed_dimension": 1, "nontrivial_unipotent": true},
+    {"p": 17, "constraint_count": 13, "constraint_rank": 13, "affine_tangent_dimension": 4, "projective_surface_tangent_dimension": 2, "generator_matrix_basis_i2_i3": [[1, 3], [0, 1]], "fixed_dimension": 1, "nontrivial_unipotent": true},
+    {"p": 23, "constraint_count": 19, "constraint_rank": 19, "affine_tangent_dimension": 4, "projective_surface_tangent_dimension": 2, "generator_matrix_basis_i2_i3": [[1, 3], [0, 1]], "fixed_dimension": 1, "nontrivial_unipotent": true},
+    {"p": 29, "constraint_count": 25, "constraint_rank": 25, "affine_tangent_dimension": 4, "projective_surface_tangent_dimension": 2, "generator_matrix_basis_i2_i3": [[1, 3], [0, 1]], "fixed_dimension": 1, "nontrivial_unipotent": true},
+    {"p": 31, "constraint_count": 27, "constraint_rank": 27, "affine_tangent_dimension": 4, "projective_surface_tangent_dimension": 2, "generator_matrix_basis_i2_i3": [[1, 3], [0, 1]], "fixed_dimension": 1, "nontrivial_unipotent": true},
+    {"p": 41, "constraint_count": 37, "constraint_rank": 37, "affine_tangent_dimension": 4, "projective_surface_tangent_dimension": 2, "generator_matrix_basis_i2_i3": [[1, 3], [0, 1]], "fixed_dimension": 1, "nontrivial_unipotent": true},
+    {"p": 53, "constraint_count": 49, "constraint_rank": 49, "affine_tangent_dimension": 4, "projective_surface_tangent_dimension": 2, "generator_matrix_basis_i2_i3": [[1, 3], [0, 1]], "fixed_dimension": 1, "nontrivial_unipotent": true}
+  ],
+  "conclusion": "For every tested p>3, the tangent equations have affine dimension four, and after quotienting the diagonal and projective fixed lines the root cycle acts by the nontrivial two-dimensional Jordan block [[1,3],[0,1]]."
+}
