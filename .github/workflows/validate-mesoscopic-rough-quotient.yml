@@ -7,9 +7,11 @@ on:
       - .github/workflows/validate-mesoscopic-rough-quotient.yml
       - frontier/integer_source_frame_bridge/MESOSCOPIC_PRIMORIAL_ORBIT_REDUCTION_20260728.md
       - frontier/integer_source_frame_bridge/ROUGH_QUOTIENT_HYPERBOLA_COLLAPSE_20260728.md
+      - frontier/integer_source_frame_bridge/FULL_ROUGH_QUOTIENT_EULER_COLLAPSE_20260728.md
       - frontier/integer_source_frame_bridge/SAME_BAND_RECOMBINATION_REDUCTION_20260728.md
       - frontier/integer_source_frame_bridge/mesoscopic_primorial_orbit_verify.py
       - frontier/integer_source_frame_bridge/rough_quotient_hyperbola_verify.py
+      - frontier/integer_source_frame_bridge/full_rough_quotient_euler_verify.py
       - frontier/integer_source_frame_bridge/same_band_rough_quotient_calibration.py
   workflow_dispatch:
 
@@ -19,7 +21,7 @@ permissions:
 jobs:
   validate:
     runs-on: ubuntu-24.04
-    timeout-minutes: 30
+    timeout-minutes: 35
     steps:
       - uses: actions/checkout@v4
 
@@ -30,15 +32,18 @@ jobs:
           for file in \
             MESOSCOPIC_PRIMORIAL_ORBIT_REDUCTION_20260728.md \
             ROUGH_QUOTIENT_HYPERBOLA_COLLAPSE_20260728.md \
+            FULL_ROUGH_QUOTIENT_EULER_COLLAPSE_20260728.md \
             SAME_BAND_RECOMBINATION_REDUCTION_20260728.md; do
             test -s "$ROOT/$file"
           done
           ! grep -RInE 'TODO|TBD|PLACEHOLDER|REPLACE_ME' \
             "$ROOT/MESOSCOPIC_PRIMORIAL_ORBIT_REDUCTION_20260728.md" \
             "$ROOT/ROUGH_QUOTIENT_HYPERBOLA_COLLAPSE_20260728.md" \
+            "$ROOT/FULL_ROUGH_QUOTIENT_EULER_COLLAPSE_20260728.md" \
             "$ROOT/SAME_BAND_RECOMBINATION_REDUCTION_20260728.md"
           grep -Fq 'Theorem 6.1' "$ROOT/MESOSCOPIC_PRIMORIAL_ORBIT_REDUCTION_20260728.md"
           grep -Fq 'Theorem 3.1 (rough-quotient source)' "$ROOT/ROUGH_QUOTIENT_HYPERBOLA_COLLAPSE_20260728.md"
+          grep -Fq 'Theorem 4.1 (full rough-quotient Euler identity)' "$ROOT/FULL_ROUGH_QUOTIENT_EULER_COLLAPSE_20260728.md"
           grep -Fq 'Theorem 3.1 (same-band conditional finish)' "$ROOT/SAME_BAND_RECOMBINATION_REDUCTION_20260728.md"
 
       - name: Install dependencies
@@ -49,6 +54,9 @@ jobs:
 
       - name: Verify rough quotient hyperbola
         run: python frontier/integer_source_frame_bridge/rough_quotient_hyperbola_verify.py > /tmp/rough-quotient.json
+
+      - name: Verify full quotient Euler cancellation
+        run: python frontier/integer_source_frame_bridge/full_rough_quotient_euler_verify.py > /tmp/full-quotient.json
 
       - name: Calibrate same-band source
         run: python frontier/integer_source_frame_bridge/same_band_rough_quotient_calibration.py > /tmp/same-band.json
@@ -61,16 +69,21 @@ jobs:
           root=Path('frontier/integer_source_frame_bridge')
           meso=json.loads((root/'mesoscopic_primorial_orbit_results.json').read_text())
           rough=json.loads((root/'rough_quotient_hyperbola_results.json').read_text())
+          full=json.loads((root/'full_rough_quotient_euler_results.json').read_text())
           band=json.loads((root/'same_band_rough_quotient_results.json').read_text())
           assert meso['status']=='PASS'
           assert rough['status']=='PASS'
+          assert full['status']=='PASS'
           assert band['status']=='PASS'
           assert max(p['maximum_formula_error'] for p in meso['panels'])<2e-10
           assert max(p['maximum_weighted_error'] for p in rough['panels'])<2e-12
           assert max(p['maximum_floor_error'] for p in rough['panels'])==0
           assert max(p['maximum_phase_error'] for p in rough['panels'])<2e-12
+          assert max(p['offset_expansion_error'] for p in full['panels'])<2e-12
+          assert max(p['quotient_expansion_error'] for p in full['panels'])<2e-12
+          assert max(p['maximum_higher_order_support'] for p in full['panels'])<=1
           assert max(p['maximum_same_band_ratio'] for p in band['panels'])<2.3
-          print('all mesoscopic rough-quotient gates passed')
+          print('all mesoscopic full rough-quotient gates passed')
           PY
 
       - name: Upload validation record
@@ -81,8 +94,10 @@ jobs:
             /tmp/*.json
             frontier/integer_source_frame_bridge/mesoscopic_primorial_orbit_results.json
             frontier/integer_source_frame_bridge/rough_quotient_hyperbola_results.json
+            frontier/integer_source_frame_bridge/full_rough_quotient_euler_results.json
             frontier/integer_source_frame_bridge/same_band_rough_quotient_results.json
             frontier/integer_source_frame_bridge/MESOSCOPIC_PRIMORIAL_ORBIT_REDUCTION_20260728.md
             frontier/integer_source_frame_bridge/ROUGH_QUOTIENT_HYPERBOLA_COLLAPSE_20260728.md
+            frontier/integer_source_frame_bridge/FULL_ROUGH_QUOTIENT_EULER_COLLAPSE_20260728.md
             frontier/integer_source_frame_bridge/SAME_BAND_RECOMBINATION_REDUCTION_20260728.md
           retention-days: 90
