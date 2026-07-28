@@ -1,7 +1,7 @@
 # Balanced-certificate dispersion identity
 
 Date: 28 July 2026  
-Status: exact second-moment identity and diagonal estimate proved; off-diagonal covariance estimate open.
+Status: exact second-moment and shifted-product identities proved; a previous standalone Fortune-scale interpretation of the diagonal is retracted.
 
 ## 1. Setup
 
@@ -115,12 +115,13 @@ h=p-p',
 \tag{3.1}
 \]
 
-The inequality `h ne 0` follows because `q>H`: a fixed modulus cannot divide two
-distinct outputs in an interval of length `H`.  Moreover
+The inequality `h!=0` follows because a prime `q>H` cannot divide two distinct
+outputs in an interval of length `H`.  Moreover
 
 \[
 q\le k,\qquad r\le\ell,
-\qquad P^-(k)\ge q,\qquad P^-(\ell)\ge r.
+\qquad P^-(k)\ge q,
+\qquad P^-(\ell)\ge r.
 \tag{3.2}
 \]
 
@@ -164,10 +165,11 @@ Equations (1.1)--(1.2) give every displayed condition.  Conversely, a tuple in
 `j`; the least-factor conditions recover the two active certificate columns.
 The correspondence is bijective.  \(\square\)
 
-Thus the remaining covariance is a fixed-complexity shifted-product problem.  No
-Möbius subset sum or growing convolution depth remains.
+Thus the balanced certificate has a fixed-complexity shifted-product
+parametrisation.  This is an exact structural result, not yet a variance theorem
+for the centred Fortune detector.
 
-## 4. The diagonal is below the Fortune scale
+## 4. Absolute diagonal bound
 
 Assume
 
@@ -202,23 +204,27 @@ B_X^2\frac{NH}{\log H}.
 \tag{4.2}
 \]
 
-For the natural prime-offset weights `B_X ll log H`,
+Equation (4.2) is a correct absolute estimate.  It must not be compared directly
+with the `NHX` variance scale of the one-sided von Mangoldt detector unless the
+weights and centring define that same detector.
 
-\[
-\boxed{
-\mathcal D_X(b)
-\ll NH\log H
-=o(NHX).
-}
-\tag{4.3}
-\]
+In particular:
 
-Thus the diagonal cannot be the obstruction to the required Fortune-scale second
-moment.
+1. for prime-count or `log p` certificate weights, the prime-output main term is
+   much smaller than the one-sided von Mangoldt main term;
+2. for the double-von-Mangoldt normalization, the natural certificate weights
+   also contain a factor of size `log P_j asymp X`;
+3. the balanced count is a large component in an exact subtraction identity, not
+   the centred detector residual itself.
 
-## 5. Centred identity
+Therefore the former conclusion that the balanced diagonal was automatically
+below the load-bearing Fortune scale is retracted.  The diagonal, off-diagonal,
+small-certificate sector, total candidate mass and centring must be combined
+before estimation.
 
-Let `beta_j` be any deterministic centring sequence.  Then
+## 5. Exact centred identity for the certificate alone
+
+Let `beta_j` be any deterministic sequence.  Algebraically,
 
 \[
 \boxed{
@@ -232,8 +238,10 @@ Let `beta_j` be any deterministic centring sequence.  Then
 \tag{5.1}
 \]
 
-No sector may be bounded independently before the last three terms are combined:
-the principal pair contribution in `mathcal O_X` must cancel the centring terms.
+This identity is exact, but an arbitrary `beta_j` is not the Fortune principal
+term.  The load-bearing centring comes only after the balanced certificate is
+reinserted into the complete signed source or the exact prime/composite
+subtraction identity.
 
 ## 6. Scale decomposition
 
@@ -241,7 +249,9 @@ For dyadic `Q,R>H`, let `mathcal O_X(Q,R;h)` denote the contribution to (3.3)
 with
 
 \[
-q\asymp Q,\qquad r\asymp R.
+q\asymp Q,
+\qquad
+r\asymp R.
 \]
 
 Then
@@ -258,35 +268,54 @@ Then
 
 The ranges have different available structure:
 
-1. **near-physical least factors**, `Q` or `R` polynomially close to `H`, where
-   prime-modulus dispersion must supply cancellation;
-2. **intermediate factors**, where reciprocal completion produces bilinear or
+1. **near-physical least factors**, `Q` or `R` polynomially close to `H`;
+2. **intermediate factors**, where reciprocal completion can create bilinear or
    trilinear Kloosterman-fraction phases;
 3. **exponential factors**, where the primorial shrinking-target theorem bounds
    the centre multiplicity of each fixed column.
 
-A proof must retain the signed/centred sum across these ranges; (6.1) is a
-partition, not permission to replace each part by a positive majorant.
+This partition is diagnostic.  It is not permission to majorise the positive
+certificate sectors separately.
 
-## 7. Load-bearing theorem
+## 7. Correct load-bearing placement
 
-The remaining balanced-sector theorem is now precisely an off-diagonal covariance
-estimate for (3.3).  A sufficient form is
+Let `mathcal N_j` denote the exact one-new-prime small-modulus term,
+`mathcal L_j` the signed large-divisor Möbius term, and `mu_j^red` the exact
+reduced principal term after subtraction of the deterministic smooth sector.  The
+actual residual is
 
 \[
 \boxed{
-\mathcal O_X(b)
--2\operatorname{Re}\sum_j\overline{\beta_j}C_j^{\mathrm{bal}}
-+\sum_j|\beta_j|^2
-\ll NHX\,L(X),
-\quad L(X)=o(\log X),
+R_j=\mathcal N_j+\mathcal L_j-\mu_j^{\mathrm{red}}.
 }
 \tag{7.1}
 \]
 
-because the diagonal (4.3) is already smaller.  The exact centring `beta_j` must
-come from the combined small-certificate and balanced-certificate principal term;
-it is not inserted heuristically.
+The Fortune programme requires a bound for
+
+\[
+\boxed{
+\sum_j|R_j|^2,
+}
+\tag{7.2}
+\]
+
+not a separate bound for `C_j^bal`.  Expanding (7.2) retains
+
+\[
+\sum_j|\mathcal N_j|^2,
+\quad
+\sum_j|\mathcal L_j|^2,
+\quad
+2\operatorname{Re}\sum_j\mathcal N_j\overline{\mathcal L_j},
+\]
+
+and all baseline cross terms.  The large cancellations observed in the exact
+finite decomposition occur across these terms.
+
+The least-factor identity and (3.3) remain useful for organising the parity
+sector, but the next theorem must be a **joint signed cross-sector covariance
+estimate** for (7.2).
 
 ## 8. Boundary
 
@@ -294,18 +323,27 @@ Proved:
 
 1. exact diagonal/off-diagonal expansion (2.1);
 2. exact shifted-product parametrisation (3.3);
-3. diagonal estimate (4.2)--(4.3);
-4. exact centred identity (5.1);
-5. reduction of the balanced obstruction to off-diagonal covariance.
+3. absolute diagonal estimate (4.2);
+4. exact certificate-centred identity (5.1);
+5. exact identification of the certificate's place inside the full signed
+   residual.
+
+Retracted:
+
+1. comparison of (4.2) with `NHX` as though the certificate and one-sided
+   von Mangoldt detectors had the same normalization;
+2. the claim that a balanced-sector off-diagonal estimate alone would close the
+   Fortune variance theorem.
 
 Computationally supported:
 
 1. the balanced sector is substantial in complete finite candidate panels;
-2. proper prime powers are absent in those panels.
+2. proper prime powers are absent in those panels;
+3. the signed large-divisor component can be either positive or negative and is
+   of main-term size in small blocks.
 
 Open:
 
-1. the principal term for the shifted-product covariance;
-2. the off-diagonal estimate (7.1);
-3. its signed coupling to the one-new-prime small-modulus sector;
-4. Fortune's conjecture.
+1. the joint signed covariance estimate for (7.2);
+2. its reciprocal/shifted-product reduction without coefficient erasure;
+3. Fortune's conjecture.
