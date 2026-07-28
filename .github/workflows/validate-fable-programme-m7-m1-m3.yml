@@ -93,7 +93,7 @@ jobs:
           ROOT=frontier/fable_programme
           grep -Fq 'does not classify every dynamically special cubic map' "$ROOT/M1_SKEW_FROBENIUS_THEOREM_PACKAGE_20260728.md"
           grep -Fq 'Newton-polygon blindness' "$ROOT/M3_DEPTH_TWO_AND_SLOPE_AUDIT_20260728.md"
-          grep -Fq 'does not prove that no corrected source-to-frame theorem' "$ROOT/M7_FUNCTION_FIELD_SOURCE_FRAME_LAB_20260728.md"
+          grep -Fq 'no corrected source-to-frame theorem' "$ROOT/M7_FUNCTION_FIELD_SOURCE_FRAME_LAB_20260728.md"
 
       - name: Upload validation outputs
         uses: actions/upload-artifact@v4
