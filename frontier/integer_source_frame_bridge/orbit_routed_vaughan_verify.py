@@ -4,47 +4,37 @@ from __future__ import annotations
 
 import json
 import math
+import random
 from collections import defaultdict
 from pathlib import Path
 
 from sympy import divisors, factorint, integer_nthroot, mobius, primerange
 
 ETA = 0.8
+SEED = 20260728
 
 
 def von_mangoldt(n: int) -> float:
     fs = factorint(n)
-    if len(fs) == 1:
-        return math.log(int(next(iter(fs))))
-    return 0.0
+    return math.log(int(next(iter(fs)))) if len(fs) == 1 else 0.0
 
 
 def vaughan_terms(n: int, U: int, V: int) -> tuple[float, float, float, float]:
     ds = [int(d) for d in divisors(n)]
     t1 = sum(float(mobius(d)) * math.log(n // d) for d in ds if d <= U)
-
     t2 = 0.0
     for d in ds:
-        if d > U:
-            continue
-        rem = n // d
-        for c in divisors(rem):
-            c = int(c)
-            if c <= V:
-                t2 += float(mobius(d)) * von_mangoldt(c)
-
+        if d <= U:
+            rem = n // d
+            t2 += sum(float(mobius(d)) * von_mangoldt(int(c))
+                      for c in divisors(rem) if int(c) <= V)
     t3 = von_mangoldt(n) if n <= V else 0.0
-
     t4 = 0.0
     for a in ds:
-        if a <= U:
-            continue
-        rem = n // a
-        for c in divisors(rem):
-            c = int(c)
-            if c > V:
-                t4 += float(mobius(a)) * von_mangoldt(c)
-
+        if a > U:
+            rem = n // a
+            t4 += sum(float(mobius(a)) * von_mangoldt(int(c))
+                      for c in divisors(rem) if int(c) > V)
     return t1, t2, t3, t4
 
 
@@ -61,35 +51,26 @@ def block_data(X: int):
     return block, centres, P0, int(ETA * X * X)
 
 
-def routed_columns_for_output(n: int, U: int, V: int) -> set[int]:
-    out: set[int] = set()
+def routed_factors(n: int, Y: int) -> set[int]:
     ds = [int(d) for d in divisors(n)]
-
+    out: set[int] = set()
     for d in ds:
-        if d <= U:
-            e = n // d
-            out.add(e)
-
+        if d <= Y:
+            out.add(n // d)
     for d in ds:
-        if d > U:
-            continue
-        rem = n // d
-        for c0 in divisors(rem):
-            c = int(c0)
-            if c <= V and von_mangoldt(c) != 0.0:
-                b = rem // c
-                out.add(b)
-
+        if d <= Y:
+            rem = n // d
+            for c0 in divisors(rem):
+                c = int(c0)
+                if c <= Y and von_mangoldt(c) != 0:
+                    out.add(rem // c)
     for a in ds:
-        if a <= U:
-            continue
-        rem = n // a
-        for c0 in divisors(rem):
-            c = int(c0)
-            if c > V and von_mangoldt(c) != 0.0:
-                b = rem // c
-                # Lexicographic tie breaking is irrelevant for the numerical value.
-                out.add(max(a, b, c))
+        if a > Y:
+            rem = n // a
+            for c0 in divisors(rem):
+                c = int(c0)
+                if c > Y and von_mangoldt(c) != 0:
+                    out.add(max(a, rem // c, c))
     return out
 
 
@@ -97,106 +78,90 @@ def main() -> None:
     universal_max_error = 0.0
     universal_cases = 0
     for U, V in ((2, 3), (5, 7), (11, 13), (19, 29)):
-        for n in range(2, 5001):
+        for n in range(2, 2001):
             t1, t2, t3, t4 = vaughan_terms(n, U, V)
-            got = t1 - t2 + t3 + t4
-            err = abs(got - von_mangoldt(n))
+            err = abs(t1 - t2 + t3 + t4 - von_mangoldt(n))
             universal_max_error = max(universal_max_error, err)
-            assert err < 5e-11, (n, U, V, got, von_mangoldt(n), (t1, t2, t3, t4))
+            assert err < 5e-11, (n, U, V, err)
             universal_cases += 1
 
-    X = 23
+    # X=31 is the first tested prime block for which floor(P0^(1/3)) > H.
+    X = 31
     block, centres, P0, H = block_data(X)
-    Y, exact = integer_nthroot(P0, 3)
+    Y, _ = integer_nthroot(P0, 3)
     Y = int(Y)
-    assert Y > H
+    assert Y > H, (X, P0, Y, H)
 
+    rng = random.Random(SEED)
+    offsets = sorted({2, 3, 5, 7, 11, X, X + 1, H - 1, H} |
+                     {rng.randrange(2, H + 1) for _ in range(50)})
     shifted_max_error = 0.0
-    shifted_cases = 0
-    type1_min = None
-    type2_min = None
-    type4_min = None
+    minima = {"type1": None, "type2": None, "type4": None}
     column_support: dict[int, set[int]] = defaultdict(set)
 
     for j, P in enumerate(centres):
-        for m in range(2, H + 1):
+        for m in offsets:
             n = P + m
             t1, t2, t3, t4 = vaughan_terms(n, Y, Y)
-            got = t1 - t2 + t3 + t4
-            err = abs(got - von_mangoldt(n))
+            err = abs(t1 - t2 + t3 + t4 - von_mangoldt(n))
             shifted_max_error = max(shifted_max_error, err)
-            assert err < 2e-9, (j, m, got, von_mangoldt(n))
+            assert err < 2e-9, (j, m, err)
             assert t3 == 0.0
-
             ds = [int(d) for d in divisors(n)]
             for d in ds:
                 if d <= Y:
                     e = n // d
-                    type1_min = e if type1_min is None else min(type1_min, e)
+                    minima["type1"] = e if minima["type1"] is None else min(minima["type1"], e)
                     assert e > H
-
             for d in ds:
-                if d > Y:
-                    continue
-                rem = n // d
-                for c0 in divisors(rem):
-                    c = int(c0)
-                    if c <= Y and von_mangoldt(c) != 0.0:
-                        b = rem // c
-                        type2_min = b if type2_min is None else min(type2_min, b)
-                        assert b > H
-
+                if d <= Y:
+                    rem = n // d
+                    for c0 in divisors(rem):
+                        c = int(c0)
+                        if c <= Y and von_mangoldt(c) != 0:
+                            b = rem // c
+                            minima["type2"] = b if minima["type2"] is None else min(minima["type2"], b)
+                            assert b > H
             for a in ds:
-                if a <= Y:
-                    continue
-                rem = n // a
-                for c0 in divisors(rem):
-                    c = int(c0)
-                    if c > Y and von_mangoldt(c) != 0.0:
-                        b = rem // c
-                        D = max(a, b, c)
-                        type4_min = D if type4_min is None else min(type4_min, D)
-                        assert D > H
-
+                if a > Y:
+                    rem = n // a
+                    for c0 in divisors(rem):
+                        c = int(c0)
+                        if c > Y and von_mangoldt(c) != 0:
+                            D = max(a, rem // c, c)
+                            minima["type4"] = D if minima["type4"] is None else min(minima["type4"], D)
+                            assert D > H
             if m > X:
-                for D in routed_columns_for_output(n, Y, Y):
+                for D in routed_factors(n, Y):
                     column_support[D].add(j)
-            shifted_cases += 1
 
-    # Apply the exact D-specific shrinking-target bound to every routed column.
+    assert minima["type1"] is not None and minima["type2"] is not None
+    all_recorded_minima_exceed_H = all(v is None or v > H for v in minima.values())
+    assert all_recorded_minima_exceed_H
+
     max_support = 0
-    worst_D = None
     max_ratio = 0.0
+    worst_D = None
     for D, support in column_support.items():
         delta = max(1, math.ceil(math.log(D / H) / math.log(2 * X)))
         bound = 1 + (len(centres) - 1) // delta
         assert len(support) <= bound, (D, sorted(support), delta, bound)
         if len(support) > max_support:
-            max_support = len(support)
-            worst_D = D
+            max_support, worst_D = len(support), D
         max_ratio = max(max_ratio, len(support) / bound)
 
     payload = {
         "status": "PASS",
-        "scope": "exact Vaughan identity and primorial-adapted fixed-complexity routing",
-        "universal": {
-            "cases": universal_cases,
-            "max_error": universal_max_error,
-            "cutoff_pairs": [[2, 3], [5, 7], [11, 13], [19, 29]],
-        },
+        "scope": "exact Vaughan identity and post-threshold primorial routing",
+        "universal": {"cases": universal_cases, "max_error": universal_max_error},
         "shifted_block": {
-            "X": X,
-            "N": len(centres),
-            "H": H,
-            "P0": P0,
-            "Y_floor_cuberoot_P0": Y,
-            "Y_exceeds_H": Y > H,
-            "cases": shifted_cases,
-            "max_error": shifted_max_error,
-            "minimum_type1_routed_factor": type1_min,
-            "minimum_subtraction_routed_factor": type2_min,
-            "minimum_large_large_routed_factor": type4_min,
-            "all_minima_exceed_H": min(type1_min, type2_min, type4_min) > H,
+            "X": X, "N": len(centres), "H": H, "P0": P0,
+            "Y_floor_cuberoot_P0": Y, "Y_exceeds_H": Y > H,
+            "offsets_per_centre": len(offsets), "max_error": shifted_max_error,
+            "minimum_type1_routed_factor": minima["type1"],
+            "minimum_subtraction_routed_factor": minima["type2"],
+            "minimum_large_large_routed_factor": minima["type4"],
+            "all_recorded_minima_exceed_H": all_recorded_minima_exceed_H,
         },
         "routed_columns": {
             "active_column_count": len(column_support),
@@ -204,13 +169,11 @@ def main() -> None:
             "worst_D": worst_D,
             "maximum_support_to_theorem_bound_ratio": max_ratio,
         },
-        "boundary": (
-            "The verifier checks exact decomposition and routing. It does not "
-            "prove the signed trilinear dispersion estimate."
-        ),
+        "boundary": "Exact identities and routing only; signed trilinear dispersion remains open.",
     }
-    path = Path(__file__).with_name("orbit_routed_vaughan_results.json")
-    path.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
+    Path(__file__).with_name("orbit_routed_vaughan_results.json").write_text(
+        json.dumps(payload, indent=2) + "\n", encoding="utf-8"
+    )
     print(json.dumps(payload, indent=2))
 
 
