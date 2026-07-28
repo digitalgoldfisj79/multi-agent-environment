@@ -1,0 +1,35 @@
+{
+  "status": "finite calibration; no asymptotic inference",
+  "parameters": {
+    "targets": [11, 17, 23, 29, 37, 43, 53, 61, 73, 89, 101, 113, 131],
+    "eta": 0.8,
+    "harmonic_cutoff": 6,
+    "twin_prime_constant_approximation": 0.6601620668212826
+  },
+  "summary": {
+    "minimum_eigenvalue_over_panel": 0.8566096743039395,
+    "maximum_eigenvalue_over_panel": 1.1829843015487533,
+    "minimum_residual_rayleigh_quotient": 0.9952869939237722,
+    "maximum_residual_rayleigh_quotient": 1.1414776104067568,
+    "minimum_total_off_diagonal_mass": 0.38077801010672696,
+    "maximum_total_off_diagonal_mass": 0.7307087176740501,
+    "minimum_max_row_sum": 0.025424646532267576,
+    "maximum_max_row_sum": 0.18853912915186619
+  },
+  "rows": [
+    {"X":11,"N":4,"H":96,"largest_centre_digits":6,"q_shell_count":19,"gaussian_signed_tail_bound":3.86743464065315e-17,"kernel_min_eigenvalue":0.8566096743039395,"kernel_max_eigenvalue":1.1829843015487533,"operator_norm_K_minus_I":0.18298430154875334,"kernel_total_off_diagonal_mass":0.7307087176740501,"kernel_max_off_diagonal_row_sum":0.18853912915186619,"residual_rayleigh_quotient":1.1414776104067568},
+    {"X":17,"N":5,"H":231,"largest_centre_digits":10,"q_shell_count":39,"gaussian_signed_tail_bound":3.86743464065315e-17,"kernel_min_eigenvalue":0.9152106733590407,"kernel_max_eigenvalue":1.1159228217767987,"operator_norm_K_minus_I":0.11592282177679869,"kernel_total_off_diagonal_mass":0.5476462212206253,"kernel_max_off_diagonal_row_sum":0.15022792945404256,"residual_rayleigh_quotient":1.0206769632937487},
+    {"X":23,"N":6,"H":423,"largest_centre_digits":15,"q_shell_count":64,"gaussian_signed_tail_bound":3.86743464065315e-17,"kernel_min_eigenvalue":0.9376191150489093,"kernel_max_eigenvalue":1.119503983943114,"operator_norm_K_minus_I":0.11950398394311401,"kernel_total_off_diagonal_mass":0.6634495494332759,"kernel_max_off_diagonal_row_sum":0.1525309569115334,"residual_rayleigh_quotient":0.9952869939237722},
+    {"X":29,"N":7,"H":672,"largest_centre_digits":18,"q_shell_count":96,"gaussian_signed_tail_bound":3.86743464065315e-17,"kernel_min_eigenvalue":0.947794035965016,"kernel_max_eigenvalue":1.0929098058254123,"operator_norm_K_minus_I":0.0929098058254123,"kernel_total_off_diagonal_mass":0.6045919598915248,"kernel_max_off_diagonal_row_sum":0.1390047687700258,"residual_rayleigh_quotient":1.0163020914944156},
+    {"X":37,"N":10,"H":1095,"largest_centre_digits":27,"q_shell_count":144,"gaussian_signed_tail_bound":3.86743464065315e-17,"kernel_min_eigenvalue":0.9584754648719368,"kernel_max_eigenvalue":1.0758674947171973,"operator_norm_K_minus_I":0.07586749471719734,"kernel_total_off_diagonal_mass":0.7029381142732836,"kernel_max_off_diagonal_row_sum":0.10656696775457883,"residual_rayleigh_quotient":1.0129377799375405},
+    {"X":43,"N":10,"H":1479,"largest_centre_digits":31,"q_shell_count":193,"gaussian_signed_tail_bound":3.86743464065315e-17,"kernel_min_eigenvalue":0.9704820648029624,"kernel_max_eigenvalue":1.0534499672786755,"operator_norm_K_minus_I":0.05344996727867546,"kernel_total_off_diagonal_mass":0.4666603911549263,"kernel_max_off_diagonal_row_sum":0.07917377404443207,"residual_rayleigh_quotient":1.0035177632770012},
+    {"X":53,"N":12,"H":2247,"largest_centre_digits":39,"q_shell_count":276,"gaussian_signed_tail_bound":3.86743464065315e-17,"kernel_min_eigenvalue":0.9748060267978662,"kernel_max_eigenvalue":1.0463908896930327,"operator_norm_K_minus_I":0.04639088969303273,"kernel_total_off_diagonal_mass":0.5427444218754668,"kernel_max_off_diagonal_row_sum":0.0631354583011122,"residual_rayleigh_quotient":1.0157576641065238},
+    {"X":61,"N":13,"H":2976,"largest_centre_digits":45,"q_shell_count":351,"gaussian_signed_tail_bound":3.86743464065315e-17,"kernel_min_eigenvalue":0.9672410986370732,"kernel_max_eigenvalue":1.051963673522561,"operator_norm_K_minus_I":0.05196367352256104,"kernel_total_off_diagonal_mass":0.6567782959196705,"kernel_max_off_diagonal_row_sum":0.06443767257383194,"residual_rayleigh_quotient":1.0098152806496001},
+    {"X":73,"N":14,"H":4263,"largest_centre_digits":53,"q_shell_count":477,"gaussian_signed_tail_bound":3.86743464065315e-17,"kernel_min_eigenvalue":0.9832638300385594,"kernel_max_eigenvalue":1.0360920516414556,"operator_norm_K_minus_I":0.03609205164145557,"kernel_total_off_diagonal_mass":0.4776996872001795,"kernel_max_off_diagonal_row_sum":0.048758839136968005,"residual_rayleigh_quotient":0.9989618088447121},
+    {"X":89,"N":17,"H":6336,"largest_centre_digits":66,"q_shell_count":690,"gaussian_signed_tail_bound":3.86743464065315e-17,"kernel_min_eigenvalue":0.9855011191625302,"kernel_max_eigenvalue":1.0313771065060737,"operator_norm_K_minus_I":0.031377106506073726,"kernel_total_off_diagonal_mass":0.5108881263757539,"kernel_max_off_diagonal_row_sum":0.04653842249180433,"residual_rayleigh_quotient":1.0006321741894664},
+    {"X":101,"N":21,"H":8160,"largest_centre_digits":80,"q_shell_count":870,"gaussian_signed_tail_bound":3.86743464065315e-17,"kernel_min_eigenvalue":0.9829311455813977,"kernel_max_eigenvalue":1.034839967793127,"operator_norm_K_minus_I":0.034839967793127036,"kernel_total_off_diagonal_mass":0.6950231351424327,"kernel_max_off_diagonal_row_sum":0.05183958043897333,"residual_rayleigh_quotient":0.9976867631722599},
+    {"X":113,"N":19,"H":10215,"largest_centre_digits":85,"q_shell_count":1054,"gaussian_signed_tail_bound":3.86743464065315e-17,"kernel_min_eigenvalue":0.9923126370832789,"kernel_max_eigenvalue":1.02056372136584,"operator_norm_K_minus_I":0.02056372136584006,"kernel_total_off_diagonal_mass":0.38077801010672696,"kernel_max_off_diagonal_row_sum":0.025424646532267576,"residual_rayleigh_quotient":0.9991410365961443},
+    {"X":131,"N":24,"H":13728,"largest_centre_digits":101,"q_shell_count":1376,"gaussian_signed_tail_bound":3.86743464065315e-17,"kernel_min_eigenvalue":0.9927869733688395,"kernel_max_eigenvalue":1.0217601907329006,"operator_norm_K_minus_I":0.021760190732900586,"kernel_total_off_diagonal_mass":0.5111296062627579,"kernel_max_off_diagonal_row_sum":0.02957257586554091,"residual_rayleigh_quotient":0.9999630461217297}
+  ],
+  "boundary": "Finite positivity and near-one Rayleigh quotients do not prove a uniform lower frame bound."
+}
