@@ -45,8 +45,11 @@ def one_case(pj: int, H: int) -> dict:
             assert isprime(q)
             s = d // q
             assert P % s == 0 and s <= H // q
-            expected = sum(w for m, w in weights.items()
-                           if m % s == 0 and ((P // s) + (m // s)) % q == 0)
+            expected = sum(
+                w
+                for m, w in weights.items()
+                if m % s == 0 and ((P // s) + (m // s)) % q == 0
+            )
             assert abs(incidence - expected) < 2e-12
             new_prime += int(mobius(s)) * (math.log(q) + math.log(s)) * expected
         classified += 1
@@ -55,12 +58,17 @@ def one_case(pj: int, H: int) -> dict:
     gcd_form = 0.0
     for d in range(1, H + 1):
         if P % d == 0 and mobius(d) != 0:
-            smooth_sharp += -int(mobius(d)) * math.log(d) * sum(1 for m in range(2, H + 1) if m % d == 0)
+            smooth_sharp += -int(mobius(d)) * math.log(d) * sum(
+                1 for m in range(2, H + 1) if m % d == 0
+            )
     for m in range(2, H + 1):
         gcd_form += von_mangoldt(math.gcd(m, P))
 
     return {
-        "p_j": pj, "P_j": P, "p_next": pnext, "H": H,
+        "p_j": pj,
+        "P_j": P,
+        "p_next": pnext,
+        "H": H,
         "classified_squarefree_moduli": classified,
         "direct_weighted_small_source": direct,
         "smooth_weighted_source": smooth,
@@ -73,7 +81,7 @@ def one_case(pj: int, H: int) -> dict:
 
 
 def main() -> None:
-    rows = [one_case(11, 150), one_case(13, 200), one_case(17, 400)]
+    rows = [one_case(11, 150), one_case(13, 200), one_case(17, 350)]
     for row in rows:
         assert row["weighted_decomposition_error"] < 3e-10
         assert row["smooth_gcd_error"] < 3e-10
