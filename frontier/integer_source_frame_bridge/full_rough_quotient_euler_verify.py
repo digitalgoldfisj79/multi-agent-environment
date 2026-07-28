@@ -2,7 +2,6 @@
 """Verify the complete Euler-to-rough-quotient identity on finite panels."""
 from __future__ import annotations
 
-import itertools
 import json
 import math
 from pathlib import Path
@@ -34,8 +33,6 @@ def one_case(z: int, H: int) -> dict:
     zp = int(nextprime(z))
     assert z < H < zp * zp
     Y = math.isqrt(P + H)
-    if (Y + 1) * (Y + 1) <= P + H:
-        Y += 1
 
     candidates = candidate_set(P, z, H)
     assert candidates == list(map(int, primerange(z + 1, H + 1)))
@@ -66,7 +63,12 @@ def one_case(z: int, H: int) -> dict:
     quotient_expansion = 0.0
     maximum_bijection_error = 0
     maximum_tail_support = 0
-    layer_counts = {"principal": 0, "single_prime": 0, "higher_order": 0}
+    layer_counts = {
+        "principal": 0,
+        "physical_prime": 0,
+        "tail_prime": 0,
+        "higher_order": 0,
+    }
     rows = []
 
     for Q in sorted(active_Q):
@@ -84,15 +86,22 @@ def one_case(z: int, H: int) -> dict:
 
         if Q == 1:
             layer = "principal"
-        elif Q <= H:
+        elif omega == 1 and Q <= H:
             assert isprime(Q)
-            assert omega == 1
-            layer = "single_prime"
+            layer = "physical_prime"
+        elif omega == 1:
+            assert H < Q <= Y
+            assert isprime(Q)
+            layer = "tail_prime"
         else:
             assert omega >= 2
+            assert Q >= zp * zp > H
+            layer = "higher_order"
+
+        if Q > H:
             assert len(ks) <= 1
             maximum_tail_support = max(maximum_tail_support, len(ks))
-            layer = "higher_order"
+
         layer_counts[layer] += 1
         rows.append({"Q": Q, "omega": omega, "layer": layer, "support": len(ks)})
 
@@ -125,7 +134,7 @@ def main() -> None:
     panels = [one_case(7, 20), one_case(11, 30), one_case(13, 36), one_case(17, 80)]
     payload = {
         "status": "PASS",
-        "scope": "complete Euler divisor cancellation and full rough-quotient geometry",
+        "scope": "complete Euler divisor cancellation and corrected four-level rough-quotient geometry",
         "panels": panels,
         "boundary": "Finite exact verification only; deterministic centred sampling of the full quotient system remains open.",
     }
