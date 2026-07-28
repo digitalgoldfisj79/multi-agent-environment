@@ -10,6 +10,9 @@ on:
       - frontier/integer_source_frame_bridge/PROGRAMME_STATUS_AFTER_COMPLETE_MODULUS_FRAME_20260728.md
       - frontier/integer_source_frame_bridge/complete_prime_modulus_frame_verify.py
       - frontier/integer_source_frame_bridge/complete_prime_modulus_frame_results.json
+      - frontier/integer_source_frame_bridge/PRIMORIAL_PAIR_OF_PAIRS_SINGULAR_SERIES_AVERAGE_20260728.md
+      - frontier/integer_source_frame_bridge/primorial_pair4_singular_series_verify.py
+      - frontier/integer_source_frame_bridge/primorial_pair4_singular_series_results.json
   workflow_dispatch:
 
 permissions:
@@ -26,34 +29,43 @@ jobs:
         run: |
           set -euo pipefail
           ROOT=frontier/integer_source_frame_bridge
-          test -s "$ROOT/COMPLETE_PRIME_MODULUS_FRAME_20260728.md"
-          test -s "$ROOT/PROGRAMME_STATUS_AFTER_COMPLETE_MODULUS_FRAME_20260728.md"
-          test -s "$ROOT/complete_prime_modulus_frame_verify.py"
-          test -s "$ROOT/complete_prime_modulus_frame_results.json"
+          for file in \
+            COMPLETE_PRIME_MODULUS_FRAME_20260728.md \
+            PROGRAMME_STATUS_AFTER_COMPLETE_MODULUS_FRAME_20260728.md \
+            complete_prime_modulus_frame_verify.py \
+            complete_prime_modulus_frame_results.json \
+            PRIMORIAL_PAIR_OF_PAIRS_SINGULAR_SERIES_AVERAGE_20260728.md \
+            primorial_pair4_singular_series_verify.py \
+            primorial_pair4_singular_series_results.json; do
+            test -s "$ROOT/$file"
+          done
           ! grep -RInE 'TODO|TBD|PLACEHOLDER|REPLACE_ME' \
             "$ROOT/COMPLETE_PRIME_MODULUS_FRAME_20260728.md" \
-            "$ROOT/PROGRAMME_STATUS_AFTER_COMPLETE_MODULUS_FRAME_20260728.md"
+            "$ROOT/PROGRAMME_STATUS_AFTER_COMPLETE_MODULUS_FRAME_20260728.md" \
+            "$ROOT/PRIMORIAL_PAIR_OF_PAIRS_SINGULAR_SERIES_AVERAGE_20260728.md"
           grep -Fq 'Theorem 4.1 (near-Parseval complete-modulus frame)' \
             "$ROOT/COMPLETE_PRIME_MODULUS_FRAME_20260728.md"
+          grep -Fq 'Theorem 3.1 (primorial pair-of-pairs average)' \
+            "$ROOT/PRIMORIAL_PAIR_OF_PAIRS_SINGULAR_SERIES_AVERAGE_20260728.md"
           grep -Fq "Fortune's conjecture remains open" \
             "$ROOT/PROGRAMME_STATUS_AFTER_COMPLETE_MODULUS_FRAME_20260728.md"
 
       - name: Install verifier dependencies
         run: python3 -m pip install --quiet numpy sympy
 
-      - name: Recompute exact identity and calibration
+      - name: Recompute complete-modulus frame
         run: |
           set -euo pipefail
           ROOT=frontier/integer_source_frame_bridge
-          cp "$ROOT/complete_prime_modulus_frame_results.json" /tmp/expected.json
-          python3 "$ROOT/complete_prime_modulus_frame_verify.py" > /tmp/recomputed.stdout.json
-          cp "$ROOT/complete_prime_modulus_frame_results.json" /tmp/recomputed.json
+          cp "$ROOT/complete_prime_modulus_frame_results.json" /tmp/frame.expected.json
+          python3 "$ROOT/complete_prime_modulus_frame_verify.py" > /tmp/frame.stdout.json
+          cp "$ROOT/complete_prime_modulus_frame_results.json" /tmp/frame.got.json
           python3 - <<'PY'
           import json
           from pathlib import Path
 
-          expected = json.loads(Path('/tmp/expected.json').read_text())
-          got = json.loads(Path('/tmp/recomputed.json').read_text())
+          expected = json.loads(Path('/tmp/frame.expected.json').read_text())
+          got = json.loads(Path('/tmp/frame.got.json').read_text())
           assert expected['status'] == got['status'] == 'PASS'
           assert expected['parameters'] == got['parameters']
           assert got['direct_character_check']['identity_error'] < 1e-10
@@ -81,15 +93,53 @@ jobs:
           print(json.dumps(got['summary'], indent=2))
           PY
 
+      - name: Recompute pair-of-pairs local identities
+        run: |
+          set -euo pipefail
+          ROOT=frontier/integer_source_frame_bridge
+          cp "$ROOT/primorial_pair4_singular_series_results.json" /tmp/pair4.expected.json
+          python3 "$ROOT/primorial_pair4_singular_series_verify.py" > /tmp/pair4.stdout.json
+          cp "$ROOT/primorial_pair4_singular_series_results.json" /tmp/pair4.got.json
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+
+          expected = json.loads(Path('/tmp/pair4.expected.json').read_text())
+          got = json.loads(Path('/tmp/pair4.got.json').read_text())
+          assert expected['status'] == got['status'] == 'PASS'
+          assert expected['parameters'] == got['parameters']
+          assert expected['local_checks'] == got['local_checks']
+          assert len(expected['truncated_averages']) == len(got['truncated_averages']) == 4
+          tol = 5e-12
+          for a, b in zip(expected['truncated_averages'], got['truncated_averages']):
+              assert a['X'] == b['X']
+              assert a['H'] == b['H']
+              assert a['primes_in_truncation'] == b['primes_in_truncation']
+              for key in (
+                  'normalised_truncated_average',
+                  'absolute_error_from_one',
+                  'logX_over_H',
+                  'error_divided_by_logX_over_H',
+              ):
+                  assert abs(a[key] - b[key]) < tol, (a['X'], key, a[key], b[key])
+              assert b['absolute_error_from_one'] < 5 * b['logX_over_H']
+          print(json.dumps(got['truncated_averages'], indent=2))
+          PY
+
       - name: Upload validation record
         uses: actions/upload-artifact@v4
         with:
           name: complete-prime-modulus-frame-validation
           path: |
-            /tmp/expected.json
-            /tmp/recomputed.json
-            /tmp/recomputed.stdout.json
+            /tmp/frame.expected.json
+            /tmp/frame.got.json
+            /tmp/frame.stdout.json
+            /tmp/pair4.expected.json
+            /tmp/pair4.got.json
+            /tmp/pair4.stdout.json
             frontier/integer_source_frame_bridge/COMPLETE_PRIME_MODULUS_FRAME_20260728.md
             frontier/integer_source_frame_bridge/PROGRAMME_STATUS_AFTER_COMPLETE_MODULUS_FRAME_20260728.md
             frontier/integer_source_frame_bridge/complete_prime_modulus_frame_verify.py
+            frontier/integer_source_frame_bridge/PRIMORIAL_PAIR_OF_PAIRS_SINGULAR_SERIES_AVERAGE_20260728.md
+            frontier/integer_source_frame_bridge/primorial_pair4_singular_series_verify.py
           retention-days: 90
