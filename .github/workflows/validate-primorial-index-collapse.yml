@@ -11,10 +11,12 @@ on:
       - frontier/integer_source_frame_bridge/LARGEST_FACTOR_HYPERBOLA_SOURCE_IDENTITY_20260728.md
       - frontier/integer_source_frame_bridge/ORBIT_ROUTED_VAUGHAN_COLLAPSE_20260728.md
       - frontier/integer_source_frame_bridge/THREE_ORBIT_COLUMN_SOURCE_IDENTITY_20260728.md
+      - frontier/integer_source_frame_bridge/EXPLICIT_ZERO_FREQUENCY_PRINCIPAL_TERM_20260728.md
       - frontier/integer_source_frame_bridge/primorial_shrinking_target_verify.py
       - frontier/integer_source_frame_bridge/largest_factor_hyperbola_verify.py
       - frontier/integer_source_frame_bridge/orbit_routed_vaughan_verify.py
       - frontier/integer_source_frame_bridge/three_orbit_column_verify.py
+      - frontier/integer_source_frame_bridge/zero_frequency_principal_verify.py
   workflow_dispatch:
 
 permissions:
@@ -23,7 +25,7 @@ permissions:
 jobs:
   validate:
     runs-on: ubuntu-24.04
-    timeout-minutes: 25
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
 
@@ -37,10 +39,12 @@ jobs:
             LARGEST_FACTOR_HYPERBOLA_SOURCE_IDENTITY_20260728.md \
             ORBIT_ROUTED_VAUGHAN_COLLAPSE_20260728.md \
             THREE_ORBIT_COLUMN_SOURCE_IDENTITY_20260728.md \
+            EXPLICIT_ZERO_FREQUENCY_PRINCIPAL_TERM_20260728.md \
             primorial_shrinking_target_verify.py \
             largest_factor_hyperbola_verify.py \
             orbit_routed_vaughan_verify.py \
-            three_orbit_column_verify.py; do
+            three_orbit_column_verify.py \
+            zero_frequency_principal_verify.py; do
             test -s "$ROOT/$file"
           done
           ! grep -RInE 'TODO|TBD|PLACEHOLDER|REPLACE_ME' \
@@ -48,7 +52,8 @@ jobs:
             "$ROOT/LARGEST_FACTOR_ROUTED_BESSEL_INEQUALITY_20260728.md" \
             "$ROOT/LARGEST_FACTOR_HYPERBOLA_SOURCE_IDENTITY_20260728.md" \
             "$ROOT/ORBIT_ROUTED_VAUGHAN_COLLAPSE_20260728.md" \
-            "$ROOT/THREE_ORBIT_COLUMN_SOURCE_IDENTITY_20260728.md"
+            "$ROOT/THREE_ORBIT_COLUMN_SOURCE_IDENTITY_20260728.md" \
+            "$ROOT/EXPLICIT_ZERO_FREQUENCY_PRINCIPAL_TERM_20260728.md"
           grep -Fq 'Theorem 4.1 (shrinking-target separation)' \
             "$ROOT/PRIMORIAL_INDEX_SHRINKING_TARGET_COLLAPSE_20260728.md"
           grep -Fq 'Theorem 2.1 (largest-factor hyperbola identity)' \
@@ -59,8 +64,8 @@ jobs:
             "$ROOT/ORBIT_ROUTED_VAUGHAN_COLLAPSE_20260728.md"
           grep -Fq 'Theorem 5.1 (three-orbit-column identity)' \
             "$ROOT/THREE_ORBIT_COLUMN_SOURCE_IDENTITY_20260728.md"
-          grep -Fq 'sum_{2\\le m\\le H}e(rm/D)' \
-            "$ROOT/THREE_ORBIT_COLUMN_SOURCE_IDENTITY_20260728.md"
+          grep -Fq 'Theorem 5.1 (exact zero-frequency baseline)' \
+            "$ROOT/EXPLICIT_ZERO_FREQUENCY_PRINCIPAL_TERM_20260728.md"
           grep -Fq "Fortune's conjecture" \
             "$ROOT/PRIMORIAL_INDEX_SHRINKING_TARGET_COLLAPSE_20260728.md"
 
@@ -149,6 +154,26 @@ jobs:
           print(json.dumps(data, indent=2))
           PY
 
+      - name: Recompute zero-frequency principal term
+        run: |
+          set -euo pipefail
+          ROOT=frontier/integer_source_frame_bridge
+          python "$ROOT/zero_frequency_principal_verify.py" > /tmp/zero-mode.stdout.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          root = Path('frontier/integer_source_frame_bridge')
+          data = json.loads((root / 'zero_frequency_principal_results.json').read_text())
+          assert data['status'] == 'PASS'
+          for row in data['toy_exact_rows']:
+              assert row['type_I_error'] < 2e-12
+              assert row['type_II_error'] < 2e-12
+              assert row['type_III_error'] < 2e-12
+              assert row['combined_error'] < 5e-12
+          assert all(row['Y_exceeds_H'] for row in data['primorial_panel'])
+          print(json.dumps(data, indent=2))
+          PY
+
       - name: Upload validation record
         uses: actions/upload-artifact@v4
         with:
@@ -158,14 +183,17 @@ jobs:
             /tmp/hyperbola.stdout.json
             /tmp/vaughan.stdout.json
             /tmp/three-columns.stdout.json
+            /tmp/zero-mode.stdout.json
             frontier/integer_source_frame_bridge/primorial_shrinking_target_results.json
             frontier/integer_source_frame_bridge/primorial_shrinking_target_results_full.json
             frontier/integer_source_frame_bridge/largest_factor_hyperbola_results.json
             frontier/integer_source_frame_bridge/orbit_routed_vaughan_results.json
             frontier/integer_source_frame_bridge/three_orbit_column_results.json
+            frontier/integer_source_frame_bridge/zero_frequency_principal_results.json
             frontier/integer_source_frame_bridge/PRIMORIAL_INDEX_SHRINKING_TARGET_COLLAPSE_20260728.md
             frontier/integer_source_frame_bridge/LARGEST_FACTOR_ROUTED_BESSEL_INEQUALITY_20260728.md
             frontier/integer_source_frame_bridge/LARGEST_FACTOR_HYPERBOLA_SOURCE_IDENTITY_20260728.md
             frontier/integer_source_frame_bridge/ORBIT_ROUTED_VAUGHAN_COLLAPSE_20260728.md
             frontier/integer_source_frame_bridge/THREE_ORBIT_COLUMN_SOURCE_IDENTITY_20260728.md
+            frontier/integer_source_frame_bridge/EXPLICIT_ZERO_FREQUENCY_PRINCIPAL_TERM_20260728.md
           retention-days: 90
