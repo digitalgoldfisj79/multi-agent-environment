@@ -1,0 +1,19 @@
+== full enumeration, K=6 ==
+X=23  K=6  M=28  |shell|=78  M(M-1)k2=10.03  full enumeration
+  E(id)=9.497  E(rev)=10.295  mean=10.018  std=0.807  min=7.806  max=13.439
+  residual R(id)=-0.537  R mean=-0.016
+  percentile of id among orderings: 26.5%  (z-score -0.64)
+
+== sampled, K=10 ==
+X=40  K=10  M=66  |shell|=201  M(M-1)k2=22.12  2002 sampled
+  E(id)=21.377  E(rev)=21.480  mean=22.036  std=0.892  min=19.660  max=25.245
+  residual R(id)=-0.748  R mean=-0.089
+  percentile of id among orderings: 23.9%  (z-score -0.74)
+
+== sampled, K=15 (X=53) ==
+X=53  K=12  M=91  |shell|=329  M(M-1)k2=25.77  502 sampled
+  E(id)=26.966  E(rev)=26.051  mean=26.030  std=0.834  min=23.765  max=29.200
+  residual R(id)=1.200  R mean=0.264
+  percentile of id among orderings: 86.3%  (z-score +1.12)
+
+[time 6.4s]

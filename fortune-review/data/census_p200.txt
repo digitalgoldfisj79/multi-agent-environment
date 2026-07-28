@@ -1,0 +1,93 @@
+== N2 census: f = x^p + x^2 + d ==
+p, N2, witnesses d, [d==2^k mod p?], chi_p(1-4d) (must be -1)
+p=   5  N2=1  wit=[2]  log2(wit)=[1]
+p=   7  N2=1  wit=[4]  log2(wit)=[2]
+p=  11  N2=1  wit=[8]  log2(wit)=[3]
+p=  13  N2=2  wit=[5, 8]  log2(wit)=[9, 3]
+p=  17  N2=1  wit=[16]  log2(wit)=[4]
+p=  19  N2=2  wit=[12, 14]  log2(wit)=[15, 7]
+p=  23  N2=2  wit=[1, 12]  log2(wit)=[11, 10]
+p=  29  N2=1  wit=[12]  log2(wit)=[7]
+p=  31  N2=0  wit=[]  log2(wit)=[]
+p=  37  N2=1  wit=[20]  log2(wit)=[25]
+p=  41  N2=0  wit=[]  log2(wit)=[]
+p=  43  N2=3  wit=[22, 28, 42]  log2(wit)=[13, None, 7]
+p=  47  N2=2  wit=[16, 24]  log2(wit)=[4, 22]
+p=  53  N2=1  wit=[32]  log2(wit)=[5]
+p=  59  N2=0  wit=[]  log2(wit)=[]
+p=  61  N2=2  wit=[11, 18]  log2(wit)=[15, 13]
+p=  67  N2=3  wit=[34, 46, 57]  log2(wit)=[65, 29, 49]
+p=  71  N2=0  wit=[]  log2(wit)=[]
+p=  73  N2=1  wit=[48]  log2(wit)=[None]
+p=  79  N2=2  wit=[36, 62]  log2(wit)=[22, 15]
+p=  83  N2=2  wit=[19, 22]  log2(wit)=[47, 25]
+p=  89  N2=2  wit=[2, 21]  log2(wit)=[1, None]
+p=  97  N2=0  wit=[]  log2(wit)=[]
+p= 101  N2=1  wit=[61]  log2(wit)=[77]
+p= 103  N2=4  wit=[2, 28, 30, 60]  log2(wit)=[1, 16, 39, 40]
+p= 107  N2=1  wit=[50]  log2(wit)=[95]
+p= 109  N2=1  wit=[32]  log2(wit)=[5]
+p= 113  N2=0  wit=[]  log2(wit)=[]
+p= 127  N2=1  wit=[76]  log2(wit)=[None]
+p= 131  N2=0  wit=[]  log2(wit)=[]
+p= 137  N2=2  wit=[63, 74]  log2(wit)=[18, 52]
+p= 139  N2=3  wit=[23, 82, 135]  log2(wit)=[27, 33, 71]
+p= 149  N2=1  wit=[50]  log2(wit)=[61]
+p= 151  N2=0  wit=[]  log2(wit)=[]
+p= 157  N2=0  wit=[]  log2(wit)=[]
+p= 163  N2=0  wit=[]  log2(wit)=[]
+p= 167  N2=1  wit=[84]  log2(wit)=[82]
+p= 173  N2=1  wit=[125]  log2(wit)=[117]
+p= 179  N2=3  wit=[94, 128, 166]  log2(wit)=[37, 7, 25]
+p= 181  N2=3  wit=[68, 110, 134]  log2(wit)=[177, 39, 103]
+p= 191  N2=2  wit=[1, 108]  log2(wit)=[95, 79]
+p= 193  N2=4  wit=[23, 112, 128, 190]  log2(wit)=[33, 24, 7, 90]
+p= 197  N2=0  wit=[]  log2(wit)=[]
+p= 199  N2=1  wit=[35]  log2(wit)=[40]
+[N2 census time 14.6s]
+
+== cubic sector counts and W_p (small p) ==
+p=  5  N2=1 Nsq=4 Nns=6  W_p=6  W_p/p=1.200
+p=  7  N2=1 Nsq=10 Nns=8  W_p=10  W_p/p=1.429
+p= 11  N2=1 Nsq=14 Nns=14  W_p=15  W_p/p=1.364
+p= 13  N2=2 Nsq=10 Nns=6  W_p=10  W_p/p=0.769
+p= 17  N2=1 Nsq=18 Nns=14  W_p=17  W_p/p=1.000
+p= 19  N2=2 Nsq=22 Nns=16  W_p=21  W_p/p=1.105
+p= 23  N2=2 Nsq=12 Nns=22  W_p=19  W_p/p=0.826
+p= 29  N2=1 Nsq=36 Nns=28  W_p=33  W_p/p=1.138
+p= 31  N2=0 Nsq=30 Nns=38  W_p=34  W_p/p=1.097
+
+== M1 integrable-map diagnostics ==
+Chebyshev cubic graph poly x^p - (x^3 - 3x): factor profile (l, deg) + rest
+p=  7: factors found at l<=p/2: [(1, 3), (2, 4)], undetected-degree rest=0
+p= 11: factors found at l<=p/2: [(1, 3), (2, 2), (3, 6)], undetected-degree rest=0
+p= 13: factors found at l<=p/2: [(1, 3), (2, 6), (4, 4)], undetected-degree rest=0
+p= 17: factors found at l<=p/2: [(1, 3), (2, 4), (3, 6), (4, 4)], undetected-degree rest=0
+p= 19: factors found at l<=p/2: [(1, 3), (2, 2), (4, 4), (5, 10)], undetected-degree rest=0
+p= 23: factors found at l<=p/2: [(1, 3), (2, 4), (3, 12), (4, 4)], undetected-degree rest=0
+p= 29: factors found at l<=p/2: [(1, 3), (2, 2), (3, 12), (4, 4), (8, 8)], undetected-degree rest=0
+p= 31: factors found at l<=p/2: [(1, 3), (3, 12), (8, 16)], undetected-degree rest=0
+p= 37: factors found at l<=p/2: [(1, 3), (2, 6), (4, 12), (8, 16)], undetected-degree rest=0
+p= 41: factors found at l<=p/2: [(1, 3), (5, 10), (9, 18), (10, 10)], undetected-degree rest=0
+p= 43: factors found at l<=p/2: [(1, 3), (2, 6), (4, 12), (11, 22)], undetected-degree rest=0
+p= 47: factors found at l<=p/2: [(1, 3), (2, 4), (5, 10), (10, 30)], undetected-degree rest=0
+p= 53: factors found at l<=p/2: [(1, 3), (2, 6), (3, 12), (6, 12), (10, 20)], undetected-degree rest=0
+p= 59: factors found at l<=p/2: [(1, 3), (2, 2), (3, 12), (6, 12), (15, 30)], undetected-degree rest=0
+p= 61: factors found at l<=p/2: [(1, 3), (2, 2), (4, 4), (8, 8), (14, 28), (16, 16)], undetected-degree rest=0
+Special quadratic parameters d in {0, 2, p-2} (power map / Chebyshev conjugates):
+p=  5: [(0, False), (2, True), (3, False)]
+p=  7: [(0, False), (2, False), (5, False)]
+p= 11: [(0, False), (2, False), (9, False)]
+p= 13: [(0, False), (2, False), (11, False)]
+p= 17: [(0, False), (2, False), (15, False)]
+p= 19: [(0, False), (2, False), (17, False)]
+p= 23: [(0, False), (2, False), (21, False)]
+p= 29: [(0, False), (2, False), (27, False)]
+p= 31: [(0, False), (2, False), (29, False)]
+p= 37: [(0, False), (2, False), (35, False)]
+p= 41: [(0, False), (2, False), (39, False)]
+p= 43: [(0, False), (2, False), (41, False)]
+p= 47: [(0, False), (2, False), (45, False)]
+p= 53: [(0, False), (2, False), (51, False)]
+p= 59: [(0, False), (2, False), (57, False)]
+p= 61: [(0, False), (2, False), (59, False)]

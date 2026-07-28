@@ -1,0 +1,30 @@
+PASS  PaperII Thm4.2 fourth moment N=2  enum=19 formula=19
+PASS  PaperII Thm4.2 centred mass  N=2  enum=10 formula=10
+PASS  PaperII Thm4.2 fourth moment N=3  enum=102 formula=102
+PASS  PaperII Thm4.2 centred mass  N=3  enum=66 formula=66
+PASS  PaperII Thm4.2 fourth moment N=4  enum=334 formula=334
+PASS  PaperII Thm4.2 centred mass  N=4  enum=234 formula=234
+PASS  PaperII Thm4.2 fourth moment N=5  enum=835 formula=835
+PASS  PaperII Thm4.2 centred mass  N=5  enum=610 formula=610
+PASS  PaperII Thm4.2 fourth moment N=6  enum=1761 formula=1761
+PASS  PaperII Thm4.2 centred mass  N=6  enum=1320 formula=1320
+PASS  PaperII Thm4.2 fourth moment N=7  enum=3304 formula=3304
+PASS  PaperII Thm4.2 centred mass  N=7  enum=2520 formula=2520
+PASS  PaperII Thm4.2 fourth moment N=8  enum=5692 formula=5692
+PASS  PaperII Thm4.2 centred mass  N=8  enum=4396 formula=4396
+PASS  PaperII Thm4.2 value at N=55  formula=13562560
+PASS  PaperIII Thm3.1 dichotomy N=8  hist={8: 56, 1: 812} expect={1: 812, 8: 56}
+PASS  PaperIII Thm3.1 dichotomy N=9  hist={9: 72, 1: 1332} expect={1: 1332, 9: 72}
+PASS  PaperIII RmkA.9 sixth moment N=3  enum=2454 formula=2454
+PASS  PaperIII RmkA.9 sixth moment N=4  enum=17812 formula=17812
+PASS  PaperIII RmkA.9 sixth moment N=5  enum=80505 formula=80505
+PASS  PaperIII RmkA.9 sixth moment N=6  enum=270921 formula=270921
+PASS  PaperIII RmkA.9 sixth moment N=7  enum=746326 formula=746326
+PASS  PaperI Prop5.4 eigenvalues  computed=[np.float64(-1.0), np.float64(1.118473), np.float64(4.0), np.float64(17.881527)]
+PASS  PaperI Prop5.6 moments V=5 q=3  m2=5.000000/5 m4=45.000000/45
+PASS  PaperI Prop5.6 moments V=5 q=4  m2=5.000000/5 m4=45.000000/45
+PASS  PaperI Prop5.6 moments V=6 q=3  m2=15.000000/15 m4=675.000000/675
+PASS  PaperI Prop5.6 moments V=6 q=4  m2=15.000000/15 m4=675.000000/675
+PASS  PaperV counts p=5  I4=124 N2=1(wit d=[2]) Nsq=4 Nns=6 W_p=6; orbit-decomp OK
+PASS  PaperV counts p=7  I4=426 N2=1(wit d=[4]) Nsq=10 Nns=8 W_p=10; orbit-decomp OK
+PASS  PaperV counts p=11  I4=1660 N2=1(wit d=[8]) Nsq=14 Nns=14 W_p=15; orbit-decomp OK
