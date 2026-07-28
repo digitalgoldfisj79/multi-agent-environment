@@ -14,7 +14,7 @@ permissions:
 jobs:
   validate:
     runs-on: ubuntu-24.04
-    timeout-minutes: 30
+    timeout-minutes: 35
     steps:
       - uses: actions/checkout@v4
 
@@ -27,7 +27,8 @@ jobs:
             MOBIUS_LOG_SINGLE_COLUMN_COLLAPSE_20260728.md \
             PRIME_OFFSET_ROUGH_MODULUS_COLLAPSE_20260728.md \
             SMALL_MODULUS_ONE_NEW_PRIME_COLLAPSE_20260728.md \
-            SMOOTH_DIVISOR_LOG2_THEOREM_20260728.md; do
+            SMOOTH_DIVISOR_LOG2_THEOREM_20260728.md \
+            BALANCED_LEAST_FACTOR_COLLAPSE_20260728.md; do
             test -s "$ROOT/$file"
           done
           ! grep -RInE 'TODO|TBD|PLACEHOLDER|REPLACE_ME' \
@@ -35,10 +36,12 @@ jobs:
             "$ROOT/MOBIUS_LOG_SINGLE_COLUMN_COLLAPSE_20260728.md" \
             "$ROOT/PRIME_OFFSET_ROUGH_MODULUS_COLLAPSE_20260728.md" \
             "$ROOT/SMALL_MODULUS_ONE_NEW_PRIME_COLLAPSE_20260728.md" \
-            "$ROOT/SMOOTH_DIVISOR_LOG2_THEOREM_20260728.md"
+            "$ROOT/SMOOTH_DIVISOR_LOG2_THEOREM_20260728.md" \
+            "$ROOT/BALANCED_LEAST_FACTOR_COLLAPSE_20260728.md"
           grep -Fq 'Theorem 4.1 (shrinking-target separation)' "$ROOT/PRIMORIAL_INDEX_SHRINKING_TARGET_COLLAPSE_20260728.md"
           grep -Fq 'Theorem 5.1 (single-column nonzero identity)' "$ROOT/MOBIUS_LOG_SINGLE_COLUMN_COLLAPSE_20260728.md"
           grep -Fq 'Theorem 5.1 (smooth-divisor asymptotic)' "$ROOT/SMOOTH_DIVISOR_LOG2_THEOREM_20260728.md"
+          grep -Fq 'Theorem 4.1' "$ROOT/BALANCED_LEAST_FACTOR_COLLAPSE_20260728.md"
 
       - name: Install dependencies
         run: python -m pip install --disable-pip-version-check sympy
@@ -58,20 +61,24 @@ jobs:
       - name: Verify smooth log-two sector
         run: python frontier/integer_source_frame_bridge/smooth_divisor_log2_verify.py > /tmp/log-two.json
 
+      - name: Verify balanced least factor
+        run: python frontier/integer_source_frame_bridge/balanced_least_factor_verify.py > /tmp/balanced.json
+
       - name: Check validation boundaries
         run: |
           python - <<'PY'
           import json
           from pathlib import Path
           root=Path('frontier/integer_source_frame_bridge')
-          names=('primorial_shrinking_target','mobius_log_single_column','prime_offset_rough_modulus','small_modulus_one_new_prime','smooth_divisor_log2')
+          names=('primorial_shrinking_target','mobius_log_single_column','prime_offset_rough_modulus','small_modulus_one_new_prime','smooth_divisor_log2','balanced_least_factor')
           data={n:json.loads((root/f'{n}_results.json').read_text()) for n in names}
           assert all(v['status']=='PASS' for v in data.values())
           assert max(r['source_error'] for r in data['mobius_log_single_column']['rows'])<2e-10
           assert max(r['split_error'] for r in data['prime_offset_rough_modulus']['rows'])<3e-10
           assert max(r['weighted_decomposition_error'] for r in data['small_modulus_one_new_prime']['rows'])<3e-10
           assert max(r['error'] for r in data['smooth_divisor_log2']['exact_rows'])<3e-10
-          print('all load-bearing Möbius-log collapse gates passed')
+          assert max(r['weighted_identity_error'] for r in data['balanced_least_factor']['rows'])<2e-10
+          print('all load-bearing collapse gates passed')
           PY
 
       - name: Upload validation record
@@ -85,9 +92,11 @@ jobs:
             frontier/integer_source_frame_bridge/prime_offset_rough_modulus_results.json
             frontier/integer_source_frame_bridge/small_modulus_one_new_prime_results.json
             frontier/integer_source_frame_bridge/smooth_divisor_log2_results.json
+            frontier/integer_source_frame_bridge/balanced_least_factor_results.json
             frontier/integer_source_frame_bridge/PRIMORIAL_INDEX_SHRINKING_TARGET_COLLAPSE_20260728.md
             frontier/integer_source_frame_bridge/MOBIUS_LOG_SINGLE_COLUMN_COLLAPSE_20260728.md
             frontier/integer_source_frame_bridge/PRIME_OFFSET_ROUGH_MODULUS_COLLAPSE_20260728.md
             frontier/integer_source_frame_bridge/SMALL_MODULUS_ONE_NEW_PRIME_COLLAPSE_20260728.md
             frontier/integer_source_frame_bridge/SMOOTH_DIVISOR_LOG2_THEOREM_20260728.md
+            frontier/integer_source_frame_bridge/BALANCED_LEAST_FACTOR_COLLAPSE_20260728.md
           retention-days: 90
