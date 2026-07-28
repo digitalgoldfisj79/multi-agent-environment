@@ -9,8 +9,10 @@ on:
       - frontier/integer_source_frame_bridge/PRIMORIAL_INDEX_SHRINKING_TARGET_COLLAPSE_20260728.md
       - frontier/integer_source_frame_bridge/LARGEST_FACTOR_ROUTED_BESSEL_INEQUALITY_20260728.md
       - frontier/integer_source_frame_bridge/LARGEST_FACTOR_HYPERBOLA_SOURCE_IDENTITY_20260728.md
+      - frontier/integer_source_frame_bridge/ORBIT_ROUTED_VAUGHAN_COLLAPSE_20260728.md
       - frontier/integer_source_frame_bridge/primorial_shrinking_target_verify.py
       - frontier/integer_source_frame_bridge/largest_factor_hyperbola_verify.py
+      - frontier/integer_source_frame_bridge/orbit_routed_vaughan_verify.py
   workflow_dispatch:
 
 permissions:
@@ -19,7 +21,7 @@ permissions:
 jobs:
   validate:
     runs-on: ubuntu-24.04
-    timeout-minutes: 15
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
 
@@ -31,20 +33,25 @@ jobs:
             PRIMORIAL_INDEX_SHRINKING_TARGET_COLLAPSE_20260728.md \
             LARGEST_FACTOR_ROUTED_BESSEL_INEQUALITY_20260728.md \
             LARGEST_FACTOR_HYPERBOLA_SOURCE_IDENTITY_20260728.md \
+            ORBIT_ROUTED_VAUGHAN_COLLAPSE_20260728.md \
             primorial_shrinking_target_verify.py \
-            largest_factor_hyperbola_verify.py; do
+            largest_factor_hyperbola_verify.py \
+            orbit_routed_vaughan_verify.py; do
             test -s "$ROOT/$file"
           done
           ! grep -RInE 'TODO|TBD|PLACEHOLDER|REPLACE_ME' \
             "$ROOT/PRIMORIAL_INDEX_SHRINKING_TARGET_COLLAPSE_20260728.md" \
             "$ROOT/LARGEST_FACTOR_ROUTED_BESSEL_INEQUALITY_20260728.md" \
-            "$ROOT/LARGEST_FACTOR_HYPERBOLA_SOURCE_IDENTITY_20260728.md"
+            "$ROOT/LARGEST_FACTOR_HYPERBOLA_SOURCE_IDENTITY_20260728.md" \
+            "$ROOT/ORBIT_ROUTED_VAUGHAN_COLLAPSE_20260728.md"
           grep -Fq 'Theorem 4.1 (shrinking-target separation)' \
             "$ROOT/PRIMORIAL_INDEX_SHRINKING_TARGET_COLLAPSE_20260728.md"
           grep -Fq 'Theorem 2.1 (largest-factor hyperbola identity)' \
             "$ROOT/LARGEST_FACTOR_HYPERBOLA_SOURCE_IDENTITY_20260728.md"
-          grep -Fq 'Theorem 2.1' \
-            "$ROOT/LARGEST_FACTOR_ROUTED_BESSEL_INEQUALITY_20260728.md"
+          grep -Fq 'Theorem 1.1 (exact Vaughan identity)' \
+            "$ROOT/ORBIT_ROUTED_VAUGHAN_COLLAPSE_20260728.md"
+          grep -Fq 'Theorem 5.1 (fixed-complexity column sparsity)' \
+            "$ROOT/ORBIT_ROUTED_VAUGHAN_COLLAPSE_20260728.md"
           grep -Fq "Fortune's conjecture" \
             "$ROOT/PRIMORIAL_INDEX_SHRINKING_TARGET_COLLAPSE_20260728.md"
 
@@ -94,6 +101,26 @@ jobs:
           print(json.dumps(data, indent=2))
           PY
 
+      - name: Recompute orbit-routed Vaughan verification
+        run: |
+          set -euo pipefail
+          ROOT=frontier/integer_source_frame_bridge
+          python "$ROOT/orbit_routed_vaughan_verify.py" > /tmp/vaughan.stdout.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          root = Path('frontier/integer_source_frame_bridge')
+          data = json.loads((root / 'orbit_routed_vaughan_results.json').read_text())
+          assert data['status'] == 'PASS'
+          assert data['universal']['cases'] == 4 * 4999
+          assert data['universal']['max_error'] < 5e-11
+          assert data['shifted_block']['Y_exceeds_H']
+          assert data['shifted_block']['all_minima_exceed_H']
+          assert data['shifted_block']['max_error'] < 2e-9
+          assert data['routed_columns']['maximum_support_to_theorem_bound_ratio'] <= 1
+          print(json.dumps(data, indent=2))
+          PY
+
       - name: Upload validation record
         uses: actions/upload-artifact@v4
         with:
@@ -101,10 +128,13 @@ jobs:
           path: |
             /tmp/shrinking-target.stdout.json
             /tmp/hyperbola.stdout.json
+            /tmp/vaughan.stdout.json
             frontier/integer_source_frame_bridge/primorial_shrinking_target_results.json
             frontier/integer_source_frame_bridge/primorial_shrinking_target_results_full.json
             frontier/integer_source_frame_bridge/largest_factor_hyperbola_results.json
+            frontier/integer_source_frame_bridge/orbit_routed_vaughan_results.json
             frontier/integer_source_frame_bridge/PRIMORIAL_INDEX_SHRINKING_TARGET_COLLAPSE_20260728.md
             frontier/integer_source_frame_bridge/LARGEST_FACTOR_ROUTED_BESSEL_INEQUALITY_20260728.md
             frontier/integer_source_frame_bridge/LARGEST_FACTOR_HYPERBOLA_SOURCE_IDENTITY_20260728.md
+            frontier/integer_source_frame_bridge/ORBIT_ROUTED_VAUGHAN_COLLAPSE_20260728.md
           retention-days: 90
