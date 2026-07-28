@@ -1,0 +1,41 @@
+{
+  "status": "PASS",
+  "classification": "VERIFIED COMPUTATIONALLY",
+  "scope": "extended frozen same-band rough-quotient calibration",
+  "external_job": "6a691a94a9f4e0ab00b2bec3",
+  "panels": [
+    {
+      "X": 1009,
+      "H": 814464,
+      "N": 138,
+      "K": 31,
+      "maximum_same_band_ratio": 1.7792999383172472,
+      "aggregate_same_band_ratio": 1.0034093739953165,
+      "block_maxima": [
+        1.413189085466321,
+        1.5178982476508052,
+        1.2268517669123342,
+        1.5150446573227758,
+        1.7792999383172472
+      ]
+    },
+    {
+      "X": 2003,
+      "H": 3209607,
+      "N": 249,
+      "K": 44,
+      "maximum_same_band_ratio": 1.550790566421355,
+      "aggregate_same_band_ratio": 0.9757726512540983,
+      "block_maxima": [
+        1.2488524754325399,
+        1.550790566421355,
+        1.2157947343734963,
+        1.253935893781642,
+        1.257468658562438,
+        1.4498343589903326
+      ]
+    }
+  ],
+  "combined_observation": "Across all committed panels through X=2003, the aggregate same-band square remains close to the exact diagonal and no maximum block ratio exceeds 2.29.",
+  "boundary": "Empirical calibration only. No uniform same-band Bessel estimate is inferred."
+}
