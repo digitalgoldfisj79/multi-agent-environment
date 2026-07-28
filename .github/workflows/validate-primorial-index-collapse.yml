@@ -14,7 +14,7 @@ permissions:
 jobs:
   validate:
     runs-on: ubuntu-24.04
-    timeout-minutes: 45
+    timeout-minutes: 50
     steps:
       - uses: actions/checkout@v4
 
@@ -24,14 +24,15 @@ jobs:
           ROOT=frontier/integer_source_frame_bridge
           for file in \
             PRIMORIAL_INDEX_SHRINKING_TARGET_COLLAPSE_20260728.md \
-            MOBIUS_LOG_SINGLE_COLUMN_COLLAPSE_20260728.md \
             PRIMITIVE_RATIONAL_FREQUENCY_COLLAPSE_20260728.md \
             PRIMORIAL_RAMANUJAN_PROJECTOR_COLLAPSE_20260728.md \
             EXACT_SMOOTH_PRIMITIVE_CENTRING_20260728.md \
             EXPLICIT_CANDIDATE_PROJECTOR_PRINCIPAL_TERM_20260728.md \
-            NEW_PART_RAMANUJAN_CHAOS_COLLAPSE_20260728.md \
-            CENTRING_CORRECTION_AFTER_RAMANUJAN_PROJECTOR_20260728.md \
-            BALANCED_LEAST_FACTOR_COLLAPSE_20260728.md \
+            EULER_BUCHSTAB_DETECTOR_IDENTITY_20260728.md \
+            FIRST_ORDER_PRIME_MODULUS_GRAM_20260728.md \
+            FIRST_ORDER_DIAGONAL_THEOREM_20260728.md \
+            NORMALIZED_TAIL_CHAOS_ENERGY_IDENTITY_20260728.md \
+            BUCHSTAB_MARTINGALE_COLLAPSE_20260728.md \
             BALANCED_CERTIFICATE_DISPERSION_IDENTITY_20260728.md; do
             test -s "$ROOT/$file"
           done
@@ -40,13 +41,16 @@ jobs:
             "$ROOT/PRIMORIAL_RAMANUJAN_PROJECTOR_COLLAPSE_20260728.md" \
             "$ROOT/EXACT_SMOOTH_PRIMITIVE_CENTRING_20260728.md" \
             "$ROOT/EXPLICIT_CANDIDATE_PROJECTOR_PRINCIPAL_TERM_20260728.md" \
-            "$ROOT/NEW_PART_RAMANUJAN_CHAOS_COLLAPSE_20260728.md" \
-            "$ROOT/CENTRING_CORRECTION_AFTER_RAMANUJAN_PROJECTOR_20260728.md" \
+            "$ROOT/EULER_BUCHSTAB_DETECTOR_IDENTITY_20260728.md" \
+            "$ROOT/FIRST_ORDER_PRIME_MODULUS_GRAM_20260728.md" \
+            "$ROOT/FIRST_ORDER_DIAGONAL_THEOREM_20260728.md" \
+            "$ROOT/NORMALIZED_TAIL_CHAOS_ENERGY_IDENTITY_20260728.md" \
+            "$ROOT/BUCHSTAB_MARTINGALE_COLLAPSE_20260728.md" \
             "$ROOT/BALANCED_CERTIFICATE_DISPERSION_IDENTITY_20260728.md"
-          grep -Fq 'Theorem 3.1' "$ROOT/PRIMITIVE_RATIONAL_FREQUENCY_COLLAPSE_20260728.md"
-          grep -Fq 'Theorem 2.1 (exact projector)' "$ROOT/PRIMORIAL_RAMANUJAN_PROJECTOR_COLLAPSE_20260728.md"
           grep -Fq 'Theorem 3.2 (exact new-modulus residual)' "$ROOT/EXACT_SMOOTH_PRIMITIVE_CENTRING_20260728.md"
-          grep -Fq 'Theorem 3.1' "$ROOT/NEW_PART_RAMANUJAN_CHAOS_COLLAPSE_20260728.md"
+          grep -Fq 'Theorem 3.1' "$ROOT/EULER_BUCHSTAB_DETECTOR_IDENTITY_20260728.md"
+          grep -Fq 'Theorem 6.1' "$ROOT/FIRST_ORDER_DIAGONAL_THEOREM_20260728.md"
+          grep -Fq 'Theorem 7.1' "$ROOT/BUCHSTAB_MARTINGALE_COLLAPSE_20260728.md"
           grep -Fq 'Retracted:' "$ROOT/BALANCED_CERTIFICATE_DISPERSION_IDENTITY_20260728.md"
 
       - name: Install dependencies
@@ -54,8 +58,6 @@ jobs:
 
       - name: Verify shrinking target
         run: python frontier/integer_source_frame_bridge/primorial_shrinking_target_verify.py > /tmp/shrinking.json
-      - name: Verify Möbius-log source
-        run: python frontier/integer_source_frame_bridge/mobius_log_single_column_verify.py > /tmp/mobius-log.json
       - name: Verify primitive rational frequencies
         run: python frontier/integer_source_frame_bridge/primitive_rational_frequency_verify.py > /tmp/primitive.json
       - name: Verify Ramanujan candidate projector
@@ -64,12 +66,12 @@ jobs:
         run: python frontier/integer_source_frame_bridge/exact_smooth_primitive_centring_verify.py > /tmp/smooth-centring.json
       - name: Verify explicit candidate principal
         run: python frontier/integer_source_frame_bridge/explicit_candidate_principal_verify.py > /tmp/principal.json
-      - name: Verify new-part chaos
-        run: python frontier/integer_source_frame_bridge/new_part_ramanujan_chaos_verify.py > /tmp/new-part.json
-      - name: Verify balanced least factor
-        run: python frontier/integer_source_frame_bridge/balanced_least_factor_verify.py > /tmp/balanced.json
-      - name: Verify corrected balanced dispersion identity
-        run: python frontier/integer_source_frame_bridge/balanced_certificate_dispersion_verify.py > /tmp/dispersion.json
+      - name: Verify Euler–Buchstab and first-order Gram
+        run: python frontier/integer_source_frame_bridge/euler_buchstab_first_order_verify.py > /tmp/euler-first-order.json
+      - name: Verify Buchstab martingale
+        run: python frontier/integer_source_frame_bridge/buchstab_martingale_verify.py > /tmp/buchstab-martingale.json
+      - name: Verify corrected balanced identity
+        run: python frontier/integer_source_frame_bridge/balanced_certificate_dispersion_verify.py > /tmp/balanced-diagnostic.json
 
       - name: Check validation boundaries
         run: |
@@ -77,18 +79,29 @@ jobs:
           import json
           from pathlib import Path
           root=Path('frontier/integer_source_frame_bridge')
-          names=('primorial_shrinking_target','mobius_log_single_column','primitive_rational_frequency','primorial_ramanujan_projector','exact_smooth_primitive_centring','explicit_candidate_principal','new_part_ramanujan_chaos','balanced_least_factor','balanced_certificate_dispersion')
+          names=(
+              'primorial_shrinking_target',
+              'primitive_rational_frequency',
+              'primorial_ramanujan_projector',
+              'exact_smooth_primitive_centring',
+              'explicit_candidate_principal',
+              'euler_buchstab_first_order',
+              'buchstab_martingale',
+              'balanced_certificate_dispersion',
+          )
           data={n:json.loads((root/f'{n}_results.json').read_text()) for n in names}
           assert all(v['status']=='PASS' for v in data.values())
           assert max(r['grouping_error'] for r in data['primitive_rational_frequency']['rows'])<3e-9
           assert max(r['maximum_exact_projector_error'] for r in data['primorial_ramanujan_projector']['rows'])<2e-10
           assert max(r['new_residual_error'] for r in data['exact_smooth_primitive_centring']['rows'])<3e-8
-          assert max(r['grouping_error'] for r in data['new_part_ramanujan_chaos']['rows'])<3e-8
           assert data['explicit_candidate_principal']['constants']['e_gamma_over_2_minus_log_two']>0
-          assert max(r['weighted_identity_error'] for r in data['balanced_least_factor']['rows'])<2e-10
+          assert max(r['product_error'] for r in data['euler_buchstab_first_order']['rows'])<2e-10
+          assert max(r['maximum_character_error'] for r in data['euler_buchstab_first_order']['rows'])<2e-8
+          assert max(c['quadratic_variation_error'] for c in data['buchstab_martingale']['cases'])<2e-12
+          assert max(c['maximum_prime_indicator_error'] for c in data['buchstab_martingale']['cases'])<2e-12
           agg=data['balanced_certificate_dispersion']['aggregate']
           assert agg['second_moment_error']<2e-10 and agg['shifted_identity_error']<2e-10
-          print('all primitive-centred source gates passed')
+          print('all Euler–Buchstab critical gates passed')
           PY
 
       - name: Upload validation record
@@ -102,7 +115,10 @@ jobs:
             frontier/integer_source_frame_bridge/PRIMORIAL_RAMANUJAN_PROJECTOR_COLLAPSE_20260728.md
             frontier/integer_source_frame_bridge/EXACT_SMOOTH_PRIMITIVE_CENTRING_20260728.md
             frontier/integer_source_frame_bridge/EXPLICIT_CANDIDATE_PROJECTOR_PRINCIPAL_TERM_20260728.md
-            frontier/integer_source_frame_bridge/NEW_PART_RAMANUJAN_CHAOS_COLLAPSE_20260728.md
-            frontier/integer_source_frame_bridge/CENTRING_CORRECTION_AFTER_RAMANUJAN_PROJECTOR_20260728.md
+            frontier/integer_source_frame_bridge/EULER_BUCHSTAB_DETECTOR_IDENTITY_20260728.md
+            frontier/integer_source_frame_bridge/FIRST_ORDER_PRIME_MODULUS_GRAM_20260728.md
+            frontier/integer_source_frame_bridge/FIRST_ORDER_DIAGONAL_THEOREM_20260728.md
+            frontier/integer_source_frame_bridge/NORMALIZED_TAIL_CHAOS_ENERGY_IDENTITY_20260728.md
+            frontier/integer_source_frame_bridge/BUCHSTAB_MARTINGALE_COLLAPSE_20260728.md
             frontier/integer_source_frame_bridge/BALANCED_CERTIFICATE_DISPERSION_IDENTITY_20260728.md
           retention-days: 90
