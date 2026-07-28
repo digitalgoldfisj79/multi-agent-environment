@@ -29,8 +29,12 @@ def ramanujan_sum(q: int, n: int, phi: list[int]) -> int:
 
 def primitive_coefficients(Z: int) -> tuple[list[float], list[int]]:
     """Compute Gamma_Z(q)=-sum_{q|n<=Z} mu(n)log(n)/n by a divisor sieve."""
-    mu = [int(mobius(n)) for n in range(Z + 1)]
-    phi = [int(totient(n)) for n in range(Z + 1)]
+    mu = [0] * (Z + 1)
+    phi = [0] * (Z + 1)
+    phi[1] = 1
+    for n in range(1, Z + 1):
+        mu[n] = int(mobius(n))
+        phi[n] = int(totient(n))
     atom = [0.0] * (Z + 1)
     for n in range(2, Z + 1):
         if mu[n]:
