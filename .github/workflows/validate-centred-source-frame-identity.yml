@@ -1,0 +1,105 @@
+name: Validate centred source-to-frame identity
+
+on:
+  pull_request:
+    branches:
+      - publication/fortune-papers-ii-vi-20260724
+    paths:
+      - .github/workflows/validate-centred-source-frame-identity.yml
+      - frontier/integer_source_frame_bridge/**
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check theorem package
+        run: |
+          set -euo pipefail
+          ROOT=frontier/integer_source_frame_bridge
+          for file in \
+            CENTRED_SOURCE_TO_FRAME_IDENTITY_20260728.md \
+            PROGRAMME_STATUS_AFTER_CENTRED_SOURCE_FRAME_IDENTITY_20260728.md \
+            centred_source_frame_verify.py \
+            centred_source_frame_results.json; do
+            test -s "$ROOT/$file"
+          done
+          ! grep -RInE 'TODO|TBD|PLACEHOLDER|REPLACE_ME' "$ROOT"
+          grep -Fq 'Theorem 4.1 (centred dual-row identity)' "$ROOT/CENTRED_SOURCE_TO_FRAME_IDENTITY_20260728.md"
+          grep -Fq 'coefficient-erasure no-go' "$ROOT/CENTRED_SOURCE_TO_FRAME_IDENTITY_20260728.md"
+          grep -Fq 'source-weighted pair-sum identity' "$ROOT/CENTRED_SOURCE_TO_FRAME_IDENTITY_20260728.md"
+          grep -Fq 'Fortune\x27s conjecture remains open' "$ROOT/PROGRAMME_STATUS_AFTER_CENTRED_SOURCE_FRAME_IDENTITY_20260728.md" || \
+            grep -Fq "Fortune's conjecture remains open" "$ROOT/PROGRAMME_STATUS_AFTER_CENTRED_SOURCE_FRAME_IDENTITY_20260728.md"
+
+      - name: Recompute finite regressions
+        run: |
+          set -euo pipefail
+          ROOT=frontier/integer_source_frame_bridge
+          cp "$ROOT/centred_source_frame_results.json" /tmp/expected.json
+          python3 "$ROOT/centred_source_frame_verify.py" > /tmp/recomputed.stdout.json
+          cp "$ROOT/centred_source_frame_results.json" /tmp/recomputed.json
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+
+          expected = json.loads(Path('/tmp/expected.json').read_text())
+          got = json.loads(Path('/tmp/recomputed.json').read_text())
+          assert got['status'] == expected['status'] == 'PASS'
+          assert got['scope'] == expected['scope']
+          assert len(got['source_projection_cases']) == 3
+          assert len(got['reciprocal_frame_cases']) == 3
+
+          tol = 5e-12
+          source_keys = (
+              'coefficient_recovery_error',
+              'convolution_error',
+              'parseval_error',
+              'variance',
+          )
+          frame_keys = (
+              'kernel_at_zero_error',
+              'kernel_range_min',
+              'kernel_range_max',
+              'single_frame_error',
+              'single_frame_imaginary_residue',
+              'literal_pair_frame_error',
+              'symmetric_pair_frame_error',
+              'literal_diagonal_error',
+              'symmetric_diagonal_error',
+              'baseline_before_square_error',
+              'variance',
+              'frame_energy',
+          )
+          for a, b in zip(got['source_projection_cases'], expected['source_projection_cases']):
+              assert a['seed'] == b['seed']
+              assert a['centres'] == b['centres']
+              for key in source_keys:
+                  assert abs(a[key] - b[key]) < tol, (key, a[key], b[key])
+          for a, b in zip(got['reciprocal_frame_cases'], expected['reciprocal_frame_cases']):
+              assert a['seed'] == b['seed']
+              for key in frame_keys:
+                  assert abs(a[key] - b[key]) < tol, (key, a[key], b[key])
+              assert a['single_frame_error'] < 2e-8
+              assert a['literal_pair_frame_error'] < 2e-8
+              assert a['symmetric_pair_frame_error'] < 2e-8
+              assert a['kernel_range_min'] >= 0
+              assert a['kernel_range_max'] <= 1 + 2e-8
+          print(json.dumps(got, indent=2))
+          PY
+
+      - name: Upload validation record
+        uses: actions/upload-artifact@v4
+        with:
+          name: centred-source-frame-identity-validation
+          path: |
+            /tmp/expected.json
+            /tmp/recomputed.json
+            /tmp/recomputed.stdout.json
+            frontier/integer_source_frame_bridge
+          retention-days: 90
