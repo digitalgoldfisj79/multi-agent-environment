@@ -2,7 +2,6 @@
 """Verify exact smooth-primitive centring and new-modulus residual."""
 from __future__ import annotations
 
-import cmath
 import json
 import math
 from pathlib import Path
@@ -22,40 +21,58 @@ def primorial(z: int) -> int:
     return P
 
 
+def ramanujan_sum(q: int, n: int, phi: list[int]) -> int:
+    """Exact c_q(n); active q are squarefree because Gamma_Z(q)=0 otherwise."""
+    g = math.gcd(q, n)
+    return int(mobius(q // g)) * phi[q] // phi[q // g]
+
+
+def primitive_coefficients(Z: int) -> tuple[list[float], list[int]]:
+    """Compute Gamma_Z(q)=-sum_{q|n<=Z} mu(n)log(n)/n by a divisor sieve."""
+    mu = [int(mobius(n)) for n in range(Z + 1)]
+    phi = [int(totient(n)) for n in range(Z + 1)]
+    atom = [0.0] * (Z + 1)
+    for n in range(2, Z + 1):
+        if mu[n]:
+            atom[n] = -mu[n] * math.log(n) / n
+    gamma = [0.0] * (Z + 1)
+    for q in range(2, Z + 1):
+        gamma[q] = math.fsum(atom[n] for n in range(q, Z + 1, q))
+    return gamma, phi
+
+
 def one_case(z: int, H: int) -> dict:
     P = primorial(z)
     Z = P + H
     weights = {m: 1.0 + 0.05 * math.cos(m) for m in range(2, H + 1)}
-    W = sum(weights.values())
-    direct = sum(w * von_mangoldt(P + m) for m, w in weights.items())
-    zero = -W * sum(float(mobius(d)) * math.log(d) / d for d in range(1, Z + 1))
+    W = math.fsum(weights.values())
+    direct = math.fsum(w * von_mangoldt(P + m) for m, w in weights.items())
 
-    smooth = 0j
-    new = 0j
-    all_primitive = 0j
+    mu_log_atoms = [
+        -float(mobius(d)) * math.log(d) / d for d in range(1, Z + 1)
+    ]
+    zero = W * math.fsum(mu_log_atoms)
+    gamma, phi = primitive_coefficients(Z)
+
+    smooth_terms: list[float] = []
+    new_terms: list[float] = []
     for q in range(2, Z + 1):
-        gamma = -sum(
-            float(mobius(q * u)) * math.log(q * u) / u
-            for u in range(1, Z // q + 1)
-        ) / q
-        if gamma == 0.0:
+        if abs(gamma[q]) < 1e-18:
             continue
-        row = 0j
-        for a in range(1, q):
-            if math.gcd(a, q) != 1:
-                continue
-            wh = sum(w * cmath.exp(2j * math.pi * a * m / q)
-                     for m, w in weights.items())
-            row += wh * cmath.exp(2j * math.pi * a * P / q)
-        term = gamma * row
-        all_primitive += term
+        row = math.fsum(
+            w * ramanujan_sum(q, P + m, phi) for m, w in weights.items()
+        )
+        term = gamma[q] * row
         if P % q == 0:
-            smooth += term
+            smooth_terms.append(term)
         else:
-            new += term
+            new_terms.append(term)
 
-    exact_centring = zero + smooth.real
-    candidate = P / int(totient(P)) * sum(
+    smooth = math.fsum(smooth_terms)
+    new = math.fsum(new_terms)
+    all_primitive = smooth + new
+    exact_centring = zero + smooth
+    candidate = P / phi[P] * math.fsum(
         w for m, w in weights.items() if math.gcd(m, P) == 1
     )
     return {
@@ -65,14 +82,14 @@ def one_case(z: int, H: int) -> dict:
         "Z": Z,
         "direct_source": direct,
         "zero_mode": zero,
-        "smooth_primitive_real": smooth.real,
-        "smooth_primitive_imag": smooth.imag,
+        "smooth_primitive": smooth,
         "exact_primitive_centring": exact_centring,
         "candidate_projector_principal": candidate,
         "centring_minus_candidate": exact_centring - candidate,
         "all_primitive_error": abs((direct - zero) - all_primitive),
         "new_residual_error": abs((direct - exact_centring) - new),
-        "new_residual_imag": new.imag,
+        "active_smooth_denominators": len(smooth_terms),
+        "active_new_denominators": len(new_terms),
     }
 
 
@@ -81,8 +98,6 @@ def main() -> None:
     for row in rows:
         assert row["all_primitive_error"] < 3e-8, row
         assert row["new_residual_error"] < 3e-8, row
-        assert abs(row["smooth_primitive_imag"]) < 3e-8, row
-        assert abs(row["new_residual_imag"]) < 3e-8, row
     payload = {
         "status": "PASS",
         "scope": "exact smooth-primitive centring and new-modulus residual",
