@@ -5,6 +5,7 @@ from __future__ import annotations
 import cmath
 import json
 import math
+from collections import Counter
 from pathlib import Path
 
 import numpy as np
@@ -31,8 +32,13 @@ def divisor_frame(X: int) -> dict:
     if not N or not Q:
         raise RuntimeError(f"empty block or shell at X={X}")
 
+    A = 1
+    for p in primerange(2, X):
+        A *= int(p)
+
     matrix = np.eye(N, dtype=float)
-    nonzero = []
+    gap_histogram: Counter[int] = Counter()
+    nonzero_pairs = 0
     max_divisor_count = 0
     for j in range(N):
         for k in range(j + 1, N):
@@ -41,12 +47,10 @@ def divisor_frame(X: int) -> dict:
             max_divisor_count = max(max_divisor_count, count)
             matrix[j, k] = matrix[k, j] = count / Q
             if count:
-                nonzero.append({"j": j, "k": k, "gap": k - j, "count": count})
+                nonzero_pairs += 1
+                gap_histogram[k - j] += count
 
             # Check the exact removal of the common primorial factor modulo q.
-            A = 1
-            for p in primerange(2, X):
-                A *= int(p)
             Pj = A * prefix[j]
             Pk = A * prefix[k]
             for q in qs[: min(20, Q)]:
@@ -75,10 +79,12 @@ def divisor_frame(X: int) -> dict:
         "operator_norm_D_minus_I": operator_norm,
         "maximum_off_diagonal_row_sum": max_row,
         "total_off_diagonal_mass": float(off.sum()),
-        "nonzero_off_diagonal_pairs": len(nonzero),
+        "nonzero_off_diagonal_pairs": nonzero_pairs,
         "maximum_shell_divisor_count": max_divisor_count,
         "theorem_row_bound": theorem_bound,
-        "nonzero_pairs": nonzero,
+        "gap_divisor_histogram": {
+            str(gap): gap_histogram[gap] for gap in sorted(gap_histogram)
+        },
     }
 
 
@@ -107,7 +113,9 @@ def direct_character_check() -> dict:
     rhs = 0j
     for j in range(N):
         for k in range(N):
-            kernel = sum(1 for q in qs if (centres[j] - centres[k]) % q == 0) / len(qs)
+            kernel = sum(
+                1 for q in qs if (centres[j] - centres[k]) % q == 0
+            ) / len(qs)
             rhs += c[j] * c[k].conjugate() * kernel
 
     error = abs(lhs - rhs.real)
