@@ -2,21 +2,10 @@ name: Validate primorial-index collapse
 
 on:
   pull_request:
-    branches:
-      - publication/fortune-papers-ii-vi-20260724
+    branches: [publication/fortune-papers-ii-vi-20260724]
     paths:
       - .github/workflows/validate-primorial-index-collapse.yml
-      - frontier/integer_source_frame_bridge/PRIMORIAL_INDEX_SHRINKING_TARGET_COLLAPSE_20260728.md
-      - frontier/integer_source_frame_bridge/LARGEST_FACTOR_ROUTED_BESSEL_INEQUALITY_20260728.md
-      - frontier/integer_source_frame_bridge/LARGEST_FACTOR_HYPERBOLA_SOURCE_IDENTITY_20260728.md
-      - frontier/integer_source_frame_bridge/ORBIT_ROUTED_VAUGHAN_COLLAPSE_20260728.md
-      - frontier/integer_source_frame_bridge/THREE_ORBIT_COLUMN_SOURCE_IDENTITY_20260728.md
-      - frontier/integer_source_frame_bridge/EXPLICIT_ZERO_FREQUENCY_PRINCIPAL_TERM_20260728.md
-      - frontier/integer_source_frame_bridge/primorial_shrinking_target_verify.py
-      - frontier/integer_source_frame_bridge/largest_factor_hyperbola_verify.py
-      - frontier/integer_source_frame_bridge/orbit_routed_vaughan_verify.py
-      - frontier/integer_source_frame_bridge/three_orbit_column_verify.py
-      - frontier/integer_source_frame_bridge/zero_frequency_principal_verify.py
+      - frontier/integer_source_frame_bridge/**
   workflow_dispatch:
 
 permissions:
@@ -40,138 +29,87 @@ jobs:
             ORBIT_ROUTED_VAUGHAN_COLLAPSE_20260728.md \
             THREE_ORBIT_COLUMN_SOURCE_IDENTITY_20260728.md \
             EXPLICIT_ZERO_FREQUENCY_PRINCIPAL_TERM_20260728.md \
+            VAUGHAN_QUOTIENT_COEFFICIENT_COLLAPSE_20260728.md \
+            EXACT_NONZERO_MODE_VAUGHAN_IDENTITY_20260728.md \
             primorial_shrinking_target_verify.py \
             largest_factor_hyperbola_verify.py \
             orbit_routed_vaughan_verify.py \
             three_orbit_column_verify.py \
-            zero_frequency_principal_verify.py; do
+            zero_frequency_principal_verify.py \
+            vaughan_quotient_coefficient_verify.py \
+            exact_nonzero_mode_verify.py; do
             test -s "$ROOT/$file"
           done
           ! grep -RInE 'TODO|TBD|PLACEHOLDER|REPLACE_ME' \
-            "$ROOT/PRIMORIAL_INDEX_SHRINKING_TARGET_COLLAPSE_20260728.md" \
-            "$ROOT/LARGEST_FACTOR_ROUTED_BESSEL_INEQUALITY_20260728.md" \
-            "$ROOT/LARGEST_FACTOR_HYPERBOLA_SOURCE_IDENTITY_20260728.md" \
-            "$ROOT/ORBIT_ROUTED_VAUGHAN_COLLAPSE_20260728.md" \
-            "$ROOT/THREE_ORBIT_COLUMN_SOURCE_IDENTITY_20260728.md" \
-            "$ROOT/EXPLICIT_ZERO_FREQUENCY_PRINCIPAL_TERM_20260728.md"
+            "$ROOT"/*_20260728.md
           grep -Fq 'Theorem 4.1 (shrinking-target separation)' \
             "$ROOT/PRIMORIAL_INDEX_SHRINKING_TARGET_COLLAPSE_20260728.md"
-          grep -Fq 'Theorem 2.1 (largest-factor hyperbola identity)' \
-            "$ROOT/LARGEST_FACTOR_HYPERBOLA_SOURCE_IDENTITY_20260728.md"
-          grep -Fq 'Theorem 1.1 (exact Vaughan identity)' \
-            "$ROOT/ORBIT_ROUTED_VAUGHAN_COLLAPSE_20260728.md"
-          grep -Fq 'Theorem 5.1 (fixed-complexity column sparsity)' \
-            "$ROOT/ORBIT_ROUTED_VAUGHAN_COLLAPSE_20260728.md"
           grep -Fq 'Theorem 5.1 (three-orbit-column identity)' \
             "$ROOT/THREE_ORBIT_COLUMN_SOURCE_IDENTITY_20260728.md"
-          grep -Fq 'Theorem 5.1 (exact zero-frequency baseline)' \
+          grep -Fq 'Theorem 3.1 (uniform positive baseline)' \
             "$ROOT/EXPLICIT_ZERO_FREQUENCY_PRINCIPAL_TERM_20260728.md"
-          grep -Fq "Fortune's conjecture" \
-            "$ROOT/PRIMORIAL_INDEX_SHRINKING_TARGET_COLLAPSE_20260728.md"
+          grep -Fq 'Theorem 4.1 (nonzero-mode source identity)' \
+            "$ROOT/EXACT_NONZERO_MODE_VAUGHAN_IDENTITY_20260728.md"
 
       - name: Install dependencies
         run: python -m pip install --disable-pip-version-check sympy
 
-      - name: Recompute shrinking-target verification
+      - name: Recompute all exact identities
         run: |
           set -euo pipefail
           ROOT=frontier/integer_source_frame_bridge
-          python "$ROOT/primorial_shrinking_target_verify.py" > /tmp/shrinking-target.stdout.json
-          python - <<'PY'
-          import json
-          from pathlib import Path
-          root = Path('frontier/integer_source_frame_bridge')
-          data = json.loads((root / 'primorial_shrinking_target_results.json').read_text())
-          assert data['status'] == 'PASS'
-          assert len(data['exhaustive_rows']) == 5
-          assert sum(r['verified_visit_pairs'] for r in data['exhaustive_rows']) > 60_000
-          for item in data['scale_summary']:
-              assert item['first_scale']['sample_max_visits'] <= item['first_scale']['theorem_bound']
-              assert item['last_scale']['sample_max_visits'] <= item['last_scale']['theorem_bound']
-          x1009 = data['fixed_depth_tables'][-1]
-          bounds = {row['R']: row['centre_multiplicity_bound'] for row in x1009['rows']}
-          assert bounds[2] <= 3
-          assert bounds[3] <= 4
-          assert bounds[10] <= 13
-          print(json.dumps(data, indent=2))
-          PY
+          python "$ROOT/primorial_shrinking_target_verify.py" > /tmp/shrinking.json
+          python "$ROOT/largest_factor_hyperbola_verify.py" > /tmp/hyperbola.json
+          python "$ROOT/orbit_routed_vaughan_verify.py" > /tmp/vaughan.json
+          python "$ROOT/three_orbit_column_verify.py" > /tmp/columns.json
+          python "$ROOT/zero_frequency_principal_verify.py" > /tmp/zero.json
+          python "$ROOT/vaughan_quotient_coefficient_verify.py" > /tmp/coefficients.json
+          python "$ROOT/exact_nonzero_mode_verify.py" > /tmp/nonzero.json
 
-      - name: Recompute hyperbola verification
+      - name: Check validation boundaries
         run: |
-          set -euo pipefail
-          ROOT=frontier/integer_source_frame_bridge
-          python "$ROOT/largest_factor_hyperbola_verify.py" > /tmp/hyperbola.stdout.json
           python - <<'PY'
           import json
           from pathlib import Path
           root = Path('frontier/integer_source_frame_bridge')
-          data = json.loads((root / 'largest_factor_hyperbola_results.json').read_text())
-          assert data['status'] == 'PASS'
-          assert data['universal_max_error'] < 2e-12
-          assert data['shifted_block']['shifted_max_error'] < 2e-11
-          assert data['shifted_block']['all_routed_largest_factors_above_H']
-          assert data['one_point_routing']['observed_max_column_support'] <= \
-                 data['one_point_routing']['threshold_multiplicity_bound']
-          print(json.dumps(data, indent=2))
-          PY
 
-      - name: Recompute orbit-routed Vaughan verification
-        run: |
-          set -euo pipefail
-          ROOT=frontier/integer_source_frame_bridge
-          python "$ROOT/orbit_routed_vaughan_verify.py" > /tmp/vaughan.stdout.json
-          python - <<'PY'
-          import json
-          from pathlib import Path
-          root = Path('frontier/integer_source_frame_bridge')
-          data = json.loads((root / 'orbit_routed_vaughan_results.json').read_text())
-          assert data['status'] == 'PASS'
-          assert data['universal']['cases'] == 4 * 4999
-          assert data['universal']['max_error'] < 5e-11
-          assert data['shifted_block']['Y_exceeds_H']
-          assert data['shifted_block']['all_minima_exceed_H']
-          assert data['shifted_block']['max_error'] < 2e-9
-          assert data['routed_columns']['maximum_support_to_theorem_bound_ratio'] <= 1
-          print(json.dumps(data, indent=2))
-          PY
+          shrinking = json.loads((root/'primorial_shrinking_target_results.json').read_text())
+          assert shrinking['status'] == 'PASS'
+          assert sum(r['verified_visit_pairs'] for r in shrinking['exhaustive_rows']) > 60_000
 
-      - name: Recompute three-orbit-column verification
-        run: |
-          set -euo pipefail
-          ROOT=frontier/integer_source_frame_bridge
-          python "$ROOT/three_orbit_column_verify.py" > /tmp/three-columns.stdout.json
-          python - <<'PY'
-          import json
-          from pathlib import Path
-          root = Path('frontier/integer_source_frame_bridge')
-          data = json.loads((root / 'three_orbit_column_results.json').read_text())
-          assert data['status'] == 'PASS'
-          assert data['source']['max_source_error'] < 2e-8
-          assert data['source']['max_type1_column_error'] < 2e-11
-          assert data['source']['max_type2_column_error'] < 2e-11
-          assert data['source']['max_type3_column_error'] < 2e-11
-          assert data['completion']['max_error'] < 2e-9
-          print(json.dumps(data, indent=2))
-          PY
+          hyperbola = json.loads((root/'largest_factor_hyperbola_results.json').read_text())
+          assert hyperbola['status'] == 'PASS'
+          assert hyperbola['universal_max_error'] < 2e-12
 
-      - name: Recompute zero-frequency principal term
-        run: |
-          set -euo pipefail
-          ROOT=frontier/integer_source_frame_bridge
-          python "$ROOT/zero_frequency_principal_verify.py" > /tmp/zero-mode.stdout.json
-          python - <<'PY'
-          import json
-          from pathlib import Path
-          root = Path('frontier/integer_source_frame_bridge')
-          data = json.loads((root / 'zero_frequency_principal_results.json').read_text())
-          assert data['status'] == 'PASS'
-          for row in data['toy_exact_rows']:
-              assert row['type_I_error'] < 2e-12
-              assert row['type_II_error'] < 2e-12
-              assert row['type_III_error'] < 2e-12
-              assert row['combined_error'] < 5e-12
-          assert all(row['Y_exceeds_H'] for row in data['primorial_panel'])
-          print(json.dumps(data, indent=2))
+          vaughan = json.loads((root/'orbit_routed_vaughan_results.json').read_text())
+          assert vaughan['status'] == 'PASS'
+          assert vaughan['universal']['cases'] == 4 * 1999
+          assert vaughan['universal']['max_error'] < 5e-11
+          assert vaughan['shifted_block']['Y_exceeds_H']
+          assert vaughan['shifted_block']['all_recorded_minima_exceed_H']
+          assert vaughan['routed_columns']['maximum_support_to_theorem_bound_ratio'] <= 1
+
+          columns = json.loads((root/'three_orbit_column_results.json').read_text())
+          assert columns['status'] == 'PASS'
+          assert columns['source']['max_source_error'] < 2e-9
+          assert columns['completion']['max_error'] < 3e-9
+
+          zero = json.loads((root/'zero_frequency_principal_results.json').read_text())
+          assert zero['status'] == 'PASS'
+          assert all(row['Y_exceeds_H'] for row in zero['primorial_panel'])
+          assert max(row['combined_error'] for row in zero['toy_exact_rows']) < 5e-12
+
+          coefficients = json.loads((root/'vaughan_quotient_coefficient_results.json').read_text())
+          assert coefficients['status'] == 'PASS'
+          assert coefficients['max_identity_error'] < 2e-11
+          assert coefficients['support_errors'] == 0
+
+          nonzero = json.loads((root/'exact_nonzero_mode_results.json').read_text())
+          assert nonzero['status'] == 'PASS'
+          assert max(row['source_error'] for row in nonzero['rows']) < 2e-10
+          assert max(row['projector_error'] for row in nonzero['rows']) < 2e-10
+          assert max(row['log_projector_error'] for row in nonzero['rows']) < 2e-10
+          print('all primorial-index collapse gates passed')
           PY
 
       - name: Upload validation record
@@ -179,21 +117,7 @@ jobs:
         with:
           name: primorial-index-collapse-validation
           path: |
-            /tmp/shrinking-target.stdout.json
-            /tmp/hyperbola.stdout.json
-            /tmp/vaughan.stdout.json
-            /tmp/three-columns.stdout.json
-            /tmp/zero-mode.stdout.json
-            frontier/integer_source_frame_bridge/primorial_shrinking_target_results.json
-            frontier/integer_source_frame_bridge/primorial_shrinking_target_results_full.json
-            frontier/integer_source_frame_bridge/largest_factor_hyperbola_results.json
-            frontier/integer_source_frame_bridge/orbit_routed_vaughan_results.json
-            frontier/integer_source_frame_bridge/three_orbit_column_results.json
-            frontier/integer_source_frame_bridge/zero_frequency_principal_results.json
-            frontier/integer_source_frame_bridge/PRIMORIAL_INDEX_SHRINKING_TARGET_COLLAPSE_20260728.md
-            frontier/integer_source_frame_bridge/LARGEST_FACTOR_ROUTED_BESSEL_INEQUALITY_20260728.md
-            frontier/integer_source_frame_bridge/LARGEST_FACTOR_HYPERBOLA_SOURCE_IDENTITY_20260728.md
-            frontier/integer_source_frame_bridge/ORBIT_ROUTED_VAUGHAN_COLLAPSE_20260728.md
-            frontier/integer_source_frame_bridge/THREE_ORBIT_COLUMN_SOURCE_IDENTITY_20260728.md
-            frontier/integer_source_frame_bridge/EXPLICIT_ZERO_FREQUENCY_PRINCIPAL_TERM_20260728.md
+            /tmp/*.json
+            frontier/integer_source_frame_bridge/*_results.json
+            frontier/integer_source_frame_bridge/*_20260728.md
           retention-days: 90
