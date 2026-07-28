@@ -18,7 +18,8 @@ def prime_sieve(n: int) -> tuple[bytearray, list[int]]:
 
 
 def direct_additive_sum(r: int, difference: int) -> complex:
-    return sum(cmath.exp(2j * math.pi * a * difference / r) for a in range(1, r))
+    residue = difference % r
+    return sum(cmath.exp(2j * math.pi * a * residue / r) for a in range(1, r))
 
 
 def panel(X: int, eta: float = 0.8) -> dict:
@@ -77,10 +78,11 @@ def panel(X: int, eta: float = 0.8) -> dict:
                 kernel[b][a] = value
 
                 # Check the exact complete-additive formula on a few small moduli.
+                difference = local_centres[a] - local_centres[b]
                 for r in moduli[: min(3, len(moduli))]:
-                    direct = direct_additive_sum(r, local_centres[a] - local_centres[b]) / (r * r)
+                    direct = direct_additive_sum(r, difference) / (r * r)
                     formula = (-1 / (r * r)) + (
-                        1 / r if (local_centres[a] - local_centres[b]) % r == 0 else 0
+                        1 / r if difference % r == 0 else 0
                     )
                     maximum_formula_error = max(maximum_formula_error, abs(direct - formula))
 
