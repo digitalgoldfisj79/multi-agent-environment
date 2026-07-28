@@ -1,0 +1,165 @@
+name: Validate centred source-to-frame identity
+
+on:
+  pull_request:
+    branches:
+      - publication/fortune-papers-ii-vi-20260724
+    paths:
+      - .github/workflows/validate-centred-source-frame-identity.yml
+      - frontier/integer_source_frame_bridge/**
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check theorem package
+        run: |
+          set -euo pipefail
+          ROOT=frontier/integer_source_frame_bridge
+          for file in \
+            CENTRED_SOURCE_TO_FRAME_IDENTITY_20260728.md \
+            SINGLE_WALK_FRAME_STABILITY_REDUCTION_20260728.md \
+            PROGRAMME_STATUS_AFTER_CENTRED_SOURCE_FRAME_IDENTITY_20260728.md \
+            PROGRAMME_STATUS_AFTER_SINGLE_WALK_STABILITY_CALIBRATION_20260728.md \
+            HOSTILE_REVIEW_PROMPT_20260728.md \
+            HOSTILE_REVIEW_DISPOSITION_20260728.md \
+            centred_source_frame_verify.py \
+            centred_source_frame_results.json \
+            centred_frame_integer_calibration.py \
+            centred_frame_integer_calibration_results.json; do
+            test -s "$ROOT/$file"
+          done
+          ! grep -RInE 'TODO|TBD|PLACEHOLDER|REPLACE_ME' "$ROOT"
+          grep -Fq 'Theorem 4.1 (centred dual-row identity)' "$ROOT/CENTRED_SOURCE_TO_FRAME_IDENTITY_20260728.md"
+          grep -Fq 'coefficient-erasure no-go' "$ROOT/CENTRED_SOURCE_TO_FRAME_IDENTITY_20260728.md"
+          grep -Fq 'source-weighted pair-sum identity' "$ROOT/CENTRED_SOURCE_TO_FRAME_IDENTITY_20260728.md"
+          grep -Fq 'Theorem 2.1 (exact single-walk mass identity)' "$ROOT/SINGLE_WALK_FRAME_STABILITY_REDUCTION_20260728.md"
+          grep -Fq 'Theorem 4.1 (scalar sufficient condition)' "$ROOT/SINGLE_WALK_FRAME_STABILITY_REDUCTION_20260728.md"
+          grep -Fq 'INTERNAL EXACT-IDENTITY PASS' "$ROOT/HOSTILE_REVIEW_DISPOSITION_20260728.md"
+          grep -Fq "Fortune's conjecture remains open" "$ROOT/PROGRAMME_STATUS_AFTER_CENTRED_SOURCE_FRAME_IDENTITY_20260728.md"
+
+      - name: Recompute exact finite regressions
+        run: |
+          set -euo pipefail
+          ROOT=frontier/integer_source_frame_bridge
+          cp "$ROOT/centred_source_frame_results.json" /tmp/expected_identity.json
+          python3 "$ROOT/centred_source_frame_verify.py" > /tmp/recomputed_identity.stdout.json
+          cp "$ROOT/centred_source_frame_results.json" /tmp/recomputed_identity.json
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+
+          expected = json.loads(Path('/tmp/expected_identity.json').read_text())
+          got = json.loads(Path('/tmp/recomputed_identity.json').read_text())
+          assert got['status'] == expected['status'] == 'PASS'
+          assert got['scope'] == expected['scope']
+          assert len(got['source_projection_cases']) == 3
+          assert len(got['reciprocal_frame_cases']) == 3
+
+          tol = 5e-12
+          source_keys = (
+              'coefficient_recovery_error',
+              'convolution_error',
+              'parseval_error',
+              'variance',
+          )
+          frame_keys = (
+              'kernel_at_zero_error',
+              'kernel_range_min',
+              'kernel_range_max',
+              'single_frame_error',
+              'single_frame_imaginary_residue',
+              'literal_pair_frame_error',
+              'symmetric_pair_frame_error',
+              'literal_diagonal_error',
+              'symmetric_diagonal_error',
+              'baseline_before_square_error',
+              'variance',
+              'frame_energy',
+          )
+          for a, b in zip(got['source_projection_cases'], expected['source_projection_cases']):
+              assert a['seed'] == b['seed']
+              assert a['centres'] == b['centres']
+              for key in source_keys:
+                  assert abs(a[key] - b[key]) < tol, (key, a[key], b[key])
+          for a, b in zip(got['reciprocal_frame_cases'], expected['reciprocal_frame_cases']):
+              assert a['seed'] == b['seed']
+              for key in frame_keys:
+                  assert abs(a[key] - b[key]) < tol, (key, a[key], b[key])
+              assert a['single_frame_error'] < 2e-8
+              assert a['literal_pair_frame_error'] < 2e-8
+              assert a['symmetric_pair_frame_error'] < 2e-8
+              assert a['kernel_range_min'] >= 0
+              assert a['kernel_range_max'] <= 1 + 2e-8
+          print(json.dumps(got, indent=2))
+          PY
+
+      - name: Install calibration dependencies
+        run: |
+          python3 -m pip install --disable-pip-version-check --quiet \
+            mpmath numpy sympy
+
+      - name: Recompute integer primorial calibration
+        run: |
+          set -euo pipefail
+          ROOT=frontier/integer_source_frame_bridge
+          cp "$ROOT/centred_frame_integer_calibration_results.json" \
+            /tmp/expected_calibration.json
+          python3 "$ROOT/centred_frame_integer_calibration.py" \
+            > /tmp/recomputed_calibration.stdout.json
+          cp "$ROOT/centred_frame_integer_calibration_results.json" \
+            /tmp/recomputed_calibration.json
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+
+          expected = json.loads(Path('/tmp/expected_calibration.json').read_text())
+          got = json.loads(Path('/tmp/recomputed_calibration.json').read_text())
+          assert got['status'] == expected['status']
+          assert got['parameters']['targets'] == expected['parameters']['targets']
+          assert got['parameters']['eta'] == expected['parameters']['eta']
+          assert got['parameters']['harmonic_cutoff'] == expected['parameters']['harmonic_cutoff']
+          assert len(got['rows']) == len(expected['rows']) == 13
+
+          tol = 2e-9
+          keys = (
+              'kernel_min_eigenvalue',
+              'kernel_max_eigenvalue',
+              'operator_norm_K_minus_I',
+              'kernel_total_off_diagonal_mass',
+              'kernel_max_off_diagonal_row_sum',
+              'residual_rayleigh_quotient',
+          )
+          for a, b in zip(got['rows'], expected['rows']):
+              for key in ('X', 'N', 'H', 'largest_centre_digits', 'q_shell_count'):
+                  assert a[key] == b[key], (key, a[key], b[key])
+              for key in keys:
+                  assert abs(a[key] - b[key]) < tol, (a['X'], key, a[key], b[key])
+              assert a['kernel_min_eigenvalue'] > 0
+              assert a['gaussian_signed_tail_bound'] < 1e-15
+          assert got['summary']['minimum_eigenvalue_over_panel'] > 0.85
+          assert got['rows'][-1]['kernel_min_eigenvalue'] > 0.99
+          assert abs(got['rows'][-1]['residual_rayleigh_quotient'] - 1) < 0.001
+          print(json.dumps(got, indent=2))
+          PY
+
+      - name: Upload validation record
+        uses: actions/upload-artifact@v4
+        with:
+          name: centred-source-frame-identity-validation
+          path: |
+            /tmp/expected_identity.json
+            /tmp/recomputed_identity.json
+            /tmp/recomputed_identity.stdout.json
+            /tmp/expected_calibration.json
+            /tmp/recomputed_calibration.json
+            /tmp/recomputed_calibration.stdout.json
+            frontier/integer_source_frame_bridge
+          retention-days: 90
