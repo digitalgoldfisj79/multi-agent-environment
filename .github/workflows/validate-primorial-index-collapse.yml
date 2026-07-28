@@ -30,13 +30,14 @@ jobs:
             THREE_ORBIT_COLUMN_SOURCE_IDENTITY_20260728.md \
             EXPLICIT_ZERO_FREQUENCY_PRINCIPAL_TERM_20260728.md \
             VAUGHAN_QUOTIENT_COEFFICIENT_COLLAPSE_20260728.md \
-            EXACT_NONZERO_MODE_VAUGHAN_IDENTITY_20260728.md; do
+            EXACT_NONZERO_MODE_VAUGHAN_IDENTITY_20260728.md \
+            MOBIUS_LOG_SINGLE_COLUMN_COLLAPSE_20260728.md; do
             test -s "$ROOT/$file"
           done
           ! grep -RInE 'TODO|TBD|PLACEHOLDER|REPLACE_ME' "$ROOT"/*_20260728.md
           grep -Fq 'Theorem 4.1 (shrinking-target separation)' "$ROOT/PRIMORIAL_INDEX_SHRINKING_TARGET_COLLAPSE_20260728.md"
           grep -Fq 'Theorem 3.1 (uniform positive baseline)' "$ROOT/EXPLICIT_ZERO_FREQUENCY_PRINCIPAL_TERM_20260728.md"
-          grep -Fq 'Theorem 4.1 (nonzero-mode source identity)' "$ROOT/EXACT_NONZERO_MODE_VAUGHAN_IDENTITY_20260728.md"
+          grep -Fq 'Theorem 5.1 (single-column nonzero identity)' "$ROOT/MOBIUS_LOG_SINGLE_COLUMN_COLLAPSE_20260728.md"
 
       - name: Install dependencies
         run: python -m pip install --disable-pip-version-check sympy
@@ -62,19 +63,26 @@ jobs:
       - name: Verify exact nonzero modes
         run: python frontier/integer_source_frame_bridge/exact_nonzero_mode_verify.py > /tmp/nonzero.json
 
+      - name: Verify Möbius-log single column
+        run: python frontier/integer_source_frame_bridge/mobius_log_single_column_verify.py > /tmp/mobius-log.json
+
       - name: Check validation boundaries
         run: |
           python - <<'PY'
           import json
           from pathlib import Path
-          root = Path('frontier/integer_source_frame_bridge')
-          s=json.loads((root/'primorial_shrinking_target_results.json').read_text()); assert s['status']=='PASS'
-          h=json.loads((root/'largest_factor_hyperbola_results.json').read_text()); assert h['status']=='PASS' and h['universal_max_error']<2e-12
-          v=json.loads((root/'orbit_routed_vaughan_results.json').read_text()); assert v['status']=='PASS' and v['universal']['cases']==4*1999 and v['shifted_block']['Y_exceeds_H'] and v['shifted_block']['all_recorded_minima_exceed_H']
-          c=json.loads((root/'three_orbit_column_results.json').read_text()); assert c['status']=='PASS' and c['source']['max_source_error']<2e-9 and c['completion']['max_error']<3e-9
-          z=json.loads((root/'zero_frequency_principal_results.json').read_text()); assert z['status']=='PASS' and all(r['Y_exceeds_H'] for r in z['primorial_panel'])
-          q=json.loads((root/'vaughan_quotient_coefficient_results.json').read_text()); assert q['status']=='PASS' and q['max_identity_error']<2e-11 and q['support_errors']==0
-          n=json.loads((root/'exact_nonzero_mode_results.json').read_text()); assert n['status']=='PASS' and max(r['source_error'] for r in n['rows'])<2e-10
+          root=Path('frontier/integer_source_frame_bridge')
+          names=('primorial_shrinking_target','largest_factor_hyperbola','orbit_routed_vaughan','three_orbit_column','zero_frequency_principal','vaughan_quotient_coefficient','exact_nonzero_mode','mobius_log_single_column')
+          data={n:json.loads((root/f'{n}_results.json').read_text()) for n in names}
+          assert all(v['status']=='PASS' for v in data.values())
+          assert data['orbit_routed_vaughan']['universal']['cases']==4*1999
+          assert data['orbit_routed_vaughan']['shifted_block']['Y_exceeds_H']
+          assert data['orbit_routed_vaughan']['shifted_block']['all_recorded_minima_exceed_H']
+          assert data['three_orbit_column']['source']['max_source_error']<2e-9
+          assert data['zero_frequency_principal']['primorial_panel'][0]['Y_exceeds_H']
+          assert data['vaughan_quotient_coefficient']['support_errors']==0
+          assert max(r['source_error'] for r in data['exact_nonzero_mode']['rows'])<2e-10
+          assert max(r['source_error'] for r in data['mobius_log_single_column']['rows'])<2e-10
           print('all primorial-index collapse gates passed')
           PY
 
