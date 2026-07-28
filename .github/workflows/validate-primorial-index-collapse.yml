@@ -10,9 +10,11 @@ on:
       - frontier/integer_source_frame_bridge/LARGEST_FACTOR_ROUTED_BESSEL_INEQUALITY_20260728.md
       - frontier/integer_source_frame_bridge/LARGEST_FACTOR_HYPERBOLA_SOURCE_IDENTITY_20260728.md
       - frontier/integer_source_frame_bridge/ORBIT_ROUTED_VAUGHAN_COLLAPSE_20260728.md
+      - frontier/integer_source_frame_bridge/THREE_ORBIT_COLUMN_SOURCE_IDENTITY_20260728.md
       - frontier/integer_source_frame_bridge/primorial_shrinking_target_verify.py
       - frontier/integer_source_frame_bridge/largest_factor_hyperbola_verify.py
       - frontier/integer_source_frame_bridge/orbit_routed_vaughan_verify.py
+      - frontier/integer_source_frame_bridge/three_orbit_column_verify.py
   workflow_dispatch:
 
 permissions:
@@ -21,7 +23,7 @@ permissions:
 jobs:
   validate:
     runs-on: ubuntu-24.04
-    timeout-minutes: 20
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
 
@@ -34,16 +36,19 @@ jobs:
             LARGEST_FACTOR_ROUTED_BESSEL_INEQUALITY_20260728.md \
             LARGEST_FACTOR_HYPERBOLA_SOURCE_IDENTITY_20260728.md \
             ORBIT_ROUTED_VAUGHAN_COLLAPSE_20260728.md \
+            THREE_ORBIT_COLUMN_SOURCE_IDENTITY_20260728.md \
             primorial_shrinking_target_verify.py \
             largest_factor_hyperbola_verify.py \
-            orbit_routed_vaughan_verify.py; do
+            orbit_routed_vaughan_verify.py \
+            three_orbit_column_verify.py; do
             test -s "$ROOT/$file"
           done
           ! grep -RInE 'TODO|TBD|PLACEHOLDER|REPLACE_ME' \
             "$ROOT/PRIMORIAL_INDEX_SHRINKING_TARGET_COLLAPSE_20260728.md" \
             "$ROOT/LARGEST_FACTOR_ROUTED_BESSEL_INEQUALITY_20260728.md" \
             "$ROOT/LARGEST_FACTOR_HYPERBOLA_SOURCE_IDENTITY_20260728.md" \
-            "$ROOT/ORBIT_ROUTED_VAUGHAN_COLLAPSE_20260728.md"
+            "$ROOT/ORBIT_ROUTED_VAUGHAN_COLLAPSE_20260728.md" \
+            "$ROOT/THREE_ORBIT_COLUMN_SOURCE_IDENTITY_20260728.md"
           grep -Fq 'Theorem 4.1 (shrinking-target separation)' \
             "$ROOT/PRIMORIAL_INDEX_SHRINKING_TARGET_COLLAPSE_20260728.md"
           grep -Fq 'Theorem 2.1 (largest-factor hyperbola identity)' \
@@ -52,6 +57,10 @@ jobs:
             "$ROOT/ORBIT_ROUTED_VAUGHAN_COLLAPSE_20260728.md"
           grep -Fq 'Theorem 5.1 (fixed-complexity column sparsity)' \
             "$ROOT/ORBIT_ROUTED_VAUGHAN_COLLAPSE_20260728.md"
+          grep -Fq 'Theorem 5.1 (three-orbit-column identity)' \
+            "$ROOT/THREE_ORBIT_COLUMN_SOURCE_IDENTITY_20260728.md"
+          grep -Fq 'sum_{2\\le m\\le H}e(rm/D)' \
+            "$ROOT/THREE_ORBIT_COLUMN_SOURCE_IDENTITY_20260728.md"
           grep -Fq "Fortune's conjecture" \
             "$ROOT/PRIMORIAL_INDEX_SHRINKING_TARGET_COLLAPSE_20260728.md"
 
@@ -121,6 +130,25 @@ jobs:
           print(json.dumps(data, indent=2))
           PY
 
+      - name: Recompute three-orbit-column verification
+        run: |
+          set -euo pipefail
+          ROOT=frontier/integer_source_frame_bridge
+          python "$ROOT/three_orbit_column_verify.py" > /tmp/three-columns.stdout.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          root = Path('frontier/integer_source_frame_bridge')
+          data = json.loads((root / 'three_orbit_column_results.json').read_text())
+          assert data['status'] == 'PASS'
+          assert data['source']['max_source_error'] < 2e-8
+          assert data['source']['max_type1_column_error'] < 2e-11
+          assert data['source']['max_type2_column_error'] < 2e-11
+          assert data['source']['max_type3_column_error'] < 2e-11
+          assert data['completion']['max_error'] < 2e-9
+          print(json.dumps(data, indent=2))
+          PY
+
       - name: Upload validation record
         uses: actions/upload-artifact@v4
         with:
@@ -129,12 +157,15 @@ jobs:
             /tmp/shrinking-target.stdout.json
             /tmp/hyperbola.stdout.json
             /tmp/vaughan.stdout.json
+            /tmp/three-columns.stdout.json
             frontier/integer_source_frame_bridge/primorial_shrinking_target_results.json
             frontier/integer_source_frame_bridge/primorial_shrinking_target_results_full.json
             frontier/integer_source_frame_bridge/largest_factor_hyperbola_results.json
             frontier/integer_source_frame_bridge/orbit_routed_vaughan_results.json
+            frontier/integer_source_frame_bridge/three_orbit_column_results.json
             frontier/integer_source_frame_bridge/PRIMORIAL_INDEX_SHRINKING_TARGET_COLLAPSE_20260728.md
             frontier/integer_source_frame_bridge/LARGEST_FACTOR_ROUTED_BESSEL_INEQUALITY_20260728.md
             frontier/integer_source_frame_bridge/LARGEST_FACTOR_HYPERBOLA_SOURCE_IDENTITY_20260728.md
             frontier/integer_source_frame_bridge/ORBIT_ROUTED_VAUGHAN_COLLAPSE_20260728.md
+            frontier/integer_source_frame_bridge/THREE_ORBIT_COLUMN_SOURCE_IDENTITY_20260728.md
           retention-days: 90
