@@ -13,6 +13,9 @@ on:
       - frontier/integer_source_frame_bridge/PRIMORIAL_PAIR_OF_PAIRS_SINGULAR_SERIES_AVERAGE_20260728.md
       - frontier/integer_source_frame_bridge/primorial_pair4_singular_series_verify.py
       - frontier/integer_source_frame_bridge/primorial_pair4_singular_series_results.json
+      - frontier/integer_source_frame_bridge/FOUR_PRIME_ERROR_AND_POSITIVE_DIAGONAL_OBSTRUCTION_20260728.md
+      - frontier/integer_source_frame_bridge/four_prime_variance_verify.py
+      - frontier/integer_source_frame_bridge/four_prime_variance_results.json
   workflow_dispatch:
 
 permissions:
@@ -36,17 +39,23 @@ jobs:
             complete_prime_modulus_frame_results.json \
             PRIMORIAL_PAIR_OF_PAIRS_SINGULAR_SERIES_AVERAGE_20260728.md \
             primorial_pair4_singular_series_verify.py \
-            primorial_pair4_singular_series_results.json; do
+            primorial_pair4_singular_series_results.json \
+            FOUR_PRIME_ERROR_AND_POSITIVE_DIAGONAL_OBSTRUCTION_20260728.md \
+            four_prime_variance_verify.py \
+            four_prime_variance_results.json; do
             test -s "$ROOT/$file"
           done
           ! grep -RInE 'TODO|TBD|PLACEHOLDER|REPLACE_ME' \
             "$ROOT/COMPLETE_PRIME_MODULUS_FRAME_20260728.md" \
             "$ROOT/PROGRAMME_STATUS_AFTER_COMPLETE_MODULUS_FRAME_20260728.md" \
-            "$ROOT/PRIMORIAL_PAIR_OF_PAIRS_SINGULAR_SERIES_AVERAGE_20260728.md"
+            "$ROOT/PRIMORIAL_PAIR_OF_PAIRS_SINGULAR_SERIES_AVERAGE_20260728.md" \
+            "$ROOT/FOUR_PRIME_ERROR_AND_POSITIVE_DIAGONAL_OBSTRUCTION_20260728.md"
           grep -Fq 'Theorem 4.1 (near-Parseval complete-modulus frame)' \
             "$ROOT/COMPLETE_PRIME_MODULUS_FRAME_20260728.md"
           grep -Fq 'Theorem 3.1 (primorial pair-of-pairs average)' \
             "$ROOT/PRIMORIAL_PAIR_OF_PAIRS_SINGULAR_SERIES_AVERAGE_20260728.md"
+          grep -Fq 'Proposition 5.1' \
+            "$ROOT/FOUR_PRIME_ERROR_AND_POSITIVE_DIAGONAL_OBSTRUCTION_20260728.md"
           grep -Fq "Fortune's conjecture remains open" \
             "$ROOT/PROGRAMME_STATUS_AFTER_COMPLETE_MODULUS_FRAME_20260728.md"
 
@@ -63,34 +72,26 @@ jobs:
           python3 - <<'PY'
           import json
           from pathlib import Path
-
-          expected = json.loads(Path('/tmp/frame.expected.json').read_text())
-          got = json.loads(Path('/tmp/frame.got.json').read_text())
-          assert expected['status'] == got['status'] == 'PASS'
-          assert expected['parameters'] == got['parameters']
-          assert got['direct_character_check']['identity_error'] < 1e-10
-          assert len(expected['rows']) == len(got['rows']) == 6
-          tol = 5e-12
-          keys = (
-              'minimum_eigenvalue',
-              'maximum_eigenvalue',
-              'operator_norm_D_minus_I',
-              'maximum_off_diagonal_row_sum',
-              'total_off_diagonal_mass',
-              'theorem_row_bound',
-          )
-          for a, b in zip(expected['rows'], got['rows']):
-              assert a['X'] == b['X']
-              assert a['N'] == b['N']
-              assert a['q_shell_count'] == b['q_shell_count']
-              assert a['nonzero_off_diagonal_pairs'] == b['nonzero_off_diagonal_pairs']
-              assert a['maximum_shell_divisor_count'] == b['maximum_shell_divisor_count']
-              assert a['gap_divisor_histogram'] == b['gap_divisor_histogram']
+          expected=json.loads(Path('/tmp/frame.expected.json').read_text())
+          got=json.loads(Path('/tmp/frame.got.json').read_text())
+          assert expected['status']==got['status']=='PASS'
+          assert expected['parameters']==got['parameters']
+          assert got['direct_character_check']['identity_error']<1e-10
+          assert len(expected['rows'])==len(got['rows'])==6
+          tol=5e-12
+          keys=('minimum_eigenvalue','maximum_eigenvalue','operator_norm_D_minus_I',
+                'maximum_off_diagonal_row_sum','total_off_diagonal_mass','theorem_row_bound')
+          for a,b in zip(expected['rows'],got['rows']):
+              assert a['X']==b['X'] and a['N']==b['N']
+              assert a['q_shell_count']==b['q_shell_count']
+              assert a['nonzero_off_diagonal_pairs']==b['nonzero_off_diagonal_pairs']
+              assert a['maximum_shell_divisor_count']==b['maximum_shell_divisor_count']
+              assert a['gap_divisor_histogram']==b['gap_divisor_histogram']
               for key in keys:
-                  assert abs(a[key] - b[key]) < tol, (a['X'], key, a[key], b[key])
-              assert b['operator_norm_D_minus_I'] <= b['maximum_off_diagonal_row_sum'] + tol
-              assert b['maximum_off_diagonal_row_sum'] <= b['theorem_row_bound'] + tol
-          print(json.dumps(got['summary'], indent=2))
+                  assert abs(a[key]-b[key])<tol,(a['X'],key,a[key],b[key])
+              assert b['operator_norm_D_minus_I']<=b['maximum_off_diagonal_row_sum']+tol
+              assert b['maximum_off_diagonal_row_sum']<=b['theorem_row_bound']+tol
+          print(json.dumps(got['summary'],indent=2))
           PY
 
       - name: Recompute pair-of-pairs local identities
@@ -103,27 +104,46 @@ jobs:
           python3 - <<'PY'
           import json
           from pathlib import Path
+          expected=json.loads(Path('/tmp/pair4.expected.json').read_text())
+          got=json.loads(Path('/tmp/pair4.got.json').read_text())
+          assert expected['status']==got['status']=='PASS'
+          assert expected['parameters']==got['parameters']
+          assert expected['local_checks']==got['local_checks']
+          assert len(expected['truncated_averages'])==len(got['truncated_averages'])==4
+          tol=5e-12
+          for a,b in zip(expected['truncated_averages'],got['truncated_averages']):
+              assert a['X']==b['X'] and a['H']==b['H']
+              assert a['primes_in_truncation']==b['primes_in_truncation']
+              for key in ('normalised_truncated_average','absolute_error_from_one',
+                          'logX_over_H','error_divided_by_logX_over_H'):
+                  assert abs(a[key]-b[key])<tol,(a['X'],key,a[key],b[key])
+              assert b['absolute_error_from_one']<5*b['logX_over_H']
+          print(json.dumps(got['truncated_averages'],indent=2))
+          PY
 
-          expected = json.loads(Path('/tmp/pair4.expected.json').read_text())
-          got = json.loads(Path('/tmp/pair4.got.json').read_text())
-          assert expected['status'] == got['status'] == 'PASS'
-          assert expected['parameters'] == got['parameters']
-          assert expected['local_checks'] == got['local_checks']
-          assert len(expected['truncated_averages']) == len(got['truncated_averages']) == 4
-          tol = 5e-12
-          for a, b in zip(expected['truncated_averages'], got['truncated_averages']):
-              assert a['X'] == b['X']
-              assert a['H'] == b['H']
-              assert a['primes_in_truncation'] == b['primes_in_truncation']
-              for key in (
-                  'normalised_truncated_average',
-                  'absolute_error_from_one',
-                  'logX_over_H',
-                  'error_divided_by_logX_over_H',
-              ):
-                  assert abs(a[key] - b[key]) < tol, (a['X'], key, a[key], b[key])
-              assert b['absolute_error_from_one'] < 5 * b['logX_over_H']
-          print(json.dumps(got['truncated_averages'], indent=2))
+      - name: Recompute variance expansion and scale obstruction
+        run: |
+          set -euo pipefail
+          ROOT=frontier/integer_source_frame_bridge
+          cp "$ROOT/four_prime_variance_results.json" /tmp/variance.expected.json
+          python3 "$ROOT/four_prime_variance_verify.py" > /tmp/variance.stdout.json
+          cp "$ROOT/four_prime_variance_results.json" /tmp/variance.got.json
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          expected=json.loads(Path('/tmp/variance.expected.json').read_text())
+          got=json.loads(Path('/tmp/variance.got.json').read_text())
+          assert expected['status']==got['status']=='PASS'
+          assert expected['exact_cases']==got['exact_cases']
+          assert len(expected['scale_cases'])==len(got['scale_cases'])==4
+          tol=5e-10
+          for a,b in zip(expected['scale_cases'],got['scale_cases']):
+              assert a['X']==b['X']
+              for key in ('loss_factor','X_over_logX','desired_diagonal_scale',
+                          'positive_sieve_diagonal_scale'):
+                  assert abs(a[key]-b[key])<=tol*max(1,abs(a[key]))
+              assert abs(b['loss_factor']-b['X_over_logX'])<1e-9
+          print(json.dumps(got['scale_cases'],indent=2))
           PY
 
       - name: Upload validation record
@@ -137,9 +157,14 @@ jobs:
             /tmp/pair4.expected.json
             /tmp/pair4.got.json
             /tmp/pair4.stdout.json
+            /tmp/variance.expected.json
+            /tmp/variance.got.json
+            /tmp/variance.stdout.json
             frontier/integer_source_frame_bridge/COMPLETE_PRIME_MODULUS_FRAME_20260728.md
             frontier/integer_source_frame_bridge/PROGRAMME_STATUS_AFTER_COMPLETE_MODULUS_FRAME_20260728.md
             frontier/integer_source_frame_bridge/complete_prime_modulus_frame_verify.py
             frontier/integer_source_frame_bridge/PRIMORIAL_PAIR_OF_PAIRS_SINGULAR_SERIES_AVERAGE_20260728.md
             frontier/integer_source_frame_bridge/primorial_pair4_singular_series_verify.py
+            frontier/integer_source_frame_bridge/FOUR_PRIME_ERROR_AND_POSITIVE_DIAGONAL_OBSTRUCTION_20260728.md
+            frontier/integer_source_frame_bridge/four_prime_variance_verify.py
           retention-days: 90
