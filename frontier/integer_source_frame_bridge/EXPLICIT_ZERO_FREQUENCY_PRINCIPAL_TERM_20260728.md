@@ -1,313 +1,217 @@
 # Explicit zero-frequency principal term
 
 Date: 28 July 2026  
-Status: exact zero-mode formula proved; asymptotic evaluation uses the classical prime number theorem zero-free-region estimates.
+Status: exact zero-mode formula proved; uniform positivity uses classical zeta zero-free-region estimates.
 
-## 1. Weighted shifted source
+## 1. Weighted source and hypotheses
 
-Let `w_m` be deterministic real weights supported on `2<=m<=H`.  Put
+Let `w_m` be deterministic **nonnegative** real weights supported on
+`2<=m<=H`, and assume
 
 \[
-W_H=\sum_{m=2}^{H}w_m
+W_H=\sum_{m=2}^{H}w_m>0.
 \]
 
-and
+Put
 
 \[
 L_j=\sum_{m=2}^{H}w_m\log(P_j+m).
-\tag{1.1}
 \]
 
-For the sharp detector, `w_m=1` and `W_H=H-1`.
+The exact formulas below remain valid for arbitrary real weights.  Nonnegativity is
+used only for the uniform estimate `L_j<<W_H X` and the positive lower bound on the
+principal term.
 
-Use the exact Vaughan cutoff
+For the sharp detector `w_m=1`, so `W_H=H-1`.  For the symmetric source one may
+take `w_m=Lambda(m)`, for which the prime number theorem gives `W_H~H`.
+
+Use
 
 \[
 Y=\lfloor P_0^{1/3}\rfloor>H
 \]
 
-and write
+and define
 
 \[
 S_\mu(T)=\sum_{n\le T}\frac{\mu(n)}n,
-\qquad
+\quad
 S_{\mu\log}(T)=\sum_{n\le T}\frac{\mu(n)\log n}{n},
-\qquad
+\quad
 S_\Lambda(T)=\sum_{n\le T}\frac{\Lambda(n)}n.
-\tag{1.2}
 \]
 
-For a divisibility condition `q|P_j+m`, additive orthogonality gives a zero
-frequency equal to `W_H/q`.  In the Type I term the logarithmic weight gives the
-zero frequency
+## 2. Exact zero modes
+
+The Type I part has exact zero-frequency contribution
+
+\[
+\boxed{
+M_{I,j}=L_jS_\mu(Y)-W_HS_{\mu\log}(Y).
+}
+\tag{2.1}
+\]
+
+Indeed the zero additive character for a fixed `d<=Y` is
 
 \[
 \frac1d\sum_m w_m\log\frac{P_j+m}{d}
 =
 \frac{L_j-W_H\log d}{d}.
-\tag{1.3}
 \]
 
-## 2. Exact Type I zero mode
-
-The Type I source is
-
-\[
-\sum_{d\le Y}\mu(d)
-\sum_{m}w_m\mathbf1_{d\mid P_j+m}
-\log\frac{P_j+m}{d}.
-\]
-
-### Proposition 2.1
-
-Its zero-frequency contribution is exactly
+The Vaughan subtraction term has exact zero mode
 
 \[
 \boxed{
-M_{I,j}
-=
-L_jS_\mu(Y)-W_HS_{\mu\log}(Y).
+M_{II}=-W_HS_\mu(Y)S_\Lambda(Y).
 }
-\tag{2.1}
+\tag{2.2}
 \]
 
-This is immediate from (1.3).
-
-## 3. Exact subtraction zero mode
-
-The subtraction term is
-
-\[
--
-\sum_{d\le Y}\sum_{c\le Y}
-\mu(d)\Lambda(c)
-\sum_m w_m\mathbf1_{dc\mid P_j+m}.
-\]
-
-### Proposition 3.1
-
-Its zero-frequency contribution is exactly
-
-\[
-\boxed{
-M_{II}
-=-W_HS_\mu(Y)S_\Lambda(Y).
-}
-\tag{3.1}
-\]
-
-The product factorisation is exact because the modulus is `dc` and the zero mode
-is `W_H/(dc)`.
-
-## 4. Exact large-large zero mode
-
-Put
-
-\[
-Z_j=P_j+H.
-\]
-
-The large-large term is
-
-\[
-\sum_{a>Y}\sum_{c>Y}
-\mu(a)\Lambda(c)
-\sum_mw_m\mathbf1_{ac\mid P_j+m}.
-\]
-
-Only products `ac<=Z_j` occur in the original finite convolution.
-
-### Proposition 4.1
-
-Its zero-frequency contribution is exactly
+For the large-large term put `Z_j=P_j+H`.  Its finite product condition is
+`ac<=Z_j`, and its exact zero mode is
 
 \[
 \boxed{
 M_{III,j}
 =
-W_H
-\sum_{\substack{c>Y\\c\le Z_j/Y}}
+W_H\sum_{Y<c\le Z_j/Y}
 \frac{\Lambda(c)}c
-\left[
-S_\mu(Z_j/c)-S_\mu(Y)
-\right].
+\left[S_\mu(Z_j/c)-S_\mu(Y)\right].
 }
-\tag{4.1}
+\tag{2.3}
 \]
 
-### Proof
-
-The zero mode for fixed `(a,c)` is `W_H/(ac)`.  Sum first over
-
-\[
-Y<a\le Z_j/c.
-\]
-
-The inner sum is exactly the bracket in (4.1).  \(\square\)
-
-## 5. Complete principal term
-
-### Theorem 5.1 (exact zero-frequency baseline)
-
-The zero-frequency contribution of the full signed Vaughan source is
+Thus the exact principal term produced by the signed Vaughan source is
 
 \[
 \boxed{
-\mu_j^{(0)}
-=
-M_{I,j}+M_{II}+M_{III,j}.
+\mu_j^{(0)}=M_{I,j}+M_{II}+M_{III,j}.
 }
-\tag{5.1}
+\tag{2.4}
 \]
 
-No Hardy--Littlewood conjecture enters this identity.
+No Hardy--Littlewood conjecture enters (2.1)--(2.4).
 
-## 6. Classical asymptotic evaluation
+## 3. Uniform asymptotic evaluation
 
-The classical zero-free region for the Riemann zeta function gives, for some
-absolute `c>0`,
+The classical zero-free region for `zeta(s)` gives, for some absolute `c>0`,
 
 \[
 S_\mu(T)
 \ll
-\exp\left(
--c(\log T)^{3/5}(\log\log T)^{-1/5}
-\right),
-\tag{6.1}
+\exp\!\left[-c(\log T)^{3/5}(\log\log T)^{-1/5}\right],
+\tag{3.1}
 \]
-
-and partial summation gives
 
 \[
 S_{\mu\log}(T)
-=-1+
-O\left(
-\exp\left(
--c(\log T)^{3/5}(\log\log T)^{-1/5}
-\right)
-\right).
-\tag{6.2}
-\]
-
-Also
-
-\[
-S_\Lambda(T)=\log T+O(1).
-\tag{6.3}
-\]
-
-Since
-
-\[
-\log Y=\frac13\log P_0+O(1)\asymp X,
-\]
-
-the error in (6.1)--(6.2) is smaller than every negative power of `X`.
-Moreover
-
-\[
-L_j\ll W_HX
-\]
-
-uniformly in the dyadic block.
-
-For (4.1), let
-
-\[
-E(Y)=
-\sup_{T\ge Y}|S_\mu(T)|.
-\]
-
-Then
-
-\[
-|S_\mu(Z_j/c)-S_\mu(Y)|\le2E(Y)
+=-1+O\!\left(
+\exp\!\left[-c(\log T)^{3/5}(\log\log T)^{-1/5}\right]
+\right),
+\tag{3.2}
 \]
 
 and
 
 \[
-\sum_{c\le Z_j/Y}\frac{\Lambda(c)}c
-\ll\log Z_j\ll X.
+S_\Lambda(T)=\log T+O(1).
+\tag{3.3}
 \]
 
-Therefore
+Since `log Y asymp X`, these errors are smaller than every negative power of `X`.
+For nonnegative weights,
 
 \[
-M_{III,j}\ll W_HX E(Y)=o(W_H).
-\tag{6.4}
+L_j\ll W_HX
 \]
 
-Combining (2.1), (3.1), and (4.1) gives:
+uniformly in the dyadic primorial block.  Hence (2.1) gives
 
-### Corollary 6.1 (uniform positive principal term)
+\[
+M_{I,j}=W_H+o(W_H),
+\]
 
-Uniformly for all centres in the dyadic primorial block,
+and (2.2) gives `M_II=o(W_H)`.
+
+For (2.3), let
+
+\[
+E(Y)=\sup_{T\ge Y}|S_\mu(T)|.
+\]
+
+Then
+
+\[
+|M_{III,j}|
+\ll
+W_HE(Y)\sum_{c\le Z_j/Y}\frac{\Lambda(c)}c
+\ll W_HX E(Y)
+=o(W_H).
+\]
+
+Therefore:
+
+### Theorem 3.1 (uniform positive baseline)
+
+For nonnegative weights with `W_H>0`, uniformly over the dyadic block,
 
 \[
 \boxed{
-\mu_j^{(0)}
-=W_H+o(W_H).
+\mu_j^{(0)}=W_H+o(W_H).
 }
-\tag{6.5}
+\tag{3.4}
 \]
 
 In particular, for sufficiently large `X`,
 
 \[
-\frac12W_H
-\le
-\mu_j^{(0)}
-\le
-\frac32W_H.
-\tag{6.6}
+\boxed{
+\frac12W_H\le\mu_j^{(0)}\le\frac32W_H.
+}
+\tag{3.5}
 \]
 
-For the sharp detector, this is `mu_j^(0)=H+o(H)`.
+For the sharp detector this is `mu_j^(0)=H+o(H)`.
 
-## 7. Consequence for the Fortune programme
+## 4. Exact remaining target
 
-The required positive baseline no longer needs to be inserted heuristically.  It
-is the zero-frequency term produced by the exact signed source decomposition.
-
-Define the nonzero-mode residual by
+Define
 
 \[
 \mathcal E_j
 =
-\sum_mw_m\Lambda(P_j+m)-\mu_j^{(0)}.
-\tag{7.1}
+\sum_{m=2}^{H}w_m\Lambda(P_j+m)-\mu_j^{(0)}.
 \]
 
-The remaining theorem is purely nonzero-frequency:
+All zero-frequency terms have now been removed exactly.  The remaining theorem is
+purely nonzero-frequency:
 
 \[
+\boxed{
 \sum_{j<N}|\mathcal E_j|^2
 \ll NHX L(X),
-\qquad
-L(X)=o(\log X).
-\tag{7.2}
+\qquad L(X)=o(\log X).
+}
+\tag{4.1}
 \]
 
-Together with (6.6), the one-sided shifted-detector criterion excludes every failed
-centre.
+For the sharp detector, (3.5) and (4.1) imply the corrected all-centres criterion
+and therefore Fortune for all sufficiently large centres.
 
-Thus principal subtraction is now exact and uniform.  The sole remaining analytic
-problem is cancellation in the nonzero reciprocal modes of the three orbit-column
-source.
-
-## 8. Boundary
+## 5. Boundary
 
 Proved internally:
 
-1. exact zero-mode formulas (2.1), (3.1), (4.1), and (5.1);
-2. reduction of the principal term to classical summatory functions.
+1. exact formulas (2.1)--(2.4);
+2. reduction of the baseline to classical summatory functions.
 
-Invoked published input:
+Published input invoked:
 
-1. the classical zeta zero-free-region bounds (6.1)--(6.3).
+1. the classical prime-number-theorem zero-free-region estimates (3.1)--(3.3).
 
 Open:
 
-1. the nonzero-mode variance estimate (7.2);
+1. the nonzero-mode variance estimate (4.1);
 2. Fortune's conjecture.
