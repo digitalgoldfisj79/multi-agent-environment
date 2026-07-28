@@ -187,7 +187,7 @@ T_j(H)
 is obtained from (2.1), (3.1), and (4.1) by multiplying each column summand by
 
 \[
-\Lambda\bigl(m_j(D)igr).
+\Lambda\bigl(m_j(D)\bigr).
 \tag{5.2}
 \]
 
@@ -202,13 +202,13 @@ is taken.  \(\square\)
 The column ranges satisfy
 
 \[
-D\ge P_0/Y>P_0^{2/3}
+D\ge P_0/Y\ge P_0^{2/3}
 \]
 
 in Type I and
 
 \[
-D\ge P_0/Y^2>P_0^{1/3}+O(1)
+D\ge P_0/Y^2\ge P_0^{1/3}
 \]
 
 in Type II, while Type III has `D>Y`.
@@ -232,20 +232,27 @@ coordinates:
 \[
 q_j(D)=\left\lceil P_j/D\right\rceil,
 \qquad
-m_j(D)=-P_j\pmod D.
+m_j(D)\equiv-P_j\pmod D,
+\quad 0\le m_j(D)<D.
 \]
 
 The interval indicator can be completed in additive characters modulo `D`:
 
 \[
+\boxed{
 \mathbf1_{2\le m_j(D)\le H}
 =
 \frac1D
 \sum_{r\bmod D}
-\left(\sum_{2\le m\le H}e(-rm/D)\right)
+\left(\sum_{2\le m\le H}e(rm/D)\right)
 e(rP_j/D).
+}
 \tag{7.1}
 \]
+
+Indeed, orthogonality makes the right side equal to the number of offsets
+`m in [2,H]` satisfying `P_j+m=0 mod D`; because `D>H`, that number is either zero
+or one and is precisely the left side.
 
 Thus every routed column has an exact reciprocal phase
 
@@ -262,9 +269,6 @@ A_Y(q),
 \qquad
 \mu(D)B_Y(q).
 \]
-
-Equation (7.1) is the direct bridge from the primorial-index collapse to bilinear
-or trilinear Kloosterman-fraction technology.
 
 ## 8. New analytic boundary
 
