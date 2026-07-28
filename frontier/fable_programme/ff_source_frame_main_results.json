@@ -1,0 +1,16 @@
+[
+{
+  "q": 3, "d": 2, "K": 3, "orders": 6, "shells": 18, "shell_pairs": 153, "offsets": 11,
+  "pearson": {"pair_mean": 0.00000000, "pair_square_mean": 0.00000000, "single_mean": 0.00000000, "single_square_mean": 0.00000000, "weighted_source_energy": 0.00000000},
+  "spearman": {"pair_mean": 0.00000000, "pair_square_mean": 0.00000000, "single_mean": 0.00000000, "single_square_mean": 0.00000000, "weighted_source_energy": 0.00000000},
+  "identity": {"detector_variance": 0.00000000, "pair_mean": -0.35294118, "pair_square_mean": 109.41176471, "single_mean": -0.17647059, "single_square_mean": 6.17647059, "percentiles": {"detector": 100.00000000, "pair_mean": 100.00000000, "pair_square_mean": 100.00000000, "single_mean": 100.00000000, "single_square_mean": 100.00000000}},
+  "rank_baselines": [7.00000000, 3.00000000, 0.00000000]
+},
+{
+  "q": 3, "d": 3, "K": 8, "orders": 40320, "shells": 116, "shell_pairs": 2048, "offsets": 74,
+  "pearson": {"pair_mean": 0.03182548, "pair_square_mean": 0.02731567, "single_mean": 0.03395716, "single_square_mean": 0.03154340, "weighted_source_energy": 0.99937643},
+  "spearman": {"pair_mean": 0.04907819, "pair_square_mean": 0.04934816, "single_mean": 0.04903283, "single_square_mean": 0.05299536, "weighted_source_energy": 0.99928026},
+  "identity": {"detector_variance": 86.14220663, "pair_mean": 3.73535156, "pair_square_mean": 7317.13183594, "single_mean": 0.26416016, "single_square_mean": 64.12158203, "percentiles": {"detector": 64.38988095, "pair_mean": 94.18402778, "pair_square_mean": 88.42509921, "single_mean": 87.87946429, "single_square_mean": 97.29910714}},
+  "rank_baselines": [31.37500000, 26.14285714, 22.17857143, 18.75714286, 17.57142857, 15.96428571, 16.75000000, 27.00000000]
+}
+]

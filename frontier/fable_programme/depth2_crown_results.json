@@ -1,0 +1,10 @@
+{
+  "rows": [
+    {"p": 5, "N2": 1, "N_sq": 4, "N_ns": 6, "W": 6, "Q_points": 25, "Q_mod_p": 0, "Q_mod_p2": 0, "recovered_W_mod_p2": 6},
+    {"p": 7, "N2": 1, "N_sq": 10, "N_ns": 8, "W": 10, "Q_points": 61, "Q_mod_p": 5, "Q_mod_p2": 12, "recovered_W_mod_p2": 10},
+    {"p": 11, "N2": 1, "N_sq": 14, "N_ns": 14, "W": 15, "Q_points": 151, "Q_mod_p": 8, "Q_mod_p2": 30, "recovered_W_mod_p2": 15},
+    {"p": 17, "N2": 1, "N_sq": 18, "N_ns": 14, "W": 17, "Q_points": 273, "Q_mod_p": 1, "Q_mod_p2": 273, "recovered_W_mod_p2": 17},
+    {"p": 23, "N2": 2, "N_sq": 12, "N_ns": 22, "W": 19, "Q_points": 419, "Q_mod_p": 5, "Q_mod_p2": 419, "recovered_W_mod_p2": 19}
+  ],
+  "theorem": "Because N2<=p-1 and each N_a<=p(p-1), 0<=W_p<=p^2-1. Hence #Q_p(F_p)=1+(p-1)W_p is congruent to 1 mod p^2 iff W_p=0."
+}

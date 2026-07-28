@@ -1,0 +1,47 @@
+{
+  "protocol": {
+    "q": 3,
+    "d": 3,
+    "orders": 40320,
+    "shell_pairs_per_seed": 512,
+    "seeds": [10101, 20202, 30303, 40404]
+  },
+  "runs": [
+    {
+      "seed": 10101,
+      "pearson": {"pair_mean": 0.04139499, "pair_square_mean": 0.01358399, "single_mean": 0.05789285, "single_square_mean": 0.03122671, "weighted_source_energy": 0.99815141},
+      "spearman": {"pair_mean": 0.04287021, "pair_square_mean": 0.01795422, "single_mean": 0.06115416, "single_square_mean": 0.03244492, "weighted_source_energy": 0.99801183}
+    },
+    {
+      "seed": 20202,
+      "pearson": {"pair_mean": -0.01269985, "pair_square_mean": 0.00070905, "single_mean": -0.00454546, "single_square_mean": -0.00469469, "weighted_source_energy": 0.99808174},
+      "spearman": {"pair_mean": -0.00943098, "pair_square_mean": 0.00494835, "single_mean": -0.00484979, "single_square_mean": 0.00134285, "weighted_source_energy": 0.99791851}
+    },
+    {
+      "seed": 30303,
+      "pearson": {"pair_mean": 0.10253138, "pair_square_mean": 0.06524043, "single_mean": 0.09863897, "single_square_mean": 0.08847494, "weighted_source_energy": 0.99800460},
+      "spearman": {"pair_mean": 0.09273209, "pair_square_mean": 0.06042063, "single_mean": 0.09201903, "single_square_mean": 0.08000832, "weighted_source_energy": 0.99775709}
+    },
+    {
+      "seed": 40404,
+      "pearson": {"pair_mean": 0.09273169, "pair_square_mean": 0.06653376, "single_mean": 0.09753676, "single_square_mean": 0.08528433, "weighted_source_energy": 0.99789298},
+      "spearman": {"pair_mean": 0.09234002, "pair_square_mean": 0.08042999, "single_mean": 0.08355335, "single_square_mean": 0.09066608, "weighted_source_energy": 0.99779249}
+    }
+  ],
+  "ranges": {
+    "pearson": {
+      "pair_mean": {"min": -0.01269985, "max": 0.10253138, "mean": 0.0559895525},
+      "pair_square_mean": {"min": 0.00070905, "max": 0.06653376, "mean": 0.0365168075},
+      "single_mean": {"min": -0.00454546, "max": 0.09863897, "mean": 0.06238078},
+      "single_square_mean": {"min": -0.00469469, "max": 0.08847494, "mean": 0.0500728225},
+      "weighted_source_energy": {"min": 0.99789298, "max": 0.99815141, "mean": 0.9980326825}
+    },
+    "spearman": {
+      "pair_mean": {"min": -0.00943098, "max": 0.09273209, "mean": 0.054627835},
+      "pair_square_mean": {"min": 0.00494835, "max": 0.08042999, "mean": 0.0409382975},
+      "single_mean": {"min": -0.00484979, "max": 0.09201903, "mean": 0.0579691875},
+      "single_square_mean": {"min": 0.00134285, "max": 0.09066608, "mean": 0.0511155425},
+      "weighted_source_energy": {"min": 0.99775709, "max": 0.99801183, "mean": 0.99786998}
+    }
+  }
+}
