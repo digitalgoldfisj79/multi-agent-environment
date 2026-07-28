@@ -1,0 +1,35 @@
+{
+  "status": "PASS",
+  "scope": "finite complete first-order dyadic covariance calibration with unit candidate weights",
+  "panels": [
+    {
+      "X": 101,
+      "H": 8160,
+      "N": 21,
+      "full_square_over_NHX": 0.00038751764651753226,
+      "diagonal_over_NHX": 0.00039226402614234217,
+      "cross_over_NHX": -0.000004746379624809917,
+      "maximum_absolute_cross_range_covariance_over_NHX": 0.00003384307859894282
+    },
+    {
+      "X": 211,
+      "H": 35616,
+      "N": 36,
+      "full_square_over_NHX": 0.00021597146600273444,
+      "diagonal_over_NHX": 0.00017195075377350198,
+      "cross_over_NHX": 0.00004402071222923245,
+      "maximum_absolute_cross_range_covariance_over_NHX": 0.000009473447463523735
+    },
+    {
+      "X": 503,
+      "H": 202407,
+      "N": 73,
+      "full_square_over_NHX": 0.00006180526415421269,
+      "diagonal_over_NHX": 0.00006569409399492497,
+      "cross_over_NHX": -0.000003888829840712279,
+      "maximum_absolute_cross_range_covariance_over_NHX": 0.0000017653479372700646
+    }
+  ],
+  "interpretation": "The unit-weight first-order square tracks its diagonal closely in the tested panels; cross-range covariance is mixed-sign and smaller. Natural Euler weights multiply the scale by approximately (2 log X)^2. These values are empirical only.",
+  "boundary": "No asymptotic covariance estimate is inferred from this calibration."
+}
