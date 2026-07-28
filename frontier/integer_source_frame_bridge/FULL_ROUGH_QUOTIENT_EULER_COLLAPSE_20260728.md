@@ -120,7 +120,7 @@ bijection between the candidate offsets hit by `Q` and `mathcal K_P(Q)`.
 No prime indicator remains on the right side.  Both the Euler divisor `Q` and
 the complementary quotient `k` are primorial-rough.
 
-## 5. Exact three-level decomposition
+## 5. Exact four-level decomposition
 
 The condition `H<(z^+)^2` has a decisive consequence.
 
@@ -129,24 +129,28 @@ The condition `H<(z^+)^2` has a decisive consequence.
 Every `Q in mathcal Q(z,Y)` lies in exactly one of the following classes:
 
 1. `Q=1`;
-2. `z<Q<=H`, in which case `Q` is a single prime;
-3. `Q>H`, in which case `Q` contains at least two new prime factors.
+2. `z<Q<=H`, in which case `Q` is a single physical prime;
+3. `H<Q<=Y`, in which case `Q` is a single tail prime;
+4. `Q` has at least two new prime factors, in which case
+   `Q>=(z^+)^2>H`.
 
-Moreover, for every `Q>H`,
+Moreover, for every `Q>H`, whether prime or composite,
 
 \[
-|\mathcal K_P(Q)|\le1.
+\boxed{|\mathcal K_P(Q)|\le1.}
 \tag{5.1}
 \]
 
 ### Proof
 
 A product of two primes exceeding `z` is at least `(z^+)^2>H`.  Hence an
-admissible `Q<=H` is either one or one prime.  Conversely every higher-order
-product exceeds `H`.  The interval in (4.1) has length `(H-z)/Q<1` when
-`Q>H`, so it contains at most one integer.  \(\square\)
+admissible `Q<=H` is either one or one prime.  A one-prime divisor larger than
+`H` lies in class 3 because every prime factor of an admissible `Q` is at most
+`Y`.  Every product of at least two new primes lies in class 4 and exceeds `H`.
+Finally, the interval in (4.1) has length `(H-z)/Q<1` for every `Q>H`, so it
+contains at most one integer.  \(\square\)
 
-Thus (4.2) decomposes exactly into:
+Thus (4.2) decomposes exactly into
 
 \[
 \boxed{
@@ -154,13 +158,16 @@ Thus (4.2) decomposes exactly into:
 +
 \text{physical single-prime layer}
 +
+\text{sparse single-prime tail}
++
 \text{sparse higher-order tail}.
 }
 \tag{5.2}
 \]
 
-These are algebraic layers of one signed identity.  They may not be bounded by
-independent positive majorants.
+The last two layers are both one-point quotient systems.  All four are algebraic
+parts of one signed identity and may not be bounded by independent positive
+majorants.
 
 ## 6. Relation to the previous first-order quotient theorem
 
@@ -171,7 +178,7 @@ The `Q=1` term is
 \tag{6.1}
 \]
 
-The single-prime part is
+The physical single-prime part is
 
 \[
 -\sum_{z<q\le H\atop q\text{ prime}}
@@ -183,24 +190,26 @@ which is exactly the hit component of
 `ROUGH_QUOTIENT_HYPERBOLA_COLLAPSE_20260728.md`.  The locally centred first-order
 formula adds and subtracts its complete-residue conditional mean.
 
-The remaining terms in (4.2) are precisely the higher Euler/Buchstab chaos that
-cancels factor clusters in (6.2).
+The single-prime tail `H<q<=Y` is the sparse first-order tail already present in
+the ordered Buchstab decomposition.  The composite `Q` terms are the higher
+Euler/Buchstab chaos.  Together they cancel factor clusters in the physical and
+tail first-order layers.
 
 ## 7. Factor-cluster cancellation
 
 Suppose `n=P+m` has exactly `t>=1` distinct prime factors in `(z,Y]`.  Its
-contribution to the Euler layers of (4.2) is
+contribution to all Euler layers of (4.2) is
 
 \[
 \sum_{r=0}^{t}(-1)^r\binom tr=0.
 \tag{7.1}
 \]
 
-The first-order layer alone contributes `-t`; all orders `r>=2` are required to
-restore the exact zero.  Therefore a same-band first-order Bessel theorem cannot
-be promoted to a generic arbitrary-source operator statement without controlling
-factor clusters.  The actual-source first-order estimate remains a useful
-diagnostic, but the full quotient identity (4.2) is the preferred final
+The complete single-prime layer contributes `-t`; all orders `r>=2` are required
+to restore the exact zero.  Therefore a same-band physical first-order Bessel
+theorem cannot be promoted to a generic arbitrary-source operator statement
+without controlling factor clusters.  The actual-source physical estimate remains
+a useful diagnostic, but the full quotient identity (4.2) is the preferred final
 architecture.
 
 ## 8. Correct centred target
@@ -242,13 +251,13 @@ Proved exactly:
 1. complete Euler divisor detector (2.1);
 2. coprimality transport for arbitrary new divisor products (3.1);
 3. weighted full quotient identity (4.2);
-4. principal/physical/tail classification (5.2);
-5. one-point support of every higher-order quotient column;
+4. principal/physical-prime/tail-prime/higher-order classification (5.2);
+5. one-point support of every quotient column `Q>H`;
 6. exact factor-cluster cancellation (7.1).
 
 Strategic qualification:
 
-1. the same-band first-order theorem is sufficient for the physical layer but is
+1. the same-band physical first-order theorem is sufficient for that layer but is
    not a substitute for the joint full-chaos covariance;
 2. arbitrary-source Bessel estimates can fail in the presence of large factor
    clusters.
@@ -256,6 +265,6 @@ Strategic qualification:
 Open:
 
 1. deterministic centred sampling for the full quotient system (8.2);
-2. a proof that combines same-band physical dispersion with the sparse tail
-   without losing (7.1);
+2. a proof that combines same-band physical dispersion with both sparse tail
+   layers without losing (7.1);
 3. Fortune's conjecture.
