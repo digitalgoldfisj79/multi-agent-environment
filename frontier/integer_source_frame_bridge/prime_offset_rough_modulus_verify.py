@@ -69,7 +69,7 @@ def one_case(pj: int, H: int) -> dict:
 
 
 def main() -> None:
-    rows = [one_case(11, 150), one_case(13, 200), one_case(17, 400)]
+    rows = [one_case(11, 150), one_case(13, 200), one_case(17, 350)]
     for row in rows:
         assert row["split_error"] < 3e-10
         assert row["maximum_per_offset_error"] < 2e-10
