@@ -1,0 +1,110 @@
+name: Validate primorial-index collapse
+
+on:
+  pull_request:
+    branches:
+      - publication/fortune-papers-ii-vi-20260724
+    paths:
+      - .github/workflows/validate-primorial-index-collapse.yml
+      - frontier/integer_source_frame_bridge/PRIMORIAL_INDEX_SHRINKING_TARGET_COLLAPSE_20260728.md
+      - frontier/integer_source_frame_bridge/LARGEST_FACTOR_ROUTED_BESSEL_INEQUALITY_20260728.md
+      - frontier/integer_source_frame_bridge/LARGEST_FACTOR_HYPERBOLA_SOURCE_IDENTITY_20260728.md
+      - frontier/integer_source_frame_bridge/primorial_shrinking_target_verify.py
+      - frontier/integer_source_frame_bridge/largest_factor_hyperbola_verify.py
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check theorem package
+        run: |
+          set -euo pipefail
+          ROOT=frontier/integer_source_frame_bridge
+          for file in \
+            PRIMORIAL_INDEX_SHRINKING_TARGET_COLLAPSE_20260728.md \
+            LARGEST_FACTOR_ROUTED_BESSEL_INEQUALITY_20260728.md \
+            LARGEST_FACTOR_HYPERBOLA_SOURCE_IDENTITY_20260728.md \
+            primorial_shrinking_target_verify.py \
+            largest_factor_hyperbola_verify.py; do
+            test -s "$ROOT/$file"
+          done
+          ! grep -RInE 'TODO|TBD|PLACEHOLDER|REPLACE_ME' \
+            "$ROOT/PRIMORIAL_INDEX_SHRINKING_TARGET_COLLAPSE_20260728.md" \
+            "$ROOT/LARGEST_FACTOR_ROUTED_BESSEL_INEQUALITY_20260728.md" \
+            "$ROOT/LARGEST_FACTOR_HYPERBOLA_SOURCE_IDENTITY_20260728.md"
+          grep -Fq 'Theorem 4.1 (shrinking-target separation)' \
+            "$ROOT/PRIMORIAL_INDEX_SHRINKING_TARGET_COLLAPSE_20260728.md"
+          grep -Fq 'Theorem 2.1 (largest-factor hyperbola identity)' \
+            "$ROOT/LARGEST_FACTOR_HYPERBOLA_SOURCE_IDENTITY_20260728.md"
+          grep -Fq 'Theorem 2.1' \
+            "$ROOT/LARGEST_FACTOR_ROUTED_BESSEL_INEQUALITY_20260728.md"
+          grep -Fq "Fortune's conjecture" \
+            "$ROOT/PRIMORIAL_INDEX_SHRINKING_TARGET_COLLAPSE_20260728.md"
+
+      - name: Install dependencies
+        run: python -m pip install --disable-pip-version-check sympy
+
+      - name: Recompute shrinking-target verification
+        run: |
+          set -euo pipefail
+          ROOT=frontier/integer_source_frame_bridge
+          python "$ROOT/primorial_shrinking_target_verify.py" > /tmp/shrinking-target.stdout.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          root = Path('frontier/integer_source_frame_bridge')
+          data = json.loads((root / 'primorial_shrinking_target_results.json').read_text())
+          assert data['status'] == 'PASS'
+          assert len(data['exhaustive_rows']) == 5
+          assert sum(r['verified_visit_pairs'] for r in data['exhaustive_rows']) > 60_000
+          for item in data['scale_summary']:
+              assert item['first_scale']['sample_max_visits'] <= item['first_scale']['theorem_bound']
+              assert item['last_scale']['sample_max_visits'] <= item['last_scale']['theorem_bound']
+          x1009 = data['fixed_depth_tables'][-1]
+          bounds = {row['R']: row['centre_multiplicity_bound'] for row in x1009['rows']}
+          assert bounds[2] <= 3
+          assert bounds[3] <= 4
+          assert bounds[10] <= 13
+          print(json.dumps(data, indent=2))
+          PY
+
+      - name: Recompute hyperbola verification
+        run: |
+          set -euo pipefail
+          ROOT=frontier/integer_source_frame_bridge
+          python "$ROOT/largest_factor_hyperbola_verify.py" > /tmp/hyperbola.stdout.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          root = Path('frontier/integer_source_frame_bridge')
+          data = json.loads((root / 'largest_factor_hyperbola_results.json').read_text())
+          assert data['status'] == 'PASS'
+          assert data['universal_max_error'] < 2e-12
+          assert data['shifted_block']['shifted_max_error'] < 2e-11
+          assert data['shifted_block']['all_routed_largest_factors_above_H']
+          assert data['one_point_routing']['observed_max_column_support'] <= \
+                 data['one_point_routing']['threshold_multiplicity_bound']
+          print(json.dumps(data, indent=2))
+          PY
+
+      - name: Upload validation record
+        uses: actions/upload-artifact@v4
+        with:
+          name: primorial-index-collapse-validation
+          path: |
+            /tmp/shrinking-target.stdout.json
+            /tmp/hyperbola.stdout.json
+            frontier/integer_source_frame_bridge/primorial_shrinking_target_results.json
+            frontier/integer_source_frame_bridge/primorial_shrinking_target_results_full.json
+            frontier/integer_source_frame_bridge/largest_factor_hyperbola_results.json
+            frontier/integer_source_frame_bridge/PRIMORIAL_INDEX_SHRINKING_TARGET_COLLAPSE_20260728.md
+            frontier/integer_source_frame_bridge/LARGEST_FACTOR_ROUTED_BESSEL_INEQUALITY_20260728.md
+            frontier/integer_source_frame_bridge/LARGEST_FACTOR_HYPERBOLA_SOURCE_IDENTITY_20260728.md
+          retention-days: 90
