@@ -1,0 +1,73 @@
+{
+  "status": "PASS",
+  "exact": {
+    "primitive_character_survivor_expansion": {
+      "primes": [
+        5,
+        7,
+        11
+      ],
+      "centre": 6,
+      "modulus": 385,
+      "unit_sources_checked": 240,
+      "survivors": 135,
+      "inverse_density": "16/9",
+      "quadratic_character_mass": "16/9",
+      "nontrivial_quadratic_mass": "7/9",
+      "character_l1_mass": "8",
+      "status": "PASS"
+    },
+    "multiplicative_factorization_no_go": {
+      "primes": [
+        5,
+        7,
+        11
+      ],
+      "multiplicative_splits": [
+        {
+          "split": "all_weight_on_centre",
+          "centre_diagonal_mass": "16/9",
+          "source_diagonal_mass": "240",
+          "product_mass": "1280/3",
+          "lower_bound": "64"
+        },
+        {
+          "split": "overweight_centre",
+          "centre_diagonal_mass": "57232/54675",
+          "source_diagonal_mass": "2575440",
+          "product_mass": "3275501824/1215",
+          "lower_bound": "64"
+        },
+        {
+          "split": "all_weight_on_source",
+          "centre_diagonal_mass": "240",
+          "source_diagonal_mass": "16/9",
+          "product_mass": "1280/3",
+          "lower_bound": "64"
+        }
+      ],
+      "square_root_split_centre_mass": 8,
+      "square_root_split_source_mass": 8,
+      "square_root_product": 64,
+      "status": "PASS"
+    },
+    "high_conductor_source_bound": {
+      "primes": [
+        11,
+        13,
+        17
+      ],
+      "interval_length": 100,
+      "low_conductors": [
+        11,
+        13,
+        17
+      ],
+      "high_conductor_count": 4,
+      "high_weighted_character_bound": "63832/2205225",
+      "all_nontrivial_euler_bound": "711598/2205225",
+      "status": "PASS"
+    }
+  },
+  "boundary": "The survivor band has an exact primitive-character expansion and small quadratic coefficient mass. High-conductor source energy is separately controlled, but every multiplicative scalar Cauchy split creates an exponential centre/source diagonal product. A signed joint hybrid character estimate is still required."
+}
