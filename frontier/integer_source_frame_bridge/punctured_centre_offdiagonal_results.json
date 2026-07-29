@@ -16,7 +16,12 @@
       "K": 3,
       "Z": 17,
       "source_count": 17,
-      "band_moduli": [19, 23, 29, 31],
+      "band_moduli": [
+        19,
+        23,
+        29,
+        31
+      ],
       "small_mobius_count": 7,
       "punctured_centre_checks": 840,
       "punctured_gram_checks": 1764,
@@ -36,7 +41,13 @@
       "K": 3,
       "Z": 23,
       "source_count": 41,
-      "band_moduli": [29, 31, 37, 41, 43],
+      "band_moduli": [
+        29,
+        31,
+        37,
+        41,
+        43
+      ],
       "small_mobius_count": 11,
       "punctured_centre_checks": 2640,
       "punctured_gram_checks": 5445,
@@ -56,7 +67,17 @@
       "K": 4,
       "Z": 37,
       "source_count": 70,
-      "band_moduli": [41, 43, 47, 53, 59, 61, 67, 71, 73],
+      "band_moduli": [
+        41,
+        43,
+        47,
+        53,
+        59,
+        61,
+        67,
+        71,
+        73
+      ],
       "small_mobius_count": 14,
       "punctured_centre_checks": 10584,
       "punctured_gram_checks": 28224,
