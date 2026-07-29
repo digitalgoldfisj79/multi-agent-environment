@@ -388,45 +388,69 @@ M\|\mathcal K^{\rm surv}(R)\|_{\rm op}
 
 This proves the model side of the normalized-survivor transfer, not the arithmetic sampling step.
 
-## 7. Exact remaining arithmetic theorem
+## 7. Exact self-coordinate correction
 
-For an actual candidate prime `m`, write
+For an actual candidate prime `m` outside the modulus band,
 
 \[
-\rho_R(m)=(m\bmod p)_{p\in\mathcal P_R}\in\Omega_R,
+\rho_R(m)=(m\bmod p)_{p\in\mathcal P_R}\in\Omega_R.
 \tag{7.1}
 \]
 
-excluding the finitely many cases `m=p` at the band boundary in the already-established local centring.
+If `m=p_0\in\mathcal P_R`, its `p_0`-coordinate is zero and is not an element of `\mathbb F_{p_0}^{\times}`. This source point is not discarded. Its band survivor has the exact decomposition
 
-The actual band increment has the form
+\[
+\boxed{
+g^{[p_0]}_{j,R}
+=
+\frac{p_0-1}{p_0-2}\,
+g_{j,R\setminus\{p_0\}}
++
+\frac1{p_0-2}.
+}
+\tag{7.2}
+\]
+
+Indeed, the factor at `p_0` always survives because `p_0\nmid P_j`, while all other coordinates remain nonzero. The first term in (7.2) is a centred survivor coordinate on the reduced band and obeys Theorem 5.1. The second is the explicit self-normalization drift already represented by the zeroth/self coordinate in the locally centred formulation.
+
+Thus the complete-CRT Gram theorem covers ordinary source points and the centred part of every self source point. No `m=p` term is silently removed.
+
+## 8. Exact remaining arithmetic theorem
+
+After inserting (7.2), the actual band increment has the form
 
 \[
 \mathcal B_{j,R}
 =
 \sum_{m\in\mathcal M_B}
 A^{<R}_{j,m}\,
-g_{j,R}(\rho_R(m)),
-\tag{7.2}
+\widetilde g_{j,R,m}
++
+\mathcal D^{\rm self}_{j,R},
+\tag{8.1}
 \]
 
-where `A^{<R}_{j,m}` is the frozen logarithmic weight multiplied by the complete normalized survivor product from earlier bands.
+where:
 
-The complete-CRT theorem would predict
+1. `A^{<R}_{j,m}` is the frozen logarithmic weight multiplied by the complete normalized survivor product from earlier bands;
+2. `\widetilde g_{j,R,m}` is either `g_{j,R}(\rho_R(m))` or the reduced-band centred coordinate from (7.2);
+3. `\mathcal D^{\rm self}_{j,R}` is the explicit weighted sum of the drifts `1/(p-2)`.
+
+The complete-CRT theorem predicts the centred part at the scale
 
 \[
-\|\mathcal B_{\cdot,R}\|_{\ell^2(B)}^2
-\ \hbox{at the scale}\ 
 \|\mathcal K^{\rm surv}(R)\|_{\rm op}
-\sum_{j,m}|A^{<R}_{j,m}|^2.
-\tag{7.3}
+\sum_{j,m}|A^{<R}_{j,m}|^2,
+\tag{8.2}
 \]
+
+with the self drift retained jointly with the existing zeroth coordinate.
 
 The remaining theorem is now explicit.
 
 ### Open theorem `PCRST(X)` — prime-candidate residue survivor transfer
 
-For the specific arithmetic weights and candidate-prime residue vectors in (7.2), prove
+For the specific arithmetic weights, ordinary residue vectors, reduced-band self coordinates and zeroth/self drift in (8.1), prove
 
 \[
 \boxed{
@@ -441,7 +465,7 @@ For the specific arithmetic weights and candidate-prime residue vectors in (7.2)
 +
 E_{B,R},
 }
-\tag{7.4}
+\tag{8.3}
 \]
 
 with errors whose dyadic sum is at the Fortune scale.
@@ -450,7 +474,7 @@ No arbitrary-weight version is asserted. The theorem is required only for the ri
 
 A proof of `PCRST(X)` across all bands, together with the zeroth-centred coordinate already isolated in the branch, would yield `NSMT(X)`. The model covariance and its centre geometry are no longer open.
 
-## 8. Relation to existing results
+## 9. Relation to existing results
 
 Friedlander's 2026 sieve note proves strong cancellation for standard beta- and Selberg-sieve coefficients and records the scalar ancestor of (2.1). Its applications average over almost all interval translations. It does not transfer the complete survivor process to the sparse primorial centres.
 
@@ -458,7 +482,7 @@ Gorodetsky's variance theorem for rough numbers, arXiv:2111.00853, computes the 
 
 These results validate the model cancellation but do not supply `PCRST(X)`.
 
-## 9. What changed
+## 10. What changed
 
 Before this calculation, `NSMT(X)` mixed two possible unknowns:
 
@@ -469,7 +493,7 @@ Theorem 5.1 settles the first question affirmatively. The only remaining band ob
 
 This is a strict reduction. It is not a proof of the Fortune variance theorem.
 
-## 10. Boundary
+## 11. Boundary
 
 **PROVED EXACTLY**
 
@@ -488,7 +512,8 @@ This is a strict reduction. It is not a proof of the Fortune variance theorem.
 1. the Hilbert identity on a nontrivial vector-valued finite panel;
 2. exact survivor means and Gram on a complete CRT panel;
 3. a panel containing a genuine primorial-prefix collision prime;
-4. the Schur quadratic-form bound.
+4. the exact self-coordinate decomposition for every band prime;
+5. the Schur quadratic-form bound.
 
 **OPEN**
 
