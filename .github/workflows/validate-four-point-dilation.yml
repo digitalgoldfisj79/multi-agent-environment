@@ -1,0 +1,40 @@
+name: Validate four-point dilation kernel
+
+on:
+  push:
+    branches:
+      - gpt56/fortune-mesoscopic-cotlar-20260728
+    paths:
+      - "frontier/integer_source_frame_bridge/four_point_dilation_verify.py"
+      - "frontier/integer_source_frame_bridge/four_point_dilation_results.json"
+      - "frontier/integer_source_frame_bridge/FOUR_POINT_DILATION_KERNEL_AND_SIGNED_AUTOCORRELATION_20260729.md"
+      - "frontier/integer_source_frame_bridge/PROGRAMME_STATUS_AFTER_FOUR_POINT_DILATION_GATE_20260729.md"
+      - ".github/workflows/validate-four-point-dilation.yml"
+  pull_request:
+    paths:
+      - "frontier/integer_source_frame_bridge/four_point_dilation_verify.py"
+      - "frontier/integer_source_frame_bridge/four_point_dilation_results.json"
+      - "frontier/integer_source_frame_bridge/FOUR_POINT_DILATION_KERNEL_AND_SIGNED_AUTOCORRELATION_20260729.md"
+      - "frontier/integer_source_frame_bridge/PROGRAMME_STATUS_AFTER_FOUR_POINT_DILATION_GATE_20260729.md"
+      - ".github/workflows/validate-four-point-dilation.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run exact verifier
+        run: python frontier/integer_source_frame_bridge/four_point_dilation_verify.py
+
+      - name: Require frozen result match
+        run: git diff --exit-code -- frontier/integer_source_frame_bridge/four_point_dilation_results.json
