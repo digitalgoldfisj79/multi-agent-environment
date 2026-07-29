@@ -105,10 +105,6 @@ def panel(X: int, eta_num: int = 4, eta_den: int = 5) -> dict:
                     "low_open": band["low_open"],
                     "high_closed": band["high_closed"],
                     "modulus_count": len(band["moduli"]),
-                    "lhs_num": lhs.numerator,
-                    "lhs_den": lhs.denominator,
-                    "diagonal_num": diagonal.numerator,
-                    "diagonal_den": diagonal.denominator,
                     "empirical_lhs_to_diagonal_ratio": ratio,
                 }
             )
