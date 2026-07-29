@@ -55,11 +55,23 @@ Primorial-prefix rigidity then gives
 
 This keeps the density coordinate, every nontrivial Euler conductor, normalization drift, sparse hits and higher factor clusters inside one centred object.
 
-## 2. Conditional model transfer
+## 2. Conditional model transfer and self coordinates
 
 Because a current band is independent of all previous bands in the complete CRT model, the Gram theorem yields a conditional Bessel estimate with arbitrary coefficients measurable in the earlier bands. Thus the complete-CRT analogue of the bandwise normalized-survivor martingale transfer is proved.
 
-The model side of `NSMT(X)` is no longer open.
+For a candidate offset `m=p_0` equal to a band prime, the source residue at `p_0` is zero. It is handled exactly by
+
+\[
+g^{[p_0]}_{j,R}
+=
+\frac{p_0-1}{p_0-2}g_{j,R\setminus\{p_0\}}
++
+\frac1{p_0-2}.
+\]
+
+The first term is a reduced-band centred survivor coordinate and the second is explicit normalization drift. No self source point is discarded.
+
+The complete-CRT model geometry, including the centred part of the self coordinates, is no longer open.
 
 ## 3. Complement-divisor preconditioner
 
@@ -82,16 +94,13 @@ For the coherent Möbius family, the right side collapses to its single `\delta=
 
 ## 4. Remaining theorem
 
-For the actual candidate primes, the band increment is
+The actual band increment is a weighted sum of:
 
-\[
-\mathcal B_{j,R}
-=
-\sum_{m\in\mathcal M_B}
-A^{<R}_{j,m}g_{j,R}(\rho_R(m)),
-\]
+1. ordinary nonzero-residue survivor coordinates;
+2. reduced-band centred self coordinates;
+3. the explicit self-normalization drift, retained jointly with the existing zeroth coordinate.
 
-where `A^{<R}_{j,m}` contains the frozen logarithmic weight and all preceding survivor bands.
+The weights contain the frozen logarithmic factor and all preceding survivor bands.
 
 The remaining theorem is `PCRST(X)`: prove that these deterministic prime residue vectors obey the complete-CRT covariance scale, with dyadically summable error. This is a sparse, weighted empirical-process theorem for a rigid family of normalized survivor tests. It is strictly narrower than the previous formulation of `NSMT(X)`.
 
@@ -107,7 +116,8 @@ Neither Friedlander's 2026 sieve inequality nor Gorodetsky's translation-average
 - normalized-survivor martingale identities;
 - Hilbert complement-divisor identity;
 - complete-CRT all-order survivor Gram;
-- conditional model Bessel transfer.
+- conditional model Bessel transfer;
+- band-prime self-coordinate decomposition.
 
 **CLOSED AS POSITIVE ROUTES**
 
