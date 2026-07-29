@@ -1,0 +1,102 @@
+{
+  "status": "PASS",
+  "exact": {
+    "single_prime_conditional_projection": {
+      "primes": [
+        5,
+        7
+      ],
+      "group_size": 24,
+      "exact_checks": 1152,
+      "collision_checks": 240,
+      "noncollision_checks": 912,
+      "status": "PASS"
+    },
+    "weighted_one_residue_discrepancy": {
+      "prime": 13,
+      "centre": 30,
+      "source_count": 17,
+      "direct_local_residual_sum": "4/11",
+      "one_residue_discrepancy": "4/11",
+      "status": "PASS"
+    },
+    "first_order_point_evaluation_no_go": {
+      "primes": [
+        13,
+        17,
+        19
+      ],
+      "first_order_character_dimension": 43,
+      "sharp_point_evaluation_squared_norm": 43,
+      "status": "PASS"
+    }
+  },
+  "finite_arithmetic_panel": {
+    "primes": [
+      13,
+      17,
+      19
+    ],
+    "centres": [
+      30,
+      210,
+      2310
+    ],
+    "source_primes": [
+      23,
+      29,
+      31,
+      37,
+      41,
+      43,
+      47,
+      53,
+      59,
+      61,
+      67,
+      71,
+      73,
+      79,
+      83,
+      89,
+      97
+    ],
+    "point_count": 51,
+    "per_prime": [
+      {
+        "prime": 13,
+        "total_low_mode_form": "-358902/874225",
+        "local_residue_discrepancy_form": "-6/11",
+        "reduced_band_correction": "117948/874225",
+        "collision_part": "-2111578/874225",
+        "noncollision_part": "1752676/874225"
+      },
+      {
+        "prime": 17,
+        "total_low_mode_form": "-642894/874225",
+        "local_residue_discrepancy_form": "-14/25",
+        "reduced_band_correction": "-153328/874225",
+        "collision_part": "-1408074/874225",
+        "noncollision_part": "153036/174845"
+      },
+      {
+        "prime": 19,
+        "total_low_mode_form": "485658/874225",
+        "local_residue_discrepancy_form": "216/289",
+        "reduced_band_correction": "-167742/874225",
+        "collision_part": "-8209438/874225",
+        "noncollision_part": "8695096/874225"
+      }
+    ],
+    "aggregate": {
+      "total_low_mode_form": "-516138/874225",
+      "local_residue_discrepancy_form": "-28456/79475",
+      "reduced_band_correction": "-203122/874225",
+      "collision_part": "-2345818/174845",
+      "noncollision_part": "11212952/874225",
+      "positive_split_to_total_ratio": "11471021/258069"
+    },
+    "status": "PASS"
+  },
+  "boundary": "After the conductor-p characters are summed exactly, their oscillation collapses to a first-order local survivor martingale defect. The leading quadratic form is a one-residue prime-distribution discrepancy; the reduced-band correction is explicit. Collision and noncollision pieces can be separately much larger and of opposite sign. Generic large-sieve control reaches the classical logarithmic scale but does not supply the o(log X) saving required by the Fortune variance target."
+}
