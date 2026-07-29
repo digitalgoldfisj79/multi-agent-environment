@@ -14,7 +14,7 @@ def prime_sieve(n: int) -> tuple[bytearray, list[int]]:
     for p in range(2, math.isqrt(n) + 1):
         if flags[p]:
             flags[p * p : n + 1 : p] = b"\x00" * (((n - p * p) // p) + 1)
-    return flags, [n for n in range(2, n + 1) if flags[n]]
+    return flags, [value for value in range(2, n + 1) if flags[value]]
 
 
 def direct_additive_sum(r: int, difference: int) -> complex:
@@ -77,23 +77,15 @@ def panel(X: int, eta: float = 0.8) -> dict:
                 kernel[a][b] = value
                 kernel[b][a] = value
 
-                # Check the exact complete-additive formula on a few small moduli.
                 difference = local_centres[a] - local_centres[b]
                 for r in moduli[: min(3, len(moduli))]:
                     direct = direct_additive_sum(r, difference) / (r * r)
-                    formula = (-1 / (r * r)) + (
-                        1 / r if difference % r == 0 else 0
-                    )
+                    formula = (-1 / (r * r)) + (1 / r if difference % r == 0 else 0)
                     maximum_formula_error = max(maximum_formula_error, abs(direct - formula))
 
         row_sums = [math.fsum(abs(x) for x in row) for row in kernel]
         maximum_row_sum = max(row_sums, default=0.0)
-        assert maximum_row_sum <= theoretical + 1e-10, (
-            X,
-            start,
-            maximum_row_sum,
-            theoretical,
-        )
+        assert maximum_row_sum <= theoretical + 1e-10
         if theoretical:
             maximum_schur_ratio = max(maximum_schur_ratio, maximum_row_sum / theoretical)
 
@@ -136,7 +128,7 @@ def main() -> None:
         "panels": panels,
         "boundary": (
             "The verifier checks the orbit frame and cutoff budget only; "
-            "the joint common-source bilinear estimate remains open."
+            "the joint common-source bilinear estimate remains OPEN."
         ),
     }
     output = Path(__file__).with_name("mesoscopic_primorial_orbit_results.json")
