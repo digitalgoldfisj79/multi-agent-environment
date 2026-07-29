@@ -1,0 +1,35 @@
+name: Validate punctured-centre unbalanced support
+
+on:
+  push:
+    branches:
+      - gpt56/fortune-mesoscopic-cotlar-20260728
+    paths:
+      - "frontier/integer_source_frame_bridge/punctured_centre_unbalanced_support_verify.py"
+      - "frontier/integer_source_frame_bridge/punctured_centre_unbalanced_support_results.json"
+      - "frontier/integer_source_frame_bridge/FABLE_REVIEW_INTAKE_AND_CORRECTED_BOUNDARY_20260730.md"
+      - ".github/workflows/validate-punctured-centre-unbalanced-support.yml"
+  pull_request:
+    paths:
+      - "frontier/integer_source_frame_bridge/punctured_centre_unbalanced_support_verify.py"
+      - "frontier/integer_source_frame_bridge/punctured_centre_unbalanced_support_results.json"
+      - "frontier/integer_source_frame_bridge/FABLE_REVIEW_INTAKE_AND_CORRECTED_BOUNDARY_20260730.md"
+      - ".github/workflows/validate-punctured-centre-unbalanced-support.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run exact support correction verifier
+        run: python frontier/integer_source_frame_bridge/punctured_centre_unbalanced_support_verify.py
+      - name: Require frozen result match
+        run: git diff --exit-code -- frontier/integer_source_frame_bridge/punctured_centre_unbalanced_support_results.json
