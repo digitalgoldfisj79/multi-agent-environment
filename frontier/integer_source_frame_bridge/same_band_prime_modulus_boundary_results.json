@@ -1,0 +1,76 @@
+{
+  "status": "PASS",
+  "exact": {
+    "scalar_source_centre_factorization_no_go": {
+      "primes": [
+        13,
+        17,
+        19
+      ],
+      "number_of_moduli": 3,
+      "splits": [
+        {
+          "split": "all_weight_on_centre",
+          "centre_mass": "607/2805",
+          "source_mass": "43",
+          "product_mass": "26101/2805",
+          "sharp_lower_bound": "9",
+          "local_products": [
+            "1",
+            "1",
+            "1"
+          ]
+        },
+        {
+          "split": "all_weight_on_source",
+          "centre_mass": "43",
+          "source_mass": "607/2805",
+          "product_mass": "26101/2805",
+          "sharp_lower_bound": "9",
+          "local_products": [
+            "1",
+            "1",
+            "1"
+          ]
+        },
+        {
+          "split": "rational_unbalanced",
+          "centre_mass": "2428/2805",
+          "source_mass": "43/4",
+          "product_mass": "26101/2805",
+          "sharp_lower_bound": "9",
+          "local_products": [
+            "1",
+            "1",
+            "1"
+          ]
+        }
+      ],
+      "status": "PASS"
+    },
+    "physical_band_above_square_root": {
+      "rows": [
+        {
+          "X": 100,
+          "eta": "3/4",
+          "H": "7500",
+          "sqrt_H_less_than_X": true
+        },
+        {
+          "X": 1000,
+          "eta": "4/5",
+          "H": "800000",
+          "sqrt_H_less_than_X": true
+        },
+        {
+          "X": 10000,
+          "eta": "9/10",
+          "H": "90000000",
+          "sqrt_H_less_than_X": true
+        }
+      ],
+      "status": "PASS"
+    }
+  },
+  "boundary": "Every scalar split of the first-order coefficient 1/(p-2) has centre/source diagonal product at least the square of the number of physical prime moduli. Hence sequential source and centre Cauchy estimates necessarily reproduce the full modulus-count loss. The lower physical band also lies strictly above sqrt(H) because H=eta X^2 with eta<1."
+}
