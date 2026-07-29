@@ -17,7 +17,11 @@
       "reduced_identity_terms": 509,
       "punctured_centre_checks": 21,
       "prime_power_correction_count": 10,
-      "band_moduli": [13, 17, 19]
+      "band_moduli": [
+        13,
+        17,
+        19
+      ]
     },
     {
       "X": 17,
@@ -30,7 +34,12 @@
       "reduced_identity_terms": 1549,
       "punctured_centre_checks": 44,
       "prime_power_correction_count": 14,
-      "band_moduli": [19, 23, 29, 31]
+      "band_moduli": [
+        19,
+        23,
+        29,
+        31
+      ]
     },
     {
       "X": 23,
@@ -43,7 +52,13 @@
       "reduced_identity_terms": 3405,
       "punctured_centre_checks": 70,
       "prime_power_correction_count": 19,
-      "band_moduli": [29, 31, 37, 41, 43]
+      "band_moduli": [
+        29,
+        31,
+        37,
+        41,
+        43
+      ]
     },
     {
       "X": 29,
@@ -56,7 +71,14 @@
       "reduced_identity_terms": 6169,
       "punctured_centre_checks": 102,
       "prime_power_correction_count": 22,
-      "band_moduli": [31, 37, 41, 43, 47, 53]
+      "band_moduli": [
+        31,
+        37,
+        41,
+        43,
+        47,
+        53
+      ]
     },
     {
       "X": 37,
@@ -69,7 +91,17 @@
       "reduced_identity_terms": 11277,
       "punctured_centre_checks": 198,
       "prime_power_correction_count": 26,
-      "band_moduli": [41, 43, 47, 53, 59, 61, 67, 71, 73]
+      "band_moduli": [
+        41,
+        43,
+        47,
+        53,
+        59,
+        61,
+        67,
+        71,
+        73
+      ]
     }
   ],
   "boundary": "The provisional three-small-variable source identity is unnecessary.  The exact two-level identity resums to a source with one small Mobius variable, which divides every primorial centre.  Prime powers remain an explicit sparse correction."
