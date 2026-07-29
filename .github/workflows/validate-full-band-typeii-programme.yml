@@ -1,0 +1,29 @@
+name: Validate full-band Type-II programme
+
+on:
+  push:
+    paths:
+      - "frontier/integer_source_frame_bridge/full_band_typeii_programme_verify.py"
+      - "frontier/integer_source_frame_bridge/full_band_typeii_programme_results.json"
+      - "frontier/integer_source_frame_bridge/NEXT_PROGRAMME_FULL_BAND_TYPEII_DISPERSION_20260729.md"
+      - ".github/workflows/validate-full-band-typeii-programme.yml"
+  pull_request:
+    paths:
+      - "frontier/integer_source_frame_bridge/full_band_typeii_programme_verify.py"
+      - "frontier/integer_source_frame_bridge/full_band_typeii_programme_results.json"
+      - "frontier/integer_source_frame_bridge/NEXT_PROGRAMME_FULL_BAND_TYPEII_DISPERSION_20260729.md"
+      - ".github/workflows/validate-full-band-typeii-programme.yml"
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Run exact full-band Type-II scaffold
+        run: python frontier/integer_source_frame_bridge/full_band_typeii_programme_verify.py
+      - name: Check committed results are reproducible
+        run: git diff --exit-code -- frontier/integer_source_frame_bridge/full_band_typeii_programme_results.json
