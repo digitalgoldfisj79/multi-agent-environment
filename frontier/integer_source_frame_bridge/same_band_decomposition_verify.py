@@ -60,47 +60,25 @@ def panel(X: int, eta_num: int = 4, eta_den: int = 5) -> dict:
         M = len(candidates)
         bands = dyadic_bands(Z, H, candidates)
 
-        rows = []
         full_energy = Fraction(0)
         band_energy_sum = Fraction(0)
-        diagonal_total = Fraction(0)
 
         for z in local_z:
             P = primorial(z)
             entries: dict[int, Fraction] = {}
-            direct_entries: dict[int, int] = {}
             for q in candidates:
                 direct = sum(1 for m in candidates if (P + m) % q == 0)
                 quotient = rough_quotient_count(P, Z, H, q)
                 floor_value = mobius_floor_count(P, Z, H, q)
                 assert direct == quotient == floor_value
-                direct_entries[q] = direct
                 delta = Fraction(quotient, 1) - Fraction(M - 1, q - 1)
                 entries[q] = Fraction(q - 1, q - 2) * delta
 
             full_sum = sum(entries.values(), Fraction(0))
             band_sums = [sum((entries[q] for q in band["moduli"]), Fraction(0)) for band in bands]
             assert full_sum == sum(band_sums, Fraction(0))
-
-            row_full_energy = full_sum * full_sum
-            row_band_energy = sum((value * value for value in band_sums), Fraction(0))
-            row_diagonal = sum((value * value for value in entries.values()), Fraction(0))
-            full_energy += row_full_energy
-            band_energy_sum += row_band_energy
-            diagonal_total += row_diagonal
-
-            rows.append(
-                {
-                    "z": z,
-                    "P": P,
-                    "full_sum_num": full_sum.numerator,
-                    "full_sum_den": full_sum.denominator,
-                    "direct_total_hits": sum(direct_entries.values()),
-                    "band_sums": [
-                        {"num": value.numerator, "den": value.denominator} for value in band_sums
-                    ],
-                }
-            )
+            full_energy += full_sum * full_sum
+            band_energy_sum += sum((value * value for value in band_sums), Fraction(0))
 
         L = len(bands)
         assert full_energy <= L * band_energy_sum
@@ -143,13 +121,7 @@ def panel(X: int, eta_num: int = 4, eta_den: int = 5) -> dict:
                 "candidate_count": M,
                 "band_count": L,
                 "outer_cauchy_exact": True,
-                "full_energy_num": full_energy.numerator,
-                "full_energy_den": full_energy.denominator,
-                "band_energy_sum_num": band_energy_sum.numerator,
-                "band_energy_sum_den": band_energy_sum.denominator,
-                "diagonal_total_num": diagonal_total.numerator,
-                "diagonal_total_den": diagonal_total.denominator,
-                "rows": rows,
+                "outer_cauchy_ratio": float(full_energy / (L * band_energy_sum)) if band_energy_sum else 0.0,
                 "bands": band_records,
             }
         )
