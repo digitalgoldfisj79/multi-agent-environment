@@ -1,0 +1,63 @@
+{
+  "status": "PASS",
+  "exact": {
+    "complete_crt_survivor_martingale": {
+      "bands": [[7, 11], [13]],
+      "sample_size": 720,
+      "increment_means": ["0", "0"],
+      "cross_covariance": "0",
+      "quadratic_variation": "5/11",
+      "final_energy": "5/11"
+    }
+  },
+  "empirical": {
+    "top_tail_drift_hit_panels": [
+      {
+        "X": 7,
+        "H": 39,
+        "rows": [
+          {"z": 7, "P": 210, "Y": 15, "candidate_count": 8, "tail_prime_count": 0, "tail_hit_offsets": 0, "total_increment": 0.0, "drift_component": 0.0, "hit_component": 0.0, "twice_drift_hit": 0.0},
+          {"z": 11, "P": 2310, "Y": 48, "candidate_count": 7, "tail_prime_count": 3, "tail_hit_offsets": 0, "total_increment": 0.42161384188792295, "drift_component": 0.42161384188792295, "hit_component": 0.0, "twice_drift_hit": 0.0},
+          {"z": 13, "P": 30030, "Y": 173, "candidate_count": 6, "tail_prime_count": 28, "tail_hit_offsets": 3, "total_increment": -2.8897534509500677, "drift_component": 2.567560736577308, "hit_component": -5.457314187527376, "twice_drift_hit": -28.023971270123166}
+        ],
+        "block_total_energy": 8.52843323894932,
+        "block_drift_energy": 6.770126367684902,
+        "block_hit_energy": 29.782278141387586,
+        "block_twice_cross": -28.023971270123166,
+        "drift_plus_hit_identity": true
+      },
+      {
+        "X": 11,
+        "H": 96,
+        "rows": [
+          {"z": 11, "P": 2310, "Y": 49, "candidate_count": 19, "tail_prime_count": 0, "tail_hit_offsets": 0, "total_increment": 0.0, "drift_component": 0.0, "hit_component": 0.0, "twice_drift_hit": 0.0},
+          {"z": 13, "P": 30030, "Y": 173, "candidate_count": 18, "tail_prime_count": 16, "tail_hit_offsets": 2, "total_increment": -1.0456453662666683, "drift_component": 2.5925640920849156, "hit_component": -3.638209458351584, "twice_drift_hit": -18.864582402412054},
+          {"z": 17, "P": 510510, "Y": 714, "candidate_count": 17, "tail_prime_count": 103, "tail_hit_offsets": 7, "total_increment": -2.9576468820068307, "drift_component": 7.811462035772612, "hit_component": -10.769108917779443, "twice_drift_hit": -168.2449709406688},
+          {"z": 19, "P": 9699690, "Y": 3114, "candidate_count": 16, "tail_prime_count": 419, "tail_hit_offsets": 6, "total_increment": -0.018932794010208816, "drift_component": 14.870294865071497, "hit_component": -14.889227659081705, "twice_drift_hit": -442.8144112074463}
+        ],
+        "block_total_energy": 9.841407761328716,
+        "block_drift_energy": 288.8659970820566,
+        "block_hit_energy": 350.8993752297993,
+        "block_twice_cross": -629.9239645505272,
+        "drift_plus_hit_identity": true
+      },
+      {
+        "X": 13,
+        "H": 135,
+        "rows": [
+          {"z": 13, "P": 30030, "Y": 173, "candidate_count": 26, "tail_prime_count": 8, "tail_hit_offsets": 1, "total_increment": -0.4204689715566766, "drift_component": 1.3986357576191153, "hit_component": -1.819104729175792, "twice_drift_hit": -5.088529842158598},
+          {"z": 17, "P": 510510, "Y": 714, "candidate_count": 25, "tail_prime_count": 95, "tail_hit_offsets": 9, "total_increment": -2.1958955609029895, "drift_component": 8.573213356876453, "hit_component": -10.769108917779443, "twice_drift_hit": -184.6517368311281},
+          {"z": 19, "P": 9699690, "Y": 3114, "candidate_count": 24, "tail_prime_count": 411, "tail_hit_offsets": 9, "total_increment": -0.20901375378574844, "drift_component": 17.16175184847624, "hit_component": -17.37076560226199, "twice_drift_hit": -596.2255373681344},
+          {"z": 23, "P": 223092870, "Y": 14936, "candidate_count": 23, "tail_prime_count": 1716, "tail_hit_offsets": 8, "total_increment": 3.656478707818549, "drift_component": 17.79329178618037, "hit_component": -14.136813078361818, "twice_drift_hit": -503.08088005996507}
+        ],
+        "block_total_energy": 18.4122747604374,
+        "block_drift_energy": 686.583128341847,
+        "block_hit_energy": 620.8758305199766,
+        "block_twice_cross": -1289.046684101386,
+        "drift_plus_hit_identity": true
+      }
+    ],
+    "qualification": "The top-tail drift/hit split is exact on each finite row; block energies are empirical. They test whether sparse hit support can be bounded independently of normalization drift."
+  },
+  "boundary": "Normalized survivor increments are exact martingale differences under complete CRT sampling. On the deterministic Fortune source the sparse hit term must remain coupled to its dense normalization drift."
+}
