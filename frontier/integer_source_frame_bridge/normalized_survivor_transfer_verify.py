@@ -67,8 +67,8 @@ def top_tail_panel(X: int) -> dict:
         P = primorial(z)
         Y = math.isqrt(P + H)
         candidates = [int(m) for m in primerange(z + 1, H + 1)]
-        physical = [int(r) for r in primerange(z + 1, H + 1)]
-        tail = [int(r) for r in primerange(H + 1, Y + 1)]
+        physical = [int(r) for r in primerange(z + 1, min(H, Y) + 1)]
+        tail = [int(r) for r in primerange(H + 1, Y + 1)] if Y > H else []
         A = inv_v(tail)
         total = Fraction(0)
         drift = Fraction(0)
