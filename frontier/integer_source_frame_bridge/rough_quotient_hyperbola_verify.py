@@ -69,7 +69,6 @@ def one_case(z: int, Z: int, H: int) -> dict:
     total_direct_hits = 0
     total_quotient_hits = 0
     total_hyperbola_hits = 0
-    rows: list[dict] = []
 
     P_divisors = list(map(int, divisors(P)))
     for q in candidates:
@@ -119,17 +118,6 @@ def one_case(z: int, Z: int, H: int) -> dict:
 
         total_direct_hits += len(direct_ms)
         total_quotient_hits += N
-        rows.append(
-            {
-                "q": q,
-                "direct_hit_count": len(direct_ms),
-                "quotient_hit_count": N,
-                "mobius_floor_count": N_floor,
-                "weighted_error": abs(direct_weight - quotient_weight),
-                "centred_discrepancy": quotient_delta,
-                "quotient_interval_length": max(0, (P + H) // q - (P + Z) // q),
-            }
-        )
 
     for q in range(Z + 1, H + 1):
         for k in range((P + Z) // q + 1, (P + H) // q + 1):
@@ -158,7 +146,6 @@ def one_case(z: int, Z: int, H: int) -> dict:
         "maximum_sawtooth_error": float(maximum_sawtooth_error),
         "maximum_discrepancy_error": maximum_discrepancy_error,
         "maximum_phase_error": maximum_phase_error,
-        "rows": rows,
     }
 
 
