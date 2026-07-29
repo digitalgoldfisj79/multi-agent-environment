@@ -1,0 +1,90 @@
+{
+  "status": "PASS",
+  "exact_scope": [
+    "additive and unit-centred Type-II drift",
+    "direct/Fourier/inverse-orbit Type-II identity",
+    "combined inverse-orbit Gram collision transport",
+    "fixed-modulus residue multiplicity bound",
+    "high-conductor candidate collision criterion",
+    "high-conductor Euler-product mass formula"
+  ],
+  "panels": [
+    {
+      "X": 11,
+      "H": 96,
+      "K": 3,
+      "z_values": [11, 13, 17],
+      "Z": 17,
+      "moduli": [19, 23, 29, 31],
+      "typeii_direct_additive": [
+        "-12891506/392863",
+        "4001603/392863",
+        "-14070095/392863"
+      ],
+      "max_fourier_error": 1.884642417180701e-14,
+      "max_inverse_orbit_error": 1.540294763838261e-14,
+      "unit_baseline_drift_checked": true,
+      "inverse_orbit_gram_checks": 3600,
+      "max_fixed_modulus_residue_multiplicity": 3,
+      "combined_frame_norm_upper": "191934/392863",
+      "high_conductor_collision_checks": 66,
+      "high_conductor_diagonal_mass": "1121/93177",
+      "high_conductor_max_schur_row": "1121/93177",
+      "max_offdiagonal_mass_over_S_squared": 0.0,
+      "empirical_typeii_coherent_to_diagonal_ratio": 0.5538809761873563,
+      "generic_frame_cauchy_to_fortune_ratio_scale": 4.5873563056667095
+    },
+    {
+      "X": 17,
+      "H": 231,
+      "K": 3,
+      "z_values": [17, 19, 23],
+      "Z": 23,
+      "moduli": [29, 31, 37, 41, 43],
+      "typeii_direct_additive": [
+        "2044792972/58642669",
+        "-5285540653/58642669",
+        "-418199126/58642669"
+      ],
+      "max_fourier_error": 5.211619134666807e-14,
+      "max_inverse_orbit_error": 3.3373145350601274e-14,
+      "unit_baseline_drift_checked": true,
+      "inverse_orbit_gram_checks": 11520,
+      "max_fixed_modulus_residue_multiplicity": 3,
+      "combined_frame_norm_upper": "24878667/58642669",
+      "high_conductor_collision_checks": 156,
+      "high_conductor_diagonal_mass": "134716/14606865",
+      "high_conductor_max_schur_row": "134716/14606865",
+      "max_offdiagonal_mass_over_S_squared": 0.0,
+      "empirical_typeii_coherent_to_diagonal_ratio": 2.0689210492909624,
+      "generic_frame_cauchy_to_fortune_ratio_scale": 6.0002541057009395
+    },
+    {
+      "X": 23,
+      "H": 423,
+      "K": 4,
+      "z_values": [23, 29, 31, 37],
+      "Z": 37,
+      "moduli": [41, 43, 47, 53, 59, 61, 67, 71, 73],
+      "typeii_direct_additive": [
+        "248073647238026306/5488629279099587",
+        "237096388679827132/5488629279099587",
+        "6573958957644478/5488629279099587",
+        "-564243486068712570/5488629279099587"
+      ],
+      "max_fourier_error": 1.1396751644422177e-13,
+      "max_inverse_orbit_error": 3.074374814067211e-14,
+      "unit_baseline_drift_checked": true,
+      "inverse_orbit_gram_checks": 69696,
+      "max_fixed_modulus_residue_multiplicity": 4,
+      "combined_frame_norm_upper": "3597065047147012/5488629279099587",
+      "high_conductor_collision_checks": 6024,
+      "high_conductor_diagonal_mass": "526178842/39285007515",
+      "high_conductor_max_schur_row": "526178842/39285007515",
+      "max_offdiagonal_mass_over_S_squared": 0.0,
+      "empirical_typeii_coherent_to_diagonal_ratio": 0.9905254713161596,
+      "generic_frame_cauchy_to_fortune_ratio_scale": 7.335366744787423
+    }
+  ],
+  "boundary": "The logarithmic-block inverse-orbit frame and the high-conductor complete-model candidate frame pass exactly. Generic Cauchy in the remaining Type-II variable still misses the Fortune scale by X/log X up to subpolynomial factors. POTD(X), deterministic one-point conductor sampling and Fortune's conjecture remain OPEN."
+}
