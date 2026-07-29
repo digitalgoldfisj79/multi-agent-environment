@@ -78,6 +78,54 @@
       "test_quadratic_form": "62864/15895",
       "test_schur_rhs": "718634/174845",
       "status": "PASS"
+    },
+    "self_coordinate_decomposition": {
+      "centre_cutoffs": [
+        5,
+        7,
+        11
+      ],
+      "band_primes": [
+        13,
+        17,
+        19
+      ],
+      "checks": [
+        {
+          "self_prime": 13,
+          "reduced_band": [
+            17,
+            19
+          ],
+          "multiplier": "12/11",
+          "drift": "1/11",
+          "checked_states": 864,
+          "status": "PASS"
+        },
+        {
+          "self_prime": 17,
+          "reduced_band": [
+            13,
+            19
+          ],
+          "multiplier": "16/15",
+          "drift": "1/15",
+          "checked_states": 648,
+          "status": "PASS"
+        },
+        {
+          "self_prime": 19,
+          "reduced_band": [
+            13,
+            17
+          ],
+          "multiplier": "18/17",
+          "drift": "1/17",
+          "checked_states": 576,
+          "status": "PASS"
+        }
+      ],
+      "status": "PASS"
     }
   },
   "boundary": "The complete-CRT normalized-survivor centre Gram is exact and bounded. The arithmetic candidate-prime source still requires a deterministic sampling transfer preserving prior-band weights and cross-offset covariance."
