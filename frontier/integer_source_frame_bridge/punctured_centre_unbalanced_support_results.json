@@ -1,0 +1,147 @@
+{
+  "status": "PASS",
+  "exact_scope": [
+    "one-variable collision collapse on intervals shorter than p",
+    "failure of the unscoped collapse on the true ranges m <= H/d",
+    "existence of non-unit long-source terms p divides m"
+  ],
+  "panels": [
+    {
+      "X": 11,
+      "H": 96,
+      "Y": 10,
+      "K": 3,
+      "Z": 17,
+      "band_moduli": [
+        19,
+        23,
+        29,
+        31
+      ],
+      "small_mobius_count": 7,
+      "balanced_one_variable_collision_count": 0,
+      "unbalanced_one_variable_collision_count": 693,
+      "first_unbalanced_collision": {
+        "p": 19,
+        "d": 1,
+        "m": 1,
+        "m_prime": 20,
+        "top": 96
+      },
+      "long_range_multiples_of_band_primes": 26
+    },
+    {
+      "X": 17,
+      "H": 231,
+      "Y": 16,
+      "K": 3,
+      "Z": 23,
+      "band_moduli": [
+        29,
+        31,
+        37,
+        41,
+        43
+      ],
+      "small_mobius_count": 11,
+      "balanced_one_variable_collision_count": 0,
+      "unbalanced_one_variable_collision_count": 4187,
+      "first_unbalanced_collision": {
+        "p": 29,
+        "d": 1,
+        "m": 1,
+        "m_prime": 30,
+        "top": 231
+      },
+      "long_range_multiples_of_band_primes": 61
+    },
+    {
+      "X": 23,
+      "H": 423,
+      "Y": 21,
+      "K": 4,
+      "Z": 37,
+      "band_moduli": [
+        41,
+        43,
+        47,
+        53,
+        59,
+        61,
+        67,
+        71,
+        73
+      ],
+      "small_mobius_count": 14,
+      "balanced_one_variable_collision_count": 0,
+      "unbalanced_one_variable_collision_count": 16964,
+      "first_unbalanced_collision": {
+        "p": 41,
+        "d": 1,
+        "m": 1,
+        "m_prime": 42,
+        "top": 423
+      },
+      "long_range_multiples_of_band_primes": 135
+    },
+    {
+      "X": 29,
+      "H": 672,
+      "Y": 26,
+      "K": 4,
+      "Z": 41,
+      "band_moduli": [
+        43,
+        47,
+        53,
+        59,
+        61,
+        67,
+        71,
+        73,
+        79
+      ],
+      "small_mobius_count": 17,
+      "balanced_one_variable_collision_count": 0,
+      "unbalanced_one_variable_collision_count": 43109,
+      "first_unbalanced_collision": {
+        "p": 43,
+        "d": 1,
+        "m": 1,
+        "m_prime": 44,
+        "top": 672
+      },
+      "long_range_multiples_of_band_primes": 231
+    },
+    {
+      "X": 37,
+      "H": 1095,
+      "Y": 34,
+      "K": 4,
+      "Z": 47,
+      "band_moduli": [
+        53,
+        59,
+        61,
+        67,
+        71,
+        73,
+        79,
+        83,
+        89
+      ],
+      "small_mobius_count": 22,
+      "balanced_one_variable_collision_count": 0,
+      "unbalanced_one_variable_collision_count": 103297,
+      "first_unbalanced_collision": {
+        "p": 53,
+        "d": 1,
+        "m": 1,
+        "m_prime": 54,
+        "top": 1095
+      },
+      "long_range_multiples_of_band_primes": 353
+    }
+  ],
+  "boundary": "The balanced collision collapse is exact only on source intervals shorter than p. True unbalanced cells contain distinct congruent pairs m'=m+kp and multiples of p. They require exact residue completion and a separate dual-kernel ledger."
+}
