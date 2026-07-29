@@ -236,12 +236,67 @@ def survivor_gram_panel(
     }
 
 
+def self_coordinate_decomposition_panel(
+    centre_cutoffs: list[int],
+    band_primes: list[int],
+) -> dict:
+    centres = [primorial(z) for z in centre_cutoffs]
+    checks = []
+    for omitted_index, p0 in enumerate(band_primes):
+        reduced_primes = [
+            p for index, p in enumerate(band_primes) if index != omitted_index
+        ]
+        reduced_space = list(product(*(range(1, p) for p in reduced_primes)))
+        multiplier = Fraction(p0 - 1, p0 - 2)
+        drift = Fraction(1, p0 - 2)
+        checked = 0
+        for centre in centres:
+            for reduced_residues in reduced_space:
+                full_residues_list: list[int] = []
+                cursor = 0
+                for index in range(len(band_primes)):
+                    if index == omitted_index:
+                        full_residues_list.append(0)
+                    else:
+                        full_residues_list.append(reduced_residues[cursor])
+                        cursor += 1
+                full_value = centered_survivor(
+                    centre,
+                    tuple(full_residues_list),
+                    band_primes,
+                )
+                reduced_value = centered_survivor(
+                    centre,
+                    tuple(reduced_residues),
+                    reduced_primes,
+                )
+                assert full_value == multiplier * reduced_value + drift
+                checked += 1
+        checks.append({
+            "self_prime": p0,
+            "reduced_band": reduced_primes,
+            "multiplier": str(multiplier),
+            "drift": str(drift),
+            "checked_states": checked,
+            "status": "PASS",
+        })
+    return {
+        "centre_cutoffs": centre_cutoffs,
+        "band_primes": band_primes,
+        "checks": checks,
+        "status": "PASS",
+    }
+
+
 def main() -> None:
     payload = {
         "status": "PASS",
         "exact": {
             "complement_divisor_identity": complement_divisor_identity_panel([5, 7, 11]),
             "survivor_gram": survivor_gram_panel([5, 7, 11], [13, 17, 19]),
+            "self_coordinate_decomposition": self_coordinate_decomposition_panel(
+                [5, 7, 11], [13, 17, 19]
+            ),
         },
         "boundary": (
             "The complete-CRT normalized-survivor centre Gram is exact and bounded. "
