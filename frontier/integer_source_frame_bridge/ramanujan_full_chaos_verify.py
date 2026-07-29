@@ -91,11 +91,13 @@ def ramanujan_projector_panel(z: int, Z: int, H: int) -> dict:
     indicator_variance = Fraction(sum((Fraction(1 if math.gcd(k, P) == 1 else 0) - density) ** 2 for k in range(1, P + 1)), P)
     assert nontrivial_mass == indicator_variance == density * (1 - density)
 
-    interval_checks = []
+    checked_moduli = 0
+    interval_count_checksum = 0
     for q in primerange(Z + 1, H + 1):
         direct, expanded = interval_projector_count(P, Z, H, int(q))
         assert expanded.denominator == 1 and int(expanded) == direct
-        interval_checks.append({"q": int(q), "count": direct})
+        checked_moduli += 1
+        interval_count_checksum += direct
 
     return {
         "z": z,
@@ -107,7 +109,8 @@ def ramanujan_projector_panel(z: int, Z: int, H: int) -> dict:
         "weighted_quadratic_mass": str(qmass),
         "rough_density": str(density),
         "nontrivial_complete_period_energy": str(nontrivial_mass),
-        "interval_checks": interval_checks,
+        "checked_physical_moduli": checked_moduli,
+        "interval_count_checksum": interval_count_checksum,
     }
 
 
@@ -238,7 +241,14 @@ def full_chaos_panel(X: int) -> dict:
                 "complete_to_physical_ratio": ef / ep if ep else None,
             }
         )
-    return {"X": X, "H": H, "K": K, "centres": centres, "blocks": blocks}
+    return {
+        "X": X,
+        "H": H,
+        "K": K,
+        "centre_count": len(centres),
+        "maximum_factor_cluster": max((row["max_factor_cluster"] for row in centres), default=0),
+        "blocks": blocks,
+    }
 
 
 def main() -> None:
