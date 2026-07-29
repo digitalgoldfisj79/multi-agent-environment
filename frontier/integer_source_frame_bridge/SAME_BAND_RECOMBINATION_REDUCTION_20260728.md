@@ -1,167 +1,137 @@
 # Same-band recombination reduction
 
-Date: 28 July 2026  
-Status: exact dyadic recombination theorem proved; uniform same-band Bessel estimate open.
+Date: 29 July 2026  
+Status: **PROVED EXACTLY** as a dyadic reduction; the uniform same-band Bessel estimate is **OPEN**.
 
-## 1. Mesoscopic frozen source
+## 1. Frozen source and exact dyadic partition
 
-Let `B` be a consecutive centre block of cardinality at most
+Let `B` be a consecutive centre block of size at most
 
 \[
-K\ll\sqrt X,
+K\ll\sqrt X.
 \]
 
-and let `\widetilde G_j^{(1)}` be the frozen first-order source from
-`MESOSCOPIC_PRIMORIAL_ORBIT_REDUCTION_20260728.md`.  Write
+Let `Z=z_B` be its common frozen cutoff and
 
 \[
-\widetilde G_j^{(1)}=-\sum_{r\in\mathcal R_B}a_{j,r},
+\mathcal R_B=\{q:Z<q\le H,\ q\text{ prime}\}.
+\]
+
+Write
+
+\[
+\widetilde G_j^{(1)}=-\sum_{q\in\mathcal R_B}a_{j,q},
+\qquad
+a_{j,q}=\frac{q-1}{q-2}\widetilde\Delta_{j,q}.
 \tag{1.1}
 \]
 
-where
+Define
 
 \[
-a_{j,r}=\frac{r-1}{r-2}\widetilde\Delta_{j,r}.
+R_\ell=2^\ell Z,
+\qquad
+\mathcal R_\ell=\{q\in\mathcal R_B:R_\ell<q\le\min(2R_\ell,H)\},
 \tag{1.2}
 \]
 
-Partition the physical modulus range into disjoint dyadic prime bands
+for `0\le\ell<L_*`, where
 
 \[
-\mathcal R_\ell=\{r\in\mathcal R_B:R_\ell<r\le2R_\ell\},
-\qquad
-R_\ell=2^\ell R_0,
+L_*=\left\lceil\log_2(H/Z)\right\rceil.
+\]
+
+Discard empty bands, denote the remaining index set by `\mathscr L`, and put `L=|\mathscr L|`. Then
+
+\[
+L\le L_*\le1+\log_2(H/X)\ll\log X,
 \tag{1.3}
 \]
 
-with empty bands omitted.  Put
+and the half-open bands form an exact disjoint partition of `\mathcal R_B`. For `\ell\in\mathscr L`, put
 
 \[
-G_{j,\ell}=-\sum_{r\in\mathcal R_\ell}a_{j,r}.
+G_{j,\ell}=-\sum_{q\in\mathcal R_\ell}a_{j,q}.
 \tag{1.4}
 \]
 
-Then
+Hence
 
 \[
-\widetilde G_j^{(1)}=\sum_{\ell=1}^{L}G_{j,\ell},
-\qquad
-L\le1+\log_2(H/X)\ll\log X.
+\boxed{\widetilde G_j^{(1)}=\sum_{\ell\in\mathscr L}G_{j,\ell}.}
 \tag{1.5}
 \]
 
-## 2. Outer dyadic recombination
+This replaces the earlier ambiguous choice of `R_0`; no endpoint or first-band gap remains.
+
+## 2. Outer recombination
 
 ### Theorem 2.1
 
-For every finite centre block,
+For every finite block,
 
 \[
 \boxed{
 \sum_{j\in B}|\widetilde G_j^{(1)}|^2
-\le
-L\sum_{\ell=1}^{L}\sum_{j\in B}|G_{j,\ell}|^2.
+\le L\sum_{\ell\in\mathscr L}\sum_{j\in B}|G_{j,\ell}|^2.
 }
 \tag{2.1}
 \]
 
-### Proof
+Apply Cauchy--Schwarz to (1.5) for each fixed `j` and sum over `j`. \(\square\)
 
-For each fixed `j`, Cauchy--Schwarz in the dyadic index gives
+No individual mixed-`(R,S)` Cotlar estimate is required for this sufficient route. The price is the single outer factor `L\ll\log X`.
 
-\[
-\left|\sum_{\ell=1}^{L}G_{j,\ell}\right|^2
-\le L\sum_{\ell=1}^{L}|G_{j,\ell}|^2.
-\]
+## 3. Conditional same-band finish
 
-Sum over `j`.  \(\square\)
-
-Thus no estimate of the individual mixed covariance
+Define
 
 \[
-\sum_jG_{j,\ell}\overline{G_{j,k}},
-\qquad \ell\ne k,
-\]
-
-is required.
-
-## 3. Same-band conditional reduction
-
-Define the band diagonal
-
-\[
-D_{B,\ell}
-=
-\sum_{j\in B}\sum_{r\in\mathcal R_\ell}|a_{j,r}|^2
+D_{B,\ell}=\sum_{j\in B}\sum_{q\in\mathcal R_\ell}|a_{j,q}|^2,
+\qquad
+D_B=\sum_{\ell\in\mathscr L}D_{B,\ell}.
 \tag{3.1}
 \]
 
-and the complete block diagonal
-
-\[
-D_B=\sum_{\ell=1}^{L}D_{B,\ell}.
-\tag{3.2}
-\]
-
-The already-proved first-order diagonal theorem is uniform centre by centre and
-therefore gives
+The established first-order diagonal theorem gives
 
 \[
 \boxed{D_B\ll\frac{KHX}{\log X}.}
-\tag{3.3}
+\tag{3.2}
 \]
 
-### Theorem 3.1 (same-band conditional finish)
+### Theorem 3.1 — **CONDITIONAL** same-band finish
 
-Suppose that, uniformly for every mesoscopic block `B` and every dyadic band,
+Assume uniformly for every block and nonempty band that
 
 \[
 \boxed{
 \sum_{j\in B}|G_{j,\ell}|^2
 \le C D_{B,\ell}+E_{B,\ell},
 }
-\tag{3.4}
+\tag{3.3}
 \]
 
 where `C` is absolute and
 
 \[
-\sum_{\ell=1}^{L}E_{B,\ell}
-\ll\frac{KHX}{\log X}L_0(X)
-\tag{3.5}
+\sum_{\ell\in\mathscr L}E_{B,\ell}
+\ll\frac{KHX}{\log X}L_0(X),
+\qquad L_0(X)=o(\log X).
+\tag{3.4}
 \]
 
-for some `L_0(X)=o(log X)`.  Then
+Then
 
 \[
 \boxed{
 \sum_{j\in B}|\widetilde G_j^{(1)}|^2
-\ll
-KHX\,[1+L_0(X)].
+\ll KHX[1+L_0(X)].
 }
-\tag{3.6}
+\tag{3.5}
 \]
 
-In particular this is a valid Fortune-scale first-order bound with a bounded,
-hence sublogarithmic, loss when the errors in (3.4) are absorbed by the diagonal.
-
-### Proof
-
-Insert (3.4) into (2.1), sum the diagonals using (3.2)--(3.3), and use
-`L\ll log X`:
-
-\[
-\begin{aligned}
-\sum_{j\in B}|\widetilde G_j^{(1)}|^2
-&\le
-L\left(CD_B+\sum_\ell E_{B,\ell}\right)\\
-&\ll
-(\log X)\frac{KHX}{\log X}[1+L_0(X)].
-\end{aligned}
-\]
-
-This proves (3.6).  \(\square\)
+Insert (3.3) into (2.1), use (3.2), and use `L\ll\log X`. \(\square\)
 
 ## 4. Global consequence
 
@@ -172,7 +142,7 @@ The mesoscopic freezing theorem gives
 \tag{4.1}
 \]
 
-Summing (3.6) over the `O(N/K)` blocks and using (4.1) yields
+Summing (3.5) over the disjoint centre blocks and applying `|u+v|^2\le2|u|^2+2|v|^2` yields
 
 \[
 \boxed{
@@ -182,83 +152,115 @@ Summing (3.6) over the `O(N/K)` blocks and using (4.1) yields
 \tag{4.2}
 \]
 
-Therefore the physical first-order theorem no longer requires off-diagonal decay
-between different dyadic modulus scales.
+This is a sufficient first-order estimate; it is not the complete Fortune variance theorem.
 
 ## 5. Exact same-band target
 
-For one dyadic band `R<r<=2R`, the required estimate is
+For one band `R<q\le\min(2R,H)`, define
 
 \[
-\boxed{
-\sum_{j\in B}
-\left|
-\sum_{R<r\le2R\atop r\text{ prime}}
-\frac{r-1}{r-2}\widetilde\Delta_{j,r}
-\right|^2
-\ll
-\sum_{j\in B}
-\sum_{R<r\le2R\atop r\text{ prime}}
-\left|
-\frac{r-1}{r-2}\widetilde\Delta_{j,r}
-\right|^2
-}
+T_{B,R}(j)=
+\sum_{q\in\mathcal R_B\atop R<q\le\min(2R,H)}
+\frac{q-1}{q-2}\widetilde\Delta_{j,q}.
 \tag{5.1}
 \]
 
-up to errors whose band sum satisfies (3.5).
-
-This is a same-scale common-source Bessel theorem.  It is weaker than absolute
-control of every mixed dyadic covariance and is the correct immediate target.
-
-## 6. Interaction with the rough-quotient collapse
-
-Under the exact rough-quotient representation,
+The open estimate is
 
 \[
-\widetilde\Delta_{j,r}
-=
-\beta_j
-\left(
-N_{P_j}(r)-\frac{M_B-1}{r-1}
-\right),
+\boxed{
+\sum_{j\in B}|T_{B,R}(j)|^2
+\ll
+\sum_{j\in B}\sum_{q\in\mathcal R_B\atop R<q\le\min(2R,H)}
+\left|\frac{q-1}{q-2}\widetilde\Delta_{j,q}\right|^2
++E_{B,R}.
+}
+\tag{5.2}
+\]
+
+The dyadic errors must satisfy (3.4).
+
+## 6. Rough-quotient form
+
+For centre `P_j`, common cutoff `Z`, and
+
+\[
+M_Z=|\{m:Z<m\le H,\ m\text{ prime}\}|,
+\]
+
+the corrected general-cutoff identity gives
+
+\[
+\boxed{
+\widetilde\Delta_{j,q}
+=\beta_j\left(N_{P_j,Z}(q)-\frac{M_Z-1}{q-1}\right),
+}
 \tag{6.1}
 \]
 
-where `N_{P_j}(r)` counts primorial-rough quotients in an interval of length
-`H/r`.  Hence (5.1) is equivalently a dyadic Bessel theorem for the signed
-Möbius--sawtooth family
+where
 
 \[
-\sum_{d\mid P_j}\mu(d)
-\left[
-\psi\!\left(\frac{P_j+z_B}{rd}\right)
--
-\psi\!\left(\frac{P_j+H}{rd}\right)
-\right].
+N_{P_j,Z}(q)=\#\{k:P_j+Z<qk\le P_j+H,\ (k,P_j)=1\}.
+\]
+
+Equivalently,
+
+\[
+\begin{aligned}
+N_{P_j,Z}(q)
+={}&\frac{H-Z}{q}\frac{\varphi(P_j)}{P_j}\\
+&+\sum_{d\mid P_j}\mu(d)
+\left[\psi\!\left(\frac{P_j+Z}{qd}\right)-
+\psi\!\left(\frac{P_j+H}{qd}\right)\right].
+\end{aligned}
 \tag{6.2}
 \]
 
-The source is now rough rather than prime, and all modulus variables lie at one
-scale.
+Thus (5.2) is a signed common-source dispersion theorem for microscopic rough intervals of length `H/q\le X`.
 
-## 7. Boundary
+## 7. Exact covariance formulation
 
-Proved exactly:
+Put
 
-1. dyadic decomposition (1.5);
-2. outer recombination inequality (2.1);
-3. same-band conditional finish (3.6);
-4. global reduction (4.2).
+\[
+C_B(q,s)=\sum_{j\in B}a_{j,q}\overline{a_{j,s}}.
+\tag{7.1}
+\]
 
-Already proved:
+Then
 
-1. mesoscopic freezing at `O(NHX)` cost;
-2. complete first-order diagonal `O(NHX/log X)`;
-3. exact rough-quotient representation.
+\[
+\boxed{
+\sum_{j\in B}|T_{B,R}(j)|^2
+=D_{B,R}+2\Re\sum_{R<q<s\le\min(2R,H)}C_B(q,s).
+}
+\tag{7.2}
+\]
 
-Open:
+Consequently the same-band theorem is precisely a signed bound for the aggregate cross-modulus covariance in (7.2). The established diagonal theorem controls only the first term.
 
-1. uniform same-band Bessel estimate (5.1);
-2. its coupling to the normalized rough coordinate and Buchstab tail;
-3. Fortune's conjecture.
+## 8. Boundary
+
+**PROVED EXACTLY**
+
+1. exact half-open dyadic partition (1.2)--(1.5);
+2. outer recombination (2.1);
+3. conditional implication (3.3)--(3.5);
+4. global implication (4.2);
+5. covariance identity (7.2).
+
+**COMPUTATIONALLY VERIFIED**
+
+The finite verifier checks the generalized quotient identity, exact dyadic coverage, exact recombination and outer Cauchy inequality. Reported same-band ratios are diagnostics only.
+
+**CONDITIONAL**
+
+The physical first-order theorem (4.2) is conditional on (5.2) and (3.4).
+
+**OPEN**
+
+1. the uniform same-band estimate (5.2);
+2. covariance with the normalized rough coordinate and ordered Buchstab tail;
+3. the complete centred Fortune variance theorem;
+4. Fortune's conjecture.
