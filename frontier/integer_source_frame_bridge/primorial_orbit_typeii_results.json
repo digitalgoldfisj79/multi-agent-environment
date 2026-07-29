@@ -120,5 +120,5 @@
       "generic_frame_cauchy_to_fortune_ratio_scale": 7.335366744787423
     }
   ],
-  "boundary": "The logarithmic-block inverse-orbit frame and the high-conductor complete-model candidate frame pass exactly. Generic Cauchy in the remaining Type-II variable still misses the Fortune scale by X/log X up to subpolynomial factors. POTD(X), deterministic one-point conductor sampling and Fortune's conjecture remain OPEN."
+  "boundary": "The logarithmic-block inverse-orbit frame and the high-conductor complete-model candidate frame pass exactly.  Generic Cauchy in the remaining Type-II variable still misses the Fortune scale by X/log X up to subpolynomial factors.  POTD(X), deterministic one-point conductor sampling and Fortune's conjecture remain OPEN."
 }
