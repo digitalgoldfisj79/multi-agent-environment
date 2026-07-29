@@ -1,0 +1,24 @@
+name: Validate prime-source Heath-Brown identity
+
+on:
+  push:
+    branches:
+      - gpt56/fortune-mesoscopic-cotlar-20260728
+  pull_request:
+    paths:
+      - 'frontier/integer_source_frame_bridge/prime_source_heath_brown_verify.py'
+      - 'frontier/integer_source_frame_bridge/prime_source_heath_brown_results.json'
+      - '.github/workflows/validate-prime-source-heath-brown.yml'
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run exact two-level source verifier
+        run: python frontier/integer_source_frame_bridge/prime_source_heath_brown_verify.py
+      - name: Check committed results are reproducible
+        run: git diff --exit-code -- frontier/integer_source_frame_bridge/prime_source_heath_brown_results.json
