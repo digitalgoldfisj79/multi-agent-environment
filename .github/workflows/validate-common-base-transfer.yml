@@ -1,0 +1,64 @@
+name: Validate common-base transfer attack
+
+on:
+  pull_request:
+    paths:
+      - 'frontier/integer_source_frame_bridge/COMMON_BASE_CONDUCTOR_REDUCTION_20260729.md'
+      - 'frontier/integer_source_frame_bridge/FIXED_CONDUCTOR_HYBRID_FRAME_20260729.md'
+      - 'frontier/integer_source_frame_bridge/NORMALIZED_SURVIVOR_MARTINGALE_AUDIT_20260729.md'
+      - 'frontier/integer_source_frame_bridge/PROGRAMME_STATUS_AFTER_COMMON_BASE_TRANSFER_ATTACK_20260729.md'
+      - 'frontier/integer_source_frame_bridge/common_base_conductor_verify.py'
+      - 'frontier/integer_source_frame_bridge/common_base_conductor_results.json'
+      - 'frontier/integer_source_frame_bridge/fixed_conductor_frame_verify.py'
+      - 'frontier/integer_source_frame_bridge/fixed_conductor_frame_results.json'
+      - 'frontier/integer_source_frame_bridge/normalized_survivor_transfer_verify.py'
+      - 'frontier/integer_source_frame_bridge/normalized_survivor_transfer_results.json'
+      - '.github/workflows/validate-common-base-transfer.yml'
+  workflow_dispatch:
+
+jobs:
+  exact-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install verifier dependency
+        run: python -m pip install --disable-pip-version-check sympy
+      - name: Verify common-base and conductor package
+        run: |
+          ROOT=frontier/integer_source_frame_bridge
+          cp "$ROOT/common_base_conductor_results.json" /tmp/common_base_reference.json
+          python "$ROOT/common_base_conductor_verify.py" > /tmp/common_base_output.json
+          python - <<'PY'
+          import json
+          assert json.load(open('/tmp/common_base_reference.json')) == json.load(open('frontier/integer_source_frame_bridge/common_base_conductor_results.json'))
+          PY
+      - name: Verify fixed-conductor hybrid frame
+        run: |
+          ROOT=frontier/integer_source_frame_bridge
+          cp "$ROOT/fixed_conductor_frame_results.json" /tmp/fixed_frame_reference.json
+          python "$ROOT/fixed_conductor_frame_verify.py" > /tmp/fixed_frame_output.json
+          python - <<'PY'
+          import json
+          assert json.load(open('/tmp/fixed_frame_reference.json')) == json.load(open('frontier/integer_source_frame_bridge/fixed_conductor_frame_results.json'))
+          PY
+      - name: Verify normalized survivor martingale
+        run: |
+          ROOT=frontier/integer_source_frame_bridge
+          cp "$ROOT/normalized_survivor_transfer_results.json" /tmp/survivor_reference.json
+          python "$ROOT/normalized_survivor_transfer_verify.py" > /tmp/survivor_output.json
+          python - <<'PY'
+          import json
+          assert json.load(open('/tmp/survivor_reference.json')) == json.load(open('frontier/integer_source_frame_bridge/normalized_survivor_transfer_results.json'))
+          PY
+      - name: Check theorem and boundary markers
+        run: |
+          ROOT=frontier/integer_source_frame_bridge
+          grep -Fq 'Theorem 2.1' "$ROOT/COMMON_BASE_CONDUCTOR_REDUCTION_20260729.md"
+          grep -Fq 'Theorem 5.1' "$ROOT/COMMON_BASE_CONDUCTOR_REDUCTION_20260729.md"
+          grep -Fq 'Theorem 2.1 — fixed-conductor frame' "$ROOT/FIXED_CONDUCTOR_HYBRID_FRAME_20260729.md"
+          grep -Fq 'Open theorem `JHGF(X)`' "$ROOT/FIXED_CONDUCTOR_HYBRID_FRAME_20260729.md"
+          grep -Fq 'Open theorem `NSMT(X)`' "$ROOT/NORMALIZED_SURVIVOR_MARTINGALE_AUDIT_20260729.md"
+          grep -Fq "Fortune's conjecture remains **OPEN**" "$ROOT/PROGRAMME_STATUS_AFTER_COMMON_BASE_TRANSFER_ATTACK_20260729.md"
