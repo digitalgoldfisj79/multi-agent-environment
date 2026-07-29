@@ -1,0 +1,153 @@
+{
+  "status": "PASS",
+  "scope": "general-cutoff quotient bijection, Mobius-floor identity, exact dyadic partition, same-band recombination and outer Cauchy",
+  "panels": [
+    {
+      "X": 7,
+      "H": 39,
+      "K": 2,
+      "centre_count": 3,
+      "maximum_empirical_same_band_ratio": 2.9664997462878584,
+      "blocks": [
+        {
+          "start_index": 0,
+          "block_size": 2,
+          "Z": 11,
+          "candidate_count": 7,
+          "band_count": 2,
+          "outer_cauchy_exact": true,
+          "outer_cauchy_ratio": 0.22922277984766468,
+          "bands": [
+            {"index": 0, "low_open": 11, "high_closed": 22, "modulus_count": 3, "empirical_lhs_to_diagonal_ratio": 0.802802103823635},
+            {"index": 1, "low_open": 22, "high_closed": 39, "modulus_count": 4, "empirical_lhs_to_diagonal_ratio": 0.8963984258690106}
+          ]
+        },
+        {
+          "start_index": 2,
+          "block_size": 1,
+          "Z": 13,
+          "candidate_count": 6,
+          "band_count": 2,
+          "outer_cauchy_exact": true,
+          "outer_cauchy_ratio": 0.17871204921702005,
+          "bands": [
+            {"index": 0, "low_open": 13, "high_closed": 26, "modulus_count": 3, "empirical_lhs_to_diagonal_ratio": 0.038865942395613896},
+            {"index": 1, "low_open": 26, "high_closed": 39, "modulus_count": 3, "empirical_lhs_to_diagonal_ratio": 2.9664997462878584}
+          ]
+        }
+      ]
+    },
+    {
+      "X": 11,
+      "H": 96,
+      "K": 3,
+      "centre_count": 4,
+      "maximum_empirical_same_band_ratio": 2.992575911059857,
+      "blocks": [
+        {
+          "start_index": 0,
+          "block_size": 3,
+          "Z": 17,
+          "candidate_count": 17,
+          "band_count": 3,
+          "outer_cauchy_exact": true,
+          "outer_cauchy_ratio": 0.5358536584095193,
+          "bands": [
+            {"index": 0, "low_open": 17, "high_closed": 34, "modulus_count": 4, "empirical_lhs_to_diagonal_ratio": 1.5119368547910834},
+            {"index": 1, "low_open": 34, "high_closed": 68, "modulus_count": 8, "empirical_lhs_to_diagonal_ratio": 1.7776278973413686},
+            {"index": 2, "low_open": 68, "high_closed": 96, "modulus_count": 5, "empirical_lhs_to_diagonal_ratio": 2.4192140163418263}
+          ]
+        },
+        {
+          "start_index": 3,
+          "block_size": 1,
+          "Z": 19,
+          "candidate_count": 16,
+          "band_count": 3,
+          "outer_cauchy_exact": true,
+          "outer_cauchy_ratio": 0.8778453282253399,
+          "bands": [
+            {"index": 0, "low_open": 19, "high_closed": 38, "modulus_count": 4, "empirical_lhs_to_diagonal_ratio": 1.5664297851555782},
+            {"index": 1, "low_open": 38, "high_closed": 76, "modulus_count": 9, "empirical_lhs_to_diagonal_ratio": 2.093455786334417},
+            {"index": 2, "low_open": 76, "high_closed": 96, "modulus_count": 3, "empirical_lhs_to_diagonal_ratio": 2.992575911059857}
+          ]
+        }
+      ]
+    },
+    {
+      "X": 13,
+      "H": 135,
+      "K": 3,
+      "centre_count": 4,
+      "maximum_empirical_same_band_ratio": 2.109198367163335,
+      "blocks": [
+        {
+          "start_index": 0,
+          "block_size": 3,
+          "Z": 19,
+          "candidate_count": 24,
+          "band_count": 3,
+          "outer_cauchy_exact": true,
+          "outer_cauchy_ratio": 0.24154593945837938,
+          "bands": [
+            {"index": 0, "low_open": 19, "high_closed": 38, "modulus_count": 4, "empirical_lhs_to_diagonal_ratio": 1.236808820488647},
+            {"index": 1, "low_open": 38, "high_closed": 76, "modulus_count": 9, "empirical_lhs_to_diagonal_ratio": 1.321343874324361},
+            {"index": 2, "low_open": 76, "high_closed": 135, "modulus_count": 11, "empirical_lhs_to_diagonal_ratio": 1.4365729908074647}
+          ]
+        },
+        {
+          "start_index": 3,
+          "block_size": 1,
+          "Z": 23,
+          "candidate_count": 23,
+          "band_count": 3,
+          "outer_cauchy_exact": true,
+          "outer_cauchy_ratio": 0.40171521885105743,
+          "bands": [
+            {"index": 0, "low_open": 23, "high_closed": 46, "modulus_count": 5, "empirical_lhs_to_diagonal_ratio": 0.5347528658066852},
+            {"index": 1, "low_open": 46, "high_closed": 92, "modulus_count": 10, "empirical_lhs_to_diagonal_ratio": 0.09275369017227084},
+            {"index": 2, "low_open": 92, "high_closed": 135, "modulus_count": 8, "empirical_lhs_to_diagonal_ratio": 2.109198367163335}
+          ]
+        }
+      ]
+    },
+    {
+      "X": 17,
+      "H": 231,
+      "K": 4,
+      "centre_count": 5,
+      "maximum_empirical_same_band_ratio": 2.434318865449372,
+      "blocks": [
+        {
+          "start_index": 0,
+          "block_size": 4,
+          "Z": 29,
+          "candidate_count": 40,
+          "band_count": 3,
+          "outer_cauchy_exact": true,
+          "outer_cauchy_ratio": 0.23769213182286833,
+          "bands": [
+            {"index": 0, "low_open": 29, "high_closed": 58, "modulus_count": 6, "empirical_lhs_to_diagonal_ratio": 2.434318865449372},
+            {"index": 1, "low_open": 58, "high_closed": 116, "modulus_count": 14, "empirical_lhs_to_diagonal_ratio": 0.5814950225829759},
+            {"index": 2, "low_open": 116, "high_closed": 231, "modulus_count": 20, "empirical_lhs_to_diagonal_ratio": 0.6910937475447188}
+          ]
+        },
+        {
+          "start_index": 4,
+          "block_size": 1,
+          "Z": 31,
+          "candidate_count": 39,
+          "band_count": 3,
+          "outer_cauchy_exact": true,
+          "outer_cauchy_ratio": 0.2257841239822401,
+          "bands": [
+            {"index": 0, "low_open": 31, "high_closed": 62, "modulus_count": 7, "empirical_lhs_to_diagonal_ratio": 0.19954003709572427},
+            {"index": 1, "low_open": 62, "high_closed": 124, "modulus_count": 12, "empirical_lhs_to_diagonal_ratio": 0.21104677873470568},
+            {"index": 2, "low_open": 124, "high_closed": 231, "modulus_count": 20, "empirical_lhs_to_diagonal_ratio": 0.5446194975881387}
+          ]
+        }
+      ]
+    }
+  ],
+  "boundary": "The same-band ratios are empirical diagnostics only. The uniform same-band Bessel estimate and Fortune's conjecture remain OPEN."
+}
