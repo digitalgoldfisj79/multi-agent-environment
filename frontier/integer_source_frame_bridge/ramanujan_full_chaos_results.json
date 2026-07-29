@@ -31,10 +31,25 @@
     ],
     "band_martingale_panel": {
       "P": 30,
-      "local_primes": [7, 11, 13],
-      "bands": [[7, 11], [13]],
+      "local_primes": [
+        7,
+        11,
+        13
+      ],
+      "bands": [
+        [
+          7,
+          11
+        ],
+        [
+          13
+        ]
+      ],
       "sample_size": 720,
-      "increment_means": ["0", "0"],
+      "increment_means": [
+        "0",
+        "0"
+      ],
       "cross_band_covariance": "0",
       "quadratic_variation": "5/11",
       "final_energy": "5/11"
