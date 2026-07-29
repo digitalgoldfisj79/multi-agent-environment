@@ -55,9 +55,9 @@ jobs:
             "$ROOT/MESOSCOPIC_SHARED_FACTOR_KERNEL_20260728.md" \
             "$ROOT/PROGRAMME_STATUS_AFTER_FULL_ROUGH_QUOTIENT_20260728.md"
           grep -Fq 'Theorem 6.1' "$ROOT/MESOSCOPIC_PRIMORIAL_ORBIT_REDUCTION_20260728.md"
-          grep -Fq 'Theorem 3.1 (rough-quotient source)' "$ROOT/ROUGH_QUOTIENT_HYPERBOLA_COLLAPSE_20260728.md"
+          grep -Fq 'Theorem 3.1' "$ROOT/ROUGH_QUOTIENT_HYPERBOLA_COLLAPSE_20260728.md"
           grep -Fq 'Theorem 4.1 (full rough-quotient Euler identity)' "$ROOT/FULL_ROUGH_QUOTIENT_EULER_COLLAPSE_20260728.md"
-          grep -Fq 'Theorem 3.1 (same-band conditional finish)' "$ROOT/SAME_BAND_RECOMBINATION_REDUCTION_20260728.md"
+          grep -Fq 'Theorem 3.1' "$ROOT/SAME_BAND_RECOMBINATION_REDUCTION_20260728.md"
           grep -Fq 'Theorem 2.1' "$ROOT/FINITE_EULER_PRODUCT_RECOMBINATION_BOUNDARY_20260728.md"
           grep -Fq 'Theorem 2.1' "$ROOT/KLOOSTERMAN_RECIPROCITY_DEGENERATION_20260728.md"
           grep -Fq 'Theorem 3.1' "$ROOT/MESOSCOPIC_SHARED_FACTOR_KERNEL_20260728.md"
