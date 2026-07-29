@@ -1,0 +1,33 @@
+name: Validate primorial-shift Titchmarsh interface
+
+on:
+  push:
+    branches:
+      - gpt56/fortune-mesoscopic-cotlar-20260728
+    paths:
+      - "frontier/integer_source_frame_bridge/primorial_shift_titchmarsh_verify.py"
+      - "frontier/integer_source_frame_bridge/PRIMORIAL_SHIFT_TITCHMARSH_AND_FULL_BAND_INTERFACE_20260729.md"
+      - ".github/workflows/validate-primorial-shift-titchmarsh.yml"
+  pull_request:
+    paths:
+      - "frontier/integer_source_frame_bridge/primorial_shift_titchmarsh_verify.py"
+      - "frontier/integer_source_frame_bridge/PRIMORIAL_SHIFT_TITCHMARSH_AND_FULL_BAND_INTERFACE_20260729.md"
+      - ".github/workflows/validate-primorial-shift-titchmarsh.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run exact verifier
+        run: python frontier/integer_source_frame_bridge/primorial_shift_titchmarsh_verify.py
