@@ -200,7 +200,7 @@ where
 \[
 A_P(q)
 =
-\delta_P|I_q|-rac{M_Z-1}{q-1}.
+\delta_P|I_q|-\frac{M_Z-1}{q-1}.
 \tag{4.5}
 \]
 
