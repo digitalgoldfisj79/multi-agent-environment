@@ -1,0 +1,38 @@
+name: Validate single-prime dilation layer
+
+on:
+  push:
+    branches:
+      - gpt56/fortune-mesoscopic-cotlar-20260728
+    paths:
+      - "frontier/integer_source_frame_bridge/single_prime_dilation_layer_verify.py"
+      - "frontier/integer_source_frame_bridge/single_prime_dilation_layer_results.json"
+      - "frontier/integer_source_frame_bridge/SINGLE_PRIME_DILATION_LAYER_AND_LOG_GAP_20260729.md"
+      - ".github/workflows/validate-single-prime-dilation-layer.yml"
+  pull_request:
+    paths:
+      - "frontier/integer_source_frame_bridge/single_prime_dilation_layer_verify.py"
+      - "frontier/integer_source_frame_bridge/single_prime_dilation_layer_results.json"
+      - "frontier/integer_source_frame_bridge/SINGLE_PRIME_DILATION_LAYER_AND_LOG_GAP_20260729.md"
+      - ".github/workflows/validate-single-prime-dilation-layer.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run exact verifier
+        run: python frontier/integer_source_frame_bridge/single_prime_dilation_layer_verify.py
+
+      - name: Require frozen result match
+        run: git diff --exit-code -- frontier/integer_source_frame_bridge/single_prime_dilation_layer_results.json
