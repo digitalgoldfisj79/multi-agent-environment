@@ -1,0 +1,63 @@
+{
+  "boundary": {
+    "not_proved": "No uniform fixed-q growing-k bound for these corrected pair values is established.",
+    "observed": "For every resonant row through k=5, X_a=X_b, Delta_a=Delta_b and B_a=B_b; the corrected cross term is a positive square."
+  },
+  "panels": [
+    {
+      "aggregate_terms_canonical": {
+        "BB": [1534752,0,0],
+        "DD": [43218,0,0],
+        "DX": [-214326,0,0],
+        "XD": [-214326,0,0],
+        "XX": [1062882,0,0]
+      },
+      "corrected_BB_over_squared_target": 0.0013204877246438043,
+      "distinct_pair_value_patterns": 2,
+      "involution_pair_values_equal": true,
+      "k": 3,
+      "m": 5,
+      "max_corrected_pair_square": 767376,
+      "q": 3,
+      "resonant_rows": 2,
+      "source_terms": 51
+    },
+    {
+      "aggregate_terms_canonical": {
+        "BB": [227070000,0,0],
+        "DD": [43823052,0,0],
+        "DX": [-55931148,0,0],
+        "XD": [-55931148,0,0],
+        "XX": [71384652,0,0]
+      },
+      "corrected_BB_over_squared_target": 8.933201645394234e-05,
+      "distinct_pair_value_patterns": 2,
+      "involution_pair_values_equal": true,
+      "k": 4,
+      "m": 7,
+      "max_corrected_pair_square": 18922500,
+      "q": 3,
+      "resonant_rows": 12,
+      "source_terms": 315
+    },
+    {
+      "aggregate_terms_canonical": {
+        "BB": [528309141912,0,0],
+        "DD": [35233974972,0,0],
+        "DX": [-92518064244,0,0],
+        "XD": [-92518064244,0,0],
+        "XX": [308039038452,0,0]
+      },
+      "corrected_BB_over_squared_target": 9.503568734084655e-05,
+      "distinct_pair_value_patterns": 12,
+      "involution_pair_values_equal": true,
+      "k": 5,
+      "m": 9,
+      "max_corrected_pair_square": 13881316761,
+      "q": 3,
+      "resonant_rows": 72,
+      "source_terms": 2195
+    }
+  ],
+  "status": "EMPIRICAL-EXACT FINITE PANEL"
+}
