@@ -13,213 +13,87 @@
       "H": 8160,
       "K": 5,
       "block_count": 6,
-      "band_count_range": [
-        18,
-        32
-      ],
-      "orbit_sampling_range": [
-        0.8690691683041204,
-        1.0317680913380505
-      ],
-      "orbit_coherence_range": [
-        0.2835560035120312,
-        1.402343082345919
-      ],
-      "orbit_total_range": [
-        0.2464297801398412,
-        1.437626777689144
-      ],
-      "random_sampling_median_range": [
-        0.9759579424839684,
-        1.008086267525211
-      ],
-      "random_coherence_median_range": [
-        0.8564796825168237,
-        1.0413482191457453
-      ],
-      "random_total_median_range": [
-        0.8048644670351927,
-        1.0033151559629607
-      ]
+      "band_count_range": [18, 32],
+      "orbit_sampling_range": [0.869069168304, 1.031768091338],
+      "orbit_coherence_range": [0.283556003512, 1.402343082346],
+      "orbit_total_range": [0.24642978014, 1.437626777689],
+      "random_sampling_median_range": [0.975957942484, 1.008086267525],
+      "random_coherence_median_range": [0.856479682517, 1.041348219146],
+      "random_total_median_range": [0.804864467035, 1.003315155963]
     },
     {
       "X": 199,
       "H": 31680,
       "K": 6,
       "block_count": 6,
-      "band_count_range": [
-        39,
-        60
-      ],
-      "orbit_sampling_range": [
-        0.9130790749324549,
-        1.0553162038058035
-      ],
-      "orbit_coherence_range": [
-        0.41760016623487156,
-        1.986106485596072
-      ],
-      "orbit_total_range": [
-        0.3813019734773759,
-        1.903602556837537
-      ],
-      "random_sampling_median_range": [
-        0.9839160761248429,
-        1.0183452514615927
-      ],
-      "random_coherence_median_range": [
-        0.8674545236516198,
-        0.9633476438005101
-      ],
-      "random_total_median_range": [
-        0.8477131877110216,
-        0.9738154411796669
-      ]
+      "band_count_range": [39, 60],
+      "orbit_sampling_range": [0.913079074932, 1.055316203806],
+      "orbit_coherence_range": [0.417600166235, 1.986106485596],
+      "orbit_total_range": [0.381301973477, 1.903602556838],
+      "random_sampling_median_range": [0.983916076125, 1.018345251462],
+      "random_coherence_median_range": [0.867454523652, 0.963347643801],
+      "random_total_median_range": [0.847713187711, 0.97381544118]
     },
     {
       "X": 307,
       "H": 75399,
       "K": 6,
       "block_count": 6,
-      "band_count_range": [
-        54,
-        88
-      ],
-      "orbit_sampling_range": [
-        0.8712131369355247,
-        1.0559715554024038
-      ],
-      "orbit_coherence_range": [
-        0.654704448837067,
-        1.7806392287608344
-      ],
-      "orbit_total_range": [
-        0.5872337260631015,
-        1.7600295377991702
-      ],
-      "random_sampling_median_range": [
-        0.9872112206351555,
-        1.007202137164755
-      ],
-      "random_coherence_median_range": [
-        0.8392181002067165,
-        0.9888645217078658
-      ],
-      "random_total_median_range": [
-        0.8343850595756304,
-        0.997367511560354
-      ]
+      "band_count_range": [54, 88],
+      "orbit_sampling_range": [0.871213136936, 1.055971555402],
+      "orbit_coherence_range": [0.654704448837, 1.780639228761],
+      "orbit_total_range": [0.587233726063, 1.760029537799],
+      "random_sampling_median_range": [0.987211220635, 1.007202137165],
+      "random_coherence_median_range": [0.839218100207, 0.988864521708],
+      "random_total_median_range": [0.834385059576, 0.99736751156]
     },
     {
       "X": 503,
       "H": 202407,
       "K": 7,
       "block_count": 6,
-      "band_count_range": [
-        84,
-        133
-      ],
-      "orbit_sampling_range": [
-        0.8878636750415012,
-        1.1077565071806268
-      ],
-      "orbit_coherence_range": [
-        0.11848268706631934,
-        1.0359474856797404
-      ],
-      "orbit_total_range": [
-        0.11647110969211875,
-        1.1475775683591416
-      ],
-      "random_sampling_median_range": [
-        0.9884521703921946,
-        1.011568239619705
-      ],
-      "random_coherence_median_range": [
-        0.8350755067220099,
-        0.9580042450903781
-      ],
-      "random_total_median_range": [
-        0.800703867155093,
-        0.9760672528670864
-      ]
+      "band_count_range": [84, 133],
+      "orbit_sampling_range": [0.887863675042, 1.107756507181],
+      "orbit_coherence_range": [0.118482687066, 1.03594748568],
+      "orbit_total_range": [0.116471109692, 1.147577568359],
+      "random_sampling_median_range": [0.988452170392, 1.01156823962],
+      "random_coherence_median_range": [0.835075506722, 0.95800424509],
+      "random_total_median_range": [0.800703867155, 0.976067252867]
     },
     {
       "X": 701,
       "H": 393120,
       "K": 7,
       "block_count": 6,
-      "band_count_range": [
-        103,
-        185
-      ],
-      "orbit_sampling_range": [
-        0.9872178044264658,
-        1.1165450294880268
-      ],
-      "orbit_coherence_range": [
-        0.5837583802955315,
-        1.1342421639772005
-      ],
-      "orbit_total_range": [
-        0.5762966665109044,
-        1.1471199482513788
-      ],
-      "random_sampling_median_range": [
-        0.9914706321980965,
-        1.0045258251191047
-      ],
-      "random_coherence_median_range": [
-        0.81734776047737,
-        0.9952680707815451
-      ],
-      "random_total_median_range": [
-        0.8243938854332429,
-        0.9691037424164284
-      ]
+      "band_count_range": [103, 185],
+      "orbit_sampling_range": [0.987217804426, 1.116545029488],
+      "orbit_coherence_range": [0.583758380296, 1.134242163977],
+      "orbit_total_range": [0.576296666511, 1.147119948251],
+      "random_sampling_median_range": [0.991470632198, 1.004525825119],
+      "random_coherence_median_range": [0.817347760477, 0.995268070782],
+      "random_total_median_range": [0.824393885433, 0.969103742416]
     },
     {
       "X": 1009,
       "H": 814464,
       "K": 7,
       "block_count": 6,
-      "band_count_range": [
-        137,
-        251
-      ],
-      "orbit_sampling_range": [
-        0.9805957435084671,
-        0.9906104143039168
-      ],
-      "orbit_coherence_range": [
-        0.4360031768148674,
-        1.4929518961954553
-      ],
-      "orbit_total_range": [
-        0.4282013878719343,
-        1.4675217473306958
-      ],
-      "random_sampling_median_range": [
-        0.9983421005559863,
-        1.0098134005157533
-      ],
-      "random_coherence_median_range": [
-        0.8652255028459923,
-        0.9542850757150486
-      ],
-      "random_total_median_range": [
-        0.8615218867164917,
-        0.950520211199253
-      ]
+      "band_count_range": [137, 251],
+      "orbit_sampling_range": [0.980595743508, 0.990610414304],
+      "orbit_coherence_range": [0.436003176815, 1.492951896195],
+      "orbit_total_range": [0.428201387872, 1.467521747331],
+      "random_sampling_median_range": [0.998342100556, 1.009813400516],
+      "random_coherence_median_range": [0.865225502846, 0.954285075715],
+      "random_total_median_range": [0.861521886716, 0.950520211199]
     }
   ],
   "summary": {
-    "maximum_orbit_sampling_ratio": 1.1165450294880268,
-    "minimum_orbit_sampling_ratio": 0.8690691683041204,
-    "maximum_orbit_coherence_ratio": 1.986106485596072,
-    "minimum_orbit_coherence_ratio": 0.11848268706631934,
-    "maximum_orbit_total_ratio": 1.903602556837537,
-    "minimum_orbit_total_ratio": 0.11647110969211875
+    "maximum_orbit_sampling_ratio": 1.116545029488,
+    "minimum_orbit_sampling_ratio": 0.869069168304,
+    "maximum_orbit_coherence_ratio": 1.986106485596,
+    "minimum_orbit_coherence_ratio": 0.118482687066,
+    "maximum_orbit_total_ratio": 1.903602556838,
+    "minimum_orbit_total_ratio": 0.116471109692
   },
   "boundary": "Across the committed finite panels, primorial-orbit residues sample the all-residue diagonal at random scale and show no growth toward the Cauchy bound in cross-modulus coherence. This is empirical only. The theorem-level orbit restriction and signed higher-conductor transfer remain open."
 }
