@@ -1,0 +1,49 @@
+== A. Reduced-source resummation (exact) ==
+PASS  (1.2) Lambda = mu_<=Y * c_Y, all n <= H   (X=11, H=96, Y=10)
+PASS  (1.2) Lambda = mu_<=Y * c_Y, all n <= H   (X=17, H=231, Y=16)
+PASS  (1.2) Lambda = mu_<=Y * c_Y, all n <= H   (X=23, H=423, Y=21)
+
+== B. Completion to psi(H;p,a) (exact) ==
+PASS  (2.2) completion = psi(H;p,a), all residues   (X=11, p=13)
+PASS  (2.2) completion = psi(H;p,a), all residues   (X=11, p=17)
+PASS  (2.2) completion = psi(H;p,a), all residues   (X=17, p=19)
+PASS  (2.2) completion = psi(H;p,a), all residues   (X=17, p=23)
+PASS  (2.2) completion = psi(H;p,a), all residues   (X=23, p=29)
+PASS  (2.2) completion = psi(H;p,a), all residues   (X=23, p=31)
+
+== C. Character collapse (2.5) ==
+PASS  (2.5) character collapse, all chi mod p   (X=11, p=13)
+PASS  (2.5) character collapse, all chi mod p   (X=17, p=19)
+PASS  (2.5) character collapse, all chi mod p   (X=23, p=29)
+
+== D. First-order coordinate (3.1) ==
+PASS  (3.1) A_jp formula vs direct survivor sum   (X=11, K=3, |band|=4)  max dev=1.33e-15
+PASS  (3.1) A_jp formula vs direct survivor sum   (X=17, K=3, |band|=5)  max dev=1.78e-15
+PASS  (3.1) A_jp formula vs direct survivor sum   (X=23, K=4, |band|=9)  max dev=5.33e-15
+
+== E. Centred determinant reordering (4.2) ==
+PASS  (4.2) centred determinant reordering   (X=11)  V=239.131477 RHS=239.131477
+PASS  (4.2) centred determinant reordering   (X=17)  V=1008.977019 RHS=1008.977019
+
+== F. Actual-source diagnostics (EMPIRICAL) ==
+   X= 101 H=  8160 |band|= 20:  V/(HX)=0.520   R_uncentred/H^2=0.1232   diag/(HX)=1.568
+   X= 149 H= 17760 |band|= 27:  V/(HX)=0.545   R_uncentred/H^2=0.1182   diag/(HX)=1.585
+   X= 199 H= 31680 |band|= 32:  V/(HX)=0.528   R_uncentred/H^2=0.1037   diag/(HX)=1.498
+   X= 251 H= 50400 |band|= 41:  V/(HX)=0.568   R_uncentred/H^2=0.1083   diag/(HX)=1.602
+   X= 307 H= 75399 |band|= 49:  V/(HX)=0.591   R_uncentred/H^2=0.1069   diag/(HX)=1.629
+
+== G. Falsity exhibit for the reviewer's uncentred SDD box (RETRACTION) ==
+   X= 101: D=1, gamma=Lambda cell:  E/(DM)=   455.26   E/(dens*(sum gamma)^2)=0.828   target O(X^o(1))
+   X= 101: mid-D mu cell (D=22, M=92):  E/(DM)=   -13.35
+   X= 199: D=1, gamma=Lambda cell:  E/(DM)=  1553.21   E/(dens*(sum gamma)^2)=0.901   target O(X^o(1))
+   X= 199: mid-D mu cell (D=44, M=180):  E/(DM)=   -19.05
+   X= 307: D=1, gamma=Lambda cell:  E/(DM)=  3884.82   E/(dens*(sum gamma)^2)=0.932   target O(X^o(1))
+   X= 307: mid-D mu cell (D=68, M=277):  E/(DM)=   -31.46
+
+== H. Cross-modulus covariance of D_p(-P_j) (EMPIRICAL, new) ==
+   X= 101 orbit  : mean |sum_p D|^2 / sum_p D^2 =   1.31   (independence=1, Cauchy bound=18);  per-centre ratios [0.56 0.72 3.14 2.   0.28]
+   X= 101 random : mean |sum_p D|^2 / sum_p D^2 =   1.62   (independence=1, Cauchy bound=18);  per-centre ratios [0.05 4.29 1.01 0.71 1.2 ]
+   X= 199 orbit  : mean |sum_p D|^2 / sum_p D^2 =   0.42   (independence=1, Cauchy bound=39);  per-centre ratios [0.56 0.   0.45 0.75 0.46 0.29]
+   X= 199 random : mean |sum_p D|^2 / sum_p D^2 =   1.22   (independence=1, Cauchy bound=39);  per-centre ratios [3.38 1.07 0.8  0.06 0.22 2.18]
+   X= 307 orbit  : mean |sum_p D|^2 / sum_p D^2 =   1.78   (independence=1, Cauchy bound=54);  per-centre ratios [0.06 4.38 0.09 0.01 0.02 5.15]
+   X= 307 random : mean |sum_p D|^2 / sum_p D^2 =   0.21   (independence=1, Cauchy bound=54);  per-centre ratios [0.52 0.26 0.25 0.1  0.1  0.12]
