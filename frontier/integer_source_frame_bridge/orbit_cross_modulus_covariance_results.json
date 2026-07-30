@@ -13,78 +13,204 @@
       "H": 8160,
       "K": 5,
       "block_count": 6,
-      "band_count_range": [18, 32],
-      "orbit_sampling_range": [0.869069168304, 1.031768091338],
-      "orbit_coherence_range": [0.283556003512, 1.402343082346],
-      "orbit_total_range": [0.24642978014, 1.437626777689],
-      "random_sampling_median_range": [0.975957942484, 1.008086267525],
-      "random_coherence_median_range": [0.856479682517, 1.041348219146],
-      "random_total_median_range": [0.804864467035, 1.003315155963]
+      "band_count_range": [
+        18,
+        32
+      ],
+      "orbit_sampling_range": [
+        0.869069168304,
+        1.031768091338
+      ],
+      "orbit_coherence_range": [
+        0.283556003512,
+        1.402343082346
+      ],
+      "orbit_total_range": [
+        0.24642978014,
+        1.437626777689
+      ],
+      "random_sampling_median_range": [
+        0.975957942484,
+        1.008086267525
+      ],
+      "random_coherence_median_range": [
+        0.856479682517,
+        1.041348219146
+      ],
+      "random_total_median_range": [
+        0.804864467035,
+        1.003315155963
+      ]
     },
     {
       "X": 199,
       "H": 31680,
       "K": 6,
       "block_count": 6,
-      "band_count_range": [39, 60],
-      "orbit_sampling_range": [0.913079074932, 1.055316203806],
-      "orbit_coherence_range": [0.417600166235, 1.986106485596],
-      "orbit_total_range": [0.381301973477, 1.903602556838],
-      "random_sampling_median_range": [0.983916076125, 1.018345251462],
-      "random_coherence_median_range": [0.867454523652, 0.963347643801],
-      "random_total_median_range": [0.847713187711, 0.97381544118]
+      "band_count_range": [
+        39,
+        60
+      ],
+      "orbit_sampling_range": [
+        0.913079074932,
+        1.055316203806
+      ],
+      "orbit_coherence_range": [
+        0.417600166235,
+        1.986106485596
+      ],
+      "orbit_total_range": [
+        0.381301973477,
+        1.903602556838
+      ],
+      "random_sampling_median_range": [
+        0.983916076125,
+        1.018345251462
+      ],
+      "random_coherence_median_range": [
+        0.867454523652,
+        0.963347643801
+      ],
+      "random_total_median_range": [
+        0.847713187711,
+        0.97381544118
+      ]
     },
     {
       "X": 307,
       "H": 75399,
       "K": 6,
       "block_count": 6,
-      "band_count_range": [54, 88],
-      "orbit_sampling_range": [0.871213136936, 1.055971555402],
-      "orbit_coherence_range": [0.654704448837, 1.780639228761],
-      "orbit_total_range": [0.587233726063, 1.760029537799],
-      "random_sampling_median_range": [0.987211220635, 1.007202137165],
-      "random_coherence_median_range": [0.839218100207, 0.988864521708],
-      "random_total_median_range": [0.834385059576, 0.99736751156]
+      "band_count_range": [
+        54,
+        88
+      ],
+      "orbit_sampling_range": [
+        0.871213136936,
+        1.055971555402
+      ],
+      "orbit_coherence_range": [
+        0.654704448837,
+        1.780639228761
+      ],
+      "orbit_total_range": [
+        0.587233726063,
+        1.760029537799
+      ],
+      "random_sampling_median_range": [
+        0.987211220635,
+        1.007202137165
+      ],
+      "random_coherence_median_range": [
+        0.839218100207,
+        0.988864521708
+      ],
+      "random_total_median_range": [
+        0.834385059576,
+        0.99736751156
+      ]
     },
     {
       "X": 503,
       "H": 202407,
       "K": 7,
       "block_count": 6,
-      "band_count_range": [84, 133],
-      "orbit_sampling_range": [0.887863675042, 1.107756507181],
-      "orbit_coherence_range": [0.118482687066, 1.03594748568],
-      "orbit_total_range": [0.116471109692, 1.147577568359],
-      "random_sampling_median_range": [0.988452170392, 1.01156823962],
-      "random_coherence_median_range": [0.835075506722, 0.95800424509],
-      "random_total_median_range": [0.800703867155, 0.976067252867]
+      "band_count_range": [
+        84,
+        133
+      ],
+      "orbit_sampling_range": [
+        0.887863675042,
+        1.107756507181
+      ],
+      "orbit_coherence_range": [
+        0.118482687066,
+        1.03594748568
+      ],
+      "orbit_total_range": [
+        0.116471109692,
+        1.147577568359
+      ],
+      "random_sampling_median_range": [
+        0.988452170392,
+        1.01156823962
+      ],
+      "random_coherence_median_range": [
+        0.835075506722,
+        0.95800424509
+      ],
+      "random_total_median_range": [
+        0.800703867155,
+        0.976067252867
+      ]
     },
     {
       "X": 701,
       "H": 393120,
       "K": 7,
       "block_count": 6,
-      "band_count_range": [103, 185],
-      "orbit_sampling_range": [0.987217804426, 1.116545029488],
-      "orbit_coherence_range": [0.583758380296, 1.134242163977],
-      "orbit_total_range": [0.576296666511, 1.147119948251],
-      "random_sampling_median_range": [0.991470632198, 1.004525825119],
-      "random_coherence_median_range": [0.817347760477, 0.995268070782],
-      "random_total_median_range": [0.824393885433, 0.969103742416]
+      "band_count_range": [
+        103,
+        185
+      ],
+      "orbit_sampling_range": [
+        0.987217804426,
+        1.116545029488
+      ],
+      "orbit_coherence_range": [
+        0.583758380296,
+        1.134242163977
+      ],
+      "orbit_total_range": [
+        0.576296666511,
+        1.147119948251
+      ],
+      "random_sampling_median_range": [
+        0.991470632198,
+        1.004525825119
+      ],
+      "random_coherence_median_range": [
+        0.817347760477,
+        0.995268070782
+      ],
+      "random_total_median_range": [
+        0.824393885433,
+        0.969103742416
+      ]
     },
     {
       "X": 1009,
       "H": 814464,
       "K": 7,
       "block_count": 6,
-      "band_count_range": [137, 251],
-      "orbit_sampling_range": [0.980595743508, 0.990610414304],
-      "orbit_coherence_range": [0.436003176815, 1.492951896195],
-      "orbit_total_range": [0.428201387872, 1.467521747331],
-      "random_sampling_median_range": [0.998342100556, 1.009813400516],
-      "random_coherence_median_range": [0.865225502846, 0.954285075715],
-      "random_total_median_range": [0.861521886716, 0.950520211199]
+      "band_count_range": [
+        137,
+        251
+      ],
+      "orbit_sampling_range": [
+        0.980595743508,
+        0.990610414304
+      ],
+      "orbit_coherence_range": [
+        0.436003176815,
+        1.492951896195
+      ],
+      "orbit_total_range": [
+        0.428201387872,
+        1.467521747331
+      ],
+      "random_sampling_median_range": [
+        0.998342100556,
+        1.009813400516
+      ],
+      "random_coherence_median_range": [
+        0.865225502846,
+        0.954285075715
+      ],
+      "random_total_median_range": [
+        0.861521886716,
+        0.950520211199
+      ]
     }
   ],
   "summary": {
