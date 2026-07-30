@@ -116,7 +116,7 @@ and
 
 The required estimate must subtract both single-source Gram diagonals before positivity, retain the `Lambda` weights and `Delta_PS`, and yield the missing `q^((m-k)/2)` saving. A second Cauchy inequality applied after the first positive diagonal has been formed cannot do this.
 
-**EMPIRICAL-EXACT FINITE PANEL:** for the true primorial at the endpoint, the simultaneous incidence is diagonal only for `(k,m)=(2,3)` at `q=3,5,7`; at `(q,k,m)=(3,3,5)` it is diagonal plus two transpose incidences. No other simultaneous incidences occur in those panels. This identifies a promising rigidity phenomenon but proves no asymptotic theorem.
+**EMPIRICAL-EXACT FINITE PANEL:** the initial panels are diagonal only for `(k,m)=(2,3)` at `q=3,5,7`; `(q,k,m)=(3,3,5)` has two transpose incidences; and `(5,3,5)` is again diagonal only. However, `(q,k,m)=(3,4,7)` has 12 genuine non-diagonal, non-transpose incidences, forming two `AGL(1,3)` orbits of size six. Thus the naive universal diagonal/transpose rigidity conjecture is **FALSIFIED**. The theorem must classify and control exceptional components rather than assume they are absent.
 
 ## 6. Function-field route after the endpoint gate
 
@@ -164,12 +164,12 @@ Independent finite checks of the exact identities and corrected aggregate decomp
 
 ### EMPIRICAL-EXACT FINITE PANEL
 
-`C/Diag <= 1` on the committed panels; exact cyclotomic values of the actual corrected aggregate; simultaneous-incidence rigidity on the listed panels.
+`C/Diag <= 1` on the committed panels; exact cyclotomic values of the actual corrected aggregate; the listed simultaneous-incidence counts and affine exception orbits.
 
 ### RETRACTED OR CORRECTED
 
-The uncentred integer `SDD`; fixed-source Theorem D; the unexplained `q^-m`; a universal factor-2 class bound; the claim that ordinary double dispersion after first Cauchy automatically recovers the endpoint deficit; the claim that coset `PORC_FF` is already Fortune in the laboratory.
+The uncentred integer `SDD`; fixed-source Theorem D; the unexplained `q^-m`; a universal factor-2 class bound; the claim that ordinary double dispersion after first Cauchy automatically recovers the endpoint deficit; the claim that coset `PORC_FF` is already Fortune in the laboratory; any universal diagonal-or-diagonal-plus-transpose classification of the bilateral incidence.
 
 ### OPEN
 
-The centered bilateral endpoint theorem; uniform class-main-term control or exact absorption inside that theorem; corrected `FFPR`; coset `PORC_FF`; signed conductor coupling; every thinning step; integer `PBDH_P`, `PORS`, `PORC/T3`, higher-conductor contraction, block variance and Fortune's conjecture.
+A general classification and estimate for exceptional bilateral-incidence components; the centered bilateral endpoint theorem; uniform class-main-term control or exact absorption inside that theorem; corrected `FFPR`; coset `PORC_FF`; signed conductor coupling; every thinning step; integer `PBDH_P`, `PORS`, `PORC/T3`, higher-conductor contraction, block variance and Fortune's conjecture.
