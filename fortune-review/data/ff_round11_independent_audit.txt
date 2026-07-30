@@ -1,0 +1,57 @@
+== R. Route A closure ==
+PASS  R1 Theorem PO2: occupancies split (0,1) x (q+1)/2 each, all deg-2 primes (q=3)
+PASS  R2 sampled-line transfer: counts constant on lines; line-count multiset = occupancy multiset (q=3, all P, primorial)
+PASS  R1 Theorem PO2: occupancies split (1,2) x (q+1)/2 each, all deg-2 primes (q=5)
+PASS  R2 sampled-line transfer: counts constant on lines; line-count multiset = occupancy multiset (q=5, all P, primorial)
+PASS  R1 Theorem PO2: occupancies split (2,3) x (q+1)/2 each, all deg-2 primes (q=7)
+PASS  R2 sampled-line transfer: counts constant on lines; line-count multiset = occupancy multiset (q=7, all P, primorial)
+PASS  R1 Theorem PO2: occupancies split (4,5) x (q+1)/2 each, all deg-2 primes (q=11)
+PASS  R2 sampled-line transfer: counts constant on lines; line-count multiset = occupancy multiset (q=11, all P, primorial)
+PASS  R3 V_all = G + q^4/(q^2-1) exactly, all P; N_P(0)=0 (q=3)  G/q^3 in [0.514, 0.514]
+PASS  R3 V_all = G + q^4/(q^2-1) exactly, all P; N_P(0)=0 (q=5)  G/q^3 in [0.752, 0.752]
+PASS  R3 V_all = G + q^4/(q^2-1) exactly, all P; N_P(0)=0 (q=7)  G/q^3 in [0.834, 0.834]
+PASS  R4 M_samp panel (q=3,k=2,m=3) = 216  got 216, M_samp/q^3k = 0.2963
+PASS  R4 M_samp panel (q=3,k=3,m=5) = 21384  got 21384, M_samp/q^3k = 1.0864
+PASS  R4 M_samp panel (q=3,k=4,m=7) = 1907874  got 1907874, M_samp/q^3k = 3.5900
+PASS  R4 M_samp panel (q=5,k=2,m=3) = 10500  got 10500, M_samp/q^3k = 0.6720
+PASS  R4 M_samp panel (q=5,k=3,m=5) = 9697500  got 9697500, M_samp/q^3k = 4.9651
+PASS  R4 M_samp panel (q=7,k=2,m=3) = 148176  got 148176, M_samp/q^3k = 1.2595
+PASS  R4 M_samp panel (q=11,k=2,m=3) = 3993000  got 3993000, M_samp/q^3k = 2.2539
+PASS  R5 exact inequality (q-1)M_samp >= (q-3)/2 M_full (q=3)  M_full=648 (M_full/q^7=0.2963), (q-1)M_samp=432, (q-3)/2*M_full=0
+PASS  R5 exact inequality (q-1)M_samp >= (q-3)/2 M_full (q=5)  M_full=30000 (M_full/q^7=0.3840), (q-1)M_samp=42000, (q-3)/2*M_full=30000
+PASS  R5 exact inequality (q-1)M_samp >= (q-3)/2 M_full (q=7)  M_full=345744 (M_full/q^7=0.4198), (q-1)M_samp=889056, (q-3)/2*M_full=691488
+== P. characteristic-three resonant family ==
+PASS  P1 resonant prime-point count at k=3: 2, even eps split  got 2, split {2: 1, 1: 1}
+   k=3: points with all four primes distinct: 0/2  (k=3 points are transpose-degenerate: P'=S, S'=P)
+PASS  P1 PRC1 numerators mu P'-mu'P = -theta/eps, nu S'-nu'S = +theta/eps (k=3, both theta)
+PASS  P3 coherent Gram phase G_mu G_nu = B_m^2 (k=3)  B_m=1203
+PASS  P1 resonant prime-point count at k=4: 12, even eps split  got 12, split {1: 6, 2: 6}
+   k=4: points with all four primes distinct: 12/12  (k=3 points are transpose-degenerate: P'=S, S'=P)
+PASS  P1 PRC1 numerators mu P'-mu'P = -theta/eps, nu S'-nu'S = +theta/eps (k=4, both theta)
+PASS  P3 coherent Gram phase G_mu G_nu = B_m^2 (k=4)  B_m=15291
+PASS  P1 resonant prime-point count at k=5: 72, even eps split  got 72, split {1: 36, 2: 36}
+   k=5: points with all four primes distinct: 72/72  (k=3 points are transpose-degenerate: P'=S, S'=P)
+PASS  P1 PRC1 numerators mu P'-mu'P = -theta/eps, nu S'-nu'S = +theta/eps (k=5, both theta)
+PASS  P3 coherent Gram phase G_mu G_nu = B_m^2 (k=5)  B_m=176979
+PASS  P2 scan (q=5,k=3,m=5): pairs/one-sided(mu,nu)/simult/diag/transpose/other = (1560, 2380, 2380, 1560, 1560, 0, 0)  got (1560, 2380, 2380, 1560, 1560, 0, 0)
+PASS  P2 scan (q=3,k=3,m=5): pairs/one-sided(mu,nu)/simult/diag/transpose/other = (56, 64, 64, 58, 56, 2, 0)  got (56, 64, 64, 58, 56, 2, 0)
+PASS  P2 scan (q=3,k=4,m=7): pairs/one-sided(mu,nu)/simult/diag/transpose/other = (306, 336, 336, 318, 306, 0, 12)  got (306, 336, 336, 318, 306, 0, 12)
+PASS  P2 k=3 degeneration: both resonant points are transpose pairs (P'=S, S'=P)
+PASS  P2 k=4 completeness: the 12 non-diag/non-transpose incidences = the resonant family exactly  |family|=12, |scan|=12
+== D. Delta panel ==
+PASS  D1 involution invariance X_a=X_b, Delta_a=Delta_b, B_a=B_b (k=3, all 2 points)
+PASS  D2 exact aggregates (XX, XD, DX, DD, BB) at k=3  got (1062882, -214326, -214326, 43218, 1534752)
+PASS  D2 BB = XX - XD - DX + DD and BB >= 0 (k=3)  BB/3^(2m+3k) = 0.00132049
+PASS  D1 involution invariance X_a=X_b, Delta_a=Delta_b, B_a=B_b (k=4, all 12 points)
+PASS  D2 exact aggregates (XX, XD, DX, DD, BB) at k=4  got (71384652, -55931148, -55931148, 43823052, 227070000)
+PASS  D2 BB = XX - XD - DX + DD and BB >= 0 (k=4)  BB/3^(2m+3k) = 0.00008933
+PASS  D1 involution invariance X_a=X_b, Delta_a=Delta_b, B_a=B_b (k=5, all 72 points)
+PASS  D2 exact aggregates (XX, XD, DX, DD, BB) at k=5  got (308039038452, -92518064244, -92518064244, 35233974972, 528309141912)
+PASS  D2 BB = XX - XD - DX + DD and BB >= 0 (k=5)  BB/3^(2m+3k) = 0.00009504
+== I. inverse-free algebraization ==
+PASS  I1 IFA1 equivalence + uniqueness (q=3,k=2; 18 cross-distinct pairs-of-pairs, 0 incidences)
+PASS  I1 IFA1 equivalence + uniqueness (q=5,k=2; 6570 cross-distinct pairs-of-pairs, 40 incidences)
+PASS  I1 IFA1 equivalence + uniqueness (q=7,k=2; 160020 cross-distinct pairs-of-pairs, 588 incidences)
+PASS  I1 IFA1 equivalence + uniqueness (q=3,k=3; 2408 cross-distinct pairs-of-pairs, 8 incidences)
+PASS  I1 IFA1 equivalence + uniqueness (q=3,k=4; 83538 cross-distinct pairs-of-pairs, 30 incidences)
+PASS  I2 resonant family satisfies the inverse-free scheme with c=-theta/eps, d=+theta/eps (k=3,4,5, both theta)
