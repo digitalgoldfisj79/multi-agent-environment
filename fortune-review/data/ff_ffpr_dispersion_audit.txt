@@ -1,0 +1,16 @@
+PASS  D1 completion dichotomy (L=t(t+1), q=3, all 6^2 pairs of pairs)  coincident=6 of 36
+PASS  D2 endpoint classification (L=t(t+1), q=3)  diagonal=6 multiplicative-class=0
+   D3 (L=t(t+1), q=3): D2nd=      3888.0  q^m*diag=      3888.0  class/diag= -0.000
+      |T|=     140.6  dispersion bound=     540.0  Cauchy ceiling~    2187.0  FFPR target=     729.0  bound/target=  0.74
+PASS  D1 completion dichotomy (L=t(t+1), q=5, all 90^2 pairs of pairs)  coincident=142 of 8100
+PASS  D2 endpoint classification (L=t(t+1), q=5)  diagonal=90 multiplicative-class=52
+   D3 (L=t(t+1), q=5): D2nd=   1475215.3  q^m*diag=   1471352.5  class/diag= +0.003
+      |T|=     886.0  dispersion bound=   23204.6  Cauchy ceiling~   78125.0  FFPR target=   15625.0  bound/target=  1.49
+PASS  D1 completion dichotomy (L=t^q-t , q=3, all 6^2 pairs of pairs)  coincident=12 of 36
+PASS  D2 endpoint classification (L=t^q-t , q=3)  diagonal=6 multiplicative-class=6
+   D3 (L=t^q-t , q=3): D2nd=     11664.0  q^m*diag=      5832.0  class/diag= +1.000
+      |T|=     216.0  dispersion bound=     935.3  Cauchy ceiling~    2187.0  FFPR target=     729.0  bound/target=  1.28
+PASS  D1 completion dichotomy (L=t^q-t , q=5, all 90^2 pairs of pairs)  coincident=150 of 8100
+PASS  D2 endpoint classification (L=t^q-t , q=5)  diagonal=90 multiplicative-class=60
+   D3 (L=t^q-t , q=5): D2nd=   2218750.0  q^m*diag=   1312500.0  class/diag= +0.690
+      |T|=    6250.0  dispersion bound=   28457.8  Cauchy ceiling~   78125.0  FFPR target=   15625.0  bound/target=  1.82
