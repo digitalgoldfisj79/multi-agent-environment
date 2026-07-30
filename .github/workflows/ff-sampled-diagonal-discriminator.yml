@@ -1,0 +1,62 @@
+name: Validate FF sampled-diagonal discriminator
+
+on:
+  pull_request:
+  push:
+    branches:
+      - gpt56/fortune-mesoscopic-cotlar-20260728
+
+jobs:
+  sampled-diagonal-discriminator:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Compile verifier
+        run: python -m py_compile fortune-review/scripts/ff_sampled_diagonal_discriminator.py
+      - name: Recompute exact panels
+        run: |
+          python fortune-review/scripts/ff_sampled_diagonal_discriminator.py > /tmp/current.json
+      - name: Validate theorem boundary and frozen anchors
+        run: |
+          python - <<'PY'
+          import json
+          current = json.load(open('/tmp/current.json'))
+          frozen = json.load(open('fortune-review/data/ff_sampled_diagonal_discriminator.json'))
+
+          assert current['theorem_boundary']['consequence'] == frozen['theorem_boundary']['consequence']
+          assert current['theorem_boundary']['not_proved'] == frozen['theorem_boundary']['not_proved']
+
+          occupancy = {row['q']: row for row in current['projective_occupancy']}
+          for q, low, high in [(3,0,1),(5,1,2),(7,2,3),(11,4,5)]:
+              row = occupancy[q]
+              assert row['minimum_occupancy'] == low
+              assert row['maximum_occupancy'] == high
+              assert row['lines_at_each_occupancy'] == (q + 1) // 2
+              assert row['verified_for_every_P']
+
+          panels = {(row['q'], row['k']): row for row in current['true_primorial_panels']}
+          anchors = {
+              (3,2): 216,
+              (5,2): 10500,
+              (7,2): 148176,
+              (11,2): 3993000,
+              (3,3): 21384,
+              (5,3): 9697500,
+              (3,4): 1907874,
+          }
+          for key, expected in anchors.items():
+              row = panels[key]
+              values = row.get('theta_rows')
+              if values is not None:
+                  exact = {tuple(v['M_samp_cyclotomic_canonical']) for v in values}
+              else:
+                  exact = {tuple(v['canonical']) for v in row['M_samp_canonical_values']}
+              assert exact == {(expected,) + (0,) * (row['q'] - 1)}
+
+          for row in current['true_primorial_panels']:
+              if row['k'] == 2:
+                  assert row['lower_bound_verified']
+          PY
