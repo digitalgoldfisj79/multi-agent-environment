@@ -1,0 +1,96 @@
+== Exact class correlation C(theta), endpoint k=2, m=3, R=3 ==
+PASS  C2 trace-zero: Tr(L(alpha_S)) = 0 for all band S (L=t^q-t , q=3)  traces=[0, 0, 0]
+PASS  C3 primorial congruence L == -P' (mod P) for all band P (q=3)
+   L=t^q-t  q=3 theta=1: DiagMass=(216, 0, 0) (=216.0, rational=True)
+      C(theta)=(216, 0, 0) (=216.0+0.0i)   #classes=6   C/Diag=+1.0000   C real=True rational=True
+      pairs with a partner: 6/6   max partners per pair: 1
+        P=(1, 0, 1) S=(2, 1, 1) -> P'=(1, 0, 1) S'=(2, 2, 1) E=2  term=(36, 0, 0)  P'=P term=|A|^2 real
+        P=(1, 0, 1) S=(2, 2, 1) -> P'=(1, 0, 1) S'=(2, 1, 1) E=1  term=(36, 0, 0)  P'=P term=|A|^2 real
+        P=(2, 1, 1) S=(1, 0, 1) -> P'=(2, 1, 1) S'=(2, 2, 1) E=1  term=(36, 0, 0)  P'=P term=|A|^2 real
+        P=(2, 1, 1) S=(2, 2, 1) -> P'=(2, 1, 1) S'=(1, 0, 1) E=2  term=(36, 0, 0)  P'=P term=|A|^2 real
+        P=(2, 2, 1) S=(1, 0, 1) -> P'=(2, 2, 1) S'=(2, 1, 1) E=2  term=(36, 0, 0)  P'=P term=|A|^2 real
+        P=(2, 2, 1) S=(2, 1, 1) -> P'=(2, 2, 1) S'=(1, 0, 1) E=1  term=(36, 0, 0)  P'=P term=|A|^2 real
+   L=t^q-t  q=3 theta=2: DiagMass=(216, 0, 0) (=216.0, rational=True)
+      C(theta)=(216, 0, 0) (=216.0+0.0i)   #classes=6   C/Diag=+1.0000   C real=True rational=True
+      pairs with a partner: 6/6   max partners per pair: 1
+        P=(1, 0, 1) S=(2, 1, 1) -> P'=(1, 0, 1) S'=(2, 2, 1) E=1  term=(36, 0, 0)  P'=P term=|A|^2 real
+        P=(1, 0, 1) S=(2, 2, 1) -> P'=(1, 0, 1) S'=(2, 1, 1) E=2  term=(36, 0, 0)  P'=P term=|A|^2 real
+        P=(2, 1, 1) S=(1, 0, 1) -> P'=(2, 1, 1) S'=(2, 2, 1) E=2  term=(36, 0, 0)  P'=P term=|A|^2 real
+        P=(2, 1, 1) S=(2, 2, 1) -> P'=(2, 1, 1) S'=(1, 0, 1) E=1  term=(36, 0, 0)  P'=P term=|A|^2 real
+        P=(2, 2, 1) S=(1, 0, 1) -> P'=(2, 2, 1) S'=(2, 1, 1) E=1  term=(36, 0, 0)  P'=P term=|A|^2 real
+        P=(2, 2, 1) S=(2, 1, 1) -> P'=(2, 2, 1) S'=(1, 0, 1) E=2  term=(36, 0, 0)  P'=P term=|A|^2 real
+PASS  C6 Galois covariance sigma_s(C(1)) = C(s) (L=t^q-t , q=3)
+   C4 per-class law zeta^E*A*conj(A') = |A|^2 (L=t^q-t , q=3): holds 12/12  [same-P ok=12 bad=0; cross-P ok=0 bad=0]
+PASS  C4 per-class exact law, all classes, all theta (L=t^q-t , q=3)  (equivalently A'(mu_1') = zeta^E * A(mu_1))
+PASS  C(theta) independent of theta (L=t^q-t , q=3)
+PASS  C(theta) and DiagMass rational integers (L=t^q-t , q=3)
+PASS  C5 one-sided coincidence <=> Tr(S'(a_S) P(a_S^q)) = 0 (L=t^q-t , q=3)  one-sided=6 full-class=6
+PASS  C2 trace-zero: Tr(L(alpha_S)) = 0 for all band S (L=t^q-t , q=5)  traces=[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+PASS  C3 primorial congruence L == -P' (mod P) for all band P (q=5)
+   L=t^q-t  q=5 theta=1: DiagMass=(10500, 0, 0, 0, 0) (=10500.0, rational=True)
+      C(theta)=(7250, 0, 0, 0, 0) (=7250.0+0.0i)   #classes=60   C/Diag=+0.6905   C real=True rational=True
+      pairs with a partner: 60/90   max partners per pair: 1
+   L=t^q-t  q=5 theta=2: DiagMass=(10500, 0, 0, 0, 0) (=10500.0, rational=True)
+      C(theta)=(7250, 0, 0, 0, 0) (=7250.0+0.0i)   #classes=60   C/Diag=+0.6905   C real=True rational=True
+      pairs with a partner: 60/90   max partners per pair: 1
+   L=t^q-t  q=5 theta=3: DiagMass=(10500, 0, 0, 0, 0) (=10500.0, rational=True)
+      C(theta)=(7250, 0, 0, 0, 0) (=7250.0+0.0i)   #classes=60   C/Diag=+0.6905   C real=True rational=True
+      pairs with a partner: 60/90   max partners per pair: 1
+   L=t^q-t  q=5 theta=4: DiagMass=(10500, 0, 0, 0, 0) (=10500.0, rational=True)
+      C(theta)=(7250, 0, 0, 0, 0) (=7250.0+0.0i)   #classes=60   C/Diag=+0.6905   C real=True rational=True
+      pairs with a partner: 60/90   max partners per pair: 1
+PASS  C6 Galois covariance sigma_s(C(1)) = C(s) (L=t^q-t , q=5)
+   C4 per-class law zeta^E*A*conj(A') = |A|^2 (L=t^q-t , q=5): holds 240/240  [same-P ok=80 bad=0; cross-P ok=160 bad=0]
+PASS  C4 per-class exact law, all classes, all theta (L=t^q-t , q=5)  (equivalently A'(mu_1') = zeta^E * A(mu_1))
+PASS  C(theta) independent of theta (L=t^q-t , q=5)
+PASS  C(theta) and DiagMass rational integers (L=t^q-t , q=5)
+PASS  C5 one-sided coincidence <=> Tr(S'(a_S) P(a_S^q)) = 0 (L=t^q-t , q=5)  one-sided=120 full-class=60
+PASS  C2 trace-zero: Tr(L(alpha_S)) = 0 for all band S (L=t^q-t , q=7)  traces=[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+PASS  C3 primorial congruence L == -P' (mod P) for all band P (q=7)
+   L=t^q-t  q=7 theta=1: DiagMass=(148176, 0, 0, 0, 0, 0, 0) (=148176.0, rational=True)
+      C(theta)=(67571, 0, 0, 0, 0, 0, 0) (=67571.0-0.0i)   #classes=672   C/Diag=+0.4560   C real=True rational=True
+      pairs with a partner: 399/420   max partners per pair: 3
+   L=t^q-t  q=7 theta=2: DiagMass=(148176, 0, 0, 0, 0, 0, 0) (=148176.0, rational=True)
+      C(theta)=(67571, 0, 0, 0, 0, 0, 0) (=67571.0-0.0i)   #classes=672   C/Diag=+0.4560   C real=True rational=True
+      pairs with a partner: 399/420   max partners per pair: 3
+   L=t^q-t  q=7 theta=3: DiagMass=(148176, 0, 0, 0, 0, 0, 0) (=148176.0, rational=True)
+      C(theta)=(67571, 0, 0, 0, 0, 0, 0) (=67571.0-0.0i)   #classes=672   C/Diag=+0.4560   C real=True rational=True
+      pairs with a partner: 399/420   max partners per pair: 3
+   L=t^q-t  q=7 theta=4: DiagMass=(148176, 0, 0, 0, 0, 0, 0) (=148176.0, rational=True)
+      C(theta)=(67571, 0, 0, 0, 0, 0, 0) (=67571.0-0.0i)   #classes=672   C/Diag=+0.4560   C real=True rational=True
+      pairs with a partner: 399/420   max partners per pair: 3
+   L=t^q-t  q=7 theta=5: DiagMass=(148176, 0, 0, 0, 0, 0, 0) (=148176.0, rational=True)
+      C(theta)=(67571, 0, 0, 0, 0, 0, 0) (=67571.0-0.0i)   #classes=672   C/Diag=+0.4560   C real=True rational=True
+      pairs with a partner: 399/420   max partners per pair: 3
+   L=t^q-t  q=7 theta=6: DiagMass=(148176, 0, 0, 0, 0, 0, 0) (=148176.0, rational=True)
+      C(theta)=(67571, 0, 0, 0, 0, 0, 0) (=67571.0-0.0i)   #classes=672   C/Diag=+0.4560   C real=True rational=True
+      pairs with a partner: 399/420   max partners per pair: 3
+PASS  C6 Galois covariance sigma_s(C(1)) = C(s) (L=t^q-t , q=7)
+   C4 per-class law zeta^E*A*conj(A') = |A|^2 (L=t^q-t , q=7): holds 1764/4032  [same-P ok=0 bad=504; cross-P ok=1764 bad=1764]
+PASS  C(theta) independent of theta (L=t^q-t , q=7)
+PASS  C(theta) and DiagMass rational integers (L=t^q-t , q=7)
+PASS  C5 one-sided coincidence <=> Tr(S'(a_S) P(a_S^q)) = 0 (L=t^q-t , q=7)  one-sided=1092 full-class=672
+
+== Control puncture ==
+   control traces (L=t(t+1), q=3): [1, 2, 1]
+   L=t(t+1) q=3 theta=1: DiagMass=(144, 0, 0) (=144.0, rational=True)
+      C(theta)=(0, 0, 0) (=0.0+0.0i)   #classes=0   C/Diag=+0.0000   C real=True rational=True
+      pairs with a partner: 0/6   max partners per pair: 0
+   L=t(t+1) q=3 theta=2: DiagMass=(144, 0, 0) (=144.0, rational=True)
+      C(theta)=(0, 0, 0) (=0.0+0.0i)   #classes=0   C/Diag=+0.0000   C real=True rational=True
+      pairs with a partner: 0/6   max partners per pair: 0
+   control traces (L=t(t+1), q=5): [3, 0, 1, 1, 3, 4, 1, 0, 4, 3]
+   L=t(t+1) q=5 theta=1: DiagMass=(10800, 0, -600, -600, 0) (=11770.8, rational=False)
+      C(theta)=(-50, 0, -50, -50, 0) (=30.9+0.0i)   #classes=52   C/Diag=+0.0026   C real=True rational=False
+      pairs with a partner: 46/90   max partners per pair: 2
+   L=t(t+1) q=5 theta=2: DiagMass=(11400, 0, 600, 600, 0) (=10429.2, rational=False)
+      C(theta)=(0, 0, 50, 50, 0) (=-80.9+0.0i)   #classes=52   C/Diag=-0.0078   C real=True rational=False
+      pairs with a partner: 46/90   max partners per pair: 2
+   L=t(t+1) q=5 theta=3: DiagMass=(11400, 0, 600, 600, 0) (=10429.2, rational=False)
+      C(theta)=(0, 0, 50, 50, 0) (=-80.9+0.0i)   #classes=52   C/Diag=-0.0078   C real=True rational=False
+      pairs with a partner: 46/90   max partners per pair: 2
+   L=t(t+1) q=5 theta=4: DiagMass=(10800, 0, -600, -600, 0) (=11770.8, rational=False)
+      C(theta)=(-50, 0, -50, -50, 0) (=30.9+0.0i)   #classes=52   C/Diag=+0.0026   C real=True rational=False
+      pairs with a partner: 46/90   max partners per pair: 2
+PASS  C6 Galois covariance sigma_s(C(1)) = C(s) (L=t(t+1), q=5)
+PASS  C1 class constant c = zeta^E (direct f'-sums, q=3, all classes)
