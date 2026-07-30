@@ -1,0 +1,22 @@
+== O1 kernel identity (exact, direct double loops) ==
+PASS  O1 kernel identity D_pD_s = T1+T2+T3  (X=23, K=4, 36 pairs x 4 centres)  max dev=3.55e-14
+PASS  O1 kernel identity D_pD_s = T1+T2+T3  (X=37, K=4, 36 pairs x 4 centres)  max dev=8.53e-14
+PASS  O1 kernel identity D_pD_s = T1+T2+T3  (X=61, K=5, 40 pairs x 5 centres)  max dev=1.71e-13
+
+== Complete-CRT model term vanishes identically ==
+PASS  model: sum_a D_83(a) = 0  (X=61)  sum=1.42e-14
+PASS  model: sum_a D_89(a) = 0  (X=61)  sum=-5.33e-14
+PASS  model: CRT covariance = 0  (X=61, p=83, s=89)  cov=-7.57e-28
+PASS  model: sum_a D_127(a) = 0  (X=101)  sum=-5.76e-13
+PASS  model: sum_a D_131(a) = 0  (X=101)  sum=-7.11e-13
+PASS  model: CRT covariance = 0  (X=101, p=127, s=131)  cov=4.09e-25
+
+== Size ledger: PORS diagonal vs defect families (EMPIRICAL) ==
+   (prediction: onept/diag ~ c/log X, i.e. onept*logX/diag ~ const;
+    paircorr carries the remaining cross-modulus mass)
+   X=  61 H=  2976 |band|= 15 K=5:  diag=    4411.8  onept=   1592.5  corr=  -1772.4  paircorr=     531.3  cross/diag= 0.080  onept/diag= 0.3610  onept*logX/diag= 1.484
+   X= 101 H=  8160 |band|= 18 K=5:  diag=   12498.8  onept=   2908.4  corr=  -3829.4  paircorr=    4774.8  cross/diag= 0.308  onept/diag= 0.2327  onept*logX/diag= 1.074
+   X= 149 H= 17760 |band|= 28 K=6:  diag=   40230.9  onept=   8811.3  corr= -11301.5  paircorr=   -5392.4  cross/diag=-0.196  onept/diag= 0.2190  onept*logX/diag= 1.096
+   X= 199 H= 31680 |band|= 39 K=6:  diag=   68575.1  onept=  22761.6  corr= -22682.5  paircorr=  -40017.3  cross/diag=-0.582  onept/diag= 0.3319  onept*logX/diag= 1.757
+   X= 251 H= 50400 |band|= 42 K=6:  diag=  124824.1  onept=  31783.9  corr= -32541.4  paircorr=  -44969.3  cross/diag=-0.366  onept/diag= 0.2546  onept*logX/diag= 1.407
+   X= 307 H= 75399 |band|= 54 K=6:  diag=  187269.7  onept=  50218.1  corr= -54324.6  paircorr=  150296.6  cross/diag= 0.781  onept/diag= 0.2682  onept*logX/diag= 1.536
