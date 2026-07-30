@@ -1,0 +1,5 @@
+== D. k=6 Delta panel ==
+   k=6 Delta panel: 192 resonant points, m=11, 16107 sources
+PASS  D involution invariance X_a=X_b, Delta_a=Delta_b, B_a=B_b (k=6, all 192 points)
+PASS  D exact aggregates rational; BB = XX-XD-DX+DD; BB >= 0 (k=6)  XX=150701632653456 XD=-1533279459564 DX=-1533279459564 DD=11390886203724 BB=165159077776308
+   k=6: BB/3^(2m+3k) = 0.0000135848   (k=3,4,5 were 0.00132049, 0.00008933, 0.00009504; raw dimension bound 2m^2 3^(-k-3) = 0.012295)
