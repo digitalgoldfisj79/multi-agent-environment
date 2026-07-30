@@ -1,0 +1,11 @@
+== C3. independent cubic census ==
+PASS  C3 cubic census q=5: total incidences = 0 (branch), independent count  got 0
+PASS  C3 cubic census q=7: total incidences = 0 (branch), independent count  got 0
+PASS  C3 cubic census q=11: total incidences = 220 (branch), independent count  got 220
+PASS  C3 (11,3): translated normalized set has size 220
+PASS  C3 (11,3): every incidence has h != 0, c + d != 0, all BDD1 identities exact  deg h values=[5], d/c values=[3, 4]
+PASS  C3 (11,3): AGL orbit structure = 2 free orbits of q(q-1) = 110  orbits=[110, 110]
+PASS  C3 cubic census q=13: total incidences = 0 (branch), independent count  got 0
+PASS  C3 cubic census q=17: total incidences = 544 (branch), independent count  got 544
+PASS  C3 cubic census q=19: total incidences = 684 (branch), independent count  got 684
+PASS  C3 cubic census q=23: total incidences = 0 (branch), independent count  got 0
