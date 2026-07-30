@@ -1,0 +1,32 @@
+name: Validate FF primorial-resonant Delta panel
+
+on:
+  pull_request:
+  push:
+    branches:
+      - gpt56/fortune-mesoscopic-cotlar-20260728
+
+jobs:
+  resonant-delta-panel:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Compile verifiers
+        run: |
+          python -m py_compile fortune-review/scripts/ff_primorial_resonant_component.py
+          python -m py_compile fortune-review/scripts/ff_primorial_resonant_delta_panel.py
+      - name: Recompute exact Delta panel
+        run: |
+          python fortune-review/scripts/ff_primorial_resonant_delta_panel.py > /tmp/current.json
+      - name: Compare frozen output
+        run: |
+          python - <<'PY'
+          import json
+          current=json.load(open('/tmp/current.json'))
+          frozen=json.load(open('fortune-review/data/ff_primorial_resonant_delta_panel.json'))
+          assert current==frozen
+          assert all(row['involution_pair_values_equal'] for row in current['panels'])
+          PY
