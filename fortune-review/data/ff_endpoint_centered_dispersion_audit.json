@@ -1,0 +1,81 @@
+{
+  "corrected_T": [
+    {
+      "abs_actual": 269.9999999999996,
+      "abs_diagonal_correction": 54.00000000000003,
+      "abs_uncorrected": 215.99999999999952,
+      "actual_exact_cyclotomic_vector": [-270, -270, 0],
+      "actual_over_FFPR_target": 0.37037037037036985,
+      "correction_over_FFPR_target": 0.07407407407407411,
+      "diagonal_correction_exact_cyclotomic_vector": [54, 54, 0],
+      "pairs": 6,
+      "q": 3,
+      "uncorrected_exact_cyclotomic_vector": [-216, -216, 0],
+      "uncorrected_over_FFPR_target": 0.2962962962962956
+    },
+    {
+      "abs_actual": 7600.000000000002,
+      "abs_diagonal_correction": 1350.0000000000005,
+      "abs_uncorrected": 6249.999999999925,
+      "actual_exact_cyclotomic_vector": [-7600, -7600, -7600, -7600, 0],
+      "actual_over_FFPR_target": 0.4864000000000001,
+      "correction_over_FFPR_target": 0.08640000000000003,
+      "diagonal_correction_exact_cyclotomic_vector": [1350, 1350, 1350, 1350, 0],
+      "pairs": 90,
+      "q": 5,
+      "uncorrected_exact_cyclotomic_vector": [-6250, -6250, -6250, -6250, 0],
+      "uncorrected_over_FFPR_target": 0.39999999999999525
+    },
+    {
+      "abs_actual": 39787.9999999977,
+      "abs_diagonal_correction": 8918.00000000003,
+      "abs_uncorrected": 30869.999999997082,
+      "actual_exact_cyclotomic_vector": [-39788, -39788, -39788, -39788, -39788, -39788, 0],
+      "actual_over_FFPR_target": 0.3381924198250533,
+      "correction_over_FFPR_target": 0.07580174927113727,
+      "diagonal_correction_exact_cyclotomic_vector": [8918, 8918, 8918, 8918, 8918, 8918, 0],
+      "pairs": 420,
+      "q": 7,
+      "uncorrected_exact_cyclotomic_vector": [-30870, -30870, -30870, -30870, -30870, -30870, 0],
+      "uncorrected_over_FFPR_target": 0.2623906705539111
+    },
+    {
+      "abs_actual": 1019303.9999996317,
+      "abs_diagonal_correction": 98252.00000000047,
+      "abs_uncorrected": 921052.0000000172,
+      "actual_exact_cyclotomic_vector": [-1019304, -1019304, -1019304, -1019304, -1019304, -1019304, -1019304, -1019304, -1019304, -1019304, 0],
+      "actual_over_FFPR_target": 0.5753705347993276,
+      "correction_over_FFPR_target": 0.055460692575644004,
+      "diagonal_correction_exact_cyclotomic_vector": [98252, 98252, 98252, 98252, 98252, 98252, 98252, 98252, 98252, 98252, 0],
+      "pairs": 2970,
+      "q": 11,
+      "uncorrected_exact_cyclotomic_vector": [-921052, -921052, -921052, -921052, -921052, -921052, -921052, -921052, -921052, -921052, 0],
+      "uncorrected_over_FFPR_target": 0.5199098422239016
+    }
+  ],
+  "diagonal_floor_ledger": {
+    "FFPR_target": "q^(m+3k/2)",
+    "after_source_Cauchy": "|T| <= q^(3m/2+k) up to polynomial factors",
+    "conclusion": "Class control C=O(Diag) preserves this bound but cannot remove its diagonal floor. Any closing second dispersion must be centered before the first positive Cauchy step or use a genuinely signed bilinear assembly theorem.",
+    "endpoint_m_2k_minus_1_deficit": "q^((k-1)/2)",
+    "first_dispersion_diagonal": "q^m * q^(m+2k) = q^(2m+2k)",
+    "sampled_A_square_mass": "q^(m+2k) up to polynomial factors"
+  },
+  "double_coincidence": [
+    {"double_coincidences": 6, "double_diagonal": 6, "double_other": 0, "double_transpose": 0, "k": 2, "m": 3, "pairs": 6, "q": 3, "source_1_coincidences": 12, "source_2_coincidences": 12},
+    {"double_coincidences": 90, "double_diagonal": 90, "double_other": 0, "double_transpose": 0, "k": 2, "m": 3, "pairs": 90, "q": 5, "source_1_coincidences": 150, "source_2_coincidences": 150},
+    {"double_coincidences": 420, "double_diagonal": 420, "double_other": 0, "double_transpose": 0, "k": 2, "m": 3, "pairs": 420, "q": 7, "source_1_coincidences": 1092, "source_2_coincidences": 1092},
+    {"double_coincidences": 58, "double_diagonal": 56, "double_other": 0, "double_transpose": 2, "k": 3, "m": 5, "pairs": 56, "q": 3, "source_1_coincidences": 64, "source_2_coincidences": 64}
+  ],
+  "plancherel": [
+    {"all_residue_variance": 24, "k": 2, "m": 3, "mass_over_q_m_plus_k": 0.8888888888888888, "max_A_over_q_m_over_2": 1.154700538379252, "q": 3, "qk_times_variance": 216, "sum_nonzero_frequency_mass": 216},
+    {"all_residue_variance": 120, "k": 2, "m": 3, "mass_over_q_m_plus_k": 0.96, "max_A_over_q_m_over_2": 1.4472135954999583, "q": 5, "qk_times_variance": 3000, "sum_nonzero_frequency_mass": 3000},
+    {"all_residue_variance": 336, "k": 2, "m": 3, "mass_over_q_m_plus_k": 0.9795918367346939, "max_A_over_q_m_over_2": 1.6985569235631117, "q": 7, "qk_times_variance": 16464, "sum_nonzero_frequency_mass": 16464}
+  ],
+  "status_labels": {
+    "corrected_T": "EMPIRICAL-EXACT FINITE PANEL",
+    "diagonal_floor": "PROVED EXACTLY (exponent ledger)",
+    "double_coincidence": "EMPIRICAL-EXACT FINITE PANEL",
+    "plancherel": "MACHINE-VERIFIED IDENTITY"
+  }
+}
