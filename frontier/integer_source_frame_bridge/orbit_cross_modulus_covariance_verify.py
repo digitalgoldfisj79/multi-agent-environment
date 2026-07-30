@@ -39,6 +39,10 @@ RANDOM_REPS = 128
 SEED = 20260730
 
 
+def stable_float(value: float) -> float:
+    return round(float(value), 12)
+
+
 def primes_upto(n: int) -> list[int]:
     sieve = np.ones(n + 1, dtype=bool)
     sieve[:2] = False
@@ -133,10 +137,7 @@ def panel(X: int) -> dict:
             coherent = 0.0
             for _centre in z_values:
                 vector = np.asarray(
-                    [
-                        discrepancy[p][rng.integers(1, p)]
-                        for p in band
-                    ],
+                    [discrepancy[p][rng.integers(1, p)] for p in band],
                     dtype=float,
                 )
                 diagonal += float(np.dot(vector, vector))
@@ -150,12 +151,12 @@ def panel(X: int) -> dict:
                 "start_index": start,
                 "Z": Z,
                 "band_count": len(band),
-                "orbit_sampling_ratio": orbit_sampling_ratio,
-                "orbit_coherence_ratio": orbit_coherence_ratio,
-                "orbit_total_ratio": orbit_total_ratio,
-                "random_sampling_median": float(np.median(random_sampling)),
-                "random_coherence_median": float(np.median(random_coherence)),
-                "random_total_median": float(np.median(random_total)),
+                "orbit_sampling_ratio": stable_float(orbit_sampling_ratio),
+                "orbit_coherence_ratio": stable_float(orbit_coherence_ratio),
+                "orbit_total_ratio": stable_float(orbit_total_ratio),
+                "random_sampling_median": stable_float(np.median(random_sampling)),
+                "random_coherence_median": stable_float(np.median(random_coherence)),
+                "random_total_median": stable_float(np.median(random_total)),
             }
         )
 
