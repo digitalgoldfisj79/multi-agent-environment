@@ -1,0 +1,38 @@
+{
+  "conclusion": "The q=3,k=4 panel has 12 genuine non-diagonal, non-transpose incidences in two AGL(1,3)-orbits of size 6. General CBEA_FF must classify and bound exceptional components rather than assume diagonal rigidity.",
+  "falsified_claim": "simultaneous endpoint incidence is universally diagonal or diagonal-plus-transpose",
+  "panels": [
+    {
+      "diagonal": 1560,
+      "exception_affine_orbit_representatives": [],
+      "exception_affine_orbit_sizes": [],
+      "k": 3,
+      "m": 5,
+      "ordered_prime_pairs": 1560,
+      "other": 0,
+      "q": 5,
+      "simultaneous_incidences": 1560,
+      "source_1_incidences": 2380,
+      "source_2_incidences": 2380,
+      "transpose": 0
+    },
+    {
+      "diagonal": 306,
+      "exception_affine_orbit_representatives": [
+        [[1,1,0,2,1],[2,0,0,2,1],[2,1,1,2,1],[1,2,1,2,1]],
+        [[1,1,1,0,1],[1,2,1,0,1],[2,2,0,0,1],[2,1,0,0,1]]
+      ],
+      "exception_affine_orbit_sizes": [6,6],
+      "k": 4,
+      "m": 7,
+      "ordered_prime_pairs": 306,
+      "other": 12,
+      "q": 3,
+      "simultaneous_incidences": 318,
+      "source_1_incidences": 336,
+      "source_2_incidences": 336,
+      "transpose": 0
+    }
+  ],
+  "status": "EMPIRICAL-EXACT FINITE PANEL"
+}
