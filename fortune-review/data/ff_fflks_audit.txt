@@ -1,0 +1,23 @@
+== 0/1. Separability identity (exact; q=3, both punctures) ==
+PASS  1 separability identity T_sep == T_direct (q=3, L=t(t+1), all theta, all pairs)
+   L=t(t+1) q= 3 k=2 R=3 m=3: max|T|=        60.9   |T|/q^(m+3k/2)=  0.084   FFPS-permitted/q^(m+3k/2)=     27.0   |T|/trivial= 0.01392
+PASS  1 separability identity T_sep == T_direct (q=3, L=t^q-t , all theta, all pairs)
+   L=t^q-t  q= 3 k=2 R=3 m=3: max|T|=       270.0   |T|/q^(m+3k/2)=  0.370   FFPS-permitted/q^(m+3k/2)=     27.0   |T|/trivial= 0.06173
+
+== 2/3. Exponent ledger and empirical FFLKS across q ==
+   (FFLKS scale = q^(m+3k/2); fixed-source FFPS permits q^m times more —
+    the gap Theorem D wrongly claimed; RETRACTED)
+   L=t(t+1) q= 3 k=2 R=3 m=3: max|T|=        60.9   |T|/q^(m+3k/2)=  0.084   FFPS-permitted/q^(m+3k/2)=     27.0   |T|/trivial= 0.01392
+   L=t(t+1) q= 5 k=2 R=3 m=3: max|T|=      1736.4   |T|/q^(m+3k/2)=  0.111   FFPS-permitted/q^(m+3k/2)=    125.0   |T|/trivial= 0.00123
+   L=t(t+1) q= 7 k=2 R=3 m=3: max|T|=     18510.7   |T|/q^(m+3k/2)=  0.157   FFPS-permitted/q^(m+3k/2)=    343.0   |T|/trivial= 0.00037
+   L=t^q-t  q= 3 k=2 R=3 m=3: max|T|=       270.0   |T|/q^(m+3k/2)=  0.370   FFPS-permitted/q^(m+3k/2)=     27.0   |T|/trivial= 0.06173
+   L=t^q-t  q= 5 k=2 R=3 m=3: max|T|=      7600.0   |T|/q^(m+3k/2)=  0.486   FFPS-permitted/q^(m+3k/2)=    125.0   |T|/trivial= 0.00540
+   L=t^q-t  q= 7 k=2 R=3 m=3: max|T|=     39788.0   |T|/q^(m+3k/2)=  0.338   FFPS-permitted/q^(m+3k/2)=    343.0   |T|/trivial= 0.00081
+
+== 4. Empirical FFV: |A(lambda)|/q^(m/2) over (theta,P,S) ==
+   L=t(t+1) q=3: n=   24  median= 1.000  max=  1.155  frac>3:  0.000  near-trivial(>0.5 q^(m/2)... rel): 0.0000
+   L=t(t+1) q=5: n=  720  median= 1.000  max=  1.447  frac>3:  0.000  near-trivial(>0.5 q^(m/2)... rel): 0.0000
+   L=t(t+1) q=7: n= 5040  median= 0.891  max=  1.699  frac>3:  0.000  near-trivial(>0.5 q^(m/2)... rel): 0.0000
+   L=t^q-t  q=3: n=   24  median= 1.155  max=  1.155  frac>3:  0.000  near-trivial(>0.5 q^(m/2)... rel): 0.0000
+   L=t^q-t  q=5: n=  720  median= 1.000  max=  1.447  frac>3:  0.000  near-trivial(>0.5 q^(m/2)... rel): 0.0000
+   L=t^q-t  q=7: n= 5040  median= 0.891  max=  1.699  frac>3:  0.000  near-trivial(>0.5 q^(m/2)... rel): 0.0000
