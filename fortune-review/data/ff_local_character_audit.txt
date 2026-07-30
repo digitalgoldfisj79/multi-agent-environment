@@ -1,0 +1,36 @@
+PASS  L1 local-character identity (L=t(t+1), q=3; 72 samples)
+PASS  L1' mu_1 never zero (L=t(t+1), q=3)  zeros=0
+PASS  L2 Plancherel identity (L=t(t+1), q=3, P=band[0])  lhs=216.0000 rhs=216.0000
+   locus probe |Ahat|/q^(m/2) by deg(mu) (L=t(t+1), q=3): deg0: mean=1.000 max=1.000  deg1: mean=0.962 max=1.155
+PASS  L3 puncture change = unit translation of frequency set (L=t(t+1), q=3)
+   assembly (L=t(t+1), q=3): sum_PS|Ahat(mu1)|^2 avg=       144.0  (1/k x #P x fullParseval =        324.0)   maxT=      60.9  Cauchy bound=       144.0  realized saving=     2.4 (q^(k/2)=3.0)
+PASS  L1 local-character identity (L=t(t+1), q=5; 2160 samples)
+PASS  L1' mu_1 never zero (L=t(t+1), q=5)  zeros=0
+PASS  L2 Plancherel identity (L=t(t+1), q=5, P=band[0])  lhs=3000.0000 rhs=3000.0000
+   locus probe |Ahat|/q^(m/2) by deg(mu) (L=t(t+1), q=5): deg0: mean=1.000 max=1.000  deg1: mean=0.868 max=1.447
+PASS  L3 puncture change = unit translation of frequency set (L=t(t+1), q=5)
+   assembly (L=t(t+1), q=5): sum_PS|Ahat(mu1)|^2 avg=     11100.0  (1/k x #P x fullParseval =      15000.0)   maxT=    1736.4  Cauchy bound=     11100.0  realized saving=     6.4 (q^(k/2)=5.0)
+PASS  L1 local-character identity (L=t(t+1), q=7; 15120 samples)
+PASS  L1' mu_1 never zero (L=t(t+1), q=7)  zeros=0
+PASS  L2 Plancherel identity (L=t(t+1), q=7, P=band[0])  lhs=16464.0000 rhs=16464.0000
+   locus probe |Ahat|/q^(m/2) by deg(mu) (L=t(t+1), q=7): deg0: mean=1.000 max=1.000  deg1: mean=0.902 max=1.699
+PASS  L3 puncture change = unit translation of frequency set (L=t(t+1), q=7)
+   assembly (L=t(t+1), q=7): sum_PS|Ahat(mu1)|^2 avg=    143472.0  (1/k x #P x fullParseval =     172872.0)   maxT=   18510.7  Cauchy bound=    143472.0  realized saving=     7.8 (q^(k/2)=7.0)
+PASS  L1 local-character identity (L=t^q-t , q=3; 72 samples)
+PASS  L1' mu_1 never zero (L=t^q-t , q=3)  zeros=0
+PASS  L2 Plancherel identity (L=t^q-t , q=3, P=band[0])  lhs=216.0000 rhs=216.0000
+   locus probe |Ahat|/q^(m/2) by deg(mu) (L=t^q-t , q=3): deg0: mean=1.000 max=1.000  deg1: mean=0.962 max=1.155
+PASS  L3 puncture change = unit translation of frequency set (L=t^q-t , q=3)
+   assembly (L=t^q-t , q=3): sum_PS|Ahat(mu1)|^2 avg=       216.0  (1/k x #P x fullParseval =        324.0)   maxT=     270.0  Cauchy bound=       216.0  realized saving=     0.8 (q^(k/2)=3.0)
+PASS  L1 local-character identity (L=t^q-t , q=5; 2160 samples)
+PASS  L1' mu_1 never zero (L=t^q-t , q=5)  zeros=0
+PASS  L2 Plancherel identity (L=t^q-t , q=5, P=band[0])  lhs=3000.0000 rhs=3000.0000
+   locus probe |Ahat|/q^(m/2) by deg(mu) (L=t^q-t , q=5): deg0: mean=1.000 max=1.000  deg1: mean=0.868 max=1.447
+PASS  L3 puncture change = unit translation of frequency set (L=t^q-t , q=5)
+   assembly (L=t^q-t , q=5): sum_PS|Ahat(mu1)|^2 avg=     10500.0  (1/k x #P x fullParseval =      15000.0)   maxT=    7600.0  Cauchy bound=     10500.0  realized saving=     1.4 (q^(k/2)=5.0)
+PASS  L1 local-character identity (L=t^q-t , q=7; 15120 samples)
+PASS  L1' mu_1 never zero (L=t^q-t , q=7)  zeros=0
+PASS  L2 Plancherel identity (L=t^q-t , q=7, P=band[0])  lhs=16464.0000 rhs=16464.0000
+   locus probe |Ahat|/q^(m/2) by deg(mu) (L=t^q-t , q=7): deg0: mean=1.000 max=1.000  deg1: mean=0.902 max=1.699
+PASS  L3 puncture change = unit translation of frequency set (L=t^q-t , q=7)
+   assembly (L=t^q-t , q=7): sum_PS|Ahat(mu1)|^2 avg=    148176.0  (1/k x #P x fullParseval =     172872.0)   maxT=   39788.0  Cauchy bound=    148176.0  realized saving=     3.7 (q^(k/2)=7.0)
