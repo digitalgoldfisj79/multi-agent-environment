@@ -1,0 +1,31 @@
+== A. Within-modulus fairness identity (EXACT, Fractions) ==
+PASS  A fairness identity sum_M D_P(-LM)^2 = q^(R-k) sum_a D_P(a)^2 (L=t(t+1), q=3, k=2, R=3, m=3)
+PASS  A fairness identity sum_M D_P(-LM)^2 = q^(R-k) sum_a D_P(a)^2 (L=t(t+1), q=5, k=2, R=3, m=3)
+PASS  A fairness identity sum_M D_P(-LM)^2 = q^(R-k) sum_a D_P(a)^2 (L=t(t+1), q=7, k=2, R=3, m=3)
+PASS  A fairness identity sum_M D_P(-LM)^2 = q^(R-k) sum_a D_P(a)^2 (L=t^q-t, q=3, k=2, R=3, m=3)
+PASS  A fairness identity sum_M D_P(-LM)^2 = q^(R-k) sum_a D_P(a)^2 (L=t^q-t, q=5, k=2, R=3, m=3)
+
+== B. Same-modulus character orthogonality over the M-family ==
+PASS  B same-modulus character orthogonality over deg-R monics (q=3, k=2, R=3)
+PASS  B same-modulus character orthogonality over deg-R monics (q=5, k=2, R=3)
+PASS  B same-modulus character orthogonality over deg-R monics (q=7, k=2, R=3)
+
+== C. Coset cross/diag across q (EMPIRICAL; k=2, R=3, m=3) ==
+   C L=t(t+1) : q=  3 k=2 R=3 m=3 |band|=  3: cross/diag =  -0.2428   diag/q^(R+m) =   0.3119
+   C L=t(t+1) : q=  5 k=2 R=3 m=3 |band|= 10: cross/diag =  -0.0201   diag/q^(R+m) =   0.3875
+   C L=t(t+1) : q=  7 k=2 R=3 m=3 |band|= 21: cross/diag =  -0.0040   diag/q^(R+m) =   0.4211
+   C L=t(t+1) : q= 11 k=2 R=3 m=3 |band|= 55: cross/diag =  +0.0446   diag/q^(R+m) =   0.4511
+   C L=t(t+1) : q= 13 k=2 R=3 m=3 |band|= 78: cross/diag =  +0.0407   diag/q^(R+m) =   0.4590
+   C L=t^q-t  : q=  3 k=2 R=3 m=3 |band|=  3: cross/diag =  -0.2165   diag/q^(R+m) =   0.3119
+   C L=t^q-t  : q=  5 k=2 R=3 m=3 |band|= 10: cross/diag =  -0.1258   diag/q^(R+m) =   0.3875
+   C L=t^q-t  : q=  7 k=2 R=3 m=3 |band|= 21: cross/diag =  -0.0272   diag/q^(R+m) =   0.4211
+   C L=t^q-t  : q= 11 k=2 R=3 m=3 |band|= 55: cross/diag =  -0.0632   diag/q^(R+m) =   0.4511
+   C L=t^q-t  : q= 13 k=2 R=3 m=3 |band|= 78: cross/diag =  -0.0338   diag/q^(R+m) =   0.4590
+
+== D/E. Subspace completion (EXACT) and theta!=0 pair sums ==
+PASS  D dim(V^perp) = 2k - R  (q=3, k=2, R=3)  |Vperp|=3 expected 3
+PASS  D subspace completion identity (81 samples)
+   E theta!=0 normalized pair sums (q=3, k=2, R=3): max=0.2887 mean=0.2887 (q^(-k/2)=0.3333)
+PASS  D dim(V^perp) = 2k - R  (q=5, k=2, R=3)  |Vperp|=5 expected 5
+PASS  D subspace completion identity (63 samples)
+   E theta!=0 normalized pair sums (q=5, k=2, R=3): max=0.2020 mean=0.1578 (q^(-k/2)=0.2000)
