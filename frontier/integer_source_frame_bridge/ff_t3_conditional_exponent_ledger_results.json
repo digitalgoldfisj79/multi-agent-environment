@@ -1,0 +1,68 @@
+{
+  "status": "PASS",
+  "classification": "EXACT_EXPONENT_LEDGER",
+  "identity": {
+    "fixed_source_FFPS_ratio_exponent": "m + 3k/2 - R",
+    "claimed_ratio_exponent": "3k/2 - R",
+    "missing_saving": "q^{-m}",
+    "required_strengthening": "Lambda-signed cancellation across the source-pair sum"
+  },
+  "panels": [
+    {
+      "k": 2,
+      "R": 3,
+      "m": 3,
+      "fixed_source_ffps_residual_exponent": 9.0,
+      "diagonal_exponent": 6.0,
+      "fixed_source_ffps_ratio_exponent": 3.0,
+      "lambda_signed_target_residual_exponent": 6.0,
+      "lambda_signed_target_ratio_exponent": 0.0,
+      "missing_exponent_saving": 3
+    },
+    {
+      "k": 3,
+      "R": 5,
+      "m": 5,
+      "fixed_source_ffps_residual_exponent": 14.5,
+      "diagonal_exponent": 10.0,
+      "fixed_source_ffps_ratio_exponent": 4.5,
+      "lambda_signed_target_residual_exponent": 9.5,
+      "lambda_signed_target_ratio_exponent": -0.5,
+      "missing_exponent_saving": 5
+    },
+    {
+      "k": 4,
+      "R": 7,
+      "m": 7,
+      "fixed_source_ffps_residual_exponent": 20.0,
+      "diagonal_exponent": 14.0,
+      "fixed_source_ffps_ratio_exponent": 6.0,
+      "lambda_signed_target_residual_exponent": 13.0,
+      "lambda_signed_target_ratio_exponent": -1.0,
+      "missing_exponent_saving": 7
+    },
+    {
+      "k": 5,
+      "R": 8,
+      "m": 8,
+      "fixed_source_ffps_residual_exponent": 23.5,
+      "diagonal_exponent": 16.0,
+      "fixed_source_ffps_ratio_exponent": 7.5,
+      "lambda_signed_target_residual_exponent": 15.5,
+      "lambda_signed_target_ratio_exponent": -0.5,
+      "missing_exponent_saving": 8
+    },
+    {
+      "k": 6,
+      "R": 11,
+      "m": 11,
+      "fixed_source_ffps_residual_exponent": 31.0,
+      "diagonal_exponent": 22.0,
+      "fixed_source_ffps_ratio_exponent": 9.0,
+      "lambda_signed_target_residual_exponent": 20.0,
+      "lambda_signed_target_ratio_exponent": -2.0,
+      "missing_exponent_saving": 11
+    }
+  ],
+  "boundary": "The fixed-source prime-pair square-root bound FFPS does not imply the claimed Theorem D. The claimed ratio requires an additional q^{-m} saving from the signed von Mangoldt source-pair sum."
+}
