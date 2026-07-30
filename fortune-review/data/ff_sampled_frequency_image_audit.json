@@ -1,0 +1,85 @@
+{
+  "asymptotic_claim": false,
+  "panels": [
+    {
+      "band_size": 3,
+      "equal_degree_translate_verified": true,
+      "injective_for_every_P": true,
+      "inverse_formula_verified": true,
+      "k": 2,
+      "ordered_pair_count": 6,
+      "puncture_unit_dilation_verified": true,
+      "q": 3,
+      "sample_density": 0.25,
+      "sample_size_per_fixed_P": 2,
+      "unit_frequency_space_size": 8
+    },
+    {
+      "band_size": 10,
+      "equal_degree_translate_verified": true,
+      "injective_for_every_P": true,
+      "inverse_formula_verified": true,
+      "k": 2,
+      "ordered_pair_count": 90,
+      "puncture_unit_dilation_verified": true,
+      "q": 5,
+      "sample_density": 0.375,
+      "sample_size_per_fixed_P": 9,
+      "unit_frequency_space_size": 24
+    },
+    {
+      "band_size": 21,
+      "equal_degree_translate_verified": true,
+      "injective_for_every_P": true,
+      "inverse_formula_verified": true,
+      "k": 2,
+      "ordered_pair_count": 420,
+      "puncture_unit_dilation_verified": true,
+      "q": 7,
+      "sample_density": 0.4166666666666667,
+      "sample_size_per_fixed_P": 20,
+      "unit_frequency_space_size": 48
+    },
+    {
+      "band_size": 8,
+      "equal_degree_translate_verified": true,
+      "injective_for_every_P": true,
+      "inverse_formula_verified": true,
+      "k": 3,
+      "ordered_pair_count": 56,
+      "puncture_unit_dilation_verified": true,
+      "q": 3,
+      "sample_density": 0.2692307692307692,
+      "sample_size_per_fixed_P": 7,
+      "unit_frequency_space_size": 26
+    },
+    {
+      "band_size": 40,
+      "equal_degree_translate_verified": true,
+      "injective_for_every_P": true,
+      "inverse_formula_verified": true,
+      "k": 3,
+      "ordered_pair_count": 1560,
+      "puncture_unit_dilation_verified": true,
+      "q": 5,
+      "sample_density": 0.31451612903225806,
+      "sample_size_per_fixed_P": 39,
+      "unit_frequency_space_size": 124
+    },
+    {
+      "band_size": 18,
+      "equal_degree_translate_verified": true,
+      "injective_for_every_P": true,
+      "inverse_formula_verified": true,
+      "k": 4,
+      "ordered_pair_count": 306,
+      "puncture_unit_dilation_verified": true,
+      "q": 3,
+      "sample_density": 0.2125,
+      "sample_size_per_fixed_P": 17,
+      "unit_frequency_space_size": 80
+    }
+  ],
+  "status": "MACHINE-VERIFIED IDENTITY / EMPIRICAL-EXACT FINITE PANEL",
+  "theorem_checked": "fixed-P sampled-frequency injectivity, inverse translate formula, and puncture dilation"
+}
