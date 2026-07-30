@@ -1,0 +1,54 @@
+== Theta-independence (T1/T2) and orbit structure, k=2 ==
+PASS  T1 A-covariance A(1; gP,gS) = A(lam; P,S), all pairs x AGL(1,q) (q=3)
+PASS  T1 corollaries: C(theta), Diag independent of theta (q=3)
+PASS  T2 class set AGL(1,q)-stable, E(g cls) = lam*E (q=3)
+PASS  T2 translations preserve terms; homotheties Galois-twist: term(g cls) = sigma_lam(term) (q=3)
+PASS  theta-covariance per term: term(s) = sigma_s(term(1)) (q=3)
+PASS  transpose involution: E -> -E, term -> conj(term) (q=3)
+PASS  O orbit decomposition: 1 orbits, law/same-P constant per orbit, free-orbit sum = q*Tr(rep), total = C (q=3)  sizes=[6]
+PASS  O integrality + q-divisibility: C = 216 = 3*72, Diag = 216 = 3*72 (q=3)
+PASS  T1 A-covariance A(1; gP,gS) = A(lam; P,S), all pairs x AGL(1,q) (q=5)
+PASS  T1 corollaries: C(theta), Diag independent of theta (q=5)
+PASS  T2 class set AGL(1,q)-stable, E(g cls) = lam*E (q=5)
+PASS  T2 translations preserve terms; homotheties Galois-twist: term(g cls) = sigma_lam(term) (q=5)
+PASS  theta-covariance per term: term(s) = sigma_s(term(1)) (q=5)
+PASS  transpose involution: E -> -E, term -> conj(term) (q=5)
+PASS  O orbit decomposition: 3 orbits, law/same-P constant per orbit, free-orbit sum = q*Tr(rep), total = C (q=5)  sizes=[20, 20, 20]
+PASS  O integrality + q-divisibility: C = 7250 = 5*1450, Diag = 10500 = 5*2100 (q=5)
+PASS  T1 A-covariance A(1; gP,gS) = A(lam; P,S), all pairs x AGL(1,q) (q=7)
+PASS  T1 corollaries: C(theta), Diag independent of theta (q=7)
+PASS  T2 class set AGL(1,q)-stable, E(g cls) = lam*E (q=7)
+PASS  T2 translations preserve terms; homotheties Galois-twist: term(g cls) = sigma_lam(term) (q=7)
+PASS  theta-covariance per term: term(s) = sigma_s(term(1)) (q=7)
+PASS  transpose involution: E -> -E, term -> conj(term) (q=7)
+PASS  O orbit decomposition: 16 orbits, law/same-P constant per orbit, free-orbit sum = q*Tr(rep), total = C (q=7)  sizes=[42, 42, 42, 42, 42, 42, 42, 42, 42, 42, 42, 42, 42, 42, 42, 42]
+PASS  O integrality + q-divisibility: C = 67571 = 7*9653, Diag = 148176 = 7*21168 (q=7)
+   -- q=7 orbit classification (chi signature order: (P,S) (P',S') (P,P') (S,S') (P,S') (S,P')) --
+   orbit  0: size= 42 same-P=False law=False Tr(term)=    343 Tr|A|^2=   2058 transpose->orbit  0 chi=(1, 1, -1, 1, -1, -1)
+   orbit  1: size= 42 same-P=False law=False Tr(term)=    343 Tr|A|^2=   2058 transpose->orbit 10 chi=(1, 1, -1, 1, -1, -1)
+   orbit  2: size= 42 same-P=False law=True  Tr(term)=   2352 Tr|A|^2=   2352 transpose->orbit  5 chi=(-1, -1, 1, -1, -1, -1)
+   orbit  3: size= 42 same-P=False law=True  Tr(term)=   2352 Tr|A|^2=   2352 transpose->orbit  3 chi=(-1, -1, -1, -1, 1, 1)
+   orbit  4: size= 42 same-P=False law=True  Tr(term)=   2352 Tr|A|^2=   2352 transpose->orbit  6 chi=(-1, -1, -1, -1, 1, 1)
+   orbit  5: size= 42 same-P=False law=True  Tr(term)=   2352 Tr|A|^2=   2352 transpose->orbit  2 chi=(-1, -1, 1, -1, -1, -1)
+   orbit  6: size= 42 same-P=False law=True  Tr(term)=   2352 Tr|A|^2=   2352 transpose->orbit  4 chi=(-1, -1, -1, -1, 1, 1)
+   orbit  7: size= 42 same-P=False law=True  Tr(term)=   2352 Tr|A|^2=   2352 transpose->orbit  7 chi=(-1, -1, 1, -1, 1, 1)
+   orbit  8: size= 42 same-P=False law=False Tr(term)=    -49 Tr|A|^2=   1666 transpose->orbit  9 chi=(1, 1, -1, 1, -1, -1)
+   orbit  9: size= 42 same-P=False law=False Tr(term)=    -49 Tr|A|^2=   1666 transpose->orbit  8 chi=(1, 1, -1, 1, -1, -1)
+   orbit 10: size= 42 same-P=False law=False Tr(term)=    343 Tr|A|^2=   1666 transpose->orbit  1 chi=(1, 1, -1, 1, -1, -1)
+   orbit 11: size= 42 same-P=False law=False Tr(term)=  -1764 Tr|A|^2=   2352 transpose->orbit 11 chi=(-1, -1, 1, -1, 1, 1)
+   orbit 12: size= 42 same-P=False law=False Tr(term)=  -1764 Tr|A|^2=   2352 transpose->orbit 12 chi=(-1, -1, -1, -1, 1, 1)
+   orbit 13: size= 42 same-P=False law=True  Tr(term)=   1666 Tr|A|^2=   1666 transpose->orbit 13 chi=(1, 1, -1, 1, -1, -1)
+   orbit 14: size= 42 same-P=True  law=False Tr(term)=  -1764 Tr|A|^2=   2352 transpose->orbit 14 chi=(-1, -1, 0, -1, -1, -1)
+   orbit 15: size= 42 same-P=True  law=False Tr(term)=  -1764 Tr|A|^2=   2352 transpose->orbit 15 chi=(-1, -1, 0, -1, -1, -1)
+   summary q=7: 16 orbits = 7 law-orbits + 9 defect-orbits; C = 7 * (sum of 16 integer traces) = 67571
+
+== k=3 endpoint: generality of T1 and first resonance data ==
+   k=3 endpoint: q=3, band size 8, pairs 56, sources 51
+   L=t^3-t  k=3 q=3: Diag=(21384, 0, 0) (=21384.0)  C(1)=(3483, 0, 0) (=3483.0)  C/Diag=+0.1629  #classes=8
+PASS  C6 Galois covariance sigma_2(C(1)) = C(2) (k=3, L=t^3-t )
+PASS  K3 T1 A-covariance at k=3 (general-k proof check)
+PASS  K3 theta-independence C(1) = C(2), Diag(1) = Diag(2) (k=3, primorial)
+PASS  K3 C(theta) rational (k=3, primorial)  C=3483 Diag=21384
+   L=t(t+1) k=3 q=3: Diag=(25488, 0, 0) (=25488.0)  C(1)=(3600, 0, 0) (=3600.0)  C/Diag=+0.1412  #classes=4
+PASS  C6 Galois covariance sigma_2(C(1)) = C(2) (k=3, L=t(t+1))
+PASS  K3 class constant = zeta^E at k=3 (direct f'-sums, 3 classes)
