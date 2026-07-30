@@ -60,7 +60,7 @@ The following are established.
   
   `sum_{mu != 0}|Ahat_P(mu)|^2 = q^k sum_r |N_P(r)-q^(m-k)|^2`.
   
-  The left-hand side is consequently on the `q^(m+k)` scale in the relevant large-`q` regime, not `q^m`. Keating–Rudnick supplies the asymptotic scale for the all-residue variance in its literal fixed-degree, large-field range; it does not prove deterministic sampled-frequency control or a growing-parameter theorem.
+  The full nonzero-frequency mass is consequently on the `q^(m+k)` scale in the relevant large-`q` regime. Keating–Rudnick supplies the asymptotic scale for the all-residue variance in its literal fixed-degree, large-field range; it does not prove the scale of the deterministic sampled subset `mu_PS`, sampled-frequency control, or a growing-parameter theorem.
 - **PROVED EXACTLY:** one-source dispersion has an exact completion dichotomy and endpoint coincidence classes consisting of the diagonal plus multiplicative prime-pair classes.
 - **PROVED EXACTLY:** for `L=t^q-t` at the endpoint, affine symmetry gives theta-independence; class terms decompose into Galois orbit traces and the aggregate class correlation is an integer.
 
@@ -82,23 +82,34 @@ Three corrections are load-bearing.
 
 Affine symmetry proves theta-independence, integrality and orbit-trace structure. It does **not** prove `C(theta) <= Diag` or a universal factor-2 second-moment estimate. Those inequalities are **EMPIRICAL-EXACT FINITE PANEL** observations only.
 
-### 4.2 The first-dispersion diagonal floor survives class absorption
+### 4.2 Exact positive diagonal and the sampled-frequency alternative
 
-The sampled `Ahat` square mass has scale `q^(m+2k)` up to polynomial factors. The first-dispersion diagonal is therefore `q^(2m+2k)`, and source Cauchy yields
+The first dispersion contains the exact positive diagonal
+
+`q^m M_samp(theta)`,  where  `M_samp(theta)=sum_{P!=S}|Ahat_P(mu_PS)|^2`.
+
+If `M_samp` has its natural sampled scale `q^(m+2k) poly`, source Cauchy yields
 
 `|T| << q^(3m/2+k) poly(k,m)`.
 
-Against `q^(m+3k/2)`, the deficit is `q^((m-k)/2)`, hence `q^((k-1)/2)` at `m=2k-1`. Even a uniform `C=O(Diag)` theorem preserves this floor; it cannot close endpoint `FFPR`.
+Against `q^(m+3k/2)`, the deficit is `q^((m-k)/2)`, hence `q^((k-1)/2)` at `m=2k-1`. Thus `C=O(Diag)` **alone** cannot imply endpoint `FFPR`: it must be accompanied either by the much stronger sampled-diagonal estimate
+
+`M_samp(theta) << q^(3k) poly(k,m)`
+
+or by a centered signed assembly that avoids paying the positive diagonal. The natural scale of `M_samp` is supported by the committed panels and by the all-frequency variance heuristic, but is not an unconditional lower bound on the deterministic sampled subset.
 
 ### 4.3 The explicit diagonal correction must remain in the theorem
 
 The earlier dispersion verifier estimated the uncorrected product aggregate. The exact `f=f'` correction `Delta_PS` is nonzero and is not automatically absorbed by that computation. It must either be bounded at the target scale or retained inside a signed, diagonally centered bilateral assembly.
 
-## 5. New exact target: centered bilateral endpoint assembly
+## 5. New exact target: sampled diagonal or centered bilateral endpoint assembly
 
-The smallest currently isolated theorem is a **Lambda-weighted, diagonally centered bilateral dispersion estimate** on ordered prime pairs.
+The corrected boundary has two logically possible routes.
 
-Parameter space:
+1. **Sampled-diagonal route:** prove the exceptional deterministic estimate `M_samp(theta) << q^(3k) poly` together with adequate class control and the `Delta_PS` correction.
+2. **Centered bilateral route (`CBEA_FF`):** prove a Lambda-weighted, diagonally centered bilateral dispersion estimate on ordered prime pairs, retaining the signed source structure before positivity.
+
+For the bilateral route, the parameter space is:
 
 - `P,S,P',S'` monic irreducibles of degree `k`, with `P != S` and `P' != S'`;
 - source degree `m=2k-1`;
@@ -114,13 +125,13 @@ and
 
 `deg(nu_SP S' - nu_S'P' S) <= 2k-m-1`.
 
-The required estimate must subtract both single-source Gram diagonals before positivity, retain the `Lambda` weights and `Delta_PS`, and yield the missing `q^((m-k)/2)` saving. A second Cauchy inequality applied after the first positive diagonal has been formed cannot do this.
+The required estimate must subtract both single-source Gram diagonals before positivity, retain the `Lambda` weights and `Delta_PS`, and yield the missing `q^((m-k)/2)` saving at the natural sampled scale. A second Cauchy inequality applied after the first positive diagonal has been formed cannot do this.
 
 **EMPIRICAL-EXACT FINITE PANEL:** the initial panels are diagonal only for `(k,m)=(2,3)` at `q=3,5,7`; `(q,k,m)=(3,3,5)` has two transpose incidences; and `(5,3,5)` is again diagonal only. However, `(q,k,m)=(3,4,7)` has 12 genuine non-diagonal, non-transpose incidences, forming two `AGL(1,3)` orbits of size six. Thus the naive universal diagonal/transpose rigidity conjecture is **FALSIFIED**. The theorem must classify and control exceptional components rather than assume they are absent.
 
 ## 6. Function-field route after the endpoint gate
 
-Only after the centered bilateral endpoint theorem is proved may the programme:
+Only after one of the two endpoint routes is proved may the programme:
 
 1. sum the canonical `theta` frequencies and prove coset `PORC_FF`;
 2. couple the physical result to the remaining signed conductor terms;
@@ -152,7 +163,7 @@ This table is a mechanism dictionary only. No function-field-to-integer transfer
 
 ### PROVED EXACTLY
 
-Candidate collapse; one-failure reduction; integer first-coordinate and physical kernel identities; function-field coset fairness, completion, separability, local nondegeneracy, Plancherel identity, one-source completion dichotomy, affine theta-independence and orbit-trace integrality; the first-dispersion diagonal-floor exponent ledger.
+Candidate collapse; one-failure reduction; integer first-coordinate and physical kernel identities; function-field coset fairness, completion, separability, local nondegeneracy, Plancherel identity, one-source completion dichotomy, affine theta-independence and orbit-trace integrality; the exact first-dispersion positive-diagonal identity; and the logical insufficiency of class control alone.
 
 ### PROVED FROM PUBLISHED INPUT
 
@@ -164,12 +175,16 @@ Independent finite checks of the exact identities and corrected aggregate decomp
 
 ### EMPIRICAL-EXACT FINITE PANEL
 
-`C/Diag <= 1` on the committed panels; exact cyclotomic values of the actual corrected aggregate; the listed simultaneous-incidence counts and affine exception orbits.
+`C/Diag <= 1` on the committed panels; exact cyclotomic values of the actual corrected aggregate; the natural sampled-diagonal scale on the committed panels; and the listed simultaneous-incidence counts and affine exception orbits.
+
+### CONDITIONAL
+
+The `q^((m-k)/2)` first-dispersion deficit, conditional on the natural sampled scale `M_samp ~ q^(m+2k) poly`.
 
 ### RETRACTED OR CORRECTED
 
-The uncentred integer `SDD`; fixed-source Theorem D; the unexplained `q^-m`; a universal factor-2 class bound; the claim that ordinary double dispersion after first Cauchy automatically recovers the endpoint deficit; the claim that coset `PORC_FF` is already Fortune in the laboratory; any universal diagonal-or-diagonal-plus-transpose classification of the bilateral incidence.
+The uncentred integer `SDD`; fixed-source Theorem D; the unexplained `q^-m`; a universal factor-2 class bound; an unconditional first-dispersion diagonal-floor exponent claim; the claim that ordinary double dispersion after first Cauchy automatically recovers the endpoint deficit; the claim that coset `PORC_FF` is already Fortune in the laboratory; any universal diagonal-or-diagonal-plus-transpose classification of the bilateral incidence.
 
 ### OPEN
 
-A general classification and estimate for exceptional bilateral-incidence components; the centered bilateral endpoint theorem; uniform class-main-term control or exact absorption inside that theorem; corrected `FFPR`; coset `PORC_FF`; signed conductor coupling; every thinning step; integer `PBDH_P`, `PORS`, `PORC/T3`, higher-conductor contraction, block variance and Fortune's conjecture.
+The sampled-diagonal estimate at the exceptional `q^(3k)` scale or a centered bilateral replacement; a general classification and estimate for exceptional bilateral-incidence components; uniform class-main-term control or exact absorption; the `Delta_PS` contribution; corrected `FFPR`; coset `PORC_FF`; signed conductor coupling; every thinning step; integer `PBDH_P`, `PORS`, `PORC/T3`, higher-conductor contraction, block variance and Fortune's conjecture.
