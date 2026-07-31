@@ -8,14 +8,14 @@ on:
       - fortune-review/scripts/ff_tfp3_*.py
       - fortune-review/scripts/ff_large_field_cubic_falsification.cpp
       - fortune-review/data/ff_tfp3_*.json
-      - fortune-review/TFP3_ROUND1_TRUE_ORIENTATION_20260731.md
+      - fortune-review/TFP3_*.md
       - .github/workflows/ff-tfp3-true-frobenius.yml
   pull_request:
     paths:
       - fortune-review/scripts/ff_tfp3_*.py
       - fortune-review/scripts/ff_large_field_cubic_falsification.cpp
       - fortune-review/data/ff_tfp3_*.json
-      - fortune-review/TFP3_ROUND1_TRUE_ORIENTATION_20260731.md
+      - fortune-review/TFP3_*.md
       - .github/workflows/ff-tfp3-true-frobenius.yml
   workflow_dispatch:
 
@@ -32,6 +32,10 @@ jobs:
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
+      - name: Install symbolic audit dependency
+        run: python3 -m pip install --quiet sympy
+      - name: Audit sign-cover theorem
+        run: python3 fortune-review/scripts/ff_tfp3_sign_cover_audit.py
       - name: Build exact classifier
         run: |
           set -euo pipefail
