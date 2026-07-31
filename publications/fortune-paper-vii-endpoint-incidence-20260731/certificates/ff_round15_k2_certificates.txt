@@ -1,0 +1,12 @@
+== Round 15 k=2 certificate log (all runs re-executed this round) ==
+[Q, chart B] GB_SIZE=5; reduce(T,G) = (0,0,0); lift matrix 5x3 emitted (561KB)
+[Q, chart X] GB_SIZE=5; reduce(T,G) = (0,0,0); lift matrix 5x3 emitted (1.6MB)
+[lift verify, chart B] T = K*M re-expanded exactly over Q in sympy: True
+[lift verify, chart X] T = K*M verified EXACTLY over Q (dict-arithmetic verifier): True; also mod 1009, 10007: OK
+[denominators] prime support across both lift matrices: {2, 3, 5, 7, 11, 31, 163}
+[mod-p, both charts] P=3 OK  P=5 OK  P=7 OK  P=11 OK  P=31 OK  P=163 OK
+[faithfulness] IDEALS_AGREE_ON_U_NONZERO (branch f0..f3 vs my Round-14 model, U inverted)
+[solution sets] p=5: 19=19  p=7: 41=41  p=11: 109=109  p=13: 155=155 (equal=True)
+[primary decomposition] NCOMP=8: dims 2,1,1,1,1,1,1,0
+[lex elimination] DIM=2 GB_SIZE=21
+[disc identities on T] disc P = -4A = (A-C)^2; disc S = 4-4C = (A-C+2)^2 (hand, Z[1/2])
