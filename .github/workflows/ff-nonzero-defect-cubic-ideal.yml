@@ -1,0 +1,47 @@
+name: Validate FF cubic nonzero-defect ideal
+
+on:
+  push:
+    branches:
+      - gpt56/fortune-mesoscopic-cotlar-20260728
+    paths:
+      - fortune-review/scripts/ff_nonzero_defect_cubic_ideal_generator.py
+      - .github/workflows/ff-nonzero-defect-cubic-ideal.yml
+  workflow_dispatch:
+
+jobs:
+  saturated-cubic-ideal:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    strategy:
+      fail-fast: false
+      matrix:
+        characteristic: [5, 7, 11, 13]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Singular
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y singular
+      - name: Generate exact localized ideal
+        run: |
+          python fortune-review/scripts/ff_nonzero_defect_cubic_ideal_generator.py \
+            --characteristic ${{ matrix.characteristic }} \
+            --output /tmp/nd-${{ matrix.characteristic }}.sing \
+            --manifest /tmp/nd-${{ matrix.characteristic }}-manifest.json
+          cat /tmp/nd-${{ matrix.characteristic }}-manifest.json
+      - name: Compute standard basis and dimension
+        run: |
+          set -o pipefail
+          timeout 105m Singular -q /tmp/nd-${{ matrix.characteristic }}.sing \
+            | tee /tmp/nd-${{ matrix.characteristic }}-result.txt
+          grep '^STATUS=COMPUTED$' /tmp/nd-${{ matrix.characteristic }}-result.txt
+          grep '^DIM=' /tmp/nd-${{ matrix.characteristic }}-result.txt
+      - name: Upload certificates
+        uses: actions/upload-artifact@v4
+        with:
+          name: ff-cubic-ideal-char-${{ matrix.characteristic }}
+          path: |
+            /tmp/nd-${{ matrix.characteristic }}.sing
+            /tmp/nd-${{ matrix.characteristic }}-manifest.json
+            /tmp/nd-${{ matrix.characteristic }}-result.txt
