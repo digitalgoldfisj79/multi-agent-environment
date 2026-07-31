@@ -7,8 +7,9 @@ Date: 2026-08-03
 Status: **THEOREM** (joint: the branch's reduction and component analysis +
 this round's characteristic-uniform certificates). All computations
 re-executed and verified in this round; artifacts in
-`fortune-review/scripts/ff_round15_k2_certificates.sh` (embeds every Singular
-source used) with archived outputs in `fortune-review/data/ff_round15_*`.
+`fortune-review/scripts/ff_round15_k2/` (all Singular sources and the
+exact lift verifier) with the run log in
+`fortune-review/data/ff_round15_k2_certificates.txt`.
 
 ## 0. Statement
 
