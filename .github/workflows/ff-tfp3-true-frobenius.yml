@@ -1,0 +1,64 @@
+name: Validate TFP3 true-Frobenius harness
+
+on:
+  push:
+    branches:
+      - gpt56/fortune-tfp3-true-frobenius-20260731
+    paths:
+      - fortune-review/scripts/ff_tfp3_*.py
+      - fortune-review/scripts/ff_large_field_cubic_falsification.cpp
+      - fortune-review/data/ff_tfp3_*.json
+      - fortune-review/TFP3_ROUND1_TRUE_ORIENTATION_20260731.md
+      - .github/workflows/ff-tfp3-true-frobenius.yml
+  pull_request:
+    paths:
+      - fortune-review/scripts/ff_tfp3_*.py
+      - fortune-review/scripts/ff_large_field_cubic_falsification.cpp
+      - fortune-review/data/ff_tfp3_*.json
+      - fortune-review/TFP3_ROUND1_TRUE_ORIENTATION_20260731.md
+      - .github/workflows/ff-tfp3-true-frobenius.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: tfp3-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  true-orientation:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build exact classifier
+        run: |
+          set -euo pipefail
+          python3 fortune-review/scripts/ff_tfp3_build_classifier.py /tmp/tfp3.cpp
+          g++ -O3 -std=c++20 /tmp/tfp3.cpp -o /tmp/tfp3
+      - name: Reproduce frozen panel
+        run: |
+          set -euo pipefail
+          /tmp/tfp3 --regression > /tmp/tfp3-regression.jsonl
+          python3 fortune-review/scripts/ff_tfp3_orientation_verify.py /tmp/tfp3-regression.jsonl
+      - name: Reproduce extended sentinels
+        run: |
+          set -euo pipefail
+          /tmp/tfp3 61 67 71 > /tmp/tfp3-extended.jsonl
+          python3 fortune-review/scripts/ff_tfp3_orientation_verify.py /tmp/tfp3-extended.jsonl
+          python3 - <<'PY'
+          import json
+          expected={61:(6,21960),67:(12,53064),71:(10,49700)}
+          got={}
+          for line in open('/tmp/tfp3-extended.jsonl'):
+              row=json.loads(line)
+              if row['type']=='summary':
+                  got[row['q']]=(row['true_orbits'],row['incidences'])
+          assert got==expected,(got,expected)
+          PY
+      - name: Audit committed panel
+        run: |
+          set -euo pipefail
+          python3 fortune-review/scripts/ff_tfp3_panel_analyse.py \
+            fortune-review/data/ff_tfp3_true_panel_through_101.json
