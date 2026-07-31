@@ -1,6 +1,12 @@
 name: Build Fortune Paper VII
 
 on:
+  pull_request:
+    branches:
+      - publication/fortune-papers-ii-vi-20260724
+    paths:
+      - .github/workflows/build-fortune-paper7.yml
+      - publications/fortune-paper-vii-endpoint-incidence-20260731/**
   push:
     branches:
       - publication/fortune-paper-vii-endpoint-incidence-20260731
@@ -73,27 +79,32 @@ jobs:
           set -euo pipefail
           P="$GITHUB_WORKSPACE/publications/fortune-paper-vii-endpoint-incidence-20260731"
           O="$RUNNER_TEMP/fortune-paper-vii"
+          M="$RUNNER_TEMP/fortune-paper-vii-manuscript.md"
           mkdir -p "$O"
+          cat "$P"/manuscript_parts/*.md > "$M"
+          echo "4c95d04b5c055dd4e97b0bdc75db8ed50c61ff2c2cbf23009f830ca25484819b  $M" | sha256sum -c -
 
-          pandoc -f markdown+tex_math_single_backslash "$P/manuscript.md" \
+          pandoc -f markdown+tex_math_single_backslash "$M" \
             --resource-path="$P" --bibliography="$P/references.bib" --citeproc \
             --pdf-engine=xelatex -V papersize=a4 -V geometry:margin=25mm \
             -V colorlinks=true -o "$O/fortune-paper-vii.pdf"
 
-          pandoc -f markdown+tex_math_single_backslash "$P/manuscript.md" \
+          pandoc -f markdown+tex_math_single_backslash "$M" \
             --resource-path="$P" --bibliography="$P/references.bib" --citeproc \
             -o "$O/fortune-paper-vii.docx"
 
-          pandoc -f markdown+tex_math_single_backslash "$P/manuscript.md" \
+          pandoc -f markdown+tex_math_single_backslash "$M" \
             --resource-path="$P" --bibliography="$P/references.bib" --citeproc \
             -s -t latex -o "$O/fortune-paper-vii.tex"
 
           cp -r "$P" "$O/source-package"
+          cp "$M" "$O/source-package/manuscript.md"
           qpdf --check "$O/fortune-paper-vii.pdf"
           pdftotext -layout "$O/fortune-paper-vii.pdf" "$O/PDF_EXTRACTED.txt"
           grep -F 'Quadratic emptiness theorem' "$O/PDF_EXTRACTED.txt"
+          grep -F 'zero-defect classification over prime fields' "$O/PDF_EXTRACTED.txt"
           grep -F 'twisted-Frobenius point theorem' "$O/PDF_EXTRACTED.txt"
-          ! grep -E 'TODO|TBD|PLACEHOLDER|REPLACE_ME' "$P/manuscript.md"
+          ! grep -E 'TODO|TBD|PLACEHOLDER|REPLACE_ME' "$M"
 
           (cd "$O" && find . -type f ! -name SHA256SUMS -print0 | sort -z | xargs -0 sha256sum > SHA256SUMS)
           (cd "$O" && sha256sum -c SHA256SUMS)

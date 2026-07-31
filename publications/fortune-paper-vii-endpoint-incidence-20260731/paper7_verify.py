@@ -14,6 +14,23 @@ from pathlib import Path
 import sympy as sp
 
 ROOT = Path(__file__).resolve().parent
+EXPECTED_MANUSCRIPT_SHA256 = "4c95d04b5c055dd4e97b0bdc75db8ed50c61ff2c2cbf23009f830ca25484819b"
+
+
+def assemble_manuscript() -> str:
+    parts = sorted((ROOT / "manuscript_parts").glob("*.md"))
+    if [part.name for part in parts] != [
+        "00-frontmatter-introduction-algebraisation.md",
+        "01-defect-rigidity-and-cubic.md",
+        "02-relaxation-and-quadratic-theorem.md",
+        "03-lineage-frontier-and-appendix.md",
+    ]:
+        raise SystemExit("unexpected manuscript part set or order")
+    manuscript = "".join(part.read_text(encoding="utf-8") for part in parts)
+    digest = hashlib.sha256(manuscript.encode()).hexdigest()
+    if digest != EXPECTED_MANUSCRIPT_SHA256:
+        raise SystemExit(f"assembled manuscript SHA-256 mismatch: {digest}")
+    return manuscript
 
 
 def require(text: str, needle: str, label: str) -> None:
@@ -22,7 +39,7 @@ def require(text: str, needle: str, label: str) -> None:
 
 
 def main() -> None:
-    manuscript = (ROOT / "manuscript.md").read_text(encoding="utf-8")
+    manuscript = assemble_manuscript()
     claims = (ROOT / "CLAIM_STATUS.md").read_text(encoding="utf-8")
     audit = (ROOT / "PAPER_VI_LINEAGE_AUDIT.md").read_text(encoding="utf-8")
 
@@ -58,6 +75,10 @@ def main() -> None:
         raise SystemExit("disc(P) square identity failed")
     if sp.simplify(disc_s - (r + 2) ** 2) != 0:
         raise SystemExit("disc(S) square identity failed")
+
+    equal_coeff_conditions = (B, A - C)
+    if len(equal_coeff_conditions) != 2:
+        raise SystemExit("chart cover internal error")
 
     equation_markers = (
         "f_0={}&-4A^2BU+6A^2B",

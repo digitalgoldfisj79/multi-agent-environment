@@ -5,10 +5,10 @@
 | ID | Claim | Source |
 |---|---|---|
 | P7-IFA1 | Inverse-free equivalence and uniqueness of scalar witnesses | Section 3; source theorem `FF_BILATERAL_INCIDENCE_INVERSE_FREE_SCHEME_20260730.md` |
-| P7-BDD1 | Unique common bilateral defect and degree bound | Section 4; source theorem `FF_BILATERAL_DEFECT_DICHOTOMY_AND_ROUND12_CORRECTION_20260730.md` |
-| P7-BDD2 | Zero defect is exactly translation/reflection | Section 5 |
+| P7-BDD1 | For odd prime q>k, unique common bilateral defect and degree bound | Section 4; source theorem `FF_BILATERAL_DEFECT_DICHOTOMY_AND_ROUND12_CORRECTION_20260730.md` |
+| P7-BDD2 | For odd prime q>k, zero defect is translation/reflection | Section 5 |
 | P7-STRIP | Cross-distinct incidence is empty for \(k<q<2k\), q prime | Corollary 5.3 |
-| P7-AGL | Affine covariance and canonical gauge | Section 6; source programme theorem AGL1 |
+| P7-AGL | In the odd-prime q>=2k regime, affine covariance and canonical gauge | Section 6; source programme theorem AGL1 |
 | P7-FRC | Bounded-degree root-cycle formulation | Section 6; source programme theorem FRC1 |
 | P7-DISC | On the certified quadratic component both discriminants are squares | Section 9 |
 

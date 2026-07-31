@@ -1,6 +1,6 @@
 {
-  "manuscript_sha256": "92a857b387d26ed88e25db5a5e90d41b7438ef315f31028fc55af829504c516c",
-  "word_count": 3303,
+  "manuscript_sha256": "4c95d04b5c055dd4e97b0bdc75db8ed50c61ff2c2cbf23009f830ca25484819b",
+  "word_count": 3454,
   "disc_P": "r**2",
   "disc_S": "(r + 2)**2",
   "chart_cover": "P!=S iff B!=0 or A-C!=0",
