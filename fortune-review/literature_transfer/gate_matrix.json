@@ -1,0 +1,64 @@
+{
+  "date": "2026-07-31",
+  "status": "AUDITED_PROGRAMME_RESULT",
+  "authoritative_heads": {
+    "paper_vii": "069f47724a3581dc40cfbc9efa3fafd14181ba3e",
+    "tfp3": "e5ef12c0f2fa39f50b623f621a998c0f65f99c6e",
+    "direct_d1": "c331f740e06a95e5596639800c931e2629ff9178"
+  },
+  "separation_rule": "TFP3/Paper VII is a bilateral endpoint-incidence publication line. The d=1 crown is a parallel Airy/irreducibility line. Neither is credited to the other without an explicit theorem-level bridge.",
+  "gates": [
+    {
+      "id": "TFP3-CURVE",
+      "target": "Prove the saturated faithful true-Frobenius locus is a bounded-degree curve with controlled exceptional components.",
+      "published_input": "Lang-Weil and large-finite-field finite-cover architecture",
+      "status": "OPEN",
+      "what_is_already_exact": ["faithful classifier", "orientation identity", "finite-panel tangent dimension one at all audited true points"],
+      "not_enough": ["q-free relaxation dimension", "formal jets", "finite census"]
+    },
+    {
+      "id": "TFP3-TORSOR",
+      "target": "On each normalized component, classify kappa and construct a finite etale relative-sign torsor with geometric monodromy.",
+      "published_input": "Bary-Soroker finite-cover/monodromy method and effective finite-field Chebotarev",
+      "status": "OPEN",
+      "correction": "The exact orientation identity yields two eight-element sign torsors indexed by kappa, not a single global degree-eight cover."
+    },
+    {
+      "id": "TFP3-CHEBOTAREV",
+      "target": "Count the all-positive Frobenius class with a linear main term and square-root error, or prove confinement to an exceptional locus.",
+      "published_input": "Effective Chebotarev after regularity and monodromy are proved",
+      "status": "CONDITIONAL_ON_TFP3_CURVE_AND_TORSOR",
+      "downstream_boundary": "An unweighted point count does not prove Delta_PS cancellation, FFPR, d=1 or Fortune."
+    },
+    {
+      "id": "D1-AIRY-FIRST-MOMENT",
+      "target": "Prove |T_p| <= C p^((p-1)/2) with absolute C, equivalently the adjacent equal-weight Airy moment correlation.",
+      "published_input": "Trace-function, monodromy, middle-convolution and Deligne/Katz machinery",
+      "status": "OPEN_GENUINELY_NEW_THEOREM",
+      "latest_route_result": "The Laurent-Airy Spin/Clausen/Hayes route is exactly circular and reconstructs T_p^2=T_p^2."
+    },
+    {
+      "id": "D1-APPLICATION-TRANSPORT",
+      "target": "Transport the normalized Airy constituent into the exact irreducibility hook/nearby-cycle ledger with q=2, q=infinity, arithmetic twist, Tate subtraction and punctual terms explicit.",
+      "published_input": "No directly applicable theorem found",
+      "status": "OPEN_GENUINELY_NEW_COMPARISON"
+    },
+    {
+      "id": "D1-SHORT-TRACE-IMPORT",
+      "target": "Apply published short sums of trace functions directly to close d=1.",
+      "status": "REJECTED_AS_DIRECT_IMPORT",
+      "reasons": [
+        "The theorem is in a fixed-large-q, squarefree-modulus regime, whereas d=1 varies p and uses a special q-line/Airy family.",
+        "The uncollapsed hook object has exponential rank.",
+        "Even a conjectural O(p)-rank collapse leaves a critical rank/conductor constant problem rather than a strict crown margin.",
+        "Trivial/Artin-Schreier factors and slopes at infinity are not yet audited for the final survivor."
+      ]
+    }
+  ],
+  "published_sources": [
+    {"key": "BS2012", "arxiv": "1206.3930", "use": "finite etale cover, monodromy and Lang-Weil architecture"},
+    {"key": "BBSR2013", "arxiv": "1302.0625", "use": "short-interval prime polynomials and exceptional-locus discipline"},
+    {"key": "DR2003", "arxiv": "math/0305311", "use": "middle convolution framework"},
+    {"key": "SS2025", "arxiv": "2512.24080", "use": "short trace sums; hypothesis and rank/conductor audit, not a direct closure"}
+  ]
+}
