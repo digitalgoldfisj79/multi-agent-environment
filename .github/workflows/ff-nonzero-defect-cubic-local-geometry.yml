@@ -1,0 +1,35 @@
+name: Validate FF cubic local geometry
+
+on:
+  push:
+    branches:
+      - gpt56/fortune-mesoscopic-cotlar-20260728
+    paths:
+      - fortune-review/scripts/ff_nonzero_defect_cubic_local_geometry.py
+      - .github/workflows/ff-nonzero-defect-cubic-local-geometry.yml
+  pull_request:
+    paths:
+      - fortune-review/scripts/ff_nonzero_defect_cubic_local_geometry.py
+      - .github/workflows/ff-nonzero-defect-cubic-local-geometry.yml
+  workflow_dispatch:
+
+jobs:
+  exact-local-geometry:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run exact local audit
+        run: |
+          python fortune-review/scripts/ff_nonzero_defect_cubic_local_geometry.py \
+            | tee /tmp/ff-cubic-local-geometry.json
+          grep '"jacobian_rank": 12' /tmp/ff-cubic-local-geometry.json
+          grep '"formal_lift_verified_through_order": 12' /tmp/ff-cubic-local-geometry.json
+      - name: Upload audit
+        uses: actions/upload-artifact@v4
+        with:
+          name: ff-cubic-local-geometry
+          path: /tmp/ff-cubic-local-geometry.json
