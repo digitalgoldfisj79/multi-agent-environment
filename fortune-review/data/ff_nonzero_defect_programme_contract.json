@@ -1,0 +1,65 @@
+{
+  "programme": "NDO-0.1",
+  "title": "Nonzero-Defect Orbit Geometry and Corrected Assembly",
+  "date": "2026-07-31",
+  "repository": "digitalgoldfisj79/multi-agent-environment",
+  "branch": "gpt56/fortune-mesoscopic-cotlar-20260728",
+  "frozen_input_head": "170c8aeb2545f9bf164258a01857360cc2d50789",
+  "primary_target": "NDC_FF",
+  "endpoint_target": "FFPR",
+  "regime": {
+    "field": "prime q",
+    "degree": "fixed k",
+    "range": "q>=2k",
+    "source_degree": "m=2k-1",
+    "puncture": "L=t^q-t",
+    "frequency": "nonzero scalar canonical theta"
+  },
+  "proved_baseline": [
+    "BDD1 common defect and degree bound",
+    "BDD2 zero-defect reflection/translation classification",
+    "FRC1 bounded-degree Frobenius-root equivalence",
+    "AGL1 covariance and unique lambda=1, trace(P)=0 gauge"
+  ],
+  "gates": [
+    {"id": "G0", "name": "freeze-and-covariance", "target": "exact anchors and contract reproduce", "status": "MACHINE-VERIFIED BASELINE"},
+    {"id": "G1", "name": "cubic-normalized-root-ideal", "target": "QZD_3", "status": "OPEN"},
+    {"id": "G2", "name": "twisted-frobenius-dictionary", "target": "TFP_k", "status": "OPEN"},
+    {"id": "G3", "name": "census-and-invariant-fingerprinting", "target": "holdout-tested exact panels", "status": "OPEN"},
+    {"id": "G4", "name": "general-fixed-degree-geometry", "target": "QZD_k with effective D_k", "status": "OPEN"},
+    {"id": "G5", "name": "centred-bilateral-identity", "target": "CBI_ND", "status": "OPEN"},
+    {"id": "G6", "name": "affine-orbit-amplitude-covariance", "target": "OAC_FF", "status": "OPEN"},
+    {"id": "G7", "name": "corrected-amplitude-panels", "target": "literal orbit ledgers", "status": "OPEN"},
+    {"id": "G8", "name": "nonzero-defect-component-theorem", "target": "NDC_FF", "status": "OPEN"},
+    {"id": "G9", "name": "corrected-endpoint", "target": "FFPR", "status": "OPEN"},
+    {"id": "G10", "name": "theta-restoration", "target": "theta-summed first band", "status": "BLOCKED BY G9"},
+    {"id": "G11", "name": "coset-porc", "target": "PORC_FF", "status": "BLOCKED BY G10"},
+    {"id": "G12", "name": "signed-conductor-coupling", "target": "complete-coset first band", "status": "BLOCKED BY G11"},
+    {"id": "G13", "name": "thinning", "target": "chosen walk theorem", "status": "BLOCKED BY G12"}
+  ],
+  "first_discriminator": {
+    "statement": "The affine-normalized nonzero-defect cubic root ideal is zero-dimensional after exact saturation.",
+    "pass": "dimension zero with certified degree D_3",
+    "fail": "positive-dimensional component meeting the root-separation open locus"
+  },
+  "sufficient_counting_theorem": "#I_nd(q,k) <= k^4 D_k q(q-1)",
+  "literature_audit": [
+    "Bagshaw arXiv:2401.10399",
+    "Bagshaw arXiv:2304.05014",
+    "Sawin-Shusterman arXiv:2512.24080"
+  ],
+  "forbidden_shortcuts": [
+    "promote finite orbit counts to a theorem",
+    "use ordinary Lang-Weil without the twisted Frobenius dictionary",
+    "apply positivity before both source diagonals and Delta_PS are centred",
+    "cite trace-function technology before deriving the literal phase and conductor",
+    "claim bounded complexity without certified dimension and degree"
+  ],
+  "stop_conditions": [
+    "endpoint FFPR proved",
+    "positive-dimensional component proved and endpoint-classified",
+    "forced component falsifies current endpoint formulation",
+    "one precise residual trace-function theorem isolated",
+    "fixed-k geometry proved and only uniform-in-k degree control remains"
+  ]
+}
