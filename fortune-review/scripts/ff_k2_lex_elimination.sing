@@ -1,0 +1,10 @@
+ring R=0,(U,B,A,C),lp;
+poly f0=-4*A^2*B*U+6*A^2*B-2*A^2*U+4*A^2+4*A*B^3+4*A*B^2*U+2*A*B^2+4*A*B*C*U-8*A*B*C-4*A*C+2*B*C^2+2*C^2*U;
+poly f1=-4*A^2*U+4*A^2+2*A*B^2+6*A*B*U-2*A*B+8*A*C*U-8*A*C-2*B^2*C-2*B*C*U-2*B*C-4*C^2*U+4*C^2;
+poly f2=-2*A^2*B-2*A^2*U-2*A*B^3*U-A*B^3-2*A*B^2*U^2-2*A*B^2*U+4*A*B*C*U+4*A*C*U^2-B^3*C-2*B^2*C*U-4*B*C^2*U+2*B*C^2-4*C^2*U^2+2*C^2*U;
+poly f3=4*A^2*U-4*A^2+2*A*B^2*U-4*A*B^2-2*A*B*U^2-2*A*B*U-8*A*C*U+8*A*C-B^4-2*B^3*U-2*B^2*C*U+4*B^2*C-2*B*C*U^2+6*B*C*U+4*C^2*U-4*C^2;
+ideal I=f0,f1,f2,f3;
+ideal G=std(I);
+print("DIM="+string(dim(G)));
+print("GB_SIZE="+string(size(G)));
+G;
