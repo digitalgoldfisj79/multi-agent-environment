@@ -5,13 +5,14 @@ poly f2=-2*A^2*B-2*A^2*U-2*A*B^3*U-A*B^3-2*A*B^2*U^2-2*A*B^2*U+4*A*B*C*U+4*A*C*U
 poly f3=4*A^2*U-4*A^2+2*A*B^2*U-4*A*B^2-2*A*B*U^2-2*A*B*U-8*A*C*U+8*A*C-B^4-2*B^3*U-2*B^2*C*U+4*B^2*C-2*B*C*U^2+6*B*C*U+4*C^2*U-4*C^2;
 ideal I=f0,f1,f2,f3;
 LIB "elim.lib";
+LIB "primdec.lib";
 poly omega=U*A*(B^2-4*C);
 ideal J=sat(I,omega)[1];
 ideal JB=sat(J,B)[1];
 ideal JX=sat(J,A-C)[1];
 print("B_CHART_BEGIN");
-std(JB);
+radical(JB);
 print("B_CHART_END");
 print("X_CHART_BEGIN");
-std(JX);
+radical(JX);
 print("X_CHART_END");
