@@ -1,0 +1,2 @@
+   V(F_13) complete count: total=20857  arithmetic(irreducible)=8  split-spurious=5873  degenerate(C=A or D=B)=14976   orientation-invariant holds at 11339/20857
+   V(F_17) complete count: total=47823  arithmetic(irreducible)=22  split-spurious=12985  degenerate(C=A or D=B)=34816   orientation-invariant holds at 26153/47823

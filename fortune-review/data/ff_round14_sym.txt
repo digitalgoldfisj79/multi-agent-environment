@@ -1,0 +1,6 @@
+== A/B. symbolic verification and q-freeness ==
+PASS  A N_F identity: eta^2 = Disc and N_F(x_i) = eta*(x_{i+1}-x_i), SYMBOLIC over Q
+PASS  A canonical (11,3) point satisfies the Q-uniform system mod 11 (17 equations)
+PASS  A Jacobian rank = 16 at the canonical point (tangent dim 1), independent linear algebra  rank=16
+PASS  A orientation invariant eta_A*eta_D = eta_B*eta_C at the canonical point
+PASS  B q-FREENESS: the system involves no q-th powers (max total degree 4; built once over Q) — one variety for all odd q; the Frobenius-consistency constraint is NOT part of the system

@@ -1,0 +1,2 @@
+== C. complete V(F_11) point count ==
+   V(F_11) complete count: total=12261  arithmetic(irreducible)=4  split-spurious=3457  degenerate(C=A or D=B)=8800   orientation-invariant holds at 6585/12261

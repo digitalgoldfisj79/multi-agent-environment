@@ -1,0 +1,11 @@
+# True-vs-orientation-spurious classification of nondegenerate irreducible
+# V(F_q)-points (k=3 q-free defect variety, gauge A2=0, lambda=1).
+# NOTE: a first probe without degeneracy exclusions counted the trivial
+# diagonal A=B=C=D (all four true divisibilities degenerate to 0=0 there);
+# that probe is superseded by the corrected counts below, which exclude
+# C,D in {A,B}, C=D, A=B.
+q=11: NONDEGENERATE irreducible V-points: true incidences = 2 (rho=[7, 8]), orientation-spurious = 2
+q=13: NONDEGENERATE irreducible V-points: true incidences = 0 (rho=[]), orientation-spurious = 8
+q=17: NONDEGENERATE irreducible V-points: true incidences = 2 (rho=[8, 15]), orientation-spurious = 20
+# Cross-checks: true counts equal census/(q(q-1)) = 2, 0, 2; the section_count
+# "arithmetic" column (4, 8, 22) = true + orientation-spurious exactly.
