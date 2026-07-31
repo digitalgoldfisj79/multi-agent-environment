@@ -6,9 +6,14 @@ completion here; the rest are this round's):
 - chartB_universal.sing / chartX_universal.sing: GB + reduce(T) + lift over Q
   for the two localization charts (B != 0 resp. A-C != 0).  Both give
   reduce(T, G) = (0,0,0).
-- chartX_liftverify.sing: recomputes the X-chart lift and verifies
-  T = K*M inside Singular (exact).  The B-chart lift identity was verified
-  by independent parsing + re-expansion in sympy (see the data log).
+- verify_lift_identities.py: the verification OF RECORD for both lift
+  identities T = K*M -- independent parsing of the Singular lift output and
+  exact re-expansion over Q with Fraction dict arithmetic (plus mod-1009 and
+  mod-10007 checks).  Both charts verify.
+- chartX_liftverify.sing: a Singular-native variant of the same check,
+  provided for reproducibility; note it recomputes the lift and did NOT
+  complete within 25 minutes in this environment -- use
+  verify_lift_identities.py on the emitted lift output instead.
 - ideal_faithfulness.sing: proves the branch's f0..f3 generate the same
   ideal as my independently derived Round-14 model after inverting U
   (mutual reduction; prints IDEALS_AGREE_ON_U_NONZERO).
