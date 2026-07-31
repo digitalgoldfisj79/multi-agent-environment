@@ -81,19 +81,21 @@ q = 2k. The corollaries check: completeness proved for all k ≥ q; the strip
 k < q < 2k proved empty (h forced zero, families impossible by degree, cross
 contact impossible); the phase transition at q = 2k exactly located.
 
-### The census — VERIFIED at k = 3 for q ≤ 23, including the absences
+### The census — VERIFIED at k = 3 for all q ≤ 37, including the absences
 
 My independent translation-normalized enumeration (count × q; translations
-act freely for q ≠ 3) reproduces the branch's cubic census exactly on
-q = 5, 7, 11, 13, 17, 19, 23 — **including the nontrivial absences at
-q = 13 and 23**, which are the strongest cross-implementation checks
+act freely for q ≠ 3; L reduced per prime by Frobenius square-and-multiply)
+reproduces the branch's cubic census exactly on all ten rows
+q = 5, 7, 11, 13, 17, 19, 23, 29, 31, 37 (0, 0, 220, 0, 544, 684, 0, 1624,
+1860, 5328) — **including the nontrivial absences at q = 13 and 23**,
+which are the strongest cross-implementation checks
 (an off-by-anything bug would almost surely break an exact zero). At q = 11
 the full structure verifies: 220 incidences = 2 free AGL(1,11)-orbits of
 size 110; every incidence has h ≠ 0 with **deg h = 5 = q − 2k exactly**
 (the bound is attained, never slack, on this panel); and the two orbits
 carry d/c = 3 and 4 respectively — **reciprocal values mod 11**, i.e. the
 two orbits are reversal-partners ((a,b) ↔ (b,a) maps d/c ↦ c/d). Rows
-q = 29..59 of the census I did not independently re-run (C++-scale); they
+q = 41..59 of the census I did not independently re-run; they
 are consistent with the exact orbit arithmetic (every count is a perfect
 union of q(q−1)-orbits) and I treat them as the branch labels them:
 empirical-exact finite panels from a machine-verified implementation.
@@ -150,8 +152,8 @@ thinning is the right order. Two calibrations from the audit data:
 
 | Status | Item |
 |---|---|
-| **VERIFIED (this audit, exact)** | The (11,3) counterexample from original definitions (frequencies, witnesses, defect, all BDD1 identities); BDD1/BDD2 re-derivations; h = 0 with c + d = 0 on all Round-12 reflection (k=4,5) and translation (k=5,6) points; the cubic census q ≤ 23 including the q = 13, 23 absences; the (11,3) orbit structure (2 × 110), deg h = q − 2k attained, reciprocal d/c orbit invariants. |
+| **VERIFIED (this audit, exact)** | The (11,3) counterexample from original definitions (frequencies, witnesses, defect, all BDD1 identities); BDD1/BDD2 re-derivations; h = 0 with c + d = 0 on all Round-12 reflection (k=4,5) and translation (k=5,6) points; the cubic census on all rows q ≤ 37 including the q = 13, 23 absences; the quadratic census empty through q = 53; the (11,3) orbit structure (2 × 110), deg h = q − 2k attained, reciprocal d/c orbit invariants. |
 | **RETRACTED (mine)** | C12-2 (universal c + d = 0); the emptiness half of C12-6 and the "diagonal-only large-field identity" inference. The zero-defect halves of Round 12 stand, now as the branch's proved BDD2 classification. |
 | **NEW (this audit)** | Quadratic defect census: empty through q = 41 (k = 2); the reversal-pairing of the (11,3) orbits; the recommendation to split NDC_FF into existence + amplitude theories. |
-| **NOT INDEPENDENTLY RE-RUN** | Census rows q = 29..59 (accepted as labelled: machine-verified implementation, exact finite panels). |
+| **NOT INDEPENDENTLY RE-RUN** | Census rows q = 41..59 (accepted as labelled: machine-verified implementation, exact finite panels; all rows q ≤ 37 independently confirmed). |
 | **OPEN (concurring)** | NDC_FF; corrected CBI_FF with explicit defect components; endpoint FFPR; θ-restoration; conductor coupling; thinning; every integer interface; Fortune. |

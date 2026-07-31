@@ -9,3 +9,6 @@ PASS  C3 cubic census q=13: total incidences = 0 (branch), independent count  go
 PASS  C3 cubic census q=17: total incidences = 544 (branch), independent count  got 544
 PASS  C3 cubic census q=19: total incidences = 684 (branch), independent count  got 684
 PASS  C3 cubic census q=23: total incidences = 0 (branch), independent count  got 0
+PASS  C3 cubic census q=29: total incidences = 1624 (branch), independent count  got 1624
+PASS  C3 cubic census q=31: total incidences = 1860 (branch), independent count  got 1860
+PASS  C3 cubic census q=37: total incidences = 5328 (branch), independent count  got 5328
