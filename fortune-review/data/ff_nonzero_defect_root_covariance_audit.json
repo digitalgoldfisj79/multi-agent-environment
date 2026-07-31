@@ -1,0 +1,60 @@
+{
+  "agl_transformations_checked": 110,
+  "canonical_gauge": {
+    "P": [
+      5,
+      8,
+      0,
+      1
+    ],
+    "P_prime": [
+      9,
+      1,
+      10,
+      1
+    ],
+    "S": [
+      1,
+      2,
+      10,
+      1
+    ],
+    "S_prime": [
+      9,
+      9,
+      0,
+      1
+    ],
+    "a": 9,
+    "b": 1,
+    "defect": [
+      7,
+      0,
+      3,
+      1,
+      7,
+      7
+    ],
+    "lambda": 1,
+    "rho": 8,
+    "unique": true
+  },
+  "k": 3,
+  "original": {
+    "defect": [
+      4,
+      6,
+      6,
+      0,
+      5,
+      2
+    ],
+    "defect_degree": 5,
+    "lambda": 5,
+    "rho": 7
+  },
+  "proved_target_not_claimed": "The audit verifies exact identities on the explicit orbit; it does not prove zero-dimensionality or a uniform orbit bound.",
+  "q": 11,
+  "root_equations_checked": 4,
+  "status": "MACHINE-VERIFIED IDENTITY"
+}
