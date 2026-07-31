@@ -1,0 +1,18 @@
+ring R=0,(z,A,B,C,U),dp;
+poly f0=-4*A^2*B*U+6*A^2*B-2*A^2*U+4*A^2+4*A*B^3+4*A*B^2*U+2*A*B^2+4*A*B*C*U-8*A*B*C-4*A*C+2*B*C^2+2*C^2*U;
+poly f1=-4*A^2*U+4*A^2+2*A*B^2+6*A*B*U-2*A*B+8*A*C*U-8*A*C-2*B^2*C-2*B*C*U-2*B*C-4*C^2*U+4*C^2;
+poly f2=-2*A^2*B-2*A^2*U-2*A*B^3*U-A*B^3-2*A*B^2*U^2-2*A*B^2*U+4*A*B*C*U+4*A*C*U^2-B^3*C-2*B^2*C*U-4*B*C^2*U+2*B*C^2-4*C^2*U^2+2*C^2*U;
+poly f3=4*A^2*U-4*A^2+2*A*B^2*U-4*A*B^2-2*A*B*U^2-2*A*B*U-8*A*C*U+8*A*C-B^4-2*B^3*U-2*B^2*C*U+4*B^2*C-2*B*C*U^2+6*B*C*U+4*C^2*U-4*C^2;
+poly g0=-4*A^2*B*U + 6*A^2*B - 2*A^2*U + 4*A^2 + 4*A*B^3 + 4*A*B^2*U + 2*A*B^2 + 4*A*B*C*U - 8*A*B*C - 4*A*C + 2*B*C^2 + 2*C^2*U;
+poly g1=-4*A^2*U + 4*A^2 + 2*A*B^2 + 6*A*B*U - 2*A*B + 8*A*C*U - 8*A*C - 2*B^2*C - 2*B*C*U - 2*B*C - 4*C^2*U + 4*C^2;
+poly g2=-2*A^2*B - 2*A^2*U - 2*A*B^3*U - A*B^3 - 2*A*B^2*U^2 - 2*A*B^2*U + 4*A*B*C*U + 4*A*C*U^2 - B^3*C - 2*B^2*C*U - 4*B*C^2*U + 2*B*C^2 - 4*C^2*U^2 + 2*C^2*U;
+poly g3=4*A^2*U - 4*A^2 + 2*A*B^2*U - 4*A*B^2 - 2*A*B*U^2 - 2*A*B*U - 8*A*C*U + 8*A*C - B^4 - 2*B^3*U - 2*B^2*C*U + 4*B^2*C - 2*B*C*U^2 + 6*B*C*U + 4*C^2*U - 4*C^2;
+ideal KT=f0,f1,f2,f3,z*U-1;
+ideal GT=std(KT);
+ideal KM=g0,g1,g2,g3,z*U-1;
+ideal GM=std(KM);
+ideal RT=reduce(ideal(g0,g1,g2,g3),GT);
+ideal RM=reduce(ideal(f0,f1,f2,f3),GM);
+int ok=1; int i;
+for(i=1;i<=4;i++){ if(RT[i]!=0){ok=0;} if(RM[i]!=0){ok=0;} }
+if(ok){print("IDEALS_AGREE_ON_U_NONZERO");}else{print("IDEAL_MISMATCH");RT;RM;}
