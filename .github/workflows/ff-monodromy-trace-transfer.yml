@@ -1,0 +1,58 @@
+name: Validate monodromy and trace transfer gates
+
+on:
+  push:
+    branches:
+      - gpt56/fortune-monodromy-trace-transfer-20260731
+    paths:
+      - fortune-review/literature_transfer/**
+      - fortune-review/scripts/ff_d1_*.py
+      - fortune-review/scripts/ff_tfp3_jacobian_panel_audit.py
+      - fortune-review/scripts/ff_tfp3_rho_one_defect_audit.py
+      - frontier/d1_symp/chuang_specialization_audit.py
+      - frontier/d1_symp/mod_p_adams_sequence_verify.py
+      - .github/workflows/ff-monodromy-trace-transfer.yml
+  pull_request:
+    paths:
+      - fortune-review/literature_transfer/**
+      - fortune-review/scripts/ff_d1_*.py
+      - fortune-review/scripts/ff_tfp3_jacobian_panel_audit.py
+      - fortune-review/scripts/ff_tfp3_rho_one_defect_audit.py
+      - frontier/d1_symp/chuang_specialization_audit.py
+      - frontier/d1_symp/mod_p_adams_sequence_verify.py
+      - .github/workflows/ff-monodromy-trace-transfer.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ff-lit-transfer-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  gate-audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install exact dependencies
+        run: python3 -m pip install --quiet sympy python-flint
+      - name: Audit Airy Picard-Lefschetz specialization
+        run: |
+          python3 frontier/d1_symp/chuang_specialization_audit.py --primes 11 17 23 29
+          python3 frontier/d1_symp/mod_p_adams_sequence_verify.py
+      - name: Audit rank and conductor scale
+        run: python3 fortune-review/scripts/ff_d1_trace_literature_gate.py 5 7 11 13 17 23 29 43 61 101
+      - name: Reproduce q-line identity discriminator
+        run: |
+          python3 fortune-review/scripts/ff_d1_qline_j1_census.py 5 7 11 13 > /tmp/qline.jsonl
+          python3 - <<'PY'
+          import json
+          got={row['p']:row['sum_E1_over_p'] for row in map(json.loads,open('/tmp/qline.jsonl'))}
+          assert got=={5:-1,7:-1,11:-1,13:3},got
+          PY
+      - name: Audit rho=1 correction
+        run: PYTHONPATH=fortune-review/scripts python3 fortune-review/scripts/ff_tfp3_rho_one_defect_audit.py
+      - name: Validate gate matrix JSON
+        run: python3 -m json.tool fortune-review/literature_transfer/gate_matrix.json >/dev/null
