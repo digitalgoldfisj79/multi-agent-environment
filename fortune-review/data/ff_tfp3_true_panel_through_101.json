@@ -1,0 +1,40 @@
+{
+  "status": "EMPIRICAL-EXACT FINITE PANEL",
+  "branch_base": "69271f1f2d71f10ba68b8d8dc5fb6ce303e382d8",
+  "classifier_source_blob": "ae127e40f901039d3ac16600f025c0fb53333035",
+  "canonical_panel_jsonl_sha256": "8e3277cbd32607b198b0a8a398c615f762f55e261e683396e0fc11cc04eecce7",
+  "jobs": {
+    "q_61_67_71": "6a6cbb836b79c09949c1d77f",
+    "q_73_79_83": "6a6cbb9da00abefd4b289c52",
+    "q_89_97_101": "6a6cbbb56b79c09949c1d787",
+    "full_canonical_panel": "6a6cbde76b79c09949c1d7ad",
+    "orientation_sign_audit": "6a6cbd9e6b79c09949c1d7ab"
+  },
+  "fields": [
+    {"q":5,"true_orbits":0,"incidences":0,"normalized_rho":[]},
+    {"q":7,"true_orbits":0,"incidences":0,"normalized_rho":[]},
+    {"q":11,"true_orbits":2,"incidences":220,"normalized_rho":[7,8]},
+    {"q":13,"true_orbits":0,"incidences":0,"normalized_rho":[]},
+    {"q":17,"true_orbits":2,"incidences":544,"normalized_rho":[8,15]},
+    {"q":19,"true_orbits":2,"incidences":684,"normalized_rho":[4,5]},
+    {"q":23,"true_orbits":0,"incidences":0,"normalized_rho":[]},
+    {"q":29,"true_orbits":2,"incidences":1624,"normalized_rho":[12,17]},
+    {"q":31,"true_orbits":2,"incidences":1860,"normalized_rho":[24,22]},
+    {"q":37,"true_orbits":4,"incidences":5328,"normalized_rho":[18,20,35,13]},
+    {"q":41,"true_orbits":6,"incidences":9840,"normalized_rho":[28,17,29,21,2,22]},
+    {"q":43,"true_orbits":6,"incidences":10836,"normalized_rho":[37,20,35,7,16,28]},
+    {"q":47,"true_orbits":2,"incidences":4324,"normalized_rho":[40,20]},
+    {"q":53,"true_orbits":6,"incidences":16536,"normalized_rho":[15,5,46,26,32,51]},
+    {"q":59,"true_orbits":4,"incidences":13688,"normalized_rho":[36,35,27,41]},
+    {"q":61,"true_orbits":6,"incidences":21960,"normalized_rho":[50,5,4,46,49,11]},
+    {"q":67,"true_orbits":12,"incidences":53064,"normalized_rho":[36,37,61,58,29,52,54,48,18,41,7,11]},
+    {"q":71,"true_orbits":10,"incidences":49700,"normalized_rho":[45,44,29,49,28,21,60,30,58,33]},
+    {"q":73,"true_orbits":8,"incidences":42048,"normalized_rho":[52,66,25,25,38,32,38,16]},
+    {"q":79,"true_orbits":8,"incidences":49296,"normalized_rho":[30,29,52,51,65,38,31,62]},
+    {"q":83,"true_orbits":14,"incidences":95284,"normalized_rho":[47,34,38,22,4,21,77,53,59,12,69,32,7,13]},
+    {"q":89,"true_orbits":18,"incidences":140976,"normalized_rho":[64,83,78,74,73,82,38,27,50,60,33,46,6,18,8,15,32,5]},
+    {"q":97,"true_orbits":16,"incidences":148992,"normalized_rho":[39,5,37,2,10,68,39,49,5,21,21,7,1,14,1,37]},
+    {"q":101,"true_orbits":24,"incidences":242400,"normalized_rho":[34,17,26,60,34,45,35,9,36,32,74,86,3,6,27,87,3,15,12,68,73,59,52,18]}
+  ],
+  "boundary": "Finite exact data neither proves nor formally refutes a uniform O(1) theorem."
+}
