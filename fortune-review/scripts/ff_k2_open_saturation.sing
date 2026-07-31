@@ -6,10 +6,12 @@ poly f3=4*A^2*U-4*A^2+2*A*B^2*U-4*A*B^2-2*A*B*U^2-2*A*B*U-8*A*C*U+8*A*C-B^4-2*B^
 ideal I=f0,f1,f2,f3;
 LIB "elim.lib";
 LIB "primdec.lib";
-poly omega=U*A*(B^2-4*C);
-ideal J=sat(I,omega)[1];
-ideal JB=sat(J,B)[1];
-ideal JX=sat(J,A-C)[1];
+ideal O=U*A*(B^2-4*C);
+ideal QB=B;
+ideal QX=A-C;
+ideal J=sat(I,O)[1];
+ideal JB=sat(J,QB)[1];
+ideal JX=sat(J,QX)[1];
 print("B_CHART_BEGIN");
 radical(JB);
 print("B_CHART_END");
