@@ -7,6 +7,10 @@ on:
     paths:
       - fortune-review/scripts/ff_nonzero_defect_cubic_ideal_generator.py
       - .github/workflows/ff-nonzero-defect-cubic-ideal.yml
+  pull_request:
+    paths:
+      - fortune-review/scripts/ff_nonzero_defect_cubic_ideal_generator.py
+      - .github/workflows/ff-nonzero-defect-cubic-ideal.yml
   workflow_dispatch:
 
 jobs:
