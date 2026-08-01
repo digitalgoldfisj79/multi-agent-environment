@@ -1,0 +1,220 @@
+== ff_round16_audit.py q97 ==
+PASS  R1.1 four DISTINCT irreducible cubics over F_97
+PASS  R1.1 ORIGINAL-DEFINITION incidence: mu_a P' - mu_b P = -1, nu_a S' - nu_b S = 1  (c = -1, d = 1, c + d = 0)
+PASS  R1.1 common defect h != 0 with deg h = 89 <= q-2k = 91; all BDD1 identities exact
+PASS  R1.1 CONVERSE FALSIFIED: c + d = 0 (rho = lambda = 1) yet h != 0 — 'h = 0 <=> c + d = 0' fails right-to-left
+PASS  R1.1 Frobenius orientation: all four oriented equations hold with eta = eta^F (sigma = (1,1,1,1)) and kappa = +1
+PASS  R1.2 four DISTINCT irreducible cubics over F_97
+PASS  R1.2 ORIGINAL-DEFINITION incidence: mu_a P' - mu_b P = -1, nu_a S' - nu_b S = 1  (c = -1, d = 1, c + d = 0)
+PASS  R1.2 common defect h != 0 with deg h = 89 <= q-2k = 91; all BDD1 identities exact
+PASS  R1.2 CONVERSE FALSIFIED: c + d = 0 (rho = lambda = 1) yet h != 0 — 'h = 0 <=> c + d = 0' fails right-to-left
+PASS  R1.2 Frobenius orientation: all four oriented equations hold with eta = eta^F (sigma = (1,1,1,1)) and kappa = +1
+== ff_round16_audit.py torsor ==
+PASS  R2 resultant identity Res(F, N_e) - e^4 = -(e^2 - disc F) Q/8 (my own expansion)
+PASS  R2 elimination: (eA eD - eB eC) * RAB * RCD lies in the ideal of the four block relations — the identity holds where the resultants are nonzero
+PASS  R2 sixteen sign vectors = two DISJOINT 8-element torsors indexed by kappa; (1,1,1,1) only in kappa = +1
+== ff_round16_audit.py qline (p=5..29) ==
+PASS  R4 q-line sums: sum E_1 / p = -1, -1, -1 at p = 5, 7, 11 (the '-p' identity) but 3, 3, 1, 3, -7 at p = 13..29 — the universal Tate identity is FALSIFIED at 13 and keeps varying, including a sign flip at 29  got {5: -1, 7: -1, 11: -1, 13: 3, 17: 3, 19: 1, 23: 3, 29: -7}
+== ff_round16_audit.py panel ==
+PASS  R5 committed panel: every row has incidences = orbits * q(q-1)
+PASS  R5 committed panel: every rho multiset is invariant under rho -> rho^{-1} (transpose symmetry), including the two rho = 1 entries at q = 97
+== ff_round16_audit.py kappa (archived run) ==
+PASS  R3 q=11: q-free identity eta_A eta_D = eta_B eta_C holds on ALL 4 irreducible nondegenerate points  held at 4/4
+PASS  R3 q=11: relative-sign equation sigma_A sigma_D = kappa sigma_B sigma_C holds at every point
+PASS  R3 q=11: true class sigma = (1,1,1,1) has 2 points (= census), every one with kappa = +1  true rho values [7, 8]
+   q=11: spurious points 2, kappa values occurring among them: [1] (+1 count 2, -1 count 0)
+PASS  R3 q=13: q-free identity eta_A eta_D = eta_B eta_C holds on ALL 8 irreducible nondegenerate points  held at 8/8
+PASS  R3 q=13: relative-sign equation sigma_A sigma_D = kappa sigma_B sigma_C holds at every point
+PASS  R3 q=13: true class sigma = (1,1,1,1) has 0 points (= census), every one with kappa = +1  true rho values []
+   q=13: spurious points 8, kappa values occurring among them: [-1, 1] (+1 count 4, -1 count 4)
+PASS  R3 q=17: q-free identity eta_A eta_D = eta_B eta_C holds on ALL 22 irreducible nondegenerate points  held at 22/22
+PASS  R3 q=17: relative-sign equation sigma_A sigma_D = kappa sigma_B sigma_C holds at every point
+PASS  R3 q=17: true class sigma = (1,1,1,1) has 2 points (= census), every one with kappa = +1  true rho values [8, 15]
+   q=17: spurious points 20, kappa values occurring among them: [1] (+1 count 20, -1 count 0)
+
+== branch verifiers at d807178 (clean worktree) ==
+{
+  "implication_correction": "h=0 implies rho=1; rho=1 does not imply h=0",
+  "records": [
+    {
+      "defect_degree": 89,
+      "defect_leading_coefficient": 30,
+      "defect_nonzero": true,
+      "eta": [
+        91,
+        48,
+        6,
+        49
+      ],
+      "q": 97,
+      "rho": 1
+    },
+    {
+      "defect_degree": 89,
+      "defect_leading_coefficient": 67,
+      "defect_nonzero": true,
+      "eta": [
+        49,
+        6,
+        48,
+        91
+      ],
+      "q": 97,
+      "rho": 1
+    }
+  ],
+  "status": "TFP3_RHO_ONE_NONZERO_DEFECT_EXACT_PASS"
+}
+{
+  "boundary": "The identity gives two eight-element sign torsors, not a globally regular degree-eight cover. Componentwise kappa, etaleness and monodromy remain open.",
+  "frobenius_base_invariant": "kappa=(etaA_F*etaD_F)/(etaB_F*etaC_F)",
+  "kernel_size": 8,
+  "q_free_orientation_identity": "eA*eD=eB*eC",
+  "relative_sign_equation": "sigmaA*sigmaD=kappa*sigmaB*sigmaC",
+  "status": "TFP3_ORIENTATION_TORSOR_EXACT_PASS",
+  "torsor_sizes": {
+    "kappa_+1": 8,
+    "kappa_-1": 8
+  },
+  "true_class_requirement": "kappa=+1 and sigma=(1,1,1,1)"
+}
+{
+  "counts": {
+    "101": {
+      "incidences": 242400,
+      "true_orbits": 24
+    },
+    "11": {
+      "incidences": 220,
+      "true_orbits": 2
+    },
+    "13": {
+      "incidences": 0,
+      "true_orbits": 0
+    },
+    "17": {
+      "incidences": 544,
+      "true_orbits": 2
+    },
+    "19": {
+      "incidences": 684,
+      "true_orbits": 2
+    },
+    "23": {
+      "incidences": 0,
+      "true_orbits": 0
+    },
+    "29": {
+      "incidences": 1624,
+      "true_orbits": 2
+    },
+    "31": {
+      "incidences": 1860,
+      "true_orbits": 2
+    },
+    "37": {
+      "incidences": 5328,
+      "true_orbits": 4
+    },
+    "41": {
+      "incidences": 9840,
+      "true_orbits": 6
+    },
+    "43": {
+      "incidences": 10836,
+      "true_orbits": 6
+    },
+    "47": {
+      "incidences": 4324,
+      "true_orbits": 2
+    },
+    "5": {
+      "incidences": 0,
+      "true_orbits": 0
+    },
+    "53": {
+      "incidences": 16536,
+      "true_orbits": 6
+    },
+    "59": {
+      "incidences": 13688,
+      "true_orbits": 4
+    },
+    "61": {
+      "incidences": 21960,
+      "true_orbits": 6
+    },
+    "67": {
+      "incidences": 53064,
+      "true_orbits": 12
+    },
+    "7": {
+      "incidences": 0,
+      "true_orbits": 0
+    },
+    "71": {
+      "incidences": 49700,
+      "true_orbits": 10
+    },
+    "73": {
+      "incidences": 42048,
+      "true_orbits": 8
+    },
+    "79": {
+      "incidences": 49296,
+      "true_orbits": 8
+    },
+    "83": {
+      "incidences": 95284,
+      "true_orbits": 14
+    },
+    "89": {
+      "incidences": 140976,
+      "true_orbits": 18
+    },
+    "97": {
+      "incidences": 148992,
+      "true_orbits": 16
+    }
+  },
+  "field_range": [
+    5,
+    101
+  ],
+  "formal_O1_refutation": false,
+  "interpretation": "The exact finite panel strongly disfavours stabilization at the previously observed ceiling, but no finite panel proves or refutes a uniform O(1) theorem.",
+  "linear_fit_q_ge_29": {
+    "intercept": -6.620220924908423,
+    "r_squared": 0.7951651051385721,
+    "slope": 0.24556433150183146
+  },
+  "linear_growth_alarm": true,
+  "maximum_true_orbits": {
+    "count": 24,
+    "q": 101
+  },
+  "next_theorem": "Identify the one-dimensional nondegenerate irreducible component(s), construct the eight-class Frobenius-sign cover, and prove either positive-density Chebotarev growth or confinement of the all-positive sign class to a bounded exceptional locus.",
+  "number_of_fields": 24,
+  "status": "EMPIRICAL_EXACT_FINITE_PANEL"
+}
+p=11 rank=1 A'_corr(k=p)=[1] E'_inv(k=p)=[]
+  tr_p=-1771561 p*tr_pm2=1771561 virtual=-3543122
+  normalized=(-1, 1, -2)
+p=17 rank=2 A'_corr(k=p)=[1] E'_inv(k=p)=[]
+  tr_p=-202296965789 p*tr_pm2=0 virtual=-202296965789
+  normalized=(-29/17, 0, -29/17)
+p=23 rank=3 A'_corr(k=p)=[1] E'_inv(k=p)=[]
+  tr_p=9735230135207515 p*tr_pm2=-13505042655649574 virtual=23240272790857089
+  normalized=(235/529, -326/529, 561/529)
+p=29 rank=4 A'_corr(k=p)=[1] E'_inv(k=p)=[]
+  tr_p=17221580757743000101634 p*tr_pm2=-5924628544775579091545 virtual=23146209302518579193179
+  normalized=(48674/24389, -16745/24389, 65419/24389)
+p=5: GL2 generator identities and dimensions: OK
+p=7: GL2 generator identities and dimensions: OK
+p=11: GL2 generator identities and dimensions: OK
+p=13: GL2 generator identities and dimensions: OK
+p=17: GL2 generator identities and dimensions: OK
+p=23: GL2 generator identities and dimensions: OK
+p=29: GL2 generator identities and dimensions: OK
+p=41: GL2 generator identities and dimensions: OK
+MOD-p ADAMS/FROBENIUS EXACT SEQUENCE VERIFIED
