@@ -1,114 +1,109 @@
 {
-  "programme": "D1_AIRY_HOOK_INTEGRAL_TRANSPORT_V0_2",
+  "programme": "D1_QLINE_NONSATURATION_WITH_SECONDARY_AIRY_V0_3",
   "date": "2026-08-01",
   "parent_commit": "c331f740e06a95e5596639800c931e2629ff9178",
+  "application_audit_commit": "b2fc61d060e7c613d555b3401f3f2f574fe6f8e8",
   "scope": "function-field d=1, current sector p congruent 5 mod 6",
-  "governing_issue": 41,
+  "governing_issue": 44,
+  "parent_application_issue": 41,
+  "broader_airy_issue": 39,
   "execution_round": 1,
-  "priority_rule": "The raw application transport lane has been audited first and formally obstructed; activate the integral Tate-diagonal lane while preserving the Tate-normalized divided-power Rees comparison as a secondary open theorem.",
+  "priority_rule": "Prove q-line simultaneous non-saturation before further Airy or integral-lift work. Airy Rees and ITD are secondary because transport alone does not close the crown.",
   "gates": [
     {
-      "id": "ABT-0",
-      "title": "Literal object dictionary",
+      "id": "QNS-0",
+      "title": "Exact simultaneous-failure reduction",
       "priority": 1,
       "status": "PASS",
       "remote_compute_allowed": false,
-      "result": "Every source summand, projector, degree, shift, twist, Frobenius convention and boundary term has a literal carrier. The only possible Airy carrier is the nonzero-frequency Fourier-Cayley sector."
+      "result": "Crown failure forces the single trace point S0=p(C_++C_-), Schi=p(C_+-C_-). Excluding that point is sufficient and weaker than a full q-line asymptotic."
     },
     {
-      "id": "ABT-1",
-      "title": "Invariant compatibility",
+      "id": "QNS-1",
+      "title": "Middle-hook non-saturation theorem",
       "priority": 2,
-      "status": "RAW_INTEGRAL_LANE_CLOSED",
+      "status": "READY_NEW_THEOREM_REQUIRED",
       "remote_compute_allowed": false,
-      "result": "Zero frequency is excluded by weights. A uniform unit-coefficient Airy term inside an honest untwisted integral q-line projector plus integral residual is excluded by the exact negative p-adic valuation at p=23 and the recorded uniform valuation theorem.",
-      "secondary_open_target": "Tate-normalized virtual divided-power Rees comparison with explicit compensating valuation and boundary ledger.",
-      "pivot_certificate": "Proved weight and p-adic integrality mismatch."
+      "target": "After removing the proved Kummer and explicit end pieces, control the invariant/quadratic assembly of M_q=sum_(i=3)^(p-3)(-1)^i H^1(P1,j_* wedge^i Std) strongly enough to exclude the saturation point.",
+      "admissible_routes": [
+        "post-parabolic or additive-wild quantum-bar parity-reversing complex",
+        "direct global invariant/quadratic q-line trace",
+        "one-sided, congruence, determinant or nonvanishing certificate"
+      ]
     },
     {
-      "id": "ABT-2",
-      "title": "All-Frobenius trace identity",
-      "priority": 3,
-      "status": "CLOSED_ON_RAW_LANE_BLOCKED_ON_VIRTUAL_REES",
-      "remote_compute_allowed": false,
-      "pass": "An exact identity for every Frobenius power in a constructed Tate-normalized virtual category, with literal Tate, Artin-Schreier and punctual corrections."
-    },
-    {
-      "id": "ABT-3",
-      "title": "Semisimple transport",
-      "priority": 4,
-      "status": "BLOCKED_BY_VIRTUAL_REES_CONSTRUCTION",
-      "remote_compute_allowed": false
-    },
-    {
-      "id": "ABT-4",
-      "title": "Derived/application transport",
-      "priority": 5,
-      "status": "BLOCKED_BY_VIRTUAL_REES_CONSTRUCTION",
-      "remote_compute_allowed": false,
-      "target": "Divided-power Rees invariance of the wild nonzero-frequency phase, preserving Frobenius and every correction cone."
-    },
-    {
-      "id": "ABT-5",
+      "id": "QNS-2",
       "title": "Half-sector crown assembly",
-      "priority": 6,
-      "status": "BLOCKED_BY_QLINE_MAIN_TERM_AND_TRANSPORT",
-      "remote_compute_allowed": false,
-      "result": "Even a successful virtual transport leaves the original q-line error-versus-main-term theorem or a weaker one-sided nonfailure certificate.",
+      "priority": 3,
+      "status": "BLOCKED_BY_QNS-1",
+      "remote_compute_allowed": true,
+      "pass": "Insert the non-saturation theorem into the exact boundary and small-prime ledger for the p congruent 5 mod 6 sector.",
       "claim_boundary": "No full d=1 or integer Fortune claim."
     },
     {
-      "id": "ITD-0",
-      "title": "Integral model and comparison",
-      "priority": 7,
-      "status": "READY_NEW_THEOREM_REQUIRED",
+      "id": "ABT-0",
+      "title": "Literal Airy-to-hook object dictionary",
+      "priority": 4,
+      "status": "PASS",
       "remote_compute_allowed": false,
-      "pass": "A perfect C_p-equivariant integral Airy complex and Weil-compatible comparison realizing both the generic Adams trace and modular Smith/Tate contraction.",
-      "current_object": "M_p = RGamma_c(A1, A_O tensor^p)^{mu_3} with cyclic action and Frobenius."
+      "result": "All source, target and correction objects are literal; the only possible Airy carrier is nonzero Fourier frequency."
     },
     {
-      "id": "ITD-1",
-      "title": "Bounded-cone attempt",
-      "priority": 8,
-      "status": "BLOCKED_BY_ITD-0_NATURAL_LIFT_ALREADY_FALSE",
-      "remote_compute_allowed": true,
-      "pass": "Uniformly bounded generic comparison cone after the explicit Tate correction.",
+      "id": "ABT-1",
+      "title": "Raw integral invariant compatibility",
+      "priority": 5,
+      "status": "RAW_INTEGRAL_LANE_CLOSED",
+      "remote_compute_allowed": false,
+      "result": "Zero frequency is excluded by weights and a uniform unit-coefficient raw integral Airy identity is excluded by p-adic integrality."
+    },
+    {
+      "id": "ABT-VIRTUAL",
+      "title": "Divided-power virtual Rees transport",
+      "priority": 6,
+      "status": "SECONDARY_OPEN_NEW_THEOREM",
+      "remote_compute_allowed": false,
+      "target": "Frobenius-compatible Rees invariance from the nonlinear wild phase to the actual Pascal oscillator with exact Tate/integrality and boundary cones.",
+      "boundary": "Success does not replace QNS-1."
+    },
+    {
+      "id": "ITD-0",
+      "title": "Integral Tate-diagonal comparison",
+      "priority": 7,
+      "status": "SECONDARY_OPEN_NEW_THEOREM",
+      "remote_compute_allowed": false,
+      "target": "A perfect C_p-equivariant integral Airy comparison realizing both generic Adams trace and modular Smith/Tate contraction.",
       "known_obstruction": "The natural Dwork lift has linearly growing surviving defect."
     },
     {
-      "id": "ITD-2",
-      "title": "Linear-cone cancellation",
-      "priority": 9,
-      "status": "READY_ONLY_AFTER_EXPLICIT_COMPARISON",
+      "id": "ITD-1",
+      "title": "Controlled cone or cancellation",
+      "priority": 8,
+      "status": "BLOCKED_BY_ITD-0",
       "remote_compute_allowed": true,
-      "pass": "Absolute Frobenius trace O(p^((p+1)/2)) after exact trivial and Artin-Schreier subtraction."
-    },
-    {
-      "id": "ITD-3",
-      "title": "Analytic propagation",
-      "priority": 10,
-      "status": "BLOCKED_BY_ITD-1_OR_ITD-2",
-      "remote_compute_allowed": false,
-      "pass": "Absolute Airy estimate and insertion into the exact application ledger."
+      "pass": "Uniformly bounded generic cone or absolute Frobenius trace O(p^((p+1)/2)) in the explicit linear cone.",
+      "boundary": "Success still requires QNS-1 or another application-side nonfailure certificate."
     },
     {
       "id": "SECTOR",
       "title": "Full d=1 sector ledger",
-      "priority": 11,
+      "priority": 9,
       "status": "BLOCKED_BY_HALF_SECTOR",
       "remote_compute_allowed": false,
-      "pass": "All other prime sectors and small primes are separately certified before any full d=1 claim."
+      "pass": "All remaining prime sectors and small primes are separately certified before any full d=1 claim."
     }
   ],
   "closed_routes": [
-    "Airy constituent in the canonical zero-frequency Fourier summand",
-    "uniform raw integral unit-coefficient Airy identity for S_0 or S_chi",
+    "boundary-only positivity",
+    "canonical pre-pushforward deletion/Koszul complex",
+    "low-degree split q-line factor extrapolation",
+    "unstructured split first-trace pattern fitting",
+    "termwise Weil bounds on the exponential-rank hook object",
+    "Airy transport as a complete crown proof",
+    "Airy constituent in canonical zero Fourier frequency",
+    "uniform raw integral unit-coefficient Airy identity for S0 or Schi",
     "Spin/Clausen/Hayes reformulation",
     "ordinary Morse linearization of the wild phase",
-    "natural two-variable alternating correspondence",
-    "characteristic-zero cross-weight correspondence",
     "natural Dwork bounded-cone claim",
-    "uncollapsed generic short-trace import",
     "raw prime sweeps without a preregistered identity",
     "TFP3 transfer without an explicit theorem-level bridge"
   ],

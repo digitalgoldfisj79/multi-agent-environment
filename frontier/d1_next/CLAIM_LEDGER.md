@@ -1,68 +1,69 @@
-# Claim ledger — direct `d=1` Airy transport programme
+# Claim ledger — direct `d=1` q-line programme
 
 **Date:** 1 August 2026  
-**Programme:** `D1_AIRY_HOOK_INTEGRAL_TRANSPORT_V0_2`
+**Programme:** `D1_QLINE_NONSATURATION_WITH_SECONDARY_AIRY_V0_3`
 
 ## PROVED inputs
 
-- The sparse ordered-root family is finite flat over the cubic-tail coefficient space and its separable open is the exact `S_p`-torsor carrying the irreducibility hook local system.
-- Global integral Fourier elimination sends the first `p-4` coefficient directions to the forced Tate and even cohomological shift and leaves the literal cubic-tail/q-line complex.
-- The residual Jordan coordinates are exactly `(3A,2B,C)`; the constant coefficient is the translation/punctual direction.
-- The arithmetic classes are exactly the constant and quadratic q-line projectors `S_0` and `S_chi`, with explicit q=2 and q=infinity boundary counts.
-- The normalized Airy constituent is absent from canonical zero Fourier frequency by weights.
-- Chuang specialization contributes one explicit Tate-line correction at `k=p`, none at `k=p-2`, and no invariant vanishing-cycle trace in the admitted sector.
-- The modular rank-two Adams difference contracts to the Frobenius twist.
-- The actual Pascal graph oscillator has complete and punctured sums `q^m` and `q^m-1` in every extension degree, with no quadratic or metaplectic sign.
-- Ordinary Morse linearization of the nonlinear wild phase is impossible.
-- The natural integral Dwork lift has a linearly growing surviving defect after the `mu_3` projector.
-- The Hayes route is exactly circular.
+- Exact q-line ledger:
+  `N_A=p-2+B_A-(S_0+A S_chi)/(2p)`.
+- All weight-zero hook cohomology cancels except one discriminant Kummer line.
+- `V_1` and `V_(p-1)` have no weight-one part.
+- `V_2` is an explicit pair-curve Prym of rank `2 floor((p-1)/4)`.
+- `V_(p-2)` is the explicit genus-`p-3` discriminant-twist curve.
+- Boundary-only positivity is false at p=53 and p=71; the crown there is entirely generic q-line.
+- The literal Airy-to-hook dictionary is complete.
+- Canonical zero-frequency Airy transport and uniform raw-integral unit-coefficient transport are closed.
+- The actual Pascal oscillator and terminal quantum-bar skeleton are exact, but their geometric q-line realization is open.
 
-## PROVED in Round 1
+## PROVED in the current execution
 
-- `ABT-0` passes: every source, target and correction term has a literal object-level carrier.
-- A uniform raw-integral unit-coefficient identity placing the normalized Airy term in `S_0` or `S_chi` plus an honest integral residual is impossible. The exact p=23 negative valuation already supplies a counterexample.
-- Any nonzero Airy coefficient must occur in a Tate-normalized virtual decomposition with an explicit compensating valuation.
-- The raw application lane satisfies the preregistered invariant-mismatch pivot condition.
+- Crown failure forces the single simultaneous-saturation point
+  `S_0=p(C_++C_-)`, `S_chi=p(C_+-C_-)`, where `C_A=p-2+B_A`.
+- Excluding that point is sufficient and strictly weaker than proving a full q-line asymptotic.
+- The sole unresolved fixed-q weight-one virtual object is the middle-hook class
+  `M_q=sum_(i=3)^(p-3)(-1)^i H^1(P1,j_* wedge^i Std)`.
+- Q-line non-saturation is the shortest main-track gate; Airy/ITD work is secondary.
 
-## OPEN — secondary virtual application lane
+## OPEN — primary lane
 
-- Divided-power Rees invariance for the wild nonzero-frequency Fourier phase.
-- Frobenius-compatible identification of its Airy-isotypic terminal quotient with the actual Pascal oscillator.
-- Exact Tate/integrality ledger for q-line, discriminant, Artin-Schreier, affine and punctual cones.
-- A genuine q-line theorem proving `N_A=p-2+B_A+o(p)` for at least one class, or a weaker nonfailure certificate.
+- A post-parabolic or additive-wild quantum-bar parity-reversing complex for the middle hooks.
+- Effective `O(p)` rank/conductor with a strict non-saturation constant.
+- A direct global invariant/quadratic trace theorem for `(S_0,S_chi)`.
+- A weaker congruence, determinant, one-sided or nonvanishing certificate excluding the saturation point.
+- Half-sector crown assembly after the theorem.
 
-## OPEN — activated integral lane
+## OPEN — secondary lanes
 
-- A perfect `C_p`-equivariant integral Airy comparison realizing both the generic Adams trace and modular Smith/Tate contraction.
-- A different lift with uniformly bounded generic cone; the natural Dwork lift is excluded.
-- Absolute Frobenius cancellation in the explicit linearly growing cone.
-- The standalone absolute Airy first-moment estimate, if still required by the eventual application ledger.
+- Divided-power Rees transport of the Airy/Pascal terminal quotient.
+- Integral Tate-diagonal comparison.
+- Absolute cancellation in the linear-rank Airy comparison cone.
 
 ## CLOSED routes
 
-- Airy transport through canonical zero Fourier frequency.
-- Raw whole-projector identification modulo only q=2 and q=infinity.
-- Uniform honest integral Airy coefficient `+1` or `-1` inside a raw q-line projector.
+- Boundary-only positivity.
+- Canonical pre-pushforward deletion/Koszul complex.
+- Extrapolating the exceptional low-degree split q-line factors.
+- Split first-trace pattern fitting.
+- Termwise Weil bounds on the uncollapsed exponential-rank hook object.
+- Treating Airy transport as sufficient for the crown.
+- Canonical zero-frequency Airy transport.
+- Uniform raw-integral unit-coefficient Airy identity.
 - Another Spin/Clausen/Hayes programme.
-- Pointwise or termwise Deligne on the uncollapsed object.
-- Ordinary formal Morse theory for the wild phase.
-- Natural two-variable alternation.
-- Characteristic-zero cross-weight correspondence.
+- Ordinary Morse linearization of the wild phase.
 - Natural Dwork bounded-cone claim.
 - Raw prime sweeps without a preregistered identity.
-- Generic short-trace import without exact final-object hypotheses.
-- TFP3 as a substitute for direct `d=1`.
+- TFP3 without an explicit bridge.
 
 ## MACHINE-CERTIFIED only
 
-Finite-prime counts and trace values remain regression evidence except where a
-single exact counterexample logically refutes a uniform proposed identity.
-They do not prove a positive uniform transport or q-line theorem.
+Finite-prime exact counts calibrate or falsify proposed uniform identities.
+They do not prove the positive non-saturation theorem.
 
 ## NOT CLAIMED
 
-- The `p congruent 5 mod 6` crown.
-- Full `d=1`.
-- Function-field Fortune for every prime sector.
-- Any transfer to integer primorial centres.
+- The p congruent 5 mod 6 crown.
+- Full d=1.
+- Other prime sectors.
+- Function-field-to-integer transfer.
 - Fortune's conjecture.
