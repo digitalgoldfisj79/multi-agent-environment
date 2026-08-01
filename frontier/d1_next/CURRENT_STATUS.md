@@ -12,7 +12,7 @@
 
 ## Round 1 result
 
-### `ABT-0`: passed
+### `ABT-0`: **PASS**
 
 The literal source-to-target dictionary is complete. The sparse hook complex,
 fixed-q hook modules, `S_0` and `S_chi` projectors, q=2 and q=infinity cells,
