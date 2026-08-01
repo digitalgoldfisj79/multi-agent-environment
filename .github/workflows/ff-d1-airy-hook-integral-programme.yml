@@ -1,0 +1,50 @@
+name: Validate next direct d1 Fortune programme
+
+on:
+  push:
+    branches:
+      - gpt56/d1-airy-hook-integral-transport-20260801
+    paths:
+      - frontier/d1_next/**
+      - frontier/d1_symp/chuang_specialization_audit.py
+      - frontier/d1_symp/mod_p_adams_sequence_verify.py
+      - .github/workflows/ff-d1-airy-hook-integral-programme.yml
+  pull_request:
+    paths:
+      - frontier/d1_next/**
+      - frontier/d1_symp/chuang_specialization_audit.py
+      - frontier/d1_symp/mod_p_adams_sequence_verify.py
+      - .github/workflows/ff-d1-airy-hook-integral-programme.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: d1-next-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  programme-regression:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Fetch exact application-audit source
+        run: |
+          git fetch --no-tags origin gpt56/airy-gaussian-independent-audit-20260725
+          git cat-file -e b2fc61d060e7c613d555b3401f3f2f574fe6f8e8^{commit}
+      - name: Validate executed q-line programme and frozen source blobs
+        run: python3 frontier/d1_next/scripts/verify_programme.py
+      - name: Recheck Chuang specialization
+        run: python3 frontier/d1_symp/chuang_specialization_audit.py --primes 11 17 23 29
+      - name: Recheck modular Adams sequence
+        run: python3 frontier/d1_symp/mod_p_adams_sequence_verify.py
+      - name: Confirm Round 1 compute and primary gate
+        run: |
+          grep -q '"round_1_paid_jobs": 0' frontier/d1_next/PREREGISTERED_GATES.json
+          grep -q 'RUNNING_REMOTE_JOBS=0' frontier/d1_next/REMOTE_COMPUTE_PROTOCOL.md
+          grep -q 'Q-LINE NON-SATURATION IS THE PRIMARY GATE' frontier/d1_next/CURRENT_STATUS.md
+          grep -q '"id": "QNS-1"' frontier/d1_next/PREREGISTERED_GATES.json
