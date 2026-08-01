@@ -1,0 +1,123 @@
+{
+  "programme": "D1_AIRY_HOOK_INTEGRAL_TRANSPORT_V0_1",
+  "date": "2026-08-01",
+  "parent_commit": "c331f740e06a95e5596639800c931e2629ff9178",
+  "scope": "function-field d=1, current sector p congruent 5 mod 6",
+  "governing_issue": 41,
+  "priority_rule": "Attempt application-side Airy-to-hook transport before the integral Tate-diagonal fallback.",
+  "gates": [
+    {
+      "id": "ABT-0",
+      "title": "Literal object dictionary",
+      "priority": 1,
+      "status": "READY",
+      "remote_compute_allowed": false,
+      "pass": "Every source summand, projector, degree, shift, twist, Frobenius convention and boundary term has a literal target or correction object.",
+      "pivot": "An essential source or target object cannot be defined independently of first-trace numerics."
+    },
+    {
+      "id": "ABT-1",
+      "title": "Invariant compatibility",
+      "priority": 2,
+      "status": "BLOCKED_BY_ABT-0",
+      "remote_compute_allowed": true,
+      "pass": "Rank, weight, determinant, inertia, conductor, field of definition, support and boundary traces are compatible after explicit corrections.",
+      "pivot": "A proved invariant mismatch."
+    },
+    {
+      "id": "ABT-2",
+      "title": "All-Frobenius trace identity",
+      "priority": 3,
+      "status": "BLOCKED_BY_ABT-1",
+      "remote_compute_allowed": true,
+      "pass": "An exact identity for every Frobenius power n, with literal Tate, Artin-Schreier and punctual correction objects.",
+      "pivot": "A proved all-power trace mismatch after correction."
+    },
+    {
+      "id": "ABT-3",
+      "title": "Semisimple transport",
+      "priority": 4,
+      "status": "BLOCKED_BY_ABT-2",
+      "remote_compute_allowed": false,
+      "pass": "A theorem-level semisimple isomorphism or virtual equality with hypotheses explicit.",
+      "pivot": "Failure of the exact all-power identity or field-of-definition hypotheses."
+    },
+    {
+      "id": "ABT-4",
+      "title": "Derived/application transport",
+      "priority": 5,
+      "status": "BLOCKED_BY_ABT-3",
+      "remote_compute_allowed": false,
+      "pass": "An exact triangle, correspondence or filtered comparison preserving the detector residual; the cone contains only audited correction terms.",
+      "pivot": "A proved extension or parity obstruction."
+    },
+    {
+      "id": "ABT-5",
+      "title": "Half-sector crown assembly",
+      "priority": 6,
+      "status": "BLOCKED_BY_ABT-4",
+      "remote_compute_allowed": true,
+      "pass": "Complete p congruent 5 mod 6 irreducibility proof with q=2, q=infinity, twist, Tate, Artin-Schreier, punctual and small-prime terms explicit.",
+      "claim_boundary": "No full d=1 or integer Fortune claim."
+    },
+    {
+      "id": "ITD-0",
+      "title": "Integral model and comparison",
+      "priority": 7,
+      "status": "CONDITIONAL_ON_FORMAL_ABT_OBSTRUCTION",
+      "remote_compute_allowed": false,
+      "pass": "A perfect Cp-equivariant integral Airy complex and Weil-compatible comparison realizing both the generic Adams trace and modular Smith/Tate contraction."
+    },
+    {
+      "id": "ITD-1",
+      "title": "Bounded-cone attempt",
+      "priority": 8,
+      "status": "BLOCKED_BY_ITD-0",
+      "remote_compute_allowed": true,
+      "pass": "Uniformly bounded generic comparison cone after the explicit Tate correction.",
+      "pivot": "A theorem proving growing cone for every admissible construction in the frozen class."
+    },
+    {
+      "id": "ITD-2",
+      "title": "Linear-cone cancellation",
+      "priority": 9,
+      "status": "CONDITIONAL_ON_ITD-1_FAILURE",
+      "remote_compute_allowed": true,
+      "pass": "Absolute Frobenius trace O(p^((p+1)/2)) after exact trivial and Artin-Schreier subtraction."
+    },
+    {
+      "id": "ITD-3",
+      "title": "Analytic propagation",
+      "priority": 10,
+      "status": "BLOCKED_BY_ITD-1_OR_ITD-2",
+      "remote_compute_allowed": false,
+      "pass": "Absolute-constant Airy estimate and insertion into the exact application ledger."
+    },
+    {
+      "id": "SECTOR",
+      "title": "Full d=1 sector ledger",
+      "priority": 11,
+      "status": "BLOCKED_BY_HALF_SECTOR",
+      "remote_compute_allowed": false,
+      "pass": "All other prime sectors and small primes are separately certified before any full d=1 claim."
+    }
+  ],
+  "closed_routes": [
+    "Spin/Clausen/Hayes reformulation",
+    "natural two-variable alternating correspondence",
+    "characteristic-zero cross-weight correspondence",
+    "natural Dwork bounded-cone claim",
+    "uncollapsed generic short-trace import",
+    "raw prime sweeps without a preregistered identity",
+    "TFP3 transfer without an explicit theorem-level bridge"
+  ],
+  "compute": {
+    "max_concurrent_paid_jobs": 1,
+    "smoke_timeout_minutes": 10,
+    "ordinary_timeout_minutes": 30,
+    "heavy_timeout_minutes": 60,
+    "exceptional_hard_max_minutes": 120,
+    "stall_cancel_minutes": 10,
+    "terminal_marker": "RUNNING_REMOTE_JOBS=0"
+  }
+}

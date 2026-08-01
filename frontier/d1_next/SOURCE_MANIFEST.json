@@ -1,0 +1,50 @@
+{
+  "programme": "D1_AIRY_HOOK_INTEGRAL_TRANSPORT_V0_1",
+  "base_branch": "gpt56/d1-main-twisted-descent-20260724",
+  "base_commit": "c331f740e06a95e5596639800c931e2629ff9178",
+  "governing_issue": 41,
+  "related_issue": 39,
+  "related_literature_transfer_pr": 38,
+  "remote_compute_protocol_pr": 40,
+  "authoritative_files": [
+    {
+      "path": "frontier/d1_symp/MAIN_BRANCH_STATUS_AFTER_CLAUSEN_CIRCULARITY_20260725.md",
+      "blob": "fc9d2b29ca67228cb288f9a162d7461a2eb8c7e6",
+      "role": "terminal direct d=1 status and closed-route ledger"
+    },
+    {
+      "path": "frontier/d1_symp/CYCLIC_TATE_DIAGONAL_AND_AIRY_LIFT_OBSTRUCTION_20260725.md",
+      "blob": "99df9120ef81a8391fca0471ae217602fb587383",
+      "role": "modular contraction and exact integral-lift obstruction"
+    },
+    {
+      "path": "frontier/d1_symp/AUTONOMOUS_PROGRAMME_TERMINAL_STATUS_20260723.md",
+      "blob": "88ec977f92c40570aaa0bf014a97c94af07ecc13",
+      "role": "earlier decision-gate closeout and O(sqrt(p)) coefficient bound"
+    },
+    {
+      "path": "frontier/d1_symp/CHUANG_2607_05757_END_TO_END_AUDIT.md",
+      "blob": "ea125c9dbda0219275b61f1ecd55747e5b25ee3b",
+      "role": "published arithmetic Picard-Lefschetz specialization audit"
+    },
+    {
+      "path": "frontier/d1_symp/chuang_specialization_audit.py",
+      "blob": "502055f61709198e360dce89693a8169ffe1aed5",
+      "role": "exact specialization verifier"
+    },
+    {
+      "path": "frontier/d1_symp/mod_p_adams_sequence_verify.py",
+      "blob": "7fba156271421d4941f3e17a0a18319235b46a19",
+      "role": "exact modular Adams/Frobenius sequence verifier"
+    }
+  ],
+  "claim_boundary": {
+    "current_target": "p congruent 5 mod 6 direct function-field d=1 sector",
+    "not_claimed": [
+      "full d=1",
+      "function-field crown for every prime",
+      "function-field to integer transfer",
+      "Fortune's conjecture"
+    ]
+  }
+}
