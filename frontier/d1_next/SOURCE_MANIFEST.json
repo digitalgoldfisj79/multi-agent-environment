@@ -1,38 +1,86 @@
 {
-  "programme": "D1_AIRY_HOOK_INTEGRAL_TRANSPORT_V0_1",
+  "programme": "D1_AIRY_HOOK_INTEGRAL_TRANSPORT_V0_2",
   "base_branch": "gpt56/d1-main-twisted-descent-20260724",
   "base_commit": "c331f740e06a95e5596639800c931e2629ff9178",
+  "application_audit_commit": "b2fc61d060e7c613d555b3401f3f2f574fe6f8e8",
   "governing_issue": 41,
   "related_issue": 39,
-  "related_literature_transfer_pr": 38,
   "remote_compute_protocol_pr": 40,
   "authoritative_files": [
     {
+      "commit": "c331f740e06a95e5596639800c931e2629ff9178",
       "path": "frontier/d1_symp/MAIN_BRANCH_STATUS_AFTER_CLAUSEN_CIRCULARITY_20260725.md",
       "blob": "fc9d2b29ca67228cb288f9a162d7461a2eb8c7e6",
       "role": "terminal direct d=1 status and closed-route ledger"
     },
     {
+      "commit": "c331f740e06a95e5596639800c931e2629ff9178",
       "path": "frontier/d1_symp/CYCLIC_TATE_DIAGONAL_AND_AIRY_LIFT_OBSTRUCTION_20260725.md",
       "blob": "99df9120ef81a8391fca0471ae217602fb587383",
       "role": "modular contraction and exact integral-lift obstruction"
     },
     {
-      "path": "frontier/d1_symp/AUTONOMOUS_PROGRAMME_TERMINAL_STATUS_20260723.md",
-      "blob": "88ec977f92c40570aaa0bf014a97c94af07ecc13",
-      "role": "earlier decision-gate closeout and O(sqrt(p)) coefficient bound"
+      "commit": "c331f740e06a95e5596639800c931e2629ff9178",
+      "path": "frontier/d1_symp/HOOK_Q_LINE_CLASS_PROJECTORS_20260724.md",
+      "blob": "bb1fc319f5b2a802565498b9600bf1e8127df15a",
+      "role": "exact fixed-q hook modules and S0/Schi arithmetic projector ledger"
     },
     {
-      "path": "frontier/d1_symp/CHUANG_2607_05757_END_TO_END_AUDIT.md",
-      "blob": "ea125c9dbda0219275b61f1ecd55747e5b25ee3b",
-      "role": "published arithmetic Picard-Lefschetz specialization audit"
+      "commit": "c331f740e06a95e5596639800c931e2629ff9178",
+      "path": "frontier/d1_symp/NORMAL_FORM_CELL_LEDGER_20260724.md",
+      "blob": "1493fba1ea464561df1dd67098c1dac3b53e6330",
+      "role": "q coordinate, split/nonsplit descent and boundary definitions"
     },
     {
+      "commit": "c331f740e06a95e5596639800c931e2629ff9178",
+      "path": "frontier/d1_symp/SPARSE_ROOT_SURFACE_AND_HOOK_EXTRACTION_20260724.md",
+      "blob": "2f850e6c9434883c26250a227162a608f2e6dd13",
+      "role": "sparse root complex, irreducibility hook and ambient Airy multiplicity"
+    },
+    {
+      "commit": "c331f740e06a95e5596639800c931e2629ff9178",
+      "path": "frontier/d1_symp/GLOBAL_INTEGRAL_FOURIER_ELIMINATION_TO_CUBIC_TAIL_20260725.md",
+      "blob": "af3da3344e148d523c3059dd7a9092e34dd9b75c",
+      "role": "all-power Frobenius-compatible coefficient elimination to cubic tail"
+    },
+    {
+      "commit": "c331f740e06a95e5596639800c931e2629ff9178",
+      "path": "frontier/d1_symp/FOURIER_CAYLEY_ZERO_FREQUENCY_OBSTRUCTION_20260725.md",
+      "blob": "43d1d45247326f9fa1902ec0f0499dcf783d45fe",
+      "role": "localization triangle, zero-frequency weight obstruction and nonzero-frequency carrier"
+    },
+    {
+      "commit": "c331f740e06a95e5596639800c931e2629ff9178",
+      "path": "frontier/d1_symp/BOUNDARY_DISCRIMINANT_AND_FOURIER_CALIBRATION_20260725.md",
+      "blob": "7a7bca3b092164eea4725e0f695ebdd359c104fd",
+      "role": "boundary theorems and exact falsification of whole-projector Airy formulas"
+    },
+    {
+      "commit": "b2fc61d060e7c613d555b3401f3f2f574fe6f8e8",
+      "path": "frontier/d1_symp/ACTUAL_PASCAL_GRAPH_OSCILLATOR_AND_MORSE_NO_GO_20260725.md",
+      "blob": "361514f5515816b49778931402b8548b93a84db9",
+      "role": "all-power Pascal oscillator and exact divided-power Rees target"
+    },
+    {
+      "commit": "b2fc61d060e7c613d555b3401f3f2f574fe6f8e8",
+      "path": "frontier/d1_symp/RESIDUAL_GATE_MEASUREMENT_AND_EPSILON_CONSTRAINT_20260725.md",
+      "blob": "acc6a22359daf7339d6a100803e30760d8c2b91f",
+      "role": "exact p-adic integrality dichotomy and q-line main-term ruling"
+    },
+    {
+      "commit": "b2fc61d060e7c613d555b3401f3f2f574fe6f8e8",
+      "path": "frontier/d1_symp/MA_2026_HOMOLOGICAL_VANISHING_APPLICABILITY_AUDIT_20260725.md",
+      "blob": "abf8b0a1ff637f364b8835357333614cef7f5a34",
+      "role": "published homological-vanishing comparison and terminal resonance boundary"
+    },
+    {
+      "commit": "c331f740e06a95e5596639800c931e2629ff9178",
       "path": "frontier/d1_symp/chuang_specialization_audit.py",
       "blob": "502055f61709198e360dce89693a8169ffe1aed5",
-      "role": "exact specialization verifier"
+      "role": "exact arithmetic Picard-Lefschetz specialization verifier"
     },
     {
+      "commit": "c331f740e06a95e5596639800c931e2629ff9178",
       "path": "frontier/d1_symp/mod_p_adams_sequence_verify.py",
       "blob": "7fba156271421d4941f3e17a0a18319235b46a19",
       "role": "exact modular Adams/Frobenius sequence verifier"
@@ -41,6 +89,7 @@
   "claim_boundary": {
     "current_target": "p congruent 5 mod 6 direct function-field d=1 sector",
     "not_claimed": [
+      "half-sector crown",
       "full d=1",
       "function-field crown for every prime",
       "function-field to integer transfer",

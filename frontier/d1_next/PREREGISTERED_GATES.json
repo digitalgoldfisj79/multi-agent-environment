@@ -1,87 +1,85 @@
 {
-  "programme": "D1_AIRY_HOOK_INTEGRAL_TRANSPORT_V0_1",
+  "programme": "D1_AIRY_HOOK_INTEGRAL_TRANSPORT_V0_2",
   "date": "2026-08-01",
   "parent_commit": "c331f740e06a95e5596639800c931e2629ff9178",
   "scope": "function-field d=1, current sector p congruent 5 mod 6",
   "governing_issue": 41,
-  "priority_rule": "Attempt application-side Airy-to-hook transport before the integral Tate-diagonal fallback.",
+  "execution_round": 1,
+  "priority_rule": "The raw application transport lane has been audited first and formally obstructed; activate the integral Tate-diagonal lane while preserving the Tate-normalized divided-power Rees comparison as a secondary open theorem.",
   "gates": [
     {
       "id": "ABT-0",
       "title": "Literal object dictionary",
       "priority": 1,
-      "status": "READY",
+      "status": "PASS",
       "remote_compute_allowed": false,
-      "pass": "Every source summand, projector, degree, shift, twist, Frobenius convention and boundary term has a literal target or correction object.",
-      "pivot": "An essential source or target object cannot be defined independently of first-trace numerics."
+      "result": "Every source summand, projector, degree, shift, twist, Frobenius convention and boundary term has a literal carrier. The only possible Airy carrier is the nonzero-frequency Fourier-Cayley sector."
     },
     {
       "id": "ABT-1",
       "title": "Invariant compatibility",
       "priority": 2,
-      "status": "BLOCKED_BY_ABT-0",
-      "remote_compute_allowed": true,
-      "pass": "Rank, weight, determinant, inertia, conductor, field of definition, support and boundary traces are compatible after explicit corrections.",
-      "pivot": "A proved invariant mismatch."
+      "status": "RAW_INTEGRAL_LANE_CLOSED",
+      "remote_compute_allowed": false,
+      "result": "Zero frequency is excluded by weights. A uniform unit-coefficient Airy term inside an honest untwisted integral q-line projector plus integral residual is excluded by the exact negative p-adic valuation at p=23 and the recorded uniform valuation theorem.",
+      "secondary_open_target": "Tate-normalized virtual divided-power Rees comparison with explicit compensating valuation and boundary ledger.",
+      "pivot_certificate": "Proved weight and p-adic integrality mismatch."
     },
     {
       "id": "ABT-2",
       "title": "All-Frobenius trace identity",
       "priority": 3,
-      "status": "BLOCKED_BY_ABT-1",
-      "remote_compute_allowed": true,
-      "pass": "An exact identity for every Frobenius power n, with literal Tate, Artin-Schreier and punctual correction objects.",
-      "pivot": "A proved all-power trace mismatch after correction."
+      "status": "CLOSED_ON_RAW_LANE_BLOCKED_ON_VIRTUAL_REES",
+      "remote_compute_allowed": false,
+      "pass": "An exact identity for every Frobenius power in a constructed Tate-normalized virtual category, with literal Tate, Artin-Schreier and punctual corrections."
     },
     {
       "id": "ABT-3",
       "title": "Semisimple transport",
       "priority": 4,
-      "status": "BLOCKED_BY_ABT-2",
-      "remote_compute_allowed": false,
-      "pass": "A theorem-level semisimple isomorphism or virtual equality with hypotheses explicit.",
-      "pivot": "Failure of the exact all-power identity or field-of-definition hypotheses."
+      "status": "BLOCKED_BY_VIRTUAL_REES_CONSTRUCTION",
+      "remote_compute_allowed": false
     },
     {
       "id": "ABT-4",
       "title": "Derived/application transport",
       "priority": 5,
-      "status": "BLOCKED_BY_ABT-3",
+      "status": "BLOCKED_BY_VIRTUAL_REES_CONSTRUCTION",
       "remote_compute_allowed": false,
-      "pass": "An exact triangle, correspondence or filtered comparison preserving the detector residual; the cone contains only audited correction terms.",
-      "pivot": "A proved extension or parity obstruction."
+      "target": "Divided-power Rees invariance of the wild nonzero-frequency phase, preserving Frobenius and every correction cone."
     },
     {
       "id": "ABT-5",
       "title": "Half-sector crown assembly",
       "priority": 6,
-      "status": "BLOCKED_BY_ABT-4",
-      "remote_compute_allowed": true,
-      "pass": "Complete p congruent 5 mod 6 irreducibility proof with q=2, q=infinity, twist, Tate, Artin-Schreier, punctual and small-prime terms explicit.",
+      "status": "BLOCKED_BY_QLINE_MAIN_TERM_AND_TRANSPORT",
+      "remote_compute_allowed": false,
+      "result": "Even a successful virtual transport leaves the original q-line error-versus-main-term theorem or a weaker one-sided nonfailure certificate.",
       "claim_boundary": "No full d=1 or integer Fortune claim."
     },
     {
       "id": "ITD-0",
       "title": "Integral model and comparison",
       "priority": 7,
-      "status": "CONDITIONAL_ON_FORMAL_ABT_OBSTRUCTION",
+      "status": "READY_NEW_THEOREM_REQUIRED",
       "remote_compute_allowed": false,
-      "pass": "A perfect Cp-equivariant integral Airy complex and Weil-compatible comparison realizing both the generic Adams trace and modular Smith/Tate contraction."
+      "pass": "A perfect C_p-equivariant integral Airy complex and Weil-compatible comparison realizing both the generic Adams trace and modular Smith/Tate contraction.",
+      "current_object": "M_p = RGamma_c(A1, A_O tensor^p)^{mu_3} with cyclic action and Frobenius."
     },
     {
       "id": "ITD-1",
       "title": "Bounded-cone attempt",
       "priority": 8,
-      "status": "BLOCKED_BY_ITD-0",
+      "status": "BLOCKED_BY_ITD-0_NATURAL_LIFT_ALREADY_FALSE",
       "remote_compute_allowed": true,
       "pass": "Uniformly bounded generic comparison cone after the explicit Tate correction.",
-      "pivot": "A theorem proving growing cone for every admissible construction in the frozen class."
+      "known_obstruction": "The natural Dwork lift has linearly growing surviving defect."
     },
     {
       "id": "ITD-2",
       "title": "Linear-cone cancellation",
       "priority": 9,
-      "status": "CONDITIONAL_ON_ITD-1_FAILURE",
+      "status": "READY_ONLY_AFTER_EXPLICIT_COMPARISON",
       "remote_compute_allowed": true,
       "pass": "Absolute Frobenius trace O(p^((p+1)/2)) after exact trivial and Artin-Schreier subtraction."
     },
@@ -91,7 +89,7 @@
       "priority": 10,
       "status": "BLOCKED_BY_ITD-1_OR_ITD-2",
       "remote_compute_allowed": false,
-      "pass": "Absolute-constant Airy estimate and insertion into the exact application ledger."
+      "pass": "Absolute Airy estimate and insertion into the exact application ledger."
     },
     {
       "id": "SECTOR",
@@ -103,7 +101,10 @@
     }
   ],
   "closed_routes": [
+    "Airy constituent in the canonical zero-frequency Fourier summand",
+    "uniform raw integral unit-coefficient Airy identity for S_0 or S_chi",
     "Spin/Clausen/Hayes reformulation",
+    "ordinary Morse linearization of the wild phase",
     "natural two-variable alternating correspondence",
     "characteristic-zero cross-weight correspondence",
     "natural Dwork bounded-cone claim",
@@ -118,6 +119,7 @@
     "heavy_timeout_minutes": 60,
     "exceptional_hard_max_minutes": 120,
     "stall_cancel_minutes": 10,
-    "terminal_marker": "RUNNING_REMOTE_JOBS=0"
+    "terminal_marker": "RUNNING_REMOTE_JOBS=0",
+    "round_1_paid_jobs": 0
   }
 }

@@ -32,13 +32,19 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Validate programme and frozen source blobs
+      - name: Fetch exact application-audit source
+        run: |
+          git fetch --no-tags origin gpt56/airy-gaussian-independent-audit-20260725
+          git cat-file -e b2fc61d060e7c613d555b3401f3f2f574fe6f8e8^{commit}
+      - name: Validate executed programme and frozen source blobs
         run: python3 frontier/d1_next/scripts/verify_programme.py
       - name: Recheck Chuang specialization
         run: python3 frontier/d1_symp/chuang_specialization_audit.py --primes 11 17 23 29
       - name: Recheck modular Adams sequence
         run: python3 frontier/d1_symp/mod_p_adams_sequence_verify.py
-      - name: Confirm no paid compute in programme build
+      - name: Confirm Round 1 compute state
         run: |
-          grep -q 'remote_compute_allowed": false' frontier/d1_next/PREREGISTERED_GATES.json
+          grep -q '"round_1_paid_jobs": 0' frontier/d1_next/PREREGISTERED_GATES.json
           grep -q 'RUNNING_REMOTE_JOBS=0' frontier/d1_next/REMOTE_COMPUTE_PROTOCOL.md
+          grep -q 'ABT-0.*PASS' frontier/d1_next/CURRENT_STATUS.md
+          grep -q 'ITD-0' frontier/d1_next/CURRENT_STATUS.md
