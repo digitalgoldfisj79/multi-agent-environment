@@ -9,4 +9,5 @@ import FortuneFormal.Bilateral.ZeroDefectReduction
 import FortuneFormal.Bilateral.QuotientShape
 import FortuneFormal.Bilateral.ZeroDefectScoped
 import FortuneFormal.Bilateral.FactorOrdering
+import FortuneFormal.Bilateral.ArtinSchreierFactor
 import FortuneFormal.Frontier.Assumptions
