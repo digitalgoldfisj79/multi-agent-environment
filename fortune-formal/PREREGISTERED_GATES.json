@@ -40,33 +40,42 @@
     {
       "id": "F3",
       "name": "defect_dichotomy_and_strip",
-      "status": "IN_PROGRESS_BDD1_PASSED",
-      "passed_subgates": [
-        {
-          "claim": "P7-BDD1",
-          "theorem": "FortuneFormal.Bilateral.p7_bdd1_concrete",
-          "removed_axiom": "FortuneFormal.p7_bdd1",
-          "scope": "prime field; L=X^q-X; k<q",
-          "evidence": "clean-room Lean 4.32.0 build and post-build trust audit"
-        }
-      ],
-      "remaining_axioms": [
+      "status": "PASSED",
+      "removed_axioms": [
+        "FortuneFormal.p7_bdd1",
         "FortuneFormal.p7_bdd2",
         "FortuneFormal.p7_strip"
       ],
-      "next_supporting_target": "prime-field Artin-Schreier irreducibility and zero-defect factor ordering"
+      "theorems": [
+        "FortuneFormal.Bilateral.p7_bdd1_concrete",
+        "FortuneFormal.Bilateral.p7_bdd2_concrete",
+        "FortuneFormal.Bilateral.p7_strip_concrete"
+      ],
+      "scope": "prime field; L=X^q-X; odd prime for BDD2/strip; k<q",
+      "evidence": "clean-room Lean 4.32.0 build completed with 8676 jobs; post-build trust audit passed"
     },
     {
       "id": "F4",
       "name": "quadratic_emptiness",
-      "status": "OPEN",
-      "removes_axioms": ["FortuneFormal.p7_k2_empty"],
+      "status": "IN_PROGRESS",
+      "remaining_axioms": ["FortuneFormal.p7_k2_empty"],
+      "implemented_subgates": [
+        "literal q-free quadratic model",
+        "certified-component interface"
+      ],
+      "remaining_subgates": [
+        "incidence-to-model normalization",
+        "open-locus chart cover",
+        "Lean-checked universal lift identities",
+        "exceptional-characteristic certificates",
+        "discriminant-square contradiction"
+      ],
       "pass_condition": "zero Paper VII axioms remain"
     },
     {
       "id": "F5",
       "name": "cubic_frontier_isolation",
-      "status": "OPEN",
+      "status": "BLOCKED_ON_F4",
       "allowed_final_axioms": ["FortuneFormal.cubic_true_frobenius_point_theorem"]
     },
     {
