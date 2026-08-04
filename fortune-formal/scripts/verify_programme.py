@@ -22,6 +22,9 @@ REQUIRED = {
     "FortuneFormal/Specification.lean",
     "FortuneFormal/Bilateral/Definitions.lean",
     "FortuneFormal/Bilateral/InverseFree.lean",
+    "FortuneFormal/Bilateral/F3Closure.lean",
+    "FortuneFormal/Quadratic/Model.lean",
+    "FortuneFormal/Quadratic/DiscriminantContradiction.lean",
     "FortuneFormal/Frontier/Assumptions.lean",
     "scripts/verify_programme.py",
 }
@@ -105,9 +108,10 @@ def main() -> int:
         if axioms:
             found_by_file[rel] = axioms
 
-    if set(found_by_file) != {allowed_rel}:
-        fail(f"axioms occur outside the quarantine file: {found_by_file}")
-    found_local = found_by_file[allowed_rel]
+    expected_axiom_files = {allowed_rel} if expected_local else set()
+    if set(found_by_file) != expected_axiom_files:
+        fail(f"axiom file set differs from ledger: {found_by_file}")
+    found_local = found_by_file.get(allowed_rel, [])
     if found_local != expected_local:
         fail(f"axiom declaration order/content differs from ledger: {found_local}")
 
@@ -121,7 +125,7 @@ def main() -> int:
 
     claim_ledger = (ROOT / "CLAIM_LEDGER.md").read_text(encoding="utf-8")
     required_boundary_phrases = (
-        "P7-IFA1 KERNEL-CHECKED",
+        "ONE PAPER VII AXIOM REMAINS",
         "ASSUMED pending formalization",
         "Explicitly not claimed",
     )
