@@ -90,4 +90,7 @@ A future proof must provide an all-orders occupancy estimate, a rowwise parity-b
 
 ## Validation
 
-Research and targeted formal validation are complete. Full clean-room validation is pending.
+- static exact-regression job `6a7253f86b79c09949c228e4`: completed with zero failures;
+- targeted formal job `6a7254e06b79c09949c228e8`: Lean 4.32.0, 8,658 jobs, zero failures;
+- full clean-room job `6a7255a96b79c09949c228f0`: inherited audits, full Lean package, and all new regressions passed in 8,683 jobs with zero failures;
+- terminal sentinel: `FORTUNE_INT_PFLI_SIGNED_DUALITY_FULL_CLEANROOM_PASS`.
