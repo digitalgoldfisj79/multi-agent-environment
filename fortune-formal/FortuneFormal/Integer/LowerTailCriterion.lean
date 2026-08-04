@@ -23,7 +23,7 @@ theorem lowerTailSq_le_sq (Z base : ℝ) :
     nlinarith
   · have h' : base - Z ≤ 0 := le_of_not_ge h
     rw [lowerTailSq, max_eq_left h']
-    positivity
+    simpa using sq_nonneg (Z - base)
 
 /-- Summing the pointwise inequality shows that any full variance estimate
 controls the lower-tail energy, while the converse need not hold. -/
