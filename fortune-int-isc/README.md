@@ -5,7 +5,7 @@
 **Base:** `deb6bb5468a951bc5485514c5848abcfcf386594`  
 **Parent closeout:** PR #47  
 **Primary issue:** #48  
-**Status:** BUILT, NOT YET EXECUTED
+**Status:** I0 PASSED; I1 READY
 
 ## Single objective
 
@@ -69,6 +69,10 @@ The target is
 \]
 
 The programme first tests whether this formulation is the weakest sufficient target. Any replacement must be formally shown to imply the one-failure block criterion and must be strictly weaker or more tractable, not merely equivalent notation.
+
+## Validation
+
+Gate I0 passed in clean-clone job `6a7205146b79c09949c2236a`. The scale audit, focused static contract and inherited seven-paper closeout all passed with failure count zero.
 
 ## Completion conditions
 
