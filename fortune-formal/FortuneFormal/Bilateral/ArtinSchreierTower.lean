@@ -26,13 +26,15 @@ theorem artinSchreier_root_relation
     α ^ Fintype.card F = α + algebraMap F (AdjoinRoot P) a := by
   let q := Fintype.card F
   let P := artinSchreierPolynomial F a
+  let R := AdjoinRoot P
   letI : Fact q.Prime := ⟨hp⟩
   letI : CharP F q :=
     (CharP.charP_iff_prime_eq_zero hp).2 (FiniteField.cast_card_eq_zero F)
   have hroot := AdjoinRoot.eval₂_root P
-  dsimp [P, artinSchreierPolynomial] at hroot ⊢
-  simpa [Polynomial.eval₂_sub, Polynomial.eval₂_pow, AdjoinRoot.algebraMap_eq] using
-    sub_eq_zero.mp hroot
+  change (AdjoinRoot.root P) ^ q - AdjoinRoot.root P -
+      algebraMap F R a = 0 at hroot
+  · linear_combination hroot
+  · simp [P, R, artinSchreierPolynomial, q, AdjoinRoot.algebraMap_eq]
 
 /-- Iterating the Artin-Schreier relation gives
 `α^(q^n) = α + algebraMap ((n : F) * a)`. -/
@@ -65,13 +67,14 @@ theorem artinSchreier_root_iterate
               algebraMap F R ((n : F) * a)) ^ q := by rw [ih]
         _ = (AdjoinRoot.root P) ^ q +
               (algebraMap F R ((n : F) * a)) ^ q := by
-          exact add_pow_char _ _
+          rw [add_pow_char (AdjoinRoot.root P)
+            (algebraMap F R ((n : F) * a)) q]
         _ = AdjoinRoot.root P + algebraMap F R a +
               algebraMap F R ((n : F) * a) := by rw [hrel, hpowBase]
         _ = AdjoinRoot.root P +
               algebraMap F R (((n + 1 : ℕ) : F) * a) := by
+          simp only [map_add, map_mul]
           push_cast
-          rw [map_add, map_mul, map_mul]
           ring
 
 /-- The Artin-Schreier polynomial divides the `q`th Frobenius tower
