@@ -39,8 +39,8 @@ def main() -> int:
         blob = paper["git_blob"]
         if len(blob) != 40 or any(c not in "0123456789abcdef" for c in blob):
             fail(f"{paper['id']} has invalid Git blob: {blob}")
-        if "Fortune" not in paper["boundary"] and "fortune" not in paper["boundary"]:
-            fail(f"{paper['id']} boundary does not state Fortune scope")
+        if len(paper["boundary"].strip()) < 20:
+            fail(f"{paper['id']} has an inadequate theorem boundary")
 
     expected_refs = {
         "P1": "publication/fortune-papers-ii-vi-20260724",
@@ -79,6 +79,10 @@ def main() -> int:
     conflations = data.get("prohibited_conflations", [])
     if len(conflations) < 5:
         fail("insufficient prohibited-conflation rules")
+    joined = "\n".join(conflations).lower()
+    for phrase in ("integer fortune", "direct d=1", "increasing primorial order"):
+        if phrase not in joined:
+            fail(f"missing global boundary rule for {phrase}")
 
     for required in (
         ROOT / "cross-paper" / "AUDIT_REPORT.md",
