@@ -20,13 +20,17 @@ private theorem muError_natDegree_lt (x : Datum F) (c : F) :
     calc
       (x.mu * x.Pp).natDegree ≤ x.mu.natDegree + x.Pp.natDegree :=
         Polynomial.natDegree_mul_le
-      _ < x.k + x.k := by rw [x.Pp_degree]; omega
+      _ < x.k + x.k := by
+        rw [x.Pp_degree]
+        exact Nat.add_lt_add_right x.mu_degree x.k
       _ = 2 * x.k := by omega
   have hmup : (x.mup * x.P).natDegree < 2 * x.k := by
     calc
       (x.mup * x.P).natDegree ≤ x.mup.natDegree + x.P.natDegree :=
         Polynomial.natDegree_mul_le
-      _ < x.k + x.k := by rw [x.P_degree]; omega
+      _ < x.k + x.k := by
+        rw [x.P_degree]
+        exact Nat.add_lt_add_right x.mup_degree x.k
       _ = 2 * x.k := by omega
   have hpair : (x.mu * x.Pp - x.mup * x.P).natDegree < 2 * x.k :=
     lt_of_le_of_lt (Polynomial.natDegree_sub_le _ _) (max_lt hmu hmup)
@@ -41,13 +45,17 @@ private theorem nuError_natDegree_lt (x : Datum F) (d : F) :
     calc
       (x.nu * x.Sp).natDegree ≤ x.nu.natDegree + x.Sp.natDegree :=
         Polynomial.natDegree_mul_le
-      _ < x.k + x.k := by rw [x.Sp_degree]; omega
+      _ < x.k + x.k := by
+        rw [x.Sp_degree]
+        exact Nat.add_lt_add_right x.nu_degree x.k
       _ = 2 * x.k := by omega
   have hnup : (x.nup * x.S).natDegree < 2 * x.k := by
     calc
       (x.nup * x.S).natDegree ≤ x.nup.natDegree + x.S.natDegree :=
         Polynomial.natDegree_mul_le
-      _ < x.k + x.k := by rw [x.S_degree]; omega
+      _ < x.k + x.k := by
+        rw [x.S_degree]
+        exact Nat.add_lt_add_right x.nup_degree x.k
       _ = 2 * x.k := by omega
   have hpair : (x.nu * x.Sp - x.nup * x.S).natDegree < 2 * x.k :=
     lt_of_le_of_lt (Polynomial.natDegree_sub_le _ _) (max_lt hnu hnup)
@@ -110,8 +118,8 @@ theorem muInverseFree_implies_endpoint (x : Datum F) {c : F}
     (x.L_coprime_P.symm.mul_right x.P_coprime_S).dvd_of_dvd_mul_left hscaledP
   have herrorP : x.P ∣ x.mu * x.Pp - x.mup * x.P - scalar c := by
     have hmup : x.P ∣ x.mup * x.P := ⟨x.mup, by ring⟩
-    have := dvd_sub hbaseP hmup
-    convert this using 1 <;> ring
+    have hdiff := dvd_sub hbaseP hmup
+    convert hdiff using 1 <;> ring
   have hscaledPp : x.Pp ∣ (x.L * x.Sp) * (scalar c + x.mup * x.P) := by
     have h₁ := h.2
     have h₂ := x.mup_congruence.mul_right x.P
@@ -121,8 +129,8 @@ theorem muInverseFree_implies_endpoint (x : Datum F) {c : F}
     (x.L_coprime_Pp.symm.mul_right x.Pp_coprime_Sp).dvd_of_dvd_mul_left hscaledPp
   have herrorPp : x.Pp ∣ x.mu * x.Pp - x.mup * x.P - scalar c := by
     have hmu : x.Pp ∣ x.mu * x.Pp := ⟨x.mu, by ring⟩
-    have := dvd_sub hmu hbasePp
-    convert this using 1 <;> ring
+    have hdiff := dvd_sub hmu hbasePp
+    convert hdiff using 1 <;> ring
   have hproduct : x.P * x.Pp ∣ x.mu * x.Pp - x.mup * x.P - scalar c :=
     x.P_coprime_Pp.mul_dvd herrorP herrorPp
   have hprodDegree : (x.P * x.Pp).natDegree = 2 * x.k := by
@@ -147,8 +155,8 @@ theorem nuInverseFree_implies_endpoint (x : Datum F) {d : F}
     (x.L_coprime_S.symm.mul_right x.P_coprime_S.symm).dvd_of_dvd_mul_left hscaledS
   have herrorS : x.S ∣ x.nu * x.Sp - x.nup * x.S - scalar d := by
     have hnup : x.S ∣ x.nup * x.S := ⟨x.nup, by ring⟩
-    have := dvd_sub hbaseS hnup
-    convert this using 1 <;> ring
+    have hdiff := dvd_sub hbaseS hnup
+    convert hdiff using 1 <;> ring
   have hscaledSp : x.Sp ∣ (x.L * x.Pp) * (scalar d + x.nup * x.S) := by
     have h₁ := h.2
     have h₂ := x.nup_congruence.mul_right x.S
@@ -158,8 +166,8 @@ theorem nuInverseFree_implies_endpoint (x : Datum F) {d : F}
     (x.L_coprime_Sp.symm.mul_right x.Pp_coprime_Sp.symm).dvd_of_dvd_mul_left hscaledSp
   have herrorSp : x.Sp ∣ x.nu * x.Sp - x.nup * x.S - scalar d := by
     have hnu : x.Sp ∣ x.nu * x.Sp := ⟨x.nu, by ring⟩
-    have := dvd_sub hnu hbaseSp
-    convert this using 1 <;> ring
+    have hdiff := dvd_sub hnu hbaseSp
+    convert hdiff using 1 <;> ring
   have hproduct : x.S * x.Sp ∣ x.nu * x.Sp - x.nup * x.S - scalar d :=
     x.S_coprime_Sp.mul_dvd herrorS herrorSp
   have hprodDegree : (x.S * x.Sp).natDegree = 2 * x.k := by
