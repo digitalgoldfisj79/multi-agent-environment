@@ -1,42 +1,66 @@
-# Current status — Fortune formal discovery programme
+# Current status — integrated Fortune formal programme
 
 **Date:** 4 August 2026  
-**Gate:** F4 quadratic emptiness certificate reconstruction  
-**Status:** F0–F3 PASSED; ONE PAPER VII AXIOM REMAINS
+**Status:** FORMAL PACKAGE STABILIZED; INTEGER REDUCTION CLOSED; OPEN RESEARCH THEOREMS EXPLICIT
 
-## Kernel-checked package
+## Compiled kernel package
 
-- F1 literal finite-field polynomial and endpoint-incidence definitions;
-- F2 inverse-free algebraisation and scalar-witness uniqueness;
-- F3 common-defect existence, uniqueness and degree bound;
-- direct prime-field Artin–Schreier irreducibility;
-- zero-defect reflection/translation classification;
-- intermediate-strip emptiness by a non-truncated degree contradiction.
+Seven load-bearing claims are formalized:
 
-The F3 promotion build completed all 8,676 Lean jobs under Lean 4.32.0 and passed the post-build static trust audit.
+- four stable Paper VII claims: IFA1, BDD1, BDD2 and strip emptiness;
+- the corrected one-failure block criterion;
+- the centred second-moment identity;
+- the four-prime covariance identity.
 
-## Scope corrections found by formalization
+The q-free certified-component discriminant contradiction is also kernel checked.
 
-- BDD1 requires prime-field scope, the literal base `L = X^q - X`, and `k < q`.
-- BDD2 and strip require odd prime characteristic.
-- The strip theorem cannot be justified by interpreting `q - 2k` as a negative natural number; it now has a direct degree contradiction.
+## Paper VII boundary
 
-## Current F4 state
+F4 is stabilized at **one external certified-normalization boundary**:
 
-Implemented:
+`FortuneFormal.p7_k2_certified_normalization`.
 
-- literal four-equation q-free quadratic model in `FortuneFormal/Quadratic/Model.lean`;
-- exact interface for the certified component `U=1`, `B=-2`, `(A-C)^2+4A=0`.
+This is narrower than quadratic emptiness. It says that each genuine quadratic incidence is carried by the external normalization/Singular package to an arithmetic-open q-free model point on the certified component. Lean then derives the contradiction and the concrete P7-K2 theorem.
 
-Still required:
+The unavailable `polyrith` experiment has been deleted. Paper VII cubic F5 work is frozen because no bridge to direct `d=1` or integer Fortune has been proved.
 
-1. normalize every genuine `k=2` incidence to the q-free model;
-2. prove the two localization charts cover the genuine open locus;
-3. import and Lean-check the characteristic-zero lift identities after denominator clearing;
-4. check the exceptional-characteristic certificates;
-5. prove the final discriminant-square contradiction;
-6. delete `FortuneFormal.p7_k2_empty`.
+## Integer reconstruction
 
-## Exact boundary
+Corrected Papers II–III have been reconstructed theorem by theorem. Their exact detector, contamination bounds, block implications, source identities, rigidity, multiplicity, moment and four-prime identities survive. Their missing arithmetic estimate does not.
 
-No cubic true-Frobenius theorem, endpoint `FFPR`, direct function-field `d=1`, function-field-to-integer transfer, or Fortune theorem is claimed.
+The unique mainline target is `INT-ISC`: the centred signed four-prime covariance residual must be `O(N X L(X))` with `L(X)=o(log X)` on the actual increasing primorial centres.
+
+The implication
+
+`INT-ISC -> corrected block variance -> no failed centre -> eventual Fortune`
+
+is exact. `INT-ISC` itself remains open.
+
+## Other papers
+
+- Replacement Papers V–VI were reconstructed and their independent finite regressions rerun. They terminate at `D1-QLINE-NONSAT`, a new one-sided Frobenius nonvanishing theorem.
+- Paper I is frozen as a selective structural source; its internal energy frontiers do not imply the corrected detector without a signed bridge.
+- Paper IV is frozen as a random-order theorem; it neither controls the increasing order nor supplies the corrected detector bridge.
+
+## Programme completion meaning
+
+The requested programme is complete as:
+
+- authoritative-source reconstruction;
+- theorem and trust-boundary audit;
+- exact target isolation;
+- selective formalization;
+- independent finite-regression rerun;
+- analytic and falsification-lane obstruction analysis.
+
+It is not complete as a proof of any of the three open terminal theorems.
+
+## Final boundaries
+
+- Paper VII P7-K2: derived from one explicit external axiom, not axiom-free.
+- `INT-ISC`: open.
+- Fortune: open.
+- `D1-QLINE-NONSAT`: open.
+- Direct function-field `d=1`: open.
+- `P7-CUBIC-TF`: open and frozen.
+- Function-field-to-integer transfer: absent.
