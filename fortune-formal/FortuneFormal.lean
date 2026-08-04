@@ -22,4 +22,5 @@ import FortuneFormal.Quadratic.ReductionInterface
 import FortuneFormal.Integer.BlockCriterion
 import FortuneFormal.Integer.LowerTailCriterion
 import FortuneFormal.Integer.FactorBandCriterion
+import FortuneFormal.Integer.SoftDefectCriterion
 import FortuneFormal.Frontier.Assumptions
