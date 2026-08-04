@@ -14,4 +14,5 @@ import FortuneFormal.Bilateral.FamilyReconstruction
 import FortuneFormal.Bilateral.BDD2Conditional
 import FortuneFormal.Bilateral.StripReduction
 import FortuneFormal.Bilateral.ArtinSchreierTower
+import FortuneFormal.Bilateral.ArtinSchreierIrreducible
 import FortuneFormal.Frontier.Assumptions
