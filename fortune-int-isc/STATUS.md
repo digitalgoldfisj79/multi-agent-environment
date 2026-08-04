@@ -3,37 +3,41 @@
 **Programme:** `FORTUNE_INT_ISC_FOCUSED_V0_1`  
 **Branch:** `gpt56/fortune-int-isc-focused-v01-20260804`  
 **Base:** `deb6bb5468a951bc5485514c5848abcfcf386594`  
-**State:** I0 PASSED; I1 READY  
-**Current gate:** I1 — weakest-sufficient-target audit
+**State:** I0–I6 COMPLETED; I7 CLEAN-ROOM VALIDATION  
+**Terminal outcome:** `REDUCED_TO_SMALLER_NEW_THEOREM`  
+**Primary target:** `INT-PSLT`
 
-## Validation
+## Execution result
 
-Clean-clone sentinel `6a7205146b79c09949c2236a` completed with failure count zero and emitted:
+The original full covariance target was reduced in two stages:
 
-- `FORTUNE_INT_ISC_SCALE_AUDIT_PASS`;
-- `FORTUNE_INT_ISC_PROGRAMME_STATIC_PASS`;
-- `FORTUNE_MAINLINE_CLOSEOUT_PASS`;
-- `FORTUNE_INT_ISC_I0_CLEAN_CLONE_PASS`.
+1. I1 removed the unnecessary upper tail, yielding the one-sided count criterion
+   `INT-LTQ`.
+2. I4 replaced the four-prime covariance architecture by the one-form shifted-source
+   theorem `INT-PSLT`.
 
-The inherited seven-paper closeout, formal claim ledger and exact integer identity remain intact.
+The remaining theorem is
 
-## Ready
+\[
+\sum_{j<N}(B_X-\Psi_j(H))_+^2=o(B_X^2),
+\qquad B_X=c_0X(\log X)^2.
+\]
 
-- single integer target frozen;
-- exact gate order defined;
-- exponent and loss ledger initialized and checked;
-- admitted and prohibited methods recorded;
-- provider timeout/cancellation policy registered;
-- static verifier, scale audit and CI contract active.
+At a failed centre `Psi_j=O(X log X)=o(B_X)`, so INT-PSLT excludes every failure and
+implies eventual Fortune by candidate collapse.
 
-## Next execution sequence
+## Gate state
 
-1. determine whether `INT-ISC` is the weakest sufficient target;
-2. formalize any strictly weaker replacement before changing the target;
-3. derive and test the necessary sparse first-moment consequence;
-4. open full covariance lanes only after the first boulder is classified;
-5. close at a theorem, a strict reduction, or an explicit scale obstruction.
+- I0 source and target freeze: passed.
+- I1 weakest-target audit: passed; lower-tail criterion formalized.
+- I2 sparse first moment: closed as non-mandatory and unavailable at the selected scale.
+- I3 direct four-prime lane: closed at the `X/L(X)` loss obstruction.
+- I4 shifted source: passed with reduction to INT-PSLT.
+- I5 source/orbit and PSD: closed at exact smooth-modulus coherence.
+- I6 falsification: passed with one-defect no-go models.
+- I7 closeout: final clean build and provider sweep in progress.
 
 ## Boundary
 
-This branch contains a validated research programme, not a proof of `INT-ISC` or Fortune.
+INT-PSLT, INT-LTQ, INT-ISC and Fortune remain unproved. The programme has completed a
+reduction and obstruction classification, not a proof of the conjecture.
