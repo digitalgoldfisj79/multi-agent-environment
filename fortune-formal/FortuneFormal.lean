@@ -21,4 +21,5 @@ import FortuneFormal.Quadratic.DiscriminantContradiction
 import FortuneFormal.Quadratic.ReductionInterface
 import FortuneFormal.Integer.BlockCriterion
 import FortuneFormal.Integer.LowerTailCriterion
+import FortuneFormal.Integer.FactorBandCriterion
 import FortuneFormal.Frontier.Assumptions
