@@ -134,7 +134,7 @@
       "lane": "DIRECT_D1",
       "source_ref": "publication/fortune-papers-ii-vi-20260724",
       "path": "publications/fortune-papers-ii-vi-20260724/paper6_secondary_quotients_replacement/manuscript.md",
-      "git_blob": "6e42cce033b6b845bdaa5c403fc5831f7ed253eba6dc115adc0c924e139567a5",
+      "git_blob": "6e42cce0331dcf6b532d2c88819303f858ae4fd9",
       "publication_status": "INTERNAL_TECHNICAL_PASS_HUMAN_REVIEW_OPEN",
       "formalization_priority": "HIGH_SELECTED_THEOREMS",
       "proved_core": [
