@@ -121,6 +121,13 @@ There are `Theta(X)` dyadic factor bands but only `Theta(log X)` uncovered prime
 
 The missing information is signed cancellation across all post-level bands, not a uniform estimate on one isolated factor interval.
 
+## Validation
+
+- static and six-regression sentinel `6a724dbca00abefd4b29284e`: completed with failure count zero;
+- targeted formal build `6a724ddda00abefd4b292854`: 8,657 jobs, completed with failure count zero;
+- full clean-room closeout `6a724e7a6b79c09949c22885`: Lean 4.32.0, 8,682 jobs, inherited seven-paper and `INT-PSLT` audits, all factor-band regressions, completed with failure count zero;
+- terminal sentinel: `FORTUNE_INT_PSLT_FACTOR_BAND_FULL_CLEANROOM_PASS`.
+
 ## Closed methods
 
 - natural defect propagation;
