@@ -1,0 +1,24 @@
+{
+  "programme": "FORTUNE_INT_PSLT_BUCHSTAB_FACTOR_BAND_V0_1",
+  "scales": {
+    "block_size_N": "X/log X",
+    "window_H": "eta X^2 with 0<eta<1",
+    "centre_logarithm": "log P_j asymp X",
+    "candidate_offsets": "H/log H asymp X^2/log X",
+    "expected_prime_outputs": "H/log P_j asymp X",
+    "original_PSLT_threshold": "X(log X)^2",
+    "compressed_prime_power_threshold": "X log X",
+    "least_admissible_output_factor": "r > ell_j >= X > sqrt(H)",
+    "optimistic_sieve_level": "D <= H",
+    "linear_sieve_parameter_ceiling": "s=log D/log r < 2",
+    "natural_propagation_offset": "m -> ell_{j+1} m > H for admissible m"
+  },
+  "formal_implications": {
+    "failed_source_cap": "Psi_j <= R_j <= log(P_j+H) sum_{k=2}^{floor(log_2(P_j+H))} 1/k",
+    "compressed_threshold": "B_j = 2 Rcap_j",
+    "failed_lower_tail_gap": "(B_j-Psi_j)_+^2 >= B_j^2/4",
+    "least_factor_partition": "candidate_count = prime_output_count + sum_r least_factor_count",
+    "sieve_obstruction": "D<=H and r>sqrt(H) imply log D/log r < 2"
+  },
+  "status": "FROZEN_FOR_EXECUTION"
+}
