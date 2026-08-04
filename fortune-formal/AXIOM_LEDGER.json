@@ -1,5 +1,5 @@
 {
-  "status": "F3_FORMALIZED_F4_IN_PROGRESS",
+  "status": "F4_STABILIZED_AT_CERTIFIED_NORMALIZATION_BOUNDARY",
   "allowed_axiom_file": "FortuneFormal/Frontier/Assumptions.lean",
   "formalized_claims": [
     {
@@ -33,16 +33,23 @@
   ],
   "axioms": [
     {
-      "name": "FortuneFormal.p7_k2_empty",
+      "name": "FortuneFormal.p7_k2_certified_normalization",
+      "claim_id": "P7-K2-CERT-NORM",
+      "source": "Paper VII Sections 7-9 and external Singular certificate package",
+      "remove_at_gate": "F4-CERT",
+      "status": "EXTERNAL_CERTIFICATE_AND_NORMALIZATION_BOUNDARY"
+    }
+  ],
+  "derived_with_external_boundary": [
+    {
+      "name": "FortuneFormal.p7_k2_empty_from_external_certificate",
       "claim_id": "P7-K2",
-      "source": "Paper VII Sections 7-9 and exact certificate package",
-      "remove_at_gate": "F4",
-      "status": "ASSUMED_PENDING_LEAN_CERTIFICATE_RECONSTRUCTION"
+      "status": "LEAN_DERIVED_FROM_ONE_LEDGERED_AXIOM"
     }
   ],
   "future_frontier_axiom": {
     "name": "FortuneFormal.cubic_true_frobenius_point_theorem",
     "creation_gate": "F5",
-    "status": "NOT_YET_DECLARED_OR_TYPED"
+    "status": "NOT_CREATED; PAPER VII EXPANSION FROZEN"
   }
 }
