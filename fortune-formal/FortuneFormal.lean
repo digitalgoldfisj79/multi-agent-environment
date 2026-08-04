@@ -5,4 +5,5 @@ import FortuneFormal.Bilateral.DefectCore
 import FortuneFormal.Bilateral.Quotient
 import FortuneFormal.Bilateral.DefectDegree
 import FortuneFormal.Bilateral.DefectTheorem
+import FortuneFormal.Bilateral.ZeroDefectReduction
 import FortuneFormal.Frontier.Assumptions
