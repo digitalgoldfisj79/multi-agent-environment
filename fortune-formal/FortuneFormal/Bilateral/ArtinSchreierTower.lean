@@ -63,12 +63,11 @@ theorem artinSchreier_root_relation
   letI : Fact q.Prime := ⟨hp⟩
   letI : CharP F q :=
     (CharP.charP_iff_prime_eq_zero hp).2 (FiniteField.cast_card_eq_zero F)
-  have hroot := AdjoinRoot.eval₂_root P
+  have hroot : AdjoinRoot.mk P P = 0 := AdjoinRoot.mk_self
   have hroot' : (AdjoinRoot.root P) ^ q - AdjoinRoot.root P -
       algebraMap F R a = 0 := by
     simpa [P, R, artinSchreierPolynomial, q,
-      Polynomial.eval₂_sub, Polynomial.eval₂_pow,
-      Polynomial.eval₂_X, Polynomial.eval₂_C,
+      map_sub, map_pow, AdjoinRoot.mk_X, AdjoinRoot.mk_C,
       AdjoinRoot.algebraMap_eq] using hroot
   linear_combination hroot'
 
