@@ -3,7 +3,7 @@
 **Programme:** `FORTUNE_INT_ISC_FOCUSED_V0_1`  
 **Branch:** `gpt56/fortune-int-isc-focused-v01-20260804`  
 **Base:** `deb6bb5468a951bc5485514c5848abcfcf386594`  
-**State:** I0–I6 COMPLETED; I7 CLEAN-ROOM VALIDATION  
+**State:** COMPLETED  
 **Terminal outcome:** `REDUCED_TO_SMALLER_NEW_THEOREM`  
 **Primary target:** `INT-PSLT`
 
@@ -29,15 +29,25 @@ implies eventual Fortune by candidate collapse.
 ## Gate state
 
 - I0 source and target freeze: passed.
-- I1 weakest-target audit: passed; lower-tail criterion formalized.
+- I1 weakest-target audit: passed; lower-tail criterion kernel checked.
 - I2 sparse first moment: closed as non-mandatory and unavailable at the selected scale.
 - I3 direct four-prime lane: closed at the `X/L(X)` loss obstruction.
 - I4 shifted source: passed with reduction to INT-PSLT.
 - I5 source/orbit and PSD: closed at exact smooth-modulus coherence.
 - I6 falsification: passed with one-defect no-go models.
-- I7 closeout: final clean build and provider sweep in progress.
+- I7 closeout: passed.
+
+## Validation
+
+Clean-room job `6a7243cba00abefd4b292733` completed with failure count zero.
+
+- Lean 4.32.0 confirmed;
+- full `FortuneFormal` build completed: 8,681 jobs;
+- focused I1–I6 regression suite passed;
+- inherited seven-paper closeout and formal trust audit passed;
+- terminal sentinel: `FORTUNE_INT_ISC_I7_FULL_CLEANROOM_PASS`.
 
 ## Boundary
 
-INT-PSLT, INT-LTQ, INT-ISC and Fortune remain unproved. The programme has completed a
-reduction and obstruction classification, not a proof of the conjecture.
+INT-PSLT, INT-LTQ, INT-ISC and Fortune remain unproved. The programme is complete as a
+reduction and obstruction classification, not as a proof of the conjecture.
