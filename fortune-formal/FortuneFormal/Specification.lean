@@ -4,6 +4,8 @@ set_option autoImplicit false
 
 namespace FortuneFormal
 
+universe u
+
 /--
 Stage-F0 logical interface for the stable Paper VII theorem package.
 
@@ -12,7 +14,7 @@ literal finite-field polynomial definitions before any manuscript theorem is
 counted as formally reconstructed.
 -/
 structure PaperVIISpecification where
-  Datum : Type
+  Datum : Type u
   crossDistinct : Datum → Prop
   inverseFreeIncidence : Datum → Prop
   scalarWitnessIncidence : Datum → Prop
