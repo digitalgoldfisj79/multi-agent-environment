@@ -1,5 +1,5 @@
 {
-  "status": "F4_STABILIZED_AT_CERTIFIED_NORMALIZATION_BOUNDARY",
+  "status": "F4_STABILIZED_INTEGER_SPINE_FORMALIZED",
   "allowed_axiom_file": "FortuneFormal/Frontier/Assumptions.lean",
   "formalized_claims": [
     {
@@ -28,6 +28,27 @@
       "claim_id": "P7-STRIP",
       "source": "Paper VII Corollary 5.3, corrected odd-prime scope",
       "gate": "F3",
+      "status": "KERNEL_CHECKED"
+    },
+    {
+      "name": "FortuneFormal.Integer.no_failure_of_variance_below_baseline_gap",
+      "claim_id": "INT-ONE-FAILURE",
+      "source": "Corrected Papers II Theorems 2.4-2.7 and Paper III Theorem 9.1",
+      "gate": "INTEGER-RECONSTRUCTION",
+      "status": "KERNEL_CHECKED"
+    },
+    {
+      "name": "FortuneFormal.Integer.centered_second_moment_identity",
+      "claim_id": "INT-CENTRED-IDENTITY",
+      "source": "Reconstructed corrected detector algebra",
+      "gate": "INTEGER-RECONSTRUCTION",
+      "status": "KERNEL_CHECKED"
+    },
+    {
+      "name": "FortuneFormal.Integer.four_prime_covariance_identity",
+      "claim_id": "INT-FOUR-PRIME-IDENTITY",
+      "source": "Paper III Equation 10.1 with exact centring",
+      "gate": "INTEGER-RECONSTRUCTION",
       "status": "KERNEL_CHECKED"
     }
   ],
