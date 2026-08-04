@@ -1,0 +1,79 @@
+{
+  "programme": "FORTUNE_INT_ISC_FOCUSED_V0_1",
+  "date": "2026-08-04",
+  "base_commit": "deb6bb5468a951bc5485514c5848abcfcf386594",
+  "parent_pr": 47,
+  "primary_issue": 48,
+  "status": "BUILT_NOT_EXECUTED",
+  "primary_target": "INT-ISC",
+  "allowed_final_statuses": [
+    "PROVED_INT_ISC",
+    "REDUCED_TO_ESTABLISHED_THEOREM",
+    "REDUCED_TO_SMALLER_NEW_THEOREM",
+    "METHOD_OBSTRUCTED_AT_EXPLICIT_SCALE"
+  ],
+  "gates": [
+    {
+      "id": "I0",
+      "name": "source_and_target_freeze",
+      "status": "READY",
+      "promotion": "exact definitions, quantifiers, scales and Lean identity verified"
+    },
+    {
+      "id": "I1",
+      "name": "weakest_sufficient_target_audit",
+      "status": "BLOCKED_BY_I0",
+      "promotion": "INT-ISC retained or a strictly weaker sufficient theorem formally substituted"
+    },
+    {
+      "id": "I2",
+      "name": "necessary_sparse_first_moment",
+      "status": "BLOCKED_BY_I1",
+      "promotion": "required selected-centre first moment proved or reduced to one exact missing theorem"
+    },
+    {
+      "id": "I3",
+      "name": "direct_four_prime_covariance",
+      "status": "BLOCKED_BY_I2_OR_DIRECT_BYPASS",
+      "promotion": "aggregate centred four-prime estimate reduced to verified analytic inputs"
+    },
+    {
+      "id": "I4",
+      "name": "double_von_mangoldt_dispersion",
+      "status": "BLOCKED_BY_I1",
+      "promotion": "centred source-to-variance theorem with total loss o(log X)"
+    },
+    {
+      "id": "I5",
+      "name": "deterministic_source_orbit_psd",
+      "status": "BLOCKED_BY_I1",
+      "promotion": "strictly smaller operator theorem with verified implication and exponent ledger"
+    },
+    {
+      "id": "I6",
+      "name": "falsification_and_adversarial_models",
+      "status": "READY_AFTER_I1",
+      "promotion": "method distinguishes all registered surrogates or a rigorous no-go is proved"
+    },
+    {
+      "id": "I7",
+      "name": "theorem_or_obstruction_closeout",
+      "status": "BLOCKED",
+      "promotion": "one allowed final status, independent reconstruction, clean build and zero active programme jobs"
+    }
+  ],
+  "prohibited_lanes": [
+    "P7-CUBIC-TF",
+    "D1-QLINE-NONSAT",
+    "random-order derandomisation without a corrected detector bridge",
+    "new reciprocal-frame moments without a corrected source theorem",
+    "finite-panel extrapolation"
+  ],
+  "compute_policy": {
+    "sentinel_timeout_minutes": 10,
+    "ordinary_job_timeout_minutes": 45,
+    "absolute_timeout_minutes": 120,
+    "terminal_programme_jobs_required": 0,
+    "inspect_unrelated_jobs_before_any_cancellation": true
+  }
+}
