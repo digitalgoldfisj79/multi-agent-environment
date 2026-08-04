@@ -69,6 +69,21 @@ private theorem quotient_B_natDegree_le (x : Datum F)
   · rw [Polynomial.natDegree_mul hB x.S_monic.ne_zero, x.S_degree] at hprod
     omega
 
+/-- On the prime Frobenius base, the first quotient difference has degree at
+most `q`.  This non-truncated estimate is the input needed to force the defect
+to vanish when `q < 2k`. -/
+theorem firstDifference_natDegree_le (x : Datum F)
+    (hp : Nat.Prime (Fintype.card F)) (hbase : FrobeniusBase x)
+    (q : QuotientWitness x) :
+    (firstDifference x q).natDegree ≤ Fintype.card F := by
+  unfold firstDifference
+  apply le_trans (Polynomial.natDegree_sub_le _ _)
+  apply max_le
+  · apply le_trans Polynomial.natDegree_mul_le
+    simpa [scalar] using quotient_Cq_natDegree_le x hp hbase q
+  · apply le_trans Polynomial.natDegree_mul_le
+    simpa [scalar] using quotient_B_natDegree_le x hp hbase q
+
 /-- The defect degree is at most `q - 2k` on the prime Frobenius base. -/
 theorem defectDegreeBound (x : Datum F)
     (hp : Nat.Prime (Fintype.card F)) (hbase : FrobeniusBase x) :
@@ -76,14 +91,7 @@ theorem defectDegreeBound (x : Datum F)
   intro h q hh
   by_cases hz : h = 0
   · simp [hz]
-  have hdiff : (firstDifference x q).natDegree ≤ Fintype.card F := by
-    unfold firstDifference
-    apply le_trans (Polynomial.natDegree_sub_le _ _)
-    apply max_le
-    · apply le_trans Polynomial.natDegree_mul_le
-      simpa [scalar] using quotient_Cq_natDegree_le x hp hbase q
-    · apply le_trans Polynomial.natDegree_mul_le
-      simpa [scalar] using quotient_B_natDegree_le x hp hbase q
+  have hdiff := firstDifference_natDegree_le x hp hbase q
   have hprod : (h * x.P * x.Sp).natDegree ≤ Fintype.card F := by
     rw [← hh.first]
     exact hdiff
