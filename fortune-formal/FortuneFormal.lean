@@ -19,4 +19,5 @@ import FortuneFormal.Bilateral.F3Closure
 import FortuneFormal.Quadratic.Model
 import FortuneFormal.Quadratic.DiscriminantContradiction
 import FortuneFormal.Quadratic.ReductionInterface
+import FortuneFormal.Integer.BlockCriterion
 import FortuneFormal.Frontier.Assumptions
