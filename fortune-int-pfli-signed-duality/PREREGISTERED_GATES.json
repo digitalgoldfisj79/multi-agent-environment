@@ -4,8 +4,10 @@
   "base_commit": "46e42dedb83dd92c7154258e6ea58b1001ae6bd0",
   "parent_pr": 51,
   "primary_issue": 52,
-  "status": "EXECUTING",
+  "status": "RESEARCH_COMPLETE_VALIDATION_PENDING",
   "initial_target": "INT-PFLI",
+  "terminal_target": "INT-AOD",
+  "terminal_outcome": "REDUCED_TO_GROWING_ARITY_GENERATING_FUNCTION",
   "allowed_final_statuses": [
     "PROVED_INT_PFLI",
     "PROVED_ADAPTIVE_OCCUPANCY",
@@ -14,14 +16,14 @@
     "METHOD_OBSTRUCTED_AT_LOGARITHMIC_MOMENT_ORDER"
   ],
   "gates": [
-    {"id": "D0", "name": "source_freeze", "status": "READY"},
-    {"id": "D1", "name": "algebraic_collapse", "status": "BLOCKED_BY_D0"},
-    {"id": "D2", "name": "adaptive_occupancy", "status": "BLOCKED_BY_D1"},
-    {"id": "D3", "name": "factorial_expansion", "status": "BLOCKED_BY_D2"},
-    {"id": "D4", "name": "finite_moment_indistinguishability", "status": "BLOCKED_BY_D3"},
-    {"id": "D5", "name": "prime_correlation_arity", "status": "BLOCKED_BY_D4"},
-    {"id": "D6", "name": "asymptotic_sieve_audit", "status": "BLOCKED_BY_D5"},
-    {"id": "D7", "name": "closeout", "status": "BLOCKED"}
+    {"id": "D0", "name": "source_freeze", "status": "PASSED"},
+    {"id": "D1", "name": "algebraic_collapse", "status": "PASSED_FORMAL"},
+    {"id": "D2", "name": "adaptive_occupancy", "status": "REDUCED_TO_INT_AOD"},
+    {"id": "D3", "name": "factorial_expansion", "status": "PASSED"},
+    {"id": "D4", "name": "finite_moment_indistinguishability", "status": "PASSED_EXACT"},
+    {"id": "D5", "name": "prime_correlation_arity", "status": "PASSED_REDUCTION"},
+    {"id": "D6", "name": "asymptotic_sieve_audit", "status": "CLOSED_MISSING_ROW_UNIFORM_POST_LEVEL_INPUT"},
+    {"id": "D7", "name": "closeout", "status": "VALIDATING"}
   ],
   "prohibited_lanes": [
     "P7-CUBIC-TF",
