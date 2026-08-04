@@ -67,6 +67,10 @@ def CrossDistinct (x : Datum F) : Prop :=
   x.P ≠ x.S ∧ x.P ≠ x.Pp ∧ x.P ≠ x.Sp ∧
   x.S ≠ x.Pp ∧ x.S ≠ x.Sp ∧ x.Pp ≠ x.Sp
 
+/-- The literal Frobenius base polynomial `t^q - t`, where `q = #F`. -/
+def FrobeniusBase (x : Datum F) : Prop :=
+  x.L = Polynomial.X ^ Fintype.card F - Polynomial.X
+
 /-- The scalar embedding into the polynomial ring. -/
 abbrev scalar (a : F) : Polynomial F := Polynomial.C a
 
@@ -160,7 +164,7 @@ def ReflectionFamily (x : Datum F) : Prop :=
 def ReflectionOrTranslation (x : Datum F) : Prop :=
   ReflectionFamily x ∨ TranslationFamily x
 
-/-- Concrete interpretation of the Stage-F0 logical interface. -/
+/-- Concrete interpretation of the logical Paper VII interface. -/
 def specification (F : Type u) [Field F] [Fintype F] : PaperVIISpecification where
   Datum := Datum F
   crossDistinct := CrossDistinct
@@ -171,6 +175,7 @@ def specification (F : Type u) [Field F] [Fintype F] : PaperVIISpecification whe
   defectDegreeBound := DefectDegreeBound
   zeroDefect := ZeroDefect
   reflectionOrTranslation := ReflectionOrTranslation
+  frobeniusBase := FrobeniusBase
   fieldSize := fun _ => Fintype.card F
   modulusDegree := fun x => x.k
   primeField := fun _ => Nat.Prime (Fintype.card F)
