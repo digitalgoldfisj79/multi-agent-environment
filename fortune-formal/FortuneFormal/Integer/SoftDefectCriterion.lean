@@ -20,7 +20,7 @@ theorem coverageExcessSq_eq_lowerTailSq
     coverageExcessSq candidate covered margin = lowerTailSq count margin := by
   rw [coverageExcessSq, lowerTailSq, hpartition]
   congr 1
-  ring
+  ring_nf
 
 /-- Any nonnegative soft detector which equals one at every failed row excludes
 all failures once its total mass is strictly below one. -/
@@ -40,7 +40,7 @@ theorem no_failure_of_soft_detector_sum_lt_one
   linarith
 
 /-- Exponential occupancy detector. -/
-def expDefect (tau source : ℝ) : ℝ :=
+noncomputable def expDefect (tau source : ℝ) : ℝ :=
   Real.exp (-tau * source)
 
 @[simp] theorem expDefect_zero (tau : ℝ) : expDefect tau 0 = 1 := by
