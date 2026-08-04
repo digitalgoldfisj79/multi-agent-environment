@@ -3,6 +3,8 @@ import FortuneFormal.Specification
 
 set_option autoImplicit false
 
+noncomputable section
+
 namespace FortuneFormal
 namespace Bilateral
 
@@ -27,6 +29,10 @@ structure Datum (F : Type u) [Field F] [Fintype F] where
   S_monic : S.Monic
   Pp_monic : Pp.Monic
   Sp_monic : Sp.Monic
+  P_irreducible : Irreducible P
+  S_irreducible : Irreducible S
+  Pp_irreducible : Irreducible Pp
+  Sp_irreducible : Irreducible Sp
   P_degree : P.natDegree = k
   S_degree : S.natDegree = k
   Pp_degree : Pp.natDegree = k
@@ -154,7 +160,7 @@ def specification (F : Type u) [Field F] [Fintype F] : PaperVIISpecification whe
   defectDegreeBound := DefectDegreeBound
   zeroDefect := ZeroDefect
   reflectionOrTranslation := ReflectionOrTranslation
-  fieldSize := fun x => Fintype.card F
+  fieldSize := fun _ => Fintype.card F
   modulusDegree := fun x => x.k
   primeField := fun _ => Nat.Prime (Fintype.card F)
   oddPrimePowerField := fun _ => Odd (Fintype.card F)
