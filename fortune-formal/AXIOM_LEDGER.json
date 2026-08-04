@@ -1,0 +1,46 @@
+{
+  "status": "STAGE_F0_COMPILED_SPECIFICATION",
+  "allowed_axiom_file": "FortuneFormal/Frontier/Assumptions.lean",
+  "axioms": [
+    {
+      "name": "FortuneFormal.p7_ifa1",
+      "claim_id": "P7-IFA1",
+      "source": "Paper VII Section 3",
+      "remove_at_gate": "F2",
+      "status": "ASSUMED_PENDING_LEAN_PROOF"
+    },
+    {
+      "name": "FortuneFormal.p7_bdd1",
+      "claim_id": "P7-BDD1",
+      "source": "Paper VII Section 4",
+      "remove_at_gate": "F3",
+      "status": "ASSUMED_PENDING_LEAN_PROOF"
+    },
+    {
+      "name": "FortuneFormal.p7_bdd2",
+      "claim_id": "P7-BDD2",
+      "source": "Paper VII Section 5",
+      "remove_at_gate": "F3",
+      "status": "ASSUMED_PENDING_LEAN_PROOF"
+    },
+    {
+      "name": "FortuneFormal.p7_strip",
+      "claim_id": "P7-STRIP",
+      "source": "Paper VII Corollary 5.3",
+      "remove_at_gate": "F3",
+      "status": "ASSUMED_PENDING_LEAN_PROOF"
+    },
+    {
+      "name": "FortuneFormal.p7_k2_empty",
+      "claim_id": "P7-K2",
+      "source": "Paper VII Sections 7-9 and exact certificate package",
+      "remove_at_gate": "F4",
+      "status": "ASSUMED_PENDING_LEAN_PROOF"
+    }
+  ],
+  "future_frontier_axiom": {
+    "name": "FortuneFormal.cubic_true_frobenius_point_theorem",
+    "creation_gate": "F5",
+    "status": "NOT_YET_DECLARED_OR_TYPED"
+  }
+}
