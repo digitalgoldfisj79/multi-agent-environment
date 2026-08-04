@@ -1,75 +1,72 @@
-# Claim ledger — Fortune formal discovery programme
+# Claim ledger — integrated Fortune formal programme
 
 **Date:** 4 August 2026  
-**Current gate:** F4 quadratic emptiness certificate reconstruction  
-**Formal proof status:** P7-IFA1, P7-BDD1, P7-BDD2 and P7-STRIP KERNEL-CHECKED; ONE PAPER VII AXIOM REMAINS
+**Current state:** Paper VII F4 stabilized; corrected integer spine formalized  
+**Formal proof status:** SEVEN CLAIMS KERNEL-CHECKED; ONE PAPER VII AXIOM REMAINS
 
 ## Kernel-checked claims
 
-| Lean declaration | Paper claim | Gate | Evidence |
-|---|---|---|---|
-| `FortuneFormal.Bilateral.p7_ifa1_concrete` | P7-IFA1 inverse-free equivalence and scalar-witness uniqueness | F2 | Clean-room Lean 4.32.0 build and post-build trust audit |
-| `FortuneFormal.Bilateral.p7_bdd1_concrete` | P7-BDD1 common-defect existence, uniqueness and degree bound | F3 | Clean-room Lean 4.32.0 build and post-build trust audit |
-| `FortuneFormal.Bilateral.p7_bdd2_concrete` | P7-BDD2 zero-defect reflection/translation classification | F3 | Clean-room Lean 4.32.0 build of 8,676 jobs and post-build trust audit |
-| `FortuneFormal.Bilateral.p7_strip_concrete` | P7-STRIP intermediate-strip emptiness | F3 | Same clean-room Lean 4.32.0 build and post-build trust audit |
+| Lean declaration | Claim | Evidence |
+|---|---|---|
+| `FortuneFormal.Bilateral.p7_ifa1_concrete` | P7-IFA1 inverse-free equivalence and scalar-witness uniqueness | Clean Lean 4.32.0 build and static trust audit |
+| `FortuneFormal.Bilateral.p7_bdd1_concrete` | P7-BDD1 common-defect existence, uniqueness and degree bound | Same build; corrected prime-Frobenius scope |
+| `FortuneFormal.Bilateral.p7_bdd2_concrete` | P7-BDD2 zero-defect reflection/translation classification | Same build; corrected odd-prime scope |
+| `FortuneFormal.Bilateral.p7_strip_concrete` | P7-STRIP intermediate-strip emptiness | Same build; direct non-truncated degree contradiction |
+| `FortuneFormal.Integer.no_failure_of_variance_below_baseline_gap` | Corrected one-failure block criterion | Lean reconstruction of Papers II–III implication |
+| `FortuneFormal.Integer.centered_second_moment_identity` | Exact centred variance identity | Lean ring normalization |
+| `FortuneFormal.Integer.four_prime_covariance_identity` | Exact four-prime covariance residual identity | Lean substitution of the off-diagonal pair count |
 
-The F3 theorem chain includes a direct formal proof that `X^q - X - a` is irreducible over a prime field when `a ≠ 0`, the zero-defect normal form, factor ordering, explicit reconstruction of the reflection and translation families, and a non-truncated degree contradiction for the strip.
+The Paper VII F3 theorem chain also includes prime-field Artin–Schreier irreducibility, the zero-defect normal form, monic factor ordering and explicit reconstruction of the reflection and translation families.
 
-The formal audit corrected the manuscript interface in two places:
+The quadratic final step
 
-- BDD1 requires the literal prime-Frobenius base `L = X^q - X`, prime-field scope and `k < q`;
-- BDD2 and strip require odd prime characteristic because the factor classification distinguishes `L - λ` from `L + λ`.
+`FortuneFormal.Quadratic.certifiedComponent_not_arithmeticOpen`
 
-No characteristic-two or over-scoped version is claimed.
+is kernel checked: on the externally certified component both normalized quadratic discriminants are literal squares, contradicting the genuine arithmetic-open locus.
 
-## Kernel-checked infrastructure
+## Scope corrections found by formalization
 
-- Lean 4.32.0, mathlib v4.32.0 and Comparator v4.32.0 are pinned.
-- Literal finite-field polynomial, endpoint, quotient, Frobenius-base and defect definitions compile.
-- Temporary assumptions are confined to one file and machine-ledgered.
-- Prohibited proof holes, unsafe declarations and unledgered axioms are rejected by the static verifier.
+- BDD1 requires the literal prime-Frobenius base `L = X^q - X`, prime-field scope and `k < q`.
+- BDD2 and strip require odd prime characteristic.
+- The strip argument cannot interpret a negative integer degree bound through truncated natural subtraction; it now uses a direct degree contradiction.
+- The corrected integer residual is
+  `Z^2 - 2*base*Z + base^2 - base` before the four-prime substitution. An experimental transcription containing an additional `-Z` was rejected by Lean and was not committed.
 
 ## ASSUMED pending formalization
 
-| Lean declaration | Paper claim | Removal gate |
+| Lean declaration | Exact boundary | Status |
 |---|---|---|
-| `FortuneFormal.p7_k2_empty` | P7-K2 quadratic emptiness over odd prime powers | F4 |
+| `FortuneFormal.p7_k2_certified_normalization` | Every genuine quadratic incidence produces an arithmetic-open q-free model point on the externally certified component | One ledgered external certificate/normalization axiom |
 
-The quadratic theorem is proved by the Paper VII computer-assisted certificate package, but remains a formal assumption until the incidence-to-model bridge, localization certificates and discriminant contradiction are reconstructed in Lean.
+The broad `p7_k2_empty` axiom has been removed. The theorem
 
-## OPEN proof engineering
+`FortuneFormal.p7_k2_empty_from_external_certificate`
 
-- faithful normalization from a genuine `k = 2` incidence to the q-free four-equation model;
-- proof that every genuine incidence lies in one of the two valid localization charts;
-- Lean checking of characteristic-zero lift identities after denominator clearing;
-- direct exceptional-characteristic certificate checking;
-- final discriminant-square contradiction;
-- true Frobenius orientation predicate;
-- cubic faithful saturation and sign-torsor interfaces.
+is derived in Lean from this one narrower axiom and the kernel-checked discriminant contradiction. It is therefore **not** an axiom-free formalization of P7-K2.
 
-## Future single research frontier
+The abandoned `polyrith` certificate draft has been deleted. No unavailable external tactic, hidden axiom, `sorry`, `admit` or `unsafe` declaration is present in the compiled programme.
 
-After F4, the programme must isolate one assumption only:
+## Exact integer research frontier
 
-`FortuneFormal.cubic_true_frobenius_point_theorem`.
+The corrected Papers II–III reconstruction isolates one theorem, `INT-ISC`: an upper bound of size `N X L(X)`, with `L(X)=o(log X)`, for the centred signed four-prime covariance residual on the actual increasing primorial centres.
 
-That declaration does not yet exist. Its exact type will be frozen at F5 after the faithful cubic definitions and weakest sufficient application statement are established.
+The finite algebraic implication from that residual to the required variance and the one-failure exclusion is kernel checked. The analytic estimate itself is not proved or declared as an axiom.
 
-## Empirical or computational material excluded from theorem status
+## Direct function-field frontier
 
-- cubic orbit-count trends;
-- tangent-dimension and formal-jet evidence on the q-free relaxation;
-- finite-panel `O(1)` or positive-density interpretations;
-- amplitude trends;
-- extrapolation from finite panels.
+Replacement Papers V–VI reduce direct `d=1` to `D1-QLINE-NONSAT`, equivalently strict q-line saturation defect or positivity of the specified Kummer quotient open. That nonvanishing theorem remains open and has no proved implication to the integer residual.
+
+## Paper VII expansion boundary
+
+The cubic true-Frobenius theorem is not declared as an axiom and the F5 cubic expansion is frozen. No bridge from Paper VII to direct `d=1` or integer Fortune is known.
 
 ## Explicitly not claimed
 
-- that the remaining Lean axiom certifies its own mathematical truth;
-- that all of Paper VII has been formalized;
-- that Comparator has accepted a completed Paper VII package;
-- the cubic true-Frobenius theorem;
-- endpoint `FFPR`;
+- an axiom-free proof of Paper VII quadratic emptiness;
+- a completed formalization of all seven manuscripts;
+- the cubic true-Frobenius theorem or endpoint `FFPR`;
+- `INT-ISC` or the required sparse-centre covariance estimate;
 - direct function-field `d=1`;
 - any function-field-to-integer transfer;
-- Fortune's conjecture.
+- Fortune's conjecture;
+- journal peer review or publication acceptance.
