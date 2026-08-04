@@ -53,24 +53,26 @@ def BDD1Statement : Prop :=
     S.inverseFreeIncidence d →
       S.commonDefectExistsUnique d ∧ S.defectDegreeBound d
 
-/-- P7-BDD2 in the same prime-field Frobenius scope: zero defect forces the
-reflection/translation classification. -/
+/-- P7-BDD2 in its manuscript scope: over an odd prime Frobenius base, zero
+defect forces the reflection/translation classification. -/
 def BDD2Statement : Prop :=
   ∀ d : S.Datum,
     S.crossDistinct d →
     S.primeField d →
+    S.oddPrimePowerField d →
     S.frobeniusBase d →
     S.modulusDegree d < S.fieldSize d →
     S.inverseFreeIncidence d →
     S.zeroDefect d →
       S.reflectionOrTranslation d
 
-/-- P7-STRIP: over the prime Frobenius base, the cross-distinct incidence is
+/-- P7-STRIP: over an odd prime Frobenius base, the cross-distinct incidence is
 empty in the intermediate strip `k < q < 2k`. -/
 def StripStatement : Prop :=
   ∀ d : S.Datum,
     S.crossDistinct d →
     S.primeField d →
+    S.oddPrimePowerField d →
     S.frobeniusBase d →
     S.modulusDegree d < S.fieldSize d →
     S.fieldSize d < 2 * S.modulusDegree d →
