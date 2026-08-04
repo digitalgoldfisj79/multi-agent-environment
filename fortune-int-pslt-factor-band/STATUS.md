@@ -2,7 +2,7 @@
 
 **Programme:** `FORTUNE_INT_PSLT_BUCHSTAB_FACTOR_BAND_V0_1`  
 **Branch:** `gpt56/fortune-int-pslt-buchstab-factor-band-v01-20260804`  
-**State:** RESEARCH COMPLETE; VALIDATION PENDING  
+**State:** CLOSED  
 **Terminal outcome:** `REDUCED_TO_CRITICAL_FACTOR_INCIDENCE`
 
 ## Gate rulings
@@ -14,10 +14,16 @@
 - B4: closed at explicit scale — first factor lies beyond the `s=2` lower-sieve boundary.
 - B5: passed as reduction — isolated `INT-PFLI`.
 - B6: passed as implication — `INT-PFLI` implies compressed `INT-PSLT` and eventual Fortune.
-- B7: validation pending.
+- B7: passed — clean-room static, regression, formal and inherited audits completed.
+
+## Validation
+
+- static/regression sentinel: `6a724dbca00abefd4b29284e`;
+- targeted Lean build: `6a724ddda00abefd4b292854`, 8,657 jobs;
+- full clean-room closeout: `6a724e7a6b79c09949c22885`, 8,682 jobs, failure count zero.
 
 ## Remaining open theorem
 
 `INT-PFLI`, the signed selected-centre post-level factor-incidence theorem in `B5_CRITICAL_FACTOR_INCIDENCE.md`.
 
-No programme compute job should remain active after B7 validation.
+The programme does not claim `INT-PFLI`, `INT-PSLT`, or Fortune.
