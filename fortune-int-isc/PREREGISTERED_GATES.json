@@ -4,15 +4,10 @@
   "base_commit": "deb6bb5468a951bc5485514c5848abcfcf386594",
   "parent_pr": 47,
   "primary_issue": 48,
-  "status": "I0_PASSED_I1_READY",
-  "primary_target": "INT-ISC",
-  "validation": {
-    "provider": "Hugging Face Jobs",
-    "job_id": "6a7205146b79c09949c2236a",
-    "result": "COMPLETED",
-    "failure_count": 0,
-    "sentinel": "FORTUNE_INT_ISC_I0_CLEAN_CLONE_PASS"
-  },
+  "status": "I0_I6_COMPLETE_I7_VALIDATION",
+  "original_target": "INT-ISC",
+  "primary_target": "INT-PSLT",
+  "terminal_outcome": "REDUCED_TO_SMALLER_NEW_THEOREM",
   "allowed_final_statuses": [
     "PROVED_INT_ISC",
     "REDUCED_TO_ESTABLISHED_THEOREM",
@@ -24,49 +19,61 @@
       "id": "I0",
       "name": "source_and_target_freeze",
       "status": "PASSED",
-      "promotion": "exact definitions, quantifiers, scales and Lean identity verified"
+      "result": "corrected detector, source, scales and inherited Lean identity frozen"
     },
     {
       "id": "I1",
       "name": "weakest_sufficient_target_audit",
-      "status": "READY",
-      "promotion": "INT-ISC retained or a strictly weaker sufficient theorem formally substituted"
+      "status": "PASSED",
+      "result": "full variance replaced by the strictly weaker one-sided lower-tail criterion INT-LTQ"
     },
     {
       "id": "I2",
       "name": "necessary_sparse_first_moment",
-      "status": "BLOCKED_BY_I1",
-      "promotion": "required selected-centre first moment proved or reduced to one exact missing theorem"
+      "status": "CLOSED_DIAGNOSTIC_NOT_REQUIRED",
+      "result": "signed first moment is not necessary after I1; generic short-interval results miss the selected-centre scale"
     },
     {
       "id": "I3",
       "name": "direct_four_prime_covariance",
-      "status": "BLOCKED_BY_I2_OR_DIRECT_BYPASS",
-      "promotion": "aggregate centred four-prime estimate reduced to verified analytic inputs"
+      "status": "CLOSED_METHOD_OBSTRUCTED",
+      "result": "absolute-value implementations lose X/L(X); four-prime expansion restores the discarded upper tail"
     },
     {
       "id": "I4",
-      "name": "double_von_mangoldt_dispersion",
-      "status": "BLOCKED_BY_I1",
-      "promotion": "centred source-to-variance theorem with total loss o(log X)"
+      "name": "shifted_von_mangoldt_source",
+      "status": "PASSED_REDUCED_TO_SMALLER_NEW_THEOREM",
+      "result": "reduced Fortune to the one-form primorial selected lower-tail theorem INT-PSLT"
     },
     {
       "id": "I5",
       "name": "deterministic_source_orbit_psd",
-      "status": "BLOCKED_BY_I1",
-      "promotion": "strictly smaller operator theorem with verified implication and exponent ledger"
+      "status": "CLOSED_COHERENCE_OBSTRUCTION",
+      "result": "for every q dividing A_X, the centre walk satisfies F_X(a/q)=N; geometry alone supplies coherence, not cancellation"
     },
     {
       "id": "I6",
       "name": "falsification_and_adversarial_models",
-      "status": "READY_AFTER_I1",
-      "promotion": "method distinguishes all registered surrogates or a rigorous no-go is proved"
+      "status": "PASSED",
+      "result": "one-defect models prove local densities, first moments, relative second moments and dense averages insufficient"
     },
     {
       "id": "I7",
       "name": "theorem_or_obstruction_closeout",
-      "status": "BLOCKED",
-      "promotion": "one allowed final status, independent reconstruction, clean build and zero active programme jobs"
+      "status": "VALIDATION_IN_PROGRESS",
+      "result": "pending final clean build, static verification and provider sweep"
+    }
+  ],
+  "validation_jobs": [
+    {
+      "job_id": "6a7205146b79c09949c2236a",
+      "gate": "I0",
+      "result": "COMPLETED"
+    },
+    {
+      "job_id": "6a7205cda00abefd4b291fdd",
+      "gate": "I0",
+      "result": "COMPLETED"
     }
   ],
   "prohibited_lanes": [
