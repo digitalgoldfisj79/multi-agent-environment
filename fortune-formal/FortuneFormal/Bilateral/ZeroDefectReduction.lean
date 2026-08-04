@@ -49,7 +49,16 @@ theorem zeroDefect_normalForm (x : Datum F) (q : QuotientWitness x)
     have hcoeff := congrArg
       (fun f : Polynomial F => f.coeff (Fintype.card F)) hh.first
     simp only [zero_mul, zero_eq_mul, Polynomial.coeff_zero] at hcoeff
-    simpa [scalar, hCcoeff, hBcoeff] using sub_eq_zero.mp hcoeff
+    have hscalarEq : rho x - lambda x = 0 := by
+      calc
+        rho x - lambda x = rho x * 1 - lambda x * 1 := by ring
+        _ = rho x * q.Cq.coeff (Fintype.card F) -
+            lambda x * q.B.coeff (Fintype.card F) := by rw [hCcoeff, hBcoeff]
+        _ = (scalar (rho x) * q.Cq -
+            scalar (lambda x) * q.B).coeff (Fintype.card F) := by
+          simp [scalar]
+        _ = 0 := hcoeff
+    exact sub_eq_zero.mp hscalarEq
   have hscalar : scalar (lambda x) ≠ 0 :=
     Polynomial.C_ne_zero.mpr hlambda
   have hCB : q.Cq = q.B := by
