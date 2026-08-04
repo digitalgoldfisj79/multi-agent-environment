@@ -1,0 +1,35 @@
+name: Fortune INT-ISC focused programme
+
+on:
+  push:
+    branches:
+      - gpt56/fortune-int-isc-focused-v01-20260804
+    paths:
+      - 'fortune-int-isc/**'
+      - 'fortune-mainline/**'
+      - 'fortune-formal/**'
+      - '.github/workflows/fortune-int-isc-focused.yml'
+  pull_request:
+    paths:
+      - 'fortune-int-isc/**'
+      - 'fortune-mainline/**'
+      - 'fortune-formal/**'
+      - '.github/workflows/fortune-int-isc-focused.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-focused-programme:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify inherited closeout
+        run: python3 fortune-mainline/scripts/verify_mainline.py
+      - name: Verify focused INT-ISC contract
+        run: python3 fortune-int-isc/scripts/verify_programme.py
