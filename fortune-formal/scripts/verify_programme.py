@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import json
 import re
+import subprocess
 import sys
 from pathlib import Path
 
@@ -26,6 +27,10 @@ REQUIRED = {
     "FortuneFormal/Quadratic/Model.lean",
     "FortuneFormal/Quadratic/DiscriminantContradiction.lean",
     "FortuneFormal/Frontier/Assumptions.lean",
+    "cross-paper/CLAIM_MATRIX.json",
+    "cross-paper/AUDIT_REPORT.md",
+    "cross-paper/DEPENDENCY_GRAPH.md",
+    "scripts/verify_cross_paper_audit.py",
     "scripts/verify_programme.py",
 }
 
@@ -138,6 +143,17 @@ def main() -> int:
         if not re.search(rf"^\s*axiom\s+{re.escape(name)}\b", assumptions, re.MULTILINE):
             fail(f"ledgered axiom not declared: {name}")
 
+    cross = subprocess.run(
+        [sys.executable, str(ROOT / "scripts" / "verify_cross_paper_audit.py")],
+        cwd=ROOT,
+        check=False,
+        text=True,
+        capture_output=True,
+    )
+    if cross.returncode:
+        fail("cross-paper audit failed: " + (cross.stdout + cross.stderr).strip())
+
+    print(cross.stdout.strip())
     print("FORTUNE_FORMAL_PROGRAMME_STATIC_PASS")
     print(f"ledgered_axioms={len(expected_local)}")
     print(f"formalized_claims={len(formalized_local)}")
