@@ -15,4 +15,5 @@ import FortuneFormal.Bilateral.BDD2Conditional
 import FortuneFormal.Bilateral.StripReduction
 import FortuneFormal.Bilateral.ArtinSchreierTower
 import FortuneFormal.Bilateral.ArtinSchreierIrreducible
+import FortuneFormal.Bilateral.F3Closure
 import FortuneFormal.Frontier.Assumptions
