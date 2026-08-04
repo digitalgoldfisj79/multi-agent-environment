@@ -89,8 +89,10 @@ theorem zeroDefect_factorOrdering_of_artinIrreducible (x : Datum F)
   obtain ⟨hgmonic, hgdegree⟩ := artin_plus_monic_degree x hp hbase
   have horder := twoFactor_ordering
     hirr hfmonic hgmonic hAmonic hBmonic
-    (hfdegree.trans hAdegree.symm) hAdegree.trans hBdegree.symm
-    (hgdegree.trans hAdegree.symm) hnormal.AB_factorization
+    (hfdegree.trans hAdegree.symm)
+    (hAdegree.trans hBdegree.symm)
+    (hgdegree.trans hAdegree.symm)
+    hnormal.AB_factorization
   exact ⟨q, hnormal, horder⟩
 
 end Bilateral
