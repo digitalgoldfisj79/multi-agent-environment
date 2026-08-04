@@ -29,12 +29,13 @@ theorem p7_bdd2_of_artinSchreier
   change ∀ x : Datum F,
     CrossDistinct x →
     Nat.Prime (Fintype.card F) →
+    Odd (Fintype.card F) →
     FrobeniusBase x →
     x.k < Fintype.card F →
     InverseFreeIncidence x →
     ZeroDefect x →
       ReflectionOrTranslation x
-  intro x _ hp hbase hk hinc hz
+  intro x _ hp _ hbase hk hinc hz
   have hirr := hartin x hp hbase hinc
   obtain ⟨q, hnormal, horder⟩ :=
     zeroDefect_factorOrdering_of_artinIrreducible x hp hbase hk hinc hz hirr
