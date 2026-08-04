@@ -1,14 +1,16 @@
 {
-  "status": "STAGE_F0_COMPILED_SPECIFICATION",
+  "status": "F2_INVERSE_FREE_FORMALIZED",
   "allowed_axiom_file": "FortuneFormal/Frontier/Assumptions.lean",
-  "axioms": [
+  "formalized_claims": [
     {
-      "name": "FortuneFormal.p7_ifa1",
+      "name": "FortuneFormal.Bilateral.p7_ifa1_concrete",
       "claim_id": "P7-IFA1",
       "source": "Paper VII Section 3",
-      "remove_at_gate": "F2",
-      "status": "ASSUMED_PENDING_LEAN_PROOF"
-    },
+      "gate": "F2",
+      "status": "KERNEL_CHECKED"
+    }
+  ],
+  "axioms": [
     {
       "name": "FortuneFormal.p7_bdd1",
       "claim_id": "P7-BDD1",
