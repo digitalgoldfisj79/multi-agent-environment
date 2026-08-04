@@ -1,0 +1,41 @@
+{
+  "programme": "FORTUNE_INT_PSLT_BUCHSTAB_FACTOR_BAND_V0_1",
+  "date": "2026-08-04",
+  "base_commit": "cc8c00c30a436b8ced65bbd4703326145d129de3",
+  "parent_pr": 49,
+  "primary_issue": 50,
+  "status": "EXECUTING",
+  "initial_target": "INT-PSLT",
+  "allowed_final_statuses": [
+    "PROVED_INT_PSLT",
+    "REDUCED_TO_ESTABLISHED_THEOREM",
+    "REDUCED_TO_CRITICAL_FACTOR_INCIDENCE",
+    "DEFECT_PROPAGATION_REDUCTION",
+    "METHOD_OBSTRUCTED_AT_EXPLICIT_SCALE"
+  ],
+  "gates": [
+    {"id": "B0", "name": "source_freeze", "status": "READY"},
+    {"id": "B1", "name": "prime_power_threshold_compression", "status": "BLOCKED_BY_B0"},
+    {"id": "B2", "name": "defect_propagation", "status": "BLOCKED_BY_B1"},
+    {"id": "B3", "name": "exact_least_factor_identity", "status": "BLOCKED_BY_B1"},
+    {"id": "B4", "name": "sieve_level_audit", "status": "BLOCKED_BY_B3"},
+    {"id": "B5", "name": "critical_factor_incidence", "status": "BLOCKED_BY_B3"},
+    {"id": "B6", "name": "one_defect_resolution", "status": "BLOCKED_BY_B5"},
+    {"id": "B7", "name": "closeout", "status": "BLOCKED"}
+  ],
+  "prohibited_lanes": [
+    "P7-CUBIC-TF",
+    "D1-QLINE-NONSAT",
+    "superseded INT-ISC four-prime campaign",
+    "random-order derandomisation",
+    "reciprocal-frame moments without a proved bridge",
+    "finite-panel asymptotic promotion"
+  ],
+  "compute_policy": {
+    "sentinel_timeout_minutes": 10,
+    "ordinary_job_timeout_minutes": 45,
+    "absolute_timeout_minutes": 120,
+    "terminal_programme_jobs_required": 0,
+    "inspect_unrelated_jobs_before_cancellation": true
+  }
+}
