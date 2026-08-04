@@ -8,4 +8,5 @@ import FortuneFormal.Bilateral.DefectTheorem
 import FortuneFormal.Bilateral.ZeroDefectReduction
 import FortuneFormal.Bilateral.QuotientShape
 import FortuneFormal.Bilateral.ZeroDefectScoped
+import FortuneFormal.Bilateral.FactorOrdering
 import FortuneFormal.Frontier.Assumptions
