@@ -50,7 +50,7 @@ private theorem artin_minus_monic_degree (x : Datum F)
     apply hLmonic.add_of_left
     rw [Polynomial.degree_neg]
     exact Polynomial.degree_lt_degree hlt
-  · exact Polynomial.natDegree_sub_eq_left_of_natDegree_lt hlt
+  · exact (Polynomial.natDegree_sub_eq_left_of_natDegree_lt hlt).trans hLdegree
 
 private theorem artin_plus_monic_degree (x : Datum F)
     (hp : Nat.Prime (Fintype.card F)) (hbase : FrobeniusBase x) :
@@ -65,7 +65,7 @@ private theorem artin_plus_monic_degree (x : Datum F)
   constructor
   · apply hLmonic.add_of_left
     exact Polynomial.degree_lt_degree hlt
-  · exact Polynomial.natDegree_add_eq_left_of_natDegree_lt hlt
+  · exact (Polynomial.natDegree_add_eq_left_of_natDegree_lt hlt).trans hLdegree
 
 /-- Conditional factor ordering for an actual zero-defect incidence.  Every
 step except the single displayed Artin-Schreier irreducibility hypothesis is
