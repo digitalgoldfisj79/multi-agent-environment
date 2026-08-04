@@ -1,5 +1,6 @@
 import Mathlib
 import FortuneFormal.Bilateral.DefectCore
+import FortuneFormal.Bilateral.DefectExistence
 import FortuneFormal.Bilateral.Quotient
 import FortuneFormal.Bilateral.DefectDegree
 
@@ -32,13 +33,13 @@ theorem p7_bdd1_concrete (F : Type u) [Field F] [Fintype F] :
     let prod : Polynomial F := x.P * x.Pp * x.S * x.Sp
     have heq : h * prod = h' * prod := by
       calc
-        h * prod = defectExpression x := by
+        h * prod = h * x.P * x.Pp * x.S * x.Sp := by
           dsimp [prod]
-          rw [← hh.product]
           ring
+        _ = defectExpression x := hh.product
+        _ = h' * x.P * x.Pp * x.S * x.Sp := hh'.product.symm
         _ = h' * prod := by
           dsimp [prod]
-          rw [← hh'.product]
           ring
     have hnonzero : prod ≠ 0 := by
       dsimp [prod]
