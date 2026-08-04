@@ -84,14 +84,7 @@ theorem no_reflectionOrTranslation_above_modulus (x : Datum F)
     have hsum : x.Pp + x.P = x.L * Q := by
       linear_combination hPp
     have hdegLeft : (x.Pp + x.P).natDegree ≤ x.k := add_natDegree_le_k x
-    have hdegRight : (x.L * Q).natDegree = Fintype.card F + Q.natDegree := by
-      rw [hLmonic.natDegree_mul (Polynomial.monic_of_leadingCoeff_eq_one <| by
-        have hlead : Q.leadingCoeff ≠ 0 := Polynomial.leadingCoeff_ne_zero.mpr hQ
-        exact one_ne_zero) ]
-    have hQmonicFree : (x.L * Q).natDegree = x.L.natDegree + Q.natDegree :=
-      Polynomial.natDegree_mul x.L_monic_or hQ
-    rw [hsum] at hdegLeft
-    rw [Polynomial.natDegree_mul hLmonic.ne_zero hQ, hLdegree] at hdegLeft
+    rw [hsum, Polynomial.natDegree_mul hLmonic.ne_zero hQ, hLdegree] at hdegLeft
     omega
   · rcases htrans with ⟨R, hPp, hS, _⟩
     have hR : R ≠ 0 := by
