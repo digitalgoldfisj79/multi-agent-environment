@@ -16,4 +16,6 @@ import FortuneFormal.Bilateral.StripReduction
 import FortuneFormal.Bilateral.ArtinSchreierTower
 import FortuneFormal.Bilateral.ArtinSchreierIrreducible
 import FortuneFormal.Bilateral.F3Closure
+import FortuneFormal.Quadratic.Model
+import FortuneFormal.Quadratic.DiscriminantContradiction
 import FortuneFormal.Frontier.Assumptions
