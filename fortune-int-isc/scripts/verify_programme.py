@@ -20,6 +20,7 @@ REQUIRED = [
     "METHOD_LEDGER.md",
     "CLAIM_LEDGER.md",
     "STATUS.md",
+    "RUN_PROTOCOL.md",
     "scripts/verify_programme.py",
     "scripts/scale_audit.py",
 ]
@@ -48,12 +49,21 @@ def main() -> int:
         fail("wrong programme identifier")
     if gates.get("base_commit") != "deb6bb5468a951bc5485514c5848abcfcf386594":
         fail("base commit drift")
-    if gates.get("status") != "BUILT_NOT_EXECUTED":
-        fail("initial programme status changed without gate promotion")
+    if gates.get("status") != "I0_PASSED_I1_READY":
+        fail("programme must be frozen at the validated I0 state")
 
     ids = [gate.get("id") for gate in gates.get("gates", [])]
     if ids != [f"I{i}" for i in range(8)]:
         fail(f"unexpected gate sequence: {ids}")
+    statuses = {gate.get("id"): gate.get("status") for gate in gates.get("gates", [])}
+    if statuses.get("I0") != "PASSED" or statuses.get("I1") != "READY":
+        fail(f"unexpected promoted gate state: {statuses}")
+
+    validation = gates.get("validation", {})
+    if validation.get("job_id") != "6a7205146b79c09949c2236a":
+        fail("I0 validation job drift")
+    if validation.get("result") != "COMPLETED" or validation.get("failure_count") != 0:
+        fail("I0 validation did not complete cleanly")
 
     allowed = gates.get("allowed_final_statuses", [])
     expected_allowed = [
@@ -136,7 +146,7 @@ def main() -> int:
     print("programme=FORTUNE_INT_ISC_FOCUSED_V0_1")
     print("gates=I0,I1,I2,I3,I4,I5,I6,I7")
     print("primary_target=INT-ISC")
-    print("status=BUILT_NOT_EXECUTED")
+    print("status=I0_PASSED_I1_READY")
     return 0
 
 
