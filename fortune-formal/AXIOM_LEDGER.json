@@ -1,5 +1,5 @@
 {
-  "status": "F3_BDD1_FORMALIZED",
+  "status": "F3_FORMALIZED_F4_IN_PROGRESS",
   "allowed_axiom_file": "FortuneFormal/Frontier/Assumptions.lean",
   "formalized_claims": [
     {
@@ -15,29 +15,29 @@
       "source": "Paper VII Section 4, corrected prime-Frobenius scope",
       "gate": "F3",
       "status": "KERNEL_CHECKED"
+    },
+    {
+      "name": "FortuneFormal.Bilateral.p7_bdd2_concrete",
+      "claim_id": "P7-BDD2",
+      "source": "Paper VII Section 5, corrected odd-prime scope",
+      "gate": "F3",
+      "status": "KERNEL_CHECKED"
+    },
+    {
+      "name": "FortuneFormal.Bilateral.p7_strip_concrete",
+      "claim_id": "P7-STRIP",
+      "source": "Paper VII Corollary 5.3, corrected odd-prime scope",
+      "gate": "F3",
+      "status": "KERNEL_CHECKED"
     }
   ],
   "axioms": [
-    {
-      "name": "FortuneFormal.p7_bdd2",
-      "claim_id": "P7-BDD2",
-      "source": "Paper VII Section 5",
-      "remove_at_gate": "F3",
-      "status": "ASSUMED_PENDING_LEAN_PROOF"
-    },
-    {
-      "name": "FortuneFormal.p7_strip",
-      "claim_id": "P7-STRIP",
-      "source": "Paper VII Corollary 5.3",
-      "remove_at_gate": "F3",
-      "status": "ASSUMED_PENDING_LEAN_PROOF"
-    },
     {
       "name": "FortuneFormal.p7_k2_empty",
       "claim_id": "P7-K2",
       "source": "Paper VII Sections 7-9 and exact certificate package",
       "remove_at_gate": "F4",
-      "status": "ASSUMED_PENDING_LEAN_PROOF"
+      "status": "ASSUMED_PENDING_LEAN_CERTIFICATE_RECONSTRUCTION"
     }
   ],
   "future_frontier_axiom": {
