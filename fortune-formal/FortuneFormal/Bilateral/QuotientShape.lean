@@ -57,6 +57,35 @@ private theorem monic_degree_main_add_lower
       rw [hcoeff]
       exact one_ne_zero
 
+private theorem A_shape (x : Datum F)
+    (hp : Nat.Prime (Fintype.card F)) (hbase : FrobeniusBase x)
+    (hk : x.k < Fintype.card F) (q : QuotientWitness x) :
+    q.A.Monic ∧ q.A.natDegree = Fintype.card F := by
+  let Q := Fintype.card F
+  have hLmonic := frobeniusBase_monic x hp hbase
+  have hLdegree := frobeniusBase_degree x hp hbase
+  have hmain : (x.L * x.S).natDegree = Q + x.k := by
+    rw [hLmonic.natDegree_mul x.S_monic, hLdegree, x.S_degree]
+  have hlower : (-(scalar (lambda x) * x.Pp)).natDegree < Q + x.k := by
+    rw [Polynomial.natDegree_neg]
+    apply lt_of_le_of_lt Polynomial.natDegree_mul_le
+    simp only [scalar, Polynomial.natDegree_C, x.Pp_degree]
+    omega
+  obtain ⟨hrhsMonic, hrhsDegree⟩ :=
+    monic_degree_main_add_lower x.L x.S (-(scalar (lambda x) * x.Pp)) (Q + x.k)
+      hLmonic x.S_monic hmain hlower
+  have hprodMonic : (q.A * x.P).Monic := by
+    rw [q.AP, sub_eq_add_neg]
+    exact hrhsMonic
+  have hAmonic : q.A.Monic := x.P_monic.of_mul_monic_right hprodMonic
+  have hprodDegree : (q.A * x.P).natDegree = Q + x.k := by
+    rw [q.AP, sub_eq_add_neg]
+    exact hrhsDegree
+  have hAdegree : q.A.natDegree = Q := by
+    rw [hAmonic.natDegree_mul x.P_monic, x.P_degree] at hprodDegree
+    omega
+  exact ⟨hAmonic, hAdegree⟩
+
 private theorem B_shape (x : Datum F)
     (hp : Nat.Prime (Fintype.card F)) (hbase : FrobeniusBase x)
     (hk : x.k < Fintype.card F) (q : QuotientWitness x) :
@@ -113,7 +142,7 @@ private theorem C_shape (x : Datum F)
     omega
   exact ⟨hCmonic, hCdegree⟩
 
-/-- The two quotient polynomials used by the zero-defect leading-coefficient
+/-- The quotient polynomials used by the zero-defect leading-coefficient
 argument are monic of degree `q`. -/
 theorem quotientLeadingShape (x : Datum F)
     (hp : Nat.Prime (Fintype.card F)) (hbase : FrobeniusBase x)
@@ -127,6 +156,16 @@ theorem quotientLeadingShape (x : Datum F)
     B_degree := hBdegree
     C_degree := hCdegree
   }
+
+/-- The A-B quotient pair is monic of common degree `q`. -/
+theorem quotientABShape (x : Datum F)
+    (hp : Nat.Prime (Fintype.card F)) (hbase : FrobeniusBase x)
+    (hk : x.k < Fintype.card F) (q : QuotientWitness x) :
+    q.A.Monic ∧ q.B.Monic ∧
+      q.A.natDegree = Fintype.card F ∧ q.B.natDegree = Fintype.card F := by
+  obtain ⟨hAmonic, hAdegree⟩ := A_shape x hp hbase hk q
+  obtain ⟨hBmonic, hBdegree⟩ := B_shape x hp hbase hk q
+  exact ⟨hAmonic, hBmonic, hAdegree, hBdegree⟩
 
 end Bilateral
 end FortuneFormal
