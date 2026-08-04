@@ -20,10 +20,10 @@ theorem lowerTailSq_le_sq (Z base : ℝ) :
     lowerTailSq Z base ≤ (Z - base) ^ 2 := by
   by_cases h : 0 ≤ base - Z
   · rw [lowerTailSq, max_eq_right h]
-    ring_nf
+    nlinarith
   · have h' : base - Z ≤ 0 := le_of_not_ge h
     rw [lowerTailSq, max_eq_left h']
-    exact sq_nonneg (Z - base)
+    positivity
 
 /-- Summing the pointwise inequality shows that any full variance estimate
 controls the lower-tail energy, while the converse need not hold. -/
