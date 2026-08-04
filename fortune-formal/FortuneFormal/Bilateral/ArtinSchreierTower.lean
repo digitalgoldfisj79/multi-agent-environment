@@ -18,6 +18,39 @@ def artinSchreierPolynomial (F : Type u) [Field F] [Fintype F]
     (a : F) : Polynomial F :=
   Polynomial.X ^ Fintype.card F - Polynomial.X - Polynomial.C a
 
+private theorem artinSchreier_natDegree
+    (a : F) (hp : Nat.Prime (Fintype.card F)) :
+    (artinSchreierPolynomial F a).natDegree = Fintype.card F := by
+  let q := Fintype.card F
+  let base : Polynomial F := Polynomial.X ^ q - Polynomial.X
+  have hbaseDegree : base.natDegree = q := by
+    dsimp [base]
+    calc
+      (Polynomial.X ^ q - Polynomial.X : Polynomial F).natDegree =
+          (Polynomial.X ^ q : Polynomial F).natDegree :=
+        Polynomial.natDegree_sub_eq_left_of_natDegree_lt (by
+          simp only [Polynomial.natDegree_X, Polynomial.natDegree_pow]
+          simpa using hp.one_lt)
+      _ = q := by simp
+  have hconstlt : (Polynomial.C a).natDegree < base.natDegree := by
+    rw [hbaseDegree]
+    simp only [Polynomial.natDegree_C]
+    exact hp.pos
+  dsimp [artinSchreierPolynomial]
+  change (base - Polynomial.C a).natDegree = q
+  exact (Polynomial.natDegree_sub_eq_left_of_natDegree_lt hconstlt).trans hbaseDegree
+
+private theorem artinSchreier_degree_ne_zero
+    (a : F) (hp : Nat.Prime (Fintype.card F)) :
+    (artinSchreierPolynomial F a).degree ≠ 0 := by
+  have hnonzero : artinSchreierPolynomial F a ≠ 0 := by
+    intro hz
+    have hdeg := artinSchreier_natDegree a hp
+    rw [hz, Polynomial.natDegree_zero] at hdeg
+    exact hp.ne_zero hdeg.symm
+  rw [Polynomial.degree_eq_natDegree hnonzero, artinSchreier_natDegree a hp]
+  exact_mod_cast hp.ne_zero
+
 /-- In the adjoined-root ring, the defining root satisfies `α^q = α + a`. -/
 theorem artinSchreier_root_relation
     (a : F) (hp : Nat.Prime (Fintype.card F)) :
@@ -31,10 +64,10 @@ theorem artinSchreier_root_relation
   letI : CharP F q :=
     (CharP.charP_iff_prime_eq_zero hp).2 (FiniteField.cast_card_eq_zero F)
   have hroot := AdjoinRoot.eval₂_root P
-  change (AdjoinRoot.root P) ^ q - AdjoinRoot.root P -
-      algebraMap F R a = 0 at hroot
-  · linear_combination hroot
-  · simp [P, R, artinSchreierPolynomial, q, AdjoinRoot.algebraMap_eq]
+  have hroot' : (AdjoinRoot.root P) ^ q - AdjoinRoot.root P -
+      algebraMap F R a = 0 := by
+    simpa [P, R, artinSchreierPolynomial, q, AdjoinRoot.algebraMap_eq] using hroot
+  linear_combination hroot'
 
 /-- Iterating the Artin-Schreier relation gives
 `α^(q^n) = α + algebraMap ((n : F) * a)`. -/
@@ -50,6 +83,11 @@ theorem artinSchreier_root_iterate
   letI : Fact q.Prime := ⟨hp⟩
   letI : CharP F q :=
     (CharP.charP_iff_prime_eq_zero hp).2 (FiniteField.cast_card_eq_zero F)
+  letI : Nontrivial R := AdjoinRoot.nontrivial P <| by
+    simpa [P] using artinSchreier_degree_ne_zero (F := F) a hp
+  letI : CharP R q :=
+    charP_of_injective_algebraMap (AdjoinRoot.coe_injective <| by
+      simpa [P] using artinSchreier_degree_ne_zero (F := F) a hp) q
   have hrel : (AdjoinRoot.root P) ^ q =
       AdjoinRoot.root P + algebraMap F R a := by
     simpa [q, P, R] using artinSchreier_root_relation (F := F) a hp
