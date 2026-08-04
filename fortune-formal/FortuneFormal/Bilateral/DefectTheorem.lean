@@ -45,9 +45,9 @@ theorem p7_bdd1_concrete (F : Type u) [Field F] [Fintype F] :
       dsimp [prod]
       exact mul_ne_zero (mul_ne_zero (mul_ne_zero x.P_monic.ne_zero x.Pp_monic.ne_zero)
         x.S_monic.ne_zero) x.Sp_monic.ne_zero
-    have hzero : (h - h') * prod = 0 := by
-      rw [sub_mul, heq, sub_self]
-    have hsub : h - h' = 0 :=
+    have hzero : (h' - h) * prod = 0 := by
+      rw [sub_mul, ← heq, sub_self]
+    have hsub : h' - h = 0 :=
       (mul_eq_zero.mp hzero).resolve_right hnonzero
     exact sub_eq_zero.mp hsub
   · exact defectDegreeBound x hp hbase
