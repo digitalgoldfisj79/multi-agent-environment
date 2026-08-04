@@ -4,10 +4,6 @@ set_option autoImplicit false
 
 namespace FortuneFormal
 
-/-- Temporary assumption for Paper VII claim P7-BDD1. Remove at F3. -/
-axiom p7_bdd1 (S : PaperVIISpecification) :
-  S.BDD1Statement
-
 /-- Temporary assumption for Paper VII claim P7-BDD2. Remove at F3. -/
 axiom p7_bdd2 (S : PaperVIISpecification) :
   S.BDD2Statement
