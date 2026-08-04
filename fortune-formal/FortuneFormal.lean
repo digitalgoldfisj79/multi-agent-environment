@@ -1,2 +1,3 @@
 import FortuneFormal.Specification
+import FortuneFormal.Bilateral.Definitions
 import FortuneFormal.Frontier.Assumptions
