@@ -7,4 +7,5 @@ import FortuneFormal.Bilateral.DefectDegree
 import FortuneFormal.Bilateral.DefectTheorem
 import FortuneFormal.Bilateral.ZeroDefectReduction
 import FortuneFormal.Bilateral.QuotientShape
+import FortuneFormal.Bilateral.ZeroDefectScoped
 import FortuneFormal.Frontier.Assumptions
