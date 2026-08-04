@@ -7,11 +7,11 @@ namespace FortuneFormal
 universe u
 
 /--
-Stage-F0 logical interface for the stable Paper VII theorem package.
+Logical interface for the stable Paper VII theorem package.
 
-The predicates are deliberately abstract at this gate. F1 must replace them by
-literal finite-field polynomial definitions before any manuscript theorem is
-counted as formally reconstructed.
+F1 supplies a literal finite-field polynomial interpretation.  The scope
+predicates are explicit because the defect, strip, and quadratic theorems are
+statements about the Frobenius base polynomial `t^q - t`, not arbitrary data.
 -/
 structure PaperVIISpecification where
   Datum : Type u
@@ -23,6 +23,7 @@ structure PaperVIISpecification where
   defectDegreeBound : Datum → Prop
   zeroDefect : Datum → Prop
   reflectionOrTranslation : Datum → Prop
+  frobeniusBase : Datum → Prop
   fieldSize : Datum → ℕ
   modulusDegree : Datum → ℕ
   primeField : Datum → Prop
@@ -40,38 +41,48 @@ def IFA1Statement : Prop :=
       (S.inverseFreeIncidence d ↔ S.scalarWitnessIncidence d) ∧
       S.witnessUnique d
 
-/-- P7-BDD1: every cross-distinct incidence has a unique common defect obeying
-the manuscript degree bound. -/
+/-- P7-BDD1 in its manuscript scope: over the prime Frobenius base and for
+`k < q`, every cross-distinct incidence has a unique common defect obeying the
+degree bound. -/
 def BDD1Statement : Prop :=
   ∀ d : S.Datum,
     S.crossDistinct d →
+    S.primeField d →
+    S.frobeniusBase d →
+    S.modulusDegree d < S.fieldSize d →
     S.inverseFreeIncidence d →
       S.commonDefectExistsUnique d ∧ S.defectDegreeBound d
 
-/-- P7-BDD2: zero defect forces the reflection/translation classification. -/
+/-- P7-BDD2 in the same prime-field Frobenius scope: zero defect forces the
+reflection/translation classification. -/
 def BDD2Statement : Prop :=
   ∀ d : S.Datum,
     S.crossDistinct d →
+    S.primeField d →
+    S.frobeniusBase d →
+    S.modulusDegree d < S.fieldSize d →
     S.inverseFreeIncidence d →
     S.zeroDefect d →
       S.reflectionOrTranslation d
 
-/-- P7-STRIP: over prime fields, the cross-distinct incidence is empty in the
-intermediate strip `k < q < 2k`. -/
+/-- P7-STRIP: over the prime Frobenius base, the cross-distinct incidence is
+empty in the intermediate strip `k < q < 2k`. -/
 def StripStatement : Prop :=
   ∀ d : S.Datum,
     S.crossDistinct d →
     S.primeField d →
+    S.frobeniusBase d →
     S.modulusDegree d < S.fieldSize d →
     S.fieldSize d < 2 * S.modulusDegree d →
       ¬ S.inverseFreeIncidence d
 
-/-- P7-K2: over every odd prime-power field, the cross-distinct incidence is
-empty in modulus degree two. -/
+/-- P7-K2: over every odd prime-power Frobenius base, the cross-distinct
+incidence is empty in modulus degree two. -/
 def K2EmptyStatement : Prop :=
   ∀ d : S.Datum,
     S.crossDistinct d →
     S.oddPrimePowerField d →
+    S.frobeniusBase d →
     S.modulusDegree d = 2 →
       ¬ S.inverseFreeIncidence d
 
