@@ -40,12 +40,21 @@
     {
       "id": "F3",
       "name": "defect_dichotomy_and_strip",
-      "status": "IN_PROGRESS",
-      "removes_axioms": [
-        "FortuneFormal.p7_bdd1",
+      "status": "IN_PROGRESS_BDD1_PASSED",
+      "passed_subgates": [
+        {
+          "claim": "P7-BDD1",
+          "theorem": "FortuneFormal.Bilateral.p7_bdd1_concrete",
+          "removed_axiom": "FortuneFormal.p7_bdd1",
+          "scope": "prime field; L=X^q-X; k<q",
+          "evidence": "clean-room Lean 4.32.0 build and post-build trust audit"
+        }
+      ],
+      "remaining_axioms": [
         "FortuneFormal.p7_bdd2",
         "FortuneFormal.p7_strip"
-      ]
+      ],
+      "next_supporting_target": "prime-field Artin-Schreier irreducibility and zero-defect factor ordering"
     },
     {
       "id": "F4",
