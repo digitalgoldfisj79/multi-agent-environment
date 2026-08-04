@@ -1,8 +1,8 @@
 # Claim ledger — Fortune formal discovery programme
 
 **Date:** 4 August 2026  
-**Current gate:** F3 zero-defect classification and strip  
-**Formal proof status:** P7-IFA1 KERNEL-CHECKED; P7-BDD1 KERNEL-CHECKED; THREE PAPER VII AXIOMS REMAIN
+**Current gate:** F4 quadratic emptiness certificate reconstruction  
+**Formal proof status:** P7-IFA1, P7-BDD1, P7-BDD2 and P7-STRIP KERNEL-CHECKED; ONE PAPER VII AXIOM REMAINS
 
 ## Kernel-checked claims
 
@@ -10,10 +10,17 @@
 |---|---|---|---|
 | `FortuneFormal.Bilateral.p7_ifa1_concrete` | P7-IFA1 inverse-free equivalence and scalar-witness uniqueness | F2 | Clean-room Lean 4.32.0 build and post-build trust audit |
 | `FortuneFormal.Bilateral.p7_bdd1_concrete` | P7-BDD1 common-defect existence, uniqueness and degree bound | F3 | Clean-room Lean 4.32.0 build and post-build trust audit |
+| `FortuneFormal.Bilateral.p7_bdd2_concrete` | P7-BDD2 zero-defect reflection/translation classification | F3 | Clean-room Lean 4.32.0 build of 8,676 jobs and post-build trust audit |
+| `FortuneFormal.Bilateral.p7_strip_concrete` | P7-STRIP intermediate-strip emptiness | F3 | Same clean-room Lean 4.32.0 build and post-build trust audit |
 
-The BDD1 formalization proves, from a literal inverse-free incidence, existence of the four quotient polynomials; the two exact transfer identities; divisibility by both modulus pairs; existence and uniqueness of one common defect; and the bound `deg h ≤ q - 2k`.
+The F3 theorem chain includes a direct formal proof that `X^q - X - a` is irreducible over a prime field when `a ≠ 0`, the zero-defect normal form, factor ordering, explicit reconstruction of the reflection and translation families, and a non-truncated degree contradiction for the strip.
 
-The formal audit corrected the theorem interface to its manuscript scope: prime field, literal Frobenius base `L = X^q - X`, and `k < q`. The earlier abstract F0 statement omitted these hypotheses and was too broad. No over-scoped theorem is claimed.
+The formal audit corrected the manuscript interface in two places:
+
+- BDD1 requires the literal prime-Frobenius base `L = X^q - X`, prime-field scope and `k < q`;
+- BDD2 and strip require odd prime characteristic because the factor classification distinguishes `L - λ` from `L + λ`.
+
+No characteristic-two or over-scoped version is claimed.
 
 ## Kernel-checked infrastructure
 
@@ -26,19 +33,17 @@ The formal audit corrected the theorem interface to its manuscript scope: prime 
 
 | Lean declaration | Paper claim | Removal gate |
 |---|---|---|
-| `FortuneFormal.p7_bdd2` | P7-BDD2 zero-defect reflection/translation classification | F3 |
-| `FortuneFormal.p7_strip` | P7-STRIP intermediate-strip emptiness | F3 |
 | `FortuneFormal.p7_k2_empty` | P7-K2 quadratic emptiness over odd prime powers | F4 |
 
-These claims are proved or certificate-backed in the Paper VII manuscript package, but remain formal assumptions until the corresponding Lean theorem replaces each declaration.
+The quadratic theorem is proved by the Paper VII computer-assisted certificate package, but remains a formal assumption until the incidence-to-model bridge, localization certificates and discriminant contradiction are reconstructed in Lean.
 
 ## OPEN proof engineering
 
-- Artin–Schreier irreducibility over the prime field for `X^q - X ± λ`, `λ ≠ 0`;
-- zero-defect reduction to the factorization `(L - λ)(L + λ)`;
-- reflection/translation reconstruction from the two factor orderings;
-- intermediate-strip deduction;
-- certificate import/checking architecture for the quadratic theorem;
+- faithful normalization from a genuine `k = 2` incidence to the q-free four-equation model;
+- proof that every genuine incidence lies in one of the two valid localization charts;
+- Lean checking of characteristic-zero lift identities after denominator clearing;
+- direct exceptional-characteristic certificate checking;
+- final discriminant-square contradiction;
 - true Frobenius orientation predicate;
 - cubic faithful saturation and sign-torsor interfaces.
 
@@ -60,7 +65,7 @@ That declaration does not yet exist. Its exact type will be frozen at F5 after t
 
 ## Explicitly not claimed
 
-- that the three remaining Lean axioms certify their own mathematical truth;
+- that the remaining Lean axiom certifies its own mathematical truth;
 - that all of Paper VII has been formalized;
 - that Comparator has accepted a completed Paper VII package;
 - the cubic true-Frobenius theorem;
