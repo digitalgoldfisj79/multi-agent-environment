@@ -4,8 +4,10 @@
   "base_commit": "cc8c00c30a436b8ced65bbd4703326145d129de3",
   "parent_pr": 49,
   "primary_issue": 50,
-  "status": "EXECUTING",
+  "status": "RESEARCH_COMPLETE_VALIDATION_PENDING",
   "initial_target": "INT-PSLT",
+  "terminal_target": "INT-PFLI",
+  "terminal_outcome": "REDUCED_TO_CRITICAL_FACTOR_INCIDENCE",
   "allowed_final_statuses": [
     "PROVED_INT_PSLT",
     "REDUCED_TO_ESTABLISHED_THEOREM",
@@ -14,14 +16,14 @@
     "METHOD_OBSTRUCTED_AT_EXPLICIT_SCALE"
   ],
   "gates": [
-    {"id": "B0", "name": "source_freeze", "status": "READY"},
-    {"id": "B1", "name": "prime_power_threshold_compression", "status": "BLOCKED_BY_B0"},
-    {"id": "B2", "name": "defect_propagation", "status": "BLOCKED_BY_B1"},
-    {"id": "B3", "name": "exact_least_factor_identity", "status": "BLOCKED_BY_B1"},
-    {"id": "B4", "name": "sieve_level_audit", "status": "BLOCKED_BY_B3"},
-    {"id": "B5", "name": "critical_factor_incidence", "status": "BLOCKED_BY_B3"},
-    {"id": "B6", "name": "one_defect_resolution", "status": "BLOCKED_BY_B5"},
-    {"id": "B7", "name": "closeout", "status": "BLOCKED"}
+    {"id": "B0", "name": "source_freeze", "status": "PASSED"},
+    {"id": "B1", "name": "prime_power_threshold_compression", "status": "PASSED"},
+    {"id": "B2", "name": "defect_propagation", "status": "CLOSED_NO_NATURAL_PROPAGATION"},
+    {"id": "B3", "name": "exact_least_factor_identity", "status": "PASSED"},
+    {"id": "B4", "name": "sieve_level_audit", "status": "CLOSED_AT_S_LT_2"},
+    {"id": "B5", "name": "critical_factor_incidence", "status": "REDUCED_TO_INT_PFLI"},
+    {"id": "B6", "name": "one_defect_resolution", "status": "PASSED_FORMAL_IMPLICATION"},
+    {"id": "B7", "name": "closeout", "status": "VALIDATING"}
   ],
   "prohibited_lanes": [
     "P7-CUBIC-TF",
