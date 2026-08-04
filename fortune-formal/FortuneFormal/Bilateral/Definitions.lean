@@ -23,6 +23,10 @@ structure Datum (F : Type u) [Field F] [Fintype F] where
   theta : F
   c : F
   d : F
+  mu : Polynomial F
+  mup : Polynomial F
+  nu : Polynomial F
+  nup : Polynomial F
   k_pos : 0 < k
   theta_ne_zero : theta ≠ 0
   P_monic : P.Monic
@@ -37,10 +41,24 @@ structure Datum (F : Type u) [Field F] [Fintype F] where
   S_degree : S.natDegree = k
   Pp_degree : Pp.natDegree = k
   Sp_degree : Sp.natDegree = k
+  mu_degree : mu.natDegree < k
+  mup_degree : mup.natDegree < k
+  nu_degree : nu.natDegree < k
+  nup_degree : nup.natDegree < k
+  mu_congruence : P ∣ L * S * mu + Polynomial.C theta
+  mup_congruence : Pp ∣ L * Sp * mup + Polynomial.C theta
+  nu_congruence : S ∣ L * P * nu + Polynomial.C theta
+  nup_congruence : Sp ∣ L * Pp * nup + Polynomial.C theta
   L_coprime_P : IsCoprime L P
   L_coprime_S : IsCoprime L S
   L_coprime_Pp : IsCoprime L Pp
   L_coprime_Sp : IsCoprime L Sp
+  P_coprime_S : IsCoprime P S
+  P_coprime_Pp : IsCoprime P Pp
+  P_coprime_Sp : IsCoprime P Sp
+  S_coprime_Pp : IsCoprime S Pp
+  S_coprime_Sp : IsCoprime S Sp
+  Pp_coprime_Sp : IsCoprime Pp Sp
 
 variable {F : Type u} [Field F] [Fintype F]
 
@@ -52,26 +70,17 @@ def CrossDistinct (x : Datum F) : Prop :=
 /-- The scalar embedding into the polynomial ring. -/
 abbrev scalar (a : F) : Polynomial F := Polynomial.C a
 
-/-- A representative of each of the four modular completion frequencies. -/
-structure FrequencyWitness (x : Datum F) where
-  mu : Polynomial F
-  mup : Polynomial F
-  nu : Polynomial F
-  nup : Polynomial F
-  mu_degree : mu.natDegree < x.k
-  mup_degree : mup.natDegree < x.k
-  nu_degree : nu.natDegree < x.k
-  nup_degree : nup.natDegree < x.k
-  mu_congruence : x.P ∣ x.L * x.S * mu + scalar x.theta
-  mup_congruence : x.Pp ∣ x.L * x.Sp * mup + scalar x.theta
-  nu_congruence : x.S ∣ x.L * x.P * nu + scalar x.theta
-  nup_congruence : x.Sp ∣ x.L * x.Pp * nup + scalar x.theta
-  mu_endpoint : mu * x.Pp - mup * x.P = scalar x.c
-  nu_endpoint : nu * x.Sp - nup * x.S = scalar x.d
+/-- Scalar endpoint contact for the first source pair. -/
+def MuEndpointAt (x : Datum F) (c : F) : Prop :=
+  x.mu * x.Pp - x.mup * x.P = scalar c
+
+/-- Scalar endpoint contact for the second source pair. -/
+def NuEndpointAt (x : Datum F) (d : F) : Prop :=
+  x.nu * x.Sp - x.nup * x.S = scalar d
 
 /-- Literal modular-frequency form of simultaneous bilateral endpoint contact. -/
 def ScalarFrequencyIncidence (x : Datum F) : Prop :=
-  Nonempty (FrequencyWitness x)
+  MuEndpointAt x x.c ∧ NuEndpointAt x x.d
 
 /-- The first pair of inverse-free divisibilities at an arbitrary scalar `c`. -/
 def MuInverseFreeAt (x : Datum F) (c : F) : Prop :=
@@ -87,10 +96,12 @@ def NuInverseFreeAt (x : Datum F) (d : F) : Prop :=
 def InverseFreeIncidence (x : Datum F) : Prop :=
   MuInverseFreeAt x x.c ∧ NuInverseFreeAt x x.d
 
-/-- Uniqueness of the two scalar endpoint witnesses. -/
+/-- Uniqueness of scalar values represented by the two endpoint polynomials. -/
 def ScalarWitnessUnique (x : Datum F) : Prop :=
-  ∀ c d : F,
-    MuInverseFreeAt x c → NuInverseFreeAt x d → c = x.c ∧ d = x.d
+  ∀ c c' d d' : F,
+    MuEndpointAt x c → MuEndpointAt x c' →
+    NuEndpointAt x d → NuEndpointAt x d' →
+      c = c' ∧ d = d'
 
 /-- The normalized scalar parameters used in the quotient equations. -/
 def lambda (x : Datum F) : F := -(x.theta / x.c)
