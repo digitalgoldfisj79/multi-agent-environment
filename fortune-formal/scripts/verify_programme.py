@@ -21,6 +21,7 @@ REQUIRED = {
     "FortuneFormal.lean",
     "FortuneFormal/Specification.lean",
     "FortuneFormal/Bilateral/Definitions.lean",
+    "FortuneFormal/Bilateral/InverseFree.lean",
     "FortuneFormal/Frontier/Assumptions.lean",
     "scripts/verify_programme.py",
 }
@@ -32,6 +33,7 @@ BANNED_LEAN_TOKENS = (
 )
 
 AXIOM_RE = re.compile(r"^\s*axiom\s+([A-Za-z0-9_']+)", re.MULTILINE)
+THEOREM_RE = re.compile(r"^\s*theorem\s+([A-Za-z0-9_']+)", re.MULTILINE)
 
 
 def fail(message: str) -> None:
@@ -91,6 +93,7 @@ def main() -> int:
         fail("duplicate axiom names in ledger")
 
     found_by_file: dict[str, list[str]] = {}
+    all_theorems: set[str] = set()
     for lean_path in programme_lean_files():
         rel = lean_path.relative_to(ROOT).as_posix()
         text = lean_path.read_text(encoding="utf-8")
@@ -98,6 +101,7 @@ def main() -> int:
             if re.search(token, text):
                 fail(f"banned Lean token {token!r} in {rel}")
         axioms = AXIOM_RE.findall(text)
+        all_theorems.update(THEOREM_RE.findall(text))
         if axioms:
             found_by_file[rel] = axioms
 
@@ -107,9 +111,17 @@ def main() -> int:
     if found_local != expected_local:
         fail(f"axiom declaration order/content differs from ledger: {found_local}")
 
+    formalized_local = [
+        entry["name"].rsplit(".", 1)[-1]
+        for entry in ledger.get("formalized_claims", [])
+    ]
+    for name in formalized_local:
+        if name not in all_theorems:
+            fail(f"formalized ledger theorem not declared: {name}")
+
     claim_ledger = (ROOT / "CLAIM_LEDGER.md").read_text(encoding="utf-8")
     required_boundary_phrases = (
-        "NO PAPER VII THEOREM FORMALIZED YET",
+        "P7-IFA1 KERNEL-CHECKED",
         "ASSUMED pending formalization",
         "Explicitly not claimed",
     )
@@ -124,6 +136,7 @@ def main() -> int:
 
     print("FORTUNE_FORMAL_PROGRAMME_STATIC_PASS")
     print(f"ledgered_axioms={len(expected_local)}")
+    print(f"formalized_claims={len(formalized_local)}")
     print(f"gate_sequence={','.join(gate_ids)}")
     print(f"programme_lean_files={len(programme_lean_files())}")
     return 0
