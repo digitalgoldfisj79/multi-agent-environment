@@ -2,106 +2,90 @@
 
 **Audit date:** 4 August 2026  
 **Programme:** `FORTUNE_CROSS_PAPER_AUDIT_V0_1`  
-**Scope:** exact-source, theorem-boundary and dependency audit
+**Integrated closeout:** `FORTUNE_MAINLINE_CLOSEOUT_V1`
 
 ## Executive ruling
 
-The seven-paper programme contains substantial exact mathematics, but it is not one linear proof of Fortune. It consists of three non-equivalent research lanes:
+The seven-paper corpus contains substantial exact mathematics, but it is not one linear proof of Fortune. It consists of three non-equivalent research lanes:
 
-1. the corrected integer prime-pair variance problem;
+1. the corrected integer prime-pair covariance problem;
 2. the direct function-field `d=1` q-line nonvanishing problem;
 3. the Paper VII bilateral endpoint-incidence problem.
 
-No theorem currently connects those three terminal frontiers. The central governance requirement is therefore to preserve three separate dependency graphs and forbid rhetorical or computational evidence from creating an unproved bridge.
-
-## Authoritative source ruling
-
-The authoritative paper set is distributed across different commits:
-
-- Paper I: publication source blob `1734d956...`;
-- corrected Papers II–III: commit `b42da323...`, blobs `407bc7c...` and `489b203...`;
-- Paper IV: publication commit `af9350f...`, blob `1a3d39d...`;
-- replacement Papers V–VI: blobs `89794e9...` and `6e42cce...`;
-- Paper VII: commit `069f477...`, claim-ledger blob `1ea10ee...`.
-
-The file `publications/fortune-papers-ii-vi-20260724/CLAIM_STATUS_ALL.md` is not authoritative because it predates the corrected detector editions and the replacement function-field papers. It is retained as historical provenance only.
+No theorem connects these terminal frontiers. The authoritative versions and their supersession relationships are pinned in `fortune-mainline/SOURCE_MANIFEST.json`.
 
 ## Paper-by-paper ruling
 
 ### Paper I
 
-The collision, transport, divisor-incidence, interval-rank and null-covariance theorems remain valid structural results. Its own conclusion explicitly leaves HTE4/HWF4/FBHE4/RQHE4 and the signed prime-detection bridge open. The paper is not invalidated by later work, but it is not presently load-bearing for the corrected Fortune detector.
+The collision, transport, divisor-incidence, interval-rank, Smith-form and null-covariance results remain valid structural mathematics. HTE4, HWF4, FBHE4 and RQHE4 remain open. Even their resolution would still require a signed bridge to the corrected prime-pair detector.
 
-**Formal treatment:** selectively formalize exact identities and interval Smith/rank results only where reused.
+**Disposition:** frozen; selective reuse only.
 
-### Paper II
+### Papers II–III
 
-The corrected edition is the authoritative integer interface. Candidate collapse changes the natural source from a generic shifted-prime sum to a prime-pair correlation. The exact detector identities, contamination bound and all-centres implications are the highest-priority earlier-paper targets for Lean reconstruction.
+The corrected editions are authoritative. Candidate collapse turns the problem into a prime-pair detector at the square threshold. The exact detector, contamination bounds, one-failure criteria, Fourier source identity, pair-sum rigidity, moment theory and four-prime expansion survive reconstruction.
 
-The Hardy–Littlewood baselines and the final signed transference/variance estimate remain open. They must never be imported as silent axioms into a purported Fortune proof.
+The reciprocal frame has no proved implication to the corrected detector. The exact remaining integer target is the centred signed covariance theorem `INT-ISC`, recorded in `fortune-mainline/INTEGER_FRONTIER.md`.
 
-### Paper III
-
-The unconditional kernel theory survives the main-term correction. The former route from reciprocal exceptional sets to Fortune does not. The paper now identifies an aggregated four-prime covariance theorem or equivalent signed two-prime transference as the missing arithmetic input.
-
-**Formal treatment:** formalize rigidity, multiplicity and covariance identities; leave the covariance estimate as an explicit theorem hole.
+**Disposition:** fully reconstructed; integer frontier isolated.
 
 ### Paper IV
 
-The random-order theorem is technically independent and internally audited. Its cancellation comes from averaging over all permutations. The unique increasing primorial order is not controlled. Since the corrected detector bridge is also missing, full formalization has low current return.
+The random-order reciprocal theorem remains valid. Its decisive cancellation comes from permutation averaging and gives no control of the increasing primorial order. It also lacks a bridge to the corrected detector.
 
-### Paper V
+**Disposition:** frozen as an independent random-order result.
 
-The replacement paper, not the superseded general-window manuscript, is authoritative. It proves the polynomial degree barrier, exact `d=1` normal forms, orbit decomposition, crown variable and q-line equivalence. The universal crown remains exactly a one-sided nonvanishing problem.
+### Replacement Papers V–VI
 
-### Paper VI
+The replacement manuscripts, not the superseded general-window and Airy manuscripts, are authoritative. Their degree barriers, orbit decompositions, q-line projectors, tangent modules, Hattori–Stallings extraction, Artin–Schreier/Kummer quotients and point-count identities survive reconstruction. The independent scripts were rerun successfully.
 
-The replacement quotient paper is authoritative. It constructs integral and quotient carriers but also proves several no-go corrections: the two cubic classes are not universally a quadratic twist, a standard mod-`p` quotient congruence does not prove the crown, and local singularity properties cannot be assumed automatically.
+Both papers terminate at `D1-QLINE-NONSAT`, equivalently strict q-line saturation defect or positivity of the specified Kummer quotient open.
 
-Its terminal theorem is still the same one-sided cubic positivity/non-saturation problem as Paper V.
+**Disposition:** reconstruction complete; one-sided Frobenius nonvanishing remains open.
 
 ### Paper VII
 
-The stable direct-algebra package is now largely Lean reconstructed. Formalization exposed and corrected missing scope hypotheses: prime-Frobenius scope for BDD1, odd characteristic for BDD2/strip, and the invalid natural-number interpretation of a negative degree bound.
+IFA1, BDD1, BDD2 and strip emptiness are kernel checked. Formalization corrected missing prime-field/Frobenius-base and odd-characteristic scopes and repaired the degree argument.
 
-One certificate-backed axiom remains: quadratic emptiness. The cubic true-Frobenius theorem is a separate frontier and does not imply direct `d=1` or integer Fortune without an additional bridge theorem.
+The discriminant contradiction on the q-free certified component is kernel checked. P7-K2 is derived from one narrower external boundary, `p7_k2_certified_normalization`; quadratic emptiness is no longer assumed wholesale. The cubic F5 expansion is frozen because no bridge to the integer or direct `d=1` lanes is proved.
 
-## What the formal framework has achieved
+**Disposition:** formal package stabilized at one explicit external certificate/normalization boundary.
 
-The framework has already produced non-editorial mathematical value:
+## What the framework established
 
-- two theorem interfaces were narrowed to their valid hypotheses;
-- a misleading truncated-degree argument was replaced by a valid direct contradiction;
-- manuscript-level Artin–Schreier, defect and strip arguments were reconstructed in the Lean kernel;
-- the surviving quadratic certificate problem was decomposed into faithful normalization, chart coverage, exact ideal identities and an elementary discriminant contradiction;
-- the seven-paper programme was separated into three exact terminal frontiers.
+- exact authoritative sources and superseded records;
+- theorem-level proved, conditional, computational, retracted and open classifications;
+- seven kernel-checked load-bearing claims plus the quadratic discriminant contradiction;
+- independent reruns of the replacement Papers V–VI regression packages;
+- the single integer theorem `INT-ISC`;
+- the single direct function-field theorem `D1-QLINE-NONSAT`;
+- no-go boundaries showing why first moments, dense averages, Lebesgue tails, random order and equivalent quotient/projector reformulations do not close those theorems.
 
-This increases confidence and prevents false synthesis. It does not yet prove any new prime-distribution or Frobenius nonvanishing theorem.
+## Terminal frontiers
 
-## Remaining programme
+### Integer
 
-### Certification work
+`INT-ISC`: control the centred signed four-prime covariance on the increasing primorial centres by `O(N X L(X))`, with `L(X)=o(log X)`.
 
-1. Finish Paper VII F4 and remove the final Paper VII axiom.
-2. Add selected Paper II–III formal interfaces and proofs.
-3. Add the elementary algebraic spine of replacement Papers V–VI.
-4. Preserve exact source hashes and supersession metadata.
+### Direct function field
 
-### Research work
+`D1-QLINE-NONSAT`: prove `N_sq+N_ns>0` whenever the quadratic sector fails.
 
-After certification, choose exactly one frontier:
+### Endpoint incidence
 
-- `INT-SIGNED-TRANSFER` for direct relevance to integer Fortune;
-- `D1-QLINE-NONSAT` for the direct function-field crown;
-- `P7-CUBIC-TF` for the endpoint-incidence existence theory.
-
-Running all three indefinitely would recreate the tangent proliferation that this audit is intended to stop.
+`P7-CUBIC-TF`: prove a faithful cubic true-Frobenius point theorem on the saturated oriented locus.
 
 ## Final boundary
 
 This audit does not claim:
 
-- journal peer review or publication acceptance;
-- a proof of the universal function-field crown;
+- an axiom-free proof of P7-K2;
+- `INT-ISC`;
+- the universal function-field crown;
+- `P7-CUBIC-TF`;
 - a function-field-to-integer transfer;
-- a proof or disproof of Fortune's conjecture.
+- Fortune's conjecture;
+- journal peer review or publication acceptance.
+
+The integrated autonomous programme is complete as reconstruction, reduction, selective formalization, regression and obstruction analysis. Further work is a new theorem-discovery programme, not unfinished audit work.
