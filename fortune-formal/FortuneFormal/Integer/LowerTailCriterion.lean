@@ -19,10 +19,11 @@ def lowerTailSq (Z base : ℝ) : ℝ :=
 theorem lowerTailSq_le_sq (Z base : ℝ) :
     lowerTailSq Z base ≤ (Z - base) ^ 2 := by
   by_cases h : 0 ≤ base - Z
-  · simp [lowerTailSq, max_eq_left h]
+  · rw [lowerTailSq, max_eq_right h]
     ring_nf
   · have h' : base - Z ≤ 0 := le_of_not_ge h
-    simp [lowerTailSq, max_eq_right h', sq_nonneg]
+    rw [lowerTailSq, max_eq_left h']
+    exact sq_nonneg (Z - base)
 
 /-- Summing the pointwise inequality shows that any full variance estimate
 controls the lower-tail energy, while the converse need not hold. -/
@@ -30,6 +31,22 @@ theorem lowerTail_sum_le_variance (Z base : ι → ℝ) :
     (∑ i, lowerTailSq (Z i) (base i)) ≤
       ∑ i, (Z i - base i) ^ 2 := by
   exact Finset.sum_le_sum fun i _ => lowerTailSq_le_sq (Z i) (base i)
+
+/-- Any failed item whose lower-tail contribution is at least `gap` is excluded
+when the total lower-tail energy is strictly below `gap`. -/
+theorem no_failure_of_lowerTail_total_gap
+    (source base : ι → ℝ) (failure : ι → Prop) (gap : ℝ)
+    (htail : (∑ i, lowerTailSq (source i) (base i)) < gap)
+    (hfailure : ∀ i, failure i → gap ≤ lowerTailSq (source i) (base i)) :
+    ∀ i, ¬ failure i := by
+  intro i hi
+  have hterm : lowerTailSq (source i) (base i) ≤
+      ∑ k, lowerTailSq (source k) (base k) := by
+    exact Finset.single_le_sum
+      (fun k _ => sq_nonneg (max 0 (base k - source k)))
+      (Finset.mem_univ i)
+  have hgap := hfailure i hi
+  linarith
 
 /-- If every baseline is at least `cX`, then a failed centre contributes at
 least `(cX)^2` to the one-sided lower-tail energy. Consequently a total
@@ -52,7 +69,7 @@ theorem no_failure_of_lowerTail_below_baseline_gap
   have hsq : cX ^ 2 ≤ (base i) ^ 2 := by
     nlinarith [hprod]
   have hfailed : lowerTailSq (Z i) (base i) = (base i) ^ 2 := by
-    simp [lowerTailSq, hi, max_eq_right hb0]
+    rw [lowerTailSq, hi, sub_zero, max_eq_right hb0]
   rw [hfailed] at hterm
   linarith
 
