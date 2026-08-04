@@ -4,7 +4,7 @@
   "base_commit": "deb6bb5468a951bc5485514c5848abcfcf386594",
   "parent_pr": 47,
   "primary_issue": 48,
-  "status": "I0_I6_COMPLETE_I7_VALIDATION",
+  "status": "COMPLETED_REDUCED_TO_INT_PSLT",
   "original_target": "INT-ISC",
   "primary_target": "INT-PSLT",
   "terminal_outcome": "REDUCED_TO_SMALLER_NEW_THEOREM",
@@ -60,8 +60,8 @@
     {
       "id": "I7",
       "name": "theorem_or_obstruction_closeout",
-      "status": "VALIDATION_IN_PROGRESS",
-      "result": "pending final clean build, static verification and provider sweep"
+      "status": "PASSED",
+      "result": "full clean build, static verification and finite obstruction suite passed"
     }
   ],
   "validation_jobs": [
@@ -74,6 +74,26 @@
       "job_id": "6a7205cda00abefd4b291fdd",
       "gate": "I0",
       "result": "COMPLETED"
+    },
+    {
+      "job_id": "6a7242e16b79c09949c227db",
+      "gate": "I1",
+      "result": "COMPLETED",
+      "sentinel": "FORTUNE_INT_ISC_I1_LOWER_TAIL_LEAN_PASS"
+    },
+    {
+      "job_id": "6a72429aa00abefd4b292715",
+      "gate": "I7",
+      "result": "COMPLETED",
+      "sentinel": "FORTUNE_INT_ISC_I7_STATIC_CLOSEOUT_PASS"
+    },
+    {
+      "job_id": "6a7243cba00abefd4b292733",
+      "gate": "I7",
+      "result": "COMPLETED",
+      "failure_count": 0,
+      "formal_build_jobs": 8681,
+      "sentinel": "FORTUNE_INT_ISC_I7_FULL_CLEANROOM_PASS"
     }
   ],
   "prohibited_lanes": [
