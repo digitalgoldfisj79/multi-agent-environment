@@ -11,4 +11,5 @@ import FortuneFormal.Bilateral.ZeroDefectScoped
 import FortuneFormal.Bilateral.FactorOrdering
 import FortuneFormal.Bilateral.ArtinSchreierFactor
 import FortuneFormal.Bilateral.FamilyReconstruction
+import FortuneFormal.Bilateral.BDD2Conditional
 import FortuneFormal.Frontier.Assumptions
