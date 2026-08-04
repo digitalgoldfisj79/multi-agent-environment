@@ -26,6 +26,8 @@ REQUIRED = {
     "FortuneFormal/Bilateral/F3Closure.lean",
     "FortuneFormal/Quadratic/Model.lean",
     "FortuneFormal/Quadratic/DiscriminantContradiction.lean",
+    "FortuneFormal/Quadratic/ReductionInterface.lean",
+    "FortuneFormal/Integer/BlockCriterion.lean",
     "FortuneFormal/Frontier/Assumptions.lean",
     "cross-paper/CLAIM_MATRIX.json",
     "cross-paper/AUDIT_REPORT.md",
