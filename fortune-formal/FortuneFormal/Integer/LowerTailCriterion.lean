@@ -47,8 +47,10 @@ theorem no_failure_of_lowerTail_below_baseline_gap
       (fun k _ => sq_nonneg (max 0 (base k - Z k)))
       (Finset.mem_univ i)
   have hb0 : 0 ≤ base i := le_trans hcX (hbase i)
+  have hprod : 0 ≤ (base i - cX) * (base i + cX) :=
+    mul_nonneg (sub_nonneg.mpr (hbase i)) (add_nonneg hb0 hcX)
   have hsq : cX ^ 2 ≤ (base i) ^ 2 := by
-    nlinarith
+    nlinarith [hprod]
   have hfailed : lowerTailSq (Z i) (base i) = (base i) ^ 2 := by
     simp [lowerTailSq, hi, max_eq_right hb0]
   rw [hfailed] at hterm
