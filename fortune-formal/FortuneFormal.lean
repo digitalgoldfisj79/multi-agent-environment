@@ -12,4 +12,5 @@ import FortuneFormal.Bilateral.FactorOrdering
 import FortuneFormal.Bilateral.ArtinSchreierFactor
 import FortuneFormal.Bilateral.FamilyReconstruction
 import FortuneFormal.Bilateral.BDD2Conditional
+import FortuneFormal.Bilateral.StripReduction
 import FortuneFormal.Frontier.Assumptions
