@@ -66,9 +66,10 @@ theorem artinSchreier_root_relation
   have hroot : AdjoinRoot.mk P P = 0 := AdjoinRoot.mk_self
   have hroot' : (AdjoinRoot.root P) ^ q - AdjoinRoot.root P -
       algebraMap F R a = 0 := by
-    simpa [P, R, artinSchreierPolynomial, q,
-      map_sub, map_pow, AdjoinRoot.mk_X, AdjoinRoot.mk_C,
-      AdjoinRoot.algebraMap_eq] using hroot
+    change AdjoinRoot.mk P
+      (Polynomial.X ^ q - Polynomial.X - Polynomial.C a) = 0 at hroot
+    rw [map_sub, map_sub, map_pow, AdjoinRoot.mk_X, AdjoinRoot.mk_C] at hroot
+    simpa [R, AdjoinRoot.algebraMap_eq] using hroot
   linear_combination hroot'
 
 /-- Iterating the Artin-Schreier relation gives
