@@ -20,6 +20,7 @@ REQUIRED = {
     "lakefile.toml",
     "FortuneFormal.lean",
     "FortuneFormal/Specification.lean",
+    "FortuneFormal/Bilateral/Definitions.lean",
     "FortuneFormal/Frontier/Assumptions.lean",
     "scripts/verify_programme.py",
 }
@@ -43,6 +44,12 @@ def load_json(relative: str) -> dict:
         return json.loads(path.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError) as exc:
         fail(f"cannot parse {relative}: {exc}")
+
+
+def programme_lean_files() -> list[Path]:
+    files = [ROOT / "FortuneFormal.lean"]
+    files.extend(sorted((ROOT / "FortuneFormal").rglob("*.lean")))
+    return files
 
 
 def main() -> int:
@@ -84,7 +91,7 @@ def main() -> int:
         fail("duplicate axiom names in ledger")
 
     found_by_file: dict[str, list[str]] = {}
-    for lean_path in sorted(ROOT.rglob("*.lean")):
+    for lean_path in programme_lean_files():
         rel = lean_path.relative_to(ROOT).as_posix()
         text = lean_path.read_text(encoding="utf-8")
         for token in BANNED_LEAN_TOKENS:
@@ -118,6 +125,7 @@ def main() -> int:
     print("FORTUNE_FORMAL_PROGRAMME_STATIC_PASS")
     print(f"ledgered_axioms={len(expected_local)}")
     print(f"gate_sequence={','.join(gate_ids)}")
+    print(f"programme_lean_files={len(programme_lean_files())}")
     return 0
 
 
