@@ -1,5 +1,8 @@
 import FortuneFormal.Specification
 import FortuneFormal.Bilateral.Definitions
 import FortuneFormal.Bilateral.InverseFree
-import FortuneFormal.Bilateral.Defect
+import FortuneFormal.Bilateral.DefectCore
+import FortuneFormal.Bilateral.Quotient
+import FortuneFormal.Bilateral.DefectDegree
+import FortuneFormal.Bilateral.DefectTheorem
 import FortuneFormal.Frontier.Assumptions
