@@ -1,0 +1,17 @@
+name = "fortune-formal"
+version = "0.1.0"
+keywords = ["math", "finite-fields", "formalization"]
+defaultTargets = ["FortuneFormal"]
+
+[[require]]
+name = "mathlib"
+scope = "leanprover-community"
+rev = "v4.32.0"
+
+[[require]]
+name = "Comparator"
+git = "https://github.com/leanprover/comparator.git"
+rev = "v4.32.0"
+
+[[lean_lib]]
+name = "FortuneFormal"
