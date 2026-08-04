@@ -1,5 +1,5 @@
 {
-  "status": "F2_INVERSE_FREE_FORMALIZED",
+  "status": "F3_BDD1_FORMALIZED",
   "allowed_axiom_file": "FortuneFormal/Frontier/Assumptions.lean",
   "formalized_claims": [
     {
@@ -8,16 +8,16 @@
       "source": "Paper VII Section 3",
       "gate": "F2",
       "status": "KERNEL_CHECKED"
+    },
+    {
+      "name": "FortuneFormal.Bilateral.p7_bdd1_concrete",
+      "claim_id": "P7-BDD1",
+      "source": "Paper VII Section 4, corrected prime-Frobenius scope",
+      "gate": "F3",
+      "status": "KERNEL_CHECKED"
     }
   ],
   "axioms": [
-    {
-      "name": "FortuneFormal.p7_bdd1",
-      "claim_id": "P7-BDD1",
-      "source": "Paper VII Section 4",
-      "remove_at_gate": "F3",
-      "status": "ASSUMED_PENDING_LEAN_PROOF"
-    },
     {
       "name": "FortuneFormal.p7_bdd2",
       "claim_id": "P7-BDD2",
