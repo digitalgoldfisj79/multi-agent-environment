@@ -1,20 +1,42 @@
 # Current status — Fortune formal discovery programme
 
 **Date:** 4 August 2026  
-**Gate:** F0 specification freeze  
-**Status:** PACKAGE BUILT; CI VALIDATION REQUESTED
+**Gate:** F4 quadratic emptiness certificate reconstruction  
+**Status:** F0–F3 PASSED; ONE PAPER VII AXIOM REMAINS
 
-## Delivered
+## Kernel-checked package
 
-- canonical Paper VII base fixed at `069f47724a3581dc40cfbc9efa3fafd14181ba3e`;
-- Lean 4.32.0/mathlib 4.32.0 package;
-- explicit F0-F7 contract;
-- compiled logical theorem interfaces;
-- five temporary Paper VII assumptions quarantined and ledgered;
-- static trust-boundary verifier;
-- Lean build workflow;
-- governing issue #45 and draft PR #46.
+- F1 literal finite-field polynomial and endpoint-incidence definitions;
+- F2 inverse-free algebraisation and scalar-witness uniqueness;
+- F3 common-defect existence, uniqueness and degree bound;
+- direct prime-field Artin–Schreier irreducibility;
+- zero-defect reflection/translation classification;
+- intermediate-strip emptiness by a non-truncated degree contradiction.
+
+The F3 promotion build completed all 8,676 Lean jobs under Lean 4.32.0 and passed the post-build static trust audit.
+
+## Scope corrections found by formalization
+
+- BDD1 requires prime-field scope, the literal base `L = X^q - X`, and `k < q`.
+- BDD2 and strip require odd prime characteristic.
+- The strip theorem cannot be justified by interpreting `q - 2k` as a negative natural number; it now has a direct degree contradiction.
+
+## Current F4 state
+
+Implemented:
+
+- literal four-equation q-free quadratic model in `FortuneFormal/Quadratic/Model.lean`;
+- exact interface for the certified component `U=1`, `B=-2`, `(A-C)^2+4A=0`.
+
+Still required:
+
+1. normalize every genuine `k=2` incidence to the q-free model;
+2. prove the two localization charts cover the genuine open locus;
+3. import and Lean-check the characteristic-zero lift identities after denominator clearing;
+4. check the exceptional-characteristic certificates;
+5. prove the final discriminant-square contradiction;
+6. delete `FortuneFormal.p7_k2_empty`.
 
 ## Exact boundary
 
-F0 is not formalization completion. No Paper VII theorem is promoted until its corresponding axiom is deleted and replaced by a kernel-checked proof. The next execution gate is F1: literal finite-field polynomial definitions.
+No cubic true-Frobenius theorem, endpoint `FFPR`, direct function-field `d=1`, function-field-to-integer transfer, or Fortune theorem is claimed.
