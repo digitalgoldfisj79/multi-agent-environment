@@ -1,0 +1,93 @@
+{
+  "programme": "FORTUNE_TEN_PROOFS_FORMAL_V0_1",
+  "date": "2026-08-04",
+  "repository": "digitalgoldfisj79/multi-agent-environment",
+  "branch": "gpt56/fortune-ten-proofs-formal-v01-20260804",
+  "base_commit": "069f47724a3581dc40cfbc9efa3fafd14181ba3e",
+  "toolchain": {
+    "lean": "leanprover/lean4:v4.32.0",
+    "mathlib": "v4.32.0",
+    "comparator": "v4.32.0"
+  },
+  "prohibited_claims": [
+    "paper_vii_already_formalized",
+    "cubic_frontier_solved",
+    "direct_d1_proved",
+    "function_field_to_integer_transfer",
+    "fortune_conjecture_proved"
+  ],
+  "gates": [
+    {
+      "id": "F0",
+      "name": "specification_freeze",
+      "status": "BUILT",
+      "required_outputs": [
+        "README.md",
+        "PROGRAMME.md",
+        "CLAIM_LEDGER.md",
+        "AXIOM_LEDGER.json",
+        "lean-toolchain",
+        "lakefile.toml",
+        "FortuneFormal.lean",
+        "FortuneFormal/Specification.lean",
+        "FortuneFormal/Frontier/Assumptions.lean",
+        "scripts/verify_programme.py"
+      ],
+      "pass_condition": "lean package compiles with only ledgered assumptions and no sorry/admit"
+    },
+    {
+      "id": "F1",
+      "name": "foundational_definitions",
+      "status": "OPEN",
+      "pass_condition": "Paper VII semantic notions are literal Lean definitions rather than opaque proposition parameters"
+    },
+    {
+      "id": "F2",
+      "name": "inverse_free_algebraization",
+      "status": "OPEN",
+      "removes_axioms": ["FortuneFormal.p7_ifa1"]
+    },
+    {
+      "id": "F3",
+      "name": "defect_dichotomy_and_strip",
+      "status": "OPEN",
+      "removes_axioms": [
+        "FortuneFormal.p7_bdd1",
+        "FortuneFormal.p7_bdd2",
+        "FortuneFormal.p7_strip"
+      ]
+    },
+    {
+      "id": "F4",
+      "name": "quadratic_emptiness",
+      "status": "OPEN",
+      "removes_axioms": ["FortuneFormal.p7_k2_empty"],
+      "pass_condition": "zero Paper VII axioms remain"
+    },
+    {
+      "id": "F5",
+      "name": "cubic_frontier_isolation",
+      "status": "OPEN",
+      "allowed_final_axioms": ["FortuneFormal.cubic_true_frobenius_point_theorem"]
+    },
+    {
+      "id": "F6",
+      "name": "parallel_theorem_discovery",
+      "status": "BLOCKED_ON_F5",
+      "lanes": [
+        "algebraic_components",
+        "torsor_monodromy",
+        "trace_functions",
+        "frobenius_dynamics",
+        "non_saturation_certificates",
+        "adversarial_falsification"
+      ]
+    },
+    {
+      "id": "F7",
+      "name": "independent_reconstruction_and_comparator",
+      "status": "BLOCKED_ON_CANDIDATE_PROOF",
+      "pass_condition": "second derivation, Lean build, Comparator acceptance, updated claim ledger"
+    }
+  ]
+}
