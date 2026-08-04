@@ -19,9 +19,13 @@ private theorem frobeniusBase_natDegree (x : Datum F)
     (hp : Nat.Prime (Fintype.card F)) (hbase : FrobeniusBase x) :
     x.L.natDegree = Fintype.card F := by
   rw [hbase]
-  apply Polynomial.natDegree_sub_eq_left_of_natDegree_lt
-  simp only [Polynomial.natDegree_X, Polynomial.natDegree_pow]
-  simpa using hp.one_lt
+  calc
+    (Polynomial.X ^ Fintype.card F - Polynomial.X : Polynomial F).natDegree =
+        (Polynomial.X ^ Fintype.card F : Polynomial F).natDegree :=
+      Polynomial.natDegree_sub_eq_left_of_natDegree_lt (by
+        simp only [Polynomial.natDegree_X, Polynomial.natDegree_pow]
+        simpa using hp.one_lt)
+    _ = Fintype.card F := by simp
 
 private theorem quotient_Cq_natDegree_le (x : Datum F)
     (hp : Nat.Prime (Fintype.card F)) (hbase : FrobeniusBase x)
