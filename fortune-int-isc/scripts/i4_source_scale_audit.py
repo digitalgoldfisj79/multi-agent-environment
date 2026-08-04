@@ -11,8 +11,18 @@ def run() -> None:
         failure_ceiling = x * logx
         barrier = x * logx * logx
         expected_mass = h
-        assert failure_ceiling / barrier == 1 / logx
-        assert math.isclose(barrier / expected_mass, logx * logx / x, rel_tol=1e-12)
+        assert math.isclose(
+            failure_ceiling / barrier,
+            1 / logx,
+            rel_tol=1e-12,
+            abs_tol=1e-15,
+        )
+        assert math.isclose(
+            barrier / expected_mass,
+            logx * logx / x,
+            rel_tol=1e-12,
+            abs_tol=1e-15,
+        )
         print(
             f"X={x} H={h:.6g} failure_ceiling~{failure_ceiling:.6g} "
             f"barrier={barrier:.6g} ceiling_ratio={failure_ceiling/barrier:.6g} "
