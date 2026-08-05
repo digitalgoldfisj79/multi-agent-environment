@@ -34,7 +34,7 @@ def main():
     width=max(1,int(args.x/(math.log(args.x)**(1+args.sigma))))
     groups={}
     for ell in terminal:
-        centre=int(primorial(ell,method="primes"))
+        centre=int(primorial(ell,nth=False))
         z=sum(1 for m in candidates if ell<m<=h and isprime(centre+m))
         groups.setdefault((ell-args.x)//width,[]).append(z)
     for key,zs in sorted(groups.items()):
