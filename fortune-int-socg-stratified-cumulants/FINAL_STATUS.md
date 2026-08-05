@@ -106,18 +106,23 @@ Exact Vaughan, Heath--Brown and divisor decompositions of the output von Mangold
 
 These are method closures, not universal impossibility theorems.
 
-## Diagnostics
+## Diagnostics and compute discipline
 
-The corrected exact panel and orbit job reruns:
+The execution reran the exact factorial transform, weighted-mean prime-power scale, prime-modulus Parseval and collision bounds, local edge rows, and a patched selected-centre panel at `X=100`. Corrected parent panels through `X=300` remain inherited diagnostic evidence.
 
-- factorial-to-ordinary transforms;
-- the weighted-mean prime-power scale;
-- prime-modulus Parseval and collision bounds;
-- local edge rows;
-- selected-centre panels through `X=300`;
-- primorial-walk traces through `X=800`.
+The larger diagnostic job `6a72d6f1a00abefd4b2932eb` was cancelled after the exact regressions and patched panel passed; its remaining panels were redundant and could not affect the theorem ruling.
 
 Finite panels are diagnostic only and are not promoted.
+
+## Validation record
+
+- static sentinel `6a72d84e6b79c09949c22d3e`: completed, zero failures;
+- full clean-room job `6a72d8c26b79c09949c22d42`: completed in 304 seconds, zero failures;
+- Lean 4.32 full package: 8,684 jobs;
+- all inherited integer verifiers and the formal trust audit passed;
+- terminal sentinel: `FORTUNE_INT_SOCG_FULL_CLEANROOM_PASS`.
+
+No new Lean axiom, `sorry`, `admit`, or unsafe declaration was introduced.
 
 ## Explicitly not claimed
 
