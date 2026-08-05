@@ -12,7 +12,7 @@
     {
       "id": "O1-WEIGHTED-DETECTOR",
       "status": "PROVED_FORMAL",
-      "statement": "A preregistered row-dependent exponential detector equals one on a zero row; if its temperatures are at most the frozen uniform temperature, its success implies the frozen INT-AOD detector."
+      "statement": "A preregistered row-dependent exponential detector equals one on a zero row; if its temperatures are at most the frozen uniform temperature, its success implies frozen INT-AOD."
     },
     {
       "id": "O2-BERNOULLI-COVER",
@@ -27,37 +27,37 @@
     {
       "id": "O3-DEGREE-COST",
       "status": "PASSED",
-      "statement": "The exact constant-q cover has degree Theta(X^2/log X)."
+      "statement": "The exact constant-density cover has degree Theta(X^2/log X)."
     },
     {
       "id": "O3-ADAPTIVE-SCALE",
       "status": "PROVED_REDUCTION",
-      "statement": "At a preregistered small parameter q asymp log N/X, the exact cover degree falls to Theta(X), and a successful detector implies the frozen INT-AOD detector."
+      "statement": "At preregistered temperature tau asymp log N/X, the exact cover degree falls to Theta(X), and a successful detector implies frozen INT-AOD."
     },
     {
       "id": "O4-GLOBAL-MIXTURE-OBSTRUCTION",
       "status": "PROVED_EXACT_SURROGATE_OBSTRUCTION",
-      "statement": "An equal mixture of Poisson row classes separated by Theta(X) has a log-PGF zero at distance Theta(1/X), outside the useful q asymp log X/X scale. Global cumulant convergence does not follow from rowwise Poisson behaviour alone."
+      "statement": "An equal mixture of Poisson row classes separated by Theta(X) has a Laplace-transform zero at distance Theta(1/X), outside the useful tau asymp log X/X scale. Whole-block cumulant convergence does not follow from rowwise Poisson behaviour alone."
     },
     {
-      "id": "O4-INT-SCCB",
+      "id": "O4-INT-SOCB",
       "status": "OPEN_SUFFICIENT_REDUCTION",
-      "statement": "A polylogarithmic row partition with a convergent connected bound exceeding log(n_b B) in every stratum implies INT-AOD."
+      "statement": "A polylogarithmic row partition with a convergent ordinary-cumulant bound exceeding log(n_b B) in every stratum implies INT-AOD."
     },
     {
       "id": "O5-JOINT-CUMULANT",
       "status": "PROVED_EXACT_ALGEBRAIC",
-      "statement": "Each factorial cumulant is the sum of connected joint cumulants over ordered distinct prime-offset columns."
+      "statement": "Each ordinary cumulant of Z=sum_m I_m is the sum of common-row joint cumulants over all ordered prime-offset column tuples, including repetitions."
     },
     {
       "id": "O5-COMPLETE-DEPENDENCY",
       "status": "METHOD_OBSTRUCTED_AT_LOG_X",
-      "statement": "The safe dependency graph is complete and its q-weighted activity is Theta(log X), excluding generic constant-threshold absolute cluster criteria."
+      "statement": "The safe dependency graph is complete and its temperature-weighted activity is Theta(log X), excluding generic constant-threshold absolute cluster criteria."
     },
     {
-      "id": "O5-INT-SCG",
+      "id": "O5-INT-SOCG",
       "status": "OPEN_PRIMARY_SUCCESSOR",
-      "statement": "Stratified cumulant growth with dependence scale D_b << X/(log X)^(1+delta) implies INT-SCCB and hence INT-AOD."
+      "statement": "Stratified ordinary-cumulant growth with dependence scale D_b << X/(log X)^(1+delta) implies INT-SOCB and hence INT-AOD."
     },
     {
       "id": "O6-RUHL-IMPLICATION",
