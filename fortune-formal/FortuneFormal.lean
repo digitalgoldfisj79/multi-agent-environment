@@ -23,4 +23,5 @@ import FortuneFormal.Integer.BlockCriterion
 import FortuneFormal.Integer.LowerTailCriterion
 import FortuneFormal.Integer.FactorBandCriterion
 import FortuneFormal.Integer.SoftDefectCriterion
+import FortuneFormal.Integer.AdaptiveOccupancyCriterion
 import FortuneFormal.Frontier.Assumptions
