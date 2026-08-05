@@ -1,0 +1,64 @@
+{
+  "programme": "FORTUNE_INT_AOD_OCCUPANCY_DUAL_V0_1",
+  "date": "2026-08-05",
+  "base_commit": "831184e1ceb519803591eda441de2672dc8a9939",
+  "parent_pr": 53,
+  "primary_issue": 54,
+  "status": "BUILT_NOT_EXECUTED",
+  "initial_target": "INT-AOD",
+  "primary_candidate_reduction": "INT-CCB",
+  "allowed_final_statuses": [
+    "PROVED_INT_AOD",
+    "REDUCED_TO_CONNECTED_CUMULANT_BOUND",
+    "REDUCED_TO_ROWWISE_PARITY_BREAKING_BILINEAR",
+    "REDUCED_TO_ESTABLISHED_THEOREM",
+    "METHOD_OBSTRUCTED_AT_EXPLICIT_SCALE"
+  ],
+  "gates": [
+    {"id": "O0", "name": "source_freeze", "status": "READY"},
+    {"id": "O1", "name": "detector_admissibility", "status": "BLOCKED_BY_O0"},
+    {"id": "O2", "name": "random_cover_dual", "status": "BLOCKED_BY_O1"},
+    {"id": "O3", "name": "degree_coefficient_cost", "status": "BLOCKED_BY_O2"},
+    {"id": "O4", "name": "connected_cumulant_compression", "status": "BLOCKED_BY_O3"},
+    {"id": "O5", "name": "arithmetic_connected_correlations", "status": "BLOCKED_BY_O4"},
+    {"id": "O6", "name": "conditional_poisson_benchmark", "status": "BLOCKED_BY_O5"},
+    {"id": "O7", "name": "rowwise_parity_breaking_dual", "status": "BLOCKED_BY_O6"},
+    {"id": "O8", "name": "falsification_and_finite_panels", "status": "BLOCKED_BY_O7"},
+    {"id": "O9", "name": "closeout", "status": "BLOCKED"}
+  ],
+  "detector_admissibility": {
+    "weights_must_be_frozen_before_output_prime_incidence": true,
+    "weights_may_depend_on": [
+      "X",
+      "H",
+      "candidate_offset_m",
+      "registered_residue_features",
+      "registered_local_singular_series_features"
+    ],
+    "weights_may_not_depend_on": [
+      "whether_Pj_plus_m_is_prime",
+      "observed_success_columns",
+      "post_hoc_row_failures"
+    ],
+    "comparison_budget_required": true
+  },
+  "prohibited_lanes": [
+    "fixed_order_moment_campaigns",
+    "independent_factor_band_estimates",
+    "classical_post_level_lower_sieves",
+    "P7-CUBIC-TF",
+    "D1-QLINE-NONSAT",
+    "random_order_derandomisation",
+    "reciprocal_frame_moments_without_bridge",
+    "superseded_INT_ISC_four_prime_campaign",
+    "finite_panel_asymptotic_promotion"
+  ],
+  "compute_policy": {
+    "sentinel_timeout_minutes": 10,
+    "ordinary_job_timeout_minutes": 45,
+    "absolute_timeout_minutes": 120,
+    "terminal_programme_jobs_required": 0,
+    "inspect_unrelated_jobs_before_cancellation": true,
+    "cancel_orphaned_programme_jobs": true
+  }
+}
