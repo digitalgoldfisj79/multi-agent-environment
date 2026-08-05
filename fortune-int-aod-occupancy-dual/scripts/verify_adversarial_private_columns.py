@@ -31,23 +31,25 @@ for k in range(0, 13):
             falling(z, order) for z in odd
         )
 
-    # Realize every success as a private column belonging to exactly one row.
-    # Then both incidence matrices have the same number of columns because their
-    # first moments agree; every column degree is one and every pairwise column
-    # overlap is zero in both panels.
+    # From K>=1 the panels match their first moments. Realize every success as
+    # a private column belonging to exactly one row. The two incidence matrices
+    # then have identical all-one column-degree multisets and zero pairwise
+    # column overlap, while only the even panel has a zero row.
     even_columns = sum(even)
     odd_columns = sum(odd)
-    assert even_columns == odd_columns
-    column_degree_multiset_even = [1] * even_columns
-    column_degree_multiset_odd = [1] * odd_columns
-    assert column_degree_multiset_even == column_degree_multiset_odd
-    pairwise_overlap_even = 0
-    pairwise_overlap_odd = 0
-    assert pairwise_overlap_even == pairwise_overlap_odd
+    if k >= 1:
+        assert even_columns == odd_columns
+        column_degree_multiset_even = [1] * even_columns
+        column_degree_multiset_odd = [1] * odd_columns
+        assert column_degree_multiset_even == column_degree_multiset_odd
+        pairwise_overlap_even = 0
+        pairwise_overlap_odd = 0
+        assert pairwise_overlap_even == pairwise_overlap_odd
 
     print(
-        f"K={k} rows={2**k} columns={even_columns} "
-        f"matched_moments=0..{k} zero_even=1 zero_odd=0"
+        f"K={k} rows={2**k} even_columns={even_columns} "
+        f"odd_columns={odd_columns} matched_moments=0..{k} "
+        f"matched_private_column_stats={int(k >= 1)} zero_even=1 zero_odd=0"
     )
 
 print("FORTUNE_INT_AOD_O8_PRIVATE_COLUMN_ADVERSARY_PASS")
