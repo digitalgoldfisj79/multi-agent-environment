@@ -2,12 +2,17 @@
 
 This directory executes issue #58 from the completed `INT-SOCG -> INT-SCME` reduction.
 
-The programme separates three distinct statements:
+The programme separates four statements:
 
 1. the weighted prime-pair mean `INT-SCME`;
-2. an unconditional first post-terminal prime-divisor-band asymptotic obtained from selected-residue BDH averaging;
-3. the remaining signed parity tail `INT-SCPT`.
+2. `INT-SCVAR`, a post-terminal prime-progression variance estimate;
+3. the conditional first post-terminal prime-divisor-band asymptotic supplied by `INT-SCVAR`;
+4. `INT-SCPT`, the remaining signed parity tail.
 
-The divisor-band theorem is not itself a prime theorem. Its value is that it establishes, at the correct `H log X` scale, the first nontrivial part of the exact Möbius-log anatomy and leaves one explicit signed tail rather than an undifferentiated appeal to parity.
+The first execution draft incorrectly applied classical BDH outside its unconditional modulus range. The corrected programme proves an explicit large-sieve obstruction and retains only the conditional implication
 
-The branch is governed by `PROGRAMME.md`, `PREREGISTERED_GATES.json`, `CLAIM_MATRIX.json` and the executable scripts under `scripts/`.
+\[
+INT\text{-}SCVAR+INT\text{-}SCPT\Longrightarrow INT\text{-}SCME.
+\]
+
+The directory is governed by `PROGRAMME.md`, `PREREGISTERED_GATES.json`, `CLAIM_MATRIX.json` and the executable scripts under `scripts/`.
