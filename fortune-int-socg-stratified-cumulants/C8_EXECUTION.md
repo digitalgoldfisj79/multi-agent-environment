@@ -10,9 +10,12 @@ Exact execution checks include:
 - output-prime-power subtraction at the `INT-SCME` scale;
 - prime-modulus primorial-walk Parseval and collision bounds;
 - local edge-kernel diagnostics;
-- exact selected-centre occupancy panels for `X=100,150,200,250,300`;
-- additive-character traces along the primorial walk for `X=100,200,400,800`.
+- a patched selected-centre occupancy panel at `X=100`;
+- the inherited corrected occupancy panels through `X=300` from the parent programme;
+- the inherited primorial-walk trace diagnostics.
 
-The selected-centre panels contain no zero row in the tested range. Cumulants vary in sign and magnitude across small strata, confirming that fitted finite-panel temperatures or fixed-order extrapolation are inadmissible. The local edge diagnostic stays well below `X/(log X)^2` on the tested panels. Prime-modulus traces show nontrivial fluctuations, while the exact averaged energy theorem remains valid.
+The new panel confirms that the corrected SymPy primorial call executes and contains no zero row. Cumulants vary in sign and magnitude across small strata, confirming that fitted finite-panel temperatures or fixed-order extrapolation are inadmissible. The local edge diagnostic stays well below `X/(log X)^2` on the tested panels.
+
+The larger CPU-XL panel job `6a72d6f1a00abefd4b2932eb` was cancelled after the exact regressions and patched `X=100` panel passed. Its remaining panels were redundant, diagnostic only, and could not affect the terminal theorem ruling.
 
 No finite computation is promoted into an asymptotic statement. The diagnostics support the registered decomposition but do not prove `INT-SCME`, `INT-LCSK`, `INT-PWOC` or `INT-SOCG`.
