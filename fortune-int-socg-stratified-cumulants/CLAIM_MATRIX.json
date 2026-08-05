@@ -1,0 +1,54 @@
+{
+  "programme": "FORTUNE_INT_SOCG_STRATIFIED_CUMULANTS_V0_1",
+  "new_axioms": 0,
+  "fortune_claimed": false,
+  "int_aod_claimed": false,
+  "int_socg_claimed": false,
+  "claims": [
+    {
+      "id": "C0-ROW-DEPENDENT-DETECTOR",
+      "status": "PROVED_FORMAL_INHERITED",
+      "statement": "A successful preregistered row-dependent exponential detector with temperatures at most tau_A implies the frozen INT-AOD detector and excludes zero rows."
+    },
+    {
+      "id": "C0-ORDINARY-CUMULANT-IDENTITY",
+      "status": "PROVED_EXACT_INHERITED",
+      "statement": "Ordinary cumulants of the occupancy equal the sum of joint cumulants over all ordered candidate-offset tuples, including repetitions."
+    },
+    {
+      "id": "C1-STRATUM-GEOMETRY",
+      "status": "BUILT_NOT_EXECUTED",
+      "statement": "Deterministic terminal-prime strata and preregistered lower scales can be fixed without observing output-prime incidence."
+    },
+    {
+      "id": "C2-MEAN-LOWER-BOUND",
+      "status": "OPEN",
+      "statement": "Each registered stratum has first cumulant at least cX."
+    },
+    {
+      "id": "C3-EQUALITY-PATTERN-DECOMPOSITION",
+      "status": "BUILT_EXACT_REGRESSION_PENDING",
+      "statement": "The ordered joint-cumulant sum decomposes exactly by equality partitions of column indices."
+    },
+    {
+      "id": "C4-INT-LCSK",
+      "status": "OPEN_CANDIDATE_REDUCTION",
+      "statement": "The renormalized local connected singular-series kernel has a subcritical tree radius."
+    },
+    {
+      "id": "C5-INT-PWOC",
+      "status": "OPEN_CANDIDATE_REDUCTION",
+      "statement": "Selected primorial-walk residue correlations satisfy the explicit orthogonality estimate required by the connected kernel."
+    },
+    {
+      "id": "C6-INT-SOCG",
+      "status": "OPEN_PRIMARY_TARGET",
+      "statement": "For every stratum, |c_k| <= c_1 k! D^(k-1) with D << X/(log X)^(1+delta)."
+    },
+    {
+      "id": "C8-RUHL-BRIDGE",
+      "status": "PROVED_CONDITIONAL_INHERITED",
+      "statement": "A row-uniform Hardy--Littlewood factorial-moment theorem through logarithmic order with the registered error budget implies INT-AOD."
+    }
+  ]
+}

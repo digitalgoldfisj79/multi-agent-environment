@@ -1,0 +1,24 @@
+{
+  "programme": "FORTUNE_INT_SOCG_STRATIFIED_CUMULANTS_V0_1",
+  "scales": [
+    {"symbol":"N","order":"X/log X","meaning":"registered primorial rows"},
+    {"symbol":"H","order":"X^2","meaning":"offset window"},
+    {"symbol":"M_X","order":"X^2/log X","meaning":"candidate-prime columns"},
+    {"symbol":"W_X","order":"X/(log X)^(1+sigma)","meaning":"terminal-prime stratum width"},
+    {"symbol":"B","order":"polylog(X)","meaning":"number of strata"},
+    {"symbol":"n_b","order":"W_X/log X","meaning":"rows in one typical stratum"},
+    {"symbol":"c_1b","order":"X","meaning":"required mean occupancy"},
+    {"symbol":"tau_b","order":"log(n_b B)/X","meaning":"adaptive exponential temperature"},
+    {"symbol":"D_b","order":"o(X/log X)","meaning":"maximum admissible ordinary-cumulant dependence radius"},
+    {"symbol":"tau_b D_b","order":"o(1)","meaning":"absolute convergence parameter"},
+    {"symbol":"K_conditional","order":"log(n_b B)","meaning":"conditional Bonferroni or tuple order"}
+  ],
+  "kill_tests": [
+    {"id":"E1","test":"any fitted parameter depends on observed Z_j","failure_action":"reject as circular"},
+    {"id":"E2","test":"diagonal equality patterns force D_b >= c X/log X","failure_action":"close INT-SOCG at explicit diagonal obstruction"},
+    {"id":"E3","test":"local connected-kernel tree radius is not o(X/log X)","failure_action":"close local-factor lane"},
+    {"id":"E4","test":"primorial-walk orbit estimate has error above one-stratum absolute budget","failure_action":"record INT-PWOC as exact frontier or close method"},
+    {"id":"E5","test":"source decomposition loses actual primes or common row variable","failure_action":"reject source lane"},
+    {"id":"E6","test":"result controls only almost all rows or relative mean square","failure_action":"reject as insufficient for one defect"}
+  ]
+}
