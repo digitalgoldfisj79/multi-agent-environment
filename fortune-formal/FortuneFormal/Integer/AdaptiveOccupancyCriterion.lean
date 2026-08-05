@@ -30,7 +30,7 @@ theorem no_failure_of_rowDependentExp_sum_lt_one
       (Finset.mem_univ i)
   rw [hzero i hi] at hterm
   simp at hterm
-  linarith
+  exact (not_lt_of_ge hterm) htotal
 
 /-- If each preregistered row temperature is at most the frozen uniform
 temperature, then the uniform detector is termwise no larger. -/
