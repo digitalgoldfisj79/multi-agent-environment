@@ -4,9 +4,11 @@
   "base_commit": "831184e1ceb519803591eda441de2672dc8a9939",
   "parent_pr": 53,
   "primary_issue": 54,
-  "status": "EXECUTING",
+  "status": "RESEARCH_COMPLETE_VALIDATION_PENDING",
   "initial_target": "INT-AOD",
-  "primary_candidate_reduction": "INT-SCG",
+  "terminal_target": "INT-SOCG",
+  "terminal_outcome": "REDUCED_TO_CONNECTED_CUMULANT_BOUND",
+  "primary_candidate_reduction": "INT-SOCG",
   "allowed_final_statuses": [
     "PROVED_INT_AOD",
     "REDUCED_TO_CONNECTED_CUMULANT_BOUND",
@@ -19,12 +21,12 @@
     {"id": "O1", "name": "detector_admissibility", "status": "PASSED_FORMAL"},
     {"id": "O2", "name": "random_cover_dual", "status": "PASSED_EXACT"},
     {"id": "O3", "name": "degree_coefficient_cost", "status": "PASSED_ADAPTIVE_SCALE_REDUCTION"},
-    {"id": "O4", "name": "connected_cumulant_compression", "status": "GLOBAL_OBSTRUCTED_REDUCED_TO_STRATIFIED"},
-    {"id": "O5", "name": "arithmetic_connected_correlations", "status": "REDUCED_TO_INT_SCG"},
+    {"id": "O4", "name": "connected_cumulant_compression", "status": "GLOBAL_OBSTRUCTED_REDUCED_TO_STRATIFIED_ORDINARY"},
+    {"id": "O5", "name": "arithmetic_connected_correlations", "status": "REDUCED_TO_INT_SOCG"},
     {"id": "O6", "name": "conditional_poisson_benchmark", "status": "PASSED_CONDITIONAL_RUHL_FM"},
     {"id": "O7", "name": "rowwise_parity_breaking_dual", "status": "CLOSED_AT_POST_LEVEL_SPARSE_HYPERBOLA"},
-    {"id": "O8", "name": "falsification_and_finite_panels", "status": "EXECUTING"},
-    {"id": "O9", "name": "closeout", "status": "BLOCKED_BY_O8"}
+    {"id": "O8", "name": "falsification_and_finite_panels", "status": "PASSED_DIAGNOSTIC"},
+    {"id": "O9", "name": "closeout", "status": "VALIDATING"}
   ],
   "detector_admissibility": {
     "weights_must_be_frozen_before_output_prime_incidence": true,
