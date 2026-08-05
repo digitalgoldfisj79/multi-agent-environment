@@ -41,16 +41,22 @@ assert contract["base_commit"] == "e1a9822e8f43c37329c03a863595af522626d73b"
 assert contract["primary_issue"] == 58
 assert contract["status"] in {"EXECUTING", "RESEARCH_COMPLETE_VALIDATION_PENDING", "CLOSED"}
 assert [gate["id"] for gate in contract["gates"]] == [f"M{i}" for i in range(10)]
-assert contract["candidate_successor"] == "INT-SCPT"
+assert contract["terminal_outcome"] == "METHOD_OBSTRUCTED_AT_EXPLICIT_SCALE"
+assert contract["conditional_reduction"] == ["INT-SCVAR", "INT-SCPT"]
+assert contract["correction"]["initial_m5_promotion_retracted"] is True
 
 claims = json.loads((PROGRAMME / "CLAIM_MATRIX.json").read_text())
 assert claims["new_axioms"] == 0
 assert claims["fortune_claimed"] is False
 assert claims["int_scme_claimed"] is False
+assert claims["int_scvar_claimed"] is False
+assert claims["int_scpt_claimed"] is False
 
 all_text = "\n".join((PROGRAMME / rel).read_text() for rel in REQUIRED)
 for forbidden in (
     "divisor-band mass proves primality",
+    "PROVED_USING_CLASSICAL_BDH",
+    "genuine unconditional post-terminal distribution result",
     "finite panels prove",
     "Fortune is proved",
 ):
@@ -75,6 +81,7 @@ for script in (
     "verify_parity_tail_reduction.py",
     "verify_fi_scale_gap.py",
     "verify_divisor_band_main.py",
+    "verify_large_sieve_obstruction.py",
 ):
     subprocess.run([sys.executable, str(PROGRAMME / "scripts" / script)], check=True)
 
@@ -82,4 +89,5 @@ assert (PROGRAMME / "scripts" / "run_factor_profile_diagnostics.py").is_file()
 
 print("FORTUNE_INT_SCME_SELECTED_CENTRE_MEAN_PROGRAMME_PASS")
 print(f"status={contract['status']}")
+print(f"outcome={contract['terminal_outcome']}")
 print(f"gates={','.join(g['id'] for g in contract['gates'])}")
