@@ -37,6 +37,7 @@ required = [
     "O7_ROWWISE_PARITY_BREAKING.md",
     "O7_EXECUTION.md",
     "O8_FALSIFICATION_AND_SMALL_PANELS.md",
+    "O8_EXECUTION.md",
     "STATUS.md",
 ]
 for rel in required:
