@@ -66,9 +66,17 @@ for forbidden in (
     if forbidden in all_text:
         raise SystemExit(f"forbidden promotion: {forbidden}")
 
-assert "issue #60" in (PROGRAMME / "SUCCESSOR.md").read_text()
-assert "issue #61" in (PROGRAMME / "SUCCESSOR.md").read_text()
-assert "incorrectly" in (PROGRAMME / "CORRECTION_RECORD.md").read_text()
+successor_text = (PROGRAMME / "SUCCESSOR.md").read_text()
+assert "issue #60" in successor_text
+assert "issue #61" in successor_text
+correction_text = (PROGRAMME / "CORRECTION_RECORD.md").read_text()
+for required in (
+    "That range attribution was incorrect.",
+    "verify_large_sieve_obstruction.py",
+    "6a72eaf2a00abefd4b293438",
+    "No unconditional post-terminal variance or divisor-band theorem is claimed.",
+):
+    assert required in correction_text
 
 formal = ROOT / "fortune-formal" / "FortuneFormal" / "Integer" / "SelectedCentreMeanCriterion.lean"
 assert formal.is_file()
