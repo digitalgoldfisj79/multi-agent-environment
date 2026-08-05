@@ -1,0 +1,35 @@
+{
+  "programme": "FORTUNE_INT_SCME_SELECTED_CENTRE_MEAN_V0_1",
+  "new_axioms": 0,
+  "fortune_claimed": false,
+  "int_aod_claimed": false,
+  "int_socg_claimed": false,
+  "int_scme_claimed": false,
+  "claims": [
+    {
+      "id": "M1-WEIGHTED-IMPLICATION",
+      "status": "INHERITED_TO_REVERIFY",
+      "statement": "A lower bound T_b >= kappa X^2 log X, after proper output-prime-power subtraction, implies c_{1,b} >= cX."
+    },
+    {
+      "id": "M2-DIRECT-FI-ELIGIBILITY",
+      "status": "OPEN_AUDIT",
+      "statement": "The direct asymptotic-sieve sequence at output scale P_j satisfies or fails the published scale hypotheses."
+    },
+    {
+      "id": "M4-SELECTED-BDH-BOUND",
+      "status": "OPEN",
+      "statement": "For microblock row exponent rho and modulus exponent 1+delta, the selected-residue BDH error is lower order when 2 delta < rho < 1-delta."
+    },
+    {
+      "id": "M5-POST-TERMINAL-BAND",
+      "status": "OPEN",
+      "statement": "Every deterministic X^(2/3)-row microblock has the expected weighted prime-divisor mass for 2X<q<=X^(4/3-epsilon)."
+    },
+    {
+      "id": "M6-INT-SCPT-IMPLICATION",
+      "status": "OPEN",
+      "statement": "The proved divisor-band theorem plus the signed selected-centre parity-tail lower bound implies INT-SCME."
+    }
+  ]
+}
