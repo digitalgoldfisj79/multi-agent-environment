@@ -2,15 +2,16 @@
 
 | Method | Execution ruling | Required new input | Gate |
 |---|---|---|---|
-| Uniform exponential occupancy | Frozen target; not proved | Bound `N G_X(e^{-tau_A})<1` | O0 |
+| Uniform exponential occupancy | Frozen target; not proved | Bound `N G_X(tau_A)<1` | O0 |
 | Preregistered row-dependent temperature | Exact formal implication passed | Arithmetic detector estimate with every `tau_j<=tau_A` | O1/O4 |
 | Bernoulli/hypergeometric random cover | Exact dual passed | Expected uncovered rows below one | O2 |
 | Fixed-order moments | Closed | Exact indistinguishability obstruction | inherited |
 | Constant-density finite Bonferroni | Closed as primary route | Degree `Theta(X^2/log X)` | O3 |
-| Adaptive small-q Bonferroni | Admitted | Growing order and row-uniform tuple estimates | O3/O6 |
-| Whole-block connected cumulants | Closed as generic route | New zero-free theorem beyond the Poisson-mixture radius obstruction | O4 |
-| Stratified connected cumulants | Primary successor | `INT-SCG`: signed aggregate cumulant growth at dependence scale `o(X/log X)` | O4/O5 |
-| Generic dependency-graph/Kotecky--Preiss | Closed | Complete-graph weighted activity is `Theta(log X)` | O5 |
+| Adaptive small-temperature Bonferroni | Admitted | Growing order and row-uniform tuple estimates | O3/O6 |
+| Whole-block cumulant generating function | Closed as generic route | New zero-free theorem beyond the Poisson-mixture radius obstruction | O4 |
+| Stratified ordinary cumulants | Primary successor | `INT-SOCG`: signed ordinary-cumulant growth at dependence scale `o(X/log X)` | O4/O5 |
+| Factorial cumulants | Retained only for factorial-moment and Bonferroni bookkeeping | No simple common-row joint-column decomposition | O5/O6 |
+| Generic dependency-graph/Kotecky--Preiss | Closed | Complete-graph temperature-weighted activity is `Theta(log X)` | O5 |
 | Growing-set singular-series averages | Supporting local-factor input only | Selected-centre prime-tuple incidence uniformity | O6 |
 | RUHL-FM through logarithmic order | Complete conditional bridge | Weighted error below the one-row budget | O6 |
 | Poisson-tail concentration | Conditional benchmark only | Transfer to sparse primorial centres | O6 |
@@ -28,4 +29,5 @@
 4. A density-one result does not resolve one failed row.
 5. A weighting or temperature chosen after observing successful outputs is circular and inadmissible as proof evidence.
 6. A finite-panel success is not an asymptotic theorem.
-7. Rowwise Poisson behaviour does not by itself justify a whole-block cumulant series when the row means vary macroscopically.
+7. Rowwise Poisson behaviour does not justify a whole-block cumulant series when row means vary macroscopically.
+8. Ordinary cumulants, not factorial cumulants, have the direct multilinear common-row joint-column decomposition used by the exponential detector.
