@@ -1,0 +1,72 @@
+{
+  "programme": "FORTUNE_INT_AOD_OCCUPANCY_DUAL_V0_1",
+  "scales": [
+    {
+      "symbol": "N",
+      "order": "X/log X",
+      "meaning": "number of increasing primorial centres in the registered block"
+    },
+    {
+      "symbol": "H",
+      "order": "X^2",
+      "meaning": "offset-window length"
+    },
+    {
+      "symbol": "M_X",
+      "order": "X^2/log X",
+      "meaning": "prime candidate offsets ell_j < m <= H"
+    },
+    {
+      "symbol": "gamma_min",
+      "order": "log X",
+      "meaning": "compressed one-row prime-count margin"
+    },
+    {
+      "symbol": "log N",
+      "order": "log X",
+      "meaning": "one-defect entropy scale"
+    },
+    {
+      "symbol": "tau_X",
+      "order": "1",
+      "meaning": "2 log N / gamma_min"
+    },
+    {
+      "symbol": "q_X",
+      "order": "1",
+      "meaning": "1-exp(-tau_X), Bernoulli cover density"
+    },
+    {
+      "symbol": "K_uniform_cover",
+      "order": "X^2/log X",
+      "meaning": "exact hypergeometric sample size corresponding to constant q_X"
+    },
+    {
+      "symbol": "mu_X",
+      "order": "X",
+      "meaning": "conditional Hardy-Littlewood first-order prime-pair count per row"
+    },
+    {
+      "symbol": "required_log_gap",
+      "order": "log X",
+      "meaning": "minimum lower bound for -log G_X(1-q_X) needed to beat N rows"
+    }
+  ],
+  "scale_tests": [
+    {
+      "id": "E1",
+      "test": "q_X remains bounded away from zero and one only after constants in gamma_min are audited",
+      "failure_action": "retain exact q_X rather than replacing it by a constant"
+    },
+    {
+      "id": "E2",
+      "test": "connected remainder must be smaller than q_X mu_X by at least (1+epsilon) log N",
+      "failure_action": "close cumulant lane at explicit deficit"
+    },
+    {
+      "id": "E3",
+      "test": "rowwise bilinear errors must resolve an absolute one-row gap, not only a relative average",
+      "failure_action": "reject density-one or relative-error result"
+    }
+  ]
+}
