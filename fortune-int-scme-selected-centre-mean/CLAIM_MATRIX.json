@@ -5,43 +5,12 @@
   "int_aod_claimed": false,
   "int_socg_claimed": false,
   "int_scme_claimed": false,
-  "int_scvar_claimed": false,
-  "int_scpt_claimed": false,
   "claims": [
-    {
-      "id": "M1-WEIGHTED-IMPLICATION",
-      "status": "PROVED_EXACT_INHERITED_AND_FORMAL_BRIDGE",
-      "statement": "A lower bound T_b >= kappa X^2 log X, after proper output-prime-power subtraction, implies c_{1,b} >= cX."
-    },
-    {
-      "id": "M2-DIRECT-FI-ELIGIBILITY",
-      "status": "CLOSED_AT_EXPONENTIAL_SCALE_GAP",
-      "statement": "The direct asymptotic-sieve theorem requires output-scale distribution exponentially beyond all ordinary offset information."
-    },
-    {
-      "id": "M4-COLLISION-MULTIPLICITY",
-      "status": "PROVED_EXACT",
-      "statement": "Selected primorial residue multiplicity energy is at most RQ/log Q plus O(R^3)."
-    },
-    {
-      "id": "M4-INT-SCVAR-IMPLICATION",
-      "status": "PROVED_CONDITIONAL",
-      "statement": "If V(H,Q) << HQ(log H)^C, then selected divisor-band errors are lower order for 2 delta < rho < 1-delta."
-    },
-    {
-      "id": "M4-UNCONDITIONAL-LARGE-SIEVE",
-      "status": "METHOD_OBSTRUCTED_AT_EXPLICIT_SCALE",
-      "statement": "The unconditional (H+Q^2)H variance bound fails for every post-terminal delta>0 even without residue collisions."
-    },
-    {
-      "id": "M5-POST-TERMINAL-BAND",
-      "status": "CONDITIONAL_ON_INT_SCVAR",
-      "statement": "INT-SCVAR yields the expected divisor-band mass through Q=X^(4/3-epsilon); no unconditional promotion is retained."
-    },
-    {
-      "id": "M6-BAND-TAIL-IMPLICATION",
-      "status": "PROVED_FORMAL",
-      "statement": "INT-SCVAR plus INT-SCPT implies INT-SCME through the exact band-plus-tail identity."
-    }
+    {"id":"M1-WEIGHTED-IMPLICATION","status":"RETAINED","statement":"INT-SCME supplies the first-cumulant lower bound after proper prime-power subtraction."},
+    {"id":"M4-COLLISION-ENERGY","status":"PROVED","statement":"Selected primorial residues satisfy the registered collision-energy bound."},
+    {"id":"M4-CONDITIONAL-EXPONENTS","status":"PROVED_CONDITIONAL_LEDGER","statement":"Under an HQ-polylog variance input, selected-residue Cauchy works exactly for 2 delta < rho < 1-delta."},
+    {"id":"M4-UNCONDITIONAL-OBSTRUCTION","status":"PROVED_METHOD_OBSTRUCTION","statement":"The standard unconditional large-sieve variance cannot enter a post-terminal polynomial band."},
+    {"id":"M6-SCPT","status":"RETRACTED_AS_REDUCTION","statement":"Given INT-SCVAR, INT-SCPT is equivalent to INT-SCME rather than a smaller target."},
+    {"id":"SOCG-LINK","status":"RETRACTED","statement":"INT-SCME does not imply INT-SOCG; INT-LCSK and INT-PWOC remain open."}
   ]
 }

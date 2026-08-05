@@ -2,60 +2,35 @@
   "programme": "FORTUNE_INT_SCME_SELECTED_CENTRE_MEAN_V0_1",
   "date": "2026-08-05",
   "base_commit": "e1a9822e8f43c37329c03a863595af522626d73b",
-  "parent_pr": 57,
   "primary_issue": 58,
-  "status": "CLOSED",
+  "status": "CLOSED_REVIEW_CORRECTED",
   "initial_target": "INT-SCME",
-  "terminal_outcome": "METHOD_OBSTRUCTED_AT_EXPLICIT_SCALE",
-  "conditional_reduction": ["INT-SCVAR", "INT-SCPT"],
-  "validation": {
-    "corrected_static_job": "6a72ed956b79c09949c22ddf",
-    "targeted_lean_job": "6a72edc6a00abefd4b293482",
-    "targeted_lean_jobs": 8655,
-    "full_cleanroom_job": "6a72efa0a00abefd4b2934a2",
-    "full_cleanroom_seconds": 222,
-    "full_formal_jobs": 8685,
-    "failure_count": 0,
-    "terminal_sentinel": "FORTUNE_INT_SCME_FULL_CLEANROOM_PASS",
-    "invalidated_pre_correction_job": "6a72eaf2a00abefd4b293438",
-    "excluded_validator_failure_job": "6a72ef3ca00abefd4b29349a"
+  "terminal_outcome": "SELECTED_RESIDUE_VARIANCE_ROUTE_OBSTRUCTED",
+  "external_review": {
+    "branch": "claude/fortune-int-programme-review-u8wgpx",
+    "commit": "029cc8c",
+    "accepted": true
   },
-  "parameters": {
-    "eta": 0.5,
-    "microblock_row_exponent": 0.6666666666666666,
-    "conditional_modulus_exponent_frontier": "1+delta with delta<1/3",
-    "output_primality_observed_in_partition": false
-  },
+  "frontier_components": ["INT-SCME", "INT-LCSK", "INT-PWOC"],
+  "auxiliary_conditional_target": "INT-SCVAR",
+  "scpt_status": "EQUIVALENT_TO_INT_SCME_GIVEN_INT_SCVAR",
   "gates": [
     {"id":"M0","name":"source_freeze","status":"PASSED"},
-    {"id":"M1","name":"normalization_prime_powers","status":"PASSED_EXACT"},
+    {"id":"M1","name":"normalization_prime_powers","status":"PASSED_EXACT_ERRATUM_CORRECTED"},
     {"id":"M2","name":"local_density_sieve_audit","status":"DIRECT_FI_ROUTE_CLOSED_EXPONENTIAL_GAP"},
     {"id":"M3","name":"deterministic_microblocks","status":"PASSED_EXACT"},
-    {"id":"M4","name":"selected_residue_variance","status":"REDUCED_TO_INT_SCVAR_LARGE_SIEVE_OBSTRUCTED"},
-    {"id":"M5","name":"post_terminal_band","status":"CONDITIONAL_ON_INT_SCVAR_UNCONDITIONAL_RETRACTED"},
-    {"id":"M6","name":"parity_tail_reduction","status":"CONDITIONAL_INT_SCVAR_PLUS_INT_SCPT"},
+    {"id":"M4","name":"selected_residue_variance","status":"CONDITIONAL_FRONTIER_AND_UNCONDITIONAL_LARGE_SIEVE_OBSTRUCTION"},
+    {"id":"M5","name":"post_terminal_band","status":"CONDITIONAL_ON_INT_SCVAR"},
+    {"id":"M6","name":"parity_tail","status":"IDENTITY_ONLY_EQUIVALENT_TO_INT_SCME"},
     {"id":"M7","name":"source_switching_audit","status":"STANDARD_DIRECT_METHODS_CLOSED"},
     {"id":"M8","name":"diagnostics_controls","status":"PASSED_EXACT_AND_DIAGNOSTIC"},
-    {"id":"M9","name":"closeout","status":"PASSED"}
+    {"id":"M9","name":"closeout","status":"PASSED_REVIEW_CORRECTED"}
   ],
-  "correction": {
-    "initial_m5_promotion_retracted": true,
-    "reason": "classical HQ log H BDH range does not include Q=H^(2/3); unconditional large-sieve variance is too weak"
-  },
-  "prohibited_lanes": [
-    "higher_cumulants_before_mean",
-    "direct_friedlander_iwaniec_without_scale_eligibility",
-    "classical_bdh_outside_verified_range",
-    "divisor_band_mass_as_prime_mass",
-    "finite_panel_asymptotic_promotion",
-    "density_one_closeout",
-    "fitted_microblocks",
-    "function_field_or_paper_vii_tangent"
-  ],
-  "compute_policy": {
-    "ordinary_job_timeout_minutes": 45,
-    "absolute_timeout_minutes": 120,
-    "gpu_requires_written_justification": true,
-    "cancel_redundant_jobs": true
-  }
+  "prohibited_claims": [
+    "completed_INT_SOCG_to_INT_SCME_reduction",
+    "INT_SCPT_as_independent_subordinate_target",
+    "INT_SCME_implies_INT_SOCG",
+    "sole_primary_frontier_is_INT_SCME",
+    "large_Lean_job_count_as_analytic_validation"
+  ]
 }

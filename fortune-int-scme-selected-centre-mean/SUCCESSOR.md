@@ -1,30 +1,39 @@
-# Subordinate targets under INT-SCME
+# Review-corrected frontier map
 
-Issue #58 remains the sole primary integer frontier. The programme isolates two independent subordinate targets.
+There is no single successor theorem produced by the INT-SCME programme.
 
-## INT-SCVAR — issue #60
+## Coequal unresolved inputs to INT-SOCG
 
-Prove post-terminal prime-progression variance at
+### INT-SCME — issue #58
 
-\[
-Q=X^{4/3-\varepsilon}=H^{2/3-\varepsilon/2}:
-\]
+Prove a positive weighted prime-pair mean on every registered primorial stratum. This supplies only
 
 \[
-\sum_{2X<q\le Q}\sum_{(a,q)=1}
-\left|\vartheta(H;q,a)-\frac{H}{q-1}\right|^2
-\ll HQ(\log H)^C.
+c_{1,b}\ge cX.
 \]
 
-## INT-SCPT — issue #61
+The target is Cramér-scale prime detection in windows of length `H asymp (log P_j)^2` around exponentially sparse deterministic centres.
 
-After extracting the corresponding prime-divisor band, prove the signed prime-versus-composite tail lower bound on every deterministic `X^(2/3)`-row microblock.
+### INT-LCSK
 
-## Exact bridge
+Prove all-orders connected local-factor control, uniformly through the growing cumulant range. Pairwise subcriticality is already known; the all-orders tree or hypergraph estimate is open.
 
-\[
-INT\text{-}SCVAR+INT\text{-}SCPT
-\Longrightarrow INT\text{-}SCME.
-\]
+### INT-PWOC
 
-Neither subordinate theorem is currently proved unconditionally. They should not be treated as competing primary branches: both are required by this particular selected-residue route.
+Extend the prime-modulus primorial-walk control to the weighted squarefree-composite moduli required by the source decomposition.
+
+Together these inputs would establish `INT-SOCG`, hence `INT-AOD` and eventual Fortune.
+
+## Auxiliary conditional object
+
+Issue #60, `INT-SCVAR`, asks for a Montgomery-type post-terminal variance estimate. It conditionally evaluates a divisor band but does not detect primes or reduce `INT-SCME`.
+
+Issue #61 is closed: under `INT-SCVAR`, its `INT-SCPT` inequality is equivalent to `INT-SCME`, not a smaller independent target.
+
+## Recommended next build
+
+Build a consolidation programme around the existing `RUHL-FM` implication:
+
+> A precisely stated row-uniform Hardy–Littlewood factorial-moment hypothesis through order `Theta(log X)`, with the registered absolute error budget, implies `INT-AOD` and therefore eventual Fortune.
+
+The build should unify the detector, Bonferroni, cumulant and obstruction records into one conditional theorem and one honest frontier map. It must not launch a new attack on `INT-SCPT`.

@@ -1,31 +1,9 @@
-# Successor target — INT-SCME
+# INT-SOCG frontier — review corrected
 
-`INT-SCME` is the sole primary integer frontier after the INT-SOCG execution and is tracked in issue #58.
+`INT-SOCG` requires three unresolved input families:
 
-For each deterministic terminal-prime stratum `B_b`, with common restricted candidate-prime universe
+1. `INT-SCME`: positive first-cumulant/selected-centre mean;
+2. `INT-LCSK`: all-orders connected local-factor control;
+3. `INT-PWOC`: weighted squarefree-composite primorial-walk control.
 
-\[
-\mathcal M_b=\{m:U_b<m\le H,\ m\text{ prime}\},
-\]
-
-prove that a fixed `kappa>0` satisfies
-
-\[
-\boxed{
-\frac1{n_b}
-\sum_{j\in B_b}
-\sum_{m\in\mathcal M_b}
-\log m\,\Lambda(P_j+m)
-\ge \kappa X^2\log X.
-}
-\]
-
-Proper output prime powers contribute only `O(X(log X)^2)` per row, so `INT-SCME` implies
-
-\[
-c_{1,b}\ge c_0X.
-\]
-
-This supplies the missing first-cumulant input to `INT-SOCG`.
-
-Secondary higher-order targets `INT-LCSK` and the composite-modulus extension of `INT-PWOC` remain open, but neither is rationally prior to `INT-SCME`.
+The conjunction implies the registered ordinary-cumulant growth theorem, hence `INT-AOD` and eventual Fortune. None of the three is currently proved, and no one component should be described as the sole primary frontier.
