@@ -1,6 +1,6 @@
 # Successor target — INT-SCME
 
-`INT-SCME` is the sole primary integer frontier after the INT-SOCG execution.
+`INT-SCME` is the sole primary integer frontier after the INT-SOCG execution and is tracked in issue #58.
 
 For each deterministic terminal-prime stratum `B_b`, with common restricted candidate-prime universe
 
