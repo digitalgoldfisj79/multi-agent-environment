@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Verify factorial cumulants as sums of connected joint column cumulants."""
+"""Verify ordinary cumulants as sums of common-row joint column cumulants."""
 
 from __future__ import annotations
 
@@ -44,17 +44,10 @@ def joint_cumulant(matrix: list[list[int]], cols: tuple[int, ...]) -> Fraction:
     return total
 
 
-def falling(z: int, k: int) -> int:
-    out = 1
-    for r in range(k):
-        out *= z - r
-    return out
-
-
-def factorial_cumulants(zs: list[int], order: int) -> list[Fraction]:
+def ordinary_cumulants(zs: list[int], order: int) -> list[Fraction]:
     moments = [Fraction(1)]
     for k in range(1, order + 1):
-        moments.append(Fraction(sum(falling(z, k) for z in zs), len(zs)))
+        moments.append(Fraction(sum(z**k for z in zs), len(zs)))
     cumulants = [Fraction(0)] * (order + 1)
     for k in range(1, order + 1):
         cumulants[k] = moments[k] - sum(
@@ -63,18 +56,27 @@ def factorial_cumulants(zs: list[int], order: int) -> list[Fraction]:
         )
     return cumulants
 
+
 rng = random.Random(560825)
 for rows, cols in ((5, 4), (7, 5), (9, 6)):
     matrix = [[rng.randrange(2) for _ in range(cols)] for _ in range(rows)]
     zs = [sum(row) for row in matrix]
     max_order = min(4, cols)
-    kappas = factorial_cumulants(zs, max_order)
+    cumulants = ordinary_cumulants(zs, max_order)
     for k in range(1, max_order + 1):
+        # Multilinearity of ordinary cumulants for Z=sum_m I_m requires all
+        # ordered column tuples, including repetitions.
         connected_sum = sum(
             joint_cumulant(matrix, ordered)
-            for ordered in itertools.permutations(range(cols), k)
+            for ordered in itertools.product(range(cols), repeat=k)
         )
-        assert connected_sum == kappas[k], (rows, cols, k, connected_sum, kappas[k])
-    print(f"rows={rows} cols={cols} verified_orders=1..{max_order}")
+        assert connected_sum == cumulants[k], (
+            rows,
+            cols,
+            k,
+            connected_sum,
+            cumulants[k],
+        )
+    print(f"rows={rows} cols={cols} verified_ordinary_orders=1..{max_order}")
 
-print("FORTUNE_INT_AOD_O5_JOINT_CUMULANT_DECOMPOSITION_PASS")
+print("FORTUNE_INT_AOD_O5_ORDINARY_JOINT_CUMULANT_PASS")
