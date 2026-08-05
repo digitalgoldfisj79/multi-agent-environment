@@ -1,13 +1,13 @@
 # O5 — arithmetic connected-correlation execution
 
-**Status:** EXACT DECOMPOSITION PASSED; GENERIC CLUSTER CRITERIA OBSTRUCTED
+**Status:** EXACT ORDINARY-CUMULANT DECOMPOSITION PASSED; REDUCED TO `INT-SOCG`
 
 ## Exact coefficient identity
 
-Fix a deterministic stratum `B_b` and a common candidate-offset universe. For a prime candidate column `m`, write
+Fix a deterministic stratum `B_b` and a common candidate-offset universe. For a candidate column `m`, write
 
 \[
-I_m(J)=1_{\mathbb P}(P_J+m),
+I_m(J)=1_{\mathbb P}(m)1_{\mathbb P}(P_J+m),
 \]
 
 where `J` is uniform on the rows in the stratum. Then
@@ -16,16 +16,16 @@ where `J` is uniform on the rows in the stratum. Then
 Z_J=\sum_m I_m(J).
 \]
 
-For every `k>=1`, the factorial cumulant satisfies the exact ordered-tuple identity
+Let `c_{k,b}=Cum_b(Z_J,\ldots,Z_J)` be the ordinary cumulant of order `k`. Multilinearity gives the exact common-centre identity
 
 \[
-\kappa_{k,b}
+c_{k,b}
 =
-\sum_{m_1,\ldots,m_k\ \mathrm{distinct}}
+\sum_{m_1,\ldots,m_k}
 \operatorname{Cum}_b(I_{m_1},\ldots,I_{m_k}),
 \]
 
-where
+where the sum is over all ordered offset tuples, including repetitions, and
 
 \[
 \operatorname{Cum}_b(I_{m_1},\ldots,I_{m_k})
@@ -40,64 +40,98 @@ The joint moments are selected-centre prime-tuple incidences
 
 \[
 \frac1{n_b}\sum_{j\in B_b}
-\prod_{r=1}^k1_{\mathbb P}(P_j+m_r).
+\prod_{r\in C}1_{\mathbb P}(m_r)1_{\mathbb P}(P_j+m_r).
 \]
 
-`verify_joint_cumulant_decomposition.py` verifies the identity exactly over rational arithmetic on finite incidence matrices.
+Repeated offsets collapse inside each product because the indicators are idempotent. The verifier checks the complete identity exactly over rational arithmetic by comparing ordinary cumulants of `Z` with the sum over all ordered column tuples.
+
+## Correction to the built conjectural identity
+
+The initially built programme stated the analogous formula for factorial cumulants over distinct columns. That formula is false: factorial cumulants involve a more complicated partition/injection combinatorics and do not equal common-row joint cumulants over distinct columns. The O9 static audit detected this before closeout. The corrected ordinary-cumulant identity is the natural one for the exponential detector
+
+\[
+\log\mathbb E_b e^{-\tau Z_J}
+=\sum_{k\ge1}c_{k,b}\frac{(-\tau)^k}{k!}.
+\]
+
+No theorem claim relies on the rejected factorial identity.
 
 ## Local arithmetic anatomy
 
-- For every prime `p<=ell_j`, `P_j` is zero modulo `p` and every candidate prime `m>ell_j` is nonzero modulo `p`. All shifted outputs therefore automatically avoid these small primes.
-- For `p>ell_j`, the forbidden residues are controlled by the collision pattern of the offsets `m_r mod p` and by the residue of the multiplicative primorial walk `P_j mod p`.
-- The connected coefficient therefore depends on cancellation across set partitions and across the selected `j`-orbit. Taking absolute values before this recombination reproduces the raw high-moment barrier.
+- For every prime `p<=ell_j`, `P_j` is zero modulo `p` and every candidate prime `m>ell_j` is nonzero modulo `p`; all shifted outputs automatically avoid these small primes.
+- For `p>ell_j`, forbidden residues are controlled by the collision pattern of the distinct offsets represented in the tuple and by the residue of the multiplicative primorial walk `P_j mod p`.
+- The ordinary connected coefficient depends on cancellation across set partitions and across the selected `j`-orbit. Taking absolute values before the cumulant recombination recovers the raw high-correlation barrier.
 
 ## Complete-dependency obstruction
 
-Viewed as random variables of the single row index `J`, all columns `I_m(J)` share the same underlying variable. No nontrivial independence graph is available; the safe dependency graph is complete.
+Viewed as random variables of the single row index `J`, all columns share the same underlying variable. The safe dependency graph is complete.
 
-The total column activity is
-
-\[
-\sum_m\mathbb E_b I_m=\kappa_{1,b}\asymp X
-\]
-
-conditionally. At the useful adaptive detector scale `q_b asymp log X/X`, the weighted neighbour activity of the complete graph is
+The total activity is
 
 \[
-q_b\kappa_{1,b}\asymp\log X.
+\sum_m\mathbb E_b I_m=c_{1,b}\asymp X
 \]
 
-This exceeds every constant Kotecky--Preiss or Dobrushin small-activity threshold. Generic absolute dependency-graph and polymer criteria are therefore closed at the explicit scale `Theta(log X)`.
+conditionally. At useful temperature
 
-## Smallest quantitative successor
+\[
+\tau_b\asymp\log X/X,
+\]
 
-A sufficient arithmetic growth condition is:
+the complete-graph weighted activity is
 
-> **INT-SCG — stratified cumulant growth.** For a deterministic `polylog(X)` partition there are preregistered lower scales `L_b>=cX` and dependence scales
+\[
+\tau_b c_{1,b}\asymp\log X.
+\]
+
+This exceeds every constant small-activity threshold. Generic absolute dependency-graph, Dobrushin, and Kotecky--Preiss criteria are therefore closed at the explicit scale `Theta(log X)`.
+
+## Primary successor theorem — INT-SOCG
+
+> **INT-SOCG — stratified ordinary-cumulant growth.** For a deterministic `B=polylog(X)` partition there are preregistered lower scales `L_b>=cX`, temperatures
+> \[
+> \tau_b=(1+3\varepsilon)\frac{\log(n_bB)}{L_b}\le\tau_A,
+> \]
+> and dependence scales
 > \[
 > D_b\ll X/(\log X)^{1+\delta}
 > \]
-> such that, for every `k>=2`,
+> such that
 > \[
-> |\kappa_{k,b}|\le \kappa_{1,b}\,k!\,D_b^{k-1},
-> \qquad \kappa_{1,b}\ge L_b.
+> c_{1,b}\ge L_b
+> \]
+> and, for every `k>=2`,
+> \[
+> |c_{k,b}|\le c_{1,b}\,k!\,D_b^{k-1}.
 > \]
 
-Choose
+The coefficient bound gives absolute convergence whenever `tau_bD_b<1`. Moreover,
 
 \[
-q_b=(1+3\varepsilon)\log(n_bB)/L_b.
-\]
-
-Then `q_bD_b=O((log X)^{-delta})` and
-
-\[
-\sum_{k\ge2}\frac{q_b^k}{k!}|\kappa_{k,b}|
+\sum_{k\ge2}\frac{\tau_b^k}{k!}|c_{k,b}|
 \le
-q_b\kappa_{1,b}\frac{q_bD_b}{1-q_bD_b}
-=o(\log n_b).
+\tau_bc_{1,b}\frac{\tau_bD_b}{1-\tau_bD_b}.
 \]
 
-Thus `INT-SCG => INT-SCCB => INT-AOD` for sufficiently large `X`.
+Since `tau_bD_b=O((log X)^(-delta))`, the higher connected contribution is `o(log(n_bB))`, while
 
-`INT-SCG` is not proved. It isolates the required signed arithmetic cancellation and the exact dependence scale; no generic cluster theorem supplies it.
+\[
+\tau_bc_{1,b}\ge(1+3\varepsilon)\log(n_bB).
+\]
+
+Thus, for sufficiently large `X`,
+
+\[
+-\log\mathbb E_b e^{-\tau_bZ_J}>\log(n_bB).
+\]
+
+Consequently
+
+\[
+\boxed{\mathrm{INT\!-\!SOCG}\Longrightarrow
+\mathrm{INT\!-\!SOCB}\Longrightarrow
+\mathrm{INT\!-\!AOD}\Longrightarrow
+\text{eventual Fortune}.}
+\]
+
+`INT-SOCG` is not proved. It isolates the required signed arithmetic cancellation and an explicit subcritical dependence scale. No generic cluster theorem supplies it.
