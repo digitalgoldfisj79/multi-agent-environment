@@ -21,13 +21,21 @@ required = [
     "LITERATURE_AUDIT.md",
     "RUNBOOK.md",
     "FORMALISATION_PLAN.md",
+    "O0_SOURCE_FREEZE.md",
     "O1_DETECTOR_ADMISSIBILITY.md",
+    "O1_EXECUTION.md",
     "O2_RANDOM_COVER_DUAL.md",
+    "O2_EXECUTION.md",
     "O3_DEGREE_COEFFICIENT_COST.md",
+    "O3_EXECUTION.md",
     "O4_CONNECTED_CUMULANT_COMPRESSION.md",
+    "O4_EXECUTION.md",
     "O5_ARITHMETIC_CONNECTED_CORRELATIONS.md",
+    "O5_EXECUTION.md",
     "O6_CONDITIONAL_POISSON_BENCHMARK.md",
+    "O6_EXECUTION.md",
     "O7_ROWWISE_PARITY_BREAKING.md",
+    "O7_EXECUTION.md",
     "O8_FALSIFICATION_AND_SMALL_PANELS.md",
     "STATUS.md",
 ]
@@ -63,8 +71,12 @@ for required_claim in {
     "O2-BERNOULLI-COVER",
     "O2-HYPERGEOMETRIC-COVER",
     "O3-DEGREE-COST",
-    "O4-INT-CCB",
-    "O5-CONNECTED-ARITHMETIC",
+    "O3-ADAPTIVE-SCALE",
+    "O4-GLOBAL-MIXTURE-OBSTRUCTION",
+    "O4-INT-SCCB",
+    "O5-JOINT-CUMULANT",
+    "O5-COMPLETE-DEPENDENCY",
+    "O5-INT-SCG",
     "O6-RUHL-IMPLICATION",
     "O7-ROWWISE-BILINEAR",
     "O8-NO_FINITE_PROMOTION",
@@ -76,18 +88,46 @@ for rel in required:
     if "Fortune is proved" in text or "PROVED_FORTUNE" in text:
         raise SystemExit(f"forbidden theorem promotion in {rel}")
 
+lean = (
+    ROOT
+    / "fortune-formal"
+    / "FortuneFormal"
+    / "Integer"
+    / "AdaptiveOccupancyCriterion.lean"
+)
+lean_text = lean.read_text()
+for forbidden in ("sorry", "admit", "unsafe", "axiom "):
+    if forbidden in lean_text:
+        raise SystemExit(f"forbidden token in {lean}: {forbidden}")
+for theorem_name in (
+    "no_failure_of_rowDependentExp_sum_lt_one",
+    "uniformExp_le_rowDependentExp",
+    "uniformExp_sum_lt_one_of_rowDependent",
+):
+    assert theorem_name in lean_text
+
 scripts = [
     "verify_detector_implication.py",
     "verify_random_cover.py",
     "verify_scale_ledger.py",
     "verify_factorial_cumulants.py",
     "verify_adversarial_private_columns.py",
+    "verify_poisson_mixture_obstruction.py",
+    "verify_stratified_criterion.py",
+    "verify_joint_cumulant_decomposition.py",
+    "verify_ruhl_budget.py",
 ]
 for script in scripts:
     subprocess.run(
         [sys.executable, str(PROGRAMME / "scripts" / script)],
         check=True,
     )
+
+for diagnostic in (
+    "run_exact_primorial_panels.py",
+    "run_stratified_panel_diagnostics.py",
+):
+    assert (PROGRAMME / "scripts" / diagnostic).is_file()
 
 print("FORTUNE_INT_AOD_OCCUPANCY_DUAL_PROGRAMME_PASS")
 print(f"programme={contract['programme']}")
