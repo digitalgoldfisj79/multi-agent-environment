@@ -1,0 +1,58 @@
+{
+  "programme": "FORTUNE_INT_AOD_OCCUPANCY_DUAL_V0_1",
+  "new_axioms": 0,
+  "fortune_claimed": false,
+  "int_aod_claimed": false,
+  "claims": [
+    {
+      "id": "O1-GENERIC-DETECTOR",
+      "status": "TO_PROVE_FORMALLY",
+      "statement": "Any nonnegative row detector equal to one on every failed row excludes failures when its total mass is below one."
+    },
+    {
+      "id": "O1-WEIGHTED-DETECTOR",
+      "status": "TO_PROVE_FORMALLY",
+      "statement": "The frozen weighted occupancy detector equals one on a zero row and is nonnegative under nonnegative weights."
+    },
+    {
+      "id": "O2-BERNOULLI-COVER",
+      "status": "EXACT_COMBINATORIAL_TARGET",
+      "statement": "Uniform INT-AOD is the expected number of uncovered rows under independent candidate-offset sampling with probability q_X."
+    },
+    {
+      "id": "O2-HYPERGEOMETRIC-COVER",
+      "status": "EXACT_COMBINATORIAL_TARGET",
+      "statement": "Sampling exactly K of M candidate offsets misses a row with Z successful offsets with probability binom(M-Z,K)/binom(M,K)."
+    },
+    {
+      "id": "O3-DEGREE-COST",
+      "status": "TO_AUDIT",
+      "statement": "The exact without-replacement analogue of the constant-q detector has degree Theta(M_X)=Theta(X^2/log X)."
+    },
+    {
+      "id": "O4-INT-CCB",
+      "status": "OPEN_CANDIDATE_REDUCTION",
+      "statement": "A convergent connected expansion whose first cumulant exceeds the absolute connected remainder by more than log N implies INT-AOD."
+    },
+    {
+      "id": "O5-CONNECTED-ARITHMETIC",
+      "status": "OPEN",
+      "statement": "Disconnected prime-tuple contributions can be cancelled before estimating the aggregate connected remainder."
+    },
+    {
+      "id": "O6-RUHL-IMPLICATION",
+      "status": "TO_DERIVE_CONDITIONALLY",
+      "statement": "A precisely parameterized row-uniform growing-tuple Hardy-Littlewood hypothesis implies INT-AOD or INT-CCB."
+    },
+    {
+      "id": "O7-ROWWISE-BILINEAR",
+      "status": "OPEN_CANDIDATE_REDUCTION",
+      "statement": "A smallest explicit row-uniform parity-breaking bilinear estimate implies INT-AOD."
+    },
+    {
+      "id": "O8-NO_FINITE_PROMOTION",
+      "status": "PROTOCOL_RULE",
+      "statement": "Finite primorial panels and adversarial incidence matrices may falsify methods but cannot prove asymptotic Fortune statements."
+    }
+  ]
+}
