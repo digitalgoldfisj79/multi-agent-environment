@@ -2,75 +2,52 @@
 
 **Status:** PASSED AS DIAGNOSTIC AND FALSIFICATION GATE
 
-## Exact panel definition
+## Exact panels
 
-For each diagnostic scale `X`, the programme used:
+For diagnostic scales `X`, the programme used actual centres `P_j=ell_j#` for primes `ell_j in [X,2X)`, `H=floor(X^2/2)`, prime offsets `ell_j<m<=H`, and exact primality tests for `P_j+m`.
 
-- actual increasing primorial centres `P_j=ell_j#` for primes `ell_j in [X,2X)`;
-- `H=floor(X^2/2)`;
-- prime candidate offsets `ell_j<m<=H`;
-- exact primality tests for `P_j+m`;
-- occupancy `Z_j` equal to the exact number of prime-prime pairs.
+No failed row occurred in the exact panels through `X=300`. This finite observation is not promoted to an asymptotic theorem.
 
-These panels use the same candidate-collapse geometry as the asymptotic target, at one registered diagnostic value `eta=1/2`.
+## Whole-block diagnosis
 
-## Whole-block results
+The whole-block occupancy distribution is strongly heterogeneous. Its factorial and ordinary connected coefficients oscillate, and an absolute order-twelve truncation does not uniformly certify the exact detector. This agrees with the O4 Poisson-mixture zero-radius obstruction.
 
-Job `6a72b6a8a00abefd4b29309b` completed with failure count zero. Through `X=250`:
+## Corrected stratified ordinary-cumulant diagnosis
 
-| X | rows | min Z | mean Z | max Z | zero rows | detector at `q=2 log N / mean Z` | nearest numerical q-zero |
-|---:|---:|---:|---:|---:|---:|---:|---:|
-| 10 | 4 | 3 | 4.000 | 6 | 0 | 0.06749 | 0.99999 |
-| 20 | 4 | 7 | 8.500 | 10 | 0 | 0.15348 | 0.98192 |
-| 30 | 7 | 11 | 14.429 | 21 | 0 | 0.12679 | 0.40361 |
-| 50 | 10 | 15 | 23.300 | 39 | 0 | 0.12291 | 0.25146 |
-| 75 | 14 | 18 | 31.786 | 45 | 0 | 0.10416 | 0.25100 |
-| 100 | 21 | 27 | 43.571 | 69 | 0 | 0.09222 | 0.13516 |
-| 150 | 27 | 44 | 64.074 | 89 | 0 | 0.04943 | 0.17784 |
-| 200 | 32 | 53 | 81.438 | 108 | 0 | 0.05678 | 0.10961 |
-| 250 | 42 | 71 | 102.381 | 142 | 0 | 0.04169 | 0.08073 |
-
-The whole-block factorial cumulants oscillate rapidly. At several scales the absolute connected remainder through order twelve is too large to certify the detector even though the exact detector is below one. This is consistent with the O4 heterogeneity obstruction.
-
-## Stratified results
-
-Rows were partitioned deterministically by terminal-prime intervals of width
+Rows were partitioned deterministically into terminal-prime intervals of width
 
 \[
 \lfloor X/(\log X)^{1.25}\rfloor.
 \]
 
-Within each stratum the diagnostic parameter was
+Within each stratum the diagnostic temperature was
 
 \[
-q_b=2\log(n_bB)/\overline Z_b.
+\tau_b=2\log(n_bB)/\overline Z_b.
 \]
 
-This uses the observed mean and is therefore **diagnostic only**, not an admissible proof parameter.
+Because this temperature uses the observed mean, it is **diagnostic only** and is not an admissible proof parameter.
 
-Jobs `6a72b899a00abefd4b2930b4` and the associated exact scripts gave:
+Job `6a72bdeca00abefd4b29310c` recomputed the detector, Laplace zero radii, and ordinary cumulants:
 
-| X | strata | total stratified detector | worst `q_b / zero radius` | worst order-12 absolute connected margin |
+| X | strata | total exponential detector | worst `tau_b / zero radius` | worst order-12 absolute ordinary-cumulant margin |
 |---:|---:|---:|---:|---:|
-| 100 | 8 | 0.05108 | 0.62885 | 1.7361 |
-| 150 | 8 | 0.04061 | 0.70667 | 1.8881 |
-| 200 | 9 | 0.03551 | 0.59789 | 2.0152 |
-| 250 | 9 | 0.02251 | 0.61022 | 3.0479 |
-| 300 | 9 | 0.02025 | 0.45975 | 3.2444 |
+| 100 | 8 | 0.07618 | 0.62305 | 2.0794 |
+| 150 | 8 | 0.05487 | 0.71534 | 2.0794 |
+| 200 | 9 | 0.04605 | 0.61033 | 2.1972 |
+| 250 | 9 | 0.02966 | 0.61831 | 2.9042 |
+| 300 | 9 | 0.02586 | 0.44057 | 3.1019 |
 
-Every tested stratum remained inside its numerical zero-free disk, and every truncated absolute connected margin was positive.
+Every tested stratum remained inside its numerical Laplace zero-free disk, and every order-twelve absolute ordinary-cumulant margin was positive.
+
+## Algebraic correction caught by O9
+
+The first O5 verifier incorrectly identified factorial cumulants with common-row joint cumulants over distinct columns. Static validation rejected that identity. The corrected exact identity uses ordinary cumulants and all ordered column tuples, including repetitions. The stratified diagnostics were rerun in the corrected ordinary-cumulant formulation before closeout.
 
 ## Adversarial falsification
 
-The inherited even/odd panels and the strengthened private-column realizations were rerun. For every tested order `K`:
-
-- one panel contains a zero row and the other does not;
-- row factorial moments agree through order `K`;
-- for `K>=1`, both can have identical all-one column-degree multisets;
-- pairwise column overlaps vanish in both.
-
-The exact stratified detector sentinel also confirms that inserting one zero row makes the total detector at least one.
+For every tested `K`, the zero-row and nonzero-row panels have matching factorial moments through order `K`; for `K>=1`, they can also have identical all-one column-degree multisets and zero pairwise column overlaps. These statistics therefore cannot resolve one failed row.
 
 ## Ruling
 
-The diagnostics select deterministic stratification and reject whole-block absolute cumulants, low-order row moments, column degrees, and pairwise overlaps as sufficient statistics. They do not establish `INT-SCG`, `INT-AOD`, or any asymptotic Fortune statement.
+The diagnostics select deterministic stratification and reject whole-block absolute cumulants, fixed-order row moments, column degrees, and pairwise overlaps as sufficient statistics. They establish neither `INT-SOCG`, `INT-AOD`, nor an asymptotic Fortune result.
