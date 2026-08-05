@@ -17,7 +17,7 @@ for x in (100, 1000, 10_000, 100_000, 1_000_000):
     n = x / math.log(x)
     useful_q = 2.0 * math.log(n) / ((lam_lo + lam_hi) / 2.0)
     ratio = useful_q / zero_radius
-    assert ratio > 1.0 for x >= 100
+    assert ratio > 1.0
 
     q0 = 1j * math.pi / delta
     value = 0.5 * cmath.exp(-q0 * lam_lo) + 0.5 * cmath.exp(-q0 * lam_hi)
