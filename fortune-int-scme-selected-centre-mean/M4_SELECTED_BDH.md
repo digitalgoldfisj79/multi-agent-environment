@@ -1,70 +1,41 @@
-# M4 — selected-residue Barban–Davenport–Halberstam estimate
+# M4 — selected-residue variance reduction
 
-**Status:** `PASSED_FROM_CLASSICAL_BDH_AND_COLLISION_THEOREM`
+**Status:** `REDUCED_TO_INT_SCVAR; UNCONDITIONAL_LARGE_SIEVE_OBSTRUCTED`
 
-Let `C` be a deterministic microblock with `R asymp X^rho` rows and let
+Let `C` be a deterministic microblock with `R asymp X^rho` rows and put
 
 \[
 Q=X^{1+\delta},\qquad 0<\delta<1.
 \]
 
-For prime `q` with `2X<q<=Q`, every `P_j` is invertible modulo `q`. Put
+For prime `q` with `2X<q<=Q`, every `P_j` is invertible modulo `q`. Define
 
 \[
-r_q(a)=\#\{j\in C:-P_j\equiv a\pmod q\}
-\]
-
-and
-
-\[
+r_q(a)=\#\{j\in C:-P_j\equiv a\pmod q\},
+\qquad
 E_q(a)=\vartheta(H;q,a)-\frac{H}{q-1}.
 \]
 
-The lower candidate cutoff contributes `O(Q(log X)^2)` after averaging and is negligible in the retained exponent range.
-
-Classical Barban–Davenport–Halberstam gives
-
-\[
-\sum_{q\le Q}\sum_{(a,q)=1}|E_q(a)|^2
-\ll H Q\log H
-\]
-
-in the range used here.
-
-For two rows at index distance `d`, a collision modulo a prime `q>2X` implies
-
-\[
-q\mid \prod_{t=1}^{d}\ell_{j+t}-1.
-\]
-
-The number of such prime divisors exceeds neither
-
-\[
-\frac{\log(\prod_{t=1}^{d}\ell_{j+t}-1)}{\log(2X)}
-\le (1+o(1))d.
-\]
-
-Summing over row pairs yields the exact-scale multiplicity estimate
+The exact primorial collision argument gives
 
 \[
 \sum_{2X<q\le Q}\sum_{a\bmod q}r_q(a)^2
 \ll \frac{RQ}{\log Q}+R^3.
 \]
 
-Cauchy–Schwarz therefore gives
+## Candidate variance input — INT-SCVAR
+
+Assume at this scale that
 
 \[
-\frac1R\left|
-\sum_{2X<q\le Q}\log q
-\sum_a r_q(a)E_q(a)
-\right|
-\ll
-\frac{\log Q}{R}
-\left(\frac{RQ}{\log Q}+R^3\right)^{1/2}
-(HQ\log H)^{1/2}.
+\boxed{
+V(H,Q):=
+\sum_{2X<q\le Q}\sum_{(a,q)=1}|E_q(a)|^2
+\ll H Q(\log H)^C.
+}
 \]
 
-Relative to the desired main scale `H log X`, the diagonal and collision pieces are respectively
+Cauchy–Schwarz then gives a selected-residue error, relative to `H log X`, with diagonal and collision exponents
 
 \[
 X^{\delta-\rho/2+o(1)}
@@ -72,10 +43,34 @@ X^{\delta-\rho/2+o(1)}
 X^{(\rho+\delta-1)/2+o(1)}.
 \]
 
-Both tend to zero exactly when
+Thus `INT-SCVAR` yields the desired selected-band asymptotic exactly when
 
 \[
-\boxed{2\delta<\rho<1-\delta.}
+2\delta<\rho<1-\delta.
 \]
 
-This is the registered selected-residue BDH range.
+The optimized conditional frontier is `rho=2/3`, `delta<1/3`.
+
+## Correction to the initial execution
+
+The classical unconditional Barban–Davenport–Halberstam `HQ log H` estimate is available in its standard form when `Q` is near `H` (for example `Q>=H/(log H)^A`), not at the programme scale
+
+\[
+Q=X^{1+\delta}=H^{(1+\delta)/2}.
+\]
+
+At this smaller `Q`, the unconditional large-sieve bound is of order
+
+\[
+V(H,Q)\ll (H+Q^2)H(\log H)^C.
+\]
+
+Since `Q>H^(1/2)` in every post-terminal band, the `Q^2H` term dominates. Even discarding every collision, the resulting selected-residue error relative to `H log X` has exponent
+
+\[
+\frac12+\frac{3\delta}{2}-\frac\rho2.
+\]
+
+It would require `rho>1+3 delta`, impossible for a microblock contained in `O(X/log X)` rows.
+
+Therefore the unconditional large-sieve/BDH route cannot enter any polynomial post-terminal band. The earlier unconditional M5 promotion is retracted. `INT-SCVAR` is a genuine additional theorem; GRH-level variance results provide a conditional benchmark in the range `Q>=H^(1/2+epsilon)`.
