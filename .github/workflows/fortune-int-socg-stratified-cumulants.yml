@@ -26,7 +26,15 @@ jobs:
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
-      - uses: leanprover/lean-action@v1
-        with:
-          lake-package-directory: fortune-formal
-          build: true
+      - name: Install Lean 4.32.0
+        run: |
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - name: Generate manifest and restore Mathlib cache
+        working-directory: fortune-formal
+        run: |
+          lake update
+          lake exe cache get
+      - name: Build inherited detector bridge
+        working-directory: fortune-formal
+        run: lake build FortuneFormal.Integer.AdaptiveOccupancyCriterion
