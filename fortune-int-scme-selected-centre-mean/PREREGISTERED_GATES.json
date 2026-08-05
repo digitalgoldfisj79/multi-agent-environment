@@ -4,10 +4,22 @@
   "base_commit": "e1a9822e8f43c37329c03a863595af522626d73b",
   "parent_pr": 57,
   "primary_issue": 58,
-  "status": "RESEARCH_COMPLETE_VALIDATION_PENDING",
+  "status": "CLOSED",
   "initial_target": "INT-SCME",
   "terminal_outcome": "METHOD_OBSTRUCTED_AT_EXPLICIT_SCALE",
   "conditional_reduction": ["INT-SCVAR", "INT-SCPT"],
+  "validation": {
+    "corrected_static_job": "6a72ed956b79c09949c22ddf",
+    "targeted_lean_job": "6a72edc6a00abefd4b293482",
+    "targeted_lean_jobs": 8655,
+    "full_cleanroom_job": "6a72efa0a00abefd4b2934a2",
+    "full_cleanroom_seconds": 222,
+    "full_formal_jobs": 8685,
+    "failure_count": 0,
+    "terminal_sentinel": "FORTUNE_INT_SCME_FULL_CLEANROOM_PASS",
+    "invalidated_pre_correction_job": "6a72eaf2a00abefd4b293438",
+    "excluded_validator_failure_job": "6a72ef3ca00abefd4b29349a"
+  },
   "parameters": {
     "eta": 0.5,
     "microblock_row_exponent": 0.6666666666666666,
@@ -24,7 +36,7 @@
     {"id":"M6","name":"parity_tail_reduction","status":"CONDITIONAL_INT_SCVAR_PLUS_INT_SCPT"},
     {"id":"M7","name":"source_switching_audit","status":"STANDARD_DIRECT_METHODS_CLOSED"},
     {"id":"M8","name":"diagnostics_controls","status":"PASSED_EXACT_AND_DIAGNOSTIC"},
-    {"id":"M9","name":"closeout","status":"VALIDATION_PENDING"}
+    {"id":"M9","name":"closeout","status":"PASSED"}
   ],
   "correction": {
     "initial_m5_promotion_retracted": true,
