@@ -1,6 +1,6 @@
-# M6 — selected-centre parity-tail reduction
+# M6 — selected-centre variance and parity-tail reduction
 
-**Status:** `REDUCED_TO_INT_SCPT`
+**Status:** `CONDITIONAL_REDUCTION_TO_INT_SCVAR_PLUS_INT_SCPT`
 
 Fix `epsilon>0`, put
 
@@ -8,7 +8,7 @@ Fix `epsilon>0`, put
 Q=X^{4/3-\varepsilon}
 \]
 
-and define for each output integer
+and define
 
 \[
 D_Q(n)=
@@ -18,58 +18,52 @@ D_Q(n)=
 R_Q(n)=\Lambda(n)-D_Q(n).
 \]
 
-This is an exact identity:
+The identity
 
 \[
-\Lambda(n)=D_Q(n)+R_Q(n).
+\Lambda(n)=D_Q(n)+R_Q(n)
 \]
 
-For a deterministic microblock `C`, let
+is exact. For a deterministic microblock `C`, let `mathcal D_C(Q)` and `mathcal R_C(Q)` be the corresponding weighted averages. Then
 
 \[
-\mathcal R_C(Q)=
-\frac1{|C|}\sum_{j\in C}\sum_{m\in M_b}
-\log m\,R_Q(P_j+m).
+T_C=\mathcal D_C(Q)+\mathcal R_C(Q).
 \]
 
-M5 gives
+## Analytic inputs
+
+`INT-SCVAR` is the post-terminal variance estimate from M4. It implies
 
 \[
 \mathcal D_C(Q)=
 (1/3-\varepsilon+o(1))H\log X.
 \]
 
-Therefore
-
-\[
-T_C=\mathcal D_C(Q)+\mathcal R_C(Q).
-\]
-
-## Successor theorem — INT-SCPT
-
-Prove that there are fixed `epsilon,kappa>0` such that every sufficiently large deterministic `X^(2/3)`-row microblock satisfies
+`INT-SCPT` is the signed tail bound
 
 \[
 \boxed{
-\mathcal R_C(X^{4/3-\varepsilon})
+\mathcal R_C(Q)
 \ge
--(1/3-\varepsilon-\kappa)H\log X.
+-(1/3-\varepsilon-\kappa)H\log X
 }
 \]
 
-Then
+for some fixed `kappa>0`.
+
+Together they imply
 
 \[
-T_C\ge (\kappa+o(1))H\log X,
+T_C\ge(\kappa+o(1))H\log X,
 \]
 
-and deterministic aggregation over microblocks proves `INT-SCME` for every parent stratum.
+hence `INT-SCME` after deterministic microblock aggregation.
 
-## Meaning of the tail
+## Terminal interpretation
 
-- prime outputs contribute positively through `Lambda(n)` and have `D_Q(n)=0`;
-- composite outputs carrying a band prime contribute negatively through `-D_Q(n)`;
-- proper prime powers are already negligible at the target scale;
-- composite outputs whose prime factors all exceed `Q` enter with zero in this particular tail.
+The programme has not reduced `INT-SCME` to one established or one open theorem. It has separated two independent missing inputs:
 
-Thus `INT-SCPT` is a precise parity-breaking statement. It is strictly downstream of an established positive divisor-band main term, but it remains open.
+1. post-terminal selected-residue variance at `Q=H^(2/3-o(1))`;
+2. signed prime-versus-composite parity cancellation after that band is extracted.
+
+A GRH-strength variance theorem can supply the first input conditionally, leaving `INT-SCPT`; unconditionally, both inputs remain open. Therefore the honest programme outcome is an explicit two-wall method obstruction, not an unconditional `INT-SCPT` reduction.
