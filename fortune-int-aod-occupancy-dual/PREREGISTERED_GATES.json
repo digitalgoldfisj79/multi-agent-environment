@@ -4,9 +4,9 @@
   "base_commit": "831184e1ceb519803591eda441de2672dc8a9939",
   "parent_pr": 53,
   "primary_issue": 54,
-  "status": "BUILT_NOT_EXECUTED",
+  "status": "EXECUTING",
   "initial_target": "INT-AOD",
-  "primary_candidate_reduction": "INT-CCB",
+  "primary_candidate_reduction": "INT-SCG",
   "allowed_final_statuses": [
     "PROVED_INT_AOD",
     "REDUCED_TO_CONNECTED_CUMULANT_BOUND",
@@ -15,16 +15,16 @@
     "METHOD_OBSTRUCTED_AT_EXPLICIT_SCALE"
   ],
   "gates": [
-    {"id": "O0", "name": "source_freeze", "status": "READY"},
-    {"id": "O1", "name": "detector_admissibility", "status": "BLOCKED_BY_O0"},
-    {"id": "O2", "name": "random_cover_dual", "status": "BLOCKED_BY_O1"},
-    {"id": "O3", "name": "degree_coefficient_cost", "status": "BLOCKED_BY_O2"},
-    {"id": "O4", "name": "connected_cumulant_compression", "status": "BLOCKED_BY_O3"},
-    {"id": "O5", "name": "arithmetic_connected_correlations", "status": "BLOCKED_BY_O4"},
-    {"id": "O6", "name": "conditional_poisson_benchmark", "status": "BLOCKED_BY_O5"},
-    {"id": "O7", "name": "rowwise_parity_breaking_dual", "status": "BLOCKED_BY_O6"},
-    {"id": "O8", "name": "falsification_and_finite_panels", "status": "BLOCKED_BY_O7"},
-    {"id": "O9", "name": "closeout", "status": "BLOCKED"}
+    {"id": "O0", "name": "source_freeze", "status": "PASSED"},
+    {"id": "O1", "name": "detector_admissibility", "status": "PASSED_FORMAL"},
+    {"id": "O2", "name": "random_cover_dual", "status": "PASSED_EXACT"},
+    {"id": "O3", "name": "degree_coefficient_cost", "status": "PASSED_ADAPTIVE_SCALE_REDUCTION"},
+    {"id": "O4", "name": "connected_cumulant_compression", "status": "GLOBAL_OBSTRUCTED_REDUCED_TO_STRATIFIED"},
+    {"id": "O5", "name": "arithmetic_connected_correlations", "status": "REDUCED_TO_INT_SCG"},
+    {"id": "O6", "name": "conditional_poisson_benchmark", "status": "PASSED_CONDITIONAL_RUHL_FM"},
+    {"id": "O7", "name": "rowwise_parity_breaking_dual", "status": "CLOSED_AT_POST_LEVEL_SPARSE_HYPERBOLA"},
+    {"id": "O8", "name": "falsification_and_finite_panels", "status": "EXECUTING"},
+    {"id": "O9", "name": "closeout", "status": "BLOCKED_BY_O8"}
   ],
   "detector_admissibility": {
     "weights_must_be_frozen_before_output_prime_incidence": true,
@@ -32,12 +32,14 @@
       "X",
       "H",
       "candidate_offset_m",
+      "registered_row_stratum",
       "registered_residue_features",
       "registered_local_singular_series_features"
     ],
     "weights_may_not_depend_on": [
       "whether_Pj_plus_m_is_prime",
       "observed_success_columns",
+      "observed_row_occupancy",
       "post_hoc_row_failures"
     ],
     "comparison_budget_required": true
