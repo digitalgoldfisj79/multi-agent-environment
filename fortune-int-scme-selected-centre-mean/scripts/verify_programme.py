@@ -34,10 +34,10 @@ assert claims["int_scme_claimed"] is False
 
 text = "\n".join((PROGRAMME / rel).read_text() for rel in required)
 for forbidden in (
-    "two independent subordinate targets",
-    "completed `INT-SOCG -> INT-SCME` reduction",
-    "INT-SCME implies INT-SOCG",
-    "sole primary integer frontier",
+    "The programme isolates two independent subordinate targets",
+    "This directory executes issue #58 from the completed `INT-SOCG -> INT-SCME` reduction",
+    "INT-SCME is sufficient for INT-SOCG",
+    "Issue #58 remains the sole primary integer frontier",
 ):
     assert forbidden not in text, forbidden
 
