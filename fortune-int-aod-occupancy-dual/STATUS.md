@@ -17,9 +17,9 @@
 - O5: ordinary joint-cumulant decomposition proved exactly; generic complete-dependency criteria closed; reduced to `INT-SOCG`.
 - O6 passed conditionally: explicit `RUHL-FM` through logarithmic tuple order implies `INT-AOD`.
 - O7 closed as direct method at the `sqrt(H)` post-level sparse-hyperbola boundary.
-- O8 passed diagnostically: exact primorial panels through `X=300` and adversarial controls support stratification but prove no asymptotic theorem.
+- O8 passed diagnostically: exact primorial panels through `X=300` and adversarial controls support stratification but establish no asymptotic result.
 - O9: targeted Lean and static exact validation passed; full inherited clean-room validation running.
 
 ## Honesty boundary
 
-Neither `INT-SOCG`, `INT-AOD`, nor Fortune is proved. Finite-panel temperatures fitted from observed occupancies are diagnostic only and are not admissible proof parameters.
+No proof is claimed for `INT-SOCG`, `INT-AOD`, or Fortune's conjecture. Finite-panel temperatures fitted from observed occupancies are diagnostic only and are not admissible proof parameters.
