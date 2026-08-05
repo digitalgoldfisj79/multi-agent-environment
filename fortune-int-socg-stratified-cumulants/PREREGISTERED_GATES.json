@@ -4,11 +4,20 @@
   "base_commit": "1d6ace4553bb88492dfceb894abd9e5d6713d426",
   "parent_pr": 55,
   "primary_issue": 56,
-  "status": "RESEARCH_COMPLETE_VALIDATION_PENDING",
+  "status": "CLOSED",
   "initial_target": "INT-SOCG",
   "terminal_target": "INT-SCME",
   "terminal_outcome": "MEAN_LOWER_BOUND_IS_PRIMARY_OBSTRUCTION",
   "primary_candidate_reductions": ["INT-SCME", "INT-LCSK", "INT-PWOC"],
+  "validation": {
+    "static_job": "6a72d84e6b79c09949c22d3e",
+    "full_cleanroom_job": "6a72d8c26b79c09949c22d42",
+    "full_cleanroom_result": "COMPLETED",
+    "failure_count": 0,
+    "formal_build_jobs": 8684,
+    "terminal_sentinel": "FORTUNE_INT_SOCG_FULL_CLEANROOM_PASS",
+    "cancelled_redundant_diagnostic_job": "6a72d6f1a00abefd4b2932eb"
+  },
   "allowed_final_statuses": [
     "PROVED_INT_SOCG",
     "REDUCED_TO_SELECTED_PRIMORIAL_WALK_CORRELATION",
@@ -27,7 +36,7 @@
     {"id":"C6","name":"signed_cumulant_assembly","status":"BLOCKED_BY_C2_HIGHER_CORE_REDUCED"},
     {"id":"C7","name":"arithmetic_source_decomposition","status":"CLOSED_AT_ACTUAL_PRIME_POST_H_SCALE"},
     {"id":"C8","name":"conditional_bridge_and_falsification","status":"PASSED_CONDITIONAL_AND_DIAGNOSTIC"},
-    {"id":"C9","name":"closeout","status":"VALIDATING"}
+    {"id":"C9","name":"closeout","status":"PASSED"}
   ],
   "stratification": {
     "deterministic": true,
