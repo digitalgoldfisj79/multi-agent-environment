@@ -1,0 +1,43 @@
+{
+  "programme": "FORTUNE_INT_SCME_SELECTED_CENTRE_MEAN_V0_1",
+  "date": "2026-08-05",
+  "base_commit": "e1a9822e8f43c37329c03a863595af522626d73b",
+  "parent_pr": 57,
+  "primary_issue": 58,
+  "status": "EXECUTING",
+  "initial_target": "INT-SCME",
+  "candidate_successor": "INT-SCPT",
+  "parameters": {
+    "eta": 0.5,
+    "microblock_row_exponent": 0.6666666666666666,
+    "modulus_exponent_frontier": "1+delta with delta<1/3",
+    "output_primality_observed_in_partition": false
+  },
+  "gates": [
+    {"id":"M0","name":"source_freeze","status":"READY"},
+    {"id":"M1","name":"normalization_prime_powers","status":"BLOCKED_BY_M0"},
+    {"id":"M2","name":"local_density_sieve_audit","status":"BLOCKED_BY_M1"},
+    {"id":"M3","name":"deterministic_microblocks","status":"BLOCKED_BY_M1"},
+    {"id":"M4","name":"selected_residue_bdh","status":"BLOCKED_BY_M3"},
+    {"id":"M5","name":"post_terminal_band","status":"BLOCKED_BY_M4"},
+    {"id":"M6","name":"parity_tail_reduction","status":"BLOCKED_BY_M5"},
+    {"id":"M7","name":"source_switching_audit","status":"BLOCKED_BY_M6"},
+    {"id":"M8","name":"diagnostics_controls","status":"READY_DIAGNOSTIC"},
+    {"id":"M9","name":"closeout","status":"BLOCKED"}
+  ],
+  "prohibited_lanes": [
+    "higher_cumulants_before_mean",
+    "direct_friedlander_iwaniec_without_scale_eligibility",
+    "divisor_band_mass_as_prime_mass",
+    "finite_panel_asymptotic_promotion",
+    "density_one_closeout",
+    "fitted_microblocks",
+    "function_field_or_paper_vii_tangent"
+  ],
+  "compute_policy": {
+    "ordinary_job_timeout_minutes": 45,
+    "absolute_timeout_minutes": 120,
+    "gpu_requires_written_justification": true,
+    "cancel_redundant_jobs": true
+  }
+}
