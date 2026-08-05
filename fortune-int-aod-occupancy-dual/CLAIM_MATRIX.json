@@ -6,53 +6,73 @@
   "claims": [
     {
       "id": "O1-GENERIC-DETECTOR",
-      "status": "TO_PROVE_FORMALLY",
+      "status": "PROVED_FORMAL_INHERITED",
       "statement": "Any nonnegative row detector equal to one on every failed row excludes failures when its total mass is below one."
     },
     {
       "id": "O1-WEIGHTED-DETECTOR",
-      "status": "TO_PROVE_FORMALLY",
-      "statement": "The frozen weighted occupancy detector equals one on a zero row and is nonnegative under nonnegative weights."
+      "status": "PROVED_FORMAL",
+      "statement": "A preregistered row-dependent exponential detector equals one on a zero row; if its temperatures are at most the frozen uniform temperature, its success implies the frozen INT-AOD detector."
     },
     {
       "id": "O2-BERNOULLI-COVER",
-      "status": "EXACT_COMBINATORIAL_TARGET",
-      "statement": "Uniform INT-AOD is the expected number of uncovered rows under independent candidate-offset sampling with probability q_X."
+      "status": "PROVED_EXACT_COMBINATORIAL",
+      "statement": "The occupancy detector is the expected number of uncovered rows under independent candidate-offset sampling."
     },
     {
       "id": "O2-HYPERGEOMETRIC-COVER",
-      "status": "EXACT_COMBINATORIAL_TARGET",
+      "status": "PROVED_EXACT_COMBINATORIAL",
       "statement": "Sampling exactly K of M candidate offsets misses a row with Z successful offsets with probability binom(M-Z,K)/binom(M,K)."
     },
     {
       "id": "O3-DEGREE-COST",
-      "status": "TO_AUDIT",
-      "statement": "The exact without-replacement analogue of the constant-q detector has degree Theta(M_X)=Theta(X^2/log X)."
+      "status": "PASSED",
+      "statement": "The exact constant-q cover has degree Theta(X^2/log X)."
     },
     {
-      "id": "O4-INT-CCB",
-      "status": "OPEN_CANDIDATE_REDUCTION",
-      "statement": "A convergent connected expansion whose first cumulant exceeds the absolute connected remainder by more than log N implies INT-AOD."
+      "id": "O3-ADAPTIVE-SCALE",
+      "status": "PROVED_REDUCTION",
+      "statement": "At a preregistered small parameter q asymp log N/X, the exact cover degree falls to Theta(X), and a successful detector implies the frozen INT-AOD detector."
     },
     {
-      "id": "O5-CONNECTED-ARITHMETIC",
-      "status": "OPEN",
-      "statement": "Disconnected prime-tuple contributions can be cancelled before estimating the aggregate connected remainder."
+      "id": "O4-GLOBAL-MIXTURE-OBSTRUCTION",
+      "status": "PROVED_EXACT_SURROGATE_OBSTRUCTION",
+      "statement": "An equal mixture of Poisson row classes separated by Theta(X) has a log-PGF zero at distance Theta(1/X), outside the useful q asymp log X/X scale. Global cumulant convergence does not follow from rowwise Poisson behaviour alone."
+    },
+    {
+      "id": "O4-INT-SCCB",
+      "status": "OPEN_SUFFICIENT_REDUCTION",
+      "statement": "A polylogarithmic row partition with a convergent connected bound exceeding log(n_b B) in every stratum implies INT-AOD."
+    },
+    {
+      "id": "O5-JOINT-CUMULANT",
+      "status": "PROVED_EXACT_ALGEBRAIC",
+      "statement": "Each factorial cumulant is the sum of connected joint cumulants over ordered distinct prime-offset columns."
+    },
+    {
+      "id": "O5-COMPLETE-DEPENDENCY",
+      "status": "METHOD_OBSTRUCTED_AT_LOG_X",
+      "statement": "The safe dependency graph is complete and its q-weighted activity is Theta(log X), excluding generic constant-threshold absolute cluster criteria."
+    },
+    {
+      "id": "O5-INT-SCG",
+      "status": "OPEN_PRIMARY_SUCCESSOR",
+      "statement": "Stratified cumulant growth with dependence scale D_b << X/(log X)^(1+delta) implies INT-SCCB and hence INT-AOD."
     },
     {
       "id": "O6-RUHL-IMPLICATION",
-      "status": "TO_DERIVE_CONDITIONALLY",
-      "statement": "A precisely parameterized row-uniform growing-tuple Hardy-Littlewood hypothesis implies INT-AOD or INT-CCB."
+      "status": "PROVED_CONDITIONAL_IMPLICATION",
+      "statement": "Row-uniform Hardy-Littlewood factorial-moment estimates through K=Theta(log X), with the explicit weighted one-row error budget, imply INT-AOD."
     },
     {
       "id": "O7-ROWWISE-BILINEAR",
-      "status": "OPEN_CANDIDATE_REDUCTION",
-      "statement": "A smallest explicit row-uniform parity-breaking bilinear estimate implies INT-AOD."
+      "status": "DIRECT_METHOD_CLOSED_AT_SQRT_H",
+      "statement": "The exact divisor decomposition reaches a sparse one-offset-per-modulus hyperbola beyond sqrt(H); a new signed rowwise bilinear theorem would imply INT-AOD but no established theorem supplies it."
     },
     {
       "id": "O8-NO_FINITE_PROMOTION",
-      "status": "PROTOCOL_RULE",
-      "statement": "Finite primorial panels and adversarial incidence matrices may falsify methods but cannot prove asymptotic Fortune statements."
+      "status": "PROTOCOL_RULE_ENFORCED",
+      "statement": "Finite primorial panels and adversarial incidence matrices select and falsify methods but do not prove asymptotic Fortune statements."
     }
   ]
 }
