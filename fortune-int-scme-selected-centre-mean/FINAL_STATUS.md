@@ -33,7 +33,7 @@ The outputs have size
 P_j=\exp((1+o(1))X),
 \]
 
-whereas all ordinary offset distribution is polynomial in `X`. The direct Friedlander–Iwaniec hypotheses require output-scale remainder and bilinear ranges exponentially beyond the available offset information.
+whereas ordinary offset distribution is polynomial in `X`. The direct Friedlander–Iwaniec hypotheses require output-scale remainder and bilinear ranges exponentially beyond the available offset information.
 
 ### Selected-residue collision energy
 
@@ -99,6 +99,12 @@ Exact scripts verified microblock aggregation, collision multiplicity, the condi
 
 - corrected static sentinel `6a72ed956b79c09949c22ddf`: passed;
 - targeted Lean `6a72edc6a00abefd4b293482`: passed, 8,655 jobs;
-- full inherited clean-room validation: pending final entry.
+- GitHub Actions run `30987825241`: static and targeted Lean jobs passed;
+- full clean room `6a72efa0a00abefd4b2934a2`: passed in 222 seconds;
+- full Lean 4.32 package: 8,685 jobs;
+- all inherited integer verifiers, mainline verifier and formal trust audit passed;
+- terminal sentinel: `FORTUNE_INT_SCME_FULL_CLEANROOM_PASS`.
+
+The pre-correction job `6a72eaf2a00abefd4b293438` and the wording-validator failure `6a72ef3ca00abefd4b29349a` are excluded from mathematical evidence.
 
 No new Lean axiom, `sorry`, `admit`, or unsafe declaration is introduced.
