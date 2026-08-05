@@ -74,10 +74,10 @@ for required_claim in {
     "O3-DEGREE-COST",
     "O3-ADAPTIVE-SCALE",
     "O4-GLOBAL-MIXTURE-OBSTRUCTION",
-    "O4-INT-SCCB",
+    "O4-INT-SOCB",
     "O5-JOINT-CUMULANT",
     "O5-COMPLETE-DEPENDENCY",
-    "O5-INT-SCG",
+    "O5-INT-SOCG",
     "O6-RUHL-IMPLICATION",
     "O7-ROWWISE-BILINEAR",
     "O8-NO_FINITE_PROMOTION",
@@ -88,6 +88,11 @@ for rel in required:
     text = (PROGRAMME / rel).read_text()
     if "Fortune is proved" in text or "PROVED_FORTUNE" in text:
         raise SystemExit(f"forbidden theorem promotion in {rel}")
+
+execution_o5 = (PROGRAMME / "O5_EXECUTION.md").read_text()
+assert "ordinary cumulant" in execution_o5
+assert "including repetitions" in execution_o5
+assert "factorial cumulant satisfies the exact ordered-tuple identity" not in execution_o5
 
 lean = (
     ROOT
