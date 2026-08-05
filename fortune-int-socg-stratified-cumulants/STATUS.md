@@ -2,29 +2,23 @@
 
 **Programme:** `FORTUNE_INT_SOCG_STRATIFIED_CUMULANTS_V0_1`  
 **Branch:** `gpt56/fortune-int-socg-stratified-cumulants-v01-20260805`  
-**State:** `BUILT_NOT_EXECUTED`  
+**State:** `RESEARCH_COMPLETE_VALIDATION_PENDING`  
 **Primary issue:** #56  
-**Target:** `INT-SOCG`
+**Initial target:** `INT-SOCG`  
+**Terminal target:** `INT-SCME`  
+**Outcome:** `MEAN_LOWER_BOUND_IS_PRIMARY_OBSTRUCTION`
 
 ## Gate state
 
-- C0 ready: source freeze and parent verification.
-- C1 blocked by C0: deterministic stratum geometry.
-- C2 blocked by C1: first-cumulant lower bound.
-- C3 blocked by C1: equality-pattern and diagonal elimination.
-- C4 blocked by C3: connected local-factor renormalization.
-- C5 blocked by C4: primorial-walk orbit theorem.
-- C6 blocked by C2--C5: signed ordinary-cumulant assembly.
-- C7 blocked by C6: arithmetic source decomposition.
-- C8 ready diagnostically: conditional bridge and falsification.
-- C9 blocked: closeout.
+- C0 passed: source freeze and inherited detector verification.
+- C1 passed: deterministic strata and common restricted offset universes.
+- C2 reduced to open `INT-SCME`; this is the primary obstruction.
+- C3 passed: correct factorial-to-ordinary Stirling reduction, with radius cost `+1`.
+- C4 pair scale passed; all-orders `INT-LCSK` remains secondary and open.
+- C5 prime-modulus large-sieve theorem proved; weighted composite extension remains open.
+- C6 higher connected core reduced but blocked by C2.
+- C7 direct source decompositions closed at the actual-prime post-`H` scale.
+- C8 conditional and diagnostic lane passed without finite promotion.
+- C9 validating.
 
-## Big-boulder order
-
-1. determine whether the first cumulant is independently provable;
-2. determine whether repeated-column diagonals already violate the target scale;
-3. isolate local connected interactions;
-4. identify the exact selected primorial-walk correlation theorem;
-5. only then attempt all-orders assembly.
-
-No theorem beyond the inherited detector and ordinary-cumulant identities is claimed.
+No proof is claimed for `INT-SCME`, `INT-SOCG`, `INT-AOD`, or Fortune's conjecture.
