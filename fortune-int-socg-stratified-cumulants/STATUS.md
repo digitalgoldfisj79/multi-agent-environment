@@ -2,7 +2,7 @@
 
 **Programme:** `FORTUNE_INT_SOCG_STRATIFIED_CUMULANTS_V0_1`  
 **Branch:** `gpt56/fortune-int-socg-stratified-cumulants-v01-20260805`  
-**State:** `RESEARCH_COMPLETE_VALIDATION_PENDING`  
+**State:** `CLOSED`  
 **Primary issue:** #56  
 **Initial target:** `INT-SOCG`  
 **Terminal target:** `INT-SCME`  
@@ -19,6 +19,13 @@
 - C6 higher connected core reduced but blocked by C2.
 - C7 direct source decompositions closed at the actual-prime post-`H` scale.
 - C8 conditional and diagnostic lane passed without finite promotion.
-- C9 validating.
+- C9 passed: static, inherited, full Lean and formal trust validation completed.
+
+## Validation
+
+- static sentinel `6a72d84e6b79c09949c22d3e`: completed, zero failures;
+- full clean room `6a72d8c26b79c09949c22d42`: completed in 304 seconds, zero failures;
+- Lean 4.32 full package: 8,684 jobs;
+- redundant CPU-XL diagnostic `6a72d6f1a00abefd4b2932eb`: deliberately cancelled after its exact regressions and patched `X=100` panel passed.
 
 No proof is claimed for `INT-SCME`, `INT-SOCG`, `INT-AOD`, or Fortune's conjecture.
