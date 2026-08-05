@@ -16,6 +16,9 @@ REQUIRED = [
     "PREREGISTERED_GATES.json",
     "CLAIM_MATRIX.json",
     "STATUS.md",
+    "FINAL_STATUS.md",
+    "CORRECTION_RECORD.md",
+    "SUCCESSOR.md",
     "M0_SOURCE_FREEZE.md",
     "M1_NORMALIZATION.md",
     "M2_LOCAL_DENSITY_AND_SIEVE.md",
@@ -62,6 +65,10 @@ for forbidden in (
 ):
     if forbidden in all_text:
         raise SystemExit(f"forbidden promotion: {forbidden}")
+
+assert "issue #60" in (PROGRAMME / "SUCCESSOR.md").read_text()
+assert "issue #61" in (PROGRAMME / "SUCCESSOR.md").read_text()
+assert "incorrectly" in (PROGRAMME / "CORRECTION_RECORD.md").read_text()
 
 formal = ROOT / "fortune-formal" / "FortuneFormal" / "Integer" / "SelectedCentreMeanCriterion.lean"
 assert formal.is_file()
