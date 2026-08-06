@@ -72,5 +72,11 @@ theorem weightedEnergy_le_of_rowCollisionBudget
     energy diagonal (fun q => ∑ i, rowCollision i q)
     mass radius hpoint hcollision
 
+/-- The fixed-order collision counts sum by the exact hockey-stick identity.
+This is the combinatorial summation used after the pairwise support bound. -/
+theorem fixedOrderChooseSum (n r : ℕ) :
+    (∑ m ∈ Finset.Icc r n, m.choose r) = (n + 1).choose (r + 1) := by
+  exact Nat.sum_Icc_choose n r
+
 end Integer
 end FortuneFormal
