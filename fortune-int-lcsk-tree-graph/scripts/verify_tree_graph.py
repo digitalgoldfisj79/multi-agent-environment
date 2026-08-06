@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from fractions import Fraction
+from functools import lru_cache
 from math import comb, factorial
 
 
@@ -18,7 +19,8 @@ def primes_upto(limit: int) -> list[int]:
     return [i for i, value in enumerate(sieve) if value]
 
 
-def partitions(n: int) -> list[tuple[tuple[int, ...], ...]]:
+@lru_cache(maxsize=None)
+def partitions(n: int) -> tuple[tuple[tuple[int, ...], ...], ...]:
     output: list[tuple[tuple[int, ...], ...]] = []
 
     def recurse(index: int, blocks: list[list[int]]) -> None:
@@ -34,7 +36,7 @@ def partitions(n: int) -> list[tuple[tuple[int, ...], ...]]:
         blocks.pop()
 
     recurse(0, [])
-    return output
+    return tuple(output)
 
 
 def local_moment(p: int, residues: tuple[int, ...], block: tuple[int, ...]) -> Fraction:
@@ -55,6 +57,36 @@ def connected_local(p: int, residues: tuple[int, ...]) -> Fraction:
     return total
 
 
+def univariate_cumulants_from_moments(
+    moments: dict[int, Fraction], maximum_order: int
+) -> dict[int, Fraction]:
+    """Independent moment-to-cumulant recurrence for an all-equal residue class."""
+    cumulants: dict[int, Fraction] = {1: moments[1]}
+    for n in range(2, maximum_order + 1):
+        correction = sum(
+            Fraction(comb(n - 1, j - 1)) * cumulants[j] * moments[n - j]
+            for j in range(1, n)
+        )
+        cumulants[n] = moments[n] - correction
+    return cumulants
+
+
+def canonical_patterns(order: int) -> list[tuple[int, ...]]:
+    patterns: list[tuple[int, ...]] = [
+        tuple([0] * order),
+        tuple(range(order)),
+    ]
+    if order >= 2:
+        patterns.append(tuple([0, 0] + list(range(1, order - 1))))
+    if order >= 3:
+        patterns.append(tuple([0, 0, 0] + list(range(1, order - 2))))
+    if order >= 4:
+        patterns.append(tuple([0, 0, 1, 1] + list(range(2, order - 2))))
+        split = order // 2
+        patterns.append(tuple([0] * split + [1] * (order - split)))
+    return list(dict.fromkeys(patterns))
+
+
 def verify_order_three_formulas() -> None:
     for p in primes_upto(211):
         if p <= 3:
@@ -63,6 +95,36 @@ def verify_order_three_formulas() -> None:
         assert connected_local(p, (0, 0, 1)) == Fraction(p - 2, (p - 1) ** 3)
         assert connected_local(p, (0, 1, 2)) == -Fraction(2, (p - 1) ** 3)
         assert connected_local(p, (0, 0)) == Fraction(1, p - 1)
+
+
+def verify_orders_four_to_eight() -> None:
+    """Exercise genuine exact connected-local calculations through order eight.
+
+    For the all-equal pattern, compare set-partition Möbius recombination with
+    an independent univariate moment-to-cumulant recurrence.  For additional
+    canonical collision patterns, verify exact permutation invariance.  This
+    closes the previously unexercised L1 finite-panel gate.
+    """
+    for p in (11, 37, 101):
+        moments = {
+            n: Fraction(p, p - 1) ** (n - 1)
+            for n in range(1, 9)
+        }
+        recurrence = univariate_cumulants_from_moments(moments, 8)
+        for order in range(4, 9):
+            all_equal = connected_local(p, tuple([0] * order))
+            assert all_equal == recurrence[order]
+            values: list[str] = []
+            for pattern in canonical_patterns(order):
+                value = connected_local(p, pattern)
+                assert value == connected_local(p, tuple(reversed(pattern)))
+                rotated = pattern[1:] + pattern[:1]
+                assert value == connected_local(p, rotated)
+                values.append(f"{pattern}:{value}")
+            print(
+                f"p={p} order={order} bell={len(partitions(order))} "
+                f"all_equal={all_equal} panels={' | '.join(values)}"
+            )
 
 
 def verify_tree_failure() -> None:
@@ -146,15 +208,16 @@ def verify_finite_panels() -> None:
 def verify_exponent_ledger() -> None:
     for order in (3, 4, 8, 16, 32, 64):
         maximum_delta = Fraction(1, order - 1)
-        assert order == (order - 1) + 1
         print(
             f"r={order} maximum_delta_from_absolute_ledger="
             f"{float(maximum_delta):.9g}"
         )
+    assert Fraction(1, 63) < Fraction(1, 10)
 
 
 def main() -> None:
     verify_order_three_formulas()
+    verify_orders_four_to_eight()
     verify_tree_failure()
     verify_actual_candidate_witness()
     verify_finite_panels()

@@ -7,23 +7,20 @@ Let `mu_{<=z}(n)=mu(n)1_{n<=z}`. For every integer `J>=1` and `n<=z^J`,
 \[
 \boxed{
 \Lambda(n)
-=
-\sum_{r=1}^{J}(-1)^{r-1}{J\choose r}
+=\sum_{r=1}^{J}(-1)^{r-1}{J\choose r}
 \bigl(\mu_{\le z}^{*r}*1^{*(r-1)}*\log\bigr)(n).
 }
 \]
 
-A direct convolution proof is available. Put `A=mu_{<=z}*1`. Then `delta-A` vanishes at `1` and is supported on integers greater than `z`. Hence `(delta-A)^{*J}` is supported above `z^J`. Expanding
+Put `A=mu_{<=z}*1`. Then `delta-A` vanishes at `1` and is supported on integers greater than `z`, so `(delta-A)^{*J}` is supported above `z^J`. Expanding
 
 \[
 \Lambda*\bigl(\delta-(\delta-A)^{*J}\bigr)
 \]
 
-gives the displayed formula because `log=Lambda*1`.
+gives the identity because `log=Lambda*1`. The committed verifier checks it on exact finite panels.
 
-The committed verifier independently checks the identity on exact finite panels.
-
-## Natural logarithmic-order choice
+## Source-scale dichotomy
 
 For output size
 
@@ -31,41 +28,31 @@ For output size
 N_X\asymp P_j=\exp((1+o(1))X)
 \]
 
-and the natural choice `J=K_b=Theta(log X)`, the cutoff is
+and `J=K_b=Theta(log X)`, the cutoff is
 
 \[
 z=N_X^{1/J}
-=
-\exp\!\left(\Theta\left(\frac{X}{\log X}\right)\right),
+=\exp\!\left(\Theta\left(\frac{X}{\log X}\right)\right),
 \]
 
-which is far larger than the offset length `H=X^2`. The identity therefore introduces truncated divisor variables directly into the one-offset-per-modulus range where interval progression averaging has disappeared.
+far larger than `H=X^2`. The identity therefore introduces divisor variables into the one-offset-per-modulus range where interval progression averaging is absent.
 
-## Attempt to force the cutoff below H
-
-The condition `z<=H` requires
+Forcing `z<=H` requires
 
 \[
-J\ge J_{\min}:=
-\left\lceil\frac{\log N_X}{\log H}\right\rceil
+J\ge J_{\min}
+=\left\lceil\frac{\log N_X}{\log H}\right\rceil
 \sim\frac{X}{2\log X}.
 \]
 
-The absolute binomial coefficient mass of the identity is exactly
+The absolute binomial coefficient mass is
 
 \[
-\sum_{r=1}^{J}{J\choose r}=2^J-1.
+\sum_{r=1}^{J}{J\choose r}=2^J-1
+=\exp\!\left(\Theta\left(\frac{X}{\log X}\right)\right)
 \]
 
-Thus at `J=J_min` the termwise coefficient mass is
-
-\[
-\exp\!\left(\Theta\left(\frac{X}{\log X}\right)\right),
-\]
-
-while the RUHL detector margin is only polynomially small, `asymp log X/X`.
-
-Finite scale panels illustrate the dichotomy:
+at `J=J_min`, while the RUHL detector margin is only polynomially small.
 
 | X | K_b | J_min | J_min/K_b | log10(2^J_min) |
 |---:|---:|---:|---:|---:|
@@ -74,13 +61,28 @@ Finite scale panels illustrate the dichotomy:
 | 100,000 | 46 | 4,343 | 94.41 | 1,307.37 |
 | 1,000,000 | 56 | 36,192 | 646.29 | 10,894.88 |
 
-This does not prove that cancellation among Heath--Brown terms is impossible. It proves that the termwise absolute source strategy loses the identity's essential cancellation before reaching the required modulus range. Preserving the full cancellation simply recombines the source to `Lambda`, returning the original selected-centre residual.
+## Correct termwise-absolute requirement
+
+Let `R_r` be the normalized residual attached to the `r`th convolution term after all row and tuple averaging. A triangle-inequality implementation must prove
+
+\[
+\sum_{r=1}^{J}{J\choose r}|R_r|<\Delta_b.
+\tag{HB}
+\]
+
+The coefficient mass alone does **not** prove that (HB) is impossible: the individual residuals might decay rapidly with `r` or `J`. What the scale ledger proves is the required accuracy burden. Coefficient-uniform or merely polynomially decaying term estimates cannot suffice once `J\asymp X/\log X`; a successful absolute source proof would need compensating `r`-dependent decay strong enough to overcome the binomial weights.
+
+Preserving all signs recombines the identity algebraically to `Lambda`. This does not prove that signed source analysis is impossible. It means that any gain must come from a genuinely new estimate made before full recombination, not from the identity or its coefficient count alone.
 
 ## Ruling
 
-The frozen Heath--Brown identity does not produce a smaller independent norm satisfying RUHL:
+The audited Heath--Brown calculation establishes:
 
 - logarithmic order leaves source variables beyond `H`;
-- order large enough to force `z<=H` has superpolynomial absolute coefficient mass;
-- retaining cancellations returns the original signed prime source;
-- the prime-power correction remains too large under the inherited trivial bound.
+- forcing all truncated variables below `H` creates exponentially weighted residual control of the form (HB);
+- no such residual theorem is supplied by the present programme;
+- no universal impossibility theorem for termwise or signed Heath--Brown methods is claimed.
+
+The correct terminal label is
+
+`SOURCE_IDENTITY_REQUIRES_EXPONENTIALLY_WEIGHTED_RESIDUAL_CONTROL`.

@@ -2,14 +2,14 @@
 
 - R0 direct-chain freeze: **PASS**.
 - R1 exact signed residual identity: **PASS**.
-- R2 absolute first-order embedding: **PASS; OBSTRUCTION IDENTIFIED**.
-- R3 model/correction ledger: **PASS; PRIME-POWER GAP IDENTIFIED FOR LAMBDA SOURCE**.
-- R4 single Heath--Brown identity: **EXECUTED; SOURCE-SCALE DICHOTOMY**.
-- R5 direct transfer to RUHL: **FAILS WITH CURRENT INPUTS**.
-- Validation: **PASS** — workflow `31085980195`, head `60f27ff3dee98f0761da361bc7856f588dec9163`.
+- R2 absolute first-order embedding: **PASS; STRENGTH INVERSION IDENTIFIED**.
+- R3 arithmetic decomposition: **CORRECTED** — exact convention is `E=A+S`; corrections are absorbed before decomposition.
+- R4 Heath--Brown identity: **EXECUTED; SCALE AND WEIGHTED-ACCURACY REQUIREMENT PROVED**.
+- R5 direct transfer to RUHL: **NOT ESTABLISHED**.
+- Validation: **PASS FOR EXACT ALGEBRA; REVIEW-CORRECTED SCOPE RECORDED**.
 
 Terminal outcomes:
 
-- `SOURCE_IDENTITY_LOSES_BONFERRONI_CANCELLATION`;
+- `SOURCE_IDENTITY_REQUIRES_EXPONENTIALLY_WEIGHTED_RESIDUAL_CONTROL`;
 - `SELECTED_CENTRE_RESIDUAL_BEYOND_CURRENT_METHODS`;
 - `NO_NEW_UNCONDITIONAL_PROGRESS`.
