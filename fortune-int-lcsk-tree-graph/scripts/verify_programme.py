@@ -45,7 +45,8 @@ def verify_json() -> None:
     claims = json.loads((PROGRAMME / "CLAIM_MATRIX.json").read_text())
     assert gates["programme"] == "FORTUNE_INT_LCSK_TREE_GRAPH_V0_1"
     assert {gate["id"] for gate in gates["gates"]} == {f"L{i}" for i in range(9)}
-    assert claims["execution_state"] == "EXECUTED_VALIDATION_PENDING"
+    assert claims["execution_state"] == "EXECUTED_AND_VALIDATED"
+    assert claims["validation"]["workflow_run_id"] == 31081057533
     claim_ids = {claim["id"] for claim in claims["claims"]}
     assert {
         "LCSK-TG-PAIR",

@@ -1,32 +1,41 @@
 {
   "programme": "FORTUNE_INT_LCSK_TREE_GRAPH_V0_1",
-  "execution_state": "EXECUTED_VALIDATION_PENDING",
+  "execution_state": "EXECUTED_AND_VALIDATED",
+  "validation": {
+    "head": "692278db18b389490104ebc8ddd2889efed17316",
+    "workflow_run_id": 31081057533,
+    "exact_regressions": "PASS",
+    "targeted_lean": "PASS",
+    "full_package_lean": "PASS",
+    "trust_scan": "PASS",
+    "lean_version": "4.32.0"
+  },
   "claims": [
     {
       "id": "LCSK-TG-PAIR",
       "statement": "The equal-residue normalized pair coefficient is 1/(p-1).",
-      "status": "TO_BE_KERNEL_RECHECKED",
+      "status": "KERNEL_CHECKED",
       "module": "FortuneFormal.Integer.LocalConnectedTreeObstruction",
       "theorem": "normalizedPairCollision"
     },
     {
       "id": "LCSK-TG-TRIPLE",
       "statement": "The equal-residue normalized triple connected coefficient is -(p-2)/(p-1)^2.",
-      "status": "TO_BE_KERNEL_RECHECKED",
+      "status": "KERNEL_CHECKED",
       "module": "FortuneFormal.Integer.LocalConnectedTreeObstruction",
       "theorem": "normalizedTripleCollisionCumulant"
     },
     {
       "id": "LCSK-TG-OBSTRUCTION",
       "statement": "For fixed edge constant C, the triple coefficient exceeds the three-tree budget once p-2>3C^2.",
-      "status": "TO_BE_KERNEL_RECHECKED",
+      "status": "KERNEL_CHECKED",
       "module": "FortuneFormal.Integer.LocalConnectedTreeObstruction",
       "theorem": "tripleCollisionExceedsPairTree"
     },
     {
       "id": "LCSK-HYPEREDGE-EXPONENT",
       "statement": "The absolute r-body log exponent is insufficient for a fixed delta whenever delta(r-1)>1.",
-      "status": "TO_BE_KERNEL_RECHECKED",
+      "status": "KERNEL_CHECKED",
       "module": "FortuneFormal.Integer.LocalConnectedTreeObstruction",
       "theorem": "absoluteHyperedgeExponentGap"
     },

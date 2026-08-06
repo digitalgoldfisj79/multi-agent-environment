@@ -3,7 +3,7 @@
 **Programme:** `FORTUNE_INT_LCSK_TREE_GRAPH_V0_1`  
 **Date:** 6 August 2026  
 **Branch:** `gpt56/fortune-int-lcsk-tree-graph-v01-20260806`  
-**State:** `EXECUTED_VALIDATION_PENDING`
+**State:** `EXECUTED_AND_VALIDATED`
 
 ## Terminal outcomes
 
@@ -37,8 +37,17 @@ The extra exponent tends to zero at logarithmic order, whereas `INT-LCSK` requir
 
 The next local theorem must preserve signed higher-body collision clusters and primewise Euler-product recombination before absolute values. It cannot be a pair-only dependency graph theorem.
 
-## Validation boundary
+## Validation
 
-Exact regressions and formal files are committed. Final validation status will be recorded only after targeted Lean, full-package Lean and the trust scan pass.
+Workflow run `31081057533` at head `692278db18b389490104ebc8ddd2889efed17316` passed:
 
-No proof or disproof of `INT-LCSK` is claimed. No proof of `INT-SOCG`, `INT-AOD` or Fortune is claimed.
+- static claim audit and exact execution regressions;
+- targeted build of `LocalConnectedTreeObstruction`;
+- full `FortuneFormal` package build;
+- scan for `sorry`, `admit`, `axiom` and `unsafe`;
+- Lean `4.32.0`.
+
+## Explicit nonclaims
+
+No proof or disproof of `INT-LCSK` is claimed.  
+No proof of `INT-SOCG`, `INT-AOD` or Fortune is claimed.

@@ -1,6 +1,6 @@
 # Execution record
 
-**State:** `EXECUTED_VALIDATION_PENDING`
+**State:** `EXECUTED_AND_VALIDATED`
 
 ## L0-L2 — exact freeze and recombination
 
@@ -73,4 +73,4 @@ No transfer to `INT-SOCG` is claimed.
 
 ## L8 — validation
 
-The exact regression, Lean module, package import and CI workflow are committed. Final status remains pending until clean-room jobs pass.
+Workflow run `31081057533` at head `692278db18b389490104ebc8ddd2889efed17316` passed the exact regression, targeted Lean build, full-package Lean build and trust scan under Lean `4.32.0`.
