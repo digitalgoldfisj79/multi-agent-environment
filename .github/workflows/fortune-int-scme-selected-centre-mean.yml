@@ -1,0 +1,42 @@
+name: Fortune INT-SCME selected-centre mean
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'fortune-int-scme-selected-centre-mean/**'
+      - 'fortune-formal/FortuneFormal/Integer/SelectedCentreMeanCriterion.lean'
+      - 'fortune-formal/FortuneFormal.lean'
+      - '.github/workflows/fortune-int-scme-selected-centre-mean.yml'
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Static and exact regression audit
+        run: python fortune-int-scme-selected-centre-mean/scripts/verify_programme.py
+
+  lean:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Lean 4.32.0
+        run: |
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - name: Generate manifest and restore Mathlib cache
+        working-directory: fortune-formal
+        run: |
+          elan toolchain install $(cat lean-toolchain)
+          lean --version | grep -F 'version 4.32.0'
+          lake update
+          lake exe cache get
+      - name: Build selected-centre mean criterion
+        working-directory: fortune-formal
+        run: lake build FortuneFormal.Integer.SelectedCentreMeanCriterion

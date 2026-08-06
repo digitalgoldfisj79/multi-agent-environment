@@ -1,0 +1,52 @@
+{
+  "programme": "FORTUNE_INT_PFLI_SIGNED_DUALITY_V0_1",
+  "date": "2026-08-04",
+  "base_commit": "46e42dedb83dd92c7154258e6ea58b1001ae6bd0",
+  "parent_pr": 51,
+  "primary_issue": 52,
+  "status": "CLOSED",
+  "initial_target": "INT-PFLI",
+  "terminal_target": "INT-AOD",
+  "terminal_outcome": "REDUCED_TO_GROWING_ARITY_GENERATING_FUNCTION",
+  "validation": {
+    "static_job": "6a7253f86b79c09949c228e4",
+    "targeted_lean_job": "6a7254e06b79c09949c228e8",
+    "full_cleanroom_job": "6a7255a96b79c09949c228f0",
+    "full_cleanroom_result": "COMPLETED",
+    "failure_count": 0,
+    "formal_build_jobs": 8683,
+    "terminal_sentinel": "FORTUNE_INT_PFLI_SIGNED_DUALITY_FULL_CLEANROOM_PASS"
+  },
+  "allowed_final_statuses": [
+    "PROVED_INT_PFLI",
+    "PROVED_ADAPTIVE_OCCUPANCY",
+    "REDUCED_TO_ESTABLISHED_THEOREM",
+    "REDUCED_TO_GROWING_ARITY_GENERATING_FUNCTION",
+    "METHOD_OBSTRUCTED_AT_LOGARITHMIC_MOMENT_ORDER"
+  ],
+  "gates": [
+    {"id": "D0", "name": "source_freeze", "status": "PASSED"},
+    {"id": "D1", "name": "algebraic_collapse", "status": "PASSED_FORMAL"},
+    {"id": "D2", "name": "adaptive_occupancy", "status": "REDUCED_TO_INT_AOD"},
+    {"id": "D3", "name": "factorial_expansion", "status": "PASSED"},
+    {"id": "D4", "name": "finite_moment_indistinguishability", "status": "PASSED_EXACT"},
+    {"id": "D5", "name": "prime_correlation_arity", "status": "PASSED_REDUCTION"},
+    {"id": "D6", "name": "asymptotic_sieve_audit", "status": "CLOSED_MISSING_ROW_UNIFORM_POST_LEVEL_INPUT"},
+    {"id": "D7", "name": "closeout", "status": "PASSED"}
+  ],
+  "prohibited_lanes": [
+    "P7-CUBIC-TF",
+    "D1-QLINE-NONSAT",
+    "superseded INT-ISC four-prime campaign",
+    "random-order derandomisation",
+    "reciprocal-frame moments without a proved bridge",
+    "finite-panel asymptotic promotion"
+  ],
+  "compute_policy": {
+    "sentinel_timeout_minutes": 10,
+    "ordinary_job_timeout_minutes": 45,
+    "absolute_timeout_minutes": 120,
+    "terminal_programme_jobs_required": 0,
+    "inspect_unrelated_jobs_before_cancellation": true
+  }
+}

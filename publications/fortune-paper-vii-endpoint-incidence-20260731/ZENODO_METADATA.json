@@ -1,0 +1,24 @@
+{
+  "metadata": {
+    "title": "Bilateral Endpoint Incidences over Finite Fields: Defect Rigidity, Frobenius Orientation, and Quadratic Emptiness",
+    "upload_type": "publication",
+    "publication_type": "workingpaper",
+    "description": "Internal theorem package for Fortune Paper VII. Proves the all-odd-prime-power quadratic emptiness theorem for cross-distinct bilateral endpoint incidence and consolidates the exact defect classification. Does not prove the function-field crown or Fortune's conjecture.",
+    "creators": [
+      {
+        "name": "Bozzard, Edward Stewart Anthony",
+        "orcid": "0009-0002-4052-0994"
+      }
+    ],
+    "keywords": [
+      "finite fields",
+      "irreducible polynomials",
+      "Frobenius orientation",
+      "computer-assisted proof",
+      "incidence geometry",
+      "Fortune's conjecture"
+    ],
+    "license": "cc-by-4.0",
+    "access_right": "open"
+  }
+}

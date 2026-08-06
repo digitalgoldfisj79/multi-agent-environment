@@ -1,0 +1,33 @@
+{
+  "programme": "FORTUNE_INT_PFLI_SIGNED_DUALITY_V0_1",
+  "sources": [
+    {
+      "id": "FI-ASYMPTOTIC-SIEVE",
+      "title": "Asymptotic sieve for primes",
+      "authors": ["John Friedlander", "Henryk Iwaniec"],
+      "year": 1998,
+      "journal": "Annals of Mathematics",
+      "doi": "10.2307/121035",
+      "arxiv": "math/9811186",
+      "use": "Parity-breaking requires an additional analytic/bilinear hypothesis beyond classical divisor sums."
+    },
+    {
+      "id": "MZ-WEIGHTED-SWITCHING",
+      "title": "Weighted sieves with switching",
+      "authors": ["Kaisa Matomäki", "Sebastian Zuniga-Alterman"],
+      "year": 2025,
+      "journal": "Mathematical Proceedings of the Cambridge Philosophical Society",
+      "doi": "10.1017/S0305004125000258",
+      "arxiv": "2405.19063",
+      "use": "Switching requires distribution input in both original and switched coordinates and targets prime/almost-prime pairs."
+    },
+    {
+      "id": "LI-BUCHSTAB-VARIANTS",
+      "title": "A note on variants of Buchstab's identity",
+      "authors": ["Runbo Li"],
+      "year": 2025,
+      "arxiv": "2504.07974",
+      "use": "Modern Buchstab iteration refinements do not themselves supply missing post-level distribution or parity-breaking input."
+    }
+  ]
+}

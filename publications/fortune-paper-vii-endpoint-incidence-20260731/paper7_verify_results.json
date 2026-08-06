@@ -1,0 +1,8 @@
+{
+  "manuscript_sha256": "4c95d04b5c055dd4e97b0bdc75db8ed50c61ff2c2cbf23009f830ca25484819b",
+  "word_count": 3454,
+  "disc_P": "r**2",
+  "disc_S": "(r + 2)**2",
+  "chart_cover": "P!=S iff B!=0 or A-C!=0",
+  "status": "PAPER7_STATIC_SYMBOLIC_PASS"
+}

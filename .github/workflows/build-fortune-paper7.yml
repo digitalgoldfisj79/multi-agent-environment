@@ -1,0 +1,120 @@
+name: Build Fortune Paper VII
+
+on:
+  pull_request:
+    branches:
+      - publication/fortune-papers-ii-vi-20260724
+    paths:
+      - .github/workflows/build-fortune-paper7.yml
+      - publications/fortune-paper-vii-endpoint-incidence-20260731/**
+  push:
+    branches:
+      - publication/fortune-paper-vii-endpoint-incidence-20260731
+    paths:
+      - .github/workflows/build-fortune-paper7.yml
+      - publications/fortune-paper-vii-endpoint-incidence-20260731/**
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: fortune-paper-vii-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify-and-build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    env:
+      DEBIAN_FRONTEND: noninteractive
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install exact and publication toolchains
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            singular pandoc texlive-xetex texlive-latex-extra \
+            texlive-fonts-recommended lmodern biber poppler-utils \
+            qpdf libreoffice-writer zip
+          python3 -m pip install --break-system-packages sympy python-docx pypdf
+
+      - name: Run static and symbolic manuscript audit
+        run: |
+          set -euo pipefail
+          P=publications/fortune-paper-vii-endpoint-incidence-20260731
+          python3 "$P/paper7_verify.py"
+
+      - name: Run exact quadratic certificates
+        run: |
+          set -euo pipefail
+          P=publications/fortune-paper-vii-endpoint-incidence-20260731
+          C="$P/certificates"
+
+          Singular -q "$C/chartB_liftverify.sing" | tee /tmp/chartB_q.txt
+          Singular -q "$C/chartX_liftverify.sing" | tee /tmp/chartX_q.txt
+          grep -F 'CHART=B LIFT_IDENTITY_OK' /tmp/chartB_q.txt
+          grep -F 'CHART=X LIFT_IDENTITY_OK' /tmp/chartX_q.txt
+
+          Singular -q "$C/chartB_universal.sing" > /tmp/lift_B.out
+          Singular -q "$C/chartX_universal.sing" > /tmp/lift_X.out
+          python3 "$C/verify_lift_identities.py" /tmp/lift_B.out /tmp/lift_X.out
+
+          Singular -q "$C/ideal_faithfulness.sing" | tee /tmp/faithfulness.txt
+          grep -F 'IDEALS_AGREE_ON_U_NONZERO' /tmp/faithfulness.txt
+
+          for p in 3 5 7 11 31 163; do
+            sed "s/^ring R=0,/ring R=${p},/" "$C/chartB_liftverify.sing" > "/tmp/chartB_${p}.sing"
+            sed "s/^ring R=0,/ring R=${p},/" "$C/chartX_liftverify.sing" > "/tmp/chartX_${p}.sing"
+            Singular -q "/tmp/chartB_${p}.sing" | tee "/tmp/chartB_${p}.txt"
+            Singular -q "/tmp/chartX_${p}.sing" | tee "/tmp/chartX_${p}.txt"
+            grep -F 'CHART=B LIFT_IDENTITY_OK' "/tmp/chartB_${p}.txt"
+            grep -F 'CHART=X LIFT_IDENTITY_OK' "/tmp/chartX_${p}.txt"
+          done
+
+      - name: Build PDF DOCX and LaTeX
+        run: |
+          set -euo pipefail
+          P="$GITHUB_WORKSPACE/publications/fortune-paper-vii-endpoint-incidence-20260731"
+          O="$RUNNER_TEMP/fortune-paper-vii"
+          M="$RUNNER_TEMP/fortune-paper-vii-manuscript.md"
+          mkdir -p "$O"
+          cat "$P"/manuscript_parts/*.md > "$M"
+          echo "4c95d04b5c055dd4e97b0bdc75db8ed50c61ff2c2cbf23009f830ca25484819b  $M" | sha256sum -c -
+
+          pandoc -f markdown+tex_math_single_backslash "$M" \
+            --resource-path="$P" --bibliography="$P/references.bib" --citeproc \
+            --pdf-engine=xelatex -V papersize=a4 -V geometry:margin=25mm \
+            -V colorlinks=true -o "$O/fortune-paper-vii.pdf"
+
+          pandoc -f markdown+tex_math_single_backslash "$M" \
+            --resource-path="$P" --bibliography="$P/references.bib" --citeproc \
+            -o "$O/fortune-paper-vii.docx"
+
+          pandoc -f markdown+tex_math_single_backslash "$M" \
+            --resource-path="$P" --bibliography="$P/references.bib" --citeproc \
+            -s -t latex -o "$O/fortune-paper-vii.tex"
+
+          cp -r "$P" "$O/source-package"
+          cp "$M" "$O/source-package/manuscript.md"
+          qpdf --check "$O/fortune-paper-vii.pdf"
+          pdftotext -layout "$O/fortune-paper-vii.pdf" "$O/PDF_EXTRACTED.txt"
+          grep -F 'Quadratic emptiness theorem' "$O/PDF_EXTRACTED.txt"
+          grep -F 'zero-defect classification over prime fields' "$O/PDF_EXTRACTED.txt"
+          grep -F 'twisted-Frobenius point theorem' "$O/PDF_EXTRACTED.txt"
+          ! grep -E 'TODO|TBD|PLACEHOLDER|REPLACE_ME' "$M"
+
+          (cd "$O" && find . -type f ! -name SHA256SUMS -print0 | sort -z | xargs -0 sha256sum > SHA256SUMS)
+          (cd "$O" && sha256sum -c SHA256SUMS)
+          (cd "$O" && zip -qr "$RUNNER_TEMP/fortune-paper-vii-internal-release.zip" .)
+
+      - name: Upload internal release
+        uses: actions/upload-artifact@v4
+        with:
+          name: fortune-paper-vii-internal-release
+          path: |
+            ${{ runner.temp }}/fortune-paper-vii
+            ${{ runner.temp }}/fortune-paper-vii-internal-release.zip
+          retention-days: 90

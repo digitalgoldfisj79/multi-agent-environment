@@ -1,0 +1,77 @@
+{
+  "programme": "FORTUNE_MAINLINE_CLOSEOUT_V1",
+  "date": "2026-08-04",
+  "status": "COMPLETED_REDUCTION_RECONSTRUCTION_AND_OBSTRUCTION_ANALYSIS",
+  "completed_phases": [
+    "PAPER_VII_STABILIZED_AT_ONE_EXTERNAL_CERTIFIED_NORMALIZATION_BOUNDARY",
+    "PAPERS_II_III_THEOREM_RECONSTRUCTION",
+    "INT_ISC_EXACT_TARGET_ISOLATION",
+    "INT_STRUCTURAL_ANALYTIC_AND_FALSIFICATION_LANES",
+    "PAPERS_V_VI_RECONSTRUCTION_AND_REGRESSION_RERUN",
+    "PAPERS_I_IV_SELECTIVE_AUDIT"
+  ],
+  "kernel_checked": [
+    "P7-IFA1",
+    "P7-BDD1",
+    "P7-BDD2",
+    "P7-STRIP",
+    "INTEGER-ONE-FAILURE-CRITERION",
+    "INTEGER-CENTRED-SECOND-MOMENT-IDENTITY",
+    "INTEGER-FOUR-PRIME-COVARIANCE-IDENTITY",
+    "P7-CERTIFIED-COMPONENT-DISCRIMINANT-CONTRADICTION"
+  ],
+  "external_certificate_boundary": [
+    {
+      "id": "P7-K2-CERT-NORM",
+      "statement": "Every genuine quadratic incidence produces a q-free arithmetic-open point on the externally certified component.",
+      "status": "ONE_LEDGERED_AXIOM"
+    }
+  ],
+  "open_research_theorems": [
+    {
+      "id": "INT-ISC",
+      "lane": "INTEGER",
+      "statement": "Centred signed four-prime covariance on increasing primorial centres is O(N X L(X)) for L(X)=o(log X).",
+      "consequence": "Fortune for all sufficiently large indices",
+      "status": "OPEN_NEW_SPARSE_CENTRE_COVARIANCE_THEOREM"
+    },
+    {
+      "id": "D1-QLINE-NONSAT",
+      "lane": "DIRECT_D1",
+      "statement": "N_sq+N_ns>0 whenever the quadratic sector fails.",
+      "consequence": "universal function-field d=1 crown",
+      "status": "OPEN_NEW_ONE_SIDED_FROBENIUS_NONVANISHING_THEOREM"
+    },
+    {
+      "id": "P7-CUBIC-TF",
+      "lane": "FINITE_FIELD_ENDPOINT",
+      "statement": "faithful cubic true-Frobenius point theorem on the saturated oriented locus",
+      "consequence": "Paper VII cubic endpoint result only unless a new bridge is proved",
+      "status": "OPEN_AND_FROZEN"
+    }
+  ],
+  "proved_no_go_or_insufficiency": [
+    "correct first moment does not exclude a failed centre",
+    "dense-centre averages cannot select exponentially sparse primorial centres without a new distribution theorem",
+    "Lebesgue tail bounds cannot control finitely supported reciprocal sampling without discrepancy/equidistribution",
+    "random-order cancellation does not control the increasing order",
+    "Paper I internal energies do not imply the corrected detector covariance without a signed bridge",
+    "Paper V-VI projector, quotient, congruence and parity formulations do not prove one-sided positivity",
+    "Paper VII has no proved bridge to direct d=1 or integer Fortune"
+  ],
+  "explicitly_not_claimed": [
+    "Fortune's conjecture",
+    "INT-ISC",
+    "universal function-field d=1",
+    "D1-QLINE-NONSAT",
+    "axiom-free P7-K2",
+    "P7-CUBIC-TF",
+    "function-field-to-integer transfer",
+    "journal peer review"
+  ],
+  "next_valid_actions": [
+    "prove INT-ISC using a genuinely new selected-centre covariance theorem",
+    "or independently prove D1-QLINE-NONSAT using a genuinely new Frobenius positivity theorem",
+    "do not reopen Paper I/Paper IV/Paper VII cubic reformulations without a proved bridge"
+  ]
+}

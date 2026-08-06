@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+message: "If you use this work, please cite it using the metadata below."
+title: "Bilateral Endpoint Incidences over Finite Fields"
+version: "0.1-internal"
+date-released: "2026-07-31"
+authors:
+  - family-names: "Bozzard"
+    given-names: "Edward Stewart Anthony"
+    orcid: "https://orcid.org/0009-0002-4052-0994"
+repository-code: "https://github.com/digitalgoldfisj79/multi-agent-environment"
+license: "CC-BY-4.0"
