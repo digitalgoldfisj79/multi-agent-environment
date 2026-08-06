@@ -3,7 +3,7 @@
 **Updated:** 6 August 2026  
 **Lean:** 4.32.0  
 **Compliance state:** papers I–VII and the conditional synthesis mapped to explicit evidence classes  
-**External axiom count:** one
+**Formal boundary:** ONE PAPER VII AXIOM REMAINS
 
 ## Evidence classes
 
