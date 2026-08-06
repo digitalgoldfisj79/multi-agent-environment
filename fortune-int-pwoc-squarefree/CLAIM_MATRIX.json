@@ -1,13 +1,6 @@
 {
   "programme": "FORTUNE_INT_PWOC_SQUAREFREE_V0_1",
-  "validation": {
-    "workflow_run_id": 31077264106,
-    "lean_version": "4.32.0",
-    "targeted_build": "PASS",
-    "full_package_build": "PASS",
-    "trust_scan": "PASS",
-    "exact_regression": "PASS"
-  },
+  "execution_state": "EXECUTED_VALIDATION_PENDING",
   "claims": [
     {
       "id": "PWOC-SF0-LEAN-A",
@@ -34,21 +27,35 @@
       "analytic_input": false
     },
     {
+      "id": "PWOC-SF1-LEAN-SUM",
+      "statement": "The fixed-order pair caps aggregate by the exact hockey-stick identity.",
+      "status": "TO_BE_KERNEL_RECHECKED",
+      "module": "FortuneFormal.Integer.SquarefreeCompositeEnergyCriterion",
+      "theorem": "fixedOrderChooseSum",
+      "analytic_input": false
+    },
+    {
       "id": "PWOC-SF0-ORTH",
       "statement": "The weighted additive-character energy equals the exact collision-kernel quadratic form.",
-      "status": "FINITE_EXACT_REGRESSION_PASSED_GENERAL_THEOREM_OPEN",
-      "analytic_input": true
+      "status": "PROVED_EXACT_ORTHOGONALITY_AND_REGRESSION",
+      "analytic_input": false
+    },
+    {
+      "id": "PWOC-W0-FALSIFIER",
+      "statement": "Unrestricted nonnegative weights cannot uniformly force R_beta=o(D_beta), because a weight concentrated on one colliding modulus has R_beta>=D_beta.",
+      "status": "PROVED",
+      "analytic_input": false
     },
     {
       "id": "PWOC-SF1",
-      "statement": "A fixed-order squarefree-composite modulus family satisfies an explicit source-compatible collision row-sum bound.",
-      "status": "OPEN",
-      "analytic_input": true
+      "statement": "For fixed order r and 0<=beta(q)q<=U_r, R_beta<=U_r*choose(n-1,r+1), hence E_beta(a)<=(D_beta+U_r*choose(n-1,r+1))*||a||_2^2.",
+      "status": "PROVED_FIXED_ORDER_BOUNDED_WEIGHT",
+      "analytic_input": false
     },
     {
       "id": "PWOC-SF2",
       "statement": "The frozen actual squarefree source block has a collision norm sufficient for RUHL-FM or INT-SOCG.",
-      "status": "OPEN",
+      "status": "OPEN_SOURCE_WEIGHT_CONTRACT_NOT_AVAILABLE",
       "analytic_input": true
     },
     {
@@ -58,10 +65,15 @@
       "analytic_input": true
     }
   ],
+  "terminal_outcomes": [
+    "FIXED_ORDER_COMPOSITE_EXTENSION_PROVED",
+    "SOURCE_WEIGHT_CONTRACT_NOT_AVAILABLE",
+    "NO_TRANSFER_TO_RUHL_OR_SOCG"
+  ],
   "explicit_nonclaims": [
-    "No squarefree-composite energy estimate has yet been proved.",
-    "No source-compatible coefficient contract has yet passed P4.",
-    "No transfer to RUHL-FM or INT-SOCG has yet been proved.",
-    "No proof of INT-AOD or Fortune is claimed."
+    "PWOC-SF2 remains open.",
+    "No actual source-compatible squarefree coefficient family has been bounded.",
+    "No transfer to RUHL-FM or INT-SOCG has been proved.",
+    "No proof of INT-PWOC, INT-AOD or Fortune is claimed."
   ]
 }
