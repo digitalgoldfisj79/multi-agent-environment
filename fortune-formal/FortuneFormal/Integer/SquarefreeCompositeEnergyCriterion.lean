@@ -42,7 +42,7 @@ theorem weightedEnergy_le_of_collisionBudget
     _ = (∑ q, diagonal q) * mass + ∑ q, collision q := by
       rw [Finset.sum_add_distrib, Finset.sum_mul]
     _ ≤ (∑ q, diagonal q) * mass + radius * mass := by
-      exact add_le_add_left hcollision _
+      linarith
     _ = ((∑ q, diagonal q) + radius) * mass := by
       ring
 
