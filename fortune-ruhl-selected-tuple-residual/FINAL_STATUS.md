@@ -3,7 +3,7 @@
 **Programme:** `FORTUNE_RUHL_SELECTED_TUPLE_RESIDUAL_V0_1`  
 **Date:** 6 August 2026  
 **Branch:** `gpt56/fortune-ruhl-selected-tuple-residual-v01-20260806`  
-**State:** `EXECUTED_VALIDATION_PENDING`
+**State:** `EXECUTED_AND_VALIDATED`
 
 ## Terminal outcomes
 
@@ -30,6 +30,17 @@ although the selected-centre mean is of order `X`. It therefore requires additiv
 ## Frontier ruling
 
 No smaller explicit bilinear estimate was isolated whose proof would immediately establish RUHL. The direct integer route is now at the selected-centre growing-order prime-tuple theorem itself. Further divisor-identity expansion without a genuinely new signed theorem would be mechanism churn rather than progress toward Fortune.
+
+## Validation
+
+Workflow run `31085980195` at head `60f27ff3dee98f0761da361bc7856f588dec9163` passed:
+
+- exact signed-discrepancy and Heath--Brown finite regressions;
+- detector-margin and source-scale panels;
+- targeted build of `RuhlSelectedTupleResidualCriterion`;
+- full `FortuneFormal` package build;
+- scan for `sorry`, `admit`, `axiom` and `unsafe`;
+- Lean `4.32.0`.
 
 ## Explicit nonclaims
 

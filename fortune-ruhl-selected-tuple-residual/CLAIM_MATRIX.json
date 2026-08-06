@@ -1,6 +1,15 @@
 {
   "programme": "FORTUNE_RUHL_SELECTED_TUPLE_RESIDUAL_V0_1",
-  "execution_state": "EXECUTED_VALIDATION_PENDING",
+  "execution_state": "EXECUTED_AND_VALIDATED",
+  "validation": {
+    "head": "60f27ff3dee98f0761da361bc7856f588dec9163",
+    "workflow_run_id": 31085980195,
+    "exact_regressions": "PASS",
+    "targeted_lean": "PASS",
+    "full_package_lean": "PASS",
+    "trust_scan": "PASS",
+    "lean_version": "4.32.0"
+  },
   "claims": [
     {
       "id": "RUHL-STR-1",
@@ -11,7 +20,7 @@
     {
       "id": "RUHL-STR-2",
       "statement": "The absolute RUHL envelope forces |E_1| < Delta/q, which is O(1) in the frozen geometry.",
-      "status": "PROVED_EXACTLY",
+      "status": "KERNEL_CHECKED_AND_REGRESSION_CHECKED",
       "analytic_input": false
     },
     {
