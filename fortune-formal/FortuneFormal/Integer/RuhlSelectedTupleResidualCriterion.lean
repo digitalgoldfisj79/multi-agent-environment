@@ -25,7 +25,8 @@ theorem firstOrderError_lt_constant
     |e₁| < C := by
   have hweighted : |e₁| * q < C * q := by
     nlinarith [abs_nonneg e₁]
-  exact (mul_lt_mul_right hq).mp hweighted
+  have hdiv : |e₁| < (C * q) / q := (lt_div_iff₀ hq).2 hweighted
+  simpa [hq.ne'] using hdiv
 
 /-- The signed residual is algebraically the difference of the weighted actual
 and model moment polynomials. -/
