@@ -1,0 +1,36 @@
+{
+  "programme": "FORTUNE_INT_SCME_SELECTED_CENTRE_MEAN_V0_1",
+  "date": "2026-08-05",
+  "base_commit": "e1a9822e8f43c37329c03a863595af522626d73b",
+  "primary_issue": 58,
+  "status": "CLOSED_REVIEW_CORRECTED",
+  "initial_target": "INT-SCME",
+  "terminal_outcome": "SELECTED_RESIDUE_VARIANCE_ROUTE_OBSTRUCTED",
+  "external_review": {
+    "branch": "claude/fortune-int-programme-review-u8wgpx",
+    "commit": "029cc8c",
+    "accepted": true
+  },
+  "frontier_components": ["INT-SCME", "INT-LCSK", "INT-PWOC"],
+  "auxiliary_conditional_target": "INT-SCVAR",
+  "scpt_status": "EQUIVALENT_TO_INT_SCME_GIVEN_INT_SCVAR",
+  "gates": [
+    {"id":"M0","name":"source_freeze","status":"PASSED"},
+    {"id":"M1","name":"normalization_prime_powers","status":"PASSED_EXACT_ERRATUM_CORRECTED"},
+    {"id":"M2","name":"local_density_sieve_audit","status":"DIRECT_FI_ROUTE_CLOSED_EXPONENTIAL_GAP"},
+    {"id":"M3","name":"deterministic_microblocks","status":"PASSED_EXACT"},
+    {"id":"M4","name":"selected_residue_variance","status":"CONDITIONAL_FRONTIER_AND_UNCONDITIONAL_LARGE_SIEVE_OBSTRUCTION"},
+    {"id":"M5","name":"post_terminal_band","status":"CONDITIONAL_ON_INT_SCVAR"},
+    {"id":"M6","name":"parity_tail","status":"IDENTITY_ONLY_EQUIVALENT_TO_INT_SCME"},
+    {"id":"M7","name":"source_switching_audit","status":"STANDARD_DIRECT_METHODS_CLOSED"},
+    {"id":"M8","name":"diagnostics_controls","status":"PASSED_EXACT_AND_DIAGNOSTIC"},
+    {"id":"M9","name":"closeout","status":"PASSED_REVIEW_CORRECTED"}
+  ],
+  "prohibited_claims": [
+    "completed_INT_SOCG_to_INT_SCME_reduction",
+    "INT_SCPT_as_independent_subordinate_target",
+    "INT_SCME_implies_INT_SOCG",
+    "sole_primary_frontier_is_INT_SCME",
+    "large_Lean_job_count_as_analytic_validation"
+  ]
+}
