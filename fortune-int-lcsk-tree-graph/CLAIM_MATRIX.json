@@ -1,0 +1,50 @@
+{
+  "programme": "FORTUNE_INT_LCSK_TREE_GRAPH_V0_1",
+  "execution_state": "EXECUTED_VALIDATION_PENDING",
+  "claims": [
+    {
+      "id": "LCSK-TG-PAIR",
+      "statement": "The equal-residue normalized pair coefficient is 1/(p-1).",
+      "status": "TO_BE_KERNEL_RECHECKED",
+      "module": "FortuneFormal.Integer.LocalConnectedTreeObstruction",
+      "theorem": "normalizedPairCollision"
+    },
+    {
+      "id": "LCSK-TG-TRIPLE",
+      "statement": "The equal-residue normalized triple connected coefficient is -(p-2)/(p-1)^2.",
+      "status": "TO_BE_KERNEL_RECHECKED",
+      "module": "FortuneFormal.Integer.LocalConnectedTreeObstruction",
+      "theorem": "normalizedTripleCollisionCumulant"
+    },
+    {
+      "id": "LCSK-TG-OBSTRUCTION",
+      "statement": "For fixed edge constant C, the triple coefficient exceeds the three-tree budget once p-2>3C^2.",
+      "status": "TO_BE_KERNEL_RECHECKED",
+      "module": "FortuneFormal.Integer.LocalConnectedTreeObstruction",
+      "theorem": "tripleCollisionExceedsPairTree"
+    },
+    {
+      "id": "LCSK-HYPEREDGE-EXPONENT",
+      "statement": "The absolute r-body log exponent is insufficient for a fixed delta whenever delta(r-1)>1.",
+      "status": "TO_BE_KERNEL_RECHECKED",
+      "module": "FortuneFormal.Integer.LocalConnectedTreeObstruction",
+      "theorem": "absoluteHyperedgeExponentGap"
+    },
+    {
+      "id": "LCSK-TG-WITNESS",
+      "statement": "X=18, H=324, p=37 and offsets 89,163,311 instantiate the same-residue triple obstruction in the frozen candidate universe.",
+      "status": "FINITE_EXACT_REGRESSION_PASSED",
+      "analytic_input": false
+    },
+    {
+      "id": "INT-LCSK",
+      "statement": "The signed connected local kernel has a fixed subcritical radius through logarithmic order.",
+      "status": "OPEN_NOT_CLAIMED"
+    },
+    {
+      "id": "FORTUNE",
+      "statement": "Fortune's conjecture.",
+      "status": "OPEN_NOT_CLAIMED"
+    }
+  ]
+}
