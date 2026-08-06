@@ -3,7 +3,7 @@
 **Programme:** `FORTUNE_INT_PWOC_SQUAREFREE_V0_1`  
 **Date:** 6 August 2026  
 **Branch:** `gpt56/fortune-int-pwoc-sf-v01-20260806`  
-**State:** `EXECUTED_VALIDATION_PENDING`
+**State:** `EXECUTED_AND_VALIDATED`
 
 ## Terminal outcomes
 
@@ -64,9 +64,17 @@ Exact panels through `X=50`, `Q=50000` verify:
 
 The surrogate ratios are not promoted as source evidence.
 
-## Formal boundary
+## Formal validation
 
-The Lean module already kernel-checks deterministic energy aggregation. This execution adds `fixedOrderChooseSum`, the exact hockey-stick summation used in the fixed-order row budget. Final status is withheld until the targeted and full-package builds recheck the extended module and all exact regressions pass.
+Workflow run `31078608311` at head `429f514257c9c1317d6ae0884805983cc16d56a8` passed:
+
+- exact execution regressions and static claim audit;
+- targeted build of `SquarefreeCompositeEnergyCriterion`;
+- full `FortuneFormal` package build;
+- scan for `sorry`, `admit`, `axiom` and `unsafe`;
+- Lean `4.32.0`.
+
+The kernel-checked module includes the deterministic weighted-energy bridge and `fixedOrderChooseSum`, the exact hockey-stick summation used in the row budget.
 
 ## Explicit nonclaims
 

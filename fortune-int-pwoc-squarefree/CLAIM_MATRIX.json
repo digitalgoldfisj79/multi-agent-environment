@@ -1,6 +1,15 @@
 {
   "programme": "FORTUNE_INT_PWOC_SQUAREFREE_V0_1",
-  "execution_state": "EXECUTED_VALIDATION_PENDING",
+  "execution_state": "EXECUTED_AND_VALIDATED",
+  "validation": {
+    "head": "429f514257c9c1317d6ae0884805983cc16d56a8",
+    "workflow_run_id": 31078608311,
+    "exact_regressions": "PASS",
+    "targeted_lean": "PASS",
+    "full_package_lean": "PASS",
+    "trust_scan": "PASS",
+    "lean_version": "4.32.0"
+  },
   "claims": [
     {
       "id": "PWOC-SF0-LEAN-A",
@@ -29,7 +38,7 @@
     {
       "id": "PWOC-SF1-LEAN-SUM",
       "statement": "The fixed-order pair caps aggregate by the exact hockey-stick identity.",
-      "status": "TO_BE_KERNEL_RECHECKED",
+      "status": "KERNEL_CHECKED",
       "module": "FortuneFormal.Integer.SquarefreeCompositeEnergyCriterion",
       "theorem": "fixedOrderChooseSum",
       "analytic_input": false
