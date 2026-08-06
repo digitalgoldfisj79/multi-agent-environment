@@ -1,25 +1,28 @@
 name: Validate Fortune integrated closeout
 
-on:
+"on":
   push:
     branches:
-      - gpt56/fortune-integrated-mainline-v01-20260804
+      - "gpt56/fortune-integrated-mainline-v01-20260804"
+      - "publication/fortune-papers-ii-vi-20260724"
     paths:
-      - fortune-formal/**
-      - fortune-mainline/**
-      - .github/workflows/fortune-mainline-closeout.yml
+      - "fortune-formal/**"
+      - "fortune-mainline/**"
+      - "publications/fortune-conditional-and-barriers-20260806/**"
+      - ".github/workflows/fortune-mainline-closeout.yml"
   pull_request:
     paths:
-      - fortune-formal/**
-      - fortune-mainline/**
-      - .github/workflows/fortune-mainline-closeout.yml
-  workflow_dispatch:
+      - "fortune-formal/**"
+      - "fortune-mainline/**"
+      - "publications/fortune-conditional-and-barriers-20260806/**"
+      - ".github/workflows/fortune-mainline-closeout.yml"
+  workflow_dispatch: {}
 
 permissions:
   contents: read
 
 concurrency:
-  group: fortune-mainline-${{ github.ref }}
+  group: "fortune-mainline-${{ github.ref }}"
   cancel-in-progress: true
 
 jobs:
@@ -32,7 +35,9 @@ jobs:
         with:
           python-version: "3.12"
       - name: Verify integrated closeout and trust boundaries
-        run: python3 fortune-mainline/scripts/verify_mainline.py
+        run: |
+          python3 fortune-mainline/scripts/verify_mainline.py
+          python3 publications/fortune-conditional-and-barriers-20260806/scripts/verify_publication.py
 
   lean-build:
     runs-on: ubuntu-24.04
