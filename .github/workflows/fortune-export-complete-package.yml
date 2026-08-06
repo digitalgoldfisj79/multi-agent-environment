@@ -1,0 +1,146 @@
+name: Export Fortune complete package
+
+"on":
+  push:
+    branches:
+      - "gpt56/fortune-export-package-20260806"
+    paths:
+      - ".github/workflows/fortune-export-complete-package.yml"
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build complete package
+        shell: bash
+        run: |
+          set -euo pipefail
+          PKG="Fortune_Complete_Package_20260806"
+          SNAP="$PKG/REPOSITORY_SNAPSHOT"
+          QUICK="$PKG/MANUSCRIPTS_ONLY"
+
+          rm -rf "$PKG" "${PKG}.zip" "${PKG}.tar.gz" ARCHIVE_SHA256SUMS.txt
+          mkdir -p "$SNAP" "$QUICK"
+
+          # Preserve the repository-relative layout so all committed verifiers remain runnable.
+          cp -a publications "$SNAP/"
+          for d in fortune-*; do
+            [ -d "$d" ] || continue
+            cp -a "$d" "$SNAP/"
+          done
+          cp -a frontier scripts .github "$SNAP/"
+
+          for f in \
+            README.md FRONTIER.md REVIEW_FORTUNE_RESEARCH.md RESEARCH_VECTORS.md \
+            RQM_PROOF.md D1_ATTACK.md CONDITIONAL_HL_BLOCK.md PAPER2_ADDENDUM.md \
+            NOVELTY_VERDICT.md addendum_checks.py independent_checks.py \
+            research_vectors_checks.py; do
+            [ -e "$f" ] && cp -a "$f" "$SNAP/"
+          done
+
+          # Convenience copies of the authoritative manuscripts and their immediate support.
+          cp -a publications/fortune-papers-ii-vi-20260724 "$QUICK/"
+          cp -a publications/fortune-paper-vii-endpoint-incidence-20260731 "$QUICK/"
+          cp -a publications/fortune-conditional-and-barriers-20260806 "$QUICK/"
+
+          cat > "$PKG/README_FIRST.md" <<'EOF'
+          # Fortune complete manuscript and reproducibility package
+
+          This archive is exported from the final consolidated publication branch of
+          `digitalgoldfisj79/multi-agent-environment` on 6 August 2026.
+
+          ## Start here
+
+          - `MANUSCRIPTS_ONLY/` contains the authoritative Papers I–VII publication
+            directories and the conditional-and-barriers synthesis in a convenient form.
+          - `REPOSITORY_SNAPSHOT/` preserves the original repository-relative layout for
+            manuscripts, Lean sources, programme dossiers, exact verifiers, certificates,
+            frontier records, build scripts and CI definitions.
+          - `SOURCE_COMMIT.txt` identifies the exact source commit.
+          - `PACKAGE_MANIFEST.txt` lists every packaged file and byte size.
+          - `SHA256SUMS.txt` authenticates every file inside the package.
+
+          ## Evidence boundary
+
+          The package distinguishes kernel-checked claims, Lean derivations using a
+          ledgered external boundary, exact-computational results, manuscript proofs not
+          yet fully formalized, and open or conditional statements. It does not claim
+          that all seven manuscripts are fully formalized.
+
+          Exactly one external Lean boundary remains:
+
+          `FortuneFormal.p7_k2_certified_normalization`.
+
+          The selected-centre prime-tuple hypothesis needed by the finite RUHL criterion
+          remains open. This archive does not contain a proof of Fortune's conjecture.
+
+          ## Principal verification commands
+
+          From the package root:
+
+          ```bash
+          cd REPOSITORY_SNAPSHOT
+          python3 publications/fortune-conditional-and-barriers-20260806/scripts/verify_publication.py
+          cd fortune-formal
+          lake build
+          ```
+
+          Lean is pinned by `REPOSITORY_SNAPSHOT/fortune-formal/lean-toolchain`.
+
+          ## Authoritative manuscripts
+
+          Papers I–VI are under:
+
+          `MANUSCRIPTS_ONLY/fortune-papers-ii-vi-20260724/`
+
+          Paper VII is under:
+
+          `MANUSCRIPTS_ONLY/fortune-paper-vii-endpoint-incidence-20260731/`
+
+          The final conditional-and-barriers synthesis is under:
+
+          `MANUSCRIPTS_ONLY/fortune-conditional-and-barriers-20260806/`
+          EOF
+
+          {
+            echo "Repository: digitalgoldfisj79/multi-agent-environment"
+            echo "Branch: publication/fortune-papers-ii-vi-20260724"
+            echo "Commit: $(git rev-parse HEAD^)"
+            echo "Export-workflow commit: $(git rev-parse HEAD)"
+            echo "Exported UTC: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          } > "$PKG/SOURCE_COMMIT.txt"
+
+          find "$PKG" -type f -printf '%P\t%s bytes\n' | LC_ALL=C sort \
+            > "$PKG/PACKAGE_MANIFEST.txt"
+          (
+            cd "$PKG"
+            find . -type f ! -name SHA256SUMS.txt -print0 \
+              | LC_ALL=C sort -z \
+              | xargs -0 sha256sum > SHA256SUMS.txt
+          )
+
+          zip -q -r "${PKG}.zip" "$PKG"
+          tar -czf "${PKG}.tar.gz" "$PKG"
+          sha256sum "${PKG}.zip" "${PKG}.tar.gz" > ARCHIVE_SHA256SUMS.txt
+
+          test -s "${PKG}.zip"
+          test -s "${PKG}.tar.gz"
+          test -s ARCHIVE_SHA256SUMS.txt
+
+      - name: Upload complete package
+        uses: actions/upload-artifact@v4
+        with:
+          name: fortune-complete-package-20260806
+          path: |
+            Fortune_Complete_Package_20260806.zip
+            Fortune_Complete_Package_20260806.tar.gz
+            ARCHIVE_SHA256SUMS.txt
+          if-no-files-found: error
+          retention-days: 90
+          compression-level: 0
