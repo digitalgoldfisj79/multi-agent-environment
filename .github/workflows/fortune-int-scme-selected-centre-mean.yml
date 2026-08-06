@@ -1,13 +1,13 @@
-name: Fortune INT-PSLT factor-band
+name: Fortune INT-SCME selected-centre mean
 
 on:
   workflow_dispatch:
   pull_request:
     paths:
-      - 'fortune-int-pslt-factor-band/**'
-      - 'fortune-formal/FortuneFormal/Integer/FactorBandCriterion.lean'
+      - 'fortune-int-scme-selected-centre-mean/**'
+      - 'fortune-formal/FortuneFormal/Integer/SelectedCentreMeanCriterion.lean'
       - 'fortune-formal/FortuneFormal.lean'
-      - '.github/workflows/fortune-int-pslt-factor-band.yml'
+      - '.github/workflows/fortune-int-scme-selected-centre-mean.yml'
 
 jobs:
   verify:
@@ -18,8 +18,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Static and regression audit
-        run: python fortune-int-pslt-factor-band/scripts/verify_programme.py
+      - name: Static and exact regression audit
+        run: python fortune-int-scme-selected-centre-mean/scripts/verify_programme.py
 
   lean:
     runs-on: ubuntu-latest
@@ -37,6 +37,6 @@ jobs:
           lean --version | grep -F 'version 4.32.0'
           lake update
           lake exe cache get
-      - name: Build factor-band criterion
+      - name: Build selected-centre mean criterion
         working-directory: fortune-formal
-        run: lake build FortuneFormal.Integer.FactorBandCriterion
+        run: lake build FortuneFormal.Integer.SelectedCentreMeanCriterion

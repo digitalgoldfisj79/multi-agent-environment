@@ -1,0 +1,88 @@
+{
+  "programme": "FORTUNE_INT_PWOC_SQUAREFREE_V0_1",
+  "execution_state": "EXECUTED_AND_VALIDATED",
+  "validation": {
+    "head": "429f514257c9c1317d6ae0884805983cc16d56a8",
+    "workflow_run_id": 31078608311,
+    "exact_regressions": "PASS",
+    "targeted_lean": "PASS",
+    "full_package_lean": "PASS",
+    "trust_scan": "PASS",
+    "lean_version": "4.32.0"
+  },
+  "claims": [
+    {
+      "id": "PWOC-SF0-LEAN-A",
+      "statement": "Rowwise collision budgets imply the aggregate collision budget.",
+      "status": "KERNEL_CHECKED",
+      "module": "FortuneFormal.Integer.SquarefreeCompositeEnergyCriterion",
+      "theorem": "totalCollision_le_of_rowBudget",
+      "analytic_input": false
+    },
+    {
+      "id": "PWOC-SF0-LEAN-B",
+      "statement": "Pointwise diagonal-plus-collision energy bounds and an aggregate collision budget imply the global weighted energy bound.",
+      "status": "KERNEL_CHECKED",
+      "module": "FortuneFormal.Integer.SquarefreeCompositeEnergyCriterion",
+      "theorem": "weightedEnergy_le_of_collisionBudget",
+      "analytic_input": false
+    },
+    {
+      "id": "PWOC-SF0-LEAN-C",
+      "statement": "A row-indexed collision decomposition and rowwise budgets imply the global weighted energy bound.",
+      "status": "KERNEL_CHECKED",
+      "module": "FortuneFormal.Integer.SquarefreeCompositeEnergyCriterion",
+      "theorem": "weightedEnergy_le_of_rowCollisionBudget",
+      "analytic_input": false
+    },
+    {
+      "id": "PWOC-SF1-LEAN-SUM",
+      "statement": "The fixed-order pair caps aggregate by the exact hockey-stick identity.",
+      "status": "KERNEL_CHECKED",
+      "module": "FortuneFormal.Integer.SquarefreeCompositeEnergyCriterion",
+      "theorem": "fixedOrderChooseSum",
+      "analytic_input": false
+    },
+    {
+      "id": "PWOC-SF0-ORTH",
+      "statement": "The weighted additive-character energy equals the exact collision-kernel quadratic form.",
+      "status": "PROVED_EXACT_ORTHOGONALITY_AND_REGRESSION",
+      "analytic_input": false
+    },
+    {
+      "id": "PWOC-W0-FALSIFIER",
+      "statement": "Unrestricted nonnegative weights cannot uniformly force R_beta=o(D_beta), because a weight concentrated on one colliding modulus has R_beta>=D_beta.",
+      "status": "PROVED",
+      "analytic_input": false
+    },
+    {
+      "id": "PWOC-SF1",
+      "statement": "For fixed order r and 0<=beta(q)q<=U_r, R_beta<=U_r*choose(n-1,r+1), hence E_beta(a)<=(D_beta+U_r*choose(n-1,r+1))*||a||_2^2.",
+      "status": "PROVED_FIXED_ORDER_BOUNDED_WEIGHT",
+      "analytic_input": false
+    },
+    {
+      "id": "PWOC-SF2",
+      "statement": "The frozen actual squarefree source block has a collision norm sufficient for RUHL-FM or INT-SOCG.",
+      "status": "OPEN_SOURCE_WEIGHT_CONTRACT_NOT_AVAILABLE",
+      "analytic_input": true
+    },
+    {
+      "id": "INT-PWOC",
+      "statement": "All weighted squarefree-composite moduli required by the full source or connected decomposition are controlled.",
+      "status": "NOT_CLAIMED",
+      "analytic_input": true
+    }
+  ],
+  "terminal_outcomes": [
+    "FIXED_ORDER_COMPOSITE_EXTENSION_PROVED",
+    "SOURCE_WEIGHT_CONTRACT_NOT_AVAILABLE",
+    "NO_TRANSFER_TO_RUHL_OR_SOCG"
+  ],
+  "explicit_nonclaims": [
+    "PWOC-SF2 remains open.",
+    "No actual source-compatible squarefree coefficient family has been bounded.",
+    "No transfer to RUHL-FM or INT-SOCG has been proved.",
+    "No proof of INT-PWOC, INT-AOD or Fortune is claimed."
+  ]
+}

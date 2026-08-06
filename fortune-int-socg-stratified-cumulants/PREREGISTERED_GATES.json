@@ -1,0 +1,77 @@
+{
+  "programme": "FORTUNE_INT_SOCG_STRATIFIED_CUMULANTS_V0_1",
+  "date": "2026-08-05",
+  "base_commit": "1d6ace4553bb88492dfceb894abd9e5d6713d426",
+  "parent_pr": 55,
+  "primary_issue": 56,
+  "status": "CLOSED",
+  "initial_target": "INT-SOCG",
+  "terminal_target": "INT-SCME",
+  "terminal_outcome": "MEAN_LOWER_BOUND_IS_PRIMARY_OBSTRUCTION",
+  "primary_candidate_reductions": ["INT-SCME", "INT-LCSK", "INT-PWOC"],
+  "validation": {
+    "static_job": "6a72d84e6b79c09949c22d3e",
+    "full_cleanroom_job": "6a72d8c26b79c09949c22d42",
+    "full_cleanroom_result": "COMPLETED",
+    "failure_count": 0,
+    "formal_build_jobs": 8684,
+    "terminal_sentinel": "FORTUNE_INT_SOCG_FULL_CLEANROOM_PASS",
+    "cancelled_redundant_diagnostic_job": "6a72d6f1a00abefd4b2932eb"
+  },
+  "allowed_final_statuses": [
+    "PROVED_INT_SOCG",
+    "REDUCED_TO_SELECTED_PRIMORIAL_WALK_CORRELATION",
+    "REDUCED_TO_LOCAL_CONNECTED_SINGULAR_SERIES",
+    "MEAN_LOWER_BOUND_IS_PRIMARY_OBSTRUCTION",
+    "REDUCED_TO_ESTABLISHED_THEOREM",
+    "METHOD_OBSTRUCTED_AT_EXPLICIT_SCALE"
+  ],
+  "gates": [
+    {"id":"C0","name":"source_freeze","status":"PASSED"},
+    {"id":"C1","name":"deterministic_stratum_geometry","status":"PASSED_EXACT"},
+    {"id":"C2","name":"first_cumulant_lower_bound","status":"REDUCED_TO_INT_SCME_PRIMARY_OBSTRUCTION"},
+    {"id":"C3","name":"equality_pattern_diagonals","status":"PASSED_FACTORIAL_STIRLING_REDUCTION"},
+    {"id":"C4","name":"connected_local_factor_renormalization","status":"PAIR_SCALE_PASSED_INT_LCSK_OPEN"},
+    {"id":"C5","name":"primorial_walk_orbit_identity","status":"PRIME_MODULUS_LARGE_SIEVE_PROVED_COMPOSITE_OPEN"},
+    {"id":"C6","name":"signed_cumulant_assembly","status":"BLOCKED_BY_C2_HIGHER_CORE_REDUCED"},
+    {"id":"C7","name":"arithmetic_source_decomposition","status":"CLOSED_AT_ACTUAL_PRIME_POST_H_SCALE"},
+    {"id":"C8","name":"conditional_bridge_and_falsification","status":"PASSED_CONDITIONAL_AND_DIAGNOSTIC"},
+    {"id":"C9","name":"closeout","status":"PASSED"}
+  ],
+  "stratification": {
+    "deterministic": true,
+    "sigma": 0.5,
+    "terminal_prime_width_order": "X/(log X)^(3/2)",
+    "number_of_strata_order": "(log X)^(3/2)",
+    "common_offset_universe_required": true,
+    "observed_occupancy_forbidden": true
+  },
+  "cumulant_contract": {
+    "kind": "ordinary",
+    "ordered_column_tuples_include_repetitions": true,
+    "factorial_distinct_column_identity_forbidden": true,
+    "correct_factorial_stirling_transform_proved": true,
+    "factorial_radius_to_ordinary_radius_additive_cost": 1,
+    "absolute_values_after_connected_recombination_only": true
+  },
+  "prohibited_lanes": [
+    "whole_block_cumulant_expansion",
+    "factorial_cumulants_as_distinct_joint_column_cumulants",
+    "fixed_order_moment_campaigns",
+    "post_hoc_fitted_temperatures",
+    "generic_dependency_graph_without_scale_check",
+    "ordinary_moving_interval_transfer",
+    "classical_post_level_lower_sieve",
+    "density_one_or_relative_error_closeout",
+    "finite_panel_asymptotic_promotion",
+    "function_field_or_paper_vii_tangent"
+  ],
+  "compute_policy": {
+    "sentinel_timeout_minutes": 10,
+    "ordinary_job_timeout_minutes": 45,
+    "absolute_timeout_minutes": 120,
+    "inspect_unrelated_jobs_before_cancellation": true,
+    "cancel_orphaned_programme_jobs": true,
+    "gpu_requires_written_justification": true
+  }
+}
