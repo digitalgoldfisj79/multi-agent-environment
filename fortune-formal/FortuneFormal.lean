@@ -20,4 +20,12 @@ import FortuneFormal.Quadratic.Model
 import FortuneFormal.Quadratic.DiscriminantContradiction
 import FortuneFormal.Quadratic.ReductionInterface
 import FortuneFormal.Integer.BlockCriterion
+import FortuneFormal.Integer.LowerTailCriterion
+import FortuneFormal.Integer.FactorBandCriterion
+import FortuneFormal.Integer.SoftDefectCriterion
+import FortuneFormal.Integer.AdaptiveOccupancyCriterion
+import FortuneFormal.Integer.SelectedCentreMeanCriterion
+import FortuneFormal.Integer.SquarefreeCompositeEnergyCriterion
+import FortuneFormal.Integer.LocalConnectedTreeObstruction
+import FortuneFormal.Integer.RuhlSelectedTupleResidualCriterion
 import FortuneFormal.Frontier.Assumptions

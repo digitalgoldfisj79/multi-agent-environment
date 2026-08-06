@@ -1,0 +1,113 @@
+{
+  "programme": "FORTUNE_INT_ISC_FOCUSED_V0_1",
+  "date": "2026-08-04",
+  "base_commit": "deb6bb5468a951bc5485514c5848abcfcf386594",
+  "parent_pr": 47,
+  "primary_issue": 48,
+  "status": "COMPLETED_REDUCED_TO_INT_PSLT",
+  "original_target": "INT-ISC",
+  "primary_target": "INT-PSLT",
+  "terminal_outcome": "REDUCED_TO_SMALLER_NEW_THEOREM",
+  "allowed_final_statuses": [
+    "PROVED_INT_ISC",
+    "REDUCED_TO_ESTABLISHED_THEOREM",
+    "REDUCED_TO_SMALLER_NEW_THEOREM",
+    "METHOD_OBSTRUCTED_AT_EXPLICIT_SCALE"
+  ],
+  "gates": [
+    {
+      "id": "I0",
+      "name": "source_and_target_freeze",
+      "status": "PASSED",
+      "result": "corrected detector, source, scales and inherited Lean identity frozen"
+    },
+    {
+      "id": "I1",
+      "name": "weakest_sufficient_target_audit",
+      "status": "PASSED",
+      "result": "full variance replaced by the strictly weaker one-sided lower-tail criterion INT-LTQ"
+    },
+    {
+      "id": "I2",
+      "name": "necessary_sparse_first_moment",
+      "status": "CLOSED_DIAGNOSTIC_NOT_REQUIRED",
+      "result": "signed first moment is not necessary after I1; generic short-interval results miss the selected-centre scale"
+    },
+    {
+      "id": "I3",
+      "name": "direct_four_prime_covariance",
+      "status": "CLOSED_METHOD_OBSTRUCTED",
+      "result": "absolute-value implementations lose X/L(X); four-prime expansion restores the discarded upper tail"
+    },
+    {
+      "id": "I4",
+      "name": "shifted_von_mangoldt_source",
+      "status": "PASSED_REDUCED_TO_SMALLER_NEW_THEOREM",
+      "result": "reduced Fortune to the one-form primorial selected lower-tail theorem INT-PSLT"
+    },
+    {
+      "id": "I5",
+      "name": "deterministic_source_orbit_psd",
+      "status": "CLOSED_COHERENCE_OBSTRUCTION",
+      "result": "for every q dividing A_X, the centre walk satisfies F_X(a/q)=N; geometry alone supplies coherence, not cancellation"
+    },
+    {
+      "id": "I6",
+      "name": "falsification_and_adversarial_models",
+      "status": "PASSED",
+      "result": "one-defect models prove local densities, first moments, relative second moments and dense averages insufficient"
+    },
+    {
+      "id": "I7",
+      "name": "theorem_or_obstruction_closeout",
+      "status": "PASSED",
+      "result": "full clean build, static verification and finite obstruction suite passed"
+    }
+  ],
+  "validation_jobs": [
+    {
+      "job_id": "6a7205146b79c09949c2236a",
+      "gate": "I0",
+      "result": "COMPLETED"
+    },
+    {
+      "job_id": "6a7205cda00abefd4b291fdd",
+      "gate": "I0",
+      "result": "COMPLETED"
+    },
+    {
+      "job_id": "6a7242e16b79c09949c227db",
+      "gate": "I1",
+      "result": "COMPLETED",
+      "sentinel": "FORTUNE_INT_ISC_I1_LOWER_TAIL_LEAN_PASS"
+    },
+    {
+      "job_id": "6a72429aa00abefd4b292715",
+      "gate": "I7",
+      "result": "COMPLETED",
+      "sentinel": "FORTUNE_INT_ISC_I7_STATIC_CLOSEOUT_PASS"
+    },
+    {
+      "job_id": "6a7243cba00abefd4b292733",
+      "gate": "I7",
+      "result": "COMPLETED",
+      "failure_count": 0,
+      "formal_build_jobs": 8681,
+      "sentinel": "FORTUNE_INT_ISC_I7_FULL_CLEANROOM_PASS"
+    }
+  ],
+  "prohibited_lanes": [
+    "P7-CUBIC-TF",
+    "D1-QLINE-NONSAT",
+    "random-order derandomisation without a corrected detector bridge",
+    "new reciprocal-frame moments without a corrected source theorem",
+    "finite-panel extrapolation"
+  ],
+  "compute_policy": {
+    "sentinel_timeout_minutes": 10,
+    "ordinary_job_timeout_minutes": 45,
+    "absolute_timeout_minutes": 120,
+    "terminal_programme_jobs_required": 0,
+    "inspect_unrelated_jobs_before_any_cancellation": true
+  }
+}

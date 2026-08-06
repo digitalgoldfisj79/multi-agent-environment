@@ -1,0 +1,48 @@
+name: Fortune INT-PWOC squarefree composite
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'fortune-int-pwoc-squarefree/**'
+      - 'fortune-formal/FortuneFormal/Integer/SquarefreeCompositeEnergyCriterion.lean'
+      - 'fortune-formal/FortuneFormal.lean'
+      - '.github/workflows/fortune-int-pwoc-squarefree.yml'
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Static trust audit and exact regressions
+        run: python fortune-int-pwoc-squarefree/scripts/verify_programme.py
+
+  lean:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Lean 4.32.0
+        run: |
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - name: Generate manifest and restore Mathlib cache
+        working-directory: fortune-formal
+        run: |
+          elan toolchain install $(cat lean-toolchain)
+          lean --version | grep -F 'version 4.32.0'
+          lake update
+          lake exe cache get
+      - name: Targeted PWOC-SF criterion build
+        working-directory: fortune-formal
+        run: lake build FortuneFormal.Integer.SquarefreeCompositeEnergyCriterion
+      - name: Full formal package build
+        working-directory: fortune-formal
+        run: lake build
+      - name: New-file trust scan
+        run: |
+          ! grep -En '\b(sorry|admit|axiom|unsafe)\b' fortune-formal/FortuneFormal/Integer/SquarefreeCompositeEnergyCriterion.lean

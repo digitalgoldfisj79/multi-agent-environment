@@ -1,0 +1,16 @@
+{
+  "programme": "FORTUNE_INT_SCME_SELECTED_CENTRE_MEAN_V0_1",
+  "new_axioms": 0,
+  "fortune_claimed": false,
+  "int_aod_claimed": false,
+  "int_socg_claimed": false,
+  "int_scme_claimed": false,
+  "claims": [
+    {"id":"M1-WEIGHTED-IMPLICATION","status":"RETAINED","statement":"INT-SCME supplies the first-cumulant lower bound after proper prime-power subtraction."},
+    {"id":"M4-COLLISION-ENERGY","status":"PROVED","statement":"Selected primorial residues satisfy the registered collision-energy bound."},
+    {"id":"M4-CONDITIONAL-EXPONENTS","status":"PROVED_CONDITIONAL_LEDGER","statement":"Under an HQ-polylog variance input, selected-residue Cauchy works exactly for 2 delta < rho < 1-delta."},
+    {"id":"M4-UNCONDITIONAL-OBSTRUCTION","status":"PROVED_METHOD_OBSTRUCTION","statement":"The standard unconditional large-sieve variance cannot enter a post-terminal polynomial band."},
+    {"id":"M6-SCPT","status":"RETRACTED_AS_REDUCTION","statement":"Given INT-SCVAR, INT-SCPT is equivalent to INT-SCME rather than a smaller target."},
+    {"id":"SOCG-LINK","status":"RETRACTED","statement":"INT-SCME does not imply INT-SOCG; INT-LCSK and INT-PWOC remain open."}
+  ]
+}
