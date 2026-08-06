@@ -1,32 +1,29 @@
 {
   "programme": "FORTUNE_RUHL_SELECTED_TUPLE_RESIDUAL_V0_1",
-  "execution_state": "EXECUTED_AND_VALIDATED",
-  "validation": {
-    "head": "60f27ff3dee98f0761da361bc7856f588dec9163",
-    "workflow_run_id": 31085980195,
-    "exact_regressions": "PASS",
-    "targeted_lean": "PASS",
-    "full_package_lean": "PASS",
-    "trust_scan": "PASS",
-    "lean_version": "4.32.0"
-  },
+  "execution_state": "EXECUTED_VALIDATED_AND_REVIEW_CORRECTED",
   "claims": [
     {
       "id": "RUHL-STR-1",
       "statement": "The signed factorial-moment error equals the averaged Bonferroni occupancy polynomial minus the averaged model Taylor polynomial.",
-      "status": "PROVED_EXACTLY",
+      "status": "PROVED_EXACTLY_AND_KERNEL_CHECKED_AT_ALGEBRAIC_INTERFACE",
       "analytic_input": false
     },
     {
       "id": "RUHL-STR-2",
-      "statement": "The absolute RUHL envelope forces |E_1| < Delta/q, which is O(1) in the frozen geometry.",
+      "statement": "The absolute RUHL envelope forces |E_1| < Delta/q, which is O(1) in the frozen geometry n_b B asymp X/log X.",
       "status": "KERNEL_CHECKED_AND_REGRESSION_CHECKED",
+      "analytic_input": false
+    },
+    {
+      "id": "RUHL-STR-2S",
+      "statement": "In the signed residual, excess first moment helps; the weakest first-order constraint is one-sided after the higher-order signed remainder is retained.",
+      "status": "KERNEL_CHECKED_ELEMENTARY_IMPLICATION",
       "analytic_input": false
     },
     {
       "id": "RUHL-STR-3",
       "statement": "The frozen Heath--Brown identity is exact for n <= z^J and has absolute binomial coefficient mass 2^J-1.",
-      "status": "PROVED_BY_CONVOLUTION; FINITE_REGRESSION_CHECKED",
+      "status": "PROVED_BY_CONVOLUTION_AND_FINITE_REGRESSION_CHECKED",
       "analytic_input": false
     },
     {
@@ -37,12 +34,18 @@
     },
     {
       "id": "RUHL-STR-5",
-      "statement": "The frozen Heath--Brown termwise absolute implementation proves the RUHL residual.",
-      "status": "REFUTED_AS_A_DELIVERED_METHOD",
-      "analytic_input": true
+      "statement": "A termwise absolute Heath--Brown proof at the forced cutoff must establish sum_r binom(J,r)|R_r| < Delta.",
+      "status": "PROVED_REQUIREMENT; NO IMPOSSIBILITY CLAIM",
+      "analytic_input": false
     },
     {
       "id": "RUHL-STR-6",
+      "statement": "Coefficient mass alone rules out every termwise absolute implementation.",
+      "status": "WITHDRAWN_UNSUPPORTED_STRENGTHENING",
+      "analytic_input": true
+    },
+    {
+      "id": "RUHL-STR-7",
       "statement": "RUHL-FM, INT-AOD, or Fortune is proved.",
       "status": "NOT_CLAIMED",
       "analytic_input": true

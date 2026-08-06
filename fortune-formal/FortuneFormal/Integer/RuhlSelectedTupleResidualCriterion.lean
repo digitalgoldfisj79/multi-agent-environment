@@ -25,8 +25,26 @@ theorem firstOrderError_lt_constant
     |e₁| < C := by
   have hweighted : |e₁| * q < C * q := by
     nlinarith [abs_nonneg e₁]
-  have hdiv : |e₁| < (C * q) / q := (lt_div_iff₀ hq).2 hweighted
-  simpa [hq.ne'] using hdiv
+  exact (lt_of_mul_lt_mul_right hweighted (le_of_lt hq))
+
+/-- In the signed residual `-q*e₁ + higher`, excess actual mean helps.  The
+weakest first-order consequence is therefore one-sided once the higher-order
+signed remainder is retained. -/
+theorem signedFirstOrder_lowerBound
+    (q e₁ higher margin : ℝ)
+    (hq : 0 < q)
+    (hbudget : -q * e₁ + higher < margin) :
+    (higher - margin) / q < e₁ := by
+  apply (div_lt_iff₀ hq).2
+  nlinarith
+
+/-- The exact arithmetic interface is telescoping: a correction already
+included in the observed or model term cannot be appended a second time. -/
+theorem arithmeticResidual_split
+    (actual tupleModel deterministicModel : ℝ) :
+    (actual - tupleModel) + (tupleModel - deterministicModel) =
+      actual - deterministicModel := by
+  ring
 
 /-- The signed residual is algebraically the difference of the weighted actual
 and model moment polynomials. -/
