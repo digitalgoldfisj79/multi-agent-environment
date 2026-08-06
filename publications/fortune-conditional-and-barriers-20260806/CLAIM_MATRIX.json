@@ -1,0 +1,32 @@
+{
+  "programme": "FORTUNE_PUBLICATION_CONSOLIDATION_LEAN_AUDIT_20260806",
+  "lean_version": "4.32.0",
+  "compliance_definition": "Every load-bearing claim is classified as kernel-checked, derived with a ledgered axiom, exact-computational, manuscript-proved but unformalized, or open/conditional.",
+  "allowed_axioms": [
+    "FortuneFormal.p7_k2_certified_normalization"
+  ],
+  "documents": [
+    {"id":"P1","status":"COMPLIANT_SELECTIVE_FORMALIZATION","fully_formalized":false,"open":["HTE4","HWF4","FBHE4","RQHE4","signed detector bridge"]},
+    {"id":"P2","status":"COMPLIANT_CORE_KERNEL_CHECKED","fully_formalized":false,"kernel":["no_failure_of_variance_below_baseline_gap"],"open":["sparse-centre first moment","signed source transfer","block variance"]},
+    {"id":"P3","status":"COMPLIANT_SELECTED_IDENTITIES_KERNEL_CHECKED","fully_formalized":false,"kernel":["centered_second_moment_identity","four_prime_covariance_identity"],"open":["INT-ISC"]},
+    {"id":"P4","status":"COMPLIANT_MANUSCRIPT_ONLY_LANE","fully_formalized":false,"open":["derandomisation","corrected detector bridge"]},
+    {"id":"P5","status":"COMPLIANT_REPLACEMENT_MANUSCRIPT","fully_formalized":false,"open":["D1-QLINE-NONSAT","integer transfer"]},
+    {"id":"P6","status":"COMPLIANT_REPLACEMENT_MANUSCRIPT","fully_formalized":false,"open":["uniform Kummer-open nonvanishing","universal function-field crown"]},
+    {"id":"P7","status":"COMPLIANT_WITH_ONE_LEDGERED_EXTERNAL_BOUNDARY","fully_formalized":false,"kernel":["p7_ifa1_concrete","p7_bdd1_concrete","p7_bdd2_concrete","p7_strip_concrete","certifiedComponent_not_arithmeticOpen"],"derived_with_axiom":["p7_k2_empty_from_external_certificate"],"open":["P7-CUBIC-TF","integer transfer"]},
+    {"id":"S1","status":"COMPLIANT_CORE_KERNEL_CHECKED_AND_SCOPE_CORRECTED","fully_formalized":false,"kernel":["firstOrderError_lt_allowance","firstOrderError_lt_constant","signedFirstOrder_lowerBound","arithmeticResidual_split","weightedResidual_eq_difference","SquarefreeCompositeEnergyCriterion","LocalConnectedTreeObstruction"],"exact_computational":["beta=5 certificate","orders 4-8 connected-local panels","Heath-Brown finite identity and scale ledger"],"open":["jointly signed selected-centre tuple residual"]}
+  ],
+  "withdrawn_or_corrected": [
+    "E=A+S+Q under definitions where A+S already equals E",
+    "coefficient mass alone proves universal failure of every termwise Heath-Brown implementation",
+    "LCSK finite panels through order eight were previously exercised",
+    "all papers are fully formalized"
+  ],
+  "global_nonclaims": [
+    "Fortune's conjecture",
+    "INT-ISC",
+    "D1-QLINE-NONSAT",
+    "P7-CUBIC-TF",
+    "RUHL-FM arithmetic hypothesis",
+    "function-field-to-integer transfer"
+  ]
+}

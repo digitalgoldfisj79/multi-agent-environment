@@ -26,7 +26,7 @@ For each residue pattern and order `r`, compute
 \prod_{B\in\pi}G_p(B).
 \]
 
-Verify the set-partition formula exactly for all order-three residue patterns and finite panels through order eight.
+Verify all order-three formulas exactly. Exercise genuine exact-rational finite panels through order eight: compare the all-equal partition formula with an independent univariate moment-to-cumulant recurrence, and test canonical collision patterns under deterministic permutations.
 
 ## L2 — pair-edge identification
 
@@ -48,19 +48,19 @@ Test whether one fixed constant `C` can give
 \frac{C\,1_{m_a\equiv m_b\,(p)}}{p-1}
 \]
 
-for every post-terminal prime, residue pattern and `r<=Theta(log X)`.
+for every post-terminal prime, residue pattern and registered order.
 
 **Kill rule:** one exact residue pattern whose ratio to the tree budget is unbounded closes the pair-tree lane.
 
 ## L4 — actual candidate witness
 
-If L3 fails abstractly, require one finite witness satisfying the frozen candidate-universe restrictions `m_i>U_b`, `m_i<=H`, all `m_i` prime and `p>2X`.
+If L3 fails abstractly, require one finite witness satisfying `m_i>U_b`, `m_i<=H`, all `m_i` prime and `p>2X`.
 
 ## L5 — absolute hyperedge ledger
 
 For the irreducible same-prime `r`-body cluster, combine the exact local coefficient with the inherited Brun--Titchmarsh row count. Keep the order dependence and logarithmic exponent explicit.
 
-**Pass condition:** a fixed `delta>0` such that the absolute row mass is bounded by
+**Pass condition:** one fixed `delta>0` such that the absolute row mass is bounded by
 
 \[
 r!\left(X/(\log X)^{1+\delta}\right)^{r-1}
@@ -74,7 +74,7 @@ Open only if L5 fails. Identify whether partition signs, signs across different 
 
 ## L7 — Fortune interface
 
-A successful result must enter the frozen factorial-cumulant estimate
+A successful result must enter
 
 \[
 |f_{r,b}|\le c_{1,b}r!D_{F,b}^{r-1}
@@ -84,7 +84,7 @@ with `D_{F,b}<<X/(log X)^(1+delta)` for one fixed `delta>0` and all registered o
 
 ## L8 — formal and clean-room validation
 
-Kernel-check the exact order-three algebra, the fixed-constant tree obstruction and the logarithmic exponent gap. Run exact regressions, targeted Lean, full-package Lean and a trust scan.
+Lean kernel-checks the exact order-three obstruction algebra, fixed-constant tree failure and exponent gap. Exact Python regressions separately exercise connected-local computations through order eight. These scopes must not be conflated.
 
 ## Allowed terminal outcomes
 
