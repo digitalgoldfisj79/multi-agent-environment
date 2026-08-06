@@ -1,0 +1,51 @@
+name: Fortune RUHL selected tuple residual
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'fortune-ruhl-selected-tuple-residual/**'
+      - 'fortune-formal/FortuneFormal/Integer/RuhlSelectedTupleResidualCriterion.lean'
+      - 'fortune-formal/FortuneFormal.lean'
+      - '.github/workflows/fortune-ruhl-selected-tuple-residual.yml'
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Exact execution and claim audit
+        run: |
+          python fortune-ruhl-selected-tuple-residual/scripts/verify_programme.py
+          grep -F 'SELECTED_CENTRE_RESIDUAL_BEYOND_CURRENT_METHODS' fortune-ruhl-selected-tuple-residual/FINAL_STATUS.md
+          grep -F 'No proof or disproof of RUHL-FM is claimed' fortune-ruhl-selected-tuple-residual/FINAL_STATUS.md
+
+  lean:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Lean 4.32.0
+        run: |
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - name: Generate manifest and restore Mathlib cache
+        working-directory: fortune-formal
+        run: |
+          elan toolchain install $(cat lean-toolchain)
+          lean --version | grep -F 'version 4.32.0'
+          lake update
+          lake exe cache get
+      - name: Targeted RUHL residual criterion build
+        working-directory: fortune-formal
+        run: lake build FortuneFormal.Integer.RuhlSelectedTupleResidualCriterion
+      - name: Full formal package build
+        working-directory: fortune-formal
+        run: lake build
+      - name: New-file trust scan
+        run: |
+          ! grep -En '\b(sorry|admit|axiom|unsafe)\b' fortune-formal/FortuneFormal/Integer/RuhlSelectedTupleResidualCriterion.lean

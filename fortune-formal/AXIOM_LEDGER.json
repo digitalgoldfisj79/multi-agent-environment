@@ -1,0 +1,51 @@
+{
+  "status": "PUBLICATION_CONSOLIDATION_LEAN_COMPLIANT",
+  "updated": "2026-08-06",
+  "allowed_axiom_file": "FortuneFormal/Frontier/Assumptions.lean",
+  "axioms": [
+    {
+      "name": "FortuneFormal.p7_k2_certified_normalization",
+      "claim_id": "P7-K2-CERT-NORM",
+      "source": "Paper VII Sections 7-9 and external Singular certificate package",
+      "status": "EXTERNAL_CERTIFICATE_AND_NORMALIZATION_BOUNDARY"
+    }
+  ],
+  "derived_with_external_boundary": [
+    {
+      "name": "FortuneFormal.p7_k2_empty_from_external_certificate",
+      "claim_id": "P7-K2",
+      "status": "LEAN_DERIVED_FROM_ONE_LEDGERED_AXIOM"
+    }
+  ],
+  "kernel_checked_publication_interfaces": [
+    "FortuneFormal.Bilateral.p7_ifa1_concrete",
+    "FortuneFormal.Bilateral.p7_bdd1_concrete",
+    "FortuneFormal.Bilateral.p7_bdd2_concrete",
+    "FortuneFormal.Bilateral.p7_strip_concrete",
+    "FortuneFormal.Quadratic.certifiedComponent_not_arithmeticOpen",
+    "FortuneFormal.Integer.no_failure_of_variance_below_baseline_gap",
+    "FortuneFormal.Integer.centered_second_moment_identity",
+    "FortuneFormal.Integer.four_prime_covariance_identity",
+    "FortuneFormal.Integer.firstOrderError_lt_allowance",
+    "FortuneFormal.Integer.firstOrderError_lt_constant",
+    "FortuneFormal.Integer.signedFirstOrder_lowerBound",
+    "FortuneFormal.Integer.arithmeticResidual_split",
+    "FortuneFormal.Integer.weightedResidual_eq_difference"
+  ],
+  "module_level_interfaces": [
+    "FortuneFormal.Integer.AdaptiveOccupancyCriterion",
+    "FortuneFormal.Integer.SquarefreeCompositeEnergyCriterion",
+    "FortuneFormal.Integer.LocalConnectedTreeObstruction"
+  ],
+  "not_axiomatized_open_frontiers": [
+    "INT-ISC",
+    "INT-SCME",
+    "INT-LCSK",
+    "full source-attached INT-PWOC",
+    "RUHL selected-centre tuple residual",
+    "D1-QLINE-NONSAT",
+    "P7-CUBIC-TF",
+    "function-field-to-integer transfer",
+    "Fortune's conjecture"
+  ]
+}

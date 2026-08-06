@@ -1,0 +1,46 @@
+{
+  "programme": "FORTUNE_INT_PFLI_SIGNED_DUALITY_V0_1",
+  "claims": [
+    {
+      "id": "D1-COLLAPSE",
+      "status": "PROVED",
+      "statement": "Complete factor coverage makes the PFLI excess exactly the count lower tail: coverageExcessSq = lowerTailSq.",
+      "formal": "FortuneFormal.Integer.coverageExcessSq_eq_lowerTailSq"
+    },
+    {
+      "id": "D2-SOFT-DETECTOR",
+      "status": "PROVED",
+      "statement": "Any nonnegative detector equal to one at failures excludes all failures when its total mass is below one.",
+      "formal": "FortuneFormal.Integer.no_failure_of_soft_detector_sum_lt_one"
+    },
+    {
+      "id": "D2-EXP-DETECTOR",
+      "status": "PROVED",
+      "statement": "The exponential occupancy detector excludes zero-source failures when its total mass is below one.",
+      "formal": "FortuneFormal.Integer.no_failure_of_expDefect_sum_lt_one"
+    },
+    {
+      "id": "D2-INT-AOD",
+      "status": "OPEN",
+      "statement": "The adaptive occupancy sum is below one on every sufficiently large registered block."
+    },
+    {
+      "id": "D4-MOMENT-BARRIER",
+      "status": "PROVED_ELEMENTARY",
+      "statement": "For every K, two 2^K-row panels agree in ordinary and factorial moments through K while only one contains a zero row.",
+      "certificate": "scripts/verify_moment_barrier.py"
+    },
+    {
+      "id": "D5-ARITY",
+      "status": "PROVED_REDUCTION",
+      "statement": "A moment-only one-defect proof requires K>log_2 N and therefore coupled prime-correlation arity 2K=Omega(log X)."
+    },
+    {
+      "id": "D6-ASYMPTOTIC-SIEVE",
+      "status": "OBSTRUCTED_AS_DIRECT_APPLICATION",
+      "statement": "No audited asymptotic-sieve, switching, or finite Buchstab framework supplies the required row-uniform post-level parity-breaking hypothesis."
+    }
+  ],
+  "new_axioms": 0,
+  "fortune_claimed": false
+}

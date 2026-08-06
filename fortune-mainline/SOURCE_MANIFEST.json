@@ -1,0 +1,75 @@
+{
+  "programme": "FORTUNE_MAINLINE_CLOSEOUT_V1",
+  "date": "2026-08-04",
+  "repository": "digitalgoldfisj79/multi-agent-environment",
+  "branch": "gpt56/fortune-integrated-mainline-v01-20260804",
+  "papers": [
+    {
+      "id": "P1",
+      "ref": "publication/fortune-papers-ii-vi-20260724",
+      "path": "publications/fortune-papers-ii-vi-20260724/paper1_collision_geometry/manuscript.md",
+      "git_blob": "1734d956dc10ce2c48ddd7c11b1df625ebdba0be",
+      "role": "selective structural source"
+    },
+    {
+      "id": "P2",
+      "ref": "b42da323eccd6f995fc9e2f93373beb1274293ac",
+      "path": "publications/fortune-papers-ii-vi-20260724/paper2_revised/manuscript.md",
+      "git_blob": "407bc7c34411e6d1a897192fe77901710628aaef",
+      "sha256": "606811c91da2e80b30f0cb12c6bd72dfe9fa167e635b48d0d0ab43ab27f18be3",
+      "lines": 1516,
+      "words": 6455,
+      "role": "authoritative corrected integer detector"
+    },
+    {
+      "id": "P3",
+      "ref": "b42da323eccd6f995fc9e2f93373beb1274293ac",
+      "path": "publications/fortune-papers-ii-vi-20260724/paper3_pair_sum/manuscript.md",
+      "git_blob": "489b203337894b3963ebfd3bddd3e5ecb4e28b22",
+      "sha256": "19f0f92128de8a2c64158a8b83f4c7ec3521a2e3ef47a10afc4c84f4c063bd64",
+      "lines": 871,
+      "words": 3871,
+      "role": "authoritative corrected integer kernel"
+    },
+    {
+      "id": "P4",
+      "ref": "af9350f06e41e94d79f583b2e8fca45b55b92852",
+      "path": "publications/fortune-papers-ii-vi-20260724/paper4_random_order/manuscript.md",
+      "git_blob": "1a3d39d974bfa37d31c100f536dcaa1b74f6d688",
+      "sha256": "548460849cc9c6125fbe59d0a4f2f37ec680761174c25556b5e781a8ae9372f1",
+      "role": "random-order model only"
+    },
+    {
+      "id": "P5",
+      "ref": "publication/fortune-papers-ii-vi-20260724",
+      "path": "publications/fortune-papers-ii-vi-20260724/paper5_function_fields_replacement/manuscript.md",
+      "git_blob": "89794e9337eaf328dfb13a627b9616a1e3a9553c",
+      "sha256": "2a7df97840babfd4f92007f0fcdc70fe67faada264019cb3f396c1d05237c965",
+      "lines": 843,
+      "words": 3640,
+      "role": "authoritative direct d=1 reduction"
+    },
+    {
+      "id": "P6",
+      "ref": "publication/fortune-papers-ii-vi-20260724",
+      "path": "publications/fortune-papers-ii-vi-20260724/paper6_secondary_quotients_replacement/manuscript.md",
+      "git_blob": "6e42cce0331dcf6b532d2c88819303f858ae4fd9",
+      "sha256": "12879f46044fa3cc598ebe60c9419b78d8d32cfeb518dbad5a5d8d4589eb88dd",
+      "lines": 900,
+      "words": 4023,
+      "role": "authoritative direct d=1 quotient reduction"
+    },
+    {
+      "id": "P7",
+      "ref": "069f47724a3581dc40cfbc9efa3fafd14181ba3e",
+      "path": "publications/fortune-paper-vii-endpoint-incidence-20260731/CLAIM_STATUS.md",
+      "git_blob": "1ea10ee378467bf484d561e05ed4cde08e1fee9a",
+      "role": "separate endpoint-incidence programme"
+    }
+  ],
+  "superseded": [
+    "publications/fortune-papers-ii-vi-20260724/CLAIM_STATUS_ALL.md",
+    "publications/fortune-papers-ii-vi-20260724/paper5_function_fields/manuscript.md",
+    "publications/fortune-papers-ii-vi-20260724/paper6_airy/manuscript.md"
+  ]
+}

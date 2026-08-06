@@ -1,0 +1,233 @@
+{
+  "programme": "FORTUNE_CROSS_PAPER_AUDIT_V0_1",
+  "date": "2026-08-04",
+  "repository": "digitalgoldfisj79/multi-agent-environment",
+  "authoritative_papers": [
+    {
+      "id": "P1",
+      "title": "Collision Geometry and Spectral Laws for Consecutive-Prime Partial Products",
+      "lane": "INTEGER_STRUCTURAL",
+      "source_ref": "publication/fortune-papers-ii-vi-20260724",
+      "path": "publications/fortune-papers-ii-vi-20260724/paper1_collision_geometry/manuscript.md",
+      "git_blob": "1734d956dc10ce2c48ddd7c11b1df625ebdba0be",
+      "publication_status": "INTERNAL_TECHNICAL_PASS_HUMAN_REVIEW_OPEN",
+      "formalization_priority": "SELECTIVE",
+      "proved_core": [
+        "exact fourth-moment and collision identities",
+        "low-transport and large-divisor incidence bounds",
+        "average almost-injectivity and local collision bounds",
+        "interval endpoint-graph rank and Smith-invariant classification",
+        "exact independent-prefix covariance and non-Gaussian fourth-moment laws"
+      ],
+      "open_frontier": [
+        "HTE4 centred rank-two dispersion",
+        "HWF4 hereditary weighted moment",
+        "FBHE4 four-distinct-block energy",
+        "RQHE4 root-quartet estimate",
+        "signed prime-detection bridge"
+      ],
+      "boundary": "No prime-offset or Fortune implication is proved."
+    },
+    {
+      "id": "P2",
+      "title": "Prime Detection at Primorial Centres",
+      "lane": "INTEGER_DETECTOR",
+      "source_ref": "b42da323eccd6f995fc9e2f93373beb1274293ac",
+      "path": "publications/fortune-papers-ii-vi-20260724/paper2_revised/manuscript.md",
+      "git_blob": "407bc7c34411e6d1a897192fe77901710628aaef",
+      "source_sha256": "606811c91da2e80b30f0cb12c6bd72dfe9fa167e635b48d0d0ab43ab27f18be3",
+      "publication_status": "INTERNAL_TECHNICAL_PASS_HUMAN_REVIEW_OPEN",
+      "formalization_priority": "HIGHEST",
+      "proved_core": [
+        "candidate collapse below the square threshold",
+        "exact weighted prime-pair detector decomposition",
+        "all-centres variance implications at corrected scales",
+        "proper-prime-power contamination bound",
+        "double-von-Mangoldt Fourier source identity",
+        "internal reciprocal-frame identities and no-go theorems"
+      ],
+      "conjectural_or_open": [
+        "Hardy-Littlewood baselines",
+        "sparse-centre first moment",
+        "corrected signed source-to-frame transference",
+        "block variance with loss o(log X)"
+      ],
+      "boundary": "The old reciprocal-frame estimate does not imply Fortune without a corrected bridge."
+    },
+    {
+      "id": "P3",
+      "title": "Pair-Sum Rigidity, Exceptional Sets, and Conditional Prime Detection at Primorial Centres",
+      "lane": "INTEGER_KERNEL",
+      "source_ref": "b42da323eccd6f995fc9e2f93373beb1274293ac",
+      "path": "publications/fortune-papers-ii-vi-20260724/paper3_pair_sum/manuscript.md",
+      "git_blob": "489b203337894b3963ebfd3bddd3e5ecb4e28b22",
+      "source_sha256": "19f0f92128de8a2c64158a8b83f4c7ec3521a2e3ef47a10afc4c84f4c063bd64",
+      "publication_status": "INTERNAL_TECHNICAL_PASS_HUMAN_REVIEW_OPEN",
+      "formalization_priority": "HIGH_SELECTED_THEOREMS",
+      "proved_core": [
+        "bounded-coefficient rigidity",
+        "pair-sum difference multiplicity N-or-1 dichotomy",
+        "two-scale energy decomposition",
+        "high-moment and sub-Weibull kernel bounds",
+        "correctly centred all-centres variance implication",
+        "four-prime covariance expansion"
+      ],
+      "open_frontier": [
+        "aggregate four-prime covariance estimates",
+        "equivalent signed two-prime transference",
+        "required all-centres variance bound"
+      ],
+      "boundary": "The reciprocal exceptional-set model has no proved implication to the corrected detector."
+    },
+    {
+      "id": "P4",
+      "title": "Prime Detection Along Random Primorial-Product Paths",
+      "lane": "INTEGER_RANDOM_MODEL",
+      "source_ref": "af9350f06e41e94d79f583b2e8fca45b55b92852",
+      "path": "publications/fortune-papers-ii-vi-20260724/paper4_random_order/manuscript.md",
+      "git_blob": "1a3d39d974bfa37d31c100f536dcaa1b74f6d688",
+      "source_sha256": "548460849cc9c6125fbe59d0a4f2f37ec680761174c25556b5e781a8ae9372f1",
+      "publication_status": "INTERNAL_TECHNICAL_PASS_HUMAN_REVIEW_OPEN",
+      "formalization_priority": "LOW_UNTIL_BRIDGE_EXISTS",
+      "proved_core": [
+        "random-order reciprocal energy bound",
+        "weighted aggregate and Frobenius bounds",
+        "complete configuration taxonomy",
+        "exceptional-character sixth-moment count"
+      ],
+      "open_frontier": [
+        "derandomisation to the increasing primorial order",
+        "corrected detector bridge"
+      ],
+      "boundary": "Expectation over random permutations does not control the unique increasing order."
+    },
+    {
+      "id": "P5",
+      "title": "Fortunate Polynomials over Finite Fields",
+      "lane": "DIRECT_D1",
+      "source_ref": "publication/fortune-papers-ii-vi-20260724",
+      "path": "publications/fortune-papers-ii-vi-20260724/paper5_function_fields_replacement/manuscript.md",
+      "git_blob": "89794e9337eaf328dfb13a627b9616a1e3a9553c",
+      "publication_status": "INTERNAL_TECHNICAL_PASS_HUMAN_REVIEW_OPEN",
+      "formalization_priority": "HIGH_SELECTED_THEOREMS",
+      "proved_core": [
+        "polynomial-primorial reducible-offset degree barrier",
+        "exact d=1 degree-at-most-three reduction",
+        "quadratic and cubic affine-orbit formulas",
+        "exact crown variable W_p and failure certificate",
+        "smooth sparse complete-intersection surface",
+        "p-cycle fixed-point and q-line saturation identities"
+      ],
+      "open_frontier": [
+        "one-sided q-line nonsaturation or equivalent nonvanishing",
+        "universal function-field d=1 crown"
+      ],
+      "excluded_or_superseded": [
+        "general Weil-RH window from superseded Paper V",
+        "absolute Airy correlation as the final crown obstruction"
+      ],
+      "boundary": "This is a function-field laboratory; no integer transfer theorem exists."
+    },
+    {
+      "id": "P6",
+      "title": "Secondary Traces and Kummer Quotients for the Function-Field Fortune Crown",
+      "lane": "DIRECT_D1",
+      "source_ref": "publication/fortune-papers-ii-vi-20260724",
+      "path": "publications/fortune-papers-ii-vi-20260724/paper6_secondary_quotients_replacement/manuscript.md",
+      "git_blob": "6e42cce0331dcf6b532d2c88819303f858ae4fd9",
+      "publication_status": "INTERNAL_TECHNICAL_PASS_HUMAN_REVIEW_OPEN",
+      "formalization_priority": "HIGH_SELECTED_THEOREMS",
+      "proved_core": [
+        "Cartier first-moment sufficiency",
+        "cyclotomic tangent and nonsplit module structure",
+        "Hattori-Stallings coefficient trace",
+        "Artin-Schreier quotient and no-split theorem",
+        "Kummer-form correction",
+        "exact quotient and boundary point counts"
+      ],
+      "open_frontier": [
+        "uniform first-moment nonvanishing",
+        "rational point on the Kummer open for every admitted prime",
+        "universal function-field crown"
+      ],
+      "withdrawn_or_refuted": [
+        "universal quadratic sign twist",
+        "standard mod-p quotient congruence proves the crown",
+        "automatic Q-Gorenstein/canonical/Witt-rational local claims"
+      ],
+      "boundary": "All quotient constructions return to one-sided cubic positivity."
+    },
+    {
+      "id": "P7",
+      "title": "Bilateral Endpoint Incidence and Quadratic Emptiness",
+      "lane": "FINITE_FIELD_ENDPOINT",
+      "source_ref": "069f47724a3581dc40cfbc9efa3fafd14181ba3e",
+      "path": "publications/fortune-paper-vii-endpoint-incidence-20260731/CLAIM_STATUS.md",
+      "git_blob": "1ea10ee378467bf484d561e05ed4cde08e1fee9a",
+      "publication_status": "INTERNAL_TECHNICAL_PASS_HUMAN_REVIEW_OPEN",
+      "formalization_priority": "ACTIVE_DEEPEST",
+      "proved_core": [
+        "inverse-free endpoint algebraisation",
+        "common-defect theorem",
+        "zero-defect reflection/translation classification",
+        "intermediate-strip emptiness",
+        "quadratic k=2 emptiness by exact certificates"
+      ],
+      "open_frontier": [
+        "cubic true-Frobenius point theorem",
+        "componentwise orientation classification",
+        "corrected bilateral amplitude and endpoint FFPR"
+      ],
+      "withdrawn": [
+        "q>k universal emptiness",
+        "universal c+d=0",
+        "relaxation dimension controls true incidence scale"
+      ],
+      "boundary": "No bridge to direct d=1 or the integer Fortune conjecture is proved."
+    }
+  ],
+  "terminal_frontiers": [
+    {
+      "id": "INT-SIGNED-TRANSFER",
+      "lane": "INTEGER",
+      "statement": "A deterministic signed source/orbit or normalized-survivor transfer theorem yielding the corrected block variance with loss o(log X).",
+      "supported_by": ["P2", "P3"],
+      "not_supplied_by": ["P1", "P4", "P5", "P6", "P7"]
+    },
+    {
+      "id": "D1-QLINE-NONSAT",
+      "lane": "DIRECT_D1",
+      "statement": "A one-sided q-line nonsaturation/nonvanishing theorem excluding simultaneous cubic failure.",
+      "supported_by": ["P5", "P6"],
+      "not_supplied_by": ["P1", "P2", "P3", "P4", "P7"]
+    },
+    {
+      "id": "P7-CUBIC-TF",
+      "lane": "FINITE_FIELD_ENDPOINT",
+      "statement": "A faithful cubic true-Frobenius point theorem on the saturated oriented locus.",
+      "supported_by": ["P7"],
+      "not_supplied_by": ["P1", "P2", "P3", "P4", "P5", "P6"]
+    }
+  ],
+  "prohibited_conflations": [
+    "P7-CUBIC-TF is not the direct d=1 q-line theorem",
+    "the direct d=1 crown is not an integer Fortune theorem",
+    "the random-order Paper IV theorem does not cover the increasing primorial order",
+    "Paper I internal energy estimates do not supply the corrected detector bridge",
+    "finite computations and exact finite panels are not uniform asymptotic theorems"
+  ],
+  "stale_or_superseded_records": [
+    {
+      "path": "publications/fortune-papers-ii-vi-20260724/CLAIM_STATUS_ALL.md",
+      "reason": "predates corrected Papers II-III and replacement Papers V-VI; must not be used as the authoritative global ledger"
+    },
+    {
+      "path": "publications/fortune-papers-ii-vi-20260724/paper5_function_fields/manuscript.md",
+      "reason": "superseded by paper5_function_fields_replacement"
+    },
+    {
+      "path": "publications/fortune-papers-ii-vi-20260724/paper6_airy/manuscript.md",
+      "reason": "superseded as the series Paper VI by paper6_secondary_quotients_replacement"
+    }
+  ]
+}

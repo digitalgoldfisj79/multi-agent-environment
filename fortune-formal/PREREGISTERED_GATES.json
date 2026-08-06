@@ -1,0 +1,101 @@
+{
+  "programme": "FORTUNE_TEN_PROOFS_FORMAL_V0_1",
+  "date": "2026-08-04",
+  "repository": "digitalgoldfisj79/multi-agent-environment",
+  "branch": "gpt56/fortune-ten-proofs-formal-v01-20260804",
+  "base_commit": "069f47724a3581dc40cfbc9efa3fafd14181ba3e",
+  "toolchain": {
+    "lean": "leanprover/lean4:v4.32.0",
+    "mathlib": "v4.32.0",
+    "comparator": "v4.32.0"
+  },
+  "prohibited_claims": [
+    "paper_vii_already_formalized",
+    "cubic_frontier_solved",
+    "direct_d1_proved",
+    "function_field_to_integer_transfer",
+    "fortune_conjecture_proved"
+  ],
+  "gates": [
+    {
+      "id": "F0",
+      "name": "specification_freeze",
+      "status": "PASSED",
+      "pass_condition": "programme package and explicit trust boundary compile"
+    },
+    {
+      "id": "F1",
+      "name": "foundational_definitions",
+      "status": "PASSED",
+      "pass_condition": "Paper VII semantic notions are literal Lean definitions rather than opaque proposition parameters"
+    },
+    {
+      "id": "F2",
+      "name": "inverse_free_algebraization",
+      "status": "PASSED",
+      "removed_axioms": ["FortuneFormal.p7_ifa1"],
+      "theorem": "FortuneFormal.Bilateral.p7_ifa1_concrete",
+      "evidence": "clean-room Lean 4.32.0 build completed; post-build trust audit passed"
+    },
+    {
+      "id": "F3",
+      "name": "defect_dichotomy_and_strip",
+      "status": "PASSED",
+      "removed_axioms": [
+        "FortuneFormal.p7_bdd1",
+        "FortuneFormal.p7_bdd2",
+        "FortuneFormal.p7_strip"
+      ],
+      "theorems": [
+        "FortuneFormal.Bilateral.p7_bdd1_concrete",
+        "FortuneFormal.Bilateral.p7_bdd2_concrete",
+        "FortuneFormal.Bilateral.p7_strip_concrete"
+      ],
+      "scope": "prime field; L=X^q-X; odd prime for BDD2/strip; k<q",
+      "evidence": "clean-room Lean 4.32.0 build completed with 8676 jobs; post-build trust audit passed"
+    },
+    {
+      "id": "F4",
+      "name": "quadratic_emptiness",
+      "status": "IN_PROGRESS",
+      "remaining_axioms": ["FortuneFormal.p7_k2_empty"],
+      "implemented_subgates": [
+        "literal q-free quadratic model",
+        "certified-component interface"
+      ],
+      "remaining_subgates": [
+        "incidence-to-model normalization",
+        "open-locus chart cover",
+        "Lean-checked universal lift identities",
+        "exceptional-characteristic certificates",
+        "discriminant-square contradiction"
+      ],
+      "pass_condition": "zero Paper VII axioms remain"
+    },
+    {
+      "id": "F5",
+      "name": "cubic_frontier_isolation",
+      "status": "BLOCKED_ON_F4",
+      "allowed_final_axioms": ["FortuneFormal.cubic_true_frobenius_point_theorem"]
+    },
+    {
+      "id": "F6",
+      "name": "parallel_theorem_discovery",
+      "status": "BLOCKED_ON_F5",
+      "lanes": [
+        "algebraic_components",
+        "torsor_monodromy",
+        "trace_functions",
+        "frobenius_dynamics",
+        "non_saturation_certificates",
+        "adversarial_falsification"
+      ]
+    },
+    {
+      "id": "F7",
+      "name": "independent_reconstruction_and_comparator",
+      "status": "BLOCKED_ON_CANDIDATE_PROOF",
+      "pass_condition": "second derivation, Lean build, Comparator acceptance, updated claim ledger"
+    }
+  ]
+}

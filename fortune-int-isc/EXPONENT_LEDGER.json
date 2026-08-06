@@ -1,0 +1,66 @@
+{
+  "programme": "FORTUNE_INT_ISC_FOCUSED_V0_1",
+  "asymptotic_parameter": "X",
+  "fixed_parameters": {
+    "eta": "0 < eta < 1"
+  },
+  "scales": {
+    "block_size_N": "X/log X",
+    "window_H": "eta X^2",
+    "centre_size": "P_j = exp(Theta(X))",
+    "log_centre": "log P_j = Theta(X)",
+    "prime_pair_baseline_per_centre": "lambda_j = Theta(X)",
+    "single_failure_variance_cost": "Theta(X^2)",
+    "full_variance_target": "N X L(X)",
+    "full_variance_loss_condition": "1 <= L(X) = o(log X)",
+    "lower_tail_target_INT_LTQ": "sum_j (lambda_j-Z_j)_+^2 = O(N X L(X))",
+    "prime_power_failure_ceiling": "O(X log X)",
+    "INT_PSLT_barrier_B": "X (log X)^2 up to a fixed admissible constant",
+    "INT_PSLT_target": "sum_j (B_X-Psi_j)_+^2 = o(B_X^2)",
+    "INT_PSLT_barrier_to_expected_mass": "B_X/H = (log X)^2/X -> 0"
+  },
+  "exact_implications": {
+    "failed_centres_from_full_variance": "B_fail = O(L(X)/log X) = o(1)",
+    "lower_tail_dominance": "(lambda-Z)_+^2 <= (Z-lambda)^2",
+    "INT_LTQ_consequence": "one failed centre costs at least c^2 X^2, so no failures",
+    "INT_PSLT_consequence": "at failure Psi_j=O(X log X), hence one failure costs (1+o(1)) B_X^2",
+    "candidate_collapse": "prime in (P_j,P_j+H] iff the corresponding offset is prime below the next-prime square threshold",
+    "fortune_consequence": "INT-PSLT implies all sufficiently large Fortunate numbers are prime; finite prefix remains decidable"
+  },
+  "lane_obstructions": {
+    "I2_generic_short_intervals": "all-centre results require x^delta lengths; H=(log x)^2",
+    "I3_raw_four_prime": "absolute-value route loses factor X/L(X)",
+    "I3_termwise_displacement": "required average signed error per (j,d) is L(X)/X",
+    "I4_distribution_range": "offset distribution reaches polynomial moduli while output factor range is exp(Theta(X))",
+    "I5_smooth_modulus_coherence": "for q|A_X, F_X(a/q)=N exactly",
+    "I6_one_defect_resolution": "relative o(1) second-moment error can coexist with one failed centre"
+  },
+  "loss_budget_rules": [
+    "Every Cauchy-Schwarz step must record its exact X and log X cost.",
+    "An estimate with loss comparable to log X does not close the original one-failure argument.",
+    "Density-one success is insufficient.",
+    "A dense-centre average requires a proved restriction theorem for the increasing primorial centres.",
+    "Absolute-value control before main-term subtraction loses the required signed cancellation.",
+    "A final theorem must resolve one failed centre on an absolute rather than merely relative scale."
+  ],
+  "method_best_bounds": [
+    {
+      "lane": "I3",
+      "best_generic_absolute_scale": "N X^2",
+      "required_scale": "N X L(X)",
+      "deficit": "factor X/L(X)"
+    },
+    {
+      "lane": "I4",
+      "available_all_centre_length": "P_j^delta for fixed delta>0",
+      "required_length": "(log P_j)^2",
+      "deficit": "exponential in X"
+    },
+    {
+      "lane": "I5",
+      "forced_frame_constant": "at least N on every q|A_X rational mode",
+      "required_feature": "post-principal-term arithmetic cancellation"
+    }
+  ],
+  "status": "EXECUTED_REDUCED_TO_INT_PSLT"
+}

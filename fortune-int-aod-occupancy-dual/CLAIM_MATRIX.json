@@ -1,0 +1,78 @@
+{
+  "programme": "FORTUNE_INT_AOD_OCCUPANCY_DUAL_V0_1",
+  "new_axioms": 0,
+  "fortune_claimed": false,
+  "int_aod_claimed": false,
+  "claims": [
+    {
+      "id": "O1-GENERIC-DETECTOR",
+      "status": "PROVED_FORMAL_INHERITED",
+      "statement": "Any nonnegative row detector equal to one on every failed row excludes failures when its total mass is below one."
+    },
+    {
+      "id": "O1-WEIGHTED-DETECTOR",
+      "status": "PROVED_FORMAL",
+      "statement": "A preregistered row-dependent exponential detector equals one on a zero row; if its temperatures are at most the frozen uniform temperature, its success implies frozen INT-AOD."
+    },
+    {
+      "id": "O2-BERNOULLI-COVER",
+      "status": "PROVED_EXACT_COMBINATORIAL",
+      "statement": "The occupancy detector is the expected number of uncovered rows under independent candidate-offset sampling."
+    },
+    {
+      "id": "O2-HYPERGEOMETRIC-COVER",
+      "status": "PROVED_EXACT_COMBINATORIAL",
+      "statement": "Sampling exactly K of M candidate offsets misses a row with Z successful offsets with probability binom(M-Z,K)/binom(M,K)."
+    },
+    {
+      "id": "O3-DEGREE-COST",
+      "status": "PASSED",
+      "statement": "The exact constant-density cover has degree Theta(X^2/log X)."
+    },
+    {
+      "id": "O3-ADAPTIVE-SCALE",
+      "status": "PROVED_REDUCTION",
+      "statement": "At preregistered temperature tau asymp log N/X, the exact cover degree falls to Theta(X), and a successful detector implies frozen INT-AOD."
+    },
+    {
+      "id": "O4-GLOBAL-MIXTURE-OBSTRUCTION",
+      "status": "PROVED_EXACT_SURROGATE_OBSTRUCTION",
+      "statement": "An equal mixture of Poisson row classes separated by Theta(X) has a Laplace-transform zero at distance Theta(1/X), outside the useful tau asymp log X/X scale. Whole-block cumulant convergence does not follow from rowwise Poisson behaviour alone."
+    },
+    {
+      "id": "O4-INT-SOCB",
+      "status": "OPEN_SUFFICIENT_REDUCTION",
+      "statement": "A polylogarithmic row partition with a convergent ordinary-cumulant bound exceeding log(n_b B) in every stratum implies INT-AOD."
+    },
+    {
+      "id": "O5-JOINT-CUMULANT",
+      "status": "PROVED_EXACT_ALGEBRAIC",
+      "statement": "Each ordinary cumulant of Z=sum_m I_m is the sum of common-row joint cumulants over all ordered prime-offset column tuples, including repetitions."
+    },
+    {
+      "id": "O5-COMPLETE-DEPENDENCY",
+      "status": "METHOD_OBSTRUCTED_AT_LOG_X",
+      "statement": "The safe dependency graph is complete and its temperature-weighted activity is Theta(log X), excluding generic constant-threshold absolute cluster criteria."
+    },
+    {
+      "id": "O5-INT-SOCG",
+      "status": "OPEN_PRIMARY_SUCCESSOR",
+      "statement": "Stratified ordinary-cumulant growth with dependence scale D_b << X/(log X)^(1+delta) implies INT-SOCB and hence INT-AOD."
+    },
+    {
+      "id": "O6-RUHL-IMPLICATION",
+      "status": "PROVED_CONDITIONAL_IMPLICATION",
+      "statement": "Row-uniform Hardy-Littlewood factorial-moment estimates through K=Theta(log X), with the explicit weighted one-row error budget, imply INT-AOD."
+    },
+    {
+      "id": "O7-ROWWISE-BILINEAR",
+      "status": "DIRECT_METHOD_CLOSED_AT_SQRT_H",
+      "statement": "The exact divisor decomposition reaches a sparse one-offset-per-modulus hyperbola beyond sqrt(H); a new signed rowwise bilinear theorem would imply INT-AOD but no established theorem supplies it."
+    },
+    {
+      "id": "O8-NO_FINITE_PROMOTION",
+      "status": "PROTOCOL_RULE_ENFORCED",
+      "statement": "Finite primorial panels and adversarial incidence matrices select and falsify methods but do not prove asymptotic Fortune statements."
+    }
+  ]
+}
