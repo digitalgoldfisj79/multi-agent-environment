@@ -25,4 +25,5 @@ import FortuneFormal.Integer.FactorBandCriterion
 import FortuneFormal.Integer.SoftDefectCriterion
 import FortuneFormal.Integer.AdaptiveOccupancyCriterion
 import FortuneFormal.Integer.SelectedCentreMeanCriterion
+import FortuneFormal.Integer.SquarefreeCompositeEnergyCriterion
 import FortuneFormal.Frontier.Assumptions
