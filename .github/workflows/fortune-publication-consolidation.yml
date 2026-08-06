@@ -2,6 +2,16 @@ name: Fortune publication consolidation and Lean audit
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - publication/fortune-papers-ii-vi-20260724
+    paths:
+      - 'publications/fortune-conditional-and-barriers-20260806/**'
+      - 'fortune-int-ruhl-fm-consolidation/**'
+      - 'fortune-ruhl-selected-tuple-residual/**'
+      - 'fortune-int-lcsk-tree-graph/**'
+      - 'fortune-formal/**'
+      - '.github/workflows/fortune-publication-consolidation.yml'
   pull_request:
     paths:
       - 'publications/fortune-conditional-and-barriers-20260806/**'
