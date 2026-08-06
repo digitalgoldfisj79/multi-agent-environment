@@ -1,0 +1,56 @@
+name: Fortune publication consolidation and Lean audit
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'publications/fortune-conditional-and-barriers-20260806/**'
+      - 'fortune-int-ruhl-fm-consolidation/**'
+      - 'fortune-ruhl-selected-tuple-residual/**'
+      - 'fortune-int-lcsk-tree-graph/**'
+      - 'fortune-formal/**'
+      - '.github/workflows/fortune-publication-consolidation.yml'
+
+jobs:
+  exact-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Publication, regression, and claim audit
+        run: python publications/fortune-conditional-and-barriers-20260806/scripts/verify_publication.py
+
+  lean:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Lean 4.32.0
+        run: |
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - name: Restore Mathlib cache
+        working-directory: fortune-formal
+        run: |
+          elan toolchain install $(cat lean-toolchain)
+          lean --version | grep -F 'version 4.32.0'
+          lake update
+          lake exe cache get
+      - name: Targeted corrected interfaces
+        working-directory: fortune-formal
+        run: |
+          lake build FortuneFormal.Integer.RuhlSelectedTupleResidualCriterion
+          lake build FortuneFormal.Integer.LocalConnectedTreeObstruction
+          lake build FortuneFormal.Integer.SquarefreeCompositeEnergyCriterion
+          lake build FortuneFormal.Integer.AdaptiveOccupancyCriterion
+      - name: Full formal package
+        working-directory: fortune-formal
+        run: lake build
+      - name: Trust and axiom boundary scan
+        run: |
+          ! grep -R -En '\b(sorry|admit|unsafe)\b' fortune-formal/FortuneFormal
+          test $(grep -R -El '^axiom p7_k2_certified_normalization\b|^axiom FortuneFormal\.p7_k2_certified_normalization\b' fortune-formal/FortuneFormal | wc -l) -le 1
+          test -f fortune-formal/AXIOM_LEDGER.json
