@@ -1,23 +1,24 @@
 name: Validate Fortune formal discovery programme
 
-on:
+"on":
   push:
     branches:
-      - gpt56/fortune-ten-proofs-formal-v01-20260804
+      - "gpt56/fortune-ten-proofs-formal-v01-20260804"
+      - "publication/fortune-papers-ii-vi-20260724"
     paths:
-      - fortune-formal/**
-      - .github/workflows/fortune-ten-proofs-formal.yml
+      - "fortune-formal/**"
+      - ".github/workflows/fortune-ten-proofs-formal.yml"
   pull_request:
     paths:
-      - fortune-formal/**
-      - .github/workflows/fortune-ten-proofs-formal.yml
-  workflow_dispatch:
+      - "fortune-formal/**"
+      - ".github/workflows/fortune-ten-proofs-formal.yml"
+  workflow_dispatch: {}
 
 permissions:
   contents: read
 
 concurrency:
-  group: fortune-formal-${{ github.ref }}
+  group: "fortune-formal-${{ github.ref }}"
   cancel-in-progress: true
 
 jobs:
