@@ -1,57 +1,46 @@
-# Build status
+# Execution status
 
 **Programme:** `FORTUNE_INT_PWOC_SQUAREFREE_V0_1`  
 **Date:** 6 August 2026  
 **Branch:** `gpt56/fortune-int-pwoc-sf-v01-20260806`  
-**State:** `BUILT_AND_VALIDATED_READY_FOR_P0`
+**State:** `EXECUTED_VALIDATION_PENDING`
 
-## Completed
+## Gates
 
-- exact target ladder frozen;
-- source-weight admissibility and no-hand-selection rule frozen;
-- squarefree collision row norm identified as the primary arithmetic object;
-- exact finite additive-character/kernel regressions implemented and passed;
-- divisor-subset count regressions passed for support orders one and two;
-- inverse and inverse-square diagnostic profiles passed;
-- Lean deterministic bridge added and imported at package root;
-- targeted and full-package CI workflow added and passed;
-- claim matrix, terminal outcomes and forbidden overclaims frozen.
+- P0: passed for W0/W1; W2/W3 unavailable.
+- P1: exact character/kernel identity proved and regression checked.
+- P2: deterministic Lean bridge previously kernel checked; extended module awaiting clean rerun.
+- P3: exact order-`r` collision count bound proved.
+- P4: W0 falsified as a uniform subcritical class; W1 frozen; W2/W3 unavailable.
+- P5: fixed-order bounded-weight extension proved.
+- P6: not executable without actual signed source coefficients.
+- P7: exact and adversarial panels passed locally and are committed for CI.
+- P8: no exact transfer to RUHL-FM or INT-SOCG is available.
+- P9: clean-room validation pending.
 
-## Kernel-checked deterministic bridge
+## Main theorem
 
-The module
+For `omega(q)=r`, prime factors above `2X`, and `0<=beta(q)q<=U_r`,
 
-`FortuneFormal.Integer.SquarefreeCompositeEnergyCriterion`
+\[
+R_\beta\le U_r{n-1\choose r+1}
+\]
 
-kernel-checks:
+and therefore
 
-- `totalCollision_le_of_rowBudget`;
-- `weightedEnergy_le_of_collisionBudget`;
-- `weightedEnergy_le_of_rowCollisionBudget`.
+\[
+\mathcal E_\beta(a)
+\le
+\left(D_\beta+U_r{n-1\choose r+1}\right)\|a\|_2^2.
+\]
 
-Every analytic input remains visible in the theorem signatures. No character-sum estimate, divisor estimate, source decomposition or prime-correlation theorem is represented by these claims.
+## Terminal classification
 
-## Validation record
+- `FIXED_ORDER_COMPOSITE_EXTENSION_PROVED`
+- `SOURCE_WEIGHT_CONTRACT_NOT_AVAILABLE`
+- `NO_TRANSFER_TO_RUHL_OR_SOCG`
 
-Workflow run `31077264106`:
+PWOC-SF2 remains open.
 
-- static trust audit and exact regressions: **PASS**;
-- targeted Lean build: **PASS**;
-- full formal package build: **PASS**;
-- new-file scan for `sorry`, `admit`, `axiom` and `unsafe`: **PASS**;
-- Lean version: `4.32.0`.
-
-The first targeted Lean run failed because an `add_le_add_left` application had its additive term on the wrong side. The proof was corrected to use the actual inequality orientation; no assumption or theorem statement was weakened. The complete rerun then passed.
-
-## Execution frontier
-
-The programme is ready to execute from P0. The first substantive decision is P4: identify and freeze one actual squarefree coefficient family arising in a local-factor or source block, then determine whether its absolute collision kernel is subcritical.
-
-The unrestricted, inverse and inverse-square profiles are falsification or regression controls only. They are not substitutes for the actual source weights.
-
-## Explicit nonclaims
-
-No squarefree-composite energy estimate has yet been proved.  
-No source-compatible coefficient contract has yet passed P4.  
-No transfer to RUHL-FM or INT-SOCG has yet been proved.  
-No proof of INT-AOD or Fortune is claimed.
+No actual source-compatible squarefree coefficient family has been bounded.  
+No proof of INT-PWOC, INT-AOD or Fortune is claimed.
