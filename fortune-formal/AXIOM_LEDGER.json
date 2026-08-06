@@ -1,63 +1,12 @@
 {
-  "status": "F4_STABILIZED_INTEGER_SPINE_FORMALIZED",
+  "status": "PUBLICATION_CONSOLIDATION_LEAN_COMPLIANT",
+  "updated": "2026-08-06",
   "allowed_axiom_file": "FortuneFormal/Frontier/Assumptions.lean",
-  "formalized_claims": [
-    {
-      "name": "FortuneFormal.Bilateral.p7_ifa1_concrete",
-      "claim_id": "P7-IFA1",
-      "source": "Paper VII Section 3",
-      "gate": "F2",
-      "status": "KERNEL_CHECKED"
-    },
-    {
-      "name": "FortuneFormal.Bilateral.p7_bdd1_concrete",
-      "claim_id": "P7-BDD1",
-      "source": "Paper VII Section 4, corrected prime-Frobenius scope",
-      "gate": "F3",
-      "status": "KERNEL_CHECKED"
-    },
-    {
-      "name": "FortuneFormal.Bilateral.p7_bdd2_concrete",
-      "claim_id": "P7-BDD2",
-      "source": "Paper VII Section 5, corrected odd-prime scope",
-      "gate": "F3",
-      "status": "KERNEL_CHECKED"
-    },
-    {
-      "name": "FortuneFormal.Bilateral.p7_strip_concrete",
-      "claim_id": "P7-STRIP",
-      "source": "Paper VII Corollary 5.3, corrected odd-prime scope",
-      "gate": "F3",
-      "status": "KERNEL_CHECKED"
-    },
-    {
-      "name": "FortuneFormal.Integer.no_failure_of_variance_below_baseline_gap",
-      "claim_id": "INT-ONE-FAILURE",
-      "source": "Corrected Papers II Theorems 2.4-2.7 and Paper III Theorem 9.1",
-      "gate": "INTEGER-RECONSTRUCTION",
-      "status": "KERNEL_CHECKED"
-    },
-    {
-      "name": "FortuneFormal.Integer.centered_second_moment_identity",
-      "claim_id": "INT-CENTRED-IDENTITY",
-      "source": "Reconstructed corrected detector algebra",
-      "gate": "INTEGER-RECONSTRUCTION",
-      "status": "KERNEL_CHECKED"
-    },
-    {
-      "name": "FortuneFormal.Integer.four_prime_covariance_identity",
-      "claim_id": "INT-FOUR-PRIME-IDENTITY",
-      "source": "Paper III Equation 10.1 with exact centring",
-      "gate": "INTEGER-RECONSTRUCTION",
-      "status": "KERNEL_CHECKED"
-    }
-  ],
   "axioms": [
     {
       "name": "FortuneFormal.p7_k2_certified_normalization",
       "claim_id": "P7-K2-CERT-NORM",
       "source": "Paper VII Sections 7-9 and external Singular certificate package",
-      "remove_at_gate": "F4-CERT",
       "status": "EXTERNAL_CERTIFICATE_AND_NORMALIZATION_BOUNDARY"
     }
   ],
@@ -68,9 +17,35 @@
       "status": "LEAN_DERIVED_FROM_ONE_LEDGERED_AXIOM"
     }
   ],
-  "future_frontier_axiom": {
-    "name": "FortuneFormal.cubic_true_frobenius_point_theorem",
-    "creation_gate": "F5",
-    "status": "NOT_CREATED; PAPER VII EXPANSION FROZEN"
-  }
+  "kernel_checked_publication_interfaces": [
+    "FortuneFormal.Bilateral.p7_ifa1_concrete",
+    "FortuneFormal.Bilateral.p7_bdd1_concrete",
+    "FortuneFormal.Bilateral.p7_bdd2_concrete",
+    "FortuneFormal.Bilateral.p7_strip_concrete",
+    "FortuneFormal.Quadratic.certifiedComponent_not_arithmeticOpen",
+    "FortuneFormal.Integer.no_failure_of_variance_below_baseline_gap",
+    "FortuneFormal.Integer.centered_second_moment_identity",
+    "FortuneFormal.Integer.four_prime_covariance_identity",
+    "FortuneFormal.Integer.firstOrderError_lt_allowance",
+    "FortuneFormal.Integer.firstOrderError_lt_constant",
+    "FortuneFormal.Integer.signedFirstOrder_lowerBound",
+    "FortuneFormal.Integer.arithmeticResidual_split",
+    "FortuneFormal.Integer.weightedResidual_eq_difference"
+  ],
+  "module_level_interfaces": [
+    "FortuneFormal.Integer.AdaptiveOccupancyCriterion",
+    "FortuneFormal.Integer.SquarefreeCompositeEnergyCriterion",
+    "FortuneFormal.Integer.LocalConnectedTreeObstruction"
+  ],
+  "not_axiomatized_open_frontiers": [
+    "INT-ISC",
+    "INT-SCME",
+    "INT-LCSK",
+    "full source-attached INT-PWOC",
+    "RUHL selected-centre tuple residual",
+    "D1-QLINE-NONSAT",
+    "P7-CUBIC-TF",
+    "function-field-to-integer transfer",
+    "Fortune's conjecture"
+  ]
 }
