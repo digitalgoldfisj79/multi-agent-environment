@@ -1,0 +1,52 @@
+{
+  "programme": "FORTUNE_INT_PSLT_BUCHSTAB_FACTOR_BAND_V0_1",
+  "date": "2026-08-04",
+  "base_commit": "cc8c00c30a436b8ced65bbd4703326145d129de3",
+  "parent_pr": 49,
+  "primary_issue": 50,
+  "status": "CLOSED",
+  "initial_target": "INT-PSLT",
+  "terminal_target": "INT-PFLI",
+  "terminal_outcome": "REDUCED_TO_CRITICAL_FACTOR_INCIDENCE",
+  "validation": {
+    "static_job": "6a724dbca00abefd4b29284e",
+    "targeted_lean_job": "6a724ddda00abefd4b292854",
+    "full_cleanroom_job": "6a724e7a6b79c09949c22885",
+    "full_cleanroom_result": "COMPLETED",
+    "failure_count": 0,
+    "formal_build_jobs": 8682,
+    "terminal_sentinel": "FORTUNE_INT_PSLT_FACTOR_BAND_FULL_CLEANROOM_PASS"
+  },
+  "allowed_final_statuses": [
+    "PROVED_INT_PSLT",
+    "REDUCED_TO_ESTABLISHED_THEOREM",
+    "REDUCED_TO_CRITICAL_FACTOR_INCIDENCE",
+    "DEFECT_PROPAGATION_REDUCTION",
+    "METHOD_OBSTRUCTED_AT_EXPLICIT_SCALE"
+  ],
+  "gates": [
+    {"id": "B0", "name": "source_freeze", "status": "PASSED"},
+    {"id": "B1", "name": "prime_power_threshold_compression", "status": "PASSED"},
+    {"id": "B2", "name": "defect_propagation", "status": "CLOSED_NO_NATURAL_PROPAGATION"},
+    {"id": "B3", "name": "exact_least_factor_identity", "status": "PASSED"},
+    {"id": "B4", "name": "sieve_level_audit", "status": "CLOSED_AT_S_LT_2"},
+    {"id": "B5", "name": "critical_factor_incidence", "status": "REDUCED_TO_INT_PFLI"},
+    {"id": "B6", "name": "one_defect_resolution", "status": "PASSED_FORMAL_IMPLICATION"},
+    {"id": "B7", "name": "closeout", "status": "PASSED"}
+  ],
+  "prohibited_lanes": [
+    "P7-CUBIC-TF",
+    "D1-QLINE-NONSAT",
+    "superseded INT-ISC four-prime campaign",
+    "random-order derandomisation",
+    "reciprocal-frame moments without a proved bridge",
+    "finite-panel asymptotic promotion"
+  ],
+  "compute_policy": {
+    "sentinel_timeout_minutes": 10,
+    "ordinary_job_timeout_minutes": 45,
+    "absolute_timeout_minutes": 120,
+    "terminal_programme_jobs_required": 0,
+    "inspect_unrelated_jobs_before_cancellation": true
+  }
+}

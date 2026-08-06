@@ -1,0 +1,27 @@
+{
+  "programme": "FORTUNE_INT_AOD_OCCUPANCY_DUAL_V0_1",
+  "scales": [
+    {"symbol":"N","order":"X/log X","meaning":"registered primorial centres"},
+    {"symbol":"H","order":"X^2","meaning":"offset-window length"},
+    {"symbol":"M_X","order":"X^2/log X","meaning":"prime candidate-offset universe"},
+    {"symbol":"gamma_min","order":"log X","meaning":"compressed one-row count margin"},
+    {"symbol":"tau_A","order":"1","meaning":"frozen issue-54 detector temperature"},
+    {"symbol":"q_A","order":"1","meaning":"frozen Bernoulli density 1-exp(-tau_A)"},
+    {"symbol":"c_1","order":"X","meaning":"conditional first ordinary cumulant or mean occupancy"},
+    {"symbol":"tau_b","order":"log X/X","meaning":"adaptive preregistered stratum temperature"},
+    {"symbol":"q_b","order":"log X/X","meaning":"associated Bernoulli density 1-exp(-tau_b)"},
+    {"symbol":"K_adaptive_cover","order":"X","meaning":"fixed-size cover degree q_b M_X"},
+    {"symbol":"B","order":"polylog(X)","meaning":"deterministic terminal-prime strata"},
+    {"symbol":"stratum_terminal_width","order":"X/(log X)^(1+delta)","meaning":"safe width from the mixture zero-radius audit"},
+    {"symbol":"D_b","order":"o(X/log X)","meaning":"maximum admissible ordinary-cumulant dependence scale in INT-SOCG"},
+    {"symbol":"K_RUHL","order":"log X","meaning":"conditional factorial-moment order sufficient for Bonferroni"},
+    {"symbol":"required_stratum_gap","order":"log(n_b B)","meaning":"Laplace gap allocating less than 1/B uncovered mass"}
+  ],
+  "scale_tests": [
+    {"id":"E1","test":"every tau_b is deterministic and at most tau_A","failure_action":"reject profile as circular or unrelated to INT-AOD"},
+    {"id":"E2","test":"whole-block Laplace zero radius reaches the useful tau scale","failure_action":"stratify before applying cumulants"},
+    {"id":"E3","test":"tau_b D_b tends to zero and the ordinary-cumulant remainder is o(log n_b)","failure_action":"close INT-SOCG at the measured dependence scale"},
+    {"id":"E4","test":"RUHL-FM weighted factorial-moment error is below (n_b B)^(-1-2epsilon) through K=Theta(log X)","failure_action":"retain conditional benchmark only"},
+    {"id":"E5","test":"rowwise bilinear estimates cross d=sqrt(H) with signed actual-prime resolution","failure_action":"close direct asymptotic-sieve lane"}
+  ]
+}

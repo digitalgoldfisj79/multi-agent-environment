@@ -1,0 +1,65 @@
+{
+  "programme": "FORTUNE_INT_SOCG_STRATIFIED_CUMULANTS_V0_1",
+  "new_axioms": 0,
+  "fortune_claimed": false,
+  "int_aod_claimed": false,
+  "int_socg_claimed": false,
+  "int_scme_claimed": false,
+  "claims": [
+    {
+      "id": "C0-ROW-DEPENDENT-DETECTOR",
+      "status": "PROVED_FORMAL_INHERITED",
+      "statement": "A successful preregistered row-dependent exponential detector with temperatures at most tau_A implies the frozen INT-AOD detector and excludes zero rows."
+    },
+    {
+      "id": "C1-STRATUM-GEOMETRY",
+      "status": "PROVED_EXACT",
+      "statement": "Deterministic terminal-prime strata, common restricted offset universes and output-independent temperatures can be fixed without observing output-prime incidence."
+    },
+    {
+      "id": "C2-INT-SCME-IMPLICATION",
+      "status": "PROVED_EXACT",
+      "statement": "The weighted selected-centre mean lower bound T_b >= kappa X^2 log X implies c_1,b >= cX after an explicit proper-output-prime-power subtraction."
+    },
+    {
+      "id": "C2-INT-SCME",
+      "status": "OPEN_PRIMARY_FRONTIER",
+      "statement": "Every registered stratum satisfies the selected-centre weighted mean lower bound T_b >= kappa X^2 log X."
+    },
+    {
+      "id": "C3-FACTORIAL-STIRLING",
+      "status": "PROVED_EXACT",
+      "statement": "Correct factorial cumulant growth with radius D implies ordinary cumulant growth with radius D+1."
+    },
+    {
+      "id": "C4-LOCAL-PAIR-SCALE",
+      "status": "PROVED_SCALE_BOUND",
+      "statement": "The post-terminal collision-plus-tail edge majorant has candidate-column row sum O(X/(log X)^2)."
+    },
+    {
+      "id": "C4-INT-LCSK",
+      "status": "OPEN_SECONDARY",
+      "statement": "The full all-orders renormalized local connected kernel admits a subcritical tree or hypergraph majorant."
+    },
+    {
+      "id": "C5-PRIME-MODULUS-LARGE-SIEVE",
+      "status": "PROVED_EXACT",
+      "statement": "The primorial walk satisfies the stated additive-character energy inequality averaged over prime moduli q>2X."
+    },
+    {
+      "id": "C5-INT-PWOC",
+      "status": "OPEN_SECONDARY",
+      "statement": "The prime-modulus theorem extends to the weighted squarefree-composite conductor families required by source and connected expansions."
+    },
+    {
+      "id": "C6-INT-SOCG",
+      "status": "OPEN_BLOCKED_BY_C2",
+      "statement": "For every stratum, |c_k| <= c_1 k! D^(k-1) with D << X/(log X)^(1+delta)."
+    },
+    {
+      "id": "C8-RUHL-BRIDGE",
+      "status": "PROVED_CONDITIONAL_INHERITED",
+      "statement": "A row-uniform Hardy--Littlewood factorial-moment theorem through logarithmic order with the registered error budget implies INT-AOD."
+    }
+  ]
+}
