@@ -1,0 +1,42 @@
+{
+  "programme": "FORTUNE_RUHL_SELECTED_TUPLE_RESIDUAL_V0_1",
+  "execution_state": "EXECUTED_VALIDATION_PENDING",
+  "claims": [
+    {
+      "id": "RUHL-STR-1",
+      "statement": "The signed factorial-moment error equals the averaged Bonferroni occupancy polynomial minus the averaged model Taylor polynomial.",
+      "status": "PROVED_EXACTLY",
+      "analytic_input": false
+    },
+    {
+      "id": "RUHL-STR-2",
+      "statement": "The absolute RUHL envelope forces |E_1| < Delta/q, which is O(1) in the frozen geometry.",
+      "status": "PROVED_EXACTLY",
+      "analytic_input": false
+    },
+    {
+      "id": "RUHL-STR-3",
+      "statement": "The frozen Heath--Brown identity is exact for n <= z^J and has absolute binomial coefficient mass 2^J-1.",
+      "status": "PROVED_BY_CONVOLUTION; FINITE_REGRESSION_CHECKED",
+      "analytic_input": false
+    },
+    {
+      "id": "RUHL-STR-4",
+      "statement": "For N~exp(X), H=X^2, forcing z=N^(1/J)<=H requires J~X/(2 log X), producing coefficient mass exp(Theta(X/log X)).",
+      "status": "PROVED_SCALE_LEDGER",
+      "analytic_input": false
+    },
+    {
+      "id": "RUHL-STR-5",
+      "statement": "The frozen Heath--Brown termwise absolute implementation proves the RUHL residual.",
+      "status": "REFUTED_AS_A_DELIVERED_METHOD",
+      "analytic_input": true
+    },
+    {
+      "id": "RUHL-STR-6",
+      "statement": "RUHL-FM, INT-AOD, or Fortune is proved.",
+      "status": "NOT_CLAIMED",
+      "analytic_input": true
+    }
+  ]
+}
