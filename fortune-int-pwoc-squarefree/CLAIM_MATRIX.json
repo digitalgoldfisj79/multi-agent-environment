@@ -1,0 +1,49 @@
+{
+  "programme": "FORTUNE_INT_PWOC_SQUAREFREE_V0_1",
+  "claims": [
+    {
+      "id": "PWOC-SF0-LEAN-A",
+      "statement": "Rowwise collision budgets imply the aggregate collision budget.",
+      "status": "TO_BE_KERNEL_CHECKED",
+      "module": "FortuneFormal.Integer.SquarefreeCompositeEnergyCriterion",
+      "analytic_input": false
+    },
+    {
+      "id": "PWOC-SF0-LEAN-B",
+      "statement": "Pointwise diagonal-plus-collision energy bounds and an aggregate collision budget imply the global weighted energy bound.",
+      "status": "TO_BE_KERNEL_CHECKED",
+      "module": "FortuneFormal.Integer.SquarefreeCompositeEnergyCriterion",
+      "analytic_input": false
+    },
+    {
+      "id": "PWOC-SF0-ORTH",
+      "statement": "The weighted additive-character energy equals the exact collision-kernel quadratic form.",
+      "status": "OPEN_PENDING_EXACT_REGRESSION",
+      "analytic_input": true
+    },
+    {
+      "id": "PWOC-SF1",
+      "statement": "A fixed-order squarefree-composite modulus family satisfies an explicit source-compatible collision row-sum bound.",
+      "status": "OPEN",
+      "analytic_input": true
+    },
+    {
+      "id": "PWOC-SF2",
+      "statement": "The frozen actual squarefree source block has a collision norm sufficient for RUHL-FM or INT-SOCG.",
+      "status": "OPEN",
+      "analytic_input": true
+    },
+    {
+      "id": "INT-PWOC",
+      "statement": "All weighted squarefree-composite moduli required by the full source or connected decomposition are controlled.",
+      "status": "NOT_CLAIMED",
+      "analytic_input": true
+    }
+  ],
+  "explicit_nonclaims": [
+    "No squarefree-composite energy estimate has yet been proved.",
+    "No source-compatible coefficient contract has yet passed P4.",
+    "No transfer to RUHL-FM or INT-SOCG has yet been proved.",
+    "No proof of INT-AOD or Fortune is claimed."
+  ]
+}
