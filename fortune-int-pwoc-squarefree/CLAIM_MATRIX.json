@@ -1,24 +1,42 @@
 {
   "programme": "FORTUNE_INT_PWOC_SQUAREFREE_V0_1",
+  "validation": {
+    "workflow_run_id": 31077264106,
+    "lean_version": "4.32.0",
+    "targeted_build": "PASS",
+    "full_package_build": "PASS",
+    "trust_scan": "PASS",
+    "exact_regression": "PASS"
+  },
   "claims": [
     {
       "id": "PWOC-SF0-LEAN-A",
       "statement": "Rowwise collision budgets imply the aggregate collision budget.",
-      "status": "TO_BE_KERNEL_CHECKED",
+      "status": "KERNEL_CHECKED",
       "module": "FortuneFormal.Integer.SquarefreeCompositeEnergyCriterion",
+      "theorem": "totalCollision_le_of_rowBudget",
       "analytic_input": false
     },
     {
       "id": "PWOC-SF0-LEAN-B",
       "statement": "Pointwise diagonal-plus-collision energy bounds and an aggregate collision budget imply the global weighted energy bound.",
-      "status": "TO_BE_KERNEL_CHECKED",
+      "status": "KERNEL_CHECKED",
       "module": "FortuneFormal.Integer.SquarefreeCompositeEnergyCriterion",
+      "theorem": "weightedEnergy_le_of_collisionBudget",
+      "analytic_input": false
+    },
+    {
+      "id": "PWOC-SF0-LEAN-C",
+      "statement": "A row-indexed collision decomposition and rowwise budgets imply the global weighted energy bound.",
+      "status": "KERNEL_CHECKED",
+      "module": "FortuneFormal.Integer.SquarefreeCompositeEnergyCriterion",
+      "theorem": "weightedEnergy_le_of_rowCollisionBudget",
       "analytic_input": false
     },
     {
       "id": "PWOC-SF0-ORTH",
       "statement": "The weighted additive-character energy equals the exact collision-kernel quadratic form.",
-      "status": "OPEN_PENDING_EXACT_REGRESSION",
+      "status": "FINITE_EXACT_REGRESSION_PASSED_GENERAL_THEOREM_OPEN",
       "analytic_input": true
     },
     {
