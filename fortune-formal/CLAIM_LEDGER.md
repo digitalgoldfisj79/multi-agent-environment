@@ -32,11 +32,15 @@
 
 The formal modules include additional supporting lemmas; this table lists the publication-facing load-bearing interfaces.
 
-## Single permitted external boundary
+## ASSUMED pending formalization
 
-`FortuneFormal.p7_k2_certified_normalization`
+Exactly one permitted external boundary remains:
 
-states that a genuine quadratic incidence produces an arithmetic-open q-free point on the externally certified component. The derived theorem `p7_k2_empty_from_external_certificate` is therefore not axiom-free. No other manuscript theorem is imported as an axiom.
+`FortuneFormal.p7_k2_certified_normalization`.
+
+It states that a genuine quadratic incidence produces an arithmetic-open q-free point on the externally certified component. The derived theorem `p7_k2_empty_from_external_certificate` is therefore not axiom-free. No other manuscript theorem is imported as an axiom.
+
+Papers I, IV, V and VI remain selectively formalized or unformalized at theorem level. Their authoritative manuscripts and exact regressions are retained, but they must not be described as wholly kernel checked.
 
 ## Exact-computational evidence
 
@@ -49,10 +53,6 @@ states that a genuine quadratic incidence produces an arithmetic-open q-free poi
 - finite Heath--Brown identity and source-scale tables.
 
 These computations do not prove the corresponding uniform analytic frontiers.
-
-## Manuscript-proved but not fully formalized
-
-Papers I, IV, V and VI remain selectively formalized or unformalized at theorem level. Their authoritative manuscripts and exact regressions are retained, but they must not be described as wholly kernel checked.
 
 ## Open analytic frontiers
 
@@ -71,6 +71,6 @@ Papers I, IV, V and VI remain selectively formalized or unformalized at theorem 
 - LCSK Python regressions now genuinely exercise connected local coefficients through order eight; Lean remains explicitly scoped to the order-three obstruction;
 - the finite RUHL margin search is diagnostic and cannot invalidate a passing asymptotic exponent certificate.
 
-## Explicit nonclaims
+## Explicitly not claimed
 
 The programme does not claim full formalization of all seven manuscripts, an axiom-free Paper VII quadratic theorem, any open analytic frontier, a transfer theorem, Fortune's conjecture, peer review or publication acceptance.
