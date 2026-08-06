@@ -1,0 +1,38 @@
+{
+  "programme": "FORTUNE_INT_LCSK_TREE_GRAPH_V0_1",
+  "date": "2026-08-06",
+  "base": "ca68b980e7222712ed0b46f939befd8ecda7f4e4",
+  "gates": [
+    {"id": "L0", "name": "source_and_scale_freeze", "required": true},
+    {"id": "L1", "name": "exact_connected_recombination", "required": true},
+    {"id": "L2", "name": "pair_edge_identification", "required": true},
+    {"id": "L3", "name": "spanning_tree_gate", "required": true},
+    {"id": "L4", "name": "actual_candidate_witness", "required": true},
+    {"id": "L5", "name": "absolute_hyperedge_ledger", "required": true},
+    {"id": "L6", "name": "signed_refinement_gate", "required": false},
+    {"id": "L7", "name": "fortune_interface", "required": true},
+    {"id": "L8", "name": "formal_and_clean_room", "required": true}
+  ],
+  "allowed_terminal_outcomes": [
+    "INT_LCSK_PROVED",
+    "PAIR_TREE_MAJORANT_REFUTED",
+    "ABSOLUTE_HYPEREDGE_RADIUS_INSUFFICIENT",
+    "REDUCED_TO_SIGNED_HIGHER_BODY_CLUSTER_THEOREM",
+    "REFUTED_OR_CORRECTED"
+  ],
+  "forbidden_claims_without_complete_implication": [
+    "INT-LCSK",
+    "INT-SOCG",
+    "INT-AOD",
+    "Fortune"
+  ],
+  "lean": {
+    "module": "FortuneFormal.Integer.LocalConnectedTreeObstruction",
+    "targeted_build_required": true,
+    "root_import_required": true,
+    "full_build_required": true,
+    "new_trust_declarations_forbidden": true,
+    "placeholder_proofs_forbidden": true,
+    "unsafe_forbidden": true
+  }
+}

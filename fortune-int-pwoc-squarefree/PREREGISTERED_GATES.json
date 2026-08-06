@@ -1,0 +1,43 @@
+{
+  "programme": "FORTUNE_INT_PWOC_SQUAREFREE_V0_1",
+  "date": "2026-08-06",
+  "base": "2c7c9e11d0af091d69886fd888a90876ba2e1161",
+  "gates": [
+    {"id": "P0", "name": "source_and_theorem_freeze", "required": true},
+    {"id": "P1", "name": "exact_character_kernel_identity", "required": true},
+    {"id": "P2", "name": "lean_deterministic_bridge", "required": true},
+    {"id": "P3", "name": "squarefree_collision_combinatorics", "required": true},
+    {"id": "P4", "name": "source_compatible_weight_contracts", "required": true},
+    {"id": "P5", "name": "fixed_order_and_multiplicative_bounds", "required": true},
+    {"id": "P6", "name": "signed_and_dyadic_refinements", "required": false, "after": "P5"},
+    {"id": "P7", "name": "finite_panels_and_adversarial_tests", "required": true},
+    {"id": "P8", "name": "arithmetic_transfer", "required": true},
+    {"id": "P9", "name": "closeout_and_clean_room", "required": true}
+  ],
+  "allowed_terminal_outcomes": [
+    "SQUAREFREE_COMPOSITE_ENERGY_PROVED",
+    "FIXED_ORDER_COMPOSITE_EXTENSION_PROVED",
+    "REDUCED_TO_WEIGHTED_DIVISOR_ROW_SUM",
+    "ABSOLUTE_MAJORANT_BLOCKED_BY_SUBSET_GROWTH",
+    "SOURCE_WEIGHT_CONTRACT_NOT_AVAILABLE",
+    "NO_TRANSFER_TO_RUHL_OR_SOCG",
+    "REFUTED_OR_CORRECTED"
+  ],
+  "forbidden_claims_without_complete_implication": [
+    "INT-PWOC",
+    "INT-SOCG",
+    "RUHL-FM",
+    "INT-AOD",
+    "Fortune"
+  ],
+  "lean": {
+    "module": "FortuneFormal.Integer.SquarefreeCompositeEnergyCriterion",
+    "targeted_build_required": true,
+    "root_import_required": true,
+    "full_build_required": true,
+    "new_axioms_forbidden": true,
+    "sorry_forbidden": true,
+    "admit_forbidden": true,
+    "unsafe_forbidden": true
+  }
+}
