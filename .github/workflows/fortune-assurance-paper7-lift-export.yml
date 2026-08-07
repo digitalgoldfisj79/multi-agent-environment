@@ -7,6 +7,7 @@ on:
     paths:
       - '.github/workflows/fortune-assurance-paper7-lift-export.yml'
       - 'publications/fortune-paper-vii-endpoint-incidence-20260731/certificates/**'
+      - 'fortune-corpus-novelty-assurance-v1/paper7/**'
   workflow_dispatch:
 
 jobs:
@@ -22,19 +23,22 @@ jobs:
         run: |
           set -euo pipefail
           CERT=publications/fortune-paper-vii-endpoint-incidence-20260731/certificates
+          OUT=fortune-corpus-novelty-assurance-v1/paper7
           Singular "$CERT/chartB_universal.sing" > /tmp/lift_B.out
           Singular "$CERT/chartX_universal.sing" > /tmp/lift_X.out
           python3 "$CERT/verify_lift_identities.py" /tmp/lift_B.out /tmp/lift_X.out
-          cp /tmp/lift_B.out "$CERT/lift_B_exact.out"
-          cp /tmp/lift_X.out "$CERT/lift_X_exact.out"
-          sha256sum "$CERT/lift_B_exact.out" "$CERT/lift_X_exact.out" > "$CERT/lift_exact_sha256.txt"
+          cp /tmp/lift_B.out "$OUT/lift_B_exact.out"
+          cp /tmp/lift_X.out "$OUT/lift_X_exact.out"
+          Singular "$OUT/chart_power_lifts.sing" > "$OUT/power_lifts_exact.out"
+          sha256sum "$OUT/lift_B_exact.out" "$OUT/lift_X_exact.out" "$OUT/power_lifts_exact.out" > "$OUT/lift_exact_sha256.txt"
       - name: Upload exact lift matrices
         uses: actions/upload-artifact@v4
         with:
           name: fortune-paper7-lift-matrices
           path: |
-            publications/fortune-paper-vii-endpoint-incidence-20260731/certificates/lift_B_exact.out
-            publications/fortune-paper-vii-endpoint-incidence-20260731/certificates/lift_X_exact.out
-            publications/fortune-paper-vii-endpoint-incidence-20260731/certificates/lift_exact_sha256.txt
+            fortune-corpus-novelty-assurance-v1/paper7/lift_B_exact.out
+            fortune-corpus-novelty-assurance-v1/paper7/lift_X_exact.out
+            fortune-corpus-novelty-assurance-v1/paper7/power_lifts_exact.out
+            fortune-corpus-novelty-assurance-v1/paper7/lift_exact_sha256.txt
           if-no-files-found: error
           retention-days: 30
