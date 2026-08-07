@@ -18,12 +18,14 @@ assert len(ids_i) == len(set(ids_i))
 assert len(ids_m) == len(set(ids_m))
 assert set(ids_i) == set(ids_m), (set(ids_i)-set(ids_m), set(ids_m)-set(ids_i))
 
-counts = Counter(r['verdict'] for r in rows)
-assert dict(counts) == matrix['counts'], (dict(counts), matrix['counts'])
+classes = ['NEW','STRENGTHENING','NEW_SPECIALIZATION','KNOWN_SPECIAL_CASE','ROUTINE_DERIVATION','UNCLEAR']
+raw_counts = Counter(r['verdict'] for r in rows)
+counts = {k: raw_counts[k] for k in classes}
+assert counts == matrix['counts'], (counts, matrix['counts'])
 assert counts['NEW'] == 0
 assert counts['STRENGTHENING'] == 0
 for r in rows:
-    assert r['verdict'] in {'NEW','STRENGTHENING','NEW_SPECIALIZATION','KNOWN_SPECIAL_CASE','ROUTINE_DERIVATION','UNCLEAR'}
+    assert r['verdict'] in set(classes)
     assert r.get('difference')
     if r['verdict'] in {'NEW','STRENGTHENING','NEW_SPECIALIZATION','UNCLEAR'}:
         assert r.get('comparator')
