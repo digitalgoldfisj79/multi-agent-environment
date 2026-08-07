@@ -37,3 +37,5 @@ jobs:
             git commit -m 'fortune assurance: repair Paper VI torsor and denominator proofs'
             git push origin HEAD:gpt56/fortune-novelty-assurance-v1-20260807
           fi
+      - name: Assurance marker
+        run: echo 'PAPER6_REPAIR_WORKFLOW_V2'
