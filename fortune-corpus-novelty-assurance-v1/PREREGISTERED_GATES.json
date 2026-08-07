@@ -1,0 +1,39 @@
+{
+  "programme": "Fortune Corpus Novelty & Assurance Programme v1.0",
+  "frozen_source": "8c506b92ed3a4d43cc647d77480476e1be48af77",
+  "integer_frontier": "CLOSED",
+  "gates": {
+    "N1_novelty": {
+      "pass": "Every priority A/B candidate has a closest-known-result record, an exact-difference statement, and one of NEW/STRENGTHENING/NEW_SPECIALIZATION/KNOWN_SPECIAL_CASE/ROUTINE_DERIVATION/UNCLEAR. No NEW or STRENGTHENING verdict may be based on search absence alone.",
+      "fail": "Any headline novelty claim lacks a documented comparator or collides with prior work under equal/weaker hypotheses."
+    },
+    "A1_axiom_closure": {
+      "pass": "The FortuneFormal package contains zero axiom declarations used by Papers I-VII, zero sorry/admit, full lake build passes, and Paper VII K2 emptiness remains derivable.",
+      "partial": "CertificateStatement becomes axiom-free but genuine Datum-to-model normalization remains external.",
+      "fail": "The external normalization boundary is mathematically stronger than the committed certificate or requires an unproved new theorem."
+    },
+    "P4_paper_iv": {
+      "pass": "Independent recomputation reproduces every coefficient pattern, multiplicity, contour loss, exceptional-character moment bound, matching class, and final log exponent with nonnegative slack.",
+      "fail": "Missing pattern, multiplicity mismatch, unproved character estimate, or final exponent exceeds the stated budget."
+    },
+    "P6_paper_vi": {
+      "pass": "Every theorem in the quotient/trace chain is independently rederived or tied to an explicit cited theorem with hypotheses verified for the present object.",
+      "fail": "Any cross-disciplinary step is analogy-only, circular, or uses a theorem outside its hypotheses."
+    },
+    "P7_paper_vii": {
+      "pass": "Inverse-free algebraisation, common defect, zero-defect classification, q-free certificate, genuine normalization, and quadratic contradiction all independently reproduce.",
+      "fail": "Any implication from genuine incidence to q-free model or from certificate to arithmetic contradiction fails."
+    },
+    "R_portfolio": {
+      "pass": "Surviving headline results are mapped to a publication structure with no known-special-case theorem marketed as new and specialist review packets are generated.",
+      "fail": "Portfolio structure still depends materially on unresolved novelty or proof status."
+    }
+  },
+  "terminal_states": [
+    "ASSURANCE_READY",
+    "PORTFOLIO_REDUCED",
+    "PROOF_REPAIR_REQUIRED",
+    "AXIOM_BOUNDARY_IRREDUCIBLE",
+    "LITERATURE_UNRESOLVED"
+  ]
+}
