@@ -14,10 +14,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Install Singular
+      - name: Install Singular and exact verifier dependency
         run: |
           sudo apt-get update
-          sudo apt-get install -y singular
+          sudo apt-get install -y singular python3-sympy
       - name: Generate exact chart lift matrices
         run: |
           set -euo pipefail
