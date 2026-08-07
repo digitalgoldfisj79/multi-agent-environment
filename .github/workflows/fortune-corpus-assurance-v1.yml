@@ -1,0 +1,82 @@
+name: Fortune corpus novelty and assurance v1
+
+on:
+  push:
+    branches:
+      - 'gpt56/fortune-novelty-assurance-v1-20260807'
+    paths:
+      - 'fortune-corpus-novelty-assurance-v1/**'
+      - 'publications/fortune-papers-ii-vi-20260724/paper6_secondary_quotients_replacement/**'
+      - 'fortune-formal/**'
+      - '.github/workflows/fortune-corpus-assurance-v1.yml'
+  workflow_dispatch:
+
+jobs:
+  assurance-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install exact-audit Python dependencies
+        run: python -m pip install numpy sympy
+      - name: Terminal programme verifier
+        run: python fortune-corpus-novelty-assurance-v1/scripts/verify_programme.py
+      - name: Paper IV independent exact support
+        run: |
+          python frontier/rqm_workbench/assembly_checks.py
+          python frontier/rqm_workbench/e2e_bias_check.py
+          python frontier/rqm_workbench/lit_audit_verify.py
+      - name: Paper VI independent reconstruction
+        run: |
+          python fortune-corpus-novelty-assurance-v1/scripts/repair_paper6_proofs.py
+          python publications/fortune-papers-ii-vi-20260724/paper6_secondary_quotients_replacement/paper6_independent_reconstruction.py
+      - name: Paper VII self-contained verifier
+        run: python publications/fortune-paper-vii-endpoint-incidence-20260731/paper7_verify.py
+
+  paper7-certificate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install exact certificate tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y singular python3-sympy
+      - name: Regenerate and verify both exact charts
+        run: |
+          set -euo pipefail
+          CERT=publications/fortune-paper-vii-endpoint-incidence-20260731/certificates
+          Singular "$CERT/chartB_universal.sing" > /tmp/lift_B.out
+          Singular "$CERT/chartX_universal.sing" > /tmp/lift_X.out
+          python3 "$CERT/verify_lift_identities.py" /tmp/lift_B.out /tmp/lift_X.out
+          Singular fortune-corpus-novelty-assurance-v1/paper7/chart_power_lifts.sing > /tmp/power_lifts.out
+          grep -A4 'B_REDUCE_BEGIN' /tmp/power_lifts.out | grep -q '_\[3\]=0'
+          grep -A4 'X_REDUCE_BEGIN' /tmp/power_lifts.out | grep -q '_\[3\]=0'
+
+  lean-boundary:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Lean 4.32.0
+        run: |
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - name: Restore Mathlib cache
+        working-directory: fortune-formal
+        run: |
+          elan toolchain install $(cat lean-toolchain)
+          lean --version | grep -F 'version 4.32.0'
+          lake update
+          lake exe cache get
+      - name: Full formal package
+        working-directory: fortune-formal
+        run: lake build
+      - name: Trust boundary scan
+        run: |
+          ! grep -R -En '\b(sorry|admit|unsafe)\b' fortune-formal/FortuneFormal
+          test $(grep -R -E '^\s*axiom\s+' fortune-formal/FortuneFormal --include='*.lean' | wc -l) -eq 1
+          grep -R -E '^\s*axiom\s+p7_k2_certified_normalization\b' fortune-formal/FortuneFormal/Frontier/Assumptions.lean

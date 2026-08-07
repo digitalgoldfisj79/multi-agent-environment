@@ -1,0 +1,50 @@
+{
+  "frozen_source": "8c506b92ed3a4d43cc647d77480476e1be48af77",
+  "policy": "Candidate clusters are broader than theorem labels. Closely dependent lemmas/corollaries are adjudicated with their parent result rather than inflated into separate novelty claims.",
+  "candidates": [
+    {"id":"I-COLLISION","paper":"I","priority":"A","statements":["Theorem 3.2","Theorem 3.3","Theorem 3.4","Corollary 3.5","Theorem 5.2"],"cluster":"averaged collision/large-divisor incidence geometry for consecutive-prime product paths"},
+    {"id":"I-SMITH","paper":"I","priority":"A","statements":["Theorem 4.1","Corollary 4.2"],"cluster":"affine rank and complete Smith form of interval endpoint families"},
+    {"id":"I-MEDIAN","paper":"I","priority":"A","statements":["Proposition 5.4","Theorem 5.5","Proposition 5.6"],"cluster":"exact median-cut bilinear mean/covariance and non-Gaussian spectral law"},
+    {"id":"I-SPARSE-COMP","paper":"I","priority":"B","statements":["Theorem 7.1"],"cluster":"sparse-composition closure"},
+    {"id":"I-ADDITIVE-FREQ","paper":"I","priority":"A","statements":["Theorem 9.1"],"cluster":"uniform additive-frequency fourth moment"},
+    {"id":"I-MULTIPLIER-NOGO","paper":"I","priority":"B","statements":["Propositions 10.1-10.3"],"cluster":"boundary-shell/four-corner/zero-frequency obstruction to multiplier inversion"},
+
+    {"id":"II-DETECTOR","paper":"II","priority":"B","statements":["Proposition 2.3","Theorems 2.4-2.7"],"cluster":"exact candidate-collapse and block prime-pair detector criteria"},
+    {"id":"II-SOURCE-WALK","paper":"II","priority":"A","statements":["Theorem 2.8","Propositions 3.1-3.2"],"cluster":"corrected source-to-walk identity and one-sided centring"},
+    {"id":"II-PAIR4","paper":"II","priority":"B","statements":["Lemma 4.1","Theorem 4.2"],"cluster":"four-copy rigidity and exact pair-sum fourth moment"},
+    {"id":"II-MOBIUS","paper":"II","priority":"B","statements":["Theorem 5.2"],"cluster":"growing-degree Möbius truncation"},
+    {"id":"II-SEMIPRIME","paper":"II","priority":"A","statements":["Theorem 6.1"],"cluster":"semiprime resonance obstruction"},
+    {"id":"II-CHAR-NOGO","paper":"II","priority":"A","statements":["Theorems 7.1-7.2","Corollary 7.3"],"cluster":"exact character diagonal, local ratio identity and CRT de-tensorisation no-go"},
+    {"id":"II-FAILURE-CERT","paper":"II","priority":"B","statements":["Theorems 8.1-8.3"],"cluster":"Fortune-failure certificate, primorial-centre coherence and conductor migration"},
+
+    {"id":"III-DICHOTOMY","paper":"III","priority":"A","statements":["Theorem A.3","Corollary A.4"],"cluster":"pair-sum dichotomy and exact two-scale energy decomposition for the primorial-prefix sequence"},
+    {"id":"III-TAIL","paper":"III","priority":"A","statements":["Lemma A.6","Theorem A.7"],"cluster":"growing moment bound and sub-Weibull Lebesgue tail"},
+    {"id":"III-TRANSFER","paper":"III","priority":"A","statements":["Corollary A.10","Theorem 9.1"],"cluster":"transfer gap from Lebesgue control to arithmetic reciprocal sampling"},
+
+    {"id":"IV-RANDOM-FRAME","paper":"IV","priority":"A","statements":["Theorem 2.1","Proposition 6.4"],"cluster":"random-order reciprocal-frame bound along primorial-product paths"},
+    {"id":"IV-CHAR6","paper":"IV","priority":"A","statements":["Lemma 5.2"],"cluster":"sixth-moment exceptional-character bound used in the random-order theorem"},
+    {"id":"IV-PATH-MATCH","paper":"IV","priority":"B","statements":["Lemmas 6.1-6.3"],"cluster":"triangular-coordinate/path-matching and all-bad configuration domination"},
+
+    {"id":"V-ORBIT-CROWN","paper":"V","priority":"A","statements":["Theorem 4.1","Corollary 4.2"],"cluster":"exact affine-orbit decomposition, crown coordinate and failure certificate"},
+    {"id":"V-SMOOTH","paper":"V","priority":"A","statements":["Theorem 5.1"],"cluster":"global smoothness of the sparse cone/projective surface"},
+    {"id":"V-SAWIN","paper":"V","priority":"A","statements":["Theorem 6.1"],"cluster":"nontrivial Sawin-cone cohomological transfer"},
+    {"id":"V-HOOKS","paper":"V","priority":"A","statements":["Theorems 7.1-8.1"],"cluster":"sign-hook trace and alternating-hook projector"},
+    {"id":"V-FIXED","paper":"V","priority":"B","statements":["Theorem 9.1","Corollary 9.2"],"cluster":"exact fixed-point count and circularity consequence"},
+    {"id":"V-QLINE","paper":"V","priority":"A","statements":["Theorems 10.1-11.1"],"cluster":"q-line class projectors and saturation-defect identity"},
+
+    {"id":"VI-CARTIER","paper":"VI","priority":"A","statements":["Theorems 2.1, 3.1, 3.2"],"cluster":"Cartier moment, translation projector and reciprocal q-line moment"},
+    {"id":"VI-TANGENT","paper":"VI","priority":"A","statements":["Theorems 4.1-6.1"],"cluster":"cyclotomic tangent, nonsplit tangent extension and Smith blindness"},
+    {"id":"VI-DIVIDED-HOOK","paper":"VI","priority":"A","statements":["Theorems 7.1-8.1"],"cluster":"no ordinary divided-hook complex and Hattori-Stallings coefficient extraction"},
+    {"id":"VI-AS-QUOTIENT","paper":"VI","priority":"A","statements":["Proposition 9.1","Theorems 9.2-10.1"],"cluster":"free root-cycle action, explicit Artin-Schreier quotient, irreducibility section and no-split theorem"},
+    {"id":"VI-KUMMER","paper":"VI","priority":"A","statements":["Theorems 11.1-11.2"],"cluster":"sign-twist criterion and common Kummer quotient counts"},
+    {"id":"VI-COMPACT","paper":"VI","priority":"A","statements":["Theorems 12.1-13.1"],"cluster":"unique projective fixed point and compactified quotient count"},
+
+    {"id":"VII-INVERSE-FREE","paper":"VII","priority":"B","statements":["Theorem 3.1"],"cluster":"inverse-free equivalence for bilateral endpoint incidence"},
+    {"id":"VII-DEFECT","paper":"VII","priority":"A","statements":["Theorem 4.1"],"cluster":"common-defect existence/uniqueness theorem"},
+    {"id":"VII-ZERO-DEFECT","paper":"VII","priority":"A","statements":["Theorem 5.1","Corollaries 5.2-5.3"],"cluster":"zero-defect reflection/translation classification and strip emptiness"},
+    {"id":"VII-K2","paper":"VII","priority":"A","statements":["Lemma 8.1","Theorem 9.1"],"cluster":"two-chart certified component and quadratic emptiness over odd prime powers"},
+
+    {"id":"SYN-BONFERRONI","paper":"Synthesis","priority":"B","statements":["Theorem 3.1"],"cluster":"sharp finite even-Bonferroni detector criterion"},
+    {"id":"SYN-OBSTRUCTIONS","paper":"Synthesis","priority":"A","statements":["first-order strength inversion","third-order pair-tree obstruction","absolute higher-body radius obstruction","Heath-Brown weighted-residual requirement"],"cluster":"signed selected-centre obstruction package"}
+  ]
+}

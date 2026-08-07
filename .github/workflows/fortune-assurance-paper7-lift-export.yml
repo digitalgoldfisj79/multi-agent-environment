@@ -1,0 +1,44 @@
+name: Fortune assurance Paper VII lift export
+
+on:
+  push:
+    branches:
+      - 'gpt56/fortune-novelty-assurance-v1-20260807'
+    paths:
+      - '.github/workflows/fortune-assurance-paper7-lift-export.yml'
+      - 'publications/fortune-paper-vii-endpoint-incidence-20260731/certificates/**'
+      - 'fortune-corpus-novelty-assurance-v1/paper7/**'
+  workflow_dispatch:
+
+jobs:
+  paper7-lifts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Singular and exact verifier dependency
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y singular python3-sympy
+      - name: Generate exact chart lift matrices
+        run: |
+          set -euo pipefail
+          CERT=publications/fortune-paper-vii-endpoint-incidence-20260731/certificates
+          OUT=fortune-corpus-novelty-assurance-v1/paper7
+          Singular "$CERT/chartB_universal.sing" > /tmp/lift_B.out
+          Singular "$CERT/chartX_universal.sing" > /tmp/lift_X.out
+          python3 "$CERT/verify_lift_identities.py" /tmp/lift_B.out /tmp/lift_X.out
+          cp /tmp/lift_B.out "$OUT/lift_B_exact.out"
+          cp /tmp/lift_X.out "$OUT/lift_X_exact.out"
+          Singular "$OUT/chart_power_lifts.sing" > "$OUT/power_lifts_exact.out"
+          sha256sum "$OUT/lift_B_exact.out" "$OUT/lift_X_exact.out" "$OUT/power_lifts_exact.out" > "$OUT/lift_exact_sha256.txt"
+      - name: Upload exact lift matrices
+        uses: actions/upload-artifact@v4
+        with:
+          name: fortune-paper7-lift-matrices
+          path: |
+            fortune-corpus-novelty-assurance-v1/paper7/lift_B_exact.out
+            fortune-corpus-novelty-assurance-v1/paper7/lift_X_exact.out
+            fortune-corpus-novelty-assurance-v1/paper7/power_lifts_exact.out
+            fortune-corpus-novelty-assurance-v1/paper7/lift_exact_sha256.txt
+          if-no-files-found: error
+          retention-days: 30

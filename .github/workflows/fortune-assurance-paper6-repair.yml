@@ -1,0 +1,41 @@
+name: Fortune assurance Paper VI proof repair
+
+on:
+  push:
+    branches:
+      - 'gpt56/fortune-novelty-assurance-v1-20260807'
+    paths:
+      - '.github/workflows/fortune-assurance-paper6-repair.yml'
+      - 'fortune-corpus-novelty-assurance-v1/scripts/repair_paper6_proofs.py'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  repair-and-verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Apply deterministic proof repairs
+        run: python3 fortune-corpus-novelty-assurance-v1/scripts/repair_paper6_proofs.py
+      - name: Run independent Paper VI reconstruction
+        run: |
+          cd publications/fortune-papers-ii-vi-20260724/paper6_secondary_quotients_replacement
+          python3 paper6_independent_reconstruction.py
+      - name: Commit repaired manuscript
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add publications/fortune-papers-ii-vi-20260724/paper6_secondary_quotients_replacement/manuscript.md
+          if git diff --cached --quiet; then
+            echo 'No manuscript change to commit'
+          else
+            git commit -m 'fortune assurance: repair Paper VI torsor and denominator proofs'
+            git push origin HEAD:gpt56/fortune-novelty-assurance-v1-20260807
+          fi
+      - name: Assurance marker
+        run: echo 'PAPER6_REPAIR_WORKFLOW_V2'
