@@ -1,0 +1,4 @@
+import FortuneFormal.Comparator.P7Bridge
+
+#print axioms FortuneFormal.Comparator.challenge_of_bilateral
+#print axioms FortuneFormal.Comparator.challenge_k2_empty_of_normalization

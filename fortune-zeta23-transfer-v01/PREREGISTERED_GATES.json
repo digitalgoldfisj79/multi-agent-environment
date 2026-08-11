@@ -1,0 +1,26 @@
+{
+  "programme": "FORTUNE_ZETA23_TRANSFER_V0_1",
+  "date": "2026-08-11",
+  "formal": {
+    "F0": "Mathlib-only independent Paper VII K2 challenge",
+    "F1": "explicit challenge-to-FortuneFormal bridge with normalization as theorem parameter",
+    "F2": "print-axioms audit on conditional bridge",
+    "F3": "no axiom/sorry/admit/unsafe in comparator layer",
+    "F4": "attempt strict reduction or closure of the sole Paper VII global axiom"
+  },
+  "spectral": {
+    "S0": "exact stable-rank/zero-row implication and adversarial controls",
+    "S1": "symbolic comparison with existing all-centres variance criterion",
+    "S2": "exact primorial panels global and terminal-prime stratified",
+    "S3": "derive stratum-size loss budget L=o(X/n_b)",
+    "S4": "expand second moment and identify prime-correlation arity",
+    "S5": "reopen integer lane only if arithmetic target is strictly weaker"
+  },
+  "integer_frontier_initial_state": "CLOSED",
+  "forbidden": [
+    "claiming the global Paper VII axiom is removed when it is only restated",
+    "calling a stable-rank restatement new progress",
+    "using diagnostic panel success as asymptotic evidence",
+    "reopening the integer Fortune programme without passing S5"
+  ]
+}
