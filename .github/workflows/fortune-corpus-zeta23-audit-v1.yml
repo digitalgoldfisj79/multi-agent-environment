@@ -59,6 +59,43 @@ jobs:
       - name: Full package regression
         run: lake build
 
+  finite-reconstructions:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Re-run Paper V independent census
+        working-directory: publications/fortune-papers-ii-vi-20260724/paper5_function_fields_replacement
+        run: |
+          cp paper5_independent_reconstruction_results.json /tmp/paper5_expected.json
+          python paper5_independent_reconstruction.py > /tmp/paper5_run.txt
+          diff -u /tmp/paper5_expected.json paper5_independent_reconstruction_results.json
+      - name: Re-run Paper V singular-locus census
+        working-directory: publications/fortune-papers-ii-vi-20260724/paper5_function_fields_replacement
+        run: |
+          cp sparse_surface_singularity_results.json /tmp/paper5_sing_expected.json
+          g++ -O2 -std=c++17 sparse_surface_singularity_independent.cpp -o /tmp/p5_singularity
+          /tmp/p5_singularity
+          diff -u /tmp/paper5_sing_expected.json sparse_surface_singularity_results.json
+      - name: Re-run Paper VI independent algebraic reconstruction
+        working-directory: publications/fortune-papers-ii-vi-20260724/paper6_secondary_quotients_replacement
+        run: |
+          cp paper6_independent_reconstruction_results.json /tmp/paper6_expected.json
+          python paper6_independent_reconstruction.py > /tmp/paper6_run.txt
+          diff -u /tmp/paper6_expected.json paper6_independent_reconstruction_results.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: fortune-papers-v-vi-independent-reconstructions
+          path: |
+            /tmp/paper5_run.txt
+            /tmp/paper6_run.txt
+            publications/fortune-papers-ii-vi-20260724/paper5_function_fields_replacement/paper5_independent_reconstruction_results.json
+            publications/fortune-papers-ii-vi-20260724/paper5_function_fields_replacement/sparse_surface_singularity_results.json
+            publications/fortune-papers-ii-vi-20260724/paper6_secondary_quotients_replacement/paper6_independent_reconstruction_results.json
+
   reduction-gates:
     runs-on: ubuntu-latest
     steps:
