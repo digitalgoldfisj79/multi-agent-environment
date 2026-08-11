@@ -1354,7 +1354,7 @@ The \(L_i\) are primorial-sized. For (9.4) to force an exact integer relation, \
 
 # Relation to existing analytic methods
 
-The remaining theorem is adjacent to several mature bodies of analytic number theory, but does not fit any of them directly.
+The remaining analytic task is adjacent to several mature bodies of analytic number theory, but does not fit any of them directly.
 
 The direct criterion in Theorem 2.4 resembles a Selberg-integral or Barban--Davenport--Halberstam statement. Classical BDH theory averages residue classes and moduli [@davenport-halberstam1966], while recent general-sequence versions require regularity or non-concentration hypotheses that are themselves unproved for the modulus-dependent primorial detector [@harper2025]. Pair-correlation methods relate continuous mean squares of primes in short intervals to zero statistics [@goldston-montgomery1987; @chan2003], but Theorems 8.2 and 8.3 show that the primorial centres neither provide a common critical-scale phase average nor a stable conductor ensemble.
 
@@ -1372,7 +1372,7 @@ creates a bounded-degree polynomial in the index and enables Weil-type arguments
 
 # Computational verification and reproducibility
 
-All asymptotic statements in this paper are proved symbolically. Computation was used for independent validation of exact identities and for diagnostics that are explicitly excluded from the proofs.
+Every asymptotic statement presented as a proved result is established analytically in the text. The Hardy--Littlewood mean formulae are conjectural calibrations and are explicitly excluded from that claim. Computation was used for independent validation of exact identities and for diagnostics that are not proof inputs.
 
 The validation suite includes:
 
@@ -1396,7 +1396,7 @@ Selected checks are shown below.
 | Fourier-scale reconstruction | maximum residual \(1.31\times10^{-13}\) |
 | Coherence diagnostic at \(N=10{,}000\) | correlation \(0.99612\) with limiting sinc profile |
 
-The supplementary archive contains the source manuscript, validators, phase reports, data summaries, a manifest, and checksums. The numerical panels are descriptive and are not used to establish any theorem.
+The accompanying reproducibility archive separates proof text from validation material and records the source manuscript, validators, data summaries, manifests and checksums. The numerical panels are descriptive; no theorem in this article depends on a finite numerical panel.
 
 # Open analytic boundary
 
