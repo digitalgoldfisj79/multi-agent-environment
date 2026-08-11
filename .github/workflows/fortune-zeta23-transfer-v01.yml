@@ -7,6 +7,7 @@ on:
     paths:
       - 'fortune-zeta23-transfer-v01/**'
       - 'fortune-formal/FortuneFormal/Comparator/**'
+      - 'fortune-formal/FortuneFormal.lean'
       - '.github/workflows/fortune-zeta23-transfer-v01.yml'
   workflow_dispatch:
 
@@ -49,19 +50,15 @@ jobs:
           lean --version | grep -F 'version 4.32.0'
           lake update
           lake exe cache get
-      - name: Compile independent challenge and bridge
+      - name: Compile independent challenge, bridge, and full package
         working-directory: fortune-formal
-        run: |
-          lake env lean FortuneFormal/Comparator/P7ChallengeDeps.lean
-          lake env lean FortuneFormal/Comparator/P7Challenge.lean
-          lake env lean FortuneFormal/Comparator/P7Bridge.lean
-          lake env lean FortuneFormal/Comparator/P7PrintAxioms.lean | tee /tmp/p7_axioms.out
+        run: lake build
+      - name: Print conditional bridge axioms
+        working-directory: fortune-formal
+        run: lake env lean FortuneFormal/Comparator/P7PrintAxioms.lean | tee /tmp/p7_axioms.out
       - name: Comparator trust scan
         run: |
           ! grep -R -En '^\s*axiom\s+' fortune-formal/FortuneFormal/Comparator --include='*.lean'
           ! grep -R -En '\b(sorry|admit)\b|^\s*unsafe\b' fortune-formal/FortuneFormal/Comparator --include='*.lean'
           ! grep -q 'p7_k2_certified_normalization' /tmp/p7_axioms.out
           test $(grep -R -E '^\s*axiom\s+' fortune-formal/FortuneFormal --include='*.lean' | wc -l) -eq 1
-      - name: Existing formal package regression
-        working-directory: fortune-formal
-        run: lake build
