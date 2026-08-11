@@ -19,6 +19,7 @@ import FortuneFormal.Bilateral.F3Closure
 import FortuneFormal.Quadratic.Model
 import FortuneFormal.Quadratic.DiscriminantContradiction
 import FortuneFormal.Quadratic.ReductionInterface
+import FortuneFormal.Quadratic.PowerLiftCertificateSmoke
 import FortuneFormal.Integer.BlockCriterion
 import FortuneFormal.Integer.LowerTailCriterion
 import FortuneFormal.Integer.FactorBandCriterion
