@@ -33,31 +33,41 @@ def main() -> None:
     )
     MAN.write_text(text, encoding="utf-8")
 
-    (OUT / "REFEREE_READ.md").write_text(
-        """# Independent-standalone referee read — Paper II\n\n"
-        "**Disposition:** `PASS_AFTER_PUBLICATION_FIXES`\n\n"
-        "The rebuilt manuscript was read as if no other Fortune manuscript were available. The theorem/proposition/lemma/corollary sequence is unchanged from the authoritative corrected source (24 statements). No load-bearing definition or proof refers to Paper I, Paper III, an internal programme label, or a superseded centring convention.\n\n"
-        "## Publication fixes made after the read\n\n"
-        "1. Replaced the ambiguous phrase `the remaining theorem` by `the remaining analytic task`.\n"
-        "2. Narrowed the reproducibility claim from `all asymptotic statements` to asymptotic statements actually presented as proved results, explicitly excluding the conjectural Hardy--Littlewood calibrations.\n"
-        "3. Clarified that finite numerical panels are validation/diagnostic material and are not proof dependencies.\n\n"
-        "## Remaining mathematical boundary\n\n"
-        "The manuscript proves exact detector implications and reciprocal-frame structural results. It does **not** prove any of the sparse-centre variance targets (12.1)--(12.3), a source-to-reciprocal transference theorem, a prime-pair asymptotic at primorial centres, or Fortune's conjecture.\n\n"
-        "## Referee risk still requiring human specialist review\n\n"
-        "The exact identities and elementary implications are comparatively low risk. The most appropriate external review is analytic-number-theory scrutiny of the positioning of the open variance target, the claimed scope of the no-go mechanisms, and literature priority for the reciprocal-frame structural results.\n",
-        encoding="utf-8",
-    )
+    referee = """# Independent-standalone referee read — Paper II
 
-    (OUT / "REPRODUCIBILITY.md").write_text(
-        """# Reproducibility boundary — Paper II\n\n"
-        "The manuscript is mathematically readable without executing code. Computation has only the following roles:\n\n"
-        "- exact finite enumeration checking the pair-sum fourth-moment count;\n"
-        "- floating-point residual checks of algebraic/Fourier identities;\n"
-        "- finite CRT/character reconstruction checks;\n"
-        "- finite coherence and reciprocal-pair diagnostics.\n\n"
-        "None of these computations establishes an asymptotic theorem. The Hardy--Littlewood baseline formulae are conjectural analytic calibrations, not computational findings. The final publication bundle must include the corresponding validators and checksums under a separate reproducibility-support directory; their absence from a reader's environment does not change any theorem statement or proof in `manuscript.md`.\n",
-        encoding="utf-8",
-    )
+**Disposition:** `PASS_AFTER_PUBLICATION_FIXES`
+
+The rebuilt manuscript was read as if no other Fortune manuscript were available. The theorem/proposition/lemma/corollary sequence is unchanged from the authoritative corrected source (24 statements). No load-bearing definition or proof refers to Paper I, Paper III, an internal programme label, or a superseded centring convention.
+
+## Publication fixes made after the read
+
+1. Replaced the ambiguous phrase `the remaining theorem` by `the remaining analytic task`.
+2. Narrowed the reproducibility claim from `all asymptotic statements` to asymptotic statements actually presented as proved results, explicitly excluding the conjectural Hardy--Littlewood calibrations.
+3. Clarified that finite numerical panels are validation/diagnostic material and are not proof dependencies.
+
+## Remaining mathematical boundary
+
+The manuscript proves exact detector implications and reciprocal-frame structural results. It does **not** prove any of the sparse-centre variance targets (12.1)--(12.3), a source-to-reciprocal transference theorem, a prime-pair asymptotic at primorial centres, or Fortune's conjecture.
+
+## Referee risk still requiring human specialist review
+
+The exact identities and elementary implications are comparatively low risk. The most appropriate external review is analytic-number-theory scrutiny of the positioning of the open variance target, the claimed scope of the no-go mechanisms, and literature priority for the reciprocal-frame structural results.
+"""
+    (OUT / "REFEREE_READ.md").write_text(referee, encoding="utf-8")
+
+    reproducibility = """# Reproducibility boundary — Paper II
+
+The manuscript is mathematically readable without executing code. Computation has only the following roles:
+
+- exact finite enumeration checking the pair-sum fourth-moment count;
+- floating-point residual checks of algebraic/Fourier identities;
+- finite CRT/character reconstruction checks;
+- finite coherence and reciprocal-pair diagnostics.
+
+None of these computations establishes an asymptotic theorem. The Hardy--Littlewood baseline formulae are conjectural analytic calibrations, not computational findings. The final publication bundle must include the corresponding validators and checksums under a separate reproducibility-support directory; their absence from a reader's environment does not change any theorem statement or proof in `manuscript.md`.
+"""
+    (OUT / "REPRODUCIBILITY.md").write_text(reproducibility, encoding="utf-8")
+
     print("PAPER2_REFEREE_POSTPROCESS_OK")
 
 
