@@ -59,6 +59,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Install exact panel dependencies
+        run: python -m pip install --quiet numpy sympy
       - name: Re-run inherited PSD finite-compression no-go diagnostics
         run: python fortune-zeta23-transfer-v01/spectral/stable_rank_transfer.py
       - name: Check claim-status/open-frontier markers
