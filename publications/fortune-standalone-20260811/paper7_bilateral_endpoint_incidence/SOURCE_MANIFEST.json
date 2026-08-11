@@ -1,0 +1,25 @@
+{
+  "paper": "VII",
+  "sources": [
+    "publications/fortune-paper-vii-endpoint-incidence-20260731/manuscript_parts/00-frontmatter-introduction-algebraisation.md",
+    "publications/fortune-paper-vii-endpoint-incidence-20260731/manuscript_parts/01-defect-rigidity-and-cubic.md",
+    "publications/fortune-paper-vii-endpoint-incidence-20260731/manuscript_parts/02-relaxation-and-quadratic-theorem.md",
+    "publications/fortune-paper-vii-endpoint-incidence-20260731/manuscript_parts/03-lineage-frontier-and-appendix.md"
+  ],
+  "standalone": "publications/fortune-standalone-20260811/paper7_bilateral_endpoint_incidence/manuscript.md",
+  "statement_count": 7,
+  "statement_sequence": [
+    "Theorem 3.1",
+    "Theorem 4.1",
+    "Theorem 5.1",
+    "Corollary 5.2",
+    "Corollary 5.3",
+    "Lemma 8.1",
+    "Theorem 9.1"
+  ],
+  "logical_cross_paper_dependencies": 0,
+  "quadratic_mathematical_status": "EXACT_COMPUTER_ASSISTED",
+  "quadratic_lean_status": "DERIVED_WITH_LEDGERED_AXIOM",
+  "custom_axiom": "FortuneFormal.p7_k2_certified_normalization",
+  "fortune_proved": false
+}
