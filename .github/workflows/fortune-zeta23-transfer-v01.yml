@@ -7,6 +7,7 @@ on:
     paths:
       - 'fortune-zeta23-transfer-v01/**'
       - 'fortune-formal/FortuneFormal/Comparator/**'
+      - 'fortune-formal/FortuneFormal/Quadratic/PowerLiftCertificateSmoke.lean'
       - 'fortune-formal/FortuneFormal.lean'
       - '.github/workflows/fortune-zeta23-transfer-v01.yml'
   workflow_dispatch:
@@ -62,3 +63,43 @@ jobs:
           ! grep -R -En '\b(sorry|admit)\b|^\s*unsafe\b' fortune-formal/FortuneFormal/Comparator --include='*.lean'
           ! grep -q 'p7_k2_certified_normalization' /tmp/p7_axioms.out
           test $(grep -R -E '^\s*axiom\s+' fortune-formal/FortuneFormal --include='*.lean' | wc -l) -eq 1
+
+  power-lift-kernel:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Singular and Lean
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y singular
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - name: Restore Mathlib cache
+        working-directory: fortune-formal
+        run: |
+          elan toolchain install $(cat lean-toolchain)
+          lake update
+          lake exe cache get
+      - name: Regenerate exact power lifts
+        run: |
+          Singular fortune-corpus-novelty-assurance-v1/paper7/chart_power_lifts.sing > /tmp/power_lifts_exact.out
+          grep -A1 'X_REDUCE_BEGIN' /tmp/power_lifts_exact.out | grep -q '^_\[1\]=0'
+      - name: Generate smallest exact Lean certificate
+        run: |
+          python fortune-zeta23-transfer-v01/formal/generate_powerlift_lean.py \
+            /tmp/power_lifts_exact.out --chart X --target 1 \
+            --output /tmp/GeneratedPowerLiftX1.lean | tee /tmp/generate.log
+          grep -q 'GENERATED chart=X target=1' /tmp/generate.log
+      - name: Kernel check generated polynomial identity
+        working-directory: fortune-formal
+        run: lake env lean /tmp/GeneratedPowerLiftX1.lean | tee /tmp/powerlift_lean.log
+      - name: Upload certificate source and generator record
+        uses: actions/upload-artifact@v4
+        with:
+          name: fortune-paper7-kernel-powerlift-X1
+          path: |
+            /tmp/GeneratedPowerLiftX1.lean
+            /tmp/power_lifts_exact.out
+            /tmp/generate.log
+          retention-days: 30
