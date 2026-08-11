@@ -1,0 +1,11 @@
+{
+  "panels": [
+    {"equivalence_and_uniqueness_verified":true,"k":2,"m":3,"mu_divisibility_witnesses":6,"mu_incidences":6,"nu_divisibility_witnesses":6,"nu_incidences":6,"ordered_prime_pairs":6,"pair_of_pairs":36,"q":3,"scope":"cross-modulus P!=Pprime and S!=Sprime","simultaneous_incidences":0},
+    {"equivalence_and_uniqueness_verified":true,"k":2,"m":3,"mu_divisibility_witnesses":60,"mu_incidences":60,"nu_divisibility_witnesses":60,"nu_incidences":60,"ordered_prime_pairs":90,"pair_of_pairs":8100,"q":5,"scope":"cross-modulus P!=Pprime and S!=Sprime","simultaneous_incidences":0},
+    {"equivalence_and_uniqueness_verified":true,"k":2,"m":3,"mu_divisibility_witnesses":672,"mu_incidences":672,"nu_divisibility_witnesses":672,"nu_incidences":672,"ordered_prime_pairs":420,"pair_of_pairs":176400,"q":7,"scope":"cross-modulus P!=Pprime and S!=Sprime","simultaneous_incidences":0},
+    {"equivalence_and_uniqueness_verified":true,"k":3,"m":5,"mu_divisibility_witnesses":8,"mu_incidences":8,"nu_divisibility_witnesses":8,"nu_incidences":8,"ordered_prime_pairs":56,"pair_of_pairs":3136,"q":3,"scope":"cross-modulus P!=Pprime and S!=Sprime","simultaneous_incidences":2},
+    {"equivalence_and_uniqueness_verified":true,"k":4,"m":7,"mu_divisibility_witnesses":30,"mu_incidences":30,"nu_divisibility_witnesses":30,"nu_incidences":30,"ordered_prime_pairs":306,"pair_of_pairs":93636,"q":3,"scope":"cross-modulus P!=Pprime and S!=Sprime","simultaneous_incidences":12}
+  ],
+  "status": "MACHINE-VERIFIED IDENTITY supporting an exact algebraic proof",
+  "theorem": "Endpoint scalar-frequency incidence is equivalent to four inverse-free polynomial divisibilities."
+}

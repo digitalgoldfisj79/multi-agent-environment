@@ -1,0 +1,366 @@
+{
+  "status": "PASS",
+  "exact_scope": [
+    "full-band Type-II direct/convolution compression",
+    "source-product diagonal/off-diagonal square decomposition",
+    "divisor-multiplicity convolution-energy bound",
+    "at-most-one first-band collision prime for distinct source products",
+    "complete-CRT two-source covariance kernel"
+  ],
+  "panels": [
+    {
+      "X": 11,
+      "H": 96,
+      "K": 3,
+      "z_values": [
+        11,
+        13,
+        17
+      ],
+      "Z": 17,
+      "moduli": [
+        19,
+        23,
+        29,
+        31
+      ],
+      "U_length": 8,
+      "V_length": 8,
+      "product_count": 31,
+      "max_product": 81,
+      "max_representation_count": 4,
+      "alpha_l2": "5",
+      "gamma_l2": "8",
+      "convolution_l2": "38",
+      "convolution_energy_bound": "160",
+      "V_R": "1479/1760",
+      "pair_products_above_H": true,
+      "maximum_distinct_product_collision_primes": 1,
+      "ordered_collision_pair_count": 252,
+      "ordered_noncollision_pair_count": 2538,
+      "total_full_band_square": "9292800/243049",
+      "total_source_product_diagonal": "17759878/729147",
+      "total_source_product_offdiagonal": "10118522/729147",
+      "total_complete_model_quadratic": "2503821760/137808783",
+      "empirical_full_square_to_source_diagonal_ratio": 1.5697405128571267,
+      "rows": [
+        {
+          "z": 11,
+          "full_band_sum": "1760/493",
+          "full_band_square": "3097600/243049",
+          "source_product_diagonal": "17759878/2187441",
+          "source_product_offdiagonal": "10118522/2187441",
+          "complete_model_quadratic": "2503821760/413426349"
+        },
+        {
+          "z": 13,
+          "full_band_sum": "-1760/493",
+          "full_band_square": "3097600/243049",
+          "source_product_diagonal": "4514306/729147",
+          "source_product_offdiagonal": "4778494/729147",
+          "complete_model_quadratic": "2503821760/413426349"
+        },
+        {
+          "z": 17,
+          "full_band_sum": "1760/493",
+          "full_band_square": "3097600/243049",
+          "source_product_diagonal": "757822/75429",
+          "source_product_offdiagonal": "5901562/2187441",
+          "complete_model_quadratic": "2503821760/413426349"
+        }
+      ]
+    },
+    {
+      "X": 17,
+      "H": 231,
+      "K": 3,
+      "z_values": [
+        17,
+        19,
+        23
+      ],
+      "Z": 23,
+      "moduli": [
+        29,
+        31,
+        37,
+        41,
+        43
+      ],
+      "U_length": 14,
+      "V_length": 14,
+      "product_count": 82,
+      "max_product": 225,
+      "max_representation_count": 6,
+      "alpha_l2": "10",
+      "gamma_l2": "14",
+      "convolution_l2": "158",
+      "convolution_energy_bound": "840",
+      "V_R": "15457/17920",
+      "pair_products_above_H": true,
+      "maximum_distinct_product_collision_primes": 1,
+      "ordered_collision_pair_count": 2022,
+      "ordered_noncollision_pair_count": 17904,
+      "total_full_band_square": "22478848000/238918849",
+      "total_source_product_diagonal": "20106542426/238918849",
+      "total_source_product_offdiagonal": "2372305574/238918849",
+      "total_complete_model_quadratic": "465540281344/6450808923",
+      "empirical_full_square_to_source_diagonal_ratio": 1.11798674897641,
+      "rows": [
+        {
+          "z": 17,
+          "full_band_sum": "107520/15457",
+          "full_band_square": "11560550400/238918849",
+          "source_product_diagonal": "5149830942/238918849",
+          "source_product_offdiagonal": "493132266/18378373",
+          "complete_model_quadratic": "465540281344/19352426769"
+        },
+        {
+          "z": 19,
+          "full_band_sum": "89600/15457",
+          "full_band_square": "8028160000/238918849",
+          "source_product_diagonal": "6779798302/238918849",
+          "source_product_offdiagonal": "1248361698/238918849",
+          "complete_model_quadratic": "465540281344/19352426769"
+        },
+        {
+          "z": 23,
+          "full_band_sum": "-53760/15457",
+          "full_band_square": "2890137600/238918849",
+          "source_product_diagonal": "8176913182/238918849",
+          "source_product_offdiagonal": "-5286775582/238918849",
+          "complete_model_quadratic": "465540281344/19352426769"
+        }
+      ]
+    },
+    {
+      "X": 23,
+      "H": 423,
+      "K": 4,
+      "z_values": [
+        23,
+        29,
+        31,
+        37
+      ],
+      "Z": 37,
+      "moduli": [
+        41,
+        43,
+        47,
+        53,
+        59,
+        61,
+        67,
+        71,
+        73
+      ],
+      "U_length": 19,
+      "V_length": 19,
+      "product_count": 143,
+      "max_product": 400,
+      "max_representation_count": 8,
+      "alpha_l2": "12",
+      "gamma_l2": "19",
+      "convolution_l2": "268",
+      "convolution_energy_bound": "1824",
+      "V_R": "2163522153/2560983040",
+      "pair_products_above_H": true,
+      "maximum_distinct_product_collision_primes": 1,
+      "ordered_collision_pair_count": 10040,
+      "ordered_noncollision_pair_count": 71184,
+      "total_full_band_square": "1047076406329604293696/4680828106521755409",
+      "total_source_product_diagonal": "834208751601412806448/4680828106521755409",
+      "total_source_product_offdiagonal": "70955884909397162416/1560276035507251803",
+      "total_complete_model_quadratic": "61707702465911076970432448/340094927735551182751713",
+      "empirical_full_square_to_source_diagonal_ratio": 1.2551731258147962,
+      "rows": [
+        {
+          "z": 23,
+          "full_band_sum": "-3532122532/2163522153",
+          "full_band_square": "12475889581062091024/4680828106521755409",
+          "source_product_diagonal": "3916692280478784556/82119791342486937",
+          "source_product_offdiagonal": "-210775570406228628668/4680828106521755409",
+          "complete_model_quadratic": "15426925616477769242608112/340094927735551182751713"
+        },
+        {
+          "z": 29,
+          "full_band_sum": "16955741788/2163522153",
+          "full_band_square": "287497179581329436944/4680828106521755409",
+          "source_product_diagonal": "83462859228750763844/1560276035507251803",
+          "source_product_offdiagonal": "37108601895077145412/4680828106521755409",
+          "complete_model_quadratic": "15426925616477769242608112/340094927735551182751713"
+        },
+        {
+          "z": 31,
+          "full_band_sum": "11833775708/2163522153",
+          "full_band_square": "140038247507250901264/4680828106521755409",
+          "source_product_diagonal": "150885812790059861452/4680828106521755409",
+          "source_product_offdiagonal": "-3615855094269653396/1560276035507251803",
+          "complete_model_quadratic": "15426925616477769242608112/340094927735551182751713"
+        },
+        {
+          "z": 37,
+          "full_band_sum": "1895283916/166424781",
+          "full_band_square": "3592101122248295056/27697207730897961",
+          "source_product_diagonal": "69894300379269977924/1560276035507251803",
+          "source_product_offdiagonal": "397382188522151930692/4680828106521755409",
+          "complete_model_quadratic": "15426925616477769242608112/340094927735551182751713"
+        }
+      ]
+    },
+    {
+      "X": 29,
+      "H": 672,
+      "K": 4,
+      "z_values": [
+        29,
+        31,
+        37,
+        41
+      ],
+      "Z": 41,
+      "moduli": [
+        43,
+        47,
+        53,
+        59,
+        61,
+        67,
+        71,
+        73,
+        79
+      ],
+      "U_length": 24,
+      "V_length": 24,
+      "product_count": 215,
+      "max_product": 625,
+      "max_representation_count": 8,
+      "alpha_l2": "15",
+      "gamma_l2": "24",
+      "convolution_l2": "404",
+      "convolution_energy_bound": "2880",
+      "V_R": "55474927/64856064",
+      "pair_products_above_H": true,
+      "maximum_distinct_product_collision_primes": 1,
+      "ordered_collision_pair_count": 22808,
+      "ordered_noncollision_pair_count": 161232,
+      "total_full_band_square": "736104081575116800/3077467525655329",
+      "total_source_product_diagonal": "719183388251848784/3077467525655329",
+      "total_source_product_offdiagonal": "16920693323268016/3077467525655329",
+      "total_complete_model_quadratic": "104845623739131756544/412199620936304949",
+      "empirical_full_square_to_source_diagonal_ratio": 1.0235276476065416,
+      "rows": [
+        {
+          "z": 29,
+          "full_band_sum": "324280320/55474927",
+          "full_band_square": "105157725939302400/3077467525655329",
+          "source_product_diagonal": "199974714174099476/3077467525655329",
+          "source_product_offdiagonal": "-94816988234797076/3077467525655329",
+          "complete_model_quadratic": "26211405934782939136/412199620936304949"
+        },
+        {
+          "z": 31,
+          "full_band_sum": "129712128/55474927",
+          "full_band_square": "16825236150288384/3077467525655329",
+          "source_product_diagonal": "143174940083490836/3077467525655329",
+          "source_product_offdiagonal": "-126349703933202452/3077467525655329",
+          "complete_model_quadratic": "26211405934782939136/412199620936304949"
+        },
+        {
+          "z": 37,
+          "full_band_sum": "713416704/55474927",
+          "full_band_square": "508963393546223616/3077467525655329",
+          "source_product_diagonal": "217911484939554836/3077467525655329",
+          "source_product_offdiagonal": "291051908606668780/3077467525655329",
+          "complete_model_quadratic": "26211405934782939136/412199620936304949"
+        },
+        {
+          "z": 41,
+          "full_band_sum": "324280320/55474927",
+          "full_band_square": "105157725939302400/3077467525655329",
+          "source_product_diagonal": "158122249054703636/3077467525655329",
+          "source_product_offdiagonal": "-52964523115401236/3077467525655329",
+          "complete_model_quadratic": "26211405934782939136/412199620936304949"
+        }
+      ]
+    },
+    {
+      "X": 37,
+      "H": 1095,
+      "K": 4,
+      "z_values": [
+        37,
+        41,
+        43,
+        47
+      ],
+      "Z": 47,
+      "moduli": [
+        53,
+        59,
+        61,
+        67,
+        71,
+        73,
+        79,
+        83,
+        89
+      ],
+      "U_length": 32,
+      "V_length": 32,
+      "product_count": 360,
+      "max_product": 1089,
+      "max_representation_count": 10,
+      "alpha_l2": "20",
+      "gamma_l2": "32",
+      "convolution_l2": "656",
+      "convolution_energy_bound": "6400",
+      "V_R": "840242187/960593920",
+      "pair_products_above_H": true,
+      "maximum_distinct_product_collision_primes": 1,
+      "ordered_collision_pair_count": 58824,
+      "ordered_noncollision_pair_count": 458136,
+      "total_full_band_square": "255599168122047692800/706006932814542969",
+      "total_source_product_diagonal": "82973920641519710912/235335644271514323",
+      "total_source_product_offdiagonal": "6677406197488560064/706006932814542969",
+      "total_complete_model_quadratic": "1875911013875743950110720/4975230855544084302543",
+      "empirical_full_square_to_source_diagonal_ratio": 1.0268253211204261,
+      "rows": [
+        {
+          "z": 37,
+          "full_band_sum": "13448314880/840242187",
+          "full_band_square": "180857173111629414400/706006932814542969",
+          "source_product_diagonal": "7202627717284325776/78445214757171441",
+          "source_product_offdiagonal": "6107027560845814864/37158259621818051",
+          "complete_model_quadratic": "468977753468935987527680/4975230855544084302543"
+        },
+        {
+          "z": 41,
+          "full_band_sum": "3842375680/840242187",
+          "full_band_square": "14763850866255462400/706006932814542969",
+          "source_product_diagonal": "46844067232919500304/706006932814542969",
+          "source_product_offdiagonal": "-32080216366664037904/706006932814542969",
+          "complete_model_quadratic": "468977753468935987527680/4975230855544084302543"
+        },
+        {
+          "z": 43,
+          "full_band_sum": "-3842375680/840242187",
+          "full_band_square": "14763850866255462400/706006932814542969",
+          "source_product_diagonal": "74504962960057087504/706006932814542969",
+          "source_product_offdiagonal": "-19913704031267208368/235335644271514323",
+          "complete_model_quadratic": "468977753468935987527680/4975230855544084302543"
+        },
+        {
+          "z": 47,
+          "full_band_sum": "6724157440/840242187",
+          "full_band_square": "45214293277907353600/706006932814542969",
+          "source_product_diagonal": "20916360758674537648/235335644271514323",
+          "source_product_offdiagonal": "-17534788998116259344/706006932814542969",
+          "complete_model_quadratic": "468977753468935987527680/4975230855544084302543"
+        }
+      ]
+    }
+  ],
+  "boundary": "These are exact finite scaffolding identities only. The next programme must construct the actual prime-source decomposition, prove the full-band off-source-diagonal Bessel estimate, retain signed cell recombination and then close the cross-band normalized-survivor transfer. Fortune's conjecture remains OPEN."
+}

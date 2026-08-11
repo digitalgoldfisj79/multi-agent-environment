@@ -1,0 +1,43 @@
+name: Validate FF endpoint incidence falsification
+
+on:
+  push:
+    paths:
+      - 'fortune-review/scripts/ff_endpoint_centered_dispersion_audit.py'
+      - 'fortune-review/scripts/ff_endpoint_incidence_falsification.py'
+      - 'fortune-review/data/ff_endpoint_incidence_falsification.json'
+      - 'fortune-review/FF_BILATERAL_INCIDENCE_FALSIFICATION_20260730.md'
+      - '.github/workflows/ff-endpoint-incidence-falsification.yml'
+  pull_request:
+    paths:
+      - 'fortune-review/scripts/ff_endpoint_centered_dispersion_audit.py'
+      - 'fortune-review/scripts/ff_endpoint_incidence_falsification.py'
+      - 'fortune-review/data/ff_endpoint_incidence_falsification.json'
+      - 'fortune-review/FF_BILATERAL_INCIDENCE_FALSIFICATION_20260730.md'
+      - '.github/workflows/ff-endpoint-incidence-falsification.yml'
+
+jobs:
+  falsification:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile verifiers
+        run: |
+          python -m py_compile fortune-review/scripts/ff_endpoint_centered_dispersion_audit.py
+          python -m py_compile fortune-review/scripts/ff_endpoint_incidence_falsification.py
+      - name: Recompute expanded panel
+        run: python fortune-review/scripts/ff_endpoint_incidence_falsification.py > /tmp/ff_endpoint_incidence_falsification.json
+      - name: Compare semantic JSON
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          frozen = json.loads(Path('fortune-review/data/ff_endpoint_incidence_falsification.json').read_text())
+          current = json.loads(Path('/tmp/ff_endpoint_incidence_falsification.json').read_text())
+          if current != frozen:
+              raise SystemExit('expanded incidence panel differs from frozen output')
+          print('PASS: expanded incidence panel matches frozen output')
+          PY

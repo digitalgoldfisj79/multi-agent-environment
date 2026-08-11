@@ -1,0 +1,41 @@
+name: Validate FF endpoint centered dispersion audit
+
+on:
+  push:
+    paths:
+      - 'fortune-review/scripts/ff_endpoint_centered_dispersion_audit.py'
+      - 'fortune-review/data/ff_endpoint_centered_dispersion_audit.json'
+      - 'fortune-review/FF_ENDPOINT_DISPERSION_AUDIT_AND_CENTERED_DOUBLE_GATE_20260730.md'
+      - 'fortune-review/FORTUNE_MECHANISM_MAP_CORRECTED_20260730.md'
+      - '.github/workflows/ff-endpoint-centered-dispersion-audit.yml'
+  pull_request:
+    paths:
+      - 'fortune-review/scripts/ff_endpoint_centered_dispersion_audit.py'
+      - 'fortune-review/data/ff_endpoint_centered_dispersion_audit.json'
+      - 'fortune-review/FF_ENDPOINT_DISPERSION_AUDIT_AND_CENTERED_DOUBLE_GATE_20260730.md'
+      - 'fortune-review/FORTUNE_MECHANISM_MAP_CORRECTED_20260730.md'
+      - '.github/workflows/ff-endpoint-centered-dispersion-audit.yml'
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile verifier
+        run: python -m py_compile fortune-review/scripts/ff_endpoint_centered_dispersion_audit.py
+      - name: Recompute frozen panel
+        run: python fortune-review/scripts/ff_endpoint_centered_dispersion_audit.py > /tmp/ff_endpoint_centered_dispersion_audit.json
+      - name: Compare semantic JSON
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          frozen = json.loads(Path('fortune-review/data/ff_endpoint_centered_dispersion_audit.json').read_text())
+          current = json.loads(Path('/tmp/ff_endpoint_centered_dispersion_audit.json').read_text())
+          if current != frozen:
+              raise SystemExit('recomputed endpoint panel differs from frozen output')
+          print('PASS: endpoint panel matches frozen output')
+          PY

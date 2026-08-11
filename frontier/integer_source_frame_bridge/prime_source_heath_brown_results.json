@@ -1,0 +1,108 @@
+{
+  "status": "PASS",
+  "exact_identities": [
+    "Lambda = 2 mu_<=Y * log - mu_<=Y * mu_<=Y * 1 * log for n <= H <= Y^2",
+    "Lambda = mu_<=Y * log + mu_<=Y * mu_>Y * 1 * log for n <= H",
+    "d P_j^{-1} = (P_j/d)^{-1} mod p for squarefree d <= Y < X < p"
+  ],
+  "panels": [
+    {
+      "X": 11,
+      "H": 96,
+      "Y": 10,
+      "Y_below_X": true,
+      "identity_values_checked": 96,
+      "two_level_factor_tuples": 1885,
+      "two_level_overlap_tuples": 200,
+      "reduced_identity_terms": 509,
+      "punctured_centre_checks": 21,
+      "prime_power_correction_count": 10,
+      "band_moduli": [
+        13,
+        17,
+        19
+      ]
+    },
+    {
+      "X": 17,
+      "H": 231,
+      "Y": 16,
+      "Y_below_X": true,
+      "identity_values_checked": 231,
+      "two_level_factor_tuples": 6475,
+      "two_level_overlap_tuples": 748,
+      "reduced_identity_terms": 1549,
+      "punctured_centre_checks": 44,
+      "prime_power_correction_count": 14,
+      "band_moduli": [
+        19,
+        23,
+        29,
+        31
+      ]
+    },
+    {
+      "X": 23,
+      "H": 423,
+      "Y": 21,
+      "Y_below_X": true,
+      "identity_values_checked": 423,
+      "two_level_factor_tuples": 14749,
+      "two_level_overlap_tuples": 1717,
+      "reduced_identity_terms": 3405,
+      "punctured_centre_checks": 70,
+      "prime_power_correction_count": 19,
+      "band_moduli": [
+        29,
+        31,
+        37,
+        41,
+        43
+      ]
+    },
+    {
+      "X": 29,
+      "H": 672,
+      "Y": 26,
+      "Y_below_X": true,
+      "identity_values_checked": 672,
+      "two_level_factor_tuples": 27217,
+      "two_level_overlap_tuples": 3350,
+      "reduced_identity_terms": 6169,
+      "punctured_centre_checks": 102,
+      "prime_power_correction_count": 22,
+      "band_moduli": [
+        31,
+        37,
+        41,
+        43,
+        47,
+        53
+      ]
+    },
+    {
+      "X": 37,
+      "H": 1095,
+      "Y": 34,
+      "Y_below_X": true,
+      "identity_values_checked": 1095,
+      "two_level_factor_tuples": 51937,
+      "two_level_overlap_tuples": 6726,
+      "reduced_identity_terms": 11277,
+      "punctured_centre_checks": 198,
+      "prime_power_correction_count": 26,
+      "band_moduli": [
+        41,
+        43,
+        47,
+        53,
+        59,
+        61,
+        67,
+        71,
+        73
+      ]
+    }
+  ],
+  "boundary": "The provisional three-small-variable source identity is unnecessary.  The exact two-level identity resums to a source with one small Mobius variable, which divides every primorial centre.  Prime powers remain an explicit sparse correction."
+}

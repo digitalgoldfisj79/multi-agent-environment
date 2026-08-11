@@ -1,0 +1,31 @@
+name: Validate primorial orbit Type-II programme
+
+on:
+  push:
+    paths:
+      - 'frontier/integer_source_frame_bridge/PRIMORIAL_ORBIT_TYPEII_AND_HIGH_CONDUCTOR_FRAME_20260729.md'
+      - 'frontier/integer_source_frame_bridge/PROGRAMME_STATUS_AFTER_PRIMORIAL_ORBIT_TYPEII_GATE_20260729.md'
+      - 'frontier/integer_source_frame_bridge/primorial_orbit_typeii_verify.py'
+      - 'frontier/integer_source_frame_bridge/primorial_orbit_typeii_results.json'
+      - '.github/workflows/validate-primorial-orbit-typeii.yml'
+  pull_request:
+    paths:
+      - 'frontier/integer_source_frame_bridge/PRIMORIAL_ORBIT_TYPEII_AND_HIGH_CONDUCTOR_FRAME_20260729.md'
+      - 'frontier/integer_source_frame_bridge/PROGRAMME_STATUS_AFTER_PRIMORIAL_ORBIT_TYPEII_GATE_20260729.md'
+      - 'frontier/integer_source_frame_bridge/primorial_orbit_typeii_verify.py'
+      - 'frontier/integer_source_frame_bridge/primorial_orbit_typeii_results.json'
+      - '.github/workflows/validate-primorial-orbit-typeii.yml'
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run exact primorial orbit Type-II verifier
+        run: python frontier/integer_source_frame_bridge/primorial_orbit_typeii_verify.py
+      - name: Confirm committed results reproduce exactly
+        run: git diff --exit-code -- frontier/integer_source_frame_bridge/primorial_orbit_typeii_results.json

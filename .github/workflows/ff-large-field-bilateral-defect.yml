@@ -1,0 +1,45 @@
+name: Validate FF large-field bilateral defect
+
+on:
+  push:
+    paths:
+      - 'fortune-review/FF_BILATERAL_DEFECT_DICHOTOMY_AND_ROUND12_CORRECTION_20260730.md'
+      - 'fortune-review/scripts/ff_large_field_explicit_counterexample.py'
+      - 'fortune-review/scripts/ff_large_field_cubic_falsification.cpp'
+      - 'fortune-review/data/ff_large_field_cubic_falsification.txt'
+      - '.github/workflows/ff-large-field-bilateral-defect.yml'
+  pull_request:
+    paths:
+      - 'fortune-review/FF_BILATERAL_DEFECT_DICHOTOMY_AND_ROUND12_CORRECTION_20260730.md'
+      - 'fortune-review/scripts/ff_large_field_explicit_counterexample.py'
+      - 'fortune-review/scripts/ff_large_field_cubic_falsification.cpp'
+      - 'fortune-review/data/ff_large_field_cubic_falsification.txt'
+      - '.github/workflows/ff-large-field-bilateral-defect.yml'
+  workflow_dispatch:
+
+jobs:
+  exact-defect-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile exact cubic census
+        run: |
+          g++ -O3 -std=c++17 \
+            fortune-review/scripts/ff_large_field_cubic_falsification.cpp \
+            -o /tmp/ff_large_field_cubic_falsification
+      - name: Verify explicit original-frequency counterexample
+        run: python3 fortune-review/scripts/ff_large_field_explicit_counterexample.py
+      - name: Recompute orbit-reduced cubic census
+        run: /tmp/ff_large_field_cubic_falsification > /tmp/census.txt
+      - name: Compare frozen census
+        run: diff -u fortune-review/data/ff_large_field_cubic_falsification.txt /tmp/census.txt
+      - name: Check theorem boundary labels
+        run: |
+          grep -q 'Theorem BDD1' fortune-review/FF_BILATERAL_DEFECT_DICHOTOMY_AND_ROUND12_CORRECTION_20260730.md
+          grep -q 'k<q<2k' fortune-review/FF_BILATERAL_DEFECT_DICHOTOMY_AND_ROUND12_CORRECTION_20260730.md
+          grep -q 'NDC_FF' fortune-review/FF_BILATERAL_DEFECT_DICHOTOMY_AND_ROUND12_CORRECTION_20260730.md
+          grep -q 'falsified' fortune-review/FF_BILATERAL_DEFECT_DICHOTOMY_AND_ROUND12_CORRECTION_20260730.md

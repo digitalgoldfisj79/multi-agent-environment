@@ -1,0 +1,58 @@
+name: Validate FF cubic ideal with msolve
+
+on:
+  push:
+    branches:
+      - gpt56/fortune-mesoscopic-cotlar-20260728
+    paths:
+      - fortune-review/scripts/ff_nonzero_defect_cubic_msolve_generator.py
+      - .github/workflows/ff-nonzero-defect-cubic-msolve.yml
+  pull_request:
+    paths:
+      - fortune-review/scripts/ff_nonzero_defect_cubic_msolve_generator.py
+      - .github/workflows/ff-nonzero-defect-cubic-msolve.yml
+  workflow_dispatch:
+
+jobs:
+  expanded-prime-field-ideal:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    strategy:
+      fail-fast: false
+      matrix:
+        characteristic: [5, 7, 11, 13]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install exact solvers
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y msolve
+          python -m pip install --disable-pip-version-check sympy
+      - name: Generate canonical expanded system
+        run: |
+          python fortune-review/scripts/ff_nonzero_defect_cubic_msolve_generator.py \
+            --characteristic ${{ matrix.characteristic }} \
+            --output /tmp/nd-${{ matrix.characteristic }}.ms
+      - name: Compute leading ideal and dimension discriminator
+        run: |
+          set -o pipefail
+          timeout 105m msolve -v 2 -g 1 -t 4 \
+            -f /tmp/nd-${{ matrix.characteristic }}.ms \
+            -o /tmp/nd-${{ matrix.characteristic }}-msolve.txt \
+            | tee /tmp/nd-${{ matrix.characteristic }}-msolve.log
+          cat /tmp/nd-${{ matrix.characteristic }}-msolve.txt
+          if grep -q '^\[-1\]' /tmp/nd-${{ matrix.characteristic }}-msolve.txt; then
+            echo 'Unexpected empty saturated open locus' >&2
+            exit 1
+          fi
+      - name: Upload msolve certificates
+        uses: actions/upload-artifact@v4
+        with:
+          name: ff-cubic-msolve-char-${{ matrix.characteristic }}
+          path: |
+            /tmp/nd-${{ matrix.characteristic }}.ms
+            /tmp/nd-${{ matrix.characteristic }}-msolve.txt
+            /tmp/nd-${{ matrix.characteristic }}-msolve.log

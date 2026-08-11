@@ -1,0 +1,87 @@
+name: Validate Round 15 k=2 emptiness theorem
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'fortune-review/ROUND15_K2_EMPTINESS_THEOREM_20260803.md'
+      - 'fortune-review/data/ff_round15_k2_certificates.txt'
+      - 'fortune-review/scripts/ff_round15_k2/**'
+      - '.github/workflows/ff-round15-k2-emptiness-theorem.yml'
+  push:
+    paths:
+      - 'fortune-review/ROUND15_K2_EMPTINESS_THEOREM_20260803.md'
+      - 'fortune-review/data/ff_round15_k2_certificates.txt'
+      - 'fortune-review/scripts/ff_round15_k2/**'
+      - '.github/workflows/ff-round15-k2-emptiness-theorem.yml'
+
+jobs:
+  theorem-certificates:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install exact algebra tools
+        run: |
+          sudo apt-get update -qq
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y singular python3-pip
+          python3 -m pip install --quiet sympy
+
+      - name: Verify characteristic-zero chart lift identities
+        run: |
+          set -euo pipefail
+          Singular -q fortune-review/scripts/ff_round15_k2/chartB_liftverify.sing | tee /tmp/chartB_q.txt
+          grep -F 'CHART=B LIFT_IDENTITY_OK' /tmp/chartB_q.txt
+          Singular -q fortune-review/scripts/ff_round15_k2/chartX_liftverify.sing | tee /tmp/chartX_q.txt
+          grep -F 'CHART=X LIFT_IDENTITY_OK' /tmp/chartX_q.txt
+
+      - name: Re-expand both lift matrices independently over Q
+        run: |
+          set -euo pipefail
+          Singular -q fortune-review/scripts/ff_round15_k2/chartB_universal.sing > /tmp/lift_B.out
+          Singular -q fortune-review/scripts/ff_round15_k2/chartX_universal.sing > /tmp/lift_X.out
+          python3 fortune-review/scripts/ff_round15_k2/verify_lift_identities.py /tmp/lift_B.out /tmp/lift_X.out | tee /tmp/lift_verify.txt
+          grep -F 'chart B: T = K*M exact over Q: True' /tmp/lift_verify.txt
+          grep -F 'chart X: T = K*M exact over Q: True' /tmp/lift_verify.txt
+
+      - name: Verify ideal-level faithfulness
+        run: |
+          set -euo pipefail
+          Singular -q fortune-review/scripts/ff_round15_k2/ideal_faithfulness.sing | tee /tmp/faithfulness.txt
+          grep -F 'IDEALS_AGREE_ON_U_NONZERO' /tmp/faithfulness.txt
+
+      - name: Verify all exceptional odd characteristics
+        run: |
+          set -euo pipefail
+          for p in 3 5 7 11 31 163; do
+            sed "s/^ring R=0,/ring R=${p},/" fortune-review/scripts/ff_round15_k2/chartB_liftverify.sing > "/tmp/chartB_${p}.sing"
+            sed "s/^ring R=0,/ring R=${p},/" fortune-review/scripts/ff_round15_k2/chartX_liftverify.sing > "/tmp/chartX_${p}.sing"
+            Singular -q "/tmp/chartB_${p}.sing" | tee "/tmp/chartB_${p}.txt"
+            Singular -q "/tmp/chartX_${p}.sing" | tee "/tmp/chartX_${p}.txt"
+            grep -F 'CHART=B LIFT_IDENTITY_OK' "/tmp/chartB_${p}.txt"
+            grep -F 'CHART=X LIFT_IDENTITY_OK' "/tmp/chartX_${p}.txt"
+          done
+
+      - name: Check theorem boundary labels
+        run: |
+          set -euo pipefail
+          grep -F '**Theorem (k = 2 emptiness).**' fortune-review/ROUND15_K2_EMPTINESS_THEOREM_20260803.md
+          grep -F '**OPEN** | The cubic (k = 3) twisted-Frobenius point theorem' fortune-review/ROUND15_K2_EMPTINESS_THEOREM_20260803.md
+          grep -F '[denominators] prime support across both lift matrices: {2, 3, 5, 7, 11, 31, 163}' fortune-review/data/ff_round15_k2_certificates.txt
+
+      - name: Upload exact certificate outputs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: round15-k2-certificate-outputs
+          path: |
+            /tmp/chartB_q.txt
+            /tmp/chartX_q.txt
+            /tmp/lift_B.out
+            /tmp/lift_X.out
+            /tmp/lift_verify.txt
+            /tmp/faithfulness.txt
+            /tmp/chartB_*.txt
+            /tmp/chartX_*.txt
+          if-no-files-found: warn

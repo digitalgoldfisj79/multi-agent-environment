@@ -1,0 +1,35 @@
+{
+  "status": "PASS",
+  "scope": "finite frozen same-band rough-quotient Bessel calibration with unit row weights",
+  "panels": [
+    {
+      "X": 101,
+      "H": 8160,
+      "N": 21,
+      "K": 10,
+      "maximum_same_band_ratio": 2.1540152395856262,
+      "aggregate_same_band_ratio": 1.123502520183054,
+      "block_maxima": [2.1540152395856262, 1.587543059298913, 1.6753659123451066]
+    },
+    {
+      "X": 211,
+      "H": 35616,
+      "N": 36,
+      "K": 14,
+      "maximum_same_band_ratio": 1.5818012944637865,
+      "aggregate_same_band_ratio": 0.9667952547638636,
+      "block_maxima": [1.4714215771555983, 1.5818012944637865, 1.2454934754194589]
+    },
+    {
+      "X": 503,
+      "H": 202407,
+      "N": 73,
+      "K": 22,
+      "maximum_same_band_ratio": 2.2869487497316903,
+      "aggregate_same_band_ratio": 1.038271726459526,
+      "block_maxima": [1.5013610896920682, 1.4722003877320613, 1.623064942118056, 2.2869487497316903]
+    }
+  ],
+  "interpretation": "Every measured same-dyadic square is at most 2.29 times its exact diagonal; aggregate ratios remain close to one. Empirical only.",
+  "boundary": "No asymptotic same-band Bessel theorem is inferred."
+}

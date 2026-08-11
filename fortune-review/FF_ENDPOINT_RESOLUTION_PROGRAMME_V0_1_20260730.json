@@ -1,0 +1,148 @@
+{
+  "programme": "FERP-0.1",
+  "title": "Function-field endpoint resolution: sampled spectrum versus centered bilateral geometry",
+  "date": "2026-07-30",
+  "repository": "digitalgoldfisj79/multi-agent-environment",
+  "branch": "gpt56/fortune-mesoscopic-cotlar-20260728",
+  "frozen_input_head": "05d493078a69587b3e8a3bcd707215a0846a6e7e",
+  "endpoint": {
+    "source_degree": "m=2k-1",
+    "target": "|T_corr(theta)| << q^(m+3k/2) poly(k,m,deg L)",
+    "sampled_diagonal": "D_diag(theta)=q^m M_samp(theta)",
+    "route_a_threshold": "M_samp(theta) << q^(3k) poly(k,m)",
+    "route_b": "CBEA_FF"
+  },
+  "allowed_statuses": [
+    "PROVED EXACTLY",
+    "PROVED FROM PUBLISHED INPUT",
+    "MACHINE-VERIFIED IDENTITY",
+    "EMPIRICAL-EXACT FINITE PANEL",
+    "EMPIRICAL",
+    "CONDITIONAL",
+    "RETRACTED",
+    "OPEN"
+  ],
+  "forbidden_claims": [
+    "universal factor-2 class bound",
+    "unconditional natural sampled scale",
+    "ordinary post-Cauchy double dispersion closes FFPR",
+    "bilateral incidence is always diagonal or transpose",
+    "coset PORC_FF is already Fortune",
+    "function-field results transfer automatically to integers"
+  ],
+  "routes": [
+    {
+      "id": "A",
+      "name": "exceptional sampled diagonal",
+      "success_theorem": "SAD_FF",
+      "success_bound": "M_samp(theta) << q^(3k) poly(k,m)",
+      "falsification_theorem": "NSAD_FF"
+    },
+    {
+      "id": "B",
+      "name": "centered bilateral assembly",
+      "success_theorems": ["BIC_FF", "CBI_FF", "RBK_FF"],
+      "success_bound": "|T_corr(theta)| << q^(m+3k/2) poly(k,m,deg L)"
+    }
+  ],
+  "gates": [
+    {
+      "id": "G0",
+      "name": "freeze contract and sampled-frequency image",
+      "status": "PROVED EXACTLY",
+      "prerequisites": [],
+      "deliverables": ["programme", "contract", "SF1/SF2 verifier", "workflow"]
+    },
+    {
+      "id": "G1",
+      "name": "sampled-diagonal discriminator",
+      "status": "OPEN",
+      "prerequisites": ["G0"],
+      "targets": ["SAD_FF", "NSAD_FF"]
+    },
+    {
+      "id": "G2",
+      "name": "bilateral incidence component classification",
+      "status": "OPEN",
+      "prerequisites": ["G0"],
+      "targets": ["BIC_FF"]
+    },
+    {
+      "id": "G3",
+      "name": "exact signed component contributions",
+      "status": "OPEN",
+      "prerequisites": ["G2"],
+      "targets": ["component main-term formula", "Delta interaction"]
+    },
+    {
+      "id": "G4",
+      "name": "centered bilateral identity",
+      "status": "OPEN",
+      "prerequisites": ["G2", "G3"],
+      "targets": ["CBI_FF"]
+    },
+    {
+      "id": "G5",
+      "name": "residual trace or bilinear theorem",
+      "status": "OPEN",
+      "prerequisites": ["G4"],
+      "targets": ["RBK_FF"]
+    },
+    {
+      "id": "G6",
+      "name": "corrected endpoint FFPR",
+      "status": "OPEN",
+      "prerequisites_any": [["G1"], ["G4", "G5"]],
+      "targets": ["FFPR"]
+    },
+    {
+      "id": "G7",
+      "name": "theta sum and coset PORC_FF",
+      "status": "OPEN",
+      "prerequisites": ["G6"],
+      "targets": ["PORC_FF"]
+    },
+    {
+      "id": "G8",
+      "name": "signed higher-conductor coupling",
+      "status": "OPEN",
+      "prerequisites": ["G7"]
+    },
+    {
+      "id": "G9",
+      "name": "complete-coset first-band theorem",
+      "status": "OPEN",
+      "prerequisites": ["G8"]
+    },
+    {
+      "id": "G10",
+      "name": "thinning and chosen walk",
+      "status": "OPEN",
+      "prerequisites": ["G9"],
+      "sequence": [
+        "all monic degree-R",
+        "squarefree products of fixed-degree irreducibles",
+        "thin product family",
+        "chosen walk"
+      ]
+    }
+  ],
+  "immediate_execution_order": [
+    "verify SF1/SF2",
+    "compute sampled diagonal and full Plancherel mass",
+    "separate source diagonal and signed off-diagonal",
+    "run route A discriminator panels",
+    "generate bilateral candidates from one-source classes",
+    "classify q=3 k=4 exceptional affine orbits",
+    "compute their signed Delta-corrected contribution",
+    "derive centered bilateral identity",
+    "audit residual sheaf against literal published hypotheses"
+  ],
+  "stop_outcomes": [
+    "SAD_FF plus class and Delta control proves endpoint FFPR",
+    "NSAD_FF closes Route A and Route B proves endpoint FFPR",
+    "forced component falsifies corrected endpoint target",
+    "one precise residual exponential-sum or sheaf theorem remains",
+    "complete-coset theorem proved and next wall is conductor coupling or thinning"
+  ]
+}

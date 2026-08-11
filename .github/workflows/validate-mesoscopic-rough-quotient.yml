@@ -1,0 +1,130 @@
+name: Validate mesoscopic rough quotient
+
+on:
+  pull_request:
+    branches: [publication/fortune-papers-ii-vi-20260724]
+    paths:
+      - .github/workflows/validate-mesoscopic-rough-quotient.yml
+      - frontier/integer_source_frame_bridge/MESOSCOPIC_PRIMORIAL_ORBIT_REDUCTION_20260728.md
+      - frontier/integer_source_frame_bridge/ROUGH_QUOTIENT_HYPERBOLA_COLLAPSE_20260728.md
+      - frontier/integer_source_frame_bridge/FULL_ROUGH_QUOTIENT_EULER_COLLAPSE_20260728.md
+      - frontier/integer_source_frame_bridge/SAME_BAND_RECOMBINATION_REDUCTION_20260728.md
+      - frontier/integer_source_frame_bridge/FINITE_EULER_PRODUCT_RECOMBINATION_BOUNDARY_20260728.md
+      - frontier/integer_source_frame_bridge/KLOOSTERMAN_RECIPROCITY_DEGENERATION_20260728.md
+      - frontier/integer_source_frame_bridge/MESOSCOPIC_SHARED_FACTOR_KERNEL_20260728.md
+      - frontier/integer_source_frame_bridge/PROGRAMME_STATUS_AFTER_FULL_ROUGH_QUOTIENT_20260728.md
+      - frontier/integer_source_frame_bridge/mesoscopic_primorial_orbit_verify.py
+      - frontier/integer_source_frame_bridge/rough_quotient_hyperbola_verify.py
+      - frontier/integer_source_frame_bridge/full_rough_quotient_euler_verify.py
+      - frontier/integer_source_frame_bridge/same_band_rough_quotient_calibration.py
+      - frontier/integer_source_frame_bridge/mesoscopic_shared_factor_verify.py
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check theorem package
+        run: |
+          set -euo pipefail
+          ROOT=frontier/integer_source_frame_bridge
+          for file in \
+            MESOSCOPIC_PRIMORIAL_ORBIT_REDUCTION_20260728.md \
+            ROUGH_QUOTIENT_HYPERBOLA_COLLAPSE_20260728.md \
+            FULL_ROUGH_QUOTIENT_EULER_COLLAPSE_20260728.md \
+            SAME_BAND_RECOMBINATION_REDUCTION_20260728.md \
+            FINITE_EULER_PRODUCT_RECOMBINATION_BOUNDARY_20260728.md \
+            KLOOSTERMAN_RECIPROCITY_DEGENERATION_20260728.md \
+            MESOSCOPIC_SHARED_FACTOR_KERNEL_20260728.md \
+            PROGRAMME_STATUS_AFTER_FULL_ROUGH_QUOTIENT_20260728.md; do
+            test -s "$ROOT/$file"
+          done
+          ! grep -RInE 'TODO|TBD|PLACEHOLDER|REPLACE_ME' \
+            "$ROOT/MESOSCOPIC_PRIMORIAL_ORBIT_REDUCTION_20260728.md" \
+            "$ROOT/ROUGH_QUOTIENT_HYPERBOLA_COLLAPSE_20260728.md" \
+            "$ROOT/FULL_ROUGH_QUOTIENT_EULER_COLLAPSE_20260728.md" \
+            "$ROOT/SAME_BAND_RECOMBINATION_REDUCTION_20260728.md" \
+            "$ROOT/FINITE_EULER_PRODUCT_RECOMBINATION_BOUNDARY_20260728.md" \
+            "$ROOT/KLOOSTERMAN_RECIPROCITY_DEGENERATION_20260728.md" \
+            "$ROOT/MESOSCOPIC_SHARED_FACTOR_KERNEL_20260728.md" \
+            "$ROOT/PROGRAMME_STATUS_AFTER_FULL_ROUGH_QUOTIENT_20260728.md"
+          grep -Fq 'Theorem 6.1' "$ROOT/MESOSCOPIC_PRIMORIAL_ORBIT_REDUCTION_20260728.md"
+          grep -Fq 'Theorem 3.1' "$ROOT/ROUGH_QUOTIENT_HYPERBOLA_COLLAPSE_20260728.md"
+          grep -Fq 'Theorem 4.1 (full rough-quotient Euler identity)' "$ROOT/FULL_ROUGH_QUOTIENT_EULER_COLLAPSE_20260728.md"
+          grep -Fq 'Theorem 3.1' "$ROOT/SAME_BAND_RECOMBINATION_REDUCTION_20260728.md"
+          grep -Fq 'Theorem 2.1' "$ROOT/FINITE_EULER_PRODUCT_RECOMBINATION_BOUNDARY_20260728.md"
+          grep -Fq 'Theorem 2.1' "$ROOT/KLOOSTERMAN_RECIPROCITY_DEGENERATION_20260728.md"
+          grep -Fq 'Theorem 3.1' "$ROOT/MESOSCOPIC_SHARED_FACTOR_KERNEL_20260728.md"
+          grep -Fq 'Fortune remains open' "$ROOT/PROGRAMME_STATUS_AFTER_FULL_ROUGH_QUOTIENT_20260728.md"
+
+      - name: Install dependencies
+        run: python -m pip install --disable-pip-version-check sympy
+
+      - name: Verify mesoscopic orbit
+        run: python frontier/integer_source_frame_bridge/mesoscopic_primorial_orbit_verify.py > /tmp/mesoscopic.json
+
+      - name: Verify rough quotient hyperbola
+        run: python frontier/integer_source_frame_bridge/rough_quotient_hyperbola_verify.py > /tmp/rough-quotient.json
+
+      - name: Verify full quotient Euler cancellation
+        run: python frontier/integer_source_frame_bridge/full_rough_quotient_euler_verify.py > /tmp/full-quotient.json
+
+      - name: Verify shared-factor kernel
+        run: python frontier/integer_source_frame_bridge/mesoscopic_shared_factor_verify.py > /tmp/shared-factor.json
+
+      - name: Calibrate same-band source
+        run: python frontier/integer_source_frame_bridge/same_band_rough_quotient_calibration.py > /tmp/same-band.json
+
+      - name: Check validation boundaries
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          root=Path('frontier/integer_source_frame_bridge')
+          meso=json.loads((root/'mesoscopic_primorial_orbit_results.json').read_text())
+          rough=json.loads((root/'rough_quotient_hyperbola_results.json').read_text())
+          full=json.loads((root/'full_rough_quotient_euler_results.json').read_text())
+          shared=json.loads((root/'mesoscopic_shared_factor_results.json').read_text())
+          band=json.loads((root/'same_band_rough_quotient_results.json').read_text())
+          assert all(x['status']=='PASS' for x in (meso,rough,full,shared,band))
+          assert max(p['maximum_formula_error'] for p in meso['panels'])<2e-10
+          assert max(p['maximum_weighted_error'] for p in rough['panels'])<2e-12
+          assert max(p['maximum_floor_error'] for p in rough['panels'])==0
+          assert max(p['maximum_phase_error'] for p in rough['panels'])<2e-12
+          assert max(p['offset_expansion_error'] for p in full['panels'])<2e-12
+          assert max(p['quotient_expansion_error'] for p in full['panels'])<2e-12
+          assert max(p['maximum_higher_order_support'] for p in full['panels'])<=1
+          assert max(p['maximum_transport_error'] for p in shared['panels'])==0
+          assert min(p['minimum_transported_gap'] for p in shared['panels'])>0
+          assert max(p['maximum_count_to_log_bound_ratio'] for p in shared['panels'])<=1+1e-12
+          assert max(p['maximum_reciprocal_to_log_bound_ratio'] for p in shared['panels'])<=1+1e-12
+          assert max(p['maximum_same_band_ratio'] for p in band['panels'])<2.3
+          print('all final mesoscopic full rough-quotient gates passed')
+          PY
+
+      - name: Upload validation record
+        uses: actions/upload-artifact@v4
+        with:
+          name: mesoscopic-rough-quotient-validation
+          path: |
+            /tmp/*.json
+            frontier/integer_source_frame_bridge/mesoscopic_primorial_orbit_results.json
+            frontier/integer_source_frame_bridge/rough_quotient_hyperbola_results.json
+            frontier/integer_source_frame_bridge/full_rough_quotient_euler_results.json
+            frontier/integer_source_frame_bridge/mesoscopic_shared_factor_results.json
+            frontier/integer_source_frame_bridge/same_band_rough_quotient_results.json
+            frontier/integer_source_frame_bridge/MESOSCOPIC_PRIMORIAL_ORBIT_REDUCTION_20260728.md
+            frontier/integer_source_frame_bridge/ROUGH_QUOTIENT_HYPERBOLA_COLLAPSE_20260728.md
+            frontier/integer_source_frame_bridge/FULL_ROUGH_QUOTIENT_EULER_COLLAPSE_20260728.md
+            frontier/integer_source_frame_bridge/SAME_BAND_RECOMBINATION_REDUCTION_20260728.md
+            frontier/integer_source_frame_bridge/FINITE_EULER_PRODUCT_RECOMBINATION_BOUNDARY_20260728.md
+            frontier/integer_source_frame_bridge/KLOOSTERMAN_RECIPROCITY_DEGENERATION_20260728.md
+            frontier/integer_source_frame_bridge/MESOSCOPIC_SHARED_FACTOR_KERNEL_20260728.md
+            frontier/integer_source_frame_bridge/PROGRAMME_STATUS_AFTER_FULL_ROUGH_QUOTIENT_20260728.md
+          retention-days: 90

@@ -1,0 +1,31 @@
+name: Validate FF inverse-free bilateral incidence
+
+on:
+  pull_request:
+  push:
+    branches:
+      - gpt56/fortune-mesoscopic-cotlar-20260728
+
+jobs:
+  inverse-free-incidence:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Compile verifiers
+        run: |
+          python -m py_compile fortune-review/scripts/ff_sampled_diagonal_discriminator.py
+          python -m py_compile fortune-review/scripts/ff_bilateral_incidence_algebraization.py
+      - name: Recompute inverse-free panels
+        run: python fortune-review/scripts/ff_bilateral_incidence_algebraization.py > /tmp/current.json
+      - name: Compare frozen output
+        run: |
+          python - <<'PY'
+          import json
+          current=json.load(open('/tmp/current.json'))
+          frozen=json.load(open('fortune-review/data/ff_bilateral_incidence_algebraization.json'))
+          assert current==frozen
+          assert all(row['equivalence_and_uniqueness_verified'] for row in current['panels'])
+          PY

@@ -1,0 +1,39 @@
+name: Validate orbit cross-modulus covariance diagnostic
+
+on:
+  push:
+    branches:
+      - gpt56/fortune-mesoscopic-cotlar-20260728
+    paths:
+      - "frontier/integer_source_frame_bridge/orbit_cross_modulus_covariance_verify.py"
+      - "frontier/integer_source_frame_bridge/orbit_cross_modulus_covariance_results.json"
+      - "frontier/integer_source_frame_bridge/FABLE_ADDENDUM_INTAKE_ORBIT_COVARIANCE_20260730.md"
+      - "frontier/integer_source_frame_bridge/NEXT_PROGRAMME_ORBIT_TRANSFER_FUNCTION_FIELD_ASL_20260730.md"
+      - ".github/workflows/validate-orbit-cross-modulus-covariance.yml"
+  pull_request:
+    paths:
+      - "frontier/integer_source_frame_bridge/orbit_cross_modulus_covariance_verify.py"
+      - "frontier/integer_source_frame_bridge/orbit_cross_modulus_covariance_results.json"
+      - "frontier/integer_source_frame_bridge/FABLE_ADDENDUM_INTAKE_ORBIT_COVARIANCE_20260730.md"
+      - "frontier/integer_source_frame_bridge/NEXT_PROGRAMME_ORBIT_TRANSFER_FUNCTION_FIELD_ASL_20260730.md"
+      - ".github/workflows/validate-orbit-cross-modulus-covariance.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install verifier dependency
+        run: python -m pip install --disable-pip-version-check numpy
+      - name: Run empirical orbit covariance verifier
+        run: python frontier/integer_source_frame_bridge/orbit_cross_modulus_covariance_verify.py
+      - name: Require frozen result match
+        run: git diff --exit-code -- frontier/integer_source_frame_bridge/orbit_cross_modulus_covariance_results.json

@@ -1,0 +1,43 @@
+name: Validate FF cubic local standard basis
+
+on:
+  push:
+    branches:
+      - gpt56/fortune-mesoscopic-cotlar-20260728
+    paths:
+      - fortune-review/scripts/ff_nonzero_defect_cubic_local_singular_generator.py
+      - .github/workflows/ff-nonzero-defect-cubic-local-singular.yml
+  pull_request:
+    paths:
+      - fortune-review/scripts/ff_nonzero_defect_cubic_local_singular_generator.py
+      - .github/workflows/ff-nonzero-defect-cubic-local-singular.yml
+  workflow_dispatch:
+
+jobs:
+  local-standard-basis:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Singular
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y singular
+      - name: Generate local ideal
+        run: |
+          python fortune-review/scripts/ff_nonzero_defect_cubic_local_singular_generator.py \
+            --output /tmp/ff-cubic-local.sing
+      - name: Compute local standard basis
+        run: |
+          set -o pipefail
+          timeout 50m Singular -q /tmp/ff-cubic-local.sing \
+            | tee /tmp/ff-cubic-local-result.txt
+          grep '^STATUS=COMPUTED$' /tmp/ff-cubic-local-result.txt
+          grep '^DIM=' /tmp/ff-cubic-local-result.txt
+      - name: Upload local certificate
+        uses: actions/upload-artifact@v4
+        with:
+          name: ff-cubic-local-standard-basis
+          path: |
+            /tmp/ff-cubic-local.sing
+            /tmp/ff-cubic-local-result.txt

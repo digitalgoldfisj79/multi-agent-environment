@@ -1,0 +1,123 @@
+{
+  "boundary": {
+    "open": "Its literal interaction with Delta_PS inside the not-yet-derived centered bilateral identity.",
+    "proved": "The explicit characteristic-three resonance cannot violate the squared endpoint target through its raw same-source Gram contribution."
+  },
+  "exact_family": {
+    "classification": "small-characteristic primorial-resonant forced phase; negligible by parameter dimension before Delta interaction",
+    "completion_numerators": "E_mu=-theta/epsilon; E_nu=theta/epsilon",
+    "construction": "S=P+epsilon Q; P'=LQ-P; S'=LQ-S",
+    "field": "F_3[t]",
+    "parameters": "deg P=k prime; deg Q=k-3 with leading coefficient -1; epsilon,theta in F_3^*",
+    "phase_product": "1",
+    "puncture": "L=t^3-t"
+  },
+  "k4_exception_completeness": {
+    "all_non_diagonal_non_transpose_incidences": 12,
+    "epsilon_orbit_sizes": {
+      "1": 6,
+      "2": 6
+    },
+    "generated_by_resonance": 12,
+    "sets_equal": true
+  },
+  "panels": [
+    {
+      "B_m_sum_Lambda_square": 1203,
+      "Q_parameter_count": 1,
+      "completion_constants_verified_for_theta": [1,2],
+      "degree_k_prime_count": 8,
+      "elementary_raw_upper_bound": 79716150,
+      "elementary_upper_over_squared_target": 0.06858710562414266,
+      "epsilon_counts": {"1":1,"2":1},
+      "k": 3,
+      "m": 5,
+      "parameter_count_upper_bound": 54,
+      "q": 3,
+      "raw_gram_component": 2894418,
+      "raw_over_squared_target": 0.002490332926093643,
+      "resonant_ordered_pair_of_pairs": 2,
+      "squared_endpoint_target": 1162261467
+    },
+    {
+      "B_m_sum_Lambda_square": 15291,
+      "Q_parameter_count": 3,
+      "completion_constants_verified_for_theta": [1,2],
+      "degree_k_prime_count": 18,
+      "elementary_raw_upper_bound": 113901623766,
+      "elementary_upper_over_squared_target": 0.04481024234110654,
+      "epsilon_counts": {"1":6,"2":6},
+      "k": 4,
+      "m": 7,
+      "parameter_count_upper_bound": 486,
+      "q": 3,
+      "raw_gram_component": 2805776172,
+      "raw_over_squared_target": 0.0011038254422124603,
+      "resonant_ordered_pair_of_pairs": 12,
+      "squared_endpoint_target": 2541865828329
+    },
+    {
+      "B_m_sum_Lambda_square": 176979,
+      "Q_parameter_count": 9,
+      "completion_constants_verified_for_theta": [1,2],
+      "degree_k_prime_count": 48,
+      "elementary_raw_upper_bound": 137260754729766,
+      "elementary_upper_over_squared_target": 0.024691358024691357,
+      "epsilon_counts": {"1":36,"2":36},
+      "k": 5,
+      "m": 9,
+      "parameter_count_upper_bound": 4374,
+      "q": 3,
+      "raw_gram_component": 2255152783752,
+      "raw_over_squared_target": 0.0004056715620836141,
+      "resonant_ordered_pair_of_pairs": 72,
+      "squared_endpoint_target": 5559060566555523
+    },
+    {
+      "B_m_sum_Lambda_square": 1948587,
+      "Q_parameter_count": 27,
+      "completion_constants_verified_for_theta": [1,2],
+      "degree_k_prime_count": 116,
+      "elementary_raw_upper_bound": 149476961900715174,
+      "elementary_upper_over_squared_target": 0.012294873748920389,
+      "epsilon_counts": {"1":96,"2":96},
+      "k": 6,
+      "m": 11,
+      "parameter_count_upper_bound": 39366,
+      "q": 3,
+      "raw_gram_component": 729022328941248,
+      "raw_over_squared_target": 5.9964006362599674e-05,
+      "resonant_ordered_pair_of_pairs": 192,
+      "squared_endpoint_target": 12157665459056928801
+    },
+    {
+      "B_m_sum_Lambda_square": 20726163,
+      "Q_parameter_count": 81,
+      "completion_constants_verified_for_theta": [1,2],
+      "degree_k_prime_count": 312,
+      "elementary_raw_upper_bound": 152195960191157108694,
+      "elementary_upper_over_squared_target": 0.005724059679249437,
+      "epsilon_counts": {"1":720,"2":720},
+      "k": 7,
+      "m": 13,
+      "parameter_count_upper_bound": 354294,
+      "q": 3,
+      "raw_gram_component": 618586319091699360,
+      "raw_over_squared_target": 2.32649079699676e-05,
+      "resonant_ordered_pair_of_pairs": 1440,
+      "squared_endpoint_target": 26588814358957503287787
+    }
+  ],
+  "status": {
+    "dimension_bound": "PROVED EXACTLY",
+    "k4_completeness": "EMPIRICAL-EXACT FINITE PANEL",
+    "resonance_identity": "MACHINE-VERIFIED IDENTITY supporting an exact algebraic proof"
+  },
+  "uniform_bound": {
+    "B_m": "<=m*3^m",
+    "raw_gram_component": "<=2*m^2*3^(2m+2k-3)",
+    "resonant_point_count": "<=2*3^(2k-3)",
+    "saving_ratio": "<=2*m^2*3^(-k-3)",
+    "squared_endpoint_target": "3^(2m+3k)"
+  }
+}

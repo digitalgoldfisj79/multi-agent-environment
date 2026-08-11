@@ -1,0 +1,388 @@
+{
+  "control_puncture_panels": [
+    {
+      "M_full": 648,
+      "M_samp_canonical_values": [
+        {
+          "canonical": [144, 0, 0],
+          "multiplicity": 2
+        }
+      ],
+      "band_size": 3,
+      "distinct_source_residue_coincidence": 180,
+      "k": 2,
+      "lower_bound_verified": true,
+      "m": 3,
+      "max_M_samp_over_q_3k": 0.19753086419753071,
+      "max_M_samp_over_q_m_plus_2k": 0.0658436213991769,
+      "max_energy_enrichment_over_density": 0.8888888888888882,
+      "max_imaginary_abs": 4.547473508864641e-13,
+      "min_M_samp_over_q_3k": 0.19753086419753071,
+      "min_M_samp_over_q_m_plus_2k": 0.0658436213991769,
+      "min_energy_enrichment_over_density": 0.8888888888888882,
+      "ordered_prime_pairs": 6,
+      "projective_occupancy_lower_bound": 0.0,
+      "puncture": "control",
+      "q": 3,
+      "sample_density": 0.25,
+      "signed_residual_canonical_values": [
+        {
+          "canonical": [-486, 0, 0],
+          "multiplicity": 2
+        }
+      ],
+      "source_diagonal": 450,
+      "source_terms": 11,
+      "sum_theta_M_samp_canonical": [288, 0, 0],
+      "sum_theta_M_samp_real": 287.9999999999998,
+      "theta_count": 2,
+      "theta_invariant": true
+    },
+    {
+      "M_full": 30000,
+      "M_samp_canonical_values": [
+        {
+          "canonical": [10800, 0, -600, -600, 0],
+          "multiplicity": 2
+        },
+        {
+          "canonical": [11400, 0, 600, 600, 0],
+          "multiplicity": 2
+        }
+      ],
+      "band_size": 10,
+      "distinct_source_residue_coincidence": 34200,
+      "k": 2,
+      "lower_bound_verified": true,
+      "m": 3,
+      "max_M_samp_over_q_3k": 0.7533325051679974,
+      "max_M_samp_over_q_m_plus_2k": 0.1506665010335995,
+      "max_energy_enrichment_over_density": 1.0462951460666632,
+      "max_imaginary_abs": 5.820766091346741e-11,
+      "min_M_samp_over_q_3k": 0.6674674948320016,
+      "min_M_samp_over_q_m_plus_2k": 0.13349349896640034,
+      "min_energy_enrichment_over_density": 0.9270381872666689,
+      "ordered_prime_pairs": 90,
+      "projective_occupancy_lower_bound": 30000.0,
+      "puncture": "control",
+      "q": 5,
+      "sample_density": 0.375,
+      "signed_residual_canonical_values": [
+        {
+          "canonical": [-56250, 0, -600, -600, 0],
+          "multiplicity": 2
+        },
+        {
+          "canonical": [-55650, 0, 600, 600, 0],
+          "multiplicity": 2
+        }
+      ],
+      "source_diagonal": 32850,
+      "source_terms": 45,
+      "sum_theta_M_samp_canonical": [44400, 0, 0, 0, 0],
+      "sum_theta_M_samp_real": 44399.99999999988,
+      "theta_count": 4,
+      "theta_invariant": false
+    },
+    {
+      "M_full": 345744,
+      "M_samp_canonical_values": [
+        {
+          "canonical": [140826, 0, -2058, -5880, -5880, -2058, 0],
+          "multiplicity": 2
+        },
+        {
+          "canonical": [142884, 0, -3822, 2058, 2058, -3822, 0],
+          "multiplicity": 2
+        },
+        {
+          "canonical": [146706, 0, 5880, 3822, 3822, 5880, 0],
+          "multiplicity": 2
+        }
+      ],
+      "band_size": 21,
+      "distinct_source_residue_coincidence": 723240,
+      "k": 2,
+      "lower_bound_verified": true,
+      "m": 3,
+      "max_M_samp_over_q_3k": 1.2948456004784734,
+      "max_M_samp_over_q_m_plus_2k": 0.1849779429254962,
+      "max_energy_enrichment_over_density": 1.0574572403907534,
+      "max_imaginary_abs": 1.862645149230957e-09,
+      "min_M_samp_over_q_3k": 1.1661990139348628,
+      "min_M_samp_over_q_m_plus_2k": 0.16659985913355183,
+      "min_energy_enrichment_over_density": 0.9523958613801379,
+      "ordered_prime_pairs": 420,
+      "projective_occupancy_lower_bound": 691488.0,
+      "puncture": "control",
+      "q": 7,
+      "sample_density": 0.4166666666666667,
+      "signed_residual_canonical_values": [
+        {
+          "canonical": [-1008714, 0, -2058, -5880, -5880, -2058, 0],
+          "multiplicity": 2
+        },
+        {
+          "canonical": [-1006656, 0, -3822, 2058, 2058, -3822, 0],
+          "multiplicity": 2
+        },
+        {
+          "canonical": [-1002834, 0, 5880, 3822, 3822, 5880, 0],
+          "multiplicity": 2
+        }
+      ],
+      "source_diagonal": 426300,
+      "source_terms": 119,
+      "sum_theta_M_samp_canonical": [860832, 0, 0, 0, 0, 0, 0],
+      "sum_theta_M_samp_real": 860831.9999999776,
+      "theta_count": 6,
+      "theta_invariant": false
+    }
+  ],
+  "extended_theta_1_panels": [],
+  "projective_occupancy": [
+    {
+      "common_occupancy_histogram": {"0": 2, "1": 2},
+      "degree": 2,
+      "degree_two_prime_count": 3,
+      "lines_at_each_occupancy": 2,
+      "maximum_occupancy": 1,
+      "minimum_occupancy": 0,
+      "projective_line_count": 4,
+      "q": 3,
+      "verified_for_every_P": true
+    },
+    {
+      "common_occupancy_histogram": {"1": 3, "2": 3},
+      "degree": 2,
+      "degree_two_prime_count": 10,
+      "lines_at_each_occupancy": 3,
+      "maximum_occupancy": 2,
+      "minimum_occupancy": 1,
+      "projective_line_count": 6,
+      "q": 5,
+      "verified_for_every_P": true
+    },
+    {
+      "common_occupancy_histogram": {"2": 4, "3": 4},
+      "degree": 2,
+      "degree_two_prime_count": 21,
+      "lines_at_each_occupancy": 4,
+      "maximum_occupancy": 3,
+      "minimum_occupancy": 2,
+      "projective_line_count": 8,
+      "q": 7,
+      "verified_for_every_P": true
+    },
+    {
+      "common_occupancy_histogram": {"4": 6, "5": 6},
+      "degree": 2,
+      "degree_two_prime_count": 55,
+      "lines_at_each_occupancy": 6,
+      "maximum_occupancy": 5,
+      "minimum_occupancy": 4,
+      "projective_line_count": 12,
+      "q": 11,
+      "verified_for_every_P": true
+    }
+  ],
+  "status": {
+    "asymptotic_route_A_closure": "PROVED FROM PUBLISHED INPUT plus exact occupancy lemma",
+    "projective_occupancy": "MACHINE-VERIFIED IDENTITY",
+    "sampled_mass_panels": "EMPIRICAL-EXACT FINITE PANEL"
+  },
+  "theorem_boundary": {
+    "consequence": "The uniform Route A target M_samp(theta) << q^(3k) poly(k,m) is false.",
+    "not_proved": "The endpoint FFPR target is not falsified; Route B remains open.",
+    "proved": "For k=2,m=3, averaging over nonzero theta samples every local projective line with multiplicity at least (q-3)/2. Combined with Keating-Rudnick Theorem 2.2(ii), max_theta M_samp(theta) >= (1/4+o(1))q^7 as q tends to infinity."
+  },
+  "true_primorial_panels": [
+    {
+      "M_full": 648,
+      "M_samp_canonical_values": [{"canonical": [216, 0, 0], "multiplicity": 2}],
+      "band_size": 3,
+      "distinct_source_residue_coincidence": 180,
+      "k": 2,
+      "lower_bound_verified": true,
+      "m": 3,
+      "max_M_samp_over_q_3k": 0.2962962962962961,
+      "max_M_samp_over_q_m_plus_2k": 0.09876543209876538,
+      "max_energy_enrichment_over_density": 1.3333333333333326,
+      "max_imaginary_abs": 4.547473508864641e-13,
+      "min_M_samp_over_q_3k": 0.2962962962962961,
+      "min_M_samp_over_q_m_plus_2k": 0.09876543209876538,
+      "min_energy_enrichment_over_density": 1.3333333333333326,
+      "ordered_prime_pairs": 6,
+      "projective_occupancy_lower_bound": 0.0,
+      "puncture": "primorial",
+      "q": 3,
+      "sample_density": 0.25,
+      "signed_residual_canonical_values": [{"canonical": [-414, 0, 0], "multiplicity": 2}],
+      "source_diagonal": 450,
+      "source_terms": 11,
+      "sum_theta_M_samp_canonical": [432, 0, 0],
+      "sum_theta_M_samp_real": 431.9999999999998,
+      "theta_count": 2,
+      "theta_invariant": true
+    },
+    {
+      "M_full": 30000,
+      "M_samp_canonical_values": [{"canonical": [10500, 0, 0, 0, 0], "multiplicity": 4}],
+      "band_size": 10,
+      "distinct_source_residue_coincidence": 34200,
+      "k": 2,
+      "lower_bound_verified": true,
+      "m": 3,
+      "max_M_samp_over_q_3k": 0.671999999999999,
+      "max_M_samp_over_q_m_plus_2k": 0.13439999999999983,
+      "max_energy_enrichment_over_density": 0.9333333333333321,
+      "max_imaginary_abs": 0.0,
+      "min_M_samp_over_q_3k": 0.671999999999999,
+      "min_M_samp_over_q_m_plus_2k": 0.13439999999999983,
+      "min_energy_enrichment_over_density": 0.9333333333333321,
+      "ordered_prime_pairs": 90,
+      "projective_occupancy_lower_bound": 30000.0,
+      "puncture": "primorial",
+      "q": 5,
+      "sample_density": 0.375,
+      "signed_residual_canonical_values": [{"canonical": [-56550, 0, 0, 0, 0], "multiplicity": 4}],
+      "source_diagonal": 32850,
+      "source_terms": 45,
+      "sum_theta_M_samp_canonical": [42000, 0, 0, 0, 0],
+      "sum_theta_M_samp_real": 41999.99999999994,
+      "theta_count": 4,
+      "theta_invariant": true
+    },
+    {
+      "M_full": 345744,
+      "M_samp_canonical_values": [{"canonical": [148176, 0, 0, 0, 0, 0, 0], "multiplicity": 6}],
+      "band_size": 21,
+      "distinct_source_residue_coincidence": 723240,
+      "k": 2,
+      "lower_bound_verified": true,
+      "m": 3,
+      "max_M_samp_over_q_3k": 1.2594752186588685,
+      "max_M_samp_over_q_m_plus_2k": 0.1799250312369812,
+      "max_energy_enrichment_over_density": 1.0285714285714092,
+      "max_imaginary_abs": 1.862645149230957e-09,
+      "min_M_samp_over_q_3k": 1.2594752186588685,
+      "min_M_samp_over_q_m_plus_2k": 0.1799250312369812,
+      "min_energy_enrichment_over_density": 1.0285714285714092,
+      "ordered_prime_pairs": 420,
+      "projective_occupancy_lower_bound": 691488.0,
+      "puncture": "primorial",
+      "q": 7,
+      "sample_density": 0.4166666666666667,
+      "signed_residual_canonical_values": [{"canonical": [-1001364, 0, 0, 0, 0, 0, 0], "multiplicity": 6}],
+      "source_diagonal": 426300,
+      "source_terms": 119,
+      "sum_theta_M_samp_canonical": [889056, 0, 0, 0, 0, 0, 0],
+      "sum_theta_M_samp_real": 889055.9999999739,
+      "theta_count": 6,
+      "theta_invariant": true
+    },
+    {
+      "M_full": 8784600,
+      "M_samp_canonical_values": [{"canonical": [3993000, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "multiplicity": 10}],
+      "band_size": 55,
+      "distinct_source_residue_coincidence": 35610300,
+      "k": 2,
+      "lower_bound_verified": true,
+      "m": 3,
+      "max_M_samp_over_q_3k": 2.2539444027045312,
+      "max_M_samp_over_q_m_plus_2k": 0.20490403660950285,
+      "max_energy_enrichment_over_density": 1.0101010101009196,
+      "max_imaginary_abs": 1.1920928955078125e-07,
+      "min_M_samp_over_q_3k": 2.2539444027045312,
+      "min_M_samp_over_q_m_plus_2k": 0.20490403660950285,
+      "min_energy_enrichment_over_density": 1.0101010101009196,
+      "ordered_prime_pairs": 2970,
+      "projective_occupancy_lower_bound": 35138400.0,
+      "puncture": "primorial",
+      "q": 11,
+      "sample_density": 0.45,
+      "signed_residual_canonical_values": [{"canonical": [-43411170, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "multiplicity": 10}],
+      "source_diagonal": 11793870,
+      "source_terms": 451,
+      "sum_theta_M_samp_canonical": [39930000, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      "sum_theta_M_samp_real": 39929999.99999809,
+      "theta_count": 10,
+      "theta_invariant": true
+    },
+    {
+      "M_full": 100116,
+      "M_samp_canonical_values": [{"canonical": [21384, 0, 0], "multiplicity": 2}],
+      "band_size": 8,
+      "distinct_source_residue_coincidence": 81060,
+      "k": 3,
+      "m": 5,
+      "max_M_samp_over_q_3k": 1.086419753086414,
+      "max_M_samp_over_q_m_plus_2k": 0.12071330589849043,
+      "max_energy_enrichment_over_density": 0.7933425797503425,
+      "max_imaginary_abs": 3.4924596548080444e-10,
+      "min_M_samp_over_q_3k": 1.086419753086414,
+      "min_M_samp_over_q_m_plus_2k": 0.12071330589849043,
+      "min_energy_enrichment_over_density": 0.7933425797503425,
+      "ordered_prime_pairs": 56,
+      "puncture": "primorial",
+      "q": 3,
+      "sample_density": 0.2692307692307692,
+      "signed_residual_canonical_values": [{"canonical": [-127044, 0, 0], "multiplicity": 2}],
+      "source_diagonal": 67368,
+      "source_terms": 51,
+      "sum_theta_M_samp_canonical": [42768, 0, 0],
+      "theta_count": 2,
+      "theta_invariant": true
+    },
+    {
+      "M_full": 30475000,
+      "M_samp_canonical_values": [{"canonical": [9697500, 0, 0, 0, 0], "multiplicity": 4}],
+      "band_size": 40,
+      "distinct_source_residue_coincidence": 107039400,
+      "k": 3,
+      "m": 5,
+      "max_M_samp_over_q_3k": 4.965119999999695,
+      "max_M_samp_over_q_m_plus_2k": 0.19860479999998779,
+      "max_energy_enrichment_over_density": 1.0117498580172282,
+      "max_imaginary_abs": 0.0,
+      "min_M_samp_over_q_3k": 4.965119999999695,
+      "min_M_samp_over_q_m_plus_2k": 0.19860479999998779,
+      "min_energy_enrichment_over_density": 1.0117498580172282,
+      "ordered_prime_pairs": 1560,
+      "puncture": "primorial",
+      "q": 5,
+      "sample_density": 0.31451612903225806,
+      "signed_residual_canonical_values": [{"canonical": [-121685700, 0, 0, 0, 0], "multiplicity": 4}],
+      "source_diagonal": 24343800,
+      "source_terms": 629,
+      "sum_theta_M_samp_canonical": [38790000, 0, 0, 0, 0],
+      "theta_count": 4,
+      "theta_invariant": true
+    },
+    {
+      "M_full": 9316620,
+      "M_samp_canonical_values": [{"canonical": [1907874, 0, 0], "multiplicity": 2}],
+      "band_size": 18,
+      "distinct_source_residue_coincidence": 15345288,
+      "k": 4,
+      "m": 7,
+      "max_M_samp_over_q_3k": 3.590001524157847,
+      "max_M_samp_over_q_m_plus_2k": 0.13296301941325359,
+      "max_energy_enrichment_over_density": 0.963678950975263,
+      "max_imaginary_abs": 1.7881393432617188e-07,
+      "min_M_samp_over_q_3k": 3.590001524157847,
+      "min_M_samp_over_q_m_plus_2k": 0.13296301941325359,
+      "min_energy_enrichment_over_density": 0.963678950975263,
+      "ordered_prime_pairs": 306,
+      "puncture": "primorial",
+      "q": 3,
+      "sample_density": 0.2125,
+      "signed_residual_canonical_values": [{"canonical": [-18116460, 0, 0], "multiplicity": 2}],
+      "source_diagonal": 4679046,
+      "source_terms": 315,
+      "sum_theta_M_samp_canonical": [3815748, 0, 0],
+      "theta_count": 2,
+      "theta_invariant": true
+    }
+  ]
+}

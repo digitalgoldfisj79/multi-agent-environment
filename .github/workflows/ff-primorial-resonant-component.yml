@@ -1,0 +1,31 @@
+name: Validate FF primorial-resonant component
+
+on:
+  pull_request:
+  push:
+    branches:
+      - gpt56/fortune-mesoscopic-cotlar-20260728
+
+jobs:
+  resonant-component:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Compile verifier
+        run: python -m py_compile fortune-review/scripts/ff_primorial_resonant_component.py
+      - name: Recompute exact component panel
+        run: |
+          python fortune-review/scripts/ff_primorial_resonant_component.py > /tmp/current.json
+      - name: Compare frozen output
+        run: |
+          python - <<'PY'
+          import json
+          current = json.load(open('/tmp/current.json'))
+          frozen = json.load(open('fortune-review/data/ff_primorial_resonant_component.json'))
+          assert current == frozen
+          assert current['k4_exception_completeness']['sets_equal']
+          assert current['uniform_bound']['saving_ratio'] == '<=2*m^2*3^(-k-3)'
+          PY

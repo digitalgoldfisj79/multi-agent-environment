@@ -1,0 +1,46 @@
+name: Validate FF nonzero-defect orbit programme
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'fortune-review/FF_NONZERO_DEFECT_ORBIT_PROGRAMME_V0_1_20260731.md'
+      - 'fortune-review/scripts/ff_nonzero_defect_programme_contract.py'
+      - 'fortune-review/scripts/ff_nonzero_defect_root_covariance_audit.py'
+      - 'fortune-review/scripts/ff_large_field_explicit_counterexample.py'
+      - 'fortune-review/data/ff_nonzero_defect_programme_contract.json'
+      - 'fortune-review/data/ff_nonzero_defect_root_covariance_audit.json'
+      - '.github/workflows/ff-nonzero-defect-orbit-programme.yml'
+
+jobs:
+  contract-and-root-covariance:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile exact verifiers
+        run: |
+          python -m py_compile \
+            fortune-review/scripts/ff_nonzero_defect_programme_contract.py \
+            fortune-review/scripts/ff_nonzero_defect_root_covariance_audit.py \
+            fortune-review/scripts/ff_large_field_explicit_counterexample.py
+      - name: Validate preregistered contract
+        run: |
+          python fortune-review/scripts/ff_nonzero_defect_programme_contract.py
+      - name: Recheck original-frequency counterexample
+        run: |
+          python fortune-review/scripts/ff_large_field_explicit_counterexample.py
+      - name: Recompute root and affine covariance audit
+        run: |
+          python fortune-review/scripts/ff_nonzero_defect_root_covariance_audit.py > /tmp/root_covariance.json
+      - name: Compare frozen root-covariance output
+        run: |
+          diff -u fortune-review/data/ff_nonzero_defect_root_covariance_audit.json /tmp/root_covariance.json
+      - name: Guard programme boundary
+        run: |
+          grep -q 'twisted Frobenius' fortune-review/FF_NONZERO_DEFECT_ORBIT_PROGRAMME_V0_1_20260731.md
+          grep -q 'may not stop at' fortune-review/FF_NONZERO_DEFECT_ORBIT_PROGRAMME_V0_1_20260731.md
+          grep -q 'Delta_PS' fortune-review/FF_NONZERO_DEFECT_ORBIT_PROGRAMME_V0_1_20260731.md
+          grep -q 'positive-dimensional' fortune-review/FF_NONZERO_DEFECT_ORBIT_PROGRAMME_V0_1_20260731.md

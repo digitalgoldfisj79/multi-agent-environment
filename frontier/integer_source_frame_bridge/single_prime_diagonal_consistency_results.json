@@ -1,0 +1,124 @@
+{
+  "status": "PASS",
+  "exact": {
+    "first_band_low_mode_equals_existing_diagonal": {
+      "cutoff": 11,
+      "band_primes": [
+        13,
+        17,
+        19
+      ],
+      "centres": [
+        30,
+        210,
+        2310
+      ],
+      "source_prime_count": 20,
+      "coordinate_checks": 9,
+      "rows": [
+        {
+          "centre": 30,
+          "prime": 13,
+          "beta": "2/3",
+          "ordinary_source_count": 19,
+          "residue_count": 1,
+          "one_residue_low_mode": "14/33",
+          "same_band_coordinate": "-14/33",
+          "sum": "0"
+        },
+        {
+          "centre": 30,
+          "prime": 17,
+          "beta": "2/3",
+          "ordinary_source_count": 19,
+          "residue_count": 1,
+          "one_residue_low_mode": "2/15",
+          "same_band_coordinate": "-2/15",
+          "sum": "0"
+        },
+        {
+          "centre": 30,
+          "prime": 19,
+          "beta": "2/3",
+          "ordinary_source_count": 19,
+          "residue_count": 0,
+          "one_residue_low_mode": "38/51",
+          "same_band_coordinate": "-38/51",
+          "sum": "0"
+        },
+        {
+          "centre": 210,
+          "prime": 13,
+          "beta": "5/7",
+          "ordinary_source_count": 19,
+          "residue_count": 2,
+          "one_residue_low_mode": "-25/77",
+          "same_band_coordinate": "25/77",
+          "sum": "0"
+        },
+        {
+          "centre": 210,
+          "prime": 17,
+          "beta": "5/7",
+          "ordinary_source_count": 19,
+          "residue_count": 1,
+          "one_residue_low_mode": "1/7",
+          "same_band_coordinate": "-1/7",
+          "sum": "0"
+        },
+        {
+          "centre": 210,
+          "prime": 19,
+          "beta": "5/7",
+          "ordinary_source_count": 19,
+          "residue_count": 1,
+          "one_residue_low_mode": "5/119",
+          "same_band_coordinate": "-5/119",
+          "sum": "0"
+        },
+        {
+          "centre": 2310,
+          "prime": 13,
+          "beta": "11/13",
+          "ordinary_source_count": 19,
+          "residue_count": 2,
+          "one_residue_low_mode": "-5/13",
+          "same_band_coordinate": "5/13",
+          "sum": "0"
+        },
+        {
+          "centre": 2310,
+          "prime": 17,
+          "beta": "11/13",
+          "ordinary_source_count": 19,
+          "residue_count": 2,
+          "one_residue_low_mode": "-11/15",
+          "same_band_coordinate": "11/15",
+          "sum": "0"
+        },
+        {
+          "centre": 2310,
+          "prime": 19,
+          "beta": "11/13",
+          "ordinary_source_count": 19,
+          "residue_count": 0,
+          "one_residue_low_mode": "209/221",
+          "same_band_coordinate": "-209/221",
+          "sum": "0"
+        }
+      ],
+      "low_mode_diagonal_energy": "6412764418/2606204601",
+      "same_band_diagonal_energy": "6412764418/2606204601",
+      "status": "PASS"
+    },
+    "later_weight_qualification": {
+      "centre": 30,
+      "prime": 13,
+      "nonconstant_weighted_low_mode": "131/132",
+      "constant_weight_identification_check": "0",
+      "qualification": "The exact identification with the established frozen diagonal uses the actual constant source weight beta_j on the first physical band. A later-band survivor-weighted extension is a different theorem.",
+      "status": "PASS"
+    }
+  },
+  "boundary": "For the frozen first physical band, the proposed SW1BDH diagonal is exactly the already-established same-band diagonal coordinate, with opposite sign. The open theorem is the coherent square of the sum over physical primes, not the sum of the individual squares. Later bands carrying previous-survivor weights remain distinct."
+}

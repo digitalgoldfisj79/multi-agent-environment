@@ -1,0 +1,11 @@
+{
+  "allowed_status_count": 8,
+  "contract_valid": true,
+  "final_gate": "G10",
+  "first_open_gate": "G1",
+  "gate_count": 11,
+  "programme": "FERP-0.1",
+  "route_a_threshold": "M_samp(theta) << q^(3k) poly(k,m)",
+  "route_b": "CBEA_FF",
+  "route_count": 2
+}

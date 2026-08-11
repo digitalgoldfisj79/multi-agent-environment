@@ -1,0 +1,50 @@
+name: Validate single-prime boundary correction
+
+on:
+  push:
+    branches:
+      - gpt56/fortune-mesoscopic-cotlar-20260728
+    paths:
+      - "frontier/integer_source_frame_bridge/single_prime_diagonal_consistency_verify.py"
+      - "frontier/integer_source_frame_bridge/single_prime_diagonal_consistency_results.json"
+      - "frontier/integer_source_frame_bridge/SINGLE_PRIME_DIAGONAL_CONSISTENCY_CORRECTION_20260729.md"
+      - "frontier/integer_source_frame_bridge/same_band_prime_modulus_boundary_verify.py"
+      - "frontier/integer_source_frame_bridge/same_band_prime_modulus_boundary_results.json"
+      - "frontier/integer_source_frame_bridge/SAME_BAND_PRIME_MODULUS_FACTORISATION_BOUNDARY_20260729.md"
+      - ".github/workflows/validate-single-prime-boundary-correction.yml"
+  pull_request:
+    paths:
+      - "frontier/integer_source_frame_bridge/single_prime_diagonal_consistency_verify.py"
+      - "frontier/integer_source_frame_bridge/single_prime_diagonal_consistency_results.json"
+      - "frontier/integer_source_frame_bridge/SINGLE_PRIME_DIAGONAL_CONSISTENCY_CORRECTION_20260729.md"
+      - "frontier/integer_source_frame_bridge/same_band_prime_modulus_boundary_verify.py"
+      - "frontier/integer_source_frame_bridge/same_band_prime_modulus_boundary_results.json"
+      - "frontier/integer_source_frame_bridge/SAME_BAND_PRIME_MODULUS_FACTORISATION_BOUNDARY_20260729.md"
+      - ".github/workflows/validate-single-prime-boundary-correction.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run diagonal consistency verifier
+        run: python frontier/integer_source_frame_bridge/single_prime_diagonal_consistency_verify.py
+
+      - name: Require diagonal frozen result match
+        run: git diff --exit-code -- frontier/integer_source_frame_bridge/single_prime_diagonal_consistency_results.json
+
+      - name: Run prime-modulus boundary verifier
+        run: python frontier/integer_source_frame_bridge/same_band_prime_modulus_boundary_verify.py
+
+      - name: Require boundary frozen result match
+        run: git diff --exit-code -- frontier/integer_source_frame_bridge/same_band_prime_modulus_boundary_results.json

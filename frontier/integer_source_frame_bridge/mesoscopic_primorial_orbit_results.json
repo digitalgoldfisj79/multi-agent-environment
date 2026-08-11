@@ -1,0 +1,53 @@
+{
+  "status": "PASS",
+  "scope": "mesoscopic primorial collision kernel and Schur bound",
+  "panels": [
+    {
+      "X": 101,
+      "H": 8160,
+      "N": 21,
+      "K": 10,
+      "boundary_budget_ratio_K2X_over_H": 1.2377450980392157,
+      "maximum_formula_error": 6.970422390509397e-17,
+      "maximum_collision_count_ratio": 0.6702448945414936,
+      "maximum_schur_ratio": 0.9985613877322033,
+      "blocks": [
+        {"start_index": 0, "block_size": 10, "z_min": 101, "z_max": 149, "modulus_count": 988, "diagonal": 0.5726701792175735, "maximum_absolute_row_sum": 0.5863878423120014, "theoretical_schur_bound": 1.608530590770676, "row_sum_to_bound_ratio": 0.36454876623207544},
+        {"start_index": 10, "block_size": 10, "z_min": 151, "z_max": 197, "modulus_count": 978, "diagonal": 0.5155034436069229, "maximum_absolute_row_sum": 0.5284352430862179, "theoretical_schur_bound": 1.5480329228700733, "row_sum_to_bound_ratio": 0.341359176073912},
+        {"start_index": 20, "block_size": 1, "z_min": 199, "z_max": 199, "modulus_count": 977, "diagonal": 0.5105035698663608, "maximum_absolute_row_sum": 0.5105035698663608, "theoretical_schur_bound": 0.511239044627739, "row_sum_to_bound_ratio": 0.9985613877322033}
+      ]
+    },
+    {
+      "X": 211,
+      "H": 35616,
+      "N": 36,
+      "K": 14,
+      "boundary_budget_ratio_K2X_over_H": 1.1611635220125787,
+      "maximum_formula_error": 5.4898859991844637e-17,
+      "maximum_collision_count_ratio": 0.5949281121696905,
+      "maximum_schur_ratio": 0.6457641359494052,
+      "blocks": [
+        {"start_index": 0, "block_size": 14, "z_min": 211, "z_max": 281, "modulus_count": 3732, "diagonal": 0.605194621612458, "maximum_absolute_row_sum": 0.6130860796627319, "theoretical_schur_bound": 1.5866444443190721, "row_sum_to_bound_ratio": 0.38640420155748584},
+        {"start_index": 14, "block_size": 14, "z_min": 283, "z_max": 373, "modulus_count": 3718, "diagonal": 0.5627961260658676, "maximum_absolute_row_sum": 0.5703543416481429, "theoretical_schur_bound": 1.5424247405105, "row_sum_to_bound_ratio": 0.3697777445266933},
+        {"start_index": 28, "block_size": 8, "z_min": 379, "z_max": 421, "modulus_count": 3710, "diagonal": 0.542806633808946, "maximum_absolute_row_sum": 0.5458262870521847, "theoretical_schur_bound": 0.8452409427316812, "row_sum_to_bound_ratio": 0.6457641359494052}
+      ]
+    },
+    {
+      "X": 503,
+      "H": 202407,
+      "N": 73,
+      "K": 22,
+      "boundary_budget_ratio_K2X_over_H": 1.2027844886787513,
+      "maximum_formula_error": 3.996131926335534e-17,
+      "maximum_collision_count_ratio": 0.7034083515413911,
+      "maximum_schur_ratio": 0.860560913577546,
+      "blocks": [
+        {"start_index": 0, "block_size": 22, "z_min": 503, "z_max": 643, "modulus_count": 18063, "diagonal": 0.6294599626792058, "maximum_absolute_row_sum": 0.6371178577641418, "theoretical_schur_bound": 1.6548291132736417, "row_sum_to_bound_ratio": 0.38500522661447056},
+        {"start_index": 22, "block_size": 22, "z_min": 647, "z_max": 797, "modulus_count": 18041, "diagonal": 0.5987688087856993, "maximum_absolute_row_sum": 0.6058787568276168, "theoretical_schur_bound": 1.6231896305133968, "row_sum_to_bound_ratio": 0.3732643096272024},
+        {"start_index": 44, "block_size": 22, "z_min": 809, "z_max": 947, "modulus_count": 18019, "diagonal": 0.5735402791117168, "maximum_absolute_row_sum": 0.5785181758125011, "theoretical_schur_bound": 1.5973215870494957, "row_sum_to_bound_ratio": 0.36218015238942286},
+        {"start_index": 66, "block_size": 7, "z_min": 953, "z_max": 997, "modulus_count": 18012, "diagonal": 0.5663813805800177, "maximum_absolute_row_sum": 0.568031135041849, "theoretical_schur_bound": 0.6600708050757444, "row_sum_to_bound_ratio": 0.860560913577546}
+      ]
+    }
+  ],
+  "boundary": "The verifier checks the orbit frame and cutoff budget only; the joint common-source bilinear estimate remains OPEN."
+}

@@ -1,0 +1,196 @@
+{
+  "status": "PASS",
+  "exact": {
+    "ramanujan_projector_panels": [
+      {
+        "z": 5,
+        "Z": 7,
+        "H": 39,
+        "P": 30,
+        "divisor_count": 8,
+        "coefficient_l1": "1",
+        "weighted_quadratic_mass": "4/15",
+        "rough_density": "4/15",
+        "nontrivial_complete_period_energy": "44/225",
+        "checked_physical_moduli": 8,
+        "interval_count_checksum": 0
+      },
+      {
+        "z": 7,
+        "Z": 11,
+        "H": 96,
+        "P": 210,
+        "divisor_count": 16,
+        "coefficient_l1": "1",
+        "weighted_quadratic_mass": "8/35",
+        "rough_density": "8/35",
+        "nontrivial_complete_period_energy": "216/1225",
+        "checked_physical_moduli": 19,
+        "interval_count_checksum": 6
+      }
+    ],
+    "band_martingale_panel": {
+      "P": 30,
+      "local_primes": [
+        7,
+        11,
+        13
+      ],
+      "bands": [
+        [
+          7,
+          11
+        ],
+        [
+          13
+        ]
+      ],
+      "sample_size": 720,
+      "increment_means": [
+        "0",
+        "0"
+      ],
+      "cross_band_covariance": "0",
+      "quadratic_variation": "5/11",
+      "final_energy": "5/11"
+    }
+  },
+  "empirical": {
+    "full_chaos_reinsertion_panels": [
+      {
+        "X": 7,
+        "H": 39,
+        "K": 2,
+        "centre_count": 3,
+        "maximum_factor_cluster": 1,
+        "blocks": [
+          {
+            "start_index": 0,
+            "block_size": 2,
+            "physical_energy": 0.7508649294313792,
+            "tail_energy": 0.255807786544375,
+            "higher_energy": 0.559898249034808,
+            "complete_energy": 1.305535804178089,
+            "twice_cov_physical_tail": -0.6640089034117079,
+            "twice_cov_physical_higher": 1.1420128152228701,
+            "twice_cov_tail_higher": -0.7390390726436358,
+            "complete_to_physical_ratio": 1.7387092578245134
+          },
+          {
+            "start_index": 2,
+            "block_size": 1,
+            "physical_energy": 0.3499713450256442,
+            "tail_energy": 1.0760142630913845,
+            "higher_energy": 3.6712982942467036,
+            "complete_energy": 5.578054562619918,
+            "twice_cov_physical_tail": -1.22731277011342,
+            "twice_cov_physical_higher": -2.267023777579646,
+            "twice_cov_tail_higher": 3.975107207949252,
+            "complete_to_physical_ratio": 15.938603665426337
+          }
+        ]
+      },
+      {
+        "X": 11,
+        "H": 96,
+        "K": 3,
+        "centre_count": 4,
+        "maximum_factor_cluster": 3,
+        "blocks": [
+          {
+            "start_index": 0,
+            "block_size": 3,
+            "physical_energy": 3.6737873106822407,
+            "tail_energy": 0.8885896458184311,
+            "higher_energy": 1.9418594092041168,
+            "complete_energy": 4.520237156258539,
+            "twice_cov_physical_tail": 0.4366266606174801,
+            "twice_cov_physical_higher": -3.784822705773499,
+            "twice_cov_tail_higher": 1.3641968357097682,
+            "complete_to_physical_ratio": 1.2304025176185576
+          },
+          {
+            "start_index": 3,
+            "block_size": 1,
+            "physical_energy": 13.016320184632733,
+            "tail_energy": 0.8463532752223621,
+            "higher_energy": 0.45627975328379783,
+            "complete_energy": 14.840242606226875,
+            "twice_cov_physical_tail": 6.638194097676522,
+            "twice_cov_physical_higher": -4.874046927351907,
+            "twice_cov_tail_higher": -1.2428577772366292,
+            "complete_to_physical_ratio": 1.1401258109605734
+          }
+        ]
+      },
+      {
+        "X": 13,
+        "H": 135,
+        "K": 3,
+        "centre_count": 4,
+        "maximum_factor_cluster": 3,
+        "blocks": [
+          {
+            "start_index": 0,
+            "block_size": 3,
+            "physical_energy": 19.146533478526518,
+            "tail_energy": 4.020113468483395,
+            "higher_energy": 5.920058545823315,
+            "complete_energy": 12.864016774561604,
+            "twice_cov_physical_tail": 2.397455724689512,
+            "twice_cov_physical_higher": -16.750984213169282,
+            "twice_cov_tail_higher": -1.8691602297918533,
+            "complete_to_physical_ratio": 0.6718718450516921
+          },
+          {
+            "start_index": 3,
+            "block_size": 1,
+            "physical_energy": 5.956013451039125,
+            "tail_energy": 17.829545293492014,
+            "higher_energy": 4.679041360755704,
+            "complete_energy": 0.1452365046770813,
+            "twice_cov_physical_tail": -20.609998699073202,
+            "twice_cov_physical_higher": 10.558112195393527,
+            "twice_cov_tail_higher": -18.267477096930087,
+            "complete_to_physical_ratio": 0.024384851691653314
+          }
+        ]
+      },
+      {
+        "X": 17,
+        "H": 231,
+        "K": 4,
+        "centre_count": 5,
+        "maximum_factor_cluster": 4,
+        "blocks": [
+          {
+            "start_index": 0,
+            "block_size": 4,
+            "physical_energy": 59.74131464851638,
+            "tail_energy": 37.21887964915837,
+            "higher_energy": 158.98578447015132,
+            "complete_energy": 356.26633405140063,
+            "twice_cov_physical_tail": -27.570586005320408,
+            "twice_cov_physical_higher": 43.536759052298024,
+            "twice_cov_tail_higher": 84.35418223659696,
+            "complete_to_physical_ratio": 5.963483330547166
+          },
+          {
+            "start_index": 4,
+            "block_size": 1,
+            "physical_energy": 1.286286496628808,
+            "tail_energy": 0.18037996291199038,
+            "higher_energy": 28.63045321068294,
+            "complete_energy": 47.74258010028866,
+            "twice_cov_physical_tail": 0.9633697328774625,
+            "twice_cov_physical_higher": 12.137045003997367,
+            "twice_cov_tail_higher": 4.545045693190098,
+            "complete_to_physical_ratio": 37.11659900451093
+          }
+        ]
+      }
+    ],
+    "qualification": "Finite full-chaos energies and covariance signs are diagnostics only. They show that reinsertion is not a monotone contraction; no asymptotic estimate is inferred."
+  },
+  "boundary": "The exact Ramanujan projector removes the exponential coefficient-count loss, but a joint incomplete Ramanujan interval theorem is still open. Exact band-martingale reinsertion preserves Euler-cluster cancellation, but deterministic sampling of its increments is still open. Fortune remains open."
+}

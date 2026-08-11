@@ -1,0 +1,38 @@
+name: Validate multiplicative character survivor
+
+on:
+  push:
+    branches:
+      - gpt56/fortune-mesoscopic-cotlar-20260728
+    paths:
+      - "frontier/integer_source_frame_bridge/multiplicative_character_survivor_verify.py"
+      - "frontier/integer_source_frame_bridge/multiplicative_character_survivor_results.json"
+      - "frontier/integer_source_frame_bridge/MULTIPLICATIVE_CHARACTER_SURVIVOR_EXPANSION_20260729.md"
+      - ".github/workflows/validate-multiplicative-character-survivor.yml"
+  pull_request:
+    paths:
+      - "frontier/integer_source_frame_bridge/multiplicative_character_survivor_verify.py"
+      - "frontier/integer_source_frame_bridge/multiplicative_character_survivor_results.json"
+      - "frontier/integer_source_frame_bridge/MULTIPLICATIVE_CHARACTER_SURVIVOR_EXPANSION_20260729.md"
+      - ".github/workflows/validate-multiplicative-character-survivor.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run exact verifier
+        run: python frontier/integer_source_frame_bridge/multiplicative_character_survivor_verify.py
+
+      - name: Require frozen result match
+        run: git diff --exit-code -- frontier/integer_source_frame_bridge/multiplicative_character_survivor_results.json

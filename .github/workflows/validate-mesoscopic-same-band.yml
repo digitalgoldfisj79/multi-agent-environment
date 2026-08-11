@@ -1,0 +1,163 @@
+name: Validate mesoscopic same-band reductions
+
+on:
+  push:
+    branches:
+      - gpt56/fortune-mesoscopic-cotlar-20260728
+    paths:
+      - .github/workflows/validate-mesoscopic-same-band.yml
+      - frontier/integer_source_frame_bridge/MESOSCOPIC_PRIMORIAL_ORBIT_REDUCTION_20260728.md
+      - frontier/integer_source_frame_bridge/ROUGH_QUOTIENT_HYPERBOLA_COLLAPSE_20260728.md
+      - frontier/integer_source_frame_bridge/SAME_BAND_RECOMBINATION_REDUCTION_20260728.md
+      - frontier/integer_source_frame_bridge/SAME_BAND_ANALYTIC_AUDIT_AND_OBSTRUCTION_20260729.md
+      - frontier/integer_source_frame_bridge/HOSTILE_REVIEW_SAME_BAND_20260729.md
+      - frontier/integer_source_frame_bridge/PROGRAMME_STATUS_SAME_BAND_20260729.md
+      - frontier/integer_source_frame_bridge/mesoscopic_primorial_orbit_verify.py
+      - frontier/integer_source_frame_bridge/rough_quotient_hyperbola_verify.py
+      - frontier/integer_source_frame_bridge/same_band_decomposition_verify.py
+      - frontier/integer_source_frame_bridge/*_results.json
+  pull_request:
+    branches:
+      - publication/fortune-papers-ii-vi-20260724
+    paths:
+      - .github/workflows/validate-mesoscopic-same-band.yml
+      - frontier/integer_source_frame_bridge/**
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check theorem package and labels
+        run: |
+          set -euo pipefail
+          ROOT=frontier/integer_source_frame_bridge
+          for file in \
+            MESOSCOPIC_PRIMORIAL_ORBIT_REDUCTION_20260728.md \
+            ROUGH_QUOTIENT_HYPERBOLA_COLLAPSE_20260728.md \
+            SAME_BAND_RECOMBINATION_REDUCTION_20260728.md \
+            SAME_BAND_ANALYTIC_AUDIT_AND_OBSTRUCTION_20260729.md \
+            HOSTILE_REVIEW_SAME_BAND_20260729.md \
+            PROGRAMME_STATUS_SAME_BAND_20260729.md \
+            mesoscopic_primorial_orbit_verify.py \
+            rough_quotient_hyperbola_verify.py \
+            same_band_decomposition_verify.py \
+            mesoscopic_primorial_orbit_results.json \
+            rough_quotient_hyperbola_results.json \
+            same_band_decomposition_results.json; do
+            test -s "$ROOT/$file"
+          done
+          ! grep -RInE 'TODO|TBD|PLACEHOLDER|REPLACE_ME' \
+            "$ROOT/MESOSCOPIC_PRIMORIAL_ORBIT_REDUCTION_20260728.md" \
+            "$ROOT/ROUGH_QUOTIENT_HYPERBOLA_COLLAPSE_20260728.md" \
+            "$ROOT/SAME_BAND_RECOMBINATION_REDUCTION_20260728.md" \
+            "$ROOT/SAME_BAND_ANALYTIC_AUDIT_AND_OBSTRUCTION_20260729.md" \
+            "$ROOT/HOSTILE_REVIEW_SAME_BAND_20260729.md" \
+            "$ROOT/PROGRAMME_STATUS_SAME_BAND_20260729.md"
+          grep -Fq '**OPEN**' "$ROOT/SAME_BAND_ANALYTIC_AUDIT_AND_OBSTRUCTION_20260729.md"
+          grep -Fq "Fortune's conjecture remains **OPEN**" "$ROOT/SAME_BAND_ANALYTIC_AUDIT_AND_OBSTRUCTION_20260729.md"
+          grep -Fq 'general-cutoff' "$ROOT/ROUGH_QUOTIENT_HYPERBOLA_COLLAPSE_20260728.md"
+          grep -Fq 'exact half-open dyadic partition' "$ROOT/SAME_BAND_RECOMBINATION_REDUCTION_20260728.md"
+          grep -Fq 'THEOREM-LEVEL OBSTRUCTION' "$ROOT/SAME_BAND_ANALYTIC_AUDIT_AND_OBSTRUCTION_20260729.md"
+
+      - name: Install verifier dependencies
+        run: python3 -m pip install --disable-pip-version-check --quiet sympy
+
+      - name: Preserve committed diagnostics
+        run: |
+          ROOT=frontier/integer_source_frame_bridge
+          cp "$ROOT/mesoscopic_primorial_orbit_results.json" /tmp/orbit.expected.json
+          cp "$ROOT/rough_quotient_hyperbola_results.json" /tmp/rough.expected.json
+          cp "$ROOT/same_band_decomposition_results.json" /tmp/same-band.expected.json
+
+      - name: Recompute orbit verifier
+        run: |
+          set -euo pipefail
+          ROOT=frontier/integer_source_frame_bridge
+          python3 "$ROOT/mesoscopic_primorial_orbit_verify.py" > /tmp/orbit.stdout.json
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          data=json.loads(Path('/tmp/orbit.stdout.json').read_text())
+          assert data['status']=='PASS'
+          assert len(data['panels'])==3
+          assert max(p['maximum_formula_error'] for p in data['panels'])<2e-10
+          assert 'OPEN' in data['boundary']
+          PY
+
+      - name: Recompute generalized rough quotient verifier
+        run: |
+          set -euo pipefail
+          ROOT=frontier/integer_source_frame_bridge
+          python3 "$ROOT/rough_quotient_hyperbola_verify.py" > /tmp/rough.stdout.json
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          data=json.loads(Path('/tmp/rough.stdout.json').read_text())
+          assert data['status']=='PASS'
+          assert len(data['panels'])==4
+          assert all(p['Z']>p['z'] for p in data['panels'])
+          assert all(p['maximum_floor_error']==0 for p in data['panels'])
+          assert all(p['maximum_sawtooth_error']==0 for p in data['panels'])
+          assert max(p['maximum_phase_error'] for p in data['panels'])<2e-12
+          assert 'OPEN' in data['boundary']
+          PY
+
+      - name: Recompute exact same-band decomposition
+        run: |
+          set -euo pipefail
+          ROOT=frontier/integer_source_frame_bridge
+          python3 "$ROOT/same_band_decomposition_verify.py" > /tmp/same-band.stdout.json
+          python3 - <<'PY'
+          import json
+          import math
+          from pathlib import Path
+          data=json.loads(Path('/tmp/same-band.stdout.json').read_text())
+          assert data['status']=='PASS'
+          assert [p['X'] for p in data['panels']]==[7,11,13,17]
+          for panel in data['panels']:
+              assert math.isfinite(panel['maximum_empirical_same_band_ratio'])
+              for block in panel['blocks']:
+                  assert block['outer_cauchy_exact'] is True
+          assert 'OPEN' in data['boundary']
+          PY
+
+      - name: Require reproducible committed diagnostics
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          root=Path('frontier/integer_source_frame_bridge')
+          pairs=[
+              ('/tmp/orbit.expected.json', root/'mesoscopic_primorial_orbit_results.json'),
+              ('/tmp/rough.expected.json', root/'rough_quotient_hyperbola_results.json'),
+              ('/tmp/same-band.expected.json', root/'same_band_decomposition_results.json'),
+          ]
+          for expected_path, got_path in pairs:
+              expected=json.loads(Path(expected_path).read_text())
+              got=json.loads(got_path.read_text())
+              assert expected==got,(expected_path,str(got_path))
+          PY
+
+      - name: Upload validation record
+        uses: actions/upload-artifact@v4
+        with:
+          name: mesoscopic-same-band-validation
+          path: |
+            /tmp/orbit.stdout.json
+            /tmp/rough.stdout.json
+            /tmp/same-band.stdout.json
+            frontier/integer_source_frame_bridge/MESOSCOPIC_PRIMORIAL_ORBIT_REDUCTION_20260728.md
+            frontier/integer_source_frame_bridge/ROUGH_QUOTIENT_HYPERBOLA_COLLAPSE_20260728.md
+            frontier/integer_source_frame_bridge/SAME_BAND_RECOMBINATION_REDUCTION_20260728.md
+            frontier/integer_source_frame_bridge/SAME_BAND_ANALYTIC_AUDIT_AND_OBSTRUCTION_20260729.md
+            frontier/integer_source_frame_bridge/HOSTILE_REVIEW_SAME_BAND_20260729.md
+            frontier/integer_source_frame_bridge/PROGRAMME_STATUS_SAME_BAND_20260729.md
+          retention-days: 90

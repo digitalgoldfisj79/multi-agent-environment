@@ -1,0 +1,57 @@
+name: Validate FF endpoint resolution programme
+
+on:
+  push:
+    branches:
+      - gpt56/fortune-mesoscopic-cotlar-20260728
+    paths:
+      - 'fortune-review/FF_ENDPOINT_RESOLUTION_PROGRAMME_V0_1_20260730.md'
+      - 'fortune-review/FF_ENDPOINT_RESOLUTION_PROGRAMME_V0_1_20260730.json'
+      - 'fortune-review/scripts/ff_endpoint_resolution_programme_contract.py'
+      - 'fortune-review/scripts/ff_sampled_frequency_image_audit.py'
+      - 'fortune-review/data/ff_endpoint_resolution_programme_contract.json'
+      - 'fortune-review/data/ff_sampled_frequency_image_audit.json'
+      - '.github/workflows/ff-endpoint-resolution-programme.yml'
+  pull_request:
+    paths:
+      - 'fortune-review/FF_ENDPOINT_RESOLUTION_PROGRAMME_V0_1_20260730.md'
+      - 'fortune-review/FF_ENDPOINT_RESOLUTION_PROGRAMME_V0_1_20260730.json'
+      - 'fortune-review/scripts/ff_endpoint_resolution_programme_contract.py'
+      - 'fortune-review/scripts/ff_sampled_frequency_image_audit.py'
+      - 'fortune-review/data/ff_endpoint_resolution_programme_contract.json'
+      - 'fortune-review/data/ff_sampled_frequency_image_audit.json'
+      - '.github/workflows/ff-endpoint-resolution-programme.yml'
+
+jobs:
+  contract-and-sampled-image:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile programme verifiers
+        run: |
+          python -m py_compile \
+            fortune-review/scripts/ff_endpoint_resolution_programme_contract.py \
+            fortune-review/scripts/ff_sampled_frequency_image_audit.py
+      - name: Validate preregistration contract
+        run: |
+          python fortune-review/scripts/ff_endpoint_resolution_programme_contract.py > /tmp/contract.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          got = json.loads(Path('/tmp/contract.json').read_text())
+          exp = json.loads(Path('fortune-review/data/ff_endpoint_resolution_programme_contract.json').read_text())
+          assert got == exp, (got, exp)
+          PY
+      - name: Recompute sampled-frequency image panel
+        run: |
+          python fortune-review/scripts/ff_sampled_frequency_image_audit.py > /tmp/sampled.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          got = json.loads(Path('/tmp/sampled.json').read_text())
+          exp = json.loads(Path('fortune-review/data/ff_sampled_frequency_image_audit.json').read_text())
+          assert got == exp, (got, exp)
+          PY

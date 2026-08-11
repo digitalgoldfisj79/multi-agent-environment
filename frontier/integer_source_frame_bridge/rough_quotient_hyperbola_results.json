@@ -1,0 +1,67 @@
+{
+  "status": "PASS",
+  "scope": "general-cutoff rough quotient bijection, Mobius-floor and sawtooth identities, centred discrepancy and reciprocal phase",
+  "panels": [
+    {
+      "z": 7,
+      "Z": 11,
+      "P": 210,
+      "H": 20,
+      "next_prime_after_z": 11,
+      "candidate_count": 3,
+      "total_hit_count": 0,
+      "maximum_transport_error": 0,
+      "maximum_weighted_error": 0.0,
+      "maximum_floor_error": 0,
+      "maximum_sawtooth_error": 0.0,
+      "maximum_discrepancy_error": 0.0,
+      "maximum_phase_error": 1.6432144662310227e-15
+    },
+    {
+      "z": 11,
+      "Z": 17,
+      "P": 2310,
+      "H": 30,
+      "next_prime_after_z": 13,
+      "candidate_count": 3,
+      "total_hit_count": 0,
+      "maximum_transport_error": 0,
+      "maximum_weighted_error": 0.0,
+      "maximum_floor_error": 0,
+      "maximum_sawtooth_error": 0.0,
+      "maximum_discrepancy_error": 1.3877787807814457e-17,
+      "maximum_phase_error": 1.247457973265988e-15
+    },
+    {
+      "z": 13,
+      "Z": 19,
+      "P": 30030,
+      "H": 36,
+      "next_prime_after_z": 17,
+      "candidate_count": 3,
+      "total_hit_count": 1,
+      "maximum_transport_error": 0,
+      "maximum_weighted_error": 0.0,
+      "maximum_floor_error": 0,
+      "maximum_sawtooth_error": 0.0,
+      "maximum_discrepancy_error": 1.3877787807814457e-17,
+      "maximum_phase_error": 1.5393713663616246e-15
+    },
+    {
+      "z": 17,
+      "Z": 23,
+      "P": 510510,
+      "H": 80,
+      "next_prime_after_z": 19,
+      "candidate_count": 13,
+      "total_hit_count": 4,
+      "maximum_transport_error": 0,
+      "maximum_weighted_error": 0.0,
+      "maximum_floor_error": 0,
+      "maximum_sawtooth_error": 0.0,
+      "maximum_discrepancy_error": 1.1102230246251565e-16,
+      "maximum_phase_error": 1.7772239894833365e-15
+    }
+  ],
+  "boundary": "Finite exact verification only; cancellation in the signed smooth-divisor sawtooth and the same-band Bessel theorem remain OPEN."
+}
