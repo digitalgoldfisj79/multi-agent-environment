@@ -2,7 +2,7 @@
   "programme": "FORTUNE_CORPUS_ZETA23_AUDIT_V1",
   "date": "2026-08-11",
   "branch": "gpt56/fortune-corpus-zeta23-audit-v1-20260811",
-  "authoritative_ci_run": 31489356925,
+  "authoritative_ci_run": 31489829532,
   "corpus_terminal": "TRUST_AND_CERTIFICATE_GAINS__NO_FRONTIER_REDUCTION",
   "fortune_status": "NOT_PROVED",
   "integer_mainline": "CLOSED",
