@@ -6,6 +6,10 @@ on:
       - gpt56/fortune-corpus-zeta23-audit-v1-20260811
   workflow_dispatch:
 
+concurrency:
+  group: fortune-corpus-zeta23-audit-v1-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   corpus-scan:
     runs-on: ubuntu-latest
@@ -117,8 +121,8 @@ jobs:
           python-version: '3.12'
       - name: Install exact panel dependencies
         run: python -m pip install --quiet numpy sympy
-      - name: Re-run inherited PSD finite-compression no-go diagnostics
-        run: python fortune-zeta23-transfer-v01/spectral/stable_rank_transfer.py
+      - name: Re-run bounded inherited PSD no-go sentinel
+        run: python fortune-zeta23-transfer-v01/spectral/stable_rank_transfer.py --x 50 75 100
       - name: Check claim-status/open-frontier markers
         run: |
           grep -q 'Strict q-line nonsaturation is equivalent to cubic positivity' publications/fortune-papers-ii-vi-20260724/paper5_function_fields_replacement/CLAIM_STATUS.md
