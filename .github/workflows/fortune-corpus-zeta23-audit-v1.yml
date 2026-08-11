@@ -72,20 +72,32 @@ jobs:
         run: |
           cp paper5_independent_reconstruction_results.json /tmp/paper5_expected.json
           python paper5_independent_reconstruction.py > /tmp/paper5_run.txt
-          diff -u /tmp/paper5_expected.json paper5_independent_reconstruction_results.json
+          python - <<'PY'
+          import json
+          assert json.load(open('/tmp/paper5_expected.json')) == json.load(open('paper5_independent_reconstruction_results.json'))
+          print('PAPER5_SEMANTIC_JSON_MATCH')
+          PY
       - name: Re-run Paper V singular-locus census
         working-directory: publications/fortune-papers-ii-vi-20260724/paper5_function_fields_replacement
         run: |
           cp sparse_surface_singularity_results.json /tmp/paper5_sing_expected.json
           g++ -O2 -std=c++17 sparse_surface_singularity_independent.cpp -o /tmp/p5_singularity
           /tmp/p5_singularity
-          diff -u /tmp/paper5_sing_expected.json sparse_surface_singularity_results.json
+          python - <<'PY'
+          import json
+          assert json.load(open('/tmp/paper5_sing_expected.json')) == json.load(open('sparse_surface_singularity_results.json'))
+          print('PAPER5_SINGULARITY_JSON_MATCH')
+          PY
       - name: Re-run Paper VI independent algebraic reconstruction
         working-directory: publications/fortune-papers-ii-vi-20260724/paper6_secondary_quotients_replacement
         run: |
           cp paper6_independent_reconstruction_results.json /tmp/paper6_expected.json
           python paper6_independent_reconstruction.py > /tmp/paper6_run.txt
-          diff -u /tmp/paper6_expected.json paper6_independent_reconstruction_results.json
+          python - <<'PY'
+          import json
+          assert json.load(open('/tmp/paper6_expected.json')) == json.load(open('paper6_independent_reconstruction_results.json'))
+          print('PAPER6_SEMANTIC_JSON_MATCH')
+          PY
       - uses: actions/upload-artifact@v4
         with:
           name: fortune-papers-v-vi-independent-reconstructions
