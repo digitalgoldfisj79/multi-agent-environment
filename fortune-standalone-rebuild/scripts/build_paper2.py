@@ -250,7 +250,7 @@ def main() -> None:
 
     stmt_re = re.compile(r"^\*\*(Theorem|Proposition|Lemma|Corollary)\s+([0-9]+\.[0-9]+)", re.M)
     statements = [f"{kind} {num}" for kind, num in stmt_re.findall(text)]
-    status = """# Standalone Paper II — claim status\n\n"
+    status = "# Standalone Paper II — claim status\n\n"
     status += "**Publication role:** exact prime-pair detection criteria plus independent reciprocal-frame structural mathematics.\n\n"
     status += "## Proved in the manuscript\n\n"
     status += "- Fortunate-number square-threshold lower bound and candidate collapse.\n"

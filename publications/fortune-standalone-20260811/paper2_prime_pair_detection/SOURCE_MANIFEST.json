@@ -1,0 +1,41 @@
+{
+  "paper": "II",
+  "source": "publications/fortune-papers-ii-vi-20260724/paper2_revised/manuscript.md",
+  "source_bibliography": "publications/fortune-papers-ii-vi-20260724/paper2_revised/references.bib",
+  "standalone_manuscript": "publications/fortune-standalone-20260811/paper2_prime_pair_detection/manuscript.md",
+  "statement_count": 24,
+  "statement_sequence": [
+    "Proposition 2.1",
+    "Lemma 2.2",
+    "Proposition 2.3",
+    "Theorem 2.4",
+    "Theorem 2.5",
+    "Lemma 2.6",
+    "Theorem 2.7",
+    "Theorem 2.8",
+    "Proposition 3.1",
+    "Proposition 3.2",
+    "Lemma 4.1",
+    "Theorem 4.2",
+    "Proposition 4.3",
+    "Proposition 5.1",
+    "Theorem 5.2",
+    "Theorem 6.1",
+    "Theorem 7.1",
+    "Theorem 7.2",
+    "Corollary 7.3",
+    "Theorem 8.1",
+    "Theorem 8.2",
+    "Theorem 8.3",
+    "Proposition 9.1",
+    "Lemma 9.2"
+  ],
+  "logical_cross_paper_dependencies": 0,
+  "fortune_proved": false,
+  "open_primary_targets": [
+    "12.1",
+    "12.2",
+    "12.3",
+    "source-to-reciprocal transference"
+  ]
+}
