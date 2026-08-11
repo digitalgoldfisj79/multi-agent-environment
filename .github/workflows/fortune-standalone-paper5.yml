@@ -1,0 +1,83 @@
+name: Fortune standalone Paper V
+
+on:
+  push:
+    branches:
+      - gpt56/fortune-standalone-papers-v1-20260811
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: fortune-standalone-paper5-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  rebuild-paper5:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Build standalone Paper V
+        run: |
+          python -m py_compile fortune-standalone-rebuild/scripts/build_paper5.py
+          python fortune-standalone-rebuild/scripts/build_paper5.py
+      - name: Standalone manuscript audit
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import json, re
+          d = Path('publications/fortune-standalone-20260811/paper5_fortunate_polynomials')
+          out = (d/'manuscript.md').read_text()
+          manifest = json.loads((d/'SOURCE_MANIFEST.json').read_text())
+          status = (d/'CLAIM_STATUS.md').read_text()
+          forbidden = ['Paper III','Paper IV','Paper VI','preceding two papers','next paper','this series','Papers I--VI','D1-QLINE-NONSAT']
+          assert not [x for x in forbidden if x in out]
+          labels = re.findall(r'^## (Proposition|Theorem|Corollary) ([0-9]+\.[0-9]+)', out, re.M)
+          assert len(labels) == 11, labels
+          assert manifest['logical_cross_paper_dependencies'] == 0
+          assert manifest['universal_crown_proved'] is False
+          assert manifest['integer_transfer_proved'] is False
+          assert 'strict q-line nonsaturation' in status
+          assert 'No theorem in this article implies the integer Fortune conjecture.' in out
+          assert 'Every uniform statement presented above as proved is established symbolically' in out
+          assert 'TODO' not in out and 'TBD' not in out
+          print(f'STANDALONE_PAPER5_AUDIT_PASS statements={len(labels)} bytes={len(out)}')
+          PY
+      - name: Re-run independent finite evidence
+        run: |
+          cd publications/fortune-papers-ii-vi-20260724/paper5_function_fields_replacement
+          cp paper5_independent_reconstruction_results.json /tmp/p5_expected.json
+          python paper5_independent_reconstruction.py >/tmp/p5_reconstruction.txt
+          python - <<'PY'
+          import json
+          assert json.load(open('/tmp/p5_expected.json')) == json.load(open('paper5_independent_reconstruction_results.json'))
+          print('PAPER5_INDEPENDENT_CENSUS_MATCH')
+          PY
+          cp sparse_surface_singularity_results.json /tmp/p5_sing_expected.json
+          g++ -O2 -std=c++17 sparse_surface_singularity_independent.cpp -o /tmp/p5_sing
+          /tmp/p5_sing
+          python - <<'PY'
+          import json
+          assert json.load(open('/tmp/p5_sing_expected.json')) == json.load(open('sparse_surface_singularity_results.json'))
+          print('PAPER5_SINGULAR_LOCUS_MATCH')
+          PY
+      - name: Diff hygiene
+        run: git diff --check
+      - name: Persist standalone Paper V
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add publications/fortune-standalone-20260811/paper5_fortunate_polynomials
+          if git diff --cached --quiet; then
+            echo NO_GENERATED_CHANGES
+          else
+            git commit -m 'fortune standalone: rebuild Paper V [skip ci]'
+            git push origin HEAD:gpt56/fortune-standalone-papers-v1-20260811
+          fi
