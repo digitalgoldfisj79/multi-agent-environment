@@ -1,0 +1,27 @@
+{
+  "paper": "IV",
+  "source": "publications/fortune-papers-ii-vi-20260724/paper4_random_order/manuscript.md",
+  "standalone": "publications/fortune-standalone-20260811/paper4_random_product_paths/manuscript.md",
+  "statement_count": 14,
+  "statement_sequence": [
+    "Theorem 2.1",
+    "Proposition 2.2",
+    "Lemma 3.1",
+    "Lemma 3.2",
+    "Lemma 3.3",
+    "Lemma 3.4",
+    "Lemma 4.1",
+    "Lemma 4.2",
+    "Lemma 5.1",
+    "Lemma 5.2",
+    "Lemma 6.1",
+    "Lemma 6.2",
+    "Lemma 6.3",
+    "Proposition 6.4"
+  ],
+  "logical_cross_paper_dependencies": 0,
+  "random_order_only": true,
+  "increasing_order_proved": false,
+  "source_to_prime_pair_bridge_proved": false,
+  "fortune_proved": false
+}
