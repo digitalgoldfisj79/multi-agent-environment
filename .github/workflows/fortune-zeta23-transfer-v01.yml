@@ -65,6 +65,22 @@ jobs:
           test $(grep -R -E '^\s*axiom\s+' fortune-formal/FortuneFormal --include='*.lean' | wc -l) -eq 1
 
   power-lift-kernel:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - chart: B
+            target: 1
+          - chart: B
+            target: 2
+          - chart: B
+            target: 3
+          - chart: X
+            target: 1
+          - chart: X
+            target: 2
+          - chart: X
+            target: 3
     runs-on: ubuntu-latest
     timeout-minutes: 60
     steps:
@@ -84,22 +100,25 @@ jobs:
       - name: Regenerate exact power lifts
         run: |
           Singular fortune-corpus-novelty-assurance-v1/paper7/chart_power_lifts.sing > /tmp/power_lifts_exact.out
+          grep -A1 'B_REDUCE_BEGIN' /tmp/power_lifts_exact.out | grep -q '^_\[1\]=0'
           grep -A1 'X_REDUCE_BEGIN' /tmp/power_lifts_exact.out | grep -q '^_\[1\]=0'
-      - name: Generate smallest exact Lean certificate
+      - name: Generate exact Lean certificate
         run: |
           python fortune-zeta23-transfer-v01/formal/generate_powerlift_lean.py \
-            /tmp/power_lifts_exact.out --chart X --target 1 \
-            --output /tmp/GeneratedPowerLiftX1.lean | tee /tmp/generate.log
-          grep -q 'GENERATED chart=X target=1' /tmp/generate.log
+            /tmp/power_lifts_exact.out \
+            --chart '${{ matrix.chart }}' --target '${{ matrix.target }}' \
+            --output '/tmp/PowerLift_${{ matrix.chart }}_${{ matrix.target }}.lean' \
+            | tee '/tmp/generate_${{ matrix.chart }}_${{ matrix.target }}.log'
       - name: Kernel check generated polynomial identity
         working-directory: fortune-formal
-        run: lake env lean /tmp/GeneratedPowerLiftX1.lean | tee /tmp/powerlift_lean.log
+        run: |
+          lake env lean '/tmp/PowerLift_${{ matrix.chart }}_${{ matrix.target }}.lean' \
+            | tee '/tmp/lean_${{ matrix.chart }}_${{ matrix.target }}.log'
       - name: Upload certificate source and generator record
         uses: actions/upload-artifact@v4
         with:
-          name: fortune-paper7-kernel-powerlift-X1
+          name: 'fortune-paper7-kernel-powerlift-${{ matrix.chart }}-${{ matrix.target }}'
           path: |
-            /tmp/GeneratedPowerLiftX1.lean
-            /tmp/power_lifts_exact.out
-            /tmp/generate.log
+            /tmp/PowerLift_${{ matrix.chart }}_${{ matrix.target }}.lean
+            /tmp/generate_${{ matrix.chart }}_${{ matrix.target }}.log
           retention-days: 30
