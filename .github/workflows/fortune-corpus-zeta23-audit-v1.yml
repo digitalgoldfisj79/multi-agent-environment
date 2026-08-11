@@ -11,15 +11,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Stage authoritative synthesis from final publication commit
+        run: |
+          git show be42a5c80d2189df2f20c8055ee7107768cb7299:publications/fortune-conditional-and-barriers-20260806/MANUSCRIPT.md > fortune-corpus-zeta23-audit-v1/SYNTHESIS_MANUSCRIPT_SNAPSHOT.md
       - name: Run deterministic corpus scan
         run: python fortune-corpus-zeta23-audit-v1/scripts/audit_corpus.py
       - uses: actions/upload-artifact@v4
         with:
           name: fortune-corpus-zeta23-audit-scan
-          path: fortune-corpus-zeta23-audit-v1/AUDIT_SCAN.json
+          path: |
+            fortune-corpus-zeta23-audit-v1/AUDIT_SCAN.json
+            fortune-corpus-zeta23-audit-v1/SYNTHESIS_MANUSCRIPT_SNAPSHOT.md
 
   integer-comparator:
     runs-on: ubuntu-latest
