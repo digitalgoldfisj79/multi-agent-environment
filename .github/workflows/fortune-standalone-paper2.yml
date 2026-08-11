@@ -1,0 +1,102 @@
+name: Fortune standalone Paper II
+
+on:
+  push:
+    branches:
+      - gpt56/fortune-standalone-papers-v1-20260811
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: fortune-standalone-paper2-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  rebuild-paper2:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Repair generator typo from bootstrap commit
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('fortune-standalone-rebuild/scripts/build_paper2.py')
+          s = p.read_text()
+          bad = 'status = """# Standalone Paper II — claim status\\n\\n"'
+          good = 'status = "# Standalone Paper II — claim status\\n\\n"'
+          if bad in s:
+              s = s.replace(bad, good, 1)
+              p.write_text(s)
+              print('GENERATOR_BOOTSTRAP_TYPO_REPAIRED')
+          else:
+              print('GENERATOR_BOOTSTRAP_TYPO_ALREADY_REPAIRED')
+          PY
+          python -m py_compile fortune-standalone-rebuild/scripts/build_paper2.py
+
+      - name: Build standalone manuscript
+        run: python fortune-standalone-rebuild/scripts/build_paper2.py
+
+      - name: Standalone dependency and theorem audit
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import json, re
+          src = Path('publications/fortune-papers-ii-vi-20260724/paper2_revised/manuscript.md').read_text()
+          outp = Path('publications/fortune-standalone-20260811/paper2_prime_pair_detection/manuscript.md')
+          out = outp.read_text()
+          bib = Path('publications/fortune-standalone-20260811/paper2_prime_pair_detection/references.bib').read_text()
+          manifest = json.loads(Path('publications/fortune-standalone-20260811/paper2_prime_pair_detection/SOURCE_MANIFEST.json').read_text())
+
+          forbidden = [
+              'Paper I', 'Paper III', 'preceding programme', 'earlier programme',
+              'earlier uncorrected', 'Correction notice', 'first circulation edition',
+              'corrected edition', 'programme boundary', 'INT-ISC', 'RUHL-FM',
+              'D1-QLINE-NONSAT', 'P7-CUBIC-TF', '@bozzard2026paper1'
+          ]
+          bad = [x for x in forbidden if x in out]
+          assert not bad, bad
+          assert 'bozzard2026paper1' not in bib
+          for heading in [
+              '# Introduction', '## Status of results',
+              '# Primorial blocks and the direct detector',
+              '# The reciprocal pair-sum frame', '# Open analytic boundary',
+              '# Computational verification and reproducibility', '# Conclusion'
+          ]:
+              assert heading in out, heading
+
+          pat = re.compile(r'^\*\*(Theorem|Proposition|Lemma|Corollary)\s+([0-9]+\.[0-9]+)', re.M)
+          a = pat.findall(src); b = pat.findall(out)
+          assert a == b, (a, b)
+          assert manifest['statement_count'] == len(b)
+          assert manifest['logical_cross_paper_dependencies'] == 0
+          assert manifest['fortune_proved'] is False
+
+          # No theorem proof may have been replaced by a placeholder.
+          assert 'TODO' not in out and 'TBD' not in out and '[proof omitted]' not in out.lower()
+          assert len(out) > 40000
+          print(f'STANDALONE_PAPER2_AUDIT_PASS statements={len(b)} bytes={len(out)}')
+          PY
+
+      - name: Diff hygiene
+        run: git diff --check
+
+      - name: Persist generated standalone paper
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add fortune-standalone-rebuild/scripts/build_paper2.py publications/fortune-standalone-20260811/paper2_prime_pair_detection
+          if git diff --cached --quiet; then
+            echo 'NO_GENERATED_CHANGES'
+          else
+            git commit -m 'fortune standalone: rebuild Paper II [skip ci]'
+            git push origin HEAD:gpt56/fortune-standalone-papers-v1-20260811
+          fi
