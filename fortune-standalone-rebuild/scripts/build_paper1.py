@@ -37,7 +37,8 @@ def main() -> None:
     if bad:
         raise RuntimeError(f"standalone dependency token remains: {bad}")
 
-    stmt_re = re.compile(r"^## (Theorem|Proposition|Lemma|Corollary) ([0-9]+\.[0-9]+)", re.M)
+    # Paper I uses both ## and ### for labelled statements; preserve the full frozen sequence.
+    stmt_re = re.compile(r"^#{2,3} (Theorem|Proposition|Lemma|Corollary) ([0-9]+\.[0-9]+)", re.M)
     a = [f"{x} {y}" for x, y in stmt_re.findall(src)]
     b = [f"{x} {y}" for x, y in stmt_re.findall(text)]
     if a != b or len(b) != 25:
