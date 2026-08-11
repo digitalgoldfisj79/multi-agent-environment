@@ -2,9 +2,9 @@
 """Translate one exact Singular power-lift column into a Lean MvPolynomial Z certificate.
 
 The generated Lean theorem contains the literal q-free model equations and a
-cleared-denominator ideal-membership identity. `native_decide` then checks the
-polynomial equality in the Lean kernel.  The generator is untrusted; the
-resulting Lean source is the auditable certificate.
+cleared-denominator ideal-membership identity. Mathlib's reflective `ring`
+normalizer checks the resulting polynomial equality. The generator is
+untrusted; the generated Lean theorem is the auditable kernel-checked object.
 """
 from __future__ import annotations
 
@@ -65,6 +65,8 @@ HEADER = r'''import Mathlib
 set_option autoImplicit false
 set_option maxRecDepth 1000000
 set_option maxHeartbeats 0
+
+noncomputable section
 
 namespace FortuneFormal
 namespace Quadratic
@@ -152,7 +154,9 @@ def target : P := {target_expr}
 theorem certificate :
     C denominator * g^{powers[j-1]} * target =
       f0 * poly m1 + f1 * poly m2 + f2 * poly m3 + f3 * poly m4 := by
-  native_decide
+  simp [poly, m1, m2, m3, m4, term, denominator, target, g,
+    f0, f1, f2, f3, a, b, c, u]
+  ring
 
 end GeneratedPowerLift
 end Quadratic
