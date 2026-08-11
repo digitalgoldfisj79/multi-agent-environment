@@ -1,0 +1,97 @@
+{
+  "programme": "FORTUNE_STANDALONE_PAPERS_V1",
+  "date": "2026-08-11",
+  "terminal": "STANDALONE_CORPUS_AUDIT_PASS",
+  "fortune_status": "NOT_PROVED",
+  "integer_mainline": "CLOSED",
+  "paper_count": 8,
+  "total_manuscript_words": 32898,
+  "total_labelled_statements": 109,
+  "papers": [
+    {
+      "paper": "I",
+      "directory": "paper1_collision_geometry",
+      "title": "Collision Geometry and Spectral Laws for Consecutive-Prime Partial Products",
+      "role": "structural collision geometry",
+      "word_count": 6564,
+      "labelled_statement_count": 25,
+      "logical_cross_paper_dependencies": 0,
+      "referee_disposition": "PASS_STANDALONE_STRUCTURAL"
+    },
+    {
+      "paper": "II",
+      "directory": "paper2_prime_pair_detection",
+      "title": "Prime-Pair Detection at Primorial Centres",
+      "role": "exact prime-pair detector and reciprocal-frame obstructions",
+      "word_count": 6327,
+      "labelled_statement_count": 24,
+      "logical_cross_paper_dependencies": 0,
+      "referee_disposition": "PASS_AFTER_PUBLICATION_FIXES"
+    },
+    {
+      "paper": "III",
+      "directory": "paper3_pair_sum_rigidity",
+      "title": "Pair-Sum Rigidity for Superincreasing Sequences",
+      "role": "superincreasing pair-sum rigidity and covariance application",
+      "word_count": 2957,
+      "labelled_statement_count": 11,
+      "logical_cross_paper_dependencies": 0,
+      "referee_disposition": "PASS_AFTER_TWO_SOURCE_REPAIRS"
+    },
+    {
+      "paper": "IV",
+      "directory": "paper4_random_product_paths",
+      "title": "Reciprocal-Frame Bounds Along Random Primorial-Product Paths",
+      "role": "random-order reciprocal-frame theorem",
+      "word_count": 3938,
+      "labelled_statement_count": 14,
+      "logical_cross_paper_dependencies": 0,
+      "referee_disposition": "PASS_AFTER_LOCAL_COMPARISON_AND_SCOPE_REPAIR"
+    },
+    {
+      "paper": "V",
+      "directory": "paper5_fortunate_polynomials",
+      "title": "Fortunate Polynomials over Finite Fields",
+      "role": "function-field normal forms and crown geometry",
+      "word_count": 3532,
+      "labelled_statement_count": 11,
+      "logical_cross_paper_dependencies": 0,
+      "referee_disposition": "PASS_STANDALONE_FUNCTION_FIELD"
+    },
+    {
+      "paper": "VI",
+      "directory": "paper6_secondary_traces_quotients",
+      "title": "Secondary Traces and Kummer Quotients for a Function-Field Fortune Crown",
+      "role": "secondary traces and quotient geometry",
+      "word_count": 4230,
+      "labelled_statement_count": 16,
+      "logical_cross_paper_dependencies": 0,
+      "referee_disposition": "PASS_AFTER_DEPENDENCY_CLOSURE"
+    },
+    {
+      "paper": "VII",
+      "directory": "paper7_bilateral_endpoint_incidence",
+      "title": "Bilateral Endpoint Incidences over Finite Fields",
+      "role": "bilateral endpoint incidence and quadratic emptiness",
+      "word_count": 3270,
+      "labelled_statement_count": 7,
+      "logical_cross_paper_dependencies": 0,
+      "referee_disposition": "PASS_WITH_EXPLICIT_FORMAL_TRUST_BOUNDARY"
+    },
+    {
+      "paper": "Synthesis",
+      "directory": "synthesis_conditional_and_barriers",
+      "title": "An Exact Conditional Criterion for Fortune's Conjecture and Barriers to Standard Prime-Detection Mechanisms",
+      "role": "conditional Fortune criterion and obstruction ring",
+      "word_count": 2080,
+      "labelled_statement_count": 1,
+      "logical_cross_paper_dependencies": 0,
+      "referee_disposition": "PASS_AS_CONDITIONAL_SYNTHESIS"
+    }
+  ],
+  "global_boundaries": {
+    "integer": "jointly signed selected-centre prime-tuple/covariance-transference theorem remains open",
+    "function_field_d1": "universal q-line/cubic crown nonvanishing remains open",
+    "paper_vii": "quadratic theorem exact computer-assisted; Lean derivation still uses one explicit normalization axiom"
+  }
+}
