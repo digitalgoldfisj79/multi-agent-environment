@@ -2,7 +2,7 @@
 """Build the standalone Paper III.
 
 Paper III's source contains a concise main proof and a fuller Appendix A that
-repeats the same kernel theory.  This rebuild merges the strongest proof text
+repeats the same kernel theory. This rebuild merges the strongest proof text
 into one sequence, removes duplicated A-numbered statements, and uses the
 Appendix A formulation of the difference dichotomy (`r(D) <= 1` off the
 single-walk family), correcting the main-text overstatement `r(D) = 1` for
@@ -18,6 +18,9 @@ ROOT = Path(__file__).resolve().parents[2]
 SRC = ROOT / "publications/fortune-papers-ii-vi-20260724/paper3_pair_sum/manuscript.md"
 OUT = ROOT / "publications/fortune-standalone-20260811/paper3_pair_sum_rigidity"
 
+# The manuscript body is generated from the audited reconstruction frozen in
+# this script. It is intentionally not assembled by concatenating the source
+# main text and Appendix A, because those two layers duplicate theorem content.
 MANUSCRIPT = r'''---
 title: "Pair-Sum Rigidity for Superincreasing Sequences"
 subtitle: "Difference multiplicities, sub-Weibull tails, and a primorial-centre covariance application"
@@ -572,7 +575,7 @@ SOURCE_MAP = {
         "Remark A.9": "used for Section 7 evidence/proof explanation",
     },
     "new_local_bridge_statements": {
-        "Lemma 9.1": "candidate-collapse proof supplied locally so Paper II is not a dependency",
+        "Lemma 9.1": "candidate-collapse proof supplied locally so companion papers are not dependencies",
         "Proposition 10.1": "labels the exact source covariance identity already present as equation (10.1) in the corrected source",
     },
 }
@@ -582,9 +585,9 @@ def source_checks() -> dict:
     src = SRC.read_text(encoding="utf-8")
     required = [
         "## Theorem 3.1",
-        "2. otherwise \\(r(D)=1\\).",
+        "2. otherwise \\(r(D)=1\\).".replace("\\\\", "\\"),
         "**Theorem A.3 (dichotomy).**",
-        "2. Otherwise \\(r(D)\\le1\\).",
+        "2. Otherwise \\(r(D)\\le1\\).".replace("\\\\", "\\"),
         "**Corollary A.4 (exact two-scale energy decomposition).**",
         "**Corollary A.10 (transfer gap).**",
     ]
@@ -608,9 +611,11 @@ def audit(manuscript: str) -> dict:
     bad = [x for x in forbidden if x in manuscript]
     if bad:
         raise RuntimeError(f"standalone dependency/provenance tokens remain: {bad}")
-    if "otherwise \\(r(D)=1\\)" in manuscript:
+    bad_statement = "otherwise \\(r(D)=1\\)".replace("\\\\", "\\")
+    good_statement = "otherwise \\(r(D)\\le1\\)".replace("\\\\", "\\")
+    if bad_statement in manuscript:
         raise RuntimeError("unrepaired multiplicity overstatement remains")
-    if "otherwise \\(r(D)\\le1\\)" not in manuscript:
+    if good_statement not in manuscript:
         raise RuntimeError("correct multiplicity statement missing")
     labels = re.findall(r"^\*\*(Lemma|Theorem|Corollary|Proposition) ([0-9]+\.[0-9]+)", manuscript, re.M)
     expected = [
