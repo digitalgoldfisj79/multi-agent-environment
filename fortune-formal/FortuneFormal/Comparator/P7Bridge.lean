@@ -11,16 +11,12 @@ namespace Comparator
 
 universe u
 
-namespace C := FortuneChallenge.P7
-namespace B := FortuneFormal.Bilateral
-namespace Q := FortuneFormal.Quadratic
-
 variable {F : Type u} [Field F] [Fintype F]
 
 /-- Literal translation from the independent Mathlib-only challenge datum to
-FortuneFormal's implementation datum.  Every field is copied; no theorem is
+FortuneFormal's implementation datum. Every field is copied; no theorem is
 inserted during translation. -/
-def toBilateral (d : C.Datum F) : B.Datum F where
+def toBilateral (d : FortuneChallenge.P7.Datum F) : Bilateral.Datum F where
   k := d.k
   L := d.L
   P := d.P
@@ -67,38 +63,39 @@ def toBilateral (d : C.Datum F) : B.Datum F where
   S_coprime_Sp := d.S_coprime_Sp
   Pp_coprime_Sp := d.Pp_coprime_Sp
 
-lemma crossDistinct_toBilateral (d : C.Datum F) :
-    B.CrossDistinct (toBilateral d) ↔ C.CrossDistinct d := by
+lemma crossDistinct_toBilateral (d : FortuneChallenge.P7.Datum F) :
+    Bilateral.CrossDistinct (toBilateral d) ↔ FortuneChallenge.P7.CrossDistinct d := by
   rfl
 
-lemma frobeniusBase_toBilateral (d : C.Datum F) :
-    B.FrobeniusBase (toBilateral d) ↔ C.FrobeniusBase d := by
+lemma frobeniusBase_toBilateral (d : FortuneChallenge.P7.Datum F) :
+    Bilateral.FrobeniusBase (toBilateral d) ↔ FortuneChallenge.P7.FrobeniusBase d := by
   rfl
 
-lemma inverseFree_toBilateral (d : C.Datum F) :
-    B.InverseFreeIncidence (toBilateral d) ↔ C.InverseFreeIncidence d := by
+lemma inverseFree_toBilateral (d : FortuneChallenge.P7.Datum F) :
+    Bilateral.InverseFreeIncidence (toBilateral d) ↔
+      FortuneChallenge.P7.InverseFreeIncidence d := by
   rfl
 
 /-- Any implementation proof of the literal bilateral K2 theorem solves the
 independent Mathlib-only challenge. -/
 theorem challenge_of_bilateral
-    (h : (B.specification F).K2EmptyStatement) : C.K2EmptyStatement F := by
+    (h : (Bilateral.specification F).K2EmptyStatement) :
+    FortuneChallenge.P7.K2EmptyStatement F := by
   intro d hcross hodd hbase hk hinc
-  have hbCross : B.CrossDistinct (toBilateral d) :=
+  have hbCross : Bilateral.CrossDistinct (toBilateral d) :=
     (crossDistinct_toBilateral d).2 hcross
-  have hbBase : B.FrobeniusBase (toBilateral d) :=
+  have hbBase : Bilateral.FrobeniusBase (toBilateral d) :=
     (frobeniusBase_toBilateral d).2 hbase
-  have hbInc : B.InverseFreeIncidence (toBilateral d) :=
+  have hbInc : Bilateral.InverseFreeIncidence (toBilateral d) :=
     (inverseFree_toBilateral d).2 hinc
   exact h (toBilateral d) hbCross hodd hbBase hk hbInc
 
 /-- Zeta23-style conditional solution boundary: normalization is an explicit
-hypothesis of this theorem, not a project axiom.  Therefore the theorem's
-axiom printout cannot hide `p7_k2_certified_normalization`.
--/
+hypothesis of this theorem, not a project axiom. -/
 theorem challenge_k2_empty_of_normalization
-    (hcert : Q.K2CertifiedNormalizationStatement F) : C.K2EmptyStatement F :=
-  challenge_of_bilateral (Q.p7_k2_empty_of_certifiedNormalization hcert)
+    (hcert : Quadratic.K2CertifiedNormalizationStatement F) :
+    FortuneChallenge.P7.K2EmptyStatement F :=
+  challenge_of_bilateral (Quadratic.p7_k2_empty_of_certifiedNormalization hcert)
 
 end Comparator
 end FortuneFormal
