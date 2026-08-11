@@ -41,11 +41,14 @@ jobs:
               print('GENERATOR_BOOTSTRAP_TYPO_ALREADY_REPAIRED')
           PY
           python -m py_compile fortune-standalone-rebuild/scripts/build_paper2.py
+          python -m py_compile fortune-standalone-rebuild/scripts/postprocess_paper2.py
 
       - name: Build standalone manuscript
-        run: python fortune-standalone-rebuild/scripts/build_paper2.py
+        run: |
+          python fortune-standalone-rebuild/scripts/build_paper2.py
+          python fortune-standalone-rebuild/scripts/postprocess_paper2.py
 
-      - name: Standalone dependency and theorem audit
+      - name: Standalone dependency, theorem and referee audit
         run: |
           python - <<'PY'
           from pathlib import Path
@@ -54,6 +57,9 @@ jobs:
           outp = Path('publications/fortune-standalone-20260811/paper2_prime_pair_detection/manuscript.md')
           out = outp.read_text()
           bib = Path('publications/fortune-standalone-20260811/paper2_prime_pair_detection/references.bib').read_text()
+          status = Path('publications/fortune-standalone-20260811/paper2_prime_pair_detection/CLAIM_STATUS.md').read_text()
+          referee = Path('publications/fortune-standalone-20260811/paper2_prime_pair_detection/REFEREE_READ.md').read_text()
+          repro = Path('publications/fortune-standalone-20260811/paper2_prime_pair_detection/REPRODUCIBILITY.md').read_text()
           manifest = json.loads(Path('publications/fortune-standalone-20260811/paper2_prime_pair_detection/SOURCE_MANIFEST.json').read_text())
 
           forbidden = [
@@ -76,9 +82,20 @@ jobs:
           pat = re.compile(r'^\*\*(Theorem|Proposition|Lemma|Corollary)\s+([0-9]+\.[0-9]+)', re.M)
           a = pat.findall(src); b = pat.findall(out)
           assert a == b, (a, b)
+          assert len(b) == 24
           assert manifest['statement_count'] == len(b)
           assert manifest['logical_cross_paper_dependencies'] == 0
           assert manifest['fortune_proved'] is False
+
+          # Publication-level epistemic checks found in the referee pass.
+          assert 'All asymptotic statements in this paper are proved symbolically.' not in out
+          assert 'The remaining theorem is adjacent' not in out
+          assert 'conjectural calibrations' in out
+          assert 'no theorem in this article depends on a finite numerical panel' in out
+          assert 'PASS_AFTER_PUBLICATION_FIXES' in referee
+          assert "does **not** prove" in referee
+          assert 'None of these computations establishes an asymptotic theorem.' in repro
+          assert 'Fortune\'s conjecture.' in status
 
           # No theorem proof may have been replaced by a placeholder.
           assert 'TODO' not in out and 'TBD' not in out and '[proof omitted]' not in out.lower()
@@ -97,6 +114,6 @@ jobs:
           if git diff --cached --quiet; then
             echo 'NO_GENERATED_CHANGES'
           else
-            git commit -m 'fortune standalone: rebuild Paper II [skip ci]'
+            git commit -m 'fortune standalone: rebuild Paper II after referee read [skip ci]'
             git push origin HEAD:gpt56/fortune-standalone-papers-v1-20260811
           fi
