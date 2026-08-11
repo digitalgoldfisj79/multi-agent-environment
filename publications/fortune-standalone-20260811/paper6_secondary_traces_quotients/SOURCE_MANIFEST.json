@@ -1,0 +1,29 @@
+{
+  "paper": "VI",
+  "source": "publications/fortune-papers-ii-vi-20260724/paper6_secondary_quotients_replacement/manuscript.md",
+  "source_bibliography": "publications/fortune-papers-ii-vi-20260724/paper6_secondary_quotients_replacement/references.bib",
+  "standalone": "publications/fortune-standalone-20260811/paper6_secondary_traces_quotients/manuscript.md",
+  "statement_count": 16,
+  "statement_sequence": [
+    "Theorem 2.1",
+    "Theorem 3.1",
+    "Theorem 3.2",
+    "Theorem 4.1",
+    "Theorem 5.1",
+    "Theorem 6.1",
+    "Theorem 7.1",
+    "Theorem 8.1",
+    "Proposition 9.1",
+    "Theorem 9.2",
+    "Theorem 9.3",
+    "Theorem 10.1",
+    "Theorem 11.1",
+    "Theorem 11.2",
+    "Theorem 12.1",
+    "Theorem 13.1"
+  ],
+  "logical_cross_paper_dependencies": 0,
+  "source_prose_repair": "Theorem 13.1 proof: U_p count already includes the p-1 shifts",
+  "universal_crown_proved": false,
+  "integer_transfer_proved": false
+}
