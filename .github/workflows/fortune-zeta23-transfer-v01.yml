@@ -1,0 +1,67 @@
+name: Fortune Zeta23 transfer v0.1
+
+on:
+  push:
+    branches:
+      - 'gpt56/fortune-zeta23-compression-v01-20260811'
+    paths:
+      - 'fortune-zeta23-transfer-v01/**'
+      - 'fortune-formal/FortuneFormal/Comparator/**'
+      - '.github/workflows/fortune-zeta23-transfer-v01.yml'
+  workflow_dispatch:
+
+jobs:
+  stable-rank:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install exact panel dependencies
+        run: python -m pip install numpy sympy
+      - name: Run exact finite-compression panels
+        run: |
+          python fortune-zeta23-transfer-v01/spectral/stable_rank_transfer.py \
+            --x 50 75 100 150 200 \
+            --output /tmp/stable_rank_results.json | tee /tmp/stable_rank.log
+          grep -q 'FORTUNE_ZETA23_STABLE_RANK_DIAGNOSTIC_PASS' /tmp/stable_rank.log
+      - name: Upload exact diagnostic record
+        uses: actions/upload-artifact@v4
+        with:
+          name: fortune-zeta23-stable-rank
+          path: /tmp/stable_rank_results.json
+
+  comparator:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Lean
+        run: |
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - name: Restore Mathlib cache
+        working-directory: fortune-formal
+        run: |
+          elan toolchain install $(cat lean-toolchain)
+          lean --version | grep -F 'version 4.32.0'
+          lake update
+          lake exe cache get
+      - name: Compile independent challenge and bridge
+        working-directory: fortune-formal
+        run: |
+          lake env lean FortuneFormal/Comparator/P7ChallengeDeps.lean
+          lake env lean FortuneFormal/Comparator/P7Challenge.lean
+          lake env lean FortuneFormal/Comparator/P7Bridge.lean
+          lake env lean FortuneFormal/Comparator/P7PrintAxioms.lean | tee /tmp/p7_axioms.out
+      - name: Comparator trust scan
+        run: |
+          ! grep -R -En '^\s*axiom\s+' fortune-formal/FortuneFormal/Comparator --include='*.lean'
+          ! grep -R -En '\b(sorry|admit)\b|^\s*unsafe\b' fortune-formal/FortuneFormal/Comparator --include='*.lean'
+          ! grep -q 'p7_k2_certified_normalization' /tmp/p7_axioms.out
+          test $(grep -R -E '^\s*axiom\s+' fortune-formal/FortuneFormal --include='*.lean' | wc -l) -eq 1
+      - name: Existing formal package regression
+        working-directory: fortune-formal
+        run: lake build
