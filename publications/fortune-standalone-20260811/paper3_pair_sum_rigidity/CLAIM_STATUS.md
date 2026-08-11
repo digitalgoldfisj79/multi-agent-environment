@@ -8,6 +8,7 @@
 - linkage and exact represented-difference multiplicity dichotomy;
 - exact two-scale energy decomposition;
 - high-moment bound and full-range sub-Weibull tail under the stated length condition;
+- exact fourth moment and centred second moment derived locally from the multiplicity dichotomy;
 - quantified sparse-sampling transfer-gap corollary;
 - candidate collapse at primorial centres;
 - deterministic all-centres variance implication;
@@ -15,7 +16,7 @@
 
 ## Exact finite combinatorial evidence, not a downstream proof input
 
-- the sixth-moment and centred third-moment polynomial identities in (7.2)--(7.3), reproduced by exhaustive endpoint-partition enumeration.
+- the sixth-moment and centred third-moment polynomial identities in (7.4)--(7.5), reproduced by exhaustive endpoint-partition enumeration.
 
 ## Conjectural calibration only
 

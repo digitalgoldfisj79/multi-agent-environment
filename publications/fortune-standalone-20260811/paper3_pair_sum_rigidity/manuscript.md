@@ -245,14 +245,55 @@ The left side is negative at \(t=121\) and decreasing thereafter, giving (6.2). 
 
 The theorem is a statement about Lebesgue measure on the circle. It does not imply that an arithmetically defined sparse sampling set is equidistributed across these level sets.
 
-# 7. Higher-moment identities and limiting scale
+# 7. Exact fourth moment, higher moments, and limiting scale
 
-The rigidity argument also implies that, for each fixed \(k\), \(\int_0^1|H_2|^{2k}\) is a polynomial in \(N\) once \(X>2k+1\). The leading term comes from endpoint multisets with \(2k\) distinct labels: there are \(\binom N{2k}\) such multisets and \((2k)!/2^k\) ordered decompositions into \(k\) unordered pairs. Consequently
+The difference classification already determines the fourth moment without any external input.
+
+**Proposition 7.1 (exact fourth and centred second moments).** Assume \(X>5\). Then
+\[
+\boxed{
+\int_0^1|H_2(\theta)|^4\,d\theta
+=
+\frac{N(3N^3-2N^2+2N-1)}2.
+}
+\tag{7.1}
+\]
+Moreover \(\int_0^1|H_2|^2=M\), and therefore
+\[
+\boxed{
+\int_0^1K(\theta)^2\,d\theta
+=
+\frac{N(N-1)(5N^2-N+2)}4
+=5M^2\bigl(1+O(N^{-1})\bigr).
+}
+\tag{7.2}
+\]
+
+**Proof.** Orthogonality gives
+\[
+\int_0^1|H_2|^4
+=\sum_D r_0(D)^2,
+\]
+where \(r_0(D)=\#\{(u,v):S_u-S_v=D\}\), now including \(D=0\). Bounded-coefficient rigidity with \(B=2\) makes the pair sums \(S_u\) distinct, so \(r_0(0)=M\). For nonzero \(D\), Theorem 3.2 gives \(N(N-1)\) values of multiplicity \(N\), while the number of multiplicity-one values is \(M(M-1)-N^2(N-1)\). Hence
+\[
+\begin{aligned}
+\int_0^1|H_2|^4
+&=M^2+N(N-1)N^2+M(M-1)-N^2(N-1)\\
+&=M^2+M(M-1)+N^2(N-1)^2,
+\end{aligned}
+\]
+which simplifies to (7.1). Also \(\int|H_2|^2=M\) by the same distinctness argument. Expanding \(K^2=(|H_2|^2-M)^2\) gives
+\[
+\int K^2=\int|H_2|^4-M^2,
+\]
+and substitution yields (7.2). \(\square\)
+
+For each fixed \(k\), rigidity further implies that \(\int_0^1|H_2|^{2k}\) is a polynomial in \(N\) once \(X>2k+1\). The leading contribution comes from endpoint multisets with \(2k\) distinct labels: there are \(\binom N{2k}\) such multisets and \((2k)!/2^k\) ordered decompositions into \(k\) unordered pairs. Consequently
 \[
 \int_0^1|H_2(\theta)|^{2k}\,d\theta
 =
 \frac{(2k)!}{4^k}N^{2k}\bigl(1+O_k(N^{-1})\bigr).
-\tag{7.1}
+\tag{7.3}
 \]
 
 A complete endpoint-partition census gives the exact sixth moment
@@ -260,63 +301,70 @@ A complete endpoint-partition census gives the exact sixth moment
 \int_0^1|H_2|^6\,d\theta
 =
 \frac{45N^6-189N^5+438N^4-597N^3+443N^2-136N}{4},
-\tag{7.2}
+\tag{7.4}
 \]
-and, after centring,
+and, using Proposition 7.1 to centre it,
 \[
 \int_0^1K(\theta)^3\,d\theta
 =
 \frac{N(N-1)^2(37N^3-115N^2+174N-136)}4
 =
 74M^3\bigl(1+O(N^{-1})\bigr).
-\tag{7.3}
+\tag{7.5}
 \]
-These two exact polynomial identities have been independently reproduced by exhaustive finite enumeration at more values of \(N\) than are required to determine the corresponding polynomials. They are included as exact combinatorial evidence and are not used in the proof of the arithmetic application below.
+The exact polynomial identities (7.4)--(7.5) have been independently reproduced by exhaustive endpoint-partition enumeration at more values of \(N\) than are required to determine the corresponding polynomials. They are exact finite combinatorial evidence and are not used in the arithmetic implication below.
 
-The leading moments in (7.1) coincide with those of \(g^2/\sqrt2\), where \(g\) is standard complex Gaussian. This explains the \(\sqrt{\lambda/M}\) scale in Theorem 6.1, but no uniform moderate-deviation limit is claimed.
+The leading moments in (7.3) coincide with those of \(g^2/\sqrt2\), where \(g\) is standard complex Gaussian. This explains the \(\sqrt{\lambda/M}\) scale in Theorem 6.1, but no uniform moderate-deviation limit is claimed.
 
 # 8. Sparse reciprocal sampling and the transfer gap
 
-To make the distinction between Lebesgue measure and arithmetic sampling explicit, now specialise the growth parameter to a large \(X\), set \(H\asymp X^2\), and let \(\mathcal Q_X\) be the primes in \([H,2H)\). Fix a nonnegative even Schwartz function \(\rho\), and for a fixed nonzero integer harmonic \(a\) define
-\[
-w_{q,a}=\rho(Ha/q),
-\qquad
-D_X=\sum_{q\in\mathcal Q_X}\sum_{b\ne0}\rho(Hb/q),
-\qquad
-p_{q,a}=\frac{w_{q,a}}{D_X}.
-\tag{8.1}
-\]
-Let \(\mu_{X,a}\) be the finite positive measure placing mass \(p_{q,a}p_{r,a}\) at
+Theorem 6.1 controls Lebesgue measure, not a sparse arithmetic sampling measure. The following formulation separates those two notions without building any asymptotic assumption into the notation.
+
+Let \(H\asymp X^2\) and let \(\Theta_X\subset\mathbb R/\mathbb Z\) be a finite set of reciprocal prime-shell atoms, for example points
 \[
 \theta_{q,r}=a\left(\frac1q-\frac1r\right)\pmod1,
-\qquad q,r\in\mathcal Q_X,
-\quad q\ne r.
+\qquad q,r\text{ prime in }[H,2H],\quad q\ne r,
+\tag{8.1}
+\]
+for a fixed nonzero harmonic \(a\). Let \(\mu_X\) be a positive measure supported on \(\Theta_X\). Assume that for some functions \(\delta_X,\varepsilon_X\to0\),
+\[
+|\Theta_X|\le X^{4+\delta_X},
+\qquad
+\max_{\theta\in\Theta_X}\mu_X(\{\theta\})\le X^{-4+\delta_X}.
 \tag{8.2}
 \]
-For fixed \(a\) in the effective support of \(\rho\), the prime number theorem gives at most \(X^{4+o(1)}\) atoms and individual masses at most \(X^{-4+o(1)}\).
+The standard bounded-weight normalization on primes in \([H,2H]\) has this scale by the prime number theorem; (8.2) is stated explicitly so that no hidden normalization claim enters the corollary.
 
-A natural one-sided reciprocal level-set target is
+A reciprocal level-set estimate useful for the pair-sum model would have the scale
 \[
-\mu_{X,a}\{K\ge\lambda\}
-\ll\frac{M X^{o(1)}}{\lambda},
-\qquad 121M\le\lambda\le M^2.
+\mu_X\{K\ge\lambda\}
+\lesssim \frac{M}{\lambda}X^{o(1)}.
 \tag{8.3}
 \]
 
-**Corollary 8.1 (quantified transfer gap).** If (8.3) fails at \(\lambda=tM\), \(121\le t\le M\), then at least
+**Corollary 8.1 (quantified transfer gap).** Assume \(X>N+2\), (8.2), and let \(\lambda=tM\) with \(121\le t\le M\). If
 \[
-X^{4+o(1)}t^{-1}
+\mu_X\{K\ge tM\}\ge t^{-1}X^{-\varepsilon_X},
 \tag{8.4}
 \]
-sampling atoms lie in a set of Lebesgue measure at most
+then at least
 \[
-\exp(-\sqrt t).
+\boxed{
+t^{-1}X^{4-\varepsilon_X-\delta_X}
+}
 \tag{8.5}
 \]
+atoms of \(\Theta_X\) lie in a subset of the circle having Lebesgue measure at most
+\[
+\boxed{
+\exp(-\sqrt t).
+}
+\tag{8.6}
+\]
 
-**Proof.** Theorem 6.1 bounds the Lebesgue measure of the level set by (8.5). Failure of (8.3) means the sampling mass of that level set exceeds \(t^{-1}X^{o(1)}\). Since each atom has mass at most \(X^{-4+o(1)}\), at least (8.4) atoms are required. \(\square\)
+**Proof.** By Theorem 6.1, the level set \(\{K\ge tM\}\) has Lebesgue measure at most (8.6). Its \(\mu_X\)-mass is at least (8.4), while each atom contributes at most \(X^{-4+\delta_X}\). Dividing gives (8.5). \(\square\)
 
-Thus the missing statement is not an improvement of the Lebesgue tail. It is an arithmetic non-concentration theorem preventing polynomially many reciprocal atoms from accumulating on exponentially small high-value sets. Nothing in Sections 2--7 supplies such a theorem.
+Thus a polynomial-scale excess of reciprocal mass over the desired \(t^{-1}\) scale requires polynomially many arithmetic atoms to concentrate inside an exponentially small Lebesgue set. The missing statement is an arithmetic non-concentration theorem, not an improvement of the Lebesgue tail. Nothing in Sections 2--7 supplies such a theorem.
 
 # 9. Primorial-centre prime-pair application
 
@@ -468,7 +516,7 @@ The accompanying validator performs independent finite checks of the kernel theo
   \{1:M(M-1)-N^2(N-1),\;N:N(N-1)\};
   \]
 - exact moment counts for \(k=2,3,4\) and \(N\le9\) satisfy Lemma 5.1;
-- the polynomial identities (7.2)--(7.3) reproduce exhaustive counts at held-out values of \(N\);
+- the polynomial identities (7.4)--(7.5) reproduce exhaustive counts at held-out values of \(N\);
 - sampled modular phases at \(N=24\) are diagnostic checks of the tail scale only and are not proof inputs.
 
 The finite checks do not establish an asymptotic sampling theorem or a prime-pair result. Their role is reproducibility and error detection.

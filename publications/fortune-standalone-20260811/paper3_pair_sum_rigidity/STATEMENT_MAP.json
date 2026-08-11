@@ -22,5 +22,8 @@
   "new_local_bridge_statements": {
     "Lemma 9.1": "candidate-collapse proof supplied locally so companion papers are not dependencies",
     "Proposition 10.1": "labels the exact source covariance identity already present as equation (10.1) in the corrected source"
+  },
+  "standalone_dependency_closures": {
+    "source Appendix A.9 reference to Paper II Theorem 4.2": "Proposition 7.1, proved locally from Theorem 3.2"
   }
 }
