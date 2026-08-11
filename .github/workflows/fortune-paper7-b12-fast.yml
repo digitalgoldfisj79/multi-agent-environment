@@ -1,0 +1,51 @@
+name: Fortune Paper VII B1/B2 fast kernel check
+
+on:
+  push:
+    branches:
+      - 'gpt56/fortune-zeta23-compression-v01-20260811'
+    paths:
+      - 'fortune-paper7-kernel-fast/**'
+      - '.github/workflows/fortune-paper7-b12-fast.yml'
+  workflow_dispatch:
+
+jobs:
+  b12-fast:
+    strategy:
+      fail-fast: false
+      matrix:
+        target: [1, 2]
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Singular and Lean
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y singular
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - name: Restore Mathlib cache
+        working-directory: fortune-formal
+        run: |
+          elan toolchain install $(cat lean-toolchain)
+          lake update
+          lake exe cache get
+      - name: Regenerate exact power lifts
+        run: Singular fortune-corpus-novelty-assurance-v1/paper7/chart_power_lifts.sing > /tmp/power_lifts_exact.out
+      - name: Generate split certificate
+        run: |
+          python fortune-paper7-kernel-fast/generate_b12_split.py /tmp/power_lifts_exact.out \
+            --target '${{ matrix.target }}' --output '/tmp/B${{ matrix.target }}Fast.lean' \
+            | tee '/tmp/B${{ matrix.target }}Fast.generate.log'
+      - name: Kernel check split certificate
+        working-directory: fortune-formal
+        run: lake env lean '/tmp/B${{ matrix.target }}Fast.lean' | tee '/tmp/B${{ matrix.target }}Fast.lean.log'
+      - name: Upload certificate
+        uses: actions/upload-artifact@v4
+        with:
+          name: 'fortune-paper7-B${{ matrix.target }}-fast-kernel'
+          path: |
+            /tmp/B${{ matrix.target }}Fast.lean
+            /tmp/B${{ matrix.target }}Fast.generate.log
+          retention-days: 30
