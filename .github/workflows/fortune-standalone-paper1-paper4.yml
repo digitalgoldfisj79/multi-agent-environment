@@ -43,7 +43,7 @@ jobs:
               d=Path('publications/fortune-standalone-20260811')/dirname
               text=(d/'manuscript.md').read_text()
               m=json.loads((d/'SOURCE_MANIFEST.json').read_text())
-              labels=re.findall(r'^## (Theorem|Proposition|Lemma|Corollary) ([0-9]+\.[0-9]+)', text, re.M)
+              labels=re.findall(r'^#{2,3} (Theorem|Proposition|Lemma|Corollary) ([0-9]+\.[0-9]+)', text, re.M)
               assert len(labels)==count,(key,len(labels))
               assert m['statement_count']==count
               assert m['logical_cross_paper_dependencies']==0
