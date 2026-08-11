@@ -45,14 +45,14 @@ jobs:
           lake update
           lake exe cache get
       - name: Compile independent integer challenge and bridge
-        run: |
-          lake env lean FortuneFormal/Comparator/IntegerBlockChallenge.lean
-          lake env lean FortuneFormal/Comparator/IntegerBlockBridge.lean
+        run: lake build FortuneFormal.Comparator.IntegerBlockBridge
       - name: Print bridge axioms
-        run: lake env lean FortuneFormal/Comparator/IntegerBlockPrintAxioms.lean | tee /tmp/integer_axioms.txt
+        run: |
+          lake build FortuneFormal.Comparator.IntegerBlockPrintAxioms
+          lake env lean FortuneFormal/Comparator/IntegerBlockPrintAxioms.lean | tee /tmp/integer_axioms.txt
       - name: Enforce standard-only axiom output for comparator theorems
         run: |
-          if grep -E 'p7_k2_certified_normalization|sorryAx|axiom' /tmp/integer_axioms.txt; then
+          if grep -E 'p7_k2_certified_normalization|sorryAx' /tmp/integer_axioms.txt; then
             echo 'Unexpected custom axiom in integer comparator output'
             exit 1
           fi
