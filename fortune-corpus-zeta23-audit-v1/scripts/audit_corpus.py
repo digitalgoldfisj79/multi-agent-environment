@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 from pathlib import Path
-import json, re, sys
+import json, re
 
 ROOT = Path(__file__).resolve().parents[2]
 PBASE = ROOT / 'publications/fortune-papers-ii-vi-20260724'
@@ -12,31 +12,46 @@ PAPERS = {
   'V': PBASE / 'paper5_function_fields_replacement/manuscript.md',
   'VI': PBASE / 'paper6_secondary_quotients_replacement/manuscript.md',
 }
+SYNTHESIS = ROOT / 'fortune-corpus-zeta23-audit-v1/SYNTHESIS_MANUSCRIPT_SNAPSHOT.md'
 CLAIM_STATUS = {
   'V': PBASE / 'paper5_function_fields_replacement/CLAIM_STATUS.md',
   'VI': PBASE / 'paper6_secondary_quotients_replacement/CLAIM_STATUS.md',
 }
 FROOT = ROOT / 'fortune-formal/FortuneFormal'
 
+
+def count_statement_labels(t: str) -> int:
+    # Publication manuscripts use both markdown headings and bold inline labels.
+    heading = re.findall(r'(?m)^#{1,3}\s+(?:Theorem|Proposition|Lemma|Corollary)\b', t)
+    bold = re.findall(r'(?m)^\*\*(?:Theorem|Proposition|Lemma|Corollary)\b', t)
+    return len(heading) + len(bold)
+
+
+def scan_manuscript(p: Path):
+    t = p.read_text(encoding='utf-8')
+    return {
+        'path': str(p.relative_to(ROOT)),
+        'statement_labels': count_statement_labels(t),
+        'computational_markers': len(re.findall(r'(?i)computer-assisted|finite verification|finite census|exact computation', t)),
+        'open_boundary_markers': len(re.findall(r'(?i)\bopen\b|remains open|not prove|not claimed', t)),
+    }
+
+
 report = {'papers': {}, 'formal': {}}
 for k, p in PAPERS.items():
     if not p.exists():
         raise SystemExit(f'missing manuscript {p}')
-    t = p.read_text(encoding='utf-8')
-    headings = re.findall(r'(?m)^#{1,3}\s+(?:Theorem|Proposition|Lemma|Corollary)\b', t)
-    comp = len(re.findall(r'(?i)computer-assisted|finite verification|finite census|exact computation', t))
-    open_hits = len(re.findall(r'(?i)\bopen\b|remains open|not prove|not claimed', t))
-    report['papers'][k] = {
-        'path': str(p.relative_to(ROOT)),
-        'statement_headings': len(headings),
-        'computational_markers': comp,
-        'open_boundary_markers': open_hits,
-    }
+    report['papers'][k] = scan_manuscript(p)
     cs = CLAIM_STATUS.get(k)
     if cs and cs.exists():
         cst = cs.read_text(encoding='utf-8')
         report['papers'][k]['claim_status_open_rows'] = len(re.findall(r'(?mi)^\|.*\bOPEN\b.*\|', cst))
         report['papers'][k]['claim_status_computer_rows'] = len(re.findall(r'(?mi)^\|.*COMPUTER-ASSISTED.*\|', cst))
+
+report['synthesis'] = scan_manuscript(SYNTHESIS) if SYNTHESIS.exists() else {
+    'status': 'MISSING_FROM_AUDIT_CHECKOUT',
+    'authoritative_source_commit': 'be42a5c80d2189df2f20c8055ee7107768cb7299',
+}
 
 lean_files = sorted(FROOT.rglob('*.lean'))
 axioms = []
@@ -60,7 +75,6 @@ report['formal'] = {
     'p7_challenge_exists': (FROOT / 'Comparator/P7Challenge.lean').exists(),
 }
 
-# Hard trust gates.
 if len(axioms) != 1 or axioms[0]['name'] != 'p7_k2_certified_normalization':
     print(json.dumps(report, indent=2))
     raise SystemExit(f'unexpected project axiom inventory: {axioms}')
@@ -69,6 +83,8 @@ if sorries:
     raise SystemExit(f'sorry/admit found: {sorries}')
 if not report['formal']['integer_challenge_exists'] or not report['formal']['integer_bridge_exists']:
     raise SystemExit('integer comparator layer missing')
+if not SYNTHESIS.exists():
+    raise SystemExit('authoritative synthesis snapshot was not staged by workflow')
 
 out = ROOT / 'fortune-corpus-zeta23-audit-v1/AUDIT_SCAN.json'
 out.write_text(json.dumps(report, indent=2) + '\n', encoding='utf-8')
