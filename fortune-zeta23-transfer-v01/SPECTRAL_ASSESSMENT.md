@@ -96,7 +96,27 @@ So **among ordinary PSD Gram stable-rank certificates using the same row energie
 
 This rules out the naive hope that a richer PSD incidence matrix will reproduce the Zeta23 gain.
 
-## 6. What would actually be Zeta23-like
+## 6. Indefinite correction and inertia obstruction
+
+The most natural attempt to imitate the actual Zeta23 mechanism is to split
+
+`B B* = P + Q`,
+
+with `P=diag(||B_j||^2)` and
+
+`Q=B B* - diag(||B_j||^2)`.
+
+Here `Q` is Hermitian and indefinite.  A useful Zeta23-type inequality would require an independently small bound on its positive index.
+
+The existing Paper I collision geometry does **not** supply such a bound.  Sparsity, low cycle complexity, forest structure, and Smith/affine-rank information do not imply small Hermitian positive index.  As a minimal counterexample, the adjacency matrix of the path graph on `n` vertices is supported on a tree but has eigenvalues
+
+`2 cos(k*pi/(n+1)), 1 <= k <= n`,
+
+so its positive index is `floor(n/2)` (up to the central zero eigenvalue when `n` is odd).  Thus even maximally sparse cycle-free support can have positive index of order the full matrix dimension.
+
+Accordingly a future indefinite-compression route would need genuinely **signed arithmetic structure** proving low inertia; collision sparsity alone cannot provide it.
+
+## 7. What would actually be Zeta23-like
 
 Zeta23 does not rely on a bare PSD Gram stable rank.  Its key inequality permits an indefinite Hermitian correction `P+Q`, with independent control of the positive index of `Q`.
 
@@ -104,11 +124,11 @@ A genuine successor for Fortune would therefore need a naturally arising signed 
 
 No such `Q` emerged from the exact Fortune detector or the existing collision geometry in this run.  Inventing an arbitrary correction merely moves the missing theorem into an inertia hypothesis.
 
-## 7. Gate S5
+## 8. Gate S5
 
 `S5 = FAIL`.
 
-The ordinary finite-compression route does not produce a strictly weaker available arithmetic target.  The stratified version gives a useful diagnostic reformulation but requires a new localized four-prime covariance theorem.  Non-diagonal PSD Gram constructions are dominated by the diagonal compression.
+The ordinary finite-compression route does not produce a strictly weaker available arithmetic target.  The stratified version gives a useful diagnostic reformulation but requires a new localized four-prime covariance theorem.  Non-diagonal PSD Gram constructions are dominated by the diagonal compression, and the natural indefinite centered Gram has no low-inertia consequence from the known collision graph structure.
 
 Therefore the integer Fortune frontier remains `CLOSED`.
 
