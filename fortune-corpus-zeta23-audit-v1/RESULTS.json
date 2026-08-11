@@ -1,0 +1,73 @@
+{
+  "programme": "FORTUNE_CORPUS_ZETA23_AUDIT_V1",
+  "date": "2026-08-11",
+  "branch": "gpt56/fortune-corpus-zeta23-audit-v1-20260811",
+  "authoritative_ci_run": 31489829532,
+  "corpus_terminal": "TRUST_AND_CERTIFICATE_GAINS__NO_FRONTIER_REDUCTION",
+  "fortune_status": "NOT_PROVED",
+  "integer_mainline": "CLOSED",
+  "direct_function_field_frontier": "D1-QLINE-NONSAT_OPEN",
+  "papers": {
+    "I": {
+      "trust": "MANUSCRIPT_ONLY_NO_FINITE_BOUNDARY",
+      "reduction": "NO_GAIN",
+      "reason": "Structural collision, incidence, rank/Smith and null-law mathematics survives, but HTE4/HWF4/FBHE4/RQHE4 remain analytic and even their resolution would still require the corrected signed detector bridge.",
+      "next_assurance_target": "Formalize the interval endpoint-graph rank/Smith theorem or exact fourth-moment identity as an independent challenge; do not treat this as Fortune progress."
+    },
+    "II": {
+      "trust": "TRUST_GAIN_ONLY",
+      "reduction": "REFORMULATION_EQUIVALENT_TO_OPEN_TARGET",
+      "reason": "Independent Mathlib-only one-failure, centered-second-moment and four-prime covariance challenges now bridge to the implementation without the Paper VII custom axiom. Sparse-centre first moment, corrected source-to-frame transfer and o(log X) variance remain open.",
+      "next_assurance_target": "Extend independent challenge coverage to candidate collapse and the exact source identity."
+    },
+    "III": {
+      "trust": "TRUST_GAIN_ONLY",
+      "reduction": "REFORMULATION_EQUIVALENT_TO_OPEN_TARGET",
+      "reason": "The corrected covariance spine is independently restated, but the superincreasing combinatorial kernel remains largely manuscript-only and the Lebesgue tail does not transfer to the arithmetic sampling measure.",
+      "next_assurance_target": "Formalize bounded-coefficient rigidity and the N-or-1 pair-sum difference multiplicity dichotomy."
+    },
+    "IV": {
+      "trust": "MANUSCRIPT_ONLY_NO_FINITE_BOUNDARY",
+      "reduction": "NO_GAIN",
+      "reason": "The main theorem is an analytic random-permutation result. Finite ledger checking could improve proof assurance, but no increasing-order transfer or corrected detector bridge emerges.",
+      "next_assurance_target": "Human analytic-number-theory review of the logarithmic-slack configuration ledger; formalization is low priority."
+    },
+    "V": {
+      "trust": "FINITE_CERTIFICATE_OPPORTUNITY",
+      "reduction": "REFORMULATION_EQUIVALENT_TO_OPEN_TARGET",
+      "reason": "Independent exhaustive p=5,7,11 census and p=7 singular-locus census reproduce. The stored p=11 hook-character artifact was found incomplete and repaired. Strict q-line nonsaturation remains exactly the open cubic-positivity frontier.",
+      "next_assurance_target": "Reflect the finite crown/hook and singular-locus certificates into Lean where practical; keep universal q-line nonvanishing explicit."
+    },
+    "VI": {
+      "trust": "FINITE_CERTIFICATE_OPPORTUNITY",
+      "reduction": "REFORMULATION_EQUIVALENT_TO_OPEN_TARGET",
+      "reason": "Independent tangent, divided-hook, Hattori-Stallings, no-split, Kummer and quotient-count regressions reproduce semantically. The quotient open is an affine restatement of the same one-sided cubic positivity requirement.",
+      "next_assurance_target": "Kernelize the low-cost exact algebraic identities first; do not mistake quotient geometry for nonvanishing progress."
+    },
+    "SYNTHESIS": {
+      "trust": "TRUST_GAIN_ONLY",
+      "reduction": "REFORMULATION_EQUIVALENT_TO_OPEN_TARGET",
+      "reason": "The exact one-failure/covariance implication spine is independently replayed, with analytic premises left explicit. No weaker premise than the frozen selected-centre signed/four-prime frontier is exposed.",
+      "next_assurance_target": "Comparator-style restatement of the remaining finite Bonferroni/occupancy implications if publication packaging benefits."
+    }
+  },
+  "evidence_repairs": [
+    {
+      "paper": "V",
+      "issue": "Stored p=11 alternating-hook table contained only the 11-cycle entry while the executable reconstruction checks all partitions.",
+      "classification": "EVIDENCE_ARTIFACT_INCOMPLETE_NOT_THEOREM_REGRESSION",
+      "repair_commit": "88739f4f10418f092039a6c89bd15a9a7372e657"
+    },
+    {
+      "paper": "VI",
+      "issue": "Initial byte-diff failure was JSON formatting only.",
+      "classification": "SERIALIZATION_ONLY",
+      "action": "Workflow changed to parsed-JSON semantic equality."
+    }
+  ],
+  "frontiers": {
+    "integer": "INT-ISC / equivalent signed selected-centre covariance-transference theorem remains open.",
+    "direct_d1": "D1-QLINE-NONSAT remains open; Papers V and VI give equivalent geometric/trace formulations but no weaker theorem.",
+    "paper_vii": "Handled by the preceding Zeta23 transfer audit; q-free certificate identities are kernel checked while datum normalization remains the sole custom axiom boundary."
+  }
+}

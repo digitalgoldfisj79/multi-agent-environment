@@ -1,0 +1,5 @@
+import FortuneFormal.Comparator.IntegerBlockBridge
+
+#print axioms FortuneFormal.Comparator.integer_no_failure_challenge
+#print axioms FortuneFormal.Comparator.integer_centered_moment_challenge
+#print axioms FortuneFormal.Comparator.integer_four_prime_challenge

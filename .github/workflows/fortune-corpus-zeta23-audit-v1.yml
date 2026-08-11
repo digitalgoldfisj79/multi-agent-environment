@@ -1,0 +1,132 @@
+name: Fortune corpus Zeta23 audit v1
+
+on:
+  push:
+    branches:
+      - gpt56/fortune-corpus-zeta23-audit-v1-20260811
+  workflow_dispatch:
+
+concurrency:
+  group: fortune-corpus-zeta23-audit-v1-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  corpus-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Stage authoritative synthesis from final publication commit
+        run: |
+          git show be42a5c80d2189df2f20c8055ee7107768cb7299:publications/fortune-conditional-and-barriers-20260806/MANUSCRIPT.md > fortune-corpus-zeta23-audit-v1/SYNTHESIS_MANUSCRIPT_SNAPSHOT.md
+      - name: Run deterministic corpus scan
+        run: python fortune-corpus-zeta23-audit-v1/scripts/audit_corpus.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: fortune-corpus-zeta23-audit-scan
+          path: |
+            fortune-corpus-zeta23-audit-v1/AUDIT_SCAN.json
+            fortune-corpus-zeta23-audit-v1/SYNTHESIS_MANUSCRIPT_SNAPSHOT.md
+
+  integer-comparator:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: fortune-formal
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Lean
+        run: |
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - name: Restore Mathlib cache
+        run: |
+          elan toolchain install $(cat lean-toolchain)
+          lake update
+          lake exe cache get
+      - name: Compile independent integer challenge and bridge
+        run: lake build FortuneFormal.Comparator.IntegerBlockBridge
+      - name: Print bridge axioms
+        run: |
+          lake build FortuneFormal.Comparator.IntegerBlockPrintAxioms
+          lake env lean FortuneFormal/Comparator/IntegerBlockPrintAxioms.lean | tee /tmp/integer_axioms.txt
+      - name: Enforce standard-only axiom output for comparator theorems
+        run: |
+          if grep -E 'p7_k2_certified_normalization|sorryAx' /tmp/integer_axioms.txt; then
+            echo 'Unexpected custom axiom in integer comparator output'
+            exit 1
+          fi
+      - name: Full package regression
+        run: lake build
+
+  finite-reconstructions:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Re-run Paper V independent census
+        working-directory: publications/fortune-papers-ii-vi-20260724/paper5_function_fields_replacement
+        run: |
+          cp paper5_independent_reconstruction_results.json /tmp/paper5_expected.json
+          python paper5_independent_reconstruction.py > /tmp/paper5_run.txt
+          python - <<'PY'
+          import json
+          assert json.load(open('/tmp/paper5_expected.json')) == json.load(open('paper5_independent_reconstruction_results.json'))
+          print('PAPER5_SEMANTIC_JSON_MATCH')
+          PY
+      - name: Re-run Paper V singular-locus census
+        working-directory: publications/fortune-papers-ii-vi-20260724/paper5_function_fields_replacement
+        run: |
+          cp sparse_surface_singularity_results.json /tmp/paper5_sing_expected.json
+          g++ -O2 -std=c++17 sparse_surface_singularity_independent.cpp -o /tmp/p5_singularity
+          /tmp/p5_singularity
+          python - <<'PY'
+          import json
+          assert json.load(open('/tmp/paper5_sing_expected.json')) == json.load(open('sparse_surface_singularity_results.json'))
+          print('PAPER5_SINGULARITY_JSON_MATCH')
+          PY
+      - name: Re-run Paper VI independent algebraic reconstruction
+        working-directory: publications/fortune-papers-ii-vi-20260724/paper6_secondary_quotients_replacement
+        run: |
+          cp paper6_independent_reconstruction_results.json /tmp/paper6_expected.json
+          python paper6_independent_reconstruction.py > /tmp/paper6_run.txt
+          python - <<'PY'
+          import json
+          assert json.load(open('/tmp/paper6_expected.json')) == json.load(open('paper6_independent_reconstruction_results.json'))
+          print('PAPER6_SEMANTIC_JSON_MATCH')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: fortune-papers-v-vi-independent-reconstructions
+          path: |
+            /tmp/paper5_run.txt
+            /tmp/paper6_run.txt
+            publications/fortune-papers-ii-vi-20260724/paper5_function_fields_replacement/paper5_independent_reconstruction_results.json
+            publications/fortune-papers-ii-vi-20260724/paper5_function_fields_replacement/sparse_surface_singularity_results.json
+            publications/fortune-papers-ii-vi-20260724/paper6_secondary_quotients_replacement/paper6_independent_reconstruction_results.json
+
+  reduction-gates:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install exact panel dependencies
+        run: python -m pip install --quiet numpy sympy
+      - name: Re-run bounded inherited PSD no-go sentinel
+        run: python fortune-zeta23-transfer-v01/spectral/stable_rank_transfer.py --x 50 75 100
+      - name: Check claim-status/open-frontier markers
+        run: |
+          grep -q 'Strict q-line nonsaturation is equivalent to cubic positivity' publications/fortune-papers-ii-vi-20260724/paper5_function_fields_replacement/CLAIM_STATUS.md
+          grep -q 'Rational point on the Kummer open for every admitted prime' publications/fortune-papers-ii-vi-20260724/paper6_secondary_quotients_replacement/CLAIM_STATUS.md
+          grep -q 'random permutation' publications/fortune-papers-ii-vi-20260724/paper4_random_order/manuscript.md
+          grep -q 'four-linear-form covariance theorem' publications/fortune-papers-ii-vi-20260724/paper3_pair_sum/manuscript.md
+          echo REDUCTION_BOUNDARIES_PRESENT
