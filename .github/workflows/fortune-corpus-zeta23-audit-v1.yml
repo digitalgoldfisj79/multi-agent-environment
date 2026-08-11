@@ -1,0 +1,70 @@
+name: Fortune corpus Zeta23 audit v1
+
+on:
+  push:
+    branches:
+      - gpt56/fortune-corpus-zeta23-audit-v1-20260811
+  workflow_dispatch:
+
+jobs:
+  corpus-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run deterministic corpus scan
+        run: python fortune-corpus-zeta23-audit-v1/scripts/audit_corpus.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: fortune-corpus-zeta23-audit-scan
+          path: fortune-corpus-zeta23-audit-v1/AUDIT_SCAN.json
+
+  integer-comparator:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: fortune-formal
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Lean
+        run: |
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - name: Restore Mathlib cache
+        run: |
+          elan toolchain install $(cat lean-toolchain)
+          lake update
+          lake exe cache get
+      - name: Compile independent integer challenge and bridge
+        run: |
+          lake env lean FortuneFormal/Comparator/IntegerBlockChallenge.lean
+          lake env lean FortuneFormal/Comparator/IntegerBlockBridge.lean
+      - name: Print bridge axioms
+        run: lake env lean FortuneFormal/Comparator/IntegerBlockPrintAxioms.lean | tee /tmp/integer_axioms.txt
+      - name: Enforce standard-only axiom output for comparator theorems
+        run: |
+          if grep -E 'p7_k2_certified_normalization|sorryAx|axiom' /tmp/integer_axioms.txt; then
+            echo 'Unexpected custom axiom in integer comparator output'
+            exit 1
+          fi
+      - name: Full package regression
+        run: lake build
+
+  reduction-gates:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Re-run inherited PSD finite-compression no-go diagnostics
+        run: python fortune-zeta23-transfer-v01/spectral/stable_rank_transfer.py
+      - name: Check claim-status/open-frontier markers
+        run: |
+          grep -q 'Strict q-line nonsaturation is equivalent to cubic positivity' publications/fortune-papers-ii-vi-20260724/paper5_function_fields_replacement/CLAIM_STATUS.md
+          grep -q 'Rational point on the Kummer open for every admitted prime' publications/fortune-papers-ii-vi-20260724/paper6_secondary_quotients_replacement/CLAIM_STATUS.md
+          grep -q 'random permutation' publications/fortune-papers-ii-vi-20260724/paper4_random_order/manuscript.md
+          grep -q 'four-linear-form covariance theorem' publications/fortune-papers-ii-vi-20260724/paper3_pair_sum/manuscript.md
+          echo REDUCTION_BOUNDARIES_PRESENT
