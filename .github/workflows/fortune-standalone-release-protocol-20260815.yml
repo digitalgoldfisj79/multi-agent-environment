@@ -1,0 +1,188 @@
+name: Fortune standalone master release protocol 20260815
+
+on:
+  push:
+    branches:
+      - gpt56/fortune-standalone-papers-v1-20260811
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: fortune-standalone-master-release-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  rebuild-and-corpus-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile all deterministic rebuilders
+        run: |
+          python -m py_compile \
+            fortune-standalone-rebuild/scripts/build_paper1.py \
+            fortune-standalone-rebuild/scripts/build_paper2.py \
+            fortune-standalone-rebuild/scripts/postprocess_paper2.py \
+            fortune-standalone-rebuild/scripts/build_paper3.py \
+            fortune-standalone-rebuild/scripts/postprocess_paper3.py \
+            fortune-standalone-rebuild/scripts/build_paper4.py \
+            fortune-standalone-rebuild/scripts/build_paper5.py \
+            fortune-standalone-rebuild/scripts/build_paper6.py \
+            fortune-standalone-rebuild/scripts/build_paper7.py \
+            fortune-standalone-rebuild/scripts/build_synthesis.py \
+            fortune-standalone-rebuild/scripts/audit_standalone_corpus.py
+      - name: Rebuild Papers I-VII and synthesis from frozen sources
+        run: |
+          python fortune-standalone-rebuild/scripts/build_paper1.py
+          python fortune-standalone-rebuild/scripts/build_paper2.py
+          python fortune-standalone-rebuild/scripts/postprocess_paper2.py
+          python fortune-standalone-rebuild/scripts/build_paper3.py
+          python fortune-standalone-rebuild/scripts/postprocess_paper3.py
+          python fortune-standalone-rebuild/scripts/build_paper4.py
+          python fortune-standalone-rebuild/scripts/build_paper5.py
+          python fortune-standalone-rebuild/scripts/build_paper6.py
+          python fortune-standalone-rebuild/scripts/build_paper7.py
+          python fortune-standalone-rebuild/scripts/build_synthesis.py
+      - name: Corpus-wide standalone and epistemic audit
+        run: python fortune-standalone-rebuild/scripts/audit_standalone_corpus.py
+      - name: Frozen-output and diff hygiene gate
+        run: |
+          git diff --check
+          if ! git diff --exit-code -- publications/fortune-standalone-20260811; then
+            echo 'FROZEN_STANDALONE_CORPUS_DRIFT'
+            exit 1
+          fi
+          echo FROZEN_STANDALONE_CORPUS_MATCH
+
+  exact-evidence-regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Paper V independent crown census
+        run: |
+          cd publications/fortune-papers-ii-vi-20260724/paper5_function_fields_replacement
+          cp paper5_independent_reconstruction_results.json /tmp/p5_expected.json
+          python paper5_independent_reconstruction.py >/tmp/p5_reconstruction.txt
+          python - <<'PY'
+          import json
+          assert json.load(open('/tmp/p5_expected.json')) == json.load(open('paper5_independent_reconstruction_results.json'))
+          print('PAPER5_INDEPENDENT_CENSUS_MATCH')
+          PY
+      - name: Paper V singular-locus census
+        run: |
+          cd publications/fortune-papers-ii-vi-20260724/paper5_function_fields_replacement
+          cp sparse_surface_singularity_results.json /tmp/p5_sing_expected.json
+          g++ -O2 -std=c++17 sparse_surface_singularity_independent.cpp -o /tmp/p5_sing
+          /tmp/p5_sing
+          python - <<'PY'
+          import json
+          assert json.load(open('/tmp/p5_sing_expected.json')) == json.load(open('sparse_surface_singularity_results.json'))
+          print('PAPER5_SINGULAR_LOCUS_MATCH')
+          PY
+      - name: Paper VI independent algebraic reconstruction
+        run: |
+          cd publications/fortune-papers-ii-vi-20260724/paper6_secondary_quotients_replacement
+          cp paper6_independent_reconstruction_results.json /tmp/p6_expected.json
+          python paper6_independent_reconstruction.py >/tmp/p6_reconstruction.txt
+          python - <<'PY'
+          import json
+          assert json.load(open('/tmp/p6_expected.json')) == json.load(open('paper6_independent_reconstruction_results.json'))
+          print('PAPER6_INDEPENDENT_RECONSTRUCTION_MATCH')
+          PY
+      - name: Paper VII frozen symbolic verifier
+        run: |
+          python -m pip install --quiet sympy
+          python publications/fortune-paper-vii-endpoint-incidence-20260731/paper7_verify.py
+      - name: Evidence regression leaves tracked sources clean
+        run: git diff --exit-code
+
+  formal-regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    defaults:
+      run:
+        working-directory: fortune-formal
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Lean
+        run: |
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - name: Restore Mathlib cache
+        run: |
+          elan toolchain install $(cat lean-toolchain)
+          lake update
+          lake exe cache get
+      - name: Full FortuneFormal regression
+        run: lake build
+      - name: Zeta23-style trust-boundary scan
+        run: |
+          test "$(grep -R --include='*.lean' -E '^\s*axiom ' FortuneFormal | wc -l)" -eq 1
+          grep -q '^axiom p7_k2_certified_normalization' FortuneFormal/Frontier/Assumptions.lean
+          grep -q 'This theorem is not axiom-free' FortuneFormal/Frontier/Assumptions.lean
+          if grep -R --include='*.lean' -n -E '\bsorry\b|\badmit\b' FortuneFormal; then
+            echo UNEXPECTED_SORRY_OR_ADMIT
+            exit 1
+          fi
+          if grep -R --line-number -E '^\s*(axiom|opaque) ' FortuneFormal/Comparator FortuneFormal/Quadratic/CertificateBridge.lean | grep -v '^$'; then
+            echo UNEXPECTED_COMPARATOR_OR_CERTIFICATE_TRUST
+            exit 1
+          fi
+          echo FORMAL_TRUST_BOUNDARY_PASS
+
+  package-release:
+    needs: [rebuild-and-corpus-audit, exact-evidence-regression, formal-regression]
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Assemble frozen publication release
+        run: |
+          set -euo pipefail
+          ROOT="Fortune_Standalone_Publication_Set_20260815"
+          mkdir -p "$ROOT/MANUSCRIPTS" "$ROOT/ASSURANCE"
+          cp -a publications/fortune-standalone-20260811/. "$ROOT/MANUSCRIPTS/"
+          cp fortune-standalone-rebuild/PROGRAMME.md "$ROOT/ASSURANCE/PROGRAMME.md"
+          cp fortune-standalone-rebuild/scripts/audit_standalone_corpus.py "$ROOT/ASSURANCE/audit_standalone_corpus.py"
+          cp fortune-formal/CLAIM_LEDGER.md "$ROOT/ASSURANCE/FORMAL_CLAIM_LEDGER.md"
+          cp fortune-formal/AXIOM_LEDGER.json "$ROOT/ASSURANCE/FORMAL_AXIOM_LEDGER.json"
+          if [ -f fortune-formal/cross-paper/AUDIT_REPORT_20260806.md ]; then
+            cp fortune-formal/cross-paper/AUDIT_REPORT_20260806.md "$ROOT/ASSURANCE/FORMAL_CROSS_PAPER_AUDIT.md"
+          fi
+          git rev-parse HEAD > "$ROOT/SOURCE_COMMIT.txt"
+          cat > "$ROOT/RELEASE_STATUS.txt" <<'EOF'
+          FORTUNE_STANDALONE_PAPERS_V1
+          RELEASE_PROTOCOL_DATE=2026-08-15
+          TERMINAL=STANDALONE_SET_RELEASE_GATE_PASS
+          FORTUNE=NOT_PROVED
+          INTEGER_MAINLINE=CLOSED
+          FUNCTION_FIELD_D1_CROWN=OPEN
+          PAPER_VII_MATHEMATICAL_STATUS=EXACT_COMPUTER_ASSISTED
+          PAPER_VII_LEAN_STATUS=DERIVED_WITH_LEDGERED_AXIOM
+          EOF
+          find "$ROOT" -type f -print0 | sort -z | xargs -0 sha256sum > "$ROOT/SHA256SUMS.txt"
+          zip -qr "${ROOT}.zip" "$ROOT"
+          tar -czf "${ROOT}.tar.gz" "$ROOT"
+          sha256sum "${ROOT}.zip" "${ROOT}.tar.gz" > "${ROOT}_ARCHIVE_SHA256SUMS.txt"
+          sha256sum -c "${ROOT}_ARCHIVE_SHA256SUMS.txt"
+          echo RELEASE_PACKAGE_PASS
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Fortune_Standalone_Publication_Set_20260815
+          path: |
+            Fortune_Standalone_Publication_Set_20260815.zip
+            Fortune_Standalone_Publication_Set_20260815.tar.gz
+            Fortune_Standalone_Publication_Set_20260815_ARCHIVE_SHA256SUMS.txt
+          if-no-files-found: error
+          retention-days: 30
