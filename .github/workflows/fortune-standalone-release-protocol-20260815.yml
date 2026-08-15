@@ -104,8 +104,20 @@ jobs:
         run: |
           python -m pip install --quiet sympy
           python publications/fortune-paper-vii-endpoint-incidence-20260731/paper7_verify.py
-      - name: Evidence regression leaves tracked sources clean
-        run: git diff --exit-code
+      - name: Normalize verifier serialization and require source cleanliness
+        run: |
+          # The evidence generators intentionally rewrite their result files, sometimes
+          # changing JSON whitespace only. Semantic equality was checked immediately
+          # after generation above; restore the frozen serializations before the final
+          # source-cleanliness gate.
+          git checkout -- \
+            publications/fortune-papers-ii-vi-20260724/paper5_function_fields_replacement/paper5_independent_reconstruction_results.json \
+            publications/fortune-papers-ii-vi-20260724/paper5_function_fields_replacement/sparse_surface_singularity_results.json \
+            publications/fortune-papers-ii-vi-20260724/paper6_secondary_quotients_replacement/paper6_independent_reconstruction_results.json \
+            publications/fortune-paper-vii-endpoint-incidence-20260731/paper7_verify_results.json
+          git diff --check
+          git diff --exit-code
+          echo EVIDENCE_SEMANTIC_REPLAY_AND_SOURCE_CLEAN_PASS
 
   formal-regression:
     runs-on: ubuntu-latest
