@@ -1,0 +1,106 @@
+name: Fortune standalone Paper VII
+
+on:
+  push:
+    branches:
+      - gpt56/fortune-standalone-papers-v1-20260811
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: fortune-standalone-paper7-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  rebuild-paper7:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Build continuous standalone Paper VII
+        run: |
+          python -m py_compile fortune-standalone-rebuild/scripts/build_paper7.py
+          python fortune-standalone-rebuild/scripts/build_paper7.py
+      - name: Standalone manuscript and trust-boundary audit
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import json, re
+          d = Path('publications/fortune-standalone-20260811/paper7_bilateral_endpoint_incidence')
+          out = (d/'manuscript.md').read_text()
+          manifest = json.loads((d/'SOURCE_MANIFEST.json').read_text())
+          status = (d/'CLAIM_STATUS.md').read_text()
+          referee = (d/'REFEREE_READ.md').read_text()
+          forbidden = ['Papers V','Paper V','Paper VI','Fortune programme','publication lineage','corrective sequel','six-paper sequence','BozzardPaperV','BozzardPaperVI']
+          assert not [x for x in forbidden if x in out]
+          labels = re.findall(r'^## (Theorem|Corollary|Lemma) ([0-9]+\.[0-9]+)', out, re.M)
+          assert len(labels) == 7, labels
+          assert manifest['statement_count'] == 7
+          assert manifest['logical_cross_paper_dependencies'] == 0
+          assert manifest['quadratic_mathematical_status'] == 'EXACT_COMPUTER_ASSISTED'
+          assert manifest['quadratic_lean_status'] == 'DERIVED_WITH_LEDGERED_AXIOM'
+          assert manifest['custom_axiom'] == 'FortuneFormal.p7_k2_certified_normalization'
+          assert 'not axiom-free' in out
+          assert 'single ledgered axiom `p7_k2_certified_normalization`' in out
+          assert 'six q-free chart power-lift identities' in status
+          assert 'PASS_WITH_EXPLICIT_FORMAL_TRUST_BOUNDARY' in referee
+          assert '# Appendix A. The quadratic four-equation system' in out
+          assert 'TODO' not in out and 'TBD' not in out
+          print(f'STANDALONE_PAPER7_AUDIT_PASS statements={len(labels)} bytes={len(out)}')
+          PY
+      - name: Re-run frozen Paper VII static verifier
+        run: |
+          python -m pip install --quiet sympy
+          python publications/fortune-paper-vii-endpoint-incidence-20260731/paper7_verify.py
+      - name: Diff hygiene
+        run: git diff --check
+      - name: Persist standalone Paper VII
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add publications/fortune-standalone-20260811/paper7_bilateral_endpoint_incidence
+          if git diff --cached --quiet; then
+            echo NO_GENERATED_CHANGES
+          else
+            git commit -m 'fortune standalone: rebuild Paper VII [skip ci]'
+            git push origin HEAD:gpt56/fortune-standalone-papers-v1-20260811
+          fi
+
+  formal-boundary:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    defaults:
+      run:
+        working-directory: fortune-formal
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Lean
+        run: |
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - name: Restore Mathlib cache
+        run: |
+          elan toolchain install $(cat lean-toolchain)
+          lake update
+          lake exe cache get
+      - name: Build Paper VII certificate and comparator layers
+        run: |
+          lake build FortuneFormal.Quadratic.CertificateBridge
+          lake build FortuneFormal.Comparator.P7Bridge
+          lake build FortuneFormal.Frontier.Assumptions
+      - name: Verify the one custom boundary remains explicit
+        run: |
+          grep -q '^axiom p7_k2_certified_normalization' FortuneFormal/Frontier/Assumptions.lean
+          grep -q 'This theorem is not axiom-free' FortuneFormal/Frontier/Assumptions.lean
+          if grep -R --line-number -E '^\s*(axiom|opaque) ' FortuneFormal/Comparator FortuneFormal/Quadratic/CertificateBridge.lean | grep -v '^$'; then
+            echo 'Unexpected comparator/certificate axiom'
+            exit 1
+          fi
+          echo PAPER7_FORMAL_BOUNDARY_EXPLICIT

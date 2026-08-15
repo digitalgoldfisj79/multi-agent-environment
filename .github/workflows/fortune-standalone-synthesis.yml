@@ -1,0 +1,67 @@
+name: Fortune standalone conditional synthesis
+
+on:
+  push:
+    branches:
+      - gpt56/fortune-standalone-papers-v1-20260811
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: fortune-standalone-synthesis-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  rebuild-synthesis:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Build standalone synthesis
+        run: |
+          python -m py_compile fortune-standalone-rebuild/scripts/build_synthesis.py
+          python fortune-standalone-rebuild/scripts/build_synthesis.py
+      - name: Standalone conditional-status audit
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import json, re
+          d=Path('publications/fortune-standalone-20260811/synthesis_conditional_and_barriers')
+          text=(d/'manuscript.md').read_text()
+          status=(d/'CLAIM_STATUS.md').read_text()
+          referee=(d/'REFEREE_READ.md').read_text()
+          m=json.loads((d/'SOURCE_MANIFEST.json').read_text())
+          forbidden=['RUHL','INT-AOD','INT-SCME','P7-CUBIC','Paper VII','seven-paper','programme','registered tuple','registered stratum']
+          assert not [x for x in forbidden if x in text]
+          assert re.findall(r'^### Theorem ([0-9]+\.[0-9]+)',text,re.M)==['3.1']
+          assert m['logical_cross_paper_dependencies']==0
+          assert m['fortune_proved'] is False
+          assert m['beta_certificate_assumptions']=={'epsilon':0.1,'U_over_L_max':1.1,'beta':5}
+          assert 'Selected-centre signed prime-tuple problem' in text
+          assert 'Fortune\'s conjecture remains open.' in text
+          assert 'D. R. Heath-Brown' in text and 'Hardy and J. E. Littlewood' in text
+          assert 'PASS_AS_CONDITIONAL_SYNTHESIS' in referee
+          assert 'beta=5 truncation certificate assumes epsilon=0.10 and U_b/L_b<=1.10' in status
+          assert 'TODO' not in text and 'TBD' not in text
+          print(f'STANDALONE_SYNTHESIS_AUDIT_PASS bytes={len(text)}')
+          PY
+      - name: Diff hygiene
+        run: git diff --check
+      - name: Persist standalone synthesis
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add publications/fortune-standalone-20260811/synthesis_conditional_and_barriers
+          if git diff --cached --quiet; then
+            echo NO_GENERATED_CHANGES
+          else
+            git commit -m 'fortune standalone: rebuild conditional synthesis [skip ci]'
+            git push origin HEAD:gpt56/fortune-standalone-papers-v1-20260811
+          fi

@@ -1,0 +1,28 @@
+{
+  "paper": "III",
+  "source_path": "publications/fortune-papers-ii-vi-20260724/paper3_pair_sum/manuscript.md",
+  "source_size_bytes": 30418,
+  "main_overstatement_detected": true,
+  "appendix_correct_form_detected": true,
+  "statement_count": 11,
+  "statement_sequence": [
+    "Lemma 2.1",
+    "Lemma 3.1",
+    "Theorem 3.2",
+    "Corollary 4.1",
+    "Lemma 5.1",
+    "Theorem 6.1",
+    "Proposition 7.1",
+    "Corollary 8.1",
+    "Lemma 9.1",
+    "Theorem 9.2",
+    "Proposition 10.1"
+  ],
+  "logical_cross_paper_dependencies": 0,
+  "appendix_duplicate_statements_retained": 0,
+  "fortune_proved": false,
+  "standalone_path": "publications/fortune-standalone-20260811/paper3_pair_sum_rigidity/manuscript.md",
+  "source_repair": "main Theorem 3.1 r(D)=1 -> Appendix A.3 r(D)<=1 off sliding family",
+  "deduplication": "Appendix A merged into main theorem sequence; no A-numbered duplicate statement retained",
+  "standalone_dependency_closure": "Exact fourth/centred second moment rederived locally; old Appendix dependency on Paper II removed"
+}

@@ -1,0 +1,29 @@
+{
+  "source_main": {
+    "Lemma 2.1": "Lemma 2.1",
+    "Theorem 3.1": "Theorem 3.2 (statement repaired: source main `otherwise r(D)=1`; frozen Appendix A.3 correctly has `r(D)<=1`)",
+    "unlabelled Section 4 energy decomposition": "Corollary 4.1",
+    "Lemma 5.1": "Lemma 5.1",
+    "Theorem 6.1": "Theorem 6.1",
+    "Corollary 8.1": "Corollary 8.1 (sampling measure defined locally)",
+    "Theorem 9.1": "Theorem 9.2",
+    "equation (10.1) covariance expansion": "Proposition 10.1"
+  },
+  "source_appendix_deduplicated": {
+    "Lemma A.1": "merged into Lemma 2.1",
+    "Lemma A.2": "promoted to Lemma 3.1",
+    "Theorem A.3": "authoritative detailed source for Theorem 3.2",
+    "Corollary A.4": "promoted to Corollary 4.1",
+    "Lemma A.6": "merged into Lemma 5.1 proof",
+    "Theorem A.7": "merged into Theorem 6.1 proof",
+    "Corollary A.10": "merged into Corollary 8.1",
+    "Remark A.9": "used for Section 7 evidence/proof explanation"
+  },
+  "new_local_bridge_statements": {
+    "Lemma 9.1": "candidate-collapse proof supplied locally so companion papers are not dependencies",
+    "Proposition 10.1": "labels the exact source covariance identity already present as equation (10.1) in the corrected source"
+  },
+  "standalone_dependency_closures": {
+    "source Appendix A.9 reference to Paper II Theorem 4.2": "Proposition 7.1, proved locally from Theorem 3.2"
+  }
+}

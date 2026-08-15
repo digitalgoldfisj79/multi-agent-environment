@@ -1,0 +1,72 @@
+name: Fortune standalone Papers I and IV
+
+on:
+  push:
+    branches:
+      - gpt56/fortune-standalone-papers-v1-20260811
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: fortune-standalone-paper1-paper4-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Build Paper I and Paper IV
+        run: |
+          python -m py_compile fortune-standalone-rebuild/scripts/build_paper1.py
+          python -m py_compile fortune-standalone-rebuild/scripts/build_paper4.py
+          python fortune-standalone-rebuild/scripts/build_paper1.py
+          python fortune-standalone-rebuild/scripts/build_paper4.py
+      - name: Standalone audit
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import json, re
+          cases = {
+              'I': ('paper1_collision_geometry', 25),
+              'IV': ('paper4_random_product_paths', 14),
+          }
+          for key,(dirname,count) in cases.items():
+              d=Path('publications/fortune-standalone-20260811')/dirname
+              text=(d/'manuscript.md').read_text()
+              m=json.loads((d/'SOURCE_MANIFEST.json').read_text())
+              labels=re.findall(r'^#{2,3} (Theorem|Proposition|Lemma|Corollary) ([0-9]+\.[0-9]+)', text, re.M)
+              assert len(labels)==count,(key,len(labels))
+              assert m['statement_count']==count
+              assert m['logical_cross_paper_dependencies']==0
+              assert m['fortune_proved'] is False
+              assert 'TODO' not in text and 'TBD' not in text
+          p1=(Path('publications/fortune-standalone-20260811/paper1_collision_geometry/manuscript.md').read_text())
+          assert 'No theorem in this paper supplies a prime-pair detector or proves Fortune\'s conjecture.' in p1
+          p4=(Path('publications/fortune-standalone-20260811/paper4_random_product_paths/manuscript.md').read_text())
+          assert 'Prime Detection Along Random' not in p4
+          assert 'No result from another manuscript is required for (2.3).' in p4
+          assert 'derandomisation of Theorem 2.1 would establish a deterministic model estimate, not by itself a prime-pair theorem' in p4
+          print('STANDALONE_PAPERS_I_IV_AUDIT_PASS')
+          PY
+      - name: Diff hygiene
+        run: git diff --check
+      - name: Persist outputs
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add publications/fortune-standalone-20260811/paper1_collision_geometry publications/fortune-standalone-20260811/paper4_random_product_paths
+          if git diff --cached --quiet; then
+            echo NO_GENERATED_CHANGES
+          else
+            git commit -m 'fortune standalone: rebuild Papers I and IV [skip ci]'
+            git push origin HEAD:gpt56/fortune-standalone-papers-v1-20260811
+          fi

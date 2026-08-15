@@ -1,0 +1,79 @@
+name: Fortune standalone corpus final
+
+on:
+  push:
+    branches:
+      - gpt56/fortune-standalone-papers-v1-20260811
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: fortune-standalone-corpus-final-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  corpus-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run final standalone corpus audit
+        run: python fortune-standalone-rebuild/scripts/audit_standalone_corpus.py
+      - name: Diff hygiene
+        run: git diff --check
+      - name: Persist corpus index and manifest
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add publications/fortune-standalone-20260811/README.md publications/fortune-standalone-20260811/CORPUS_MANIFEST.json
+          if git diff --cached --quiet; then
+            echo NO_CORPUS_INDEX_CHANGES
+          else
+            git commit -m 'fortune standalone: freeze audited corpus index [skip ci]'
+            git push origin HEAD:gpt56/fortune-standalone-papers-v1-20260811
+          fi
+
+  formal-regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    defaults:
+      run:
+        working-directory: fortune-formal
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Lean
+        run: |
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - name: Restore Mathlib cache
+        run: |
+          elan toolchain install $(cat lean-toolchain)
+          lake update
+          lake exe cache get
+      - name: Full formal package regression
+        run: lake build
+      - name: Recheck explicit Paper VII boundary
+        run: |
+          grep -q '^axiom p7_k2_certified_normalization' FortuneFormal/Frontier/Assumptions.lean
+          grep -q 'This theorem is not axiom-free' FortuneFormal/Frontier/Assumptions.lean
+          echo FINAL_FORMAL_BOUNDARY_PASS
+
+  paper7-static:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Re-run frozen Paper VII verifier
+        run: |
+          python -m pip install --quiet sympy
+          python publications/fortune-paper-vii-endpoint-incidence-20260731/paper7_verify.py

@@ -1,0 +1,15 @@
+{
+  "paper": "conditional-and-barriers synthesis",
+  "source_commit": "be42a5c80d2189df2f20c8055ee7107768cb7299",
+  "source_path": "publications/fortune-conditional-and-barriers-20260806/MANUSCRIPT.md",
+  "standalone": "publications/fortune-standalone-20260811/synthesis_conditional_and_barriers/manuscript.md",
+  "numbered_theorem_count": 1,
+  "logical_cross_paper_dependencies": 0,
+  "fortune_proved": false,
+  "primary_open_input": "jointly signed selected-centre prime-tuple estimate through Theta(log X)",
+  "beta_certificate_assumptions": {
+    "epsilon": 0.1,
+    "U_over_L_max": 1.1,
+    "beta": 5
+  }
+}

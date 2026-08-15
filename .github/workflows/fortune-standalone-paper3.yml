@@ -1,0 +1,83 @@
+name: Fortune standalone Paper III
+
+on:
+  push:
+    branches:
+      - gpt56/fortune-standalone-papers-v1-20260811
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: fortune-standalone-paper3-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  rebuild-paper3:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile and build
+        run: |
+          python -m py_compile fortune-standalone-rebuild/scripts/build_paper3.py
+          python -m py_compile fortune-standalone-rebuild/scripts/postprocess_paper3.py
+          python fortune-standalone-rebuild/scripts/build_paper3.py
+          python fortune-standalone-rebuild/scripts/postprocess_paper3.py
+      - name: Standalone theorem, dependency and source-repair audit
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import json, re
+          outdir = Path('publications/fortune-standalone-20260811/paper3_pair_sum_rigidity')
+          out = (outdir / 'manuscript.md').read_text()
+          status = (outdir / 'CLAIM_STATUS.md').read_text()
+          referee = (outdir / 'REFEREE_READ.md').read_text()
+          mapping = json.loads((outdir / 'STATEMENT_MAP.json').read_text())
+          manifest = json.loads((outdir / 'SOURCE_MANIFEST.json').read_text())
+          forbidden = ['Paper I', 'Paper II', 'Paper III', 'companion manuscript', 'first circulation', 'Correction notice', 'INT-ISC', 'RUHL-FM']
+          assert not [x for x in forbidden if x in out]
+          assert 'r(D)\\le1' in out
+          assert 'otherwise \\(r(D)=1\\)' not in out
+          assert manifest['main_overstatement_detected'] is True
+          assert manifest['appendix_correct_form_detected'] is True
+          assert manifest['appendix_duplicate_statements_retained'] == 0
+          assert manifest['logical_cross_paper_dependencies'] == 0
+          assert manifest['fortune_proved'] is False
+          assert 'source main `otherwise r(D)=1`' in mapping['source_main']['Theorem 3.1']
+          assert 'Proposition 7.1' in manifest['statement_sequence']
+          assert 'standalone_dependency_closures' in mapping
+          labels = re.findall(r'^\*\*(Lemma|Theorem|Corollary|Proposition) ([0-9]+\.[0-9]+)', out, re.M)
+          assert len(labels) == 11, labels
+          assert ('Theorem', '3.2') in labels
+          assert ('Proposition', '7.1') in labels
+          assert ('Theorem', '9.2') in labels
+          assert 'Hardy--Littlewood baseline (9.4)' in status
+          assert 'Fortune\'s conjecture.' in status
+          assert 'PASS_AFTER_TWO_SOURCE_REPAIRS' in referee
+          assert 'Fourth-moment dependency' in referee
+          assert 'delta_X' in out and 'epsilon_X' in out
+          assert '# 11. Computational validation and evidence boundary' in out
+          assert '# 12. Conclusion' in out
+          assert 'TODO' not in out and 'TBD' not in out
+          print(f'STANDALONE_PAPER3_AUDIT_PASS statements={len(labels)} bytes={len(out)}')
+          PY
+      - name: Diff hygiene
+        run: git diff --check
+      - name: Persist generated standalone Paper III
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add publications/fortune-standalone-20260811/paper3_pair_sum_rigidity
+          if git diff --cached --quiet; then
+            echo NO_GENERATED_CHANGES
+          else
+            git commit -m 'fortune standalone: rebuild Paper III after referee read [skip ci]'
+            git push origin HEAD:gpt56/fortune-standalone-papers-v1-20260811
+          fi
