@@ -1,0 +1,12 @@
+{
+  "status": "FINITE_ALGEBRA_AND_COMBINATORICS_PASS",
+  "role": "regression evidence only; not used in the asymptotic proof",
+  "panels": [
+    {"X":100,"modulus":211,"block_primes":21,"value_set_size":20,"selected_gap":2,"selected_gap_count":7,"max_nonidentity_line_multiplicity":2,"value_over_T_8_15":7.084529955943604,"value_over_sqrt_modulus":1.3768567816430286},
+    {"X":250,"modulus":503,"block_primes":42,"value_set_size":42,"selected_gap":6,"selected_gap_count":11,"max_nonidentity_line_multiplicity":2,"value_over_T_8_15":11.690682294761833,"value_over_sqrt_modulus":1.8726874406843812},
+    {"X":500,"modulus":1009,"block_primes":73,"value_set_size":72,"selected_gap":6,"selected_gap_count":20,"max_nonidentity_line_multiplicity":2,"value_over_T_8_15":14.569673920931644,"value_over_sqrt_modulus":2.2666627800740113},
+    {"X":1000,"modulus":2003,"block_primes":135,"value_set_size":132,"selected_gap":6,"selected_gap_count":35,"max_nonidentity_line_multiplicity":2,"value_over_T_8_15":19.818508816941616,"value_over_sqrt_modulus":2.9493985103137623},
+    {"X":2500,"modulus":5003,"block_primes":302,"value_set_size":290,"selected_gap":6,"selected_gap_count":67,"max_nonidentity_line_multiplicity":2,"value_over_T_8_15":30.795796168814004,"value_over_sqrt_modulus":4.099989518470633},
+    {"X":5000,"modulus":10007,"block_primes":560,"value_set_size":549,"selected_gap":6,"selected_gap_count":137,"max_nonidentity_line_multiplicity":2,"value_over_T_8_15":39.80962090665994,"value_over_sqrt_modulus":5.488079508199401}
+  ]
+}
