@@ -2,7 +2,7 @@
 
 ## Setup
 
-Let `X` be large. Write
+Let `X` be a sufficiently large integer. Write
 
 `q_1<...<q_N`
 
@@ -14,7 +14,7 @@ Let `varpi>2X` be prime and put
 
 `A=A_X(varpi)={P_j mod varpi:0<=j<=N} subset F_varpi^*`, `m=|A|`.
 
-All algebra below is in `F_varpi`.
+All algebra below is in `F_varpi`. Since `varpi>2X`, none of the prime factors occurring in any `P_j` is `varpi`, so every `P_j` is nonzero modulo `varpi`.
 
 ## Lemma 1 — fractional-linear recurrence
 
@@ -76,9 +76,11 @@ where `M(a,b)` counts common inputs whose two outputs lie in `A`.
 
 By Lemmas 2--3, diagonal pairs contribute at most `m^2`, while nonidentity pairs are bounded by twice the incidence count between `A x A` and the distinct lines `ell_{a,b,d}`. Enlarge the line set to exactly `m^2` nonvertical lines if necessary. This is possible because `m<=N+1<varpi`.
 
-If `m^3<=c_0 varpi^2`, the Stevens--de Zeeuw Cartesian-product incidence theorem in the form used by Hu gives
+We use the Cartesian-product incidence theorem of Stevens and de Zeeuw (arXiv:1609.06284, Theorem 4). With `|A|=|B|=m` and `n=m^2` lines, its size hypothesis `|A||B|^2<=n^3` becomes `m^3<=m^6` and is automatic. In characteristic `varpi`, its remaining hypothesis is `|A|n << varpi^2`, i.e. `m^3<<varpi^2`.
 
-`I(A x A,L) << m^(11/4)`.
+In that range,
+
+`I(A x A,L) << m^(3/4)m^(1/2)(m^2)^(3/4)+m^2 << m^(11/4)`.
 
 Hence
 
@@ -86,19 +88,27 @@ Hence
 
 so `m>>T^(8/15)`.
 
-If `m^3>c_0 varpi^2`, then `m>>varpi^(2/3)`. Since `T<=N< X<varpi`, this is stronger than `m>>T^(8/15)`. Thus the displayed bound holds in both cases.
+If the characteristic hypothesis fails, `m^3 >> varpi^2`, so `m>>varpi^(2/3)`. Since `T<=N<X<varpi`, this is stronger than `m>>T^(8/15)`. Thus the displayed bound holds in both cases.
 
 ## Lemma 5 — repeated short prime gap in every dyadic block
 
-For all sufficiently large `X`, there is an even integer `d` with `2<=d<=6 log X` for which
+For all sufficiently large integer `X`, there is an even integer `d` with `2<=d<=6 log X` for which
 
 `#{j:0<=j<=N-2, q_{j+2}-q_{j+1}=d} >> X/(log X)^2`.
 
-Proof. By the prime number theorem, for all sufficiently large `X`, `N-2 >= X/(3 log X)`. The sum of the `N-2` gaps `q_{j+2}-q_{j+1}` is at most `X`. Therefore at least half of them are at most `6 log X`; otherwise the sum would exceed `3(N-2)log X >= X`. All internal gaps are even. There are at most `3 log X` possible even values up to `6 log X`, so one value occurs at least `(N-2)/(6 log X) >> X/(log X)^2` times.
+Proof. There are exactly `N-1` internal consecutive-prime gaps `q_{i+1}-q_i`, `1<=i<=N-1`. By the prime number theorem, for all sufficiently large `X`,
+
+`N-1 >= X/(3 log X)`.
+
+Their sum is `q_N-q_1<X`. Therefore at least half of these `N-1` gaps are at most `6 log X`; otherwise their total contribution alone would exceed `3(N-1)log X>=X`. All internal gaps are even. There are at most `3 log X` possible even values up to `6 log X`, so one value occurs at least
+
+`(N-1)/(6 log X) >> X/(log X)^2`
+
+times. Re-indexing `i=j+1` gives the displayed form.
 
 ## Theorem 6 — primorial-prefix residue anti-concentration
 
-There are absolute constants `c>0` and `X_0` such that for every `X>=X_0` and every prime `varpi>2X`,
+There are absolute constants `c>0` and `X_0` such that for every integer `X>=X_0` and every prime `varpi>2X`,
 
 `|A_X(varpi)| >= c (X/(log X)^2)^(8/15)`.
 
@@ -106,7 +116,7 @@ Proof. Choose `d` by Lemma 5. Each occurrence of that gap gives a distinct trans
 
 ## Corollary 7 — beyond square root at a comparable prime modulus
 
-For every sufficiently large `X`, choose by Bertrand a prime `varpi` with `2X<varpi<4X`. Then
+For every sufficiently large integer `X`, Bertrand's postulate applied to `2X` gives a prime `varpi` with `2X<varpi<4X`. For such a modulus,
 
 `|A_X(varpi)| >> varpi^(8/15)/(log varpi)^(16/15)`.
 
@@ -119,9 +129,12 @@ Thus the increasing primorial-prefix path has a modular value set that exceeds t
 ## Epistemic status
 
 - Lemmas 1--3: elementary exact algebra.
-- Proposition 4: conditional only on the published Stevens--de Zeeuw incidence theorem, used in exactly the same parameter regime as Hu's arXiv:2608.01781 proof.
-- Lemma 5: unconditional consequence of PNT plus telescoping.
-- Theorem 6 / Corollary 7: proof-complete modulo line-by-line verification of the quoted Stevens--de Zeeuw hypothesis form.
-- Novelty: not certified. Current cold search found adjacent polynomial-product and factorial value-set literature, but no primorial-prefix theorem of this form.
+- Proposition 4: unconditional application of the published Stevens--de Zeeuw Cartesian-product incidence theorem; its hypotheses have been checked explicitly above.
+- Lemma 5: unconditional consequence of the prime number theorem plus telescoping.
+- Theorem 6 / Corollary 7: proof-complete relative only to standard published results (PNT, Bertrand, Stevens--de Zeeuw).
+- Finite computations are regression evidence only and are not used in the proof.
+- Novelty: not certified. A cold search found adjacent factorial and fixed-polynomial-product value-set literature, but no theorem for cumulative products of consecutive primes of this form. Human specialist priority review remains required.
+
+The method is an adaptation of Xiyu Hu's fractional-linear/incidence mechanism for factorial residues (arXiv:2608.01781). Any publication should state that provenance prominently.
 
 This result has no direct implication for Fortune's conjecture or the selected-centre prime-pair variance frontier.
