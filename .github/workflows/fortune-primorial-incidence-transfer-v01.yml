@@ -1,0 +1,46 @@
+name: Fortune primorial incidence transfer v0.1
+
+on:
+  push:
+    branches:
+      - gpt56/fortune-primorial-incidence-transfer-v01-20260827
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: fortune-primorial-incidence-transfer-v01-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  finite-verification:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile verifier
+        run: python -m py_compile fortune-primorial-incidence-transfer-v01/verify_transfer.py
+      - name: Run exact finite panels
+        run: python fortune-primorial-incidence-transfer-v01/verify_transfer.py | tee /tmp/transfer.json
+      - name: Verify terminal marker
+        run: grep -q 'FINITE_ALGEBRA_AND_COMBINATORICS_PASS' /tmp/transfer.json
+      - name: Diff hygiene
+        run: git diff --check
+
+  proof-static-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check frozen proof architecture
+        run: |
+          grep -q 'P_{j+2}=g_j P_{j+1}+P_{j+1}^2/P_j' fortune-primorial-incidence-transfer-v01/THEOREM_DRAFT.md
+          grep -q 'at most two representations' fortune-primorial-incidence-transfer-v01/THEOREM_DRAFT.md
+          grep -q 'm>>T^(8/15)' fortune-primorial-incidence-transfer-v01/THEOREM_DRAFT.md
+          grep -q 'X/(log X)^2' fortune-primorial-incidence-transfer-v01/THEOREM_DRAFT.md
+          grep -q 'no direct implication for Fortune' fortune-primorial-incidence-transfer-v01/THEOREM_DRAFT.md
+          echo PROOF_ARCHITECTURE_PASS
