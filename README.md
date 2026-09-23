@@ -49,4 +49,6 @@ A zero-dependency (stdlib only) harness lives in `harness/`, with unit tests in 
 
 In the UI you can pick a scenario, set the steps and seed, scrub or play the trajectory on the grid, inspect each agent's state at every step, see check results and tracebacks, and run the unit test suite.
 
+`harness/standalone.html` is a single-file version that needs no Python or server: open it in a browser. It runs a JavaScript port of the environment, scenarios and tests, so edits to the Python code are not reflected there. Deterministic scenarios match Python step for step; `random_walk` uses a different RNG.
+
 To add a scenario, decorate a builder in `harness/scenarios.py` with `@scenario(...)`. The builder returns `(env, checks)`, and each check takes the recorded trace and returns `(passed, detail)`.
