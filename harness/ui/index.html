@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agent Test Harness</title>
+<style>
+  :root {
+    --bg: #f6f7f9; --panel: #ffffff; --text: #1b1f24; --muted: #5f6b7a;
+    --border: #d9dee5; --accent: #2f6fdf; --pass: #1f8a4c; --fail: #c83a3a;
+    --grid: #e8ebf0;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #111418; --panel: #1a1f25; --text: #e6e9ed; --muted: #97a1ad;
+      --border: #2c333c; --accent: #6b9cff; --pass: #4cc38a; --fail: #ff6b6b; --grid: #232a32; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+    font: 14px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  header { padding: 14px 16px; border-bottom: 1px solid var(--border); display: flex;
+    gap: 12px; align-items: center; flex-wrap: wrap; }
+  header h1 { font-size: 17px; margin: 0; margin-right: auto; }
+  main { display: grid; grid-template-columns: 260px 1fr 340px; gap: 16px; padding: 16px; }
+  @media (max-width: 1000px) { main { grid-template-columns: 1fr; } }
+  section { background: var(--panel); border: 1px solid var(--border); border-radius: 8px;
+    padding: 14px; min-width: 0; }
+  h2 { font-size: 13px; text-transform: uppercase; letter-spacing: .04em; color: var(--muted);
+    margin: 0 0 10px; }
+  button, input { font: inherit; color: inherit; }
+  button { background: var(--accent); color: #fff; border: 0; border-radius: 6px;
+    padding: 6px 12px; cursor: pointer; }
+  button.ghost { background: transparent; color: var(--text); border: 1px solid var(--border); }
+  button:disabled { opacity: .5; cursor: default; }
+  input[type=number] { width: 72px; padding: 5px 6px; background: var(--bg);
+    border: 1px solid var(--border); border-radius: 6px; }
+  .scn { padding: 8px 10px; border-radius: 6px; cursor: pointer; border: 1px solid transparent; }
+  .scn:hover { background: var(--bg); }
+  .scn.active { border-color: var(--accent); }
+  .scn .d { color: var(--muted); font-size: 12px; }
+  .badge { font-size: 11px; font-weight: 600; padding: 1px 6px; border-radius: 10px; margin-left: 6px; }
+  .pass { color: var(--pass); } .fail { color: var(--fail); }
+  .badge.pass { background: color-mix(in srgb, var(--pass) 15%, transparent); }
+  .badge.fail { background: color-mix(in srgb, var(--fail) 15%, transparent); }
+  .controls { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-bottom: 12px; }
+  .controls label { color: var(--muted); font-size: 12px; }
+  #timeline { width: 100%; margin: 10px 0 4px; }
+  svg { width: 100%; height: auto; max-height: 440px; display: block; background: var(--bg); border-radius: 6px; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  #tests td:nth-child(2) { word-break: break-word; }
+  #tests td:last-child { white-space: nowrap; }
+  td, th { text-align: left; padding: 4px 6px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  th { color: var(--muted); font-weight: 500; }
+  pre { white-space: pre-wrap; word-break: break-word; font-size: 12px; background: var(--bg);
+    padding: 8px; border-radius: 6px; max-height: 240px; overflow: auto; }
+  .muted { color: var(--muted); }
+  .stack > * + * { margin-top: 16px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Multi-Agent Test Harness</h1>
+  <button id="runAll" class="ghost">Run all scenarios</button>
+  <button id="runTests">Run unit tests</button>
+</header>
+<main>
+  <section>
+    <h2>Scenarios</h2>
+    <div id="scenarios"></div>
+  </section>
+
+  <section>
+    <div class="controls">
+      <strong id="title">Select a scenario</strong>
+      <span style="margin-left:auto"></span>
+      <label>steps <input id="steps" type="number" min="0" max="1000"></label>
+      <label>seed <input id="seed" type="number" value="0"></label>
+      <button id="run" disabled>Run</button>
+    </div>
+    <svg id="grid" viewBox="0 0 400 300"></svg>
+    <input id="timeline" type="range" min="0" max="0" value="0" disabled>
+    <div class="controls">
+      <button id="play" class="ghost" disabled>Play</button>
+      <span id="stepLabel" class="muted">step –</span>
+    </div>
+    <h2>Agents at this step</h2>
+    <table><thead><tr><th>Name</th><th>Type</th><th>Position</th><th>State</th></tr></thead>
+      <tbody id="agents"></tbody></table>
+  </section>
+
+  <div class="stack">
+    <section>
+      <h2>Checks</h2>
+      <div id="checks" class="muted">No run yet.</div>
+    </section>
+    <section>
+      <h2>Unit tests</h2>
+      <div id="tests" class="muted">Not run.</div>
+    </section>
+  </div>
+</main>
+
+<script>
+const $ = (id) => document.getElementById(id);
+const COLORS = ["#2f6fdf", "#e0823d", "#1f8a4c", "#b04fc7", "#c83a3a", "#2aa3a3"];
+let scenarios = [], current = null, trace = null, timer = null;
+const lastResult = {};
+
+const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+async function api(path, body) {
+  const res = await fetch(path, body === undefined ? {} :
+    {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(body)});
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.error || res.statusText);
+  return data;
+}
+
+function renderScenarioList() {
+  $("scenarios").innerHTML = scenarios.map((s) => {
+    const r = lastResult[s.name];
+    const badge = r === undefined ? "" :
+      `<span class="badge ${r ? "pass" : "fail"}">${r ? "PASS" : "FAIL"}</span>`;
+    return `<div class="scn ${current === s.name ? "active" : ""}" data-name="${esc(s.name)}">
+      <div><strong>${esc(s.name)}</strong>${badge}</div><div class="d">${esc(s.description)}</div></div>`;
+  }).join("");
+  document.querySelectorAll(".scn").forEach((el) => el.onclick = () => select(el.dataset.name));
+}
+
+function select(name) {
+  current = name;
+  const s = scenarios.find((x) => x.name === name);
+  $("title").textContent = name;
+  $("steps").value = s.default_steps;
+  $("run").disabled = false;
+  renderScenarioList();
+  run();
+}
+
+async function run() {
+  stop();
+  $("run").disabled = true;
+  try {
+    trace = await api("/api/run", {scenario: current, steps: $("steps").value, seed: +$("seed").value});
+    lastResult[current] = trace.passed;
+    renderScenarioList();
+    renderChecks();
+    $("timeline").max = trace.frames.length - 1;
+    $("timeline").value = trace.frames.length - 1;
+    $("timeline").disabled = $("play").disabled = false;
+    drawFrame(trace.frames.length - 1);
+  } catch (e) {
+    $("checks").innerHTML = `<span class="fail">${esc(e.message)}</span>`;
+  } finally {
+    $("run").disabled = false;
+  }
+}
+
+function renderChecks() {
+  let html = `<p><strong class="${trace.passed ? "pass" : "fail"}">${trace.passed ? "PASSED" : "FAILED"}</strong>
+    <span class="muted"> · ${trace.frames.length - 1} of ${trace.steps} steps · seed ${trace.seed}</span></p>
+    <table>` + trace.checks.map((c) =>
+    `<tr><td class="${c.passed ? "pass" : "fail"}">${c.passed ? "✓" : "✗"}</td>
+     <td><strong>${esc(c.name)}</strong><div class="muted">${esc(c.detail)}</div></td></tr>`).join("") + "</table>";
+  if (trace.error) html += `<h2 style="margin-top:12px">Run error</h2><pre>${esc(trace.traceback || trace.error)}</pre>`;
+  $("checks").innerHTML = html;
+}
+
+function drawFrame(i) {
+  const frames = trace.frames, frame = frames[i];
+  const names = frames[0].agents.map((a) => a.name);
+  let xs = [], ys = [];
+  frames.forEach((f) => f.agents.forEach((a) => { xs.push(a.position[0]); ys.push(a.position[1]); }));
+  const minX = Math.min(...xs) - 1, maxX = Math.max(...xs) + 1;
+  const minY = Math.min(...ys) - 1, maxY = Math.max(...ys) + 1;
+  const W = 400, cols = maxX - minX + 1, rows = maxY - minY + 1;
+  const cell = Math.min(W / cols, 40), H = Math.max(rows * cell, 120);
+  const px = (x) => (x - minX + 0.5) * cell, py = (y) => (y - minY + 0.5) * cell;
+  const svg = $("grid");
+  svg.setAttribute("viewBox", `0 0 ${cols * cell} ${H}`);
+  let out = "";
+  for (let c = 0; c <= cols; c++) out += `<line x1="${c*cell}" y1="0" x2="${c*cell}" y2="${rows*cell}" stroke="var(--grid)"/>`;
+  for (let r = 0; r <= rows; r++) out += `<line x1="0" y1="${r*cell}" x2="${cols*cell}" y2="${r*cell}" stroke="var(--grid)"/>`;
+  names.forEach((name, k) => {
+    const color = COLORS[k % COLORS.length];
+    const pts = frames.slice(0, i + 1).map((f) => f.agents.find((a) => a.name === name))
+      .filter(Boolean).map((a) => `${px(a.position[0])},${py(a.position[1])}`).join(" ");
+    out += `<polyline points="${pts}" fill="none" stroke="${color}" stroke-opacity=".45" stroke-width="2"/>`;
+  });
+  frame.agents.forEach((a) => {
+    const k = names.indexOf(a.name), color = COLORS[k % COLORS.length];
+    out += `<circle cx="${px(a.position[0])}" cy="${py(a.position[1])}" r="${Math.min(cell * 0.3, 10)}" fill="${color}"/>
+      <text x="${px(a.position[0])}" y="${py(a.position[1]) - Math.min(cell * 0.3, 10) - 4}" font-size="${Math.min(12, Math.max(8, cell * 0.3))}"
+        text-anchor="middle" fill="var(--text)">${esc(a.name)}</text>`;
+  });
+  svg.innerHTML = out;
+  $("stepLabel").textContent = `step ${frame.step} / ${frames[frames.length - 1].step}` +
+    (trace.error && i === frames.length - 1 ? " — run stopped by error" : "");
+  $("agents").innerHTML = frame.agents.map((a, k) =>
+    `<tr><td style="color:${COLORS[names.indexOf(a.name) % COLORS.length]}"><strong>${esc(a.name)}</strong></td>
+     <td>${esc(a.type)}</td><td>(${a.position.join(", ")})</td><td><code>${esc(JSON.stringify(a.state))}</code></td></tr>`).join("");
+}
+
+function stop() { clearInterval(timer); timer = null; $("play").textContent = "Play"; }
+
+$("play").onclick = () => {
+  if (timer) return stop();
+  const tl = $("timeline");
+  if (+tl.value >= +tl.max) tl.value = 0;
+  $("play").textContent = "Pause";
+  drawFrame(+tl.value);
+  timer = setInterval(() => {
+    if (+tl.value >= +tl.max) return stop();
+    tl.value = +tl.value + 1;
+    drawFrame(+tl.value);
+  }, 250);
+};
+$("timeline").oninput = (e) => { stop(); drawFrame(+e.target.value); };
+$("run").onclick = run;
+
+$("runAll").onclick = async () => {
+  $("runAll").disabled = true;
+  try {
+    const all = await api("/api/run_all", {seed: +$("seed").value});
+    all.forEach((t) => lastResult[t.scenario] = t.passed);
+    renderScenarioList();
+  } finally { $("runAll").disabled = false; }
+};
+
+$("runTests").onclick = async () => {
+  $("runTests").disabled = true;
+  $("tests").textContent = "Running…";
+  try {
+    const r = await api("/api/tests", {});
+    const failed = r.tests.filter((t) => t.status === "fail" || t.status === "error");
+    $("tests").innerHTML = `<p><strong class="${r.passed ? "pass" : "fail"}">${r.ran - failed.length}/${r.ran} passed</strong></p>
+      <table>` + r.tests.map((t) =>
+      `<tr><td class="${t.status === "pass" ? "pass" : t.status === "skip" ? "muted" : "fail"}">${t.status}</td>
+       <td>${esc(t.id.replace(/^tests\./, ""))}${t.detail ? `<pre>${esc(t.detail)}</pre>` : ""}</td>
+       <td class="muted">${t.ms}ms</td></tr>`).join("") + "</table>";
+  } catch (e) {
+    $("tests").innerHTML = `<span class="fail">${esc(e.message)}</span>`;
+  } finally { $("runTests").disabled = false; }
+};
+
+api("/api/scenarios").then((s) => { scenarios = s; renderScenarioList(); if (s.length) select(s[0].name); });
+</script>
+</body>
+</html>

@@ -8,6 +8,10 @@ class Agent:
         # Implement the logic for the agent to take an action
         pass
 
+    def update(self):
+        # Called once per environment tick; subclasses override to act
+        pass
+
     def update_state(self, new_state):
         self.state.update(new_state)
 

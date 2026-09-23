@@ -37,3 +37,16 @@ We welcome contributions to the project! To contribute, please follow these step
 5. Create a pull request to the main repository.
 
 Please ensure that your code follows the project's coding standards and includes appropriate tests.
+
+## Test Harness
+
+A zero-dependency (stdlib only) harness lives in `harness/`, with unit tests in `tests/`.
+
+- `python -m unittest discover -s tests -t .` runs the unit tests
+- `python -m harness` runs every scenario and prints each check (the exit code is non-zero on failure)
+- `python -m harness run chase --steps 5 --seed 1` runs a single scenario
+- `python -m harness serve --port 8000` starts the web UI at http://127.0.0.1:8000
+
+In the UI you can pick a scenario, set the steps and seed, scrub or play the trajectory on the grid, inspect each agent's state at every step, see check results and tracebacks, and run the unit test suite.
+
+To add a scenario, decorate a builder in `harness/scenarios.py` with `@scenario(...)`. The builder returns `(env, checks)`, and each check takes the recorded trace and returns `(passed, detail)`.
