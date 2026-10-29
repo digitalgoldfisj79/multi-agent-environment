@@ -22,6 +22,34 @@ Why a runbook in the middle instead of "video in, clicks out":
 - **Secrets stay out.** Passwords seen in a demo are never transcribed; the agent types
   them through a `type_secret` tool whose value it never sees.
 
+## Install
+
+Needs Python 3.10+ and `ffmpeg` on PATH.
+
+```bash
+pip install "video2cua-0.1.0-py3-none-any.whl[openai]"   # GPT-6.1 Terra (default backend)
+pip install "video2cua-0.1.0-py3-none-any.whl[claude]"   # Claude on Foundry
+pip install "video2cua-0.1.0-py3-none-any.whl[all]"      # both
+playwright install chromium                              # browser for `video2cua run`
+video2cua --help
+```
+
+From a checkout: `pip install -e ".[dev]"` then `pytest`.
+
+### Container (Azure Container Apps job / AKS)
+
+```bash
+docker build -t video2cua:0.1.0 .
+# or from a base image mirrored into your registry:
+docker build --build-arg BASE_IMAGE=myacr.azurecr.io/python:3.12-slim -t video2cua:0.1.0 .
+docker run --rm -v "$PWD/data:/data" -e AZURE_OPENAI_ENDPOINT -e AZURE_OPENAI_API_KEY \
+    video2cua:0.1.0 analyze /data/demo.mp4 --work /data/work/demo
+```
+
+The image includes ffmpeg and Chromium, runs as a non-root user, and uses `/data` as its
+working directory. In Azure, mount an Azure Files share at `/data` and give the job a
+managed identity instead of passing keys.
+
 ## What runs where in Azure
 
 | Piece | Default (`--backend openai`) | `--backend claude` |
@@ -65,14 +93,14 @@ For the Claude backend, deploy `claude-opus-5-5`, `claude-opus-5` and `claude-op
 
 ```bash
 # 1-3: recording -> runbook (resumable: each stage writes a checkpoint in --work)
-python -m video2cua.cli analyze demo.mp4 --work work/demo --vtt demo.vtt \
+video2cua analyze demo.mp4 --work work/demo --vtt demo.vtt \
     --notes "SAP Fiori invoice approval, EU tenant"
 
 # review work/demo/runbook.md; fix runbook.json if needed; then set "_meta": {"approved": true}
 
 # 4: follow it in a sandboxed browser (asks you before any requires_confirmation step
 #    and before acknowledging any Terra safety check)
-python -m video2cua.cli run work/demo/runbook.json --param invoice_id=INV-1234 \
+video2cua run work/demo/runbook.json --param invoice_id=INV-1234 \
     --start-url https://app.example.internal --chromium /path/to/chrome
 ```
 

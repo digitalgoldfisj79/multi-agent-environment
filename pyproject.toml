@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "video2cua"
+version = "0.1.0"
+description = "Turn MP4 screen recordings into reviewed runbooks for a computer-use agent on Microsoft Foundry (GPT-6.1 Terra or Claude)."
+readme = "video2cua/README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "pillow>=10",
+    "playwright>=1.40",
+]
+
+[project.optional-dependencies]
+# GPT-6.1 Terra on Foundry (default backend)
+openai = ["openai>=3.41.0", "azure-identity>=1.15"]
+# Claude on Foundry (--backend claude)
+claude = ["anthropic>=2.3.0", "azure-identity>=1.15"]
+all = ["video2cua[openai,claude]"]
+dev = ["video2cua[all]", "pytest>=8"]
+
+[project.scripts]
+video2cua = "video2cua.cli:main"
+
+[tool.setuptools]
+packages = ["video2cua"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

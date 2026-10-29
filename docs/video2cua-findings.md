@@ -43,6 +43,15 @@
 | SDK request shape: agent = `computer_20251124`, betas `computer-use-2025-11-24,context-management-2025-06-27` (+ middleware adds `fallback-credit-2026-07-01`) | built OK |
 | 1080p synthetic recording, 6.5 s, 13 sampled frames | 5 kept: t = 0.0, 3.5, 5.0, 5.5, 6.0 |
 
+## Packaging (2026-10-29)
+
+| Check | Result |
+|---|---|
+| `python -m build` | `video2cua-0.1.0-py3-none-any.whl` and `video2cua-0.1.0.tar.gz` built |
+| Fresh venv, wheel with `[openai]` only | installs without `anthropic`; `video2cua --help` and `analyze --extract-only` work; all modules import |
+| Docker image, full Dockerfile | **not built here**: Docker Hub rate-limited (429) and deb.debian.org is blocked by this session's network policy |
+| Docker image, variant without apt/ffmpeg and without the browser download | builds; entrypoint prints help; runs as `v2c` in `/data`; `openai` and `anthropic` import |
+
 ## Open uncertainties (not yet tested against a live Foundry resource)
 
 1. Whether Foundry accepts the `fallback-credit-2026-07-01` header the middleware adds. If not, every call 400s → set `V2C_FALLBACK_DEPLOYMENT=""`.
@@ -53,3 +62,4 @@
 6. Terra: whether computer use on Azure needs an access request (the older `computer-use-preview` did), and whether `previous_response_id` + `truncation="auto"` is the recommended loop for the GA tool — not read from docs.
 7. Terra: how its key names look in `keypress` (e.g. `CTRL` vs `Control`); the translator lower-cases and maps common names, but unusual names may fail.
 8. Terra: image count / payload limits per Responses request for synthesis (60 high-detail frames) — unknown.
+9. Docker: the ffmpeg apt step and `playwright install --with-deps chromium` were not exercised in a build; first real build should be watched.

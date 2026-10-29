@@ -11,10 +11,8 @@ import io
 import json
 from pathlib import Path
 
-from anthropic import BetaFallbackState
 from PIL import Image
 
-from . import azure_openai, foundry
 from .checkpoint import read_json, write_json
 from .runbook import RUNBOOK_SCHEMA, to_markdown, validate
 
@@ -100,6 +98,8 @@ def to_responses_content(blocks: list[dict]) -> list[dict]:
 
 
 def _call_openai(client, content: list[dict]) -> tuple[dict, dict]:
+    from . import azure_openai
+
     resp = client.responses.create(
         model=azure_openai.SYNTH_DEPLOYMENT,
         instructions=SYSTEM,
@@ -119,6 +119,10 @@ def _call_openai(client, content: list[dict]) -> tuple[dict, dict]:
 
 
 def _call_claude(client, content: list[dict]) -> tuple[dict, dict]:
+    from anthropic import BetaFallbackState
+
+    from . import foundry
+
     with BetaFallbackState():
         with client.beta.messages.stream(
             model=foundry.SYNTH_DEPLOYMENT,
@@ -144,8 +148,12 @@ def synthesize(work: Path, manifest: dict, transcript: dict, notes: str = "",
 
     content = build_content(work, manifest, transcript, notes)
     if backend == "openai":
+        from . import azure_openai
+
         rb, meta = _call_openai(client or azure_openai.make_client(), content)
     elif backend == "claude":
+        from . import foundry
+
         rb, meta = _call_claude(client or foundry.make_client(), content)
     else:
         raise ValueError(f"unknown backend {backend!r}")

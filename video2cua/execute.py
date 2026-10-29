@@ -12,9 +12,6 @@ import time
 from pathlib import Path
 from typing import Callable
 
-from anthropic import BetaFallbackState
-
-from . import foundry
 from .computer import Computer, ToolError
 from .runbook import unresolved_params
 
@@ -179,6 +176,10 @@ def run(rb: dict, values: dict, computer: Computer, log_dir: Path, client=None,
         confirm: Callable[[int, str], tuple[bool, str]] = terminal_confirm,
         max_turns: int = 80, require_approved: bool = True) -> dict:
     """Claude on Foundry with the beta computer_20251124 tool."""
+    from anthropic import BetaFallbackState
+
+    from . import foundry
+
     session = Session(rb, values, computer, log_dir, confirm, require_approved)
     client = client or foundry.make_client()
     tools = [{

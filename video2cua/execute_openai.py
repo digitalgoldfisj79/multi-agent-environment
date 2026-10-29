@@ -11,7 +11,6 @@ import json
 from pathlib import Path
 from typing import Callable
 
-from . import azure_openai
 from .computer import Computer, ToolError
 from .execute import CUSTOM_TOOLS, SYSTEM, TOOL_ERRORS, Session, render_runbook, terminal_confirm
 
@@ -74,6 +73,8 @@ def _dump(obj) -> dict:
 def run_openai(rb: dict, values: dict, computer: Computer, log_dir: Path, client=None,
                confirm: Callable[[int, str], tuple[bool, str]] = terminal_confirm,
                max_turns: int = 80, require_approved: bool = True) -> dict:
+    from . import azure_openai
+
     session = Session(rb, values, computer, log_dir, confirm, require_approved)
     client = client or azure_openai.make_client()
     first = computer.screenshot_png()
