@@ -37,3 +37,9 @@ We welcome contributions to the project! To contribute, please follow these step
 5. Create a pull request to the main repository.
 
 Please ensure that your code follows the project's coding standards and includes appropriate tests.
+
+## video2cua
+
+`video2cua/` turns MP4 screen recordings of colleagues doing a task into reviewed runbooks
+that a Claude computer-use agent on Microsoft Foundry can follow. See
+[`video2cua/README.md`](video2cua/README.md).

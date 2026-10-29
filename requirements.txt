@@ -1,0 +1,6 @@
+anthropic>=2.3.0
+azure-identity
+openai
+playwright
+pillow
+pytest
