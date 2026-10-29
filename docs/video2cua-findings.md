@@ -21,11 +21,24 @@
 | Azure Content Understanding video analyzer GA API `2025-11-01` | web search snippet | **unverified** |
 | `computer_20251124` action names/params | Anthropic computer-use-demo `tools/computer.py` | verified (reference code) |
 
+## GPT-6.1 Terra backend (added 2026-10-29)
+
+| Fact | Source | Status |
+|---|---|---|
+| GPT-6.1 Terra released 2026-10-26; API id `gpt-6.1-terra` | press coverage (InfoWorld, BleepingComputer) via search | verified (secondary sources) |
+| GA in Foundry catalog; input text + image (no video); 1050k context, 128k output | ai.azure.com catalog via search snippet | snippet only — catalog page not fetched |
+| Computer tool is `{"type": "computer"}` (no display size); `computer_call` carries `actions` (batched) or legacy `action`; reply `computer_call_output` with `computer_screenshot`; `pending_safety_checks` → `acknowledged_safety_checks` | `openai` 3.41.0 SDK type definitions | verified (SDK types) |
+| `gpt-6.1-terra` is in the SDK's model list | `openai` 3.41.0 `ChatModel` | verified |
+| Azure v1 URL `https://<res>.openai.azure.com/openai/v1/`; key sent as Bearer | SDK request capture (mock transport); Azure accepting it is **unverified** | partly verified |
+| Entra scope `https://cognitiveservices.azure.com/.default` | memory | **unverified** |
+| developers.openai.com, techcommunity.microsoft.com, learn.microsoft.com | blocked in this session | not read |
+
 ## Test results (offline, 2026-10-29)
 
 | Test | Result |
 |---|---|
-| Full suite `pytest tests/` | 14 passed |
+| Full suite `pytest tests/` (after Terra backend) | 20 passed |
+| SDK request shape, Terra: both calls POST `/openai/v1/responses`; agent tools = `computer` + 4 strict functions | built OK |
 | SDK request shape (mock transport): synthesis = beta stream, `output_config.format` json_schema, `claude-opus-5-5` | built OK |
 | SDK request shape: agent = `computer_20251124`, betas `computer-use-2025-11-24,context-management-2025-06-27` (+ middleware adds `fallback-credit-2026-07-01`) | built OK |
 | 1080p synthetic recording, 6.5 s, 13 sampled frames | 5 kept: t = 0.0, 3.5, 5.0, 5.5, 6.0 |
@@ -37,3 +50,6 @@
 3. Real-world frame selection: only synthetic video tested. Real screen recordings (video compression, animations, cursor blink, smooth scrolling) may keep too many or too few frames.
 4. Runbook quality from real recordings: not measured. Needs an eval set of recorded tasks with hand-written reference runbooks.
 5. Whisper `api_version` default `2024-06-01` and endpoint format: from memory, unverified.
+6. Terra: whether computer use on Azure needs an access request (the older `computer-use-preview` did), and whether `previous_response_id` + `truncation="auto"` is the recommended loop for the GA tool — not read from docs.
+7. Terra: how its key names look in `keypress` (e.g. `CTRL` vs `Control`); the translator lower-cases and maps common names, but unusual names may fail.
+8. Terra: image count / payload limits per Responses request for synthesis (60 high-detail frames) — unknown.

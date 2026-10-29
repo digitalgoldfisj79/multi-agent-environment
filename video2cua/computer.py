@@ -1,7 +1,9 @@
 """Executors for the computer_20251124 tool's actions.
 
 The model only proposes actions; something has to perform them. Computer is the
-interface the agent loop calls. PlaywrightComputer drives a Chromium page whose
+interface the agent loops call. Its action vocabulary is the Claude
+computer_20251124 one plus two extras (wheel, drag_path) that the OpenAI
+computer tool's pixel scrolls and multi-point drags need. PlaywrightComputer drives a Chromium page whose
 viewport is the "screen", which covers browser-based line-of-business apps. For
 desktop apps, implement Computer over xdotool in a Linux VM (Anthropic's
 reference computer-use-demo does this) or over a Windows VM's input API.
@@ -47,7 +49,7 @@ class Computer(ABC):
             raise ToolError(f"unsupported action {action!r}")
         for key in ("coordinate", "start_coordinate"):
             if key in params:
-                self._check_xy(params[key])
+                self.check_xy(params[key])
         if action == "zoom":
             region = params.get("region")
             if not (isinstance(region, (list, tuple)) and len(region) == 4
@@ -60,7 +62,7 @@ class Computer(ABC):
         blocks.append(self.image_block(self.screenshot_png()))
         return blocks
 
-    def _check_xy(self, xy) -> None:
+    def check_xy(self, xy) -> None:
         if not (isinstance(xy, (list, tuple)) and len(xy) == 2):
             raise ToolError(f"coordinate must be [x, y], got {xy!r}")
         x, y = xy
@@ -82,6 +84,8 @@ _KEYMAP = {
     "up": "ArrowUp", "down": "ArrowDown", "left": "ArrowLeft", "right": "ArrowRight",
     "page_up": "PageUp", "prior": "PageUp", "page_down": "PageDown", "next": "PageDown",
     "home": "Home", "end": "End", "insert": "Insert",
+    "arrowup": "ArrowUp", "arrowdown": "ArrowDown", "arrowleft": "ArrowLeft", "arrowright": "ArrowRight",
+    "pageup": "PageUp", "pagedown": "PageDown", "option": "Alt", "del": "Delete",
 }
 
 
@@ -140,7 +144,7 @@ class PlaywrightComputer(Computer):
 
     def perform(self, action: str, p: dict) -> str | None:
         m, kb = self.page.mouse, self.page.keyboard
-        if "coordinate" in p and action not in ("left_click_drag", "scroll"):
+        if "coordinate" in p and action not in ("left_click_drag", "scroll", "wheel"):
             self._move(p["coordinate"])
 
         if action == "cursor_position":
@@ -171,6 +175,25 @@ class PlaywrightComputer(Computer):
             if dx is None:
                 raise ToolError(f"scroll_direction must be up/down/left/right, got {direction!r}")
             self._with_modifier(p, lambda: m.wheel(dx, dy))
+        elif action == "wheel":
+            # Pixel deltas, as the OpenAI computer tool sends them.
+            if "coordinate" in p:
+                self._move(p["coordinate"])
+            self._with_modifier(p, lambda: m.wheel(int(p.get("dx", 0)), int(p.get("dy", 0))))
+        elif action == "drag_path":
+            points = p["path"]
+            if len(points) < 2:
+                raise ToolError("drag path needs at least two points")
+            for pt in points:
+                self.check_xy(pt)
+
+            def drag():
+                self._move(points[0])
+                m.down()
+                for pt in points[1:]:
+                    self._move(pt)
+                m.up()
+            self._with_modifier(p, drag)
         elif action == "type":
             kb.type(p["text"], delay=10)
         elif action == "key":

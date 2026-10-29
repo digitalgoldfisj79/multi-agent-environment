@@ -1,6 +1,6 @@
 anthropic>=2.3.0
 azure-identity
-openai
+openai>=3.41.0
 playwright
 pillow
 pytest

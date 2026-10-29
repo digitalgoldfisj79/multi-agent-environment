@@ -1,7 +1,9 @@
-"""Stage 3: turn key frames + narration into a structured runbook with Claude.
+"""Stage 3: turn key frames + narration into a structured runbook.
 
-Claude does not take video input, so the recording is sent as a time-ordered
-sequence of key frames, each preceded by the narration spoken around it.
+Neither backend takes video input (GPT-6.1 Terra and Claude both take text and
+images), so the recording is sent as a time-ordered sequence of key frames, each
+preceded by the narration spoken around it. Backends: "openai" (GPT-6.1 Terra,
+Responses API) or "claude" (Claude on Foundry, Messages API).
 """
 
 import base64
@@ -12,7 +14,7 @@ from pathlib import Path
 from anthropic import BetaFallbackState
 from PIL import Image
 
-from . import foundry
+from . import azure_openai, foundry
 from .checkpoint import read_json, write_json
 from .runbook import RUNBOOK_SCHEMA, to_markdown, validate
 
@@ -84,34 +86,71 @@ def build_content(work: Path, manifest: dict, transcript: dict, notes: str = "")
     return content
 
 
-def synthesize(work: Path, manifest: dict, transcript: dict, notes: str = "", client=None) -> dict:
-    out = work / RUNBOOK
-    if out.exists():
-        return read_json(out)
+def to_responses_content(blocks: list[dict]) -> list[dict]:
+    """Messages-API content blocks -> Responses-API input parts."""
+    parts = []
+    for b in blocks:
+        if b["type"] == "text":
+            parts.append({"type": "input_text", "text": b["text"]})
+        else:
+            src = b["source"]
+            parts.append({"type": "input_image", "detail": "high",
+                          "image_url": f"data:{src['media_type']};base64,{src['data']}"})
+    return parts
 
-    client = client or foundry.make_client()
+
+def _call_openai(client, content: list[dict]) -> tuple[dict, dict]:
+    resp = client.responses.create(
+        model=azure_openai.SYNTH_DEPLOYMENT,
+        instructions=SYSTEM,
+        input=[{"role": "user", "content": to_responses_content(content)}],
+        text={"format": {"type": "json_schema", "name": "runbook", "schema": RUNBOOK_SCHEMA, "strict": True}},
+        reasoning={"effort": "high"},
+        max_output_tokens=64000,
+    )
+    if resp.status == "incomplete":
+        raise RuntimeError(f"runbook incomplete ({resp.incomplete_details}); reduce --max-frames or split the video")
+    for item in resp.output:
+        for part in getattr(item, "content", None) or []:
+            if part.type == "refusal":
+                raise RuntimeError(f"model declined: {part.refusal}")
+    usage = {"input_tokens": resp.usage.input_tokens, "output_tokens": resp.usage.output_tokens}
+    return json.loads(resp.output_text), {"model": resp.model, "usage": usage}
+
+
+def _call_claude(client, content: list[dict]) -> tuple[dict, dict]:
     with BetaFallbackState():
         with client.beta.messages.stream(
             model=foundry.SYNTH_DEPLOYMENT,
             max_tokens=64000,
             system=SYSTEM,
             output_config={"effort": "high", "format": {"type": "json_schema", "schema": RUNBOOK_SCHEMA}},
-            messages=[{"role": "user", "content": build_content(work, manifest, transcript, notes)}],
+            messages=[{"role": "user", "content": content}],
         ) as stream:
             msg = stream.get_final_message()
-
     if msg.stop_reason == "refusal":
         raise RuntimeError(f"model declined: {msg.stop_details}")
     if msg.stop_reason == "max_tokens":
         raise RuntimeError("runbook truncated at max_tokens; reduce --max-frames or split the video")
-    rb = json.loads(next(b.text for b in msg.content if b.type == "text"))
+    usage = {"input_tokens": msg.usage.input_tokens, "output_tokens": msg.usage.output_tokens}
+    return json.loads(next(b.text for b in msg.content if b.type == "text")), {"model": msg.model, "usage": usage}
 
-    rb["_meta"] = {
-        "model": msg.model,
-        "usage": {"input_tokens": msg.usage.input_tokens, "output_tokens": msg.usage.output_tokens},
-        "problems": validate(rb),
-        "approved": False,
-    }
+
+def synthesize(work: Path, manifest: dict, transcript: dict, notes: str = "",
+               backend: str = "openai", client=None) -> dict:
+    out = work / RUNBOOK
+    if out.exists():
+        return read_json(out)
+
+    content = build_content(work, manifest, transcript, notes)
+    if backend == "openai":
+        rb, meta = _call_openai(client or azure_openai.make_client(), content)
+    elif backend == "claude":
+        rb, meta = _call_claude(client or foundry.make_client(), content)
+    else:
+        raise ValueError(f"unknown backend {backend!r}")
+
+    rb["_meta"] = {**meta, "backend": backend, "problems": validate(rb), "approved": False}
     write_json(out, rb)
     (work / "runbook.md").write_text(to_markdown(rb), encoding="utf-8")
     return rb

@@ -27,7 +27,7 @@ def cmd_analyze(a) -> None:
     print(f"transcript: {len(transcript['segments'])} segments ({transcript['source']})")
     if a.extract_only:
         return
-    rb = synthesize(work, manifest, transcript, notes=a.notes or "")
+    rb = synthesize(work, manifest, transcript, notes=a.notes or "", backend=a.backend)
     print(f"runbook: {len(rb['steps'])} steps, {len(rb['parameters'])} parameters -> {work / 'runbook.md'}")
     for p in rb["_meta"]["problems"]:
         print(f"  problem: {p}")
@@ -38,6 +38,7 @@ def cmd_analyze(a) -> None:
 def cmd_run(a) -> None:
     from .computer import PlaywrightComputer
     from .execute import run
+    from .execute_openai import run_openai
 
     rb = read_json(Path(a.runbook))
     values = dict(kv.split("=", 1) for kv in a.param)
@@ -45,7 +46,8 @@ def cmd_run(a) -> None:
                                   executable_path=a.chromium)
     try:
         log_dir = Path(a.runbook).parent / f"run_{time.strftime('%Y%m%d_%H%M%S')}"
-        result = run(rb, values, computer, log_dir, max_turns=a.max_turns)
+        loop = run_openai if a.backend == "openai" else run
+        result = loop(rb, values, computer, log_dir, max_turns=a.max_turns)
     finally:
         computer.close()
     print(json.dumps(result, indent=2))
@@ -66,6 +68,8 @@ def main() -> None:
     an.add_argument("--min-blocks", type=int, default=2, help="changed 32px tiles needed to keep a frame")
     an.add_argument("--max-frames", type=int, default=60)
     an.add_argument("--extract-only", action="store_true")
+    an.add_argument("--backend", choices=["openai", "claude"], default="openai",
+                    help="openai = GPT-6.1 Terra (default); claude = Claude on Foundry")
     an.set_defaults(fn=cmd_analyze)
 
     rn = sub.add_parser("run", help="approved runbook -> computer-use agent")
@@ -77,6 +81,7 @@ def main() -> None:
     rn.add_argument("--headed", action="store_true")
     rn.add_argument("--chromium", help="Chromium executable path")
     rn.add_argument("--max-turns", type=int, default=80)
+    rn.add_argument("--backend", choices=["openai", "claude"], default="openai")
     rn.set_defaults(fn=cmd_run)
 
     a = ap.parse_args()

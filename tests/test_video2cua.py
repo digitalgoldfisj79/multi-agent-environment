@@ -208,7 +208,7 @@ def test_synthesize_sends_interleaved_frames_and_writes_runbook(screen_video, tm
     sink = {}
     client = SimpleNamespace(beta=SimpleNamespace(messages=SimpleNamespace(
         stream=lambda **kw: _FakeStream(msg, sink, kw))))
-    out = synthesize(work, manifest, transcript, client=client)
+    out = synthesize(work, manifest, transcript, backend="claude", client=client)
 
     content = sink["kwargs"]["messages"][0]["content"]
     images = [c for c in content if c["type"] == "image"]
