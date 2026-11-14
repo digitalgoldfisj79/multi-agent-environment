@@ -9,6 +9,16 @@
       "at": "2026-11-14T06:55:55+00:00",
       "credits": 2.5,
       "item": "2026-11-14 carousel 5x gpt_image_2_6 medium"
+    },
+    {
+      "at": "2026-11-14T07:24:45+00:00",
+      "credits": 3.0,
+      "item": "2026-11-14 test_v2 2x gpt_image_2_6 high 9:16 start frames"
+    },
+    {
+      "at": "2026-11-14T07:24:45+00:00",
+      "credits": 11.0,
+      "item": "2026-11-14 test_v2 minimax_hailuo 2.3 10s 768 i2v"
     }
   ]
 }
