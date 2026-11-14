@@ -1,0 +1,60 @@
+name: instagram-post
+
+# Fires when the daily content session pushes a new manifest to content-engine/queue/.
+# Posts the Reel immediately, waits CAROUSEL_DELAY_MIN, then posts the carousel.
+# Does nothing (green run) until the IG_USER_ID / IG_ACCESS_TOKEN secrets exist.
+on:
+  push:
+    branches: [ccr-8bbf046b-r7dn0e]
+    paths: ["content-engine/queue/*.json"]
+  workflow_dispatch:
+
+concurrency:
+  group: instagram-post
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    env:
+      IG_USER_ID: ${{ secrets.IG_USER_ID }}
+      IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+      IG_GRAPH_HOST: ${{ vars.IG_GRAPH_HOST || 'graph.instagram.com' }}
+      IG_API_VERSION: ${{ vars.IG_API_VERSION || 'v27.0' }}
+      CAROUSEL_DELAY_MIN: ${{ vars.CAROUSEL_DELAY_MIN || '180' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Post recent unposted manifests
+        run: |
+          set -euo pipefail
+          if [ -z "${IG_ACCESS_TOKEN}" ] || [ -z "${IG_USER_ID}" ]; then
+            echo "::notice::Instagram secrets not configured yet - nothing posted. See content-engine/README.md"
+            exit 0
+          fi
+          cutoff=$(date -u -d 'yesterday' +%F)
+          for f in content-engine/queue/*.json; do
+            day=$(basename "$f" .json)
+            [[ "$day" < "$cutoff" ]] && continue
+            python content-engine/engine/ig_post.py "$f" --only reel
+            git add content-engine/state/posted.json || true
+            echo "Waiting ${CAROUSEL_DELAY_MIN} min before carousel"
+            sleep $(( CAROUSEL_DELAY_MIN * 60 ))
+            python content-engine/engine/ig_post.py "$f" --only carousel
+          done
+      - name: Commit posted state
+        if: always()
+        run: |
+          git config user.name "content-engine-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add content-engine/state/posted.json 2>/dev/null || true
+          if ! git diff --cached --quiet; then
+            git commit -m "content-engine: record Instagram posts [skip ci]"
+            for i in 1 2 3; do git pull --rebase && git push && break || sleep 10; done
+          fi

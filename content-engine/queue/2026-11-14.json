@@ -1,0 +1,54 @@
+{
+  "date": "2026-11-14",
+  "trend": {
+    "topic": "Cozy holiday cafe / sugar cookie latte season",
+    "why": "Holiday drinks (#sugarcookielatte) and cozy-cafe 'digicam diary' / calm food-and-coffee content reported rising across TikTok and Reels trackers for the week of 8-13 Nov 2026. Brand-tied variants (e.g. #bearista cups) deliberately excluded.",
+    "sources": [
+      "https://newengen.com/insights/tiktok-trends/",
+      "https://www.socialpilot.co/blog/instagram-reels-trends",
+      "https://lightreel.ai/blogs/whats-trending-on-instagram",
+      "https://later.com/blog/instagram-reels-trends/"
+    ]
+  },
+  "reel": {
+    "higgsfield_job_id": "bc7e6f1d-ee37-4d2a-8172-a523d9a9d1ff",
+    "model": "kling3_0_turbo",
+    "video_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3FK0dunbFgWCUnRQsBGZ9N3VWr7/hf_20261114_065203_bc7e6f1d-ee37-4d2a-8172-a523d9a9d1ff.mp4",
+    "audio": "model-native (pour/ambience), unmodified",
+    "caption": "the first-snow latte pour you didn't know you needed ☕❄️ save it for a slow morning\n\n#sugarcookielatte #latteart #cozyaesthetic #satisfying #holidayvibes\n\n(AI-generated visuals)"
+  },
+  "carousel": {
+    "higgsfield_job_ids": [
+      "78c0fc3f-acf7-401e-98f1-b3cf8f2dc716",
+      "5a23a857-e027-4834-8ede-a76f1b896543",
+      "3285577a-fa02-42a6-9d7b-81e0ce543e4c",
+      "9c6abf49-172b-44d1-8c0f-5f1ed4bd5640",
+      "1170e1c1-e838-48ea-83b1-2dbcfe2aeb72"
+    ],
+    "image_urls": [
+      "https://d8j0ntlcm91z4.cloudfront.net/user_3FK0dunbFgWCUnRQsBGZ9N3VWr7/hf_20261114_065205_78c0fc3f-acf7-401e-98f1-b3cf8f2dc716.jpeg",
+      "https://d8j0ntlcm91z4.cloudfront.net/user_3FK0dunbFgWCUnRQsBGZ9N3VWr7/hf_20261114_065205_5a23a857-e027-4834-8ede-a76f1b896543.jpeg",
+      "https://d8j0ntlcm91z4.cloudfront.net/user_3FK0dunbFgWCUnRQsBGZ9N3VWr7/hf_20261114_065205_3285577a-fa02-42a6-9d7b-81e0ce543e4c.jpeg",
+      "https://d8j0ntlcm91z4.cloudfront.net/user_3FK0dunbFgWCUnRQsBGZ9N3VWr7/hf_20261114_065205_9c6abf49-172b-44d1-8c0f-5f1ed4bd5640.jpeg",
+      "https://d8j0ntlcm91z4.cloudfront.net/user_3FK0dunbFgWCUnRQsBGZ9N3VWr7/hf_20261114_065205_1170e1c1-e838-48ea-83b1-2dbcfe2aeb72.jpeg"
+    ],
+    "caption": "a slow sugar-cookie morning in 5 frames ❄️ which one would you step into?\n\n#sugarcookielatte #cozyaesthetic #wintermorning #cafevibes #holidayseason\n\n(AI-generated visuals)"
+  },
+  "credits_spent": 17.5,
+  "usd_est": 0.88,
+  "compliance": {
+    "passed": true,
+    "checked_by": "claude session 2026-11-14 (manual frame review)",
+    "checks": {
+      "no_real_people_or_likeness": true,
+      "no_brands_logos_trademarks": true,
+      "no_copyrighted_characters_or_music": true,
+      "no_sensitive_topics": true,
+      "no_misleading_claims": true,
+      "ai_label_set_on_upload": true,
+      "ai_disclosed_in_caption": true,
+      "hashtags_le_5": true
+    },
+    "notes": "Hands visible at top of reel frames 1-2 (generic, non-identifiable). No on-screen text."
+  }
+}
