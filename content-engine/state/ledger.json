@@ -19,6 +19,26 @@
       "at": "2026-11-14T07:24:45+00:00",
       "credits": 11.0,
       "item": "2026-11-14 test_v2 minimax_hailuo 2.3 10s 768 i2v"
+    },
+    {
+      "at": "2026-11-14T07:40:03+00:00",
+      "credits": 2.75,
+      "item": "2026-11-14 bakeoff start frame gpt_image_2_6 high 2k"
+    },
+    {
+      "at": "2026-11-14T07:40:03+00:00",
+      "credits": 32.5,
+      "item": "2026-11-14 bakeoff kling4_0 i2v 10s 1080p"
+    },
+    {
+      "at": "2026-11-14T07:40:03+00:00",
+      "credits": 32.5,
+      "item": "2026-11-14 bakeoff gemini_omni_flash_1_2 i2v 10s 1080p"
+    },
+    {
+      "at": "2026-11-14T07:40:03+00:00",
+      "credits": 70.0,
+      "item": "2026-11-14 bakeoff seedance_2_5 omni 10s 720p"
     }
   ]
 }

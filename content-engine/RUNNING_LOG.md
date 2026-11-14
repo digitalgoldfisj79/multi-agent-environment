@@ -121,3 +121,34 @@ All figures are from `get_cost` preflights this session, for 9:16 clips.
 - Not yet run: today has 8.5 credits left.
 - The scheduled task is paused until the owner approves a look.
 - No quality claim is made for v3. The owner's eye is the test.
+
+## 2026-11-14: bake-off (owner instruction: "optimise for quality, raise the cap to the minimum necessary")
+
+PRE-REGISTERED before viewing any output:
+- Same start frame (GPT Image 2.6, high, 2k, 1520x2688) and identical prompt on three models: Kling 4.0 1080p (32.5 cr), Gemini Omni Flash 1.2 1080p (32.5 cr), Seedance 2.5 720p (70 cr). All 10 s, 9:16.
+- My frame check FAILS a clip if it shows any of: object morphing or ghosting, the houses moving or deforming, the truck changing shape, sugar behaving like liquid or fog, text or logos appearing.
+- The owner's eye is the deciding test. The new daily cap is set by the CHEAPEST model the owner accepts. If the owner accepts none, the cap is not raised and the format question reopens.
+- One clip per model is n = 1. A single good or bad render does not establish a model's typical quality.
+- One-off bake-off spend: 137.75 credits (about $6.89 at the unconfirmed $0.05/credit). This is authorised test spend, not the new daily level.
+
+### Bake-off result (2026-11-14, frame review at 1 frame per second plus full-size frames at 8 s)
+
+Spend verified against Higgsfield `transactions`: 2.75 + 32.5 + 32.5 + 70 = 137.75 credits. Balance 794.75 at session start, 625.5 now; day total 169.25, which matches.
+
+| Clip | Model | Credits | Output | My frame check |
+|---|---|---|---|---|
+| A | Kling 4.0, image-to-video | 32.5 | 1080x1912, 24 fps, audio | PASS. The plough pushes sugar forward, the cleared track is behind the truck, sugar dusts the cab. Houses gain chimneys versus the start frame but stay solid. |
+| B | Gemini Omni Flash 1.2 | 32.5 | 1080x1920, 24 fps, quiet audio | FAIL on logic. Sharp and photographic, but the cleared track appears in front of the blade, so the truck reads as reversing. |
+| C | Seedance 2.5 | 70 | 720x1280, 24 fps, audio | FAIL on logic. Same inverted clearing, with two bare strips ahead of the blade. Lower resolution. |
+
+- Against the pre-registered criteria, only A passes. A is also the cheapest of the three.
+- n = 1 per model. This does not establish that Kling 4.0 is typically better, only that it was on this shot.
+- I cannot hear audio. Levels were measured (A: mean -23.9 dB), content was not judged.
+- Awaiting the owner's verdict on clip A. The daily task stays paused until then.
+
+Candidate recipe v3 if the owner accepts A:
+- start frame GPT Image 2.6 high 2k (2.75) + Kling 4.0 10 s 1080p image-to-video (32.5) + 5 carousel images at high quality (7.5) = 42.75 credits a day.
+- Proposed cap 45 credits (about $2.25). No re-roll: if the clip fails the frame check, that day posts the carousel only.
+- At 42.75 credits a day the month needs about 1,280 credits against the plan's 1,000-credit grant (seen in transactions on 12 Nov).
+
+P(owner accepts clip A) = 55%. P(Kling 4.0 keeps passing my frame check on at least 7 of the next 10 daily clips) = 60%.
