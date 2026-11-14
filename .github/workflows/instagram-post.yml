@@ -45,6 +45,9 @@ jobs:
           for f in content-engine/queue/*.json; do
             day=$(basename "$f" .json)
             [[ "$day" < "$cutoff" ]] && continue
+            if python -c "import json,sys; sys.exit(0 if json.load(open(sys.argv[1])).get('hold') else 1)" "$f"; then
+              echo "$day is on hold - skipping"; continue
+            fi
             python content-engine/engine/ig_post.py "$f" --only reel
             git add content-engine/state/posted.json || true
             echo "Waiting ${CAROUSEL_DELAY_MIN} min before carousel"

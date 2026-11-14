@@ -1,7 +1,9 @@
 # Running log: content engine
 
 ## Retracted findings
-_(none yet; retractions go here, at the top)_
+- **2026-11-14: recipe v1 (Kling 3.0 Turbo, text-to-video, 720p) RETRACTED.** The owner rejected it: generic concept, obviously AI. Its manifest `queue/2026-11-14.json` is on hold and must not be posted.
+- **2026-11-14: recipe v2 (Minimax Hailuo 2.3 image-to-video, 768p) RETRACTED.** The owner rejected it: "looks like 2025 AI". The reveal also failed my own frame check. The "proposed new daily mix" built on Hailuo is withdrawn.
+- **Root cause of both:** I chose models by lowest credit cost and never priced the current top tier. The owner's own account history (12 Nov) shows Kling 4.0 and GPT Image 2.0, which is the quality bar I should have matched.
 
 ---
 
@@ -97,3 +99,25 @@ PRE-REGISTERED:
 - n = 1 so far. Nothing here is established.
 
 P(start+end-frame fixes the reveal) = 50%.
+
+## 2026-11-14: top-tier pricing (after second rejection)
+
+All figures are from `get_cost` preflights this session, for 9:16 clips.
+
+| Model | Length, resolution | Credits |
+|---|---|---|
+| Kling 4.0 | 10 s, 1080p | 32.5 |
+| Kling 4.0 | 10 s, 720p | 22.5 |
+| Kling 4.0 | 5 s, 1080p | 16.25 |
+| Kling 4.0 Flash | 10 s, 720p | 30 |
+| Google Veo 3.1 | 8 s | 32 |
+| Wan 3.0 | 10 s, 1080p | 35 |
+| Gemini Omni Flash 1.2 | 10 s, 1080p | 32.5 |
+| Seedance 2.5 Flash | 10 s, 720p | 50 |
+| Seedance 2.5 | 5 s, 1080p | 80 |
+| Cinema Studio 4.0 | 10 s, 1080p | 160 |
+
+- Candidate recipe v3: 1 high-quality start frame (1.5) + Kling 4.0 10 s 1080p image-to-video (32.5) + 5-image carousel (2.5) = 36.5 credits, under the 40 cap with no retry headroom.
+- Not yet run: today has 8.5 credits left.
+- The scheduled task is paused until the owner approves a look.
+- No quality claim is made for v3. The owner's eye is the test.

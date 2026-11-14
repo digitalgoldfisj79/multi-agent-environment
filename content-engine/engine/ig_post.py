@@ -122,6 +122,8 @@ def main() -> int:
     m = json.loads(Path(a.manifest).read_text())
     day = m["date"]
 
+    if m.get("hold"):
+        print(f"{day}: on hold ({m['hold']}) -- not posting"); return 0
     if not m.get("compliance", {}).get("passed"):
         print(f"{day}: compliance not marked passed -- refusing to post"); return 1
     kinds = [a.only] if a.only else ["reel", "carousel"]
