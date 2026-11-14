@@ -64,3 +64,36 @@ PRE-REGISTERED (written before any engagement data exists):
 - Anything weaker is logged as "the metric does not resolve this".
 
 Untested against the live API, because there is no token yet. P(insights code works first time against the live API) = 70%. The most likely failure is a metric name or permission error, which is isolated per metric.
+
+## 2026-11-14: quality test v2 (after owner feedback: "ideas poor, video clearly AI")
+
+Diagnosis of v1:
+- The concept was generic: a hygge latte with no hook and no payoff.
+- It was text-to-video on the cheapest model.
+- The prompt used stock-AI descriptors ("film grain, amber bokeh").
+
+Test v2 recipe:
+- Concept: "is it cake?" Christmas bauble reveal.
+- Start frame: GPT Image 2.6, high quality, 9:16 jpeg, prompted with phone-photo realism (1.5 credits each, 2 frames).
+- Video: Minimax Hailuo 2.3 image-to-video, 10 s, 768p (11 credits).
+- Higgsfield transactions confirm the spend: 1.5 + 1.5 + 11 = 14 credits.
+- Day total: 31.5 credits (about $1.58), under the 40-credit cap.
+
+Result:
+- Seconds 0-7 (hand, knife, bauble, marble, window light) are convincingly photographic, which is a large improvement over v1.
+- Seconds 7-10, the reveal and payoff, FAIL:
+  - The knife turns translucent and floats away.
+  - A red glow bleeds onto the marble.
+  - The interior mixes vanilla and red-velvet sponge with no consistent structure.
+  - There is no audio track.
+- Verdict: not postable as is. The weak point is exactly the moment that carries the hook.
+
+Next test, not yet run (the daily cap is reached):
+- Supply an END frame as well, a photoreal cut-open bauble cake, so Hailuo interpolates between two fixed frames instead of inventing the interior.
+- Expected cost: 2 frames at 1.5 + Hailuo at 11 = 14 credits.
+
+PRE-REGISTERED:
+- If the start+end-frame version still shows object morphing or ghosting during the reveal in at least 2 of 4 test clips, the "transformation reveal" format is dropped. The fallback is the simpler physics the models do well: melt, pour, slice of a soft solid, steam.
+- n = 1 so far. Nothing here is established.
+
+P(start+end-frame fixes the reveal) = 50%.
