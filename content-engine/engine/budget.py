@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Daily Higgsfield spend guard.
 
-Hard cap: $2/day. Credits are converted at USD_PER_CREDIT (default 0.05,
+Hard cap: $2.25/day = 45 credits (raised from $2 by the owner on 2026-11-14
+to pay for Kling 4.0). Credits are converted at USD_PER_CREDIT (default 0.05,
 i.e. the ~$5 per 100 credits top-up price reported by third-party pricing
 pages -- UNVERIFIED against higgsfield.ai; it is the more expensive of the
 reported rates, so the cap errs on the safe side).
@@ -22,9 +23,9 @@ import tempfile
 from pathlib import Path
 
 LEDGER = Path(__file__).resolve().parent.parent / "state" / "ledger.json"
-USD_CAP = float(os.environ.get("DAILY_USD_CAP", "2.00"))
+USD_CAP = float(os.environ.get("DAILY_USD_CAP", "2.25"))
 USD_PER_CREDIT = float(os.environ.get("USD_PER_CREDIT", "0.05"))
-CREDIT_CAP = USD_CAP / USD_PER_CREDIT  # 40 credits at defaults
+CREDIT_CAP = USD_CAP / USD_PER_CREDIT  # 45 credits at defaults
 
 
 def today() -> str:

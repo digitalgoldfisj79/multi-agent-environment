@@ -48,10 +48,11 @@ jobs:
             if python -c "import json,sys; sys.exit(0 if json.load(open(sys.argv[1])).get('hold') else 1)" "$f"; then
               echo "$day is on hold - skipping"; continue
             fi
-            python content-engine/engine/ig_post.py "$f" --only reel
-            git add content-engine/state/posted.json || true
-            echo "Waiting ${CAROUSEL_DELAY_MIN} min before carousel"
-            sleep $(( CAROUSEL_DELAY_MIN * 60 ))
+            if python -c "import json,sys; sys.exit(0 if 'reel' in json.load(open(sys.argv[1])) else 1)" "$f"; then
+              python content-engine/engine/ig_post.py "$f" --only reel
+              echo "Waiting ${CAROUSEL_DELAY_MIN} min before carousel"
+              sleep $(( CAROUSEL_DELAY_MIN * 60 ))
+            fi
             python content-engine/engine/ig_post.py "$f" --only carousel
           done
       - name: Commit posted state

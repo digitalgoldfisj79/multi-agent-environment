@@ -6,14 +6,18 @@ scheduled cloud session (daily)
   └─ RUNBOOK.md:
      trends (web + TikTok music chart)
      → pick 1 on-brand, compliant topic
-     → Higgsfield: 1 × 10 s Kling 3.0 Turbo clip (15 cr) + 5 × GPT Image 2.6 (2.5 cr)
+     → Higgsfield: photoreal start frame (2.75 cr)
+       → 10 s Kling 4.0 clip at 1080p animated from it (32.5 cr)
+       + 5 × GPT Image 2.6 carousel stills (7.5 cr)
      → frame-by-frame QA + COMPLIANCE.md gate
      → queue/DAY.json → git push
           └─ GitHub Action instagram-post.yml
              → Reel now, carousel +3 h (AI label on)
      → TikTok publish form pre-filled (is_aigc on) → you tap "Post"
 ```
-**Budget:** a hard cap of 40 credits a day (about $2 at $0.05/credit), enforced by `engine/budget.py` and cross-checked against Higgsfield's transaction log. A normal day uses 17.5 credits (about $0.88).
+**Budget:** a hard cap of 45 credits a day (about $2.25 at $0.05/credit), enforced by `engine/budget.py` and cross-checked against Higgsfield's transaction log. A normal day uses 42.75 credits (about $2.14). The owner raised the cap from $2 on 2026-11-14 to pay for Kling 4.0, the only model that passed the quality bake-off. That is about 1,280 credits a month, against the Plus plan's 1,000.
+
+**Quality rule:** if a day's clip fails the frame check, it is not regenerated and not posted. That day posts the carousel only.
 
 ## One-time setup
 
@@ -46,7 +50,7 @@ Connect your TikTok account to Higgsfield. Ask Claude to "connect TikTok to Higg
 | `RUNBOOK.md` | The exact daily procedure the scheduled session follows |
 | `STYLE_GUIDE.md` | The fixed look, prompt templates and caption rules that keep posts consistent |
 | `COMPLIANCE.md` | Platform-rule gate (AI labels, no real people or brands or copyrighted audio) |
-| `engine/budget.py` | $2/day cap ledger |
+| `engine/budget.py` | $2.25/day (45-credit) cap ledger |
 | `engine/validate.py` | Media spec checks (JPEG, 9:16, fps, duration…) |
 | `engine/ambient_audio.py` | Original synthesised audio bed for silent clips |
 | `engine/ig_post.py` | Instagram Content Publishing API client (stdlib only). It reads back `is_ai_generated` after each post to confirm the label |

@@ -152,3 +152,13 @@ Candidate recipe v3 if the owner accepts A:
 - At 42.75 credits a day the month needs about 1,280 credits against the plan's 1,000-credit grant (seen in transactions on 12 Nov).
 
 P(owner accepts clip A) = 55%. P(Kling 4.0 keeps passing my frame check on at least 7 of the next 10 daily clips) = 60%.
+
+## 2026-11-14: recipe v3 adopted (owner verdict: "Kling is best")
+
+- The owner accepted clip A. Under the pre-registered rule, the cap is set by the cheapest accepted model, which is Kling 4.0.
+- Daily cap raised from 40 to 45 credits (about $2.25). Normal day: 2.75 + 32.5 + 7.5 = 42.75 credits.
+- `budget.py` check: 42.75 fits, 42.5 (start-frame redo with a 3-image carousel) fits, 45.5 is blocked.
+- RUNBOOK and STYLE_GUIDE rewritten for recipe v3: start frame, then Kling 4.0 image-to-video; concept tests (trend anchor, hook, payoff, feasible physics); no re-roll on a failed clip; never substitute a cheaper video model.
+- The workflow no longer waits 3 hours on days with no Reel.
+- The scheduled task is re-enabled with the new cap in its prompt. It still lacks the Higgsfield connector.
+- Still unverified: an end-to-end daily run, a live Instagram post, and whether Kling 4.0 holds this quality on other concepts (n = 1).
