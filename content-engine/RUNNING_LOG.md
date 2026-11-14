@@ -39,3 +39,8 @@ _(none yet; retractions go here, at the top)_
 | Daily pipeline stays at or under 40 credits per day | 90% |
 | Kling Turbo price stays at 15 credits per 10 s | 60% (vendor prices move) |
 | Content will "go viral" | not estimable; no engagement data exists yet |
+
+### Post-push checks (2026-11-14, about 07:00 UTC)
+- VERIFIED: a push to the non-default branch `ccr-8bbf046b-r7dn0e` triggered `instagram-post` (run 43568905944). With no secrets set, it is expected to post nothing.
+- Created scheduled task `trig_019XFhSadowXnQ7ovHP3NVNa`: daily at 11:23 UTC, a fresh session each time, with push notifications.
+- BLOCKER: the scheduled task was created without the Higgsfield connector, because this organisation does not allow attaching connectors from a session. Until the owner attaches Higgsfield to the task in the claude.ai scheduled-tasks UI, daily runs will stop at the "Higgsfield tools unavailable" check and report it. They will not spend anything.
