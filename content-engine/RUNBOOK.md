@@ -21,6 +21,11 @@ DAY=$(date -u +%F); cd content-engine
   - "trending aesthetic / satisfying / cozy content this week"
 - If `tiktok_accounts` shows an active account, also call `tiktok_music_trending` (7DAY) to read the mood of trending sounds. This is for mood only; tracks are attached by the owner in the publish form.
 - Read `state/history.json`. Do not repeat a topic used in the last 14 days.
+- **Feedback from past posts.** Run `python engine/ig_insights.py --report`, which is descriptive only. The pre-registered rule, which must not be changed after seeing data:
+  - Until there are **14 or more Reels with d7 snapshots**, insights do NOT influence topic choice. Just note them in the log.
+  - After that, a category is "favoured" only if its median d7 views exceed the overall median by more than the overall IQR, with at least 4 posts in that category. A favoured category earns +1 on trend strength. Anything weaker counts as "the metric does not resolve this" and has no effect.
+  - High `reels_skip_rate` is a hook problem, not a topic problem. If the median skip rate is above 50%, put the motion in frame 1 and keep the subject centred.
+- Give each candidate a `category` from: `food-drink`, `nature-weather`, `seasonal-holiday`, `craft-making`, `texture-asmr`, `place-mood`. It goes in the manifest at `trend.category`.
 - Score up to 5 candidates out of 5 on each of:
   - **trend strength**: named by 2 or more independent sources this week
   - **visual fit** with STYLE_GUIDE.md: can it be a satisfying, people-free macro visual?

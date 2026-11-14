@@ -44,3 +44,23 @@ _(none yet; retractions go here, at the top)_
 - VERIFIED: a push to the non-default branch `ccr-8bbf046b-r7dn0e` triggered `instagram-post` (run 43568905944). With no secrets set, it is expected to post nothing.
 - Created scheduled task `trig_019XFhSadowXnQ7ovHP3NVNa`: daily at 11:23 UTC, a fresh session each time, with push notifications.
 - BLOCKER: the scheduled task was created without the Higgsfield connector, because this organisation does not allow attaching connectors from a session. Until the owner attaches Higgsfield to the task in the claude.ai scheduled-tasks UI, daily runs will stop at the "Higgsfield tools unavailable" check and report it. They will not spend anything.
+
+## 2026-11-14: insights feedback loop added
+
+The owner supplied Meta's docs for "Instagram API with Instagram Login" and "Media Insights". What those docs confirm:
+- The host is `graph.instagram.com` and the latest version is v27.0, which matches the code defaults.
+- No Facebook Page is needed.
+- The scopes `instagram_business_*` are the right ones.
+
+What was added:
+- `engine/ig_insights.py` takes d2 (48 h or more) and d7 snapshots. Metrics are requested one at a time, empty data is stored as null rather than 0, and carousel children are not queried. All of this follows the doc's limitations section.
+- `ig_post.verify()` reads `is_ai_generated` back after publishing and raises a warning if it is not true.
+- The README now asks for the extra scope `instagram_business_manage_insights`.
+- Offline mock test `tests/test_insights_mock.py`: PASSED (idempotent reruns, 48 h gating, null-not-zero, per-metric error isolation, label warning).
+
+PRE-REGISTERED (written before any engagement data exists):
+- With fewer than 14 Reels holding d7 snapshots, insights have no effect on topic choice.
+- After that, a category is favoured only if its median d7 views exceed the overall median by more than the IQR, with at least 4 posts in the category.
+- Anything weaker is logged as "the metric does not resolve this".
+
+Untested against the live API, because there is no token yet. P(insights code works first time against the live API) = 70%. The most likely failure is a metric name or permission error, which is isolated per metric.

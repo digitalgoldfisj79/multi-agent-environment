@@ -91,10 +91,25 @@ def load_posted() -> dict:
     return json.loads(POSTED.read_text()) if POSTED.exists() else {}
 
 
-def mark(day: str, kind: str, media_id: str) -> None:
+def verify(media_id: str) -> dict:
+    """Read back the published media; the AI-label field is documented on IG Media."""
+    try:  # never let a read-back failure stop us recording a post that already published
+        info = api("GET", media_id, fields="is_ai_generated,media_product_type,permalink")
+    except SystemExit as e:
+        print(f"::warning::could not read back media {media_id}: {e}")
+        return {}
+    if info.get("is_ai_generated") is not True:
+        print(f"::warning::media {media_id} does not report is_ai_generated=true: {info}")
+    return info
+
+
+def mark(day: str, kind: str, media_id: str, info: dict | None = None) -> None:
     d = load_posted()
     d.setdefault(day, {})[kind] = {"media_id": media_id,
-                                   "at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())}
+                                   "at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+                                   **({"permalink": info.get("permalink"),
+                                       "is_ai_generated": info.get("is_ai_generated")}
+                                      if info else {})}
     POSTED.write_text(json.dumps(d, indent=2, sort_keys=True))
 
 
@@ -125,7 +140,7 @@ def main() -> int:
     for k in todo:
         print(f"{day}: posting {k}")
         mid = post_reel(uid, m) if k == "reel" else post_carousel(uid, m)
-        mark(day, k, mid)
+        mark(day, k, mid, verify(mid))
         print(f"{day}: {k} published as {mid}")
     return 0
 

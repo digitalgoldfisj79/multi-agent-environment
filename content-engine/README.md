@@ -19,8 +19,13 @@ scheduled cloud session (daily)
 
 ### 1. Instagram (about 30 min, once)
 1. In the Instagram app: Settings → Account type → switch to a **Professional** account (Creator or Business).
-2. Create an app at <https://developers.facebook.com/apps>. Choose the use case for managing content on Instagram ("Instagram API with Instagram Login").
-3. In the app's Instagram API setup, add your Instagram account and **generate an access token** with `instagram_business_basic` and `instagram_business_content_publish`. Copy the token and the Instagram **user ID** shown next to it.
+2. Create an app at <https://developers.facebook.com/apps>. Choose the use case for managing content on Instagram ("Instagram API with Instagram Login"). This setup does **not** need a Facebook Page.
+3. In the app's Instagram API setup, add your Instagram account and **generate an access token** with these three permissions:
+   - `instagram_business_basic`
+   - `instagram_business_content_publish`
+   - `instagram_business_manage_insights`, which lets the engine read each post's views, saves and skip rate and learn from them
+
+   Copy the token and the Instagram **user ID** shown next to it.
 4. In GitHub, open this repo → Settings → Secrets and variables → Actions → **New repository secret** and add:
    - `IG_USER_ID`
    - `IG_ACCESS_TOKEN`
@@ -44,7 +49,8 @@ Connect your TikTok account to Higgsfield. Ask Claude to "connect TikTok to Higg
 | `engine/budget.py` | $2/day cap ledger |
 | `engine/validate.py` | Media spec checks (JPEG, 9:16, fps, duration…) |
 | `engine/ambient_audio.py` | Original synthesised audio bed for silent clips |
-| `engine/ig_post.py` | Instagram Content Publishing API client (stdlib only) |
+| `engine/ig_post.py` | Instagram Content Publishing API client (stdlib only). It reads back `is_ai_generated` after each post to confirm the label |
+| `engine/ig_insights.py` | Per-post metrics at 48 h and 7 days, written to `state/insights.json` |
 | `queue/DAY.json` | One manifest per day (also the audit trail) |
 | `state/` | Ledger, topic history, posted IDs |
 | `RUNNING_LOG.md` | Dated log of every run and decision |
